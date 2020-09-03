@@ -187,4 +187,5 @@
 * OpenGL系列
     * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
     * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)
+    * [3.OpenGL渲染问题的处理方法](OpenGL系列/03_OpenGL渲染问题的处理方法.md)
 
