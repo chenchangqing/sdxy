@@ -1,0 +1,2855 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>3.OpenGL渲染问题的处理方法 · 自考</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈长青">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="02_OpenGL基础渲染.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://chenchangqing.github.io/" target="_blank" class="custom-link">Chenchangqing's Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    第1学期 1.马克思主义基本原理概论
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../第1学期_1_马克思主义基本原理概论/精讲1.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../第1学期_1_马克思主义基本原理概论/精讲2.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../第1学期_1_马克思主义基本原理概论/精讲3.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../第1学期_1_马克思主义基本原理概论/精讲4.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../第1学期_1_马克思主义基本原理概论/精讲5.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../第1学期_1_马克思主义基本原理概论/精讲6.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../第1学期_1_马克思主义基本原理概论/精讲7.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../第1学期_1_马克思主义基本原理概论/精讲8.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../第1学期_1_马克思主义基本原理概论/精讲9.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../第1学期_1_马克思主义基本原理概论/串讲1.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/串讲1.html">
+            
+                    
+                    1.10.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../第1学期_1_马克思主义基本原理概论/串讲2.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/串讲2.html">
+            
+                    
+                    1.11.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="../第1学期_1_马克思主义基本原理概论/串讲3.html">
+            
+                <a href="../第1学期_1_马克思主义基本原理概论/串讲3.html">
+            
+                    
+                    1.12.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    第1学期 2.中国近代史纲要
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../第1学期_2_中国近代史纲要/精讲1.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../第1学期_2_中国近代史纲要/精讲2.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../第1学期_2_中国近代史纲要/精讲3.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../第1学期_2_中国近代史纲要/精讲4.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../第1学期_2_中国近代史纲要/精讲5.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../第1学期_2_中国近代史纲要/精讲6.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../第1学期_2_中国近代史纲要/精讲7.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../第1学期_2_中国近代史纲要/精讲8.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../第1学期_2_中国近代史纲要/精讲9.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../第1学期_2_中国近代史纲要/串讲1.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/串讲1.html">
+            
+                    
+                    1.10.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../第1学期_2_中国近代史纲要/串讲2.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/串讲2.html">
+            
+                    
+                    1.11.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../第1学期_2_中国近代史纲要/串讲3.html">
+            
+                <a href="../第1学期_2_中国近代史纲要/串讲3.html">
+            
+                    
+                    1.12.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    第1学期 3.操作系统概论
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../第1学期_3_操作系统概论/精讲1.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../第1学期_3_操作系统概论/精讲2.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../第1学期_3_操作系统概论/精讲3.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../第1学期_3_操作系统概论/精讲4.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../第1学期_3_操作系统概论/精讲5.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../第1学期_3_操作系统概论/精讲6.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../第1学期_3_操作系统概论/精讲7.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../第1学期_3_操作系统概论/精讲8.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../第1学期_3_操作系统概论/精讲9.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../第1学期_3_操作系统概论/精讲10.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../第1学期_3_操作系统概论/精讲11.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../第1学期_3_操作系统概论/精讲12.html">
+            
+                <a href="../第1学期_3_操作系统概论/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="../第1学期_3_操作系统概论/串讲1.html">
+            
+                <a href="../第1学期_3_操作系统概论/串讲1.html">
+            
+                    
+                    1.13.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="../第1学期_3_操作系统概论/串讲2.html">
+            
+                <a href="../第1学期_3_操作系统概论/串讲2.html">
+            
+                    
+                    1.14.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="../第1学期_3_操作系统概论/串讲3.html">
+            
+                <a href="../第1学期_3_操作系统概论/串讲3.html">
+            
+                    
+                    1.15.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    第2学期 1.C++程序设计
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../第2学期_1_C++程序设计/精讲1.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../第2学期_1_C++程序设计/精讲2.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../第2学期_1_C++程序设计/精讲3.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../第2学期_1_C++程序设计/精讲4.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../第2学期_1_C++程序设计/精讲5.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../第2学期_1_C++程序设计/精讲6.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../第2学期_1_C++程序设计/精讲7.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../第2学期_1_C++程序设计/精讲8.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../第2学期_1_C++程序设计/精讲9.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../第2学期_1_C++程序设计/精讲10.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../第2学期_1_C++程序设计/精讲11.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../第2学期_1_C++程序设计/精讲12.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../第2学期_1_C++程序设计/精讲13.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲13.html">
+            
+                    
+                    1.13.精讲13
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../第2学期_1_C++程序设计/精讲14.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲14.html">
+            
+                    
+                    1.14.精讲14
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../第2学期_1_C++程序设计/精讲15.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲15.html">
+            
+                    
+                    1.15.精讲15
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.16" data-path="../第2学期_1_C++程序设计/精讲16.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲16.html">
+            
+                    
+                    1.16.精讲16
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.17" data-path="../第2学期_1_C++程序设计/精讲17.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲17.html">
+            
+                    
+                    1.17.精讲17
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.18" data-path="../第2学期_1_C++程序设计/精讲18.html">
+            
+                <a href="../第2学期_1_C++程序设计/精讲18.html">
+            
+                    
+                    1.18.精讲18
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.19" data-path="../第2学期_1_C++程序设计/串讲19.html">
+            
+                <a href="../第2学期_1_C++程序设计/串讲19.html">
+            
+                    
+                    1.19.串讲19
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.20" data-path="../第2学期_1_C++程序设计/串讲20.html">
+            
+                <a href="../第2学期_1_C++程序设计/串讲20.html">
+            
+                    
+                    1.20.串讲20
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.21" data-path="../第2学期_1_C++程序设计/串讲21.html">
+            
+                <a href="../第2学期_1_C++程序设计/串讲21.html">
+            
+                    
+                    1.21.串讲21
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    第2学期 2.网络经济与企业管理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../第2学期_2_网络经济与企业管理/精讲1.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../第2学期_2_网络经济与企业管理/精讲2.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../第2学期_2_网络经济与企业管理/精讲3.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../第2学期_2_网络经济与企业管理/精讲4.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../第2学期_2_网络经济与企业管理/精讲5.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../第2学期_2_网络经济与企业管理/精讲6.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../第2学期_2_网络经济与企业管理/精讲7.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../第2学期_2_网络经济与企业管理/精讲8.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../第2学期_2_网络经济与企业管理/精讲9.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../第2学期_2_网络经济与企业管理/精讲10.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.11" data-path="../第2学期_2_网络经济与企业管理/精讲11.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.12" data-path="../第2学期_2_网络经济与企业管理/精讲12.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.13" data-path="../第2学期_2_网络经济与企业管理/串讲1.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/串讲1.html">
+            
+                    
+                    1.13.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.14" data-path="../第2学期_2_网络经济与企业管理/串讲2.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/串讲2.html">
+            
+                    
+                    1.14.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.15" data-path="../第2学期_2_网络经济与企业管理/串讲3.html">
+            
+                <a href="../第2学期_2_网络经济与企业管理/串讲3.html">
+            
+                    
+                    1.15.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    第2学期 3.数据库系统原理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../第2学期_3_数据库系统原理/精讲1.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../第2学期_3_数据库系统原理/精讲2.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../第2学期_3_数据库系统原理/精讲3.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../第2学期_3_数据库系统原理/精讲4.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../第2学期_3_数据库系统原理/精讲5.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../第2学期_3_数据库系统原理/精讲6.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../第2学期_3_数据库系统原理/精讲7.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../第2学期_3_数据库系统原理/精讲8.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.9" data-path="../第2学期_3_数据库系统原理/精讲9.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.10" data-path="../第2学期_3_数据库系统原理/精讲10.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.11" data-path="../第2学期_3_数据库系统原理/精讲11.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.12" data-path="../第2学期_3_数据库系统原理/精讲12.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.13" data-path="../第2学期_3_数据库系统原理/精讲13.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲13.html">
+            
+                    
+                    1.13.精讲13
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.14" data-path="../第2学期_3_数据库系统原理/精讲14.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲14.html">
+            
+                    
+                    1.14.精讲14
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.15" data-path="../第2学期_3_数据库系统原理/精讲15.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲15.html">
+            
+                    
+                    1.15.精讲15
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.16" data-path="../第2学期_3_数据库系统原理/精讲16.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲16.html">
+            
+                    
+                    1.16.精讲16
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.17" data-path="../第2学期_3_数据库系统原理/精讲17.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲17.html">
+            
+                    
+                    1.17.精讲17
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.18" data-path="../第2学期_3_数据库系统原理/精讲18.html">
+            
+                <a href="../第2学期_3_数据库系统原理/精讲18.html">
+            
+                    
+                    1.18.精讲18
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.19" data-path="../第2学期_3_数据库系统原理/串讲19.html">
+            
+                <a href="../第2学期_3_数据库系统原理/串讲19.html">
+            
+                    
+                    1.19.串讲19
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.20" data-path="../第2学期_3_数据库系统原理/串讲20.html">
+            
+                <a href="../第2学期_3_数据库系统原理/串讲20.html">
+            
+                    
+                    1.20.串讲20
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.21" data-path="../第2学期_3_数据库系统原理/串讲21.html">
+            
+                <a href="../第2学期_3_数据库系统原理/串讲21.html">
+            
+                    
+                    1.21.串讲21
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    第2学期 4.计算机网络原理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../第2学期_4_计算机网络原理/精讲1.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../第2学期_4_计算机网络原理/精讲2.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../第2学期_4_计算机网络原理/精讲3.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../第2学期_4_计算机网络原理/精讲4.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../第2学期_4_计算机网络原理/精讲5.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../第2学期_4_计算机网络原理/精讲6.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../第2学期_4_计算机网络原理/精讲7.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../第2学期_4_计算机网络原理/精讲8.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../第2学期_4_计算机网络原理/精讲9.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.10" data-path="../第2学期_4_计算机网络原理/精讲10.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.11" data-path="../第2学期_4_计算机网络原理/精讲11.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.12" data-path="../第2学期_4_计算机网络原理/精讲12.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.13" data-path="../第2学期_4_计算机网络原理/精讲13.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲13.html">
+            
+                    
+                    1.13.精讲13
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.14" data-path="../第2学期_4_计算机网络原理/精讲14.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲14.html">
+            
+                    
+                    1.14.精讲14
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.15" data-path="../第2学期_4_计算机网络原理/精讲15.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲15.html">
+            
+                    
+                    1.15.精讲15
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.16" data-path="../第2学期_4_计算机网络原理/串讲1.html">
+            
+                <a href="../第2学期_4_计算机网络原理/串讲1.html">
+            
+                    
+                    1.16.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.17" data-path="../第2学期_4_计算机网络原理/串讲2.html">
+            
+                <a href="../第2学期_4_计算机网络原理/串讲2.html">
+            
+                    
+                    1.17.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.18" data-path="../第2学期_4_计算机网络原理/串讲3.html">
+            
+                <a href="../第2学期_4_计算机网络原理/串讲3.html">
+            
+                    
+                    1.18.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    第3学期 1.数据结构导论
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../第3学期_1_数据结构导论/精讲1.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../第3学期_1_数据结构导论/精讲2.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../第3学期_1_数据结构导论/精讲3.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../第3学期_1_数据结构导论/精讲4.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../第3学期_1_数据结构导论/精讲5.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../第3学期_1_数据结构导论/精讲6.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../第3学期_1_数据结构导论/精讲7.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../第3学期_1_数据结构导论/精讲8.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../第3学期_1_数据结构导论/精讲9.html">
+            
+                <a href="../第3学期_1_数据结构导论/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../第3学期_1_数据结构导论/串讲1.html">
+            
+                <a href="../第3学期_1_数据结构导论/串讲1.html">
+            
+                    
+                    1.10.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../第3学期_1_数据结构导论/串讲2.html">
+            
+                <a href="../第3学期_1_数据结构导论/串讲2.html">
+            
+                    
+                    1.11.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../第3学期_1_数据结构导论/串讲3.html">
+            
+                <a href="../第3学期_1_数据结构导论/串讲3.html">
+            
+                    
+                    1.12.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    第3学期 2.信息系统开发与管理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../第3学期_2_信息系统开发与管理/精讲1.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../第3学期_2_信息系统开发与管理/精讲2.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../第3学期_2_信息系统开发与管理/精讲3.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../第3学期_2_信息系统开发与管理/精讲4.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../第3学期_2_信息系统开发与管理/精讲5.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../第3学期_2_信息系统开发与管理/精讲6.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../第3学期_2_信息系统开发与管理/精讲7.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../第3学期_2_信息系统开发与管理/精讲8.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../第3学期_2_信息系统开发与管理/精讲9.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../第3学期_2_信息系统开发与管理/精讲10.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.11" data-path="../第3学期_2_信息系统开发与管理/精讲11.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.12" data-path="../第3学期_2_信息系统开发与管理/精讲12.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.13" data-path="../第3学期_2_信息系统开发与管理/串讲1.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/串讲1.html">
+            
+                    
+                    1.13.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.14" data-path="../第3学期_2_信息系统开发与管理/串讲2.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/串讲2.html">
+            
+                    
+                    1.14.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.15" data-path="../第3学期_2_信息系统开发与管理/串讲3.html">
+            
+                <a href="../第3学期_2_信息系统开发与管理/串讲3.html">
+            
+                    
+                    1.15.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    第4学期 1.信息资源管理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../第4学期_1_信息资源管理/精讲1.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../第4学期_1_信息资源管理/精讲2.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../第4学期_1_信息资源管理/精讲3.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../第4学期_1_信息资源管理/精讲4.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../第4学期_1_信息资源管理/精讲5.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../第4学期_1_信息资源管理/精讲6.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../第4学期_1_信息资源管理/精讲7.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../第4学期_1_信息资源管理/精讲8.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.9" data-path="../第4学期_1_信息资源管理/精讲9.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.10" data-path="../第4学期_1_信息资源管理/精讲10.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.11" data-path="../第4学期_1_信息资源管理/精讲11.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.12" data-path="../第4学期_1_信息资源管理/精讲12.html">
+            
+                <a href="../第4学期_1_信息资源管理/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.13" data-path="../第4学期_1_信息资源管理/串讲1.html">
+            
+                <a href="../第4学期_1_信息资源管理/串讲1.html">
+            
+                    
+                    1.13.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.14" data-path="../第4学期_1_信息资源管理/串讲2.html">
+            
+                <a href="../第4学期_1_信息资源管理/串讲2.html">
+            
+                    
+                    1.14.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.15" data-path="../第4学期_1_信息资源管理/串讲3.html">
+            
+                <a href="../第4学期_1_信息资源管理/串讲3.html">
+            
+                    
+                    1.15.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    第4学期 2.英语（二）
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../第4学期_2_英语（二）/精讲1.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../第4学期_2_英语（二）/精讲2.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../第4学期_2_英语（二）/精讲3.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../第4学期_2_英语（二）/精讲4.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../第4学期_2_英语（二）/精讲5.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../第4学期_2_英语（二）/精讲6.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../第4学期_2_英语（二）/精讲7.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.8" data-path="../第4学期_2_英语（二）/精讲8.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.9" data-path="../第4学期_2_英语（二）/精讲9.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.10" data-path="../第4学期_2_英语（二）/精讲10.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.11" data-path="../第4学期_2_英语（二）/精讲11.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.12" data-path="../第4学期_2_英语（二）/精讲12.html">
+            
+                <a href="../第4学期_2_英语（二）/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.13" data-path="../第4学期_2_英语（二）/串讲1.html">
+            
+                <a href="../第4学期_2_英语（二）/串讲1.html">
+            
+                    
+                    1.13.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.14" data-path="../第4学期_2_英语（二）/串讲2.html">
+            
+                <a href="../第4学期_2_英语（二）/串讲2.html">
+            
+                    
+                    1.14.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.15" data-path="../第4学期_2_英语（二）/串讲3.html">
+            
+                <a href="../第4学期_2_英语（二）/串讲3.html">
+            
+                    
+                    1.15.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" >
+            
+                <span>
+            
+                    
+                    OpenGL系列
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="01_OpenGL渲染结构与常用图元.html">
+            
+                <a href="01_OpenGL渲染结构与常用图元.html">
+            
+                    
+                    1.OpenGL渲染结构与常用图元
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="02_OpenGL基础渲染.html">
+            
+                <a href="02_OpenGL基础渲染.html">
+            
+                    
+                    2.OpenGL基础渲染
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.13.3" data-path="03_OpenGL渲染问题的处理方法.html">
+            
+                <a href="03_OpenGL渲染问题的处理方法.html">
+            
+                    
+                    3.OpenGL渲染问题的处理方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >3.OpenGL渲染问题的处理方法</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="3opengl&#x6E32;&#x67D3;&#x95EE;&#x9898;&#x7684;&#x5904;&#x7406;&#x65B9;&#x6CD5;">3.OpenGL&#x6E32;&#x67D3;&#x95EE;&#x9898;&#x7684;&#x5904;&#x7406;&#x65B9;&#x6CD5;</h1>
+<h2 id="&#x5B66;&#x4E60;&#x5185;&#x5BB9;">&#x5B66;&#x4E60;&#x5185;&#x5BB9;</h2>
+<ul>
+<li>&#x6E32;&#x67D3;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x80FD;&#x4EA7;&#x2F63;&#x7684;&#x95EE;&#x9898;</li>
+<li>&#x6CB9;&#x753B;&#x6E32;&#x67D3;</li>
+<li>&#x6B63;&#x2FAF;&#x9762;&amp;&#x80CC;&#x2FAF;&#x9762;&#x5254;&#x9664;</li>
+<li>&#x6DF1;&#x5EA6;&#x6D4B;&#x8BD5;</li>
+<li>&#x591A;&#x8FB9;&#x5F62;&#x6A21;&#x578B;</li>
+<li>&#x591A;&#x8FB9;&#x5F62;&#x504F;&#x79FB;</li>
+<li>&#x88C1;&#x526A;</li>
+</ul>
+<h2 id="&#x4E00;&#x3001;&#x5728;&#x6E32;&#x67D3;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x80FD;&#x4EA7;&#x2F63;&#x7684;&#x95EE;&#x9898;">&#x4E00;&#x3001;&#x5728;&#x6E32;&#x67D3;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x80FD;&#x4EA7;&#x2F63;&#x7684;&#x95EE;&#x9898;</h2>
+<p>&#x5728;&#x7ED8;&#x5236;3D&#x573A;&#x666F;&#x7684;&#x65F6;&#x5019;,&#x6211;&#x4EEC;&#x9700;&#x8981;&#x51B3;&#x5B9A;&#x54EA;&#x4E9B;&#x90E8;&#x5206;&#x662F;&#x5BF9;&#x89C2;&#x5BDF;&#x8005; &#x53EF;&#x2EC5;&#x7684;,&#x6216;&#x8005;&#x54EA;&#x4E9B;&#x90E8;&#x5206;&#x662F;&#x5BF9;&#x89C2;&#x5BDF;&#x8005;&#x4E0D;&#x53EF;&#x2EC5;&#x7684;.&#x5BF9;&#x4E8E;&#x4E0D;&#x53EF;&#x2EC5;&#x7684; &#x90E8;&#x5206;,&#x5E94;&#x8BE5;&#x53CA;&#x65E9;&#x4E22;&#x5F03;.&#x4F8B;&#x5982;&#x5728;&#x2F00;&#x4E2A;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x5899;&#x58C1;&#x540E;,&#x5C31;&#x4E0D;&#x5E94;&#x8BE5; &#x6E32;&#x67D3;.&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x53EB;&#x505A;&#x201C;&#x9690;&#x85CF;&#x2FAF;&#x6D88;&#x9664;&#x201D;(Hidden surface elimination).</p>
+<p><img src="../../images/opengl_03_1.png" alt=""></p>
+<h3 id="11-&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;&#x6CB9;&#x753B;&#x6CD5;">1.1 &#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;&#x6CB9;&#x753B;&#x6CD5;</h3>
+<p>&#x6CB9;&#x753B;&#x7B97;&#x6CD5;&#xFF1A;&#x5148;&#x7ED8;&#x5236;&#x573A;&#x666F;&#x4E2D;&#x7684;&#x79BB;&#x89C2;&#x5BDF;&#x8005;&#x8F83;&#x8FDC;&#x7684;&#x7269;&#x4F53;,&#x518D;&#x7ED8;&#x5236;&#x8F83;&#x8FD1;&#x7684;&#x7269;&#x4F53;.</p>
+<p>&#x4F8B;&#x5982;&#x4E0B;&#x2FAF;&#x7684;&#x56FE;&#x4F8B;&#xFF1A;&#x5148;&#x7ED8;&#x5236;&#x7EA2;&#x2F8A;&#x90E8;&#x5206;,&#x518D;&#x7ED8;&#x5236;&#x2EE9;&#x2F8A;&#x90E8;&#x5206;,&#x6700;&#x540E;&#x518D;&#x7ED8;&#x5236;&#x7070;&#x8272;&#x90E8;&#x5206;,&#x5373;&#x53EF;&#x89E3;&#x51B3;&#x9690;&#x85CF;&#x2FAF;&#x6D88;&#x9664;&#x7684; &#x95EE;&#x9898;&#x3002;</p>
+<p><img src="../../images/opengl_03_1_1.png" alt=""></p>
+<h3 id="12-&#x6CB9;&#x753B;&#x6CD5;&#x5F0A;&#x7AEF;">1.2 &#x6CB9;&#x753B;&#x6CD5;&#x5F0A;&#x7AEF;</h3>
+<p>&#x4F7F;&#x2F64;&#x6CB9;&#x753B;&#x7B97;&#x6CD5;,&#x53EA;&#x8981;&#x5C06;&#x573A;&#x666F;&#x6309;&#x7167;&#x7269;&#x7406;&#x8DDD;&#x79BB;&#x89C2;&#x5BDF;&#x8005;&#x7684;&#x8DDD;&#x79BB;&#x8FDC;&#x8FD1;&#x6392;&#x5E8F;,&#x7531;&#x8FDC;&#x53CA;&#x8FD1;&#x7684;&#x7ED8;&#x5236;&#x5373;&#x53EF;.&#x90A3;&#x4E48;&#x4F1A;&#x51FA;&#x73B0;&#x4EC0;&#x4E48;&#x95EE;&#x9898;? &#x5982;&#x679C;&#x4E09;&#x4E2A;&#x4E09;&#x89D2;&#x5F62;&#x662F;&#x53E0;&#x52A0;&#x7684;&#x60C5;&#x51B5;,&#x6CB9;&#x753B;&#x7B97;&#x6CD5;&#x5C06;&#x2F46;&#x6CD5;&#x5904;&#x7406;.</p>
+<p><img src="../../images/opengl_03_1_2.png" alt=""></p>
+<h3 id="13-&#x89E3;&#x51B3;&#x2F45;&#x6848;&#xFF1A;&#x6B63;&#x80CC;&#x2FAF;&#x5254;&#x9664;face-culling">1.3 &#x89E3;&#x51B3;&#x2F45;&#x6848;&#xFF1A;&#x6B63;&#x80CC;&#x2FAF;&#x5254;&#x9664;(Face Culling)</h3>
+<p><strong>&#x2F00;&#x4E2A;3D&#x56FE;&#x5F62;,&#x4F60;&#x4ECE;&#x4EFB;&#x4F55;&#x2F00;&#x4E2A;&#x2F45;&#x5411;&#x53BB;&#x89C2;&#x5BDF;,&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x51E0;&#x4E2A;&#x9762;?</strong></p>
+<p>&#x7B54;&#x6848;&#xFF1A;&#x6700;&#x591A;3&#x2FAF;. &#x4ECE;&#x2F00;&#x4E2A;&#x2F74;&#x2F45;&#x4F53;&#x7684;&#x4EFB;&#x610F;&#x4F4D;&#x7F6E;&#x548C;&#x2F45;&#x5411;&#x4E0A;&#x770B;,&#x4F60;&#x7528;&#x8FC7;&#x4E0D;&#x53EF;&#x80FD;&#x770B;&#x5230;&#x591A;&#x4E8E;3&#x4E2A;&#x9762;.</p>
+<p><strong>&#x90A3;&#x4E48;&#x601D;&#x8003;? &#x6211;&#x4EEC;&#x4E3A;&#x4F55;&#x8981;&#x591A;&#x4F59;&#x7684;&#x53BB;&#x7ED8;&#x5236;&#x90A3;&#x6839;&#x672C;&#x770B;&#x4E0D;&#x5230;&#x7684;3&#x4E2A;&#x9762;?</strong></p>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x80FD;&#x4EE5;&#x67D0;&#x79CD;&#x65B9;&#x5F0F;&#x53BB;&#x4E22;&#x5F03;&#x8FD9;&#x90E8;&#x5206;&#x6570;&#x636E;,OpenGL&#x5728;&#x6E32;&#x67D3;&#x7684;&#x6027;&#x80FD;&#x5373;&#x53EF;&#x63D0;&#x2FBC;&#x8D85;&#x8FC7;50%.</p>
+<p><strong>&#x5982;&#x4F55;&#x77E5;&#x9053;&#x67D0;&#x4E2A;&#x9762;&#x5728;&#x89C2;&#x5BDF;&#x8005;&#x7684;&#x89C6;&#x10FC00;&#x4E2D;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;?</strong></p>
+<p>&#x4EFB;&#x4F55;&#x5E73;&#x2FAF;&#x90FD;&#x6709;2&#x4E2A;&#x9762;,&#x6B63;&#x9762;/&#x80CC;&#x9762;.&#x610F;&#x5473;&#x7740;&#x4F60;&#x2F00;&#x4E2A;&#x65F6;&#x523B;&#x53EA;&#x80FD;&#x770B;&#x5230;&#x4E00;&#x2FAF;.OpenGL &#x53EF;&#x4EE5;&#x505A;&#x5230;&#x68C0;&#x67E5;&#x6240;&#x6709;&#x6B63;&#x9762;&#x671D;&#x5411;&#x89C2;&#x5BDF;&#x8005;&#x7684;&#x9762;,&#x5E76;&#x6E32;&#x67D3;&#x5B83;&#x4EEC;.&#x4ECE;&#x2F7D;&#x4E22;&#x5F03;&#x80CC;&#x2FAF;&#x671D;&#x5411;&#x7684;&#x2FAF;. &#x8FD9;&#x6837;&#x53EF;&#x4EE5; &#x8282;&#x7EA6;&#x2F5A;&#x5143;&#x7740;&#x2F8A;&#x5668;&#x7684;&#x6027;&#x80FD;.</p>
+<p><strong>&#x5982;&#x679C;&#x544A;&#x8BC9;OpenGL&#x4F60;&#x7ED8;&#x5236;&#x7684;&#x56FE;&#x5F62;,&#x54EA;&#x4E2A;&#x9762;&#x662F;&#x6B63;&#x9762;,&#x54EA;&#x4E2A;&#x9762;&#x662F;&#x80CC;&#x9762;?</strong></p>
+<p>&#x7B54;&#x6848;&#xFF1A;&#x901A;&#x8FC7;&#x5206;&#x6790;&#x9876;&#x70B9;&#x6570;&#x636E;&#x7684;&#x987A;&#x5E8F;</p>
+<h3 id="14-&#x5206;&#x6790;&#x9876;&#x70B9;&#x987A;&#x5E8F;">1.4 &#x5206;&#x6790;&#x9876;&#x70B9;&#x987A;&#x5E8F;</h3>
+<p><img src="../../images/opengl_03_1_4.png" alt=""></p>
+<p>&#x6B63;&#x2FAF;: &#x6309;&#x7167;&#x9006;&#x65F6;&#x9488;&#x9876;&#x70B9;&#x8FDE;&#x63A5;&#x987A;&#x5E8F;&#x7684;&#x4E09;&#x2EC6;&#x5F62;&#x2FAF;</p>
+<p>&#x80CC;&#x2FAF;: &#x6309;&#x7167;&#x987A;&#x65F6;&#x9488;&#x9876;&#x70B9;&#x8FDE;&#x63A5;&#x987A;&#x5E8F;&#x7684;&#x4E09;&#x2EC6;&#x5F62;&#x2FAF;</p>
+<h3 id="15-&#x5206;&#x6790;&#x2F74;&#x65B9;&#x4F53;&#x4E2D;&#x7684;&#x6B63;&#x80CC;&#x2FAF;">1.5 &#x5206;&#x6790;&#x2F74;&#x65B9;&#x4F53;&#x4E2D;&#x7684;&#x6B63;&#x80CC;&#x2FAF;</h3>
+<p><img src="../../images/opengl_03_1_5.png" alt=""></p>
+<h4 id="&#x5206;&#x6790;">&#x5206;&#x6790;</h4>
+<ul>
+<li>&#x5DE6;&#x4FA7;&#x4E09;&#x2EC6;&#x5F62;&#x9876;&#x70B9;&#x987A;&#x5E8F;&#x4E3A;: 1&#x2014;&gt; 2&#x2014;&gt; 3; &#x53F3;&#x4FA7;&#x4E09;&#x2EC6;&#x5F62;&#x7684;&#x9876;&#x70B9;&#x987A;&#x5E8F;&#x4E3A;: 1&#x2014;&gt; 2&#x2014;&gt; 3 . </li>
+<li>&#x5F53;&#x89C2;&#x5BDF;&#x8005;&#x5728;&#x53F3;&#x4FA7;&#x65F6;,&#x5219;&#x53F3;&#x8FB9;&#x7684;&#x4E09;&#x2EC6;&#x5F62;&#x2F45;&#x5411;&#x4E3A;&#x9006;&#x65F6;&#x9488;&#x2F45;&#x65B9;&#x5411;&#x5224;&#x5B9A;&#x4E3A;&#x6B63;&#x2FAF;,&#x2F7D;&#x5DE6;&#x4FA7;&#x7684;&#x4E09;&#x2EC6;&#x5F62;&#x4E3A;&#x987A;&#x65F6;&#x9488;&#x5219;&#x4E3A;&#x80CC;&#x9762; </li>
+<li>&#x5F53;&#x89C2;&#x5BDF;&#x8005;&#x5728;&#x5DE6;&#x4FA7;&#x65F6;,&#x5219;&#x5DE6;&#x8FB9;&#x7684;&#x4E09;&#x89D2;&#x5F62;&#x2F45;&#x5411;&#x4E3A;&#x9006;&#x65F6;&#x9488;&#x2F45;&#x65B9;&#x5411;&#x5224;&#x5B9A;&#x4E3A;&#x6B63;&#x2FAF;,&#x2F7D;&#x53F3;&#x4FA7;&#x7684;&#x4E09;&#x2EC6;&#x5F62;&#x4E3A;&#x987A;&#x65F6;&#x9488;&#x5219;&#x4E3A;&#x80CC;&#x9762; </li>
+</ul>
+<h4 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h4>
+<p>&#x6B63;&#x2FAF;&#x548C;&#x80CC;&#x9762;&#x662F;&#x7531;&#x4E09;&#x2EC6;&#x5F62;&#x7684;&#x9876;&#x70B9;&#x5B9A;&#x4E49;&#x987A;&#x5E8F;&#x548C;&#x89C2;&#x5BDF;&#x8005;&#x65B9;&#x5411;&#x5171;&#x540C;&#x51B3;&#x5B9A;&#x7684;.&#x968F;&#x7740;&#x89C2;&#x5BDF;&#x8005;&#x7684;&#x2EC6;&#x5EA6;&#x2F45;&#x5411;&#x7684;&#x6539;&#x53D8;,&#x6B63;&#x9762;&#x80CC;&#x9762;&#x4E5F; &#x4F1A;&#x8DDF;&#x7740;&#x6539;&#x53D8;&#x3002;</p>
+<h3 id="16-&#x5F00;&#x542F;&#x6B63;&#x80CC;&#x9762;&#x5254;&#x9664;">1.6 &#x5F00;&#x542F;&#x6B63;&#x80CC;&#x9762;&#x5254;&#x9664;</h3>
+<p><strong>&#x5F00;&#x542F;&#x8868;&#x2FAF;&#x5254;&#x9664;(&#x9ED8;&#x8BA4;&#x80CC;&#x2FAF;&#x5254;&#x9664;)</strong></p>
+<pre class="language-"><code class="lang-cpp"><span class="token keyword">void</span> <span class="token function">glEnable</span><span class="token punctuation">(</span>GL_CULL_FACE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><strong>&#x5173;&#x95ED;&#x8868;&#x9762;&#x5254;&#x9664;(&#x9ED8;&#x8BA4;&#x80CC;&#x2FAF;&#x5254;&#x9664;)</strong></p>
+<pre class="language-"><code class="lang-cpp"><span class="token keyword">void</span> <span class="token function">glDisable</span><span class="token punctuation">(</span>GL_CULL_FACE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><strong>&#x2F64;&#x6237;&#x9009;&#x62E9;&#x5254;&#x9664;&#x90A3;&#x4E2A;&#x9762;(&#x6B63;&#x9762;/&#x80CC;&#x9762;)</strong></p>
+<pre class="language-"><code class="lang-cpp"><span class="token comment">// mode&#x53C2;&#x6570;&#x4E3A;: GL_FRONT,GL_BACK,GL_FRONT_AND_BACK ,&#x9ED8;&#x8BA4;GL_BACK</span>
+<span class="token keyword">void</span> <span class="token function">glCullFace</span><span class="token punctuation">(</span>GLenum mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><strong>&#x2F64;&#x6237;&#x6307;&#x5B9A;&#x7ED5;&#x5E8F;&#x54EA;&#x4E2A;&#x4E3A;&#x6B63;&#x2FAF;</strong></p>
+<pre class="language-"><code class="lang-cpp"><span class="token comment">// mode&#x53C2;&#x6570;&#x4E3A;: GL_CW,GL_CCW,&#x9ED8;&#x8BA4;&#x503C;:GL_CCW</span>
+oid <span class="token function">glFrontFace</span><span class="token punctuation">(</span>GLenum mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><strong>&#x4F8B;&#x5982;,&#x5254;&#x9664;&#x6B63;&#x9762;&#x5B9E;&#x73B0;(1)</strong></p>
+<pre class="language-"><code class="lang-cpp"><span class="token function">glCullFace</span><span class="token punctuation">(</span>GL_BACK<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glFrontFace</span><span class="token punctuation">(</span>GL_CW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><strong>&#x4F8B;&#x5982;,&#x5254;&#x9664;&#x6B63;&#x9762;&#x5B9E;&#x73B0;(1)</strong></p>
+<pre class="language-"><code class="lang-cpp"><span class="token function">glCullFace</span><span class="token punctuation">(</span>GL_FRONT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2020-09-04 01:02:54
+</span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="02_OpenGL基础渲染.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 2.OpenGL基础渲染">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3.OpenGL渲染问题的处理方法","level":"1.13.3","depth":2,"previous":{"title":"2.OpenGL基础渲染","level":"1.13.2","depth":2,"path":"OpenGL系列/02_OpenGL基础渲染.md","ref":"OpenGL系列/02_OpenGL基础渲染.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"OpenGL系列/03_OpenGL渲染问题的处理方法.md","mtime":"2020-09-03T17:02:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-03T17:29:30.864Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
