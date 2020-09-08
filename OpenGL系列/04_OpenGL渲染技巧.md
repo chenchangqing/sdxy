@@ -107,9 +107,11 @@ m3dCrossProduct3(vector2, v1, v2);
 printf("%f,%f,%f",vector2[0],vector2[1],vector2[2]);
 ```
 
-## 案例
+## 四、案例
 
-### 抗锯齿+多重采样
+[源码](https://gitee.com/chenchangqing/iOS-OpenGL-Tutorials/tree/master/04_OpenGL渲染技巧)
+
+### 4.1 抗锯齿+多重采样
 
 ```cpp
 #include "GLTools.h"
@@ -349,7 +351,7 @@ int main(int argc, char* argv[])
 }
 ```
 
-### 图形移动（矩阵变换）
+### 4.2 图形移动（矩阵变换）
 
 ```cpp
 
@@ -491,7 +493,7 @@ int main(int argc, char* argv[])
 }
 ```
 
-### 正交投影
+### 4.3 正交投影
 
 ```cpp
 
@@ -1048,7 +1050,7 @@ int main(int argc, char* argv[])
 }
 ```
 
-### 透视投影
+### 4.4 透视投影
 ```cpp
 #include "GLTools.h"
 #include "GLMatrixStack.h"
