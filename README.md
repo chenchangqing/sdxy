@@ -6,7 +6,7 @@
 * [iOS-OpenGL-Tutorials](https://gitee.com/chenchangqing/iOS-OpenGL-Tutorials)
 * [UITextField PlaceHolder居中显示问题](https://www.jianshu.com/p/54c206a8a326)
 * [新版gitbook导出pdf](https://www.jianshu.com/p/9cbc9d3bfd16)
-
+* [gitbook教程](http://gitbook.hushuang.me/syntax/markdown.html)
 ## 佰驻
 
 * [蓝湖](https://lanhuapp.com/web/#/item/project/board?pid=588fe568-2d9a-433e-aa99-7d9027700d4e)
