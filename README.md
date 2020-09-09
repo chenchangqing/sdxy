@@ -5,6 +5,7 @@
 * [MarkDown代码块高亮](https://blog.csdn.net/shepherd_dirk/article/details/84646379?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-4-84646379.nonecase&utm_term=c++高亮%20markdown)
 * [iOS-OpenGL-Tutorials](https://gitee.com/chenchangqing/iOS-OpenGL-Tutorials)
 * [UITextField PlaceHolder居中显示问题](https://www.jianshu.com/p/54c206a8a326)
+* [新版gitbook导出pdf](https://www.jianshu.com/p/9cbc9d3bfd16)
 
 ## 佰驻
 
