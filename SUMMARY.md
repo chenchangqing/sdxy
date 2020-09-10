@@ -1,6 +1,15 @@
 # Summary
 
 * [Introduction](README.md)
+* OpenGL系列
+    * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
+    * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)
+    * [3.OpenGL渲染问题的处理方法](OpenGL系列/03_OpenGL渲染问题的处理方法.md)
+    * [4.OpenGL渲染技巧](OpenGL系列/04_OpenGL渲染技巧.md)
+    * [5.OpenGL三角形批次类绘制案例](OpenGL系列/05_OpenGL三角形批次类绘制案例.md)
+    * [6.OpenGL模型视图矩阵绘制案例](OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md)
+    * [7.OpenGL顶点变化管线详解](OpenGL系列/07_OpenGL顶点变化管线详解.md)
+    * [8.OpenGL公转自转案例](OpenGL系列/08_OpenGL公转自转案例.md)
 * 第1学期 1.马克思主义基本原理概论
     * [1.1.精讲1](第1学期_1_马克思主义基本原理概论/精讲1.md)
     * [1.2.精讲2](第1学期_1_马克思主义基本原理概论/精讲2.md)
@@ -183,13 +192,4 @@
     * [1.13.串讲1](第4学期_2_英语（二）/串讲1.md)
     * [1.14.串讲2](第4学期_2_英语（二）/串讲2.md)
     * [1.15.串讲3](第4学期_2_英语（二）/串讲3.md)
-* OpenGL系列
-    * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
-    * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)
-    * [3.OpenGL渲染问题的处理方法](OpenGL系列/03_OpenGL渲染问题的处理方法.md)
-    * [4.OpenGL渲染技巧](OpenGL系列/04_OpenGL渲染技巧.md)
-    * [5.OpenGL三角形批次类绘制案例](OpenGL系列/05_OpenGL三角形批次类绘制案例.md)
-    * [6.OpenGL模型视图矩阵绘制案例](OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md)
-    * [7.OpenGL顶点变化管线详解](OpenGL系列/07_OpenGL顶点变化管线详解.md)
-    * [8.OpenGL公转自转案例](OpenGL系列/08_OpenGL公转自转案例.md)
 
