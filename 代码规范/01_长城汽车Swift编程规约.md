@@ -419,7 +419,7 @@
 
   **推荐:**
 
-  ```objc
+  ```c
   dispatch_queue_t gwhUpdateQueue = dispatch_queue_create("", DISPATCH_QUEUE_SERIAL);
   let queue = DispatchQueue(label: "com.gwh.app.update", attributes: .concurrent)
   ```
@@ -587,3 +587,4 @@
 - fix: 修复bug
 
 目前除了fix需要附带bug编号, 别的统一用feat.
+
