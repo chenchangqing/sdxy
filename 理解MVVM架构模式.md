@@ -1,5 +1,7 @@
 # 理解MVVM架构模式
 
+后续补充自己的理解与实战
+
 ## 参考文章
 
 * [iOS 关于MVC和MVVM设计模式的那些事](https://www.jianshu.com/p/caaa173071f3)
