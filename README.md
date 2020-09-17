@@ -119,3 +119,10 @@
 ## Git
 
 * [git如何删除远端不存在的本地分支？](https://www.cnblogs.com/shengulong/p/10398617.html)
+
+## 参考文章
+
+* [Swift - RxSwift的使用详解1（基本介绍、安装配置）](https://www.hangge.com/blog/cache/detail_1917.html)
+* [RxSwift的学习之路（二）——Subjects](https://www.jianshu.com/p/6ce9cae4f410)
+* [使用 RxTest 来建立基于 RxSwift 的自动化测试](https://imtx.me/blog/testing-rxswift-by-rxtest/)
+* [RxSwift中文文档](https://beeth0ven.github.io/RxSwift-Chinese-Documentation/)
