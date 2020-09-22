@@ -44,6 +44,7 @@
     * [31.UITableView的使用5：可编辑表格](RxSwift系列/31_UITableView的使用5_可编辑表格.md)
     * [32.UITableView的使用6：不同类型的单元格混用](RxSwift系列/32_UITableView的使用6_不同类型的单元格混用.md)
     * [33.UITableView的使用7：样式修改](RxSwift系列/33_UITableView的使用7_样式修改.md)
+    * [34.UICollectionView的使用1：基本用法](RxSwift系列/34_UICollectionView的使用1_基本用法.md)
 * [长城汽车Swift编程规约](长城汽车Swift编程规约.md)
 * [WebView与iOS原生的交互](WebView与iOS原生的交互.md)
 * [理解MVVM架构模式](理解MVVM架构模式.md)
