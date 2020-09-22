@@ -6,6 +6,8 @@
 
 `Observable` 作为 `Rx` 的根基，我们首先对它要有一些基本的了解。
 
+[iOS-RxSwift-Tutorials](https://gitee.com/chenchangqing/iOS-RxSwift-Tutorials)
+
 ### 1.1 Observable<T>
 
 * `Observable<T>` 这个类就是 `Rx` 框架的基础，我们可以称它为可观察序列。它的作用就是可以异步地产生一系列的 `Event`（事件），即一个 `Observable<T>` 对象会随着时间推移不定期地发出 `event(element : T)` 这样一个东西。
