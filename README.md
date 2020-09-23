@@ -128,3 +128,4 @@
 * [RxSwift中文文档](https://beeth0ven.github.io/RxSwift-Chinese-Documentation/)
 * [RxSwift学习 - share(replay:scope:)](https://www.jianshu.com/p/08b30b4181ea)
 * [RXSwift中Driver的使用](https://www.jianshu.com/p/7cc6bb93d4f2)
+* [RxSwift+Moya网络请求之项目实战](https://www.jianshu.com/p/406336b4aadc)
