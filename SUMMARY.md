@@ -62,6 +62,8 @@
     * [49.一个用户注册样例1：基本功能实现](RxSwift系列/49_一个用户注册样例1_基本功能实现.md)
     * [50.结合MJRefresh使用1：下拉刷新](RxSwift系列/50_结合MJRefresh使用1_下拉刷新.md)
     * [51.DelegateProxy样例1：获取地理定位信息](RxSwift系列/51_DelegateProxy样例1_获取地理定位信息.md)
+    * [52.DelegateProxy样例2：图片选择功能](RxSwift系列/52_DelegateProxy样例2_图片选择功能.md)
+    * [53.DelegateProxy样例3：应用生命周期的状态变化](RxSwift系列/53_DelegateProxy样例3_应用生命周期的状态变化.md)
 * [长城汽车Swift编程规约](长城汽车Swift编程规约.md)
 * [WebView与iOS原生的交互](WebView与iOS原生的交互.md)
 * [理解MVVM架构模式](理解MVVM架构模式.md)
