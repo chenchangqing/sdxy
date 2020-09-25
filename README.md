@@ -129,3 +129,11 @@
 * [RxSwift学习 - share(replay:scope:)](https://www.jianshu.com/p/08b30b4181ea)
 * [RXSwift中Driver的使用](https://www.jianshu.com/p/7cc6bb93d4f2)
 * [RxSwift+Moya网络请求之项目实战](https://www.jianshu.com/p/406336b4aadc)
+
+## 面试
+
+* [iOS开发中 weak和assign的区别](https://www.jianshu.com/p/e9a46253f587)
+* [做了快5年iOS，这份面试题让我从15K变成了30K](https://www.jianshu.com/p/1af57f250976?utm_campaign=haruki&utm_content=note&utm_medium=reader_share&utm_source=weixin)
+* [《招聘一个靠谱的iOS》面试题参考答案](https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md#13-用property声明的nsstring或nsarraynsdictionary经常使用copy关键字为什么如果改用strong关键字可能造成什么问题)
+* [iOS性能优化](https://www.jianshu.com/p/aace73e49392)
+* [iOS]NSHashTable和NSMapTable用法](https://www.jianshu.com/p/de71385930ba)

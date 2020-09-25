@@ -78,8 +78,9 @@
     * [65.ReactorKit架构1：安装配置、基本用法](RxSwift系列/65_ReactorKit架构1_安装配置、基本用法.md)
     * [66.ReactorKit架构2：一个用户注册样例](RxSwift系列/66_ReactorKit架构2_一个用户注册样例.md)
     * [67.ReactorKit架构3：GitHub资源搜索样例](RxSwift系列/67_ReactorKit架构3_GitHub资源搜索样例.md)
+* 面试系列
+    * [1.weak和assign的区别](面试系列/01_weak和assign的区别.md)
 * [长城汽车Swift编程规约](长城汽车Swift编程规约.md)
 * [WebView与iOS原生的交互](WebView与iOS原生的交互.md)
 * [理解MVVM架构模式](理解MVVM架构模式.md)
-* [面试题](面试题.md)
 
