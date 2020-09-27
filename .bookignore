@@ -6,5 +6,5 @@ ignore
 bookignore
 第*学期*/
 book.pdf
-RxSwift系列/
-OpenGL系列/
+#RxSwift系列/
+#OpenGL系列/
