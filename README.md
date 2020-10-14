@@ -13,6 +13,7 @@
 * [arm64、armv7、armv7s](https://www.jianshu.com/p/673aea016403)
 * [iOS获取手机型号](https://www.jianshu.com/p/4ac5627aa69f)
 * [Cannot find protocol definition for XXX](https://stackoverflow.com/questions/14993265/cannot-find-protocol-definition-for-xxx)
+* [Cannot assign to immutable expression of type 'Bool?'](https://stackoverflow.com/questions/33056612/cannot-assign-to-immutable-expression-of-type-bool)
 
 ## iOS·审核
 
@@ -55,6 +56,8 @@
 * [iOS程序员简历模板](https://blog.csdn.net/Anping1993/article/details/79013595)
 
 ## 自动化打包
+
+打包命令：fastlane release version:0.2.6
 
 * [Mac 下 fastlane 安装 以及常见错误处理](http://www.mamicode.com/info-detail-2835665.html)
 * [fir-cli](https://github.com/FIRHQ/fir-cli/blob/master/README.md)
@@ -129,6 +132,7 @@
 * [RxSwift学习 - share(replay:scope:)](https://www.jianshu.com/p/08b30b4181ea)
 * [RXSwift中Driver的使用](https://www.jianshu.com/p/7cc6bb93d4f2)
 * [RxSwift+Moya网络请求之项目实战](https://www.jianshu.com/p/406336b4aadc)
+* [RxSwift + ReactorKit 构建信息流框架](https://www.jianshu.com/p/dff7b0368d2b)
 
 ## 面试
 
@@ -137,3 +141,16 @@
 * [《招聘一个靠谱的iOS》面试题参考答案](https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md#13-用property声明的nsstring或nsarraynsdictionary经常使用copy关键字为什么如果改用strong关键字可能造成什么问题)
 * [iOS性能优化](https://www.jianshu.com/p/aace73e49392)
 * [iOS]NSHashTable和NSMapTable用法](https://www.jianshu.com/p/de71385930ba)
+
+## CocoaPods
+
+* [整体把握 CocoaPods 核心组件](https://zhuanlan.zhihu.com/p/187272448)
+
+## UI效果
+
+* [iOS开发中实现UIScrollView嵌套UITableView，且有悬停效果](https://www.jishudog.com/5319/html)
+* [iOS UICollectionView header吸顶悬停](https://www.jianshu.com/p/dd1e87795b63)
+
+## 网络下载
+
+* [Kingfisher的基本使用（一）](https://www.jianshu.com/p/e025cec4197a)
