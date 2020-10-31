@@ -15,6 +15,18 @@
 * [Cannot find protocol definition for XXX](https://stackoverflow.com/questions/14993265/cannot-find-protocol-definition-for-xxx)
 * [Cannot assign to immutable expression of type 'Bool?'](https://stackoverflow.com/questions/33056612/cannot-assign-to-immutable-expression-of-type-bool)
 
+## ScrollView嵌套
+
+* [iOS开发实战 - 解决UIScrollView嵌套滑动手势冲突](https://www.jianshu.com/p/8b87837d9e3a)
+* [LYEmbedScrollView](https://github.com/LustySwimmer/LYEmbedScrollView)
+* [JXCategoryView](https://github.com/pujiaxin33/JXCategoryView)
+* [MXParallaxHeader](https://github.com/maxep/MXParallaxHeader)
+* [关于嵌套滚动现实的讨论](https://bawn.github.io/2019/02/NestedScrolling/)
+
+## iOS·新知识
+
+* [使用 Swift Package Manager 集成依赖库](https://www.jianshu.com/p/8f50fe5da938)
+
 ## iOS·审核
 
 * [检查iOS项目中是否还有使用UIWebView](https://www.jianshu.com/p/3a645500d461)
@@ -154,3 +166,19 @@
 ## 网络下载
 
 * [Kingfisher的基本使用（一）](https://www.jianshu.com/p/e025cec4197a)
+
+## VPN
+
+* [cx](https://main.v2ray.cx/)
+
+## 导航栏
+
+* [iOS系统中导航栏的转场解决方案与最佳实践](https://tech.meituan.com/2018/10/25/navigation-transition-solution-and-best-practice-in-meituan.html)
+* [IOS-FDFullscreenPopGesture的使用](IOS-FDFullscreenPopGesture的使用)
+* [我的iOS开发笔记——右滑返回手势失效怎么办？](https://www.jianshu.com/p/180f88960bdd)
+* [iOS 导航栏的那些事儿](https://www.jianshu.com/p/c8ffb2bdda91)
+
+## iOS·UI
+
+* [详解intrinsicContentSize 及 约束优先级／content Hugging／content Compression Resistance](https://blog.csdn.net/hard_man/article/details/50888377)
+* [iOS开发笔记常用工具之文本宽度和高度计算](https://www.jianshu.com/p/7388ef05f32c)
