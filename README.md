@@ -25,6 +25,8 @@
 ## iOS·新知识
 
 * [使用 Swift Package Manager 集成依赖库](https://www.jianshu.com/p/8f50fe5da938)
+* [Swift化零为整：Reduce方法详解](https://www.jianshu.com/p/671760c26061)
+* [swift3.0中fileprivate，private使用](https://www.jianshu.com/p/3953ddb1d3ab/)
 
 ## iOS·审核
 
@@ -49,6 +51,7 @@
 * [熊猫压缩](https://tinypng.com)
 * [远程](https://files02.tchspt.com/storage2/temp/Microsoft_Remote_Desktop_10.3.4_installer.pkg)
 * [udid获取](http://www.pgyer.com/tools/udid)
+* [JSON格式化](https://c.runoob.com/front-end/53)
 
 ## Gitbook
 
@@ -61,6 +64,8 @@
 * [用 Markdown 制作简历](http://tinylab.org/write-resume-with-markdown/?utm_source=tuicool&utm_medium=referral)
 * [Markdown Guide](https://www.markdownguide.org/basic-syntax)
 * [MarkDown代码块高亮](https://blog.csdn.net/shepherd_dirk/article/details/84646379?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-4-84646379.nonecase&utm_term=c++高亮%20markdown)
+* [在 markdown 中生成并导出思维导图的 Gitbook 插件](https://www.cnblogs.com/snowdreams1006/p/12514254.html)
+* [gitbook 3.2.3及之后流程图解决方案](https://blog.csdn.net/Curryth_/article/details/107333300)
 
 ## 简历
 
@@ -101,6 +106,7 @@
 * [闪屏demo](https://github.com/wxzwork/SplashScreenADView)
 * [QGTextField](https://github.com/yinqinggong/QGTextField)
 * [URLNavigator](https://github.com/devxoul/URLNavigator)
+* [网络监控](https://github.com/yujitach/MenuMeters)
 
 ## 学习
 
@@ -141,6 +147,9 @@
 * [RxSwift学习 - share(replay:scope:)](https://www.jianshu.com/p/08b30b4181ea)
 * [RXSwift中Driver的使用](https://www.jianshu.com/p/7cc6bb93d4f2)
 * [RxSwift+Moya网络请求之项目实战](https://www.jianshu.com/p/406336b4aadc)
+* [RxMultiCounter](https://github.com/danielt1263/RxMultiCounter)
+* [RxSwift Error Handling](https://www.cnblogs.com/strengthen/p/13577440.html)
+* [RxDataSource 使用套路与解释](https://zhuanlan.zhihu.com/p/71212181)
 
 ## 面试
 
@@ -165,3 +174,4 @@
 
 * [详解intrinsicContentSize 及 约束优先级／content Hugging／content Compression Resistance](https://blog.csdn.net/hard_man/article/details/50888377)
 * [iOS开发笔记常用工具之文本宽度和高度计算](https://www.jianshu.com/p/7388ef05f32c)
+* [iOS 获取webview高度小结](https://www.cnblogs.com/lijianyi/p/11950702.html)

@@ -47,9 +47,17 @@
                 "popup",
                 "tbfed-pagefooter",
                 "todo",
-                "prism", "-highlight"
+                "prism", "-highlight",
+                "simple-mind-map",
+                "mermaid-gb3"
                 ],
     "pluginsConfig": {
+        "simple-mind-map": {
+            "type": "markdown",
+            "preset": "colorful",
+            "linkShape": "diagonal",
+            "autoFit": true
+        },
         "github": {"url": "https://github.com/chenchangqing"},
         "sharing": {
                    "douban": true,
