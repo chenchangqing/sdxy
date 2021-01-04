@@ -13,6 +13,8 @@
 * [arm64、armv7、armv7s](https://www.jianshu.com/p/673aea016403)
 * [iOS获取手机型号](https://www.jianshu.com/p/4ac5627aa69f)
 * [Cannot find protocol definition for XXX](https://stackoverflow.com/questions/14993265/cannot-find-protocol-definition-for-xxx)
+* [ios – 奇怪的UIView-Encapsulated-Layout-Height错误](http://www.voidcn.com/article/p-hidevpfd-bsw.html)
+* [fix:iOS 13.1.3,textView点击回调3次](https://www.it1352.com/1848705.html)
 
 ## ScrollView嵌套
 
@@ -52,6 +54,7 @@
 * [远程](https://files02.tchspt.com/storage2/temp/Microsoft_Remote_Desktop_10.3.4_installer.pkg)
 * [udid获取](http://www.pgyer.com/tools/udid)
 * [JSON格式化](https://c.runoob.com/front-end/53)
+* [代码格式化插件](https://github.com/nicklockwood/SwiftFormat)
 
 ## Gitbook
 
@@ -150,6 +153,7 @@
 * [RxMultiCounter](https://github.com/danielt1263/RxMultiCounter)
 * [RxSwift Error Handling](https://www.cnblogs.com/strengthen/p/13577440.html)
 * [RxDataSource 使用套路与解释](https://zhuanlan.zhihu.com/p/71212181)
+* [RxSwift 中的老司机](https://juejin.cn/post/6844903906745516046)
 
 ## 面试
 
@@ -158,10 +162,13 @@
 * [《招聘一个靠谱的iOS》面试题参考答案](https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md#13-用property声明的nsstring或nsarraynsdictionary经常使用copy关键字为什么如果改用strong关键字可能造成什么问题)
 * [iOS性能优化](https://www.jianshu.com/p/aace73e49392)
 * [iOS]NSHashTable和NSMapTable用法](https://www.jianshu.com/p/de71385930ba)
+* [Swift中的unowned和weak](https://www.jianshu.com/p/51cb83833c9b?utm_campaign=hugo)
 
 ## VPN
 
 * [cx](https://main.v2ray.cx/)
+* [vpn·周](https://linlinks.cc/auth/register?code=v7Wm)
+* [vpn·李](https://mymonocloud.com/home)
 
 ## 导航栏
 
@@ -175,3 +182,15 @@
 * [详解intrinsicContentSize 及 约束优先级／content Hugging／content Compression Resistance](https://blog.csdn.net/hard_man/article/details/50888377)
 * [iOS开发笔记常用工具之文本宽度和高度计算](https://www.jianshu.com/p/7388ef05f32c)
 * [iOS 获取webview高度小结](https://www.cnblogs.com/lijianyi/p/11950702.html)
+* [iOS Swift 判断手机机型 已更新 至iPhone12](https://cloud.tencent.com/developer/article/1735194)
+* [iOS判断刘海屏幕机型](https://www.jianshu.com/p/130fd4d54537)
+
+## 脚本
+
+sudo pip install openpyxl
+
+## Git
+
+* [Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
+* [git rebase 还是 merge的使用场景最通俗的解释](https://www.jianshu.com/p/4079284dd970)
+
