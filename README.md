@@ -70,6 +70,7 @@
 * [MarkDown代码块高亮](https://blog.csdn.net/shepherd_dirk/article/details/84646379?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-4-84646379.nonecase&utm_term=c++高亮%20markdown)
 * [在 markdown 中生成并导出思维导图的 Gitbook 插件](https://www.cnblogs.com/snowdreams1006/p/12514254.html)
 * [gitbook 3.2.3及之后流程图解决方案](https://blog.csdn.net/Curryth_/article/details/107333300)
+* [Markdown 中文文档](https://markdown-zh.readthedocs.io/en/latest/)
 
 ## 简历
 
@@ -101,6 +102,7 @@
 7. [GitBook 安装以及使用](https://www.jianshu.com/p/e86c702578df)
 8. [mac管理及更新node版本](https://www.jianshu.com/p/c50d900fb68c)
 9. [安装Gitbook](https://www.bilibili.com/read/cv6932054)
+10. [mac软件网址](https://www.macbl.com/)
 
 ## 开源项目
 
@@ -120,6 +122,7 @@
 * [自考](http://zk.zjzs.net/Index/index.aspx)
 * [苹果官方教程swiftui](https://developer.apple.com/tutorials/swiftui)
 * [潭州课堂](https://www.shiguangkey.com)
+* [swift51](http://www.swift51.com/)
 
 ## 苹果官方文档
 
@@ -143,6 +146,7 @@
 ## Git
 
 * [git如何删除远端不存在的本地分支？](https://www.cnblogs.com/shengulong/p/10398617.html)
+* [关于Git协作，除了知道merge，你可能还需要知道rebase](https://www.jianshu.com/p/3081e33a6136)
 
 ## RxSwift
 
@@ -193,6 +197,7 @@
 * [IOS-FDFullscreenPopGesture的使用](IOS-FDFullscreenPopGesture的使用)
 * [我的iOS开发笔记——右滑返回手势失效怎么办？](https://www.jianshu.com/p/180f88960bdd)
 * [iOS 导航栏的那些事儿](https://www.jianshu.com/p/c8ffb2bdda91)
+* [Swift - 导航栏滑动透明渐变效果的实现（透明度随视图滚动而改变）](https://www.hangge.com/blog/cache/detail_2068.html)
 
 ## iOS·UI
 
@@ -201,6 +206,7 @@
 * [iOS 获取webview高度小结](https://www.cnblogs.com/lijianyi/p/11950702.html)
 * [iOS Swift 判断手机机型 已更新 至iPhone12](https://cloud.tencent.com/developer/article/1735194)
 * [iOS判断刘海屏幕机型](https://www.jianshu.com/p/130fd4d54537)
+* [所有机型](https://www.theiphonewiki.com/wiki/Models)
 
 ## 脚本
 
@@ -211,3 +217,15 @@ sudo pip install openpyxl
 * [Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
 * [git rebase 还是 merge的使用场景最通俗的解释](https://www.jianshu.com/p/4079284dd970)
 
+## 快捷键
+
+* 注释：command+option+/
+* 打开xcode文档：command+shift+0
+
+## Flutter
+
+* [Flutter 开发文档](https://flutter.cn/docs)
+
+## 其它
+
+* [医院等级查询](https://cs.newchinalife.com/service-center/query/other/approve-hospital)
