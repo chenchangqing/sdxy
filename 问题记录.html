@@ -97,6 +97,8 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="异常占位图的封装.html" />
+    
     
     <link rel="prev" href="客户端网络逻辑整理及建议.html" />
     
@@ -1583,6 +1585,188 @@
             
         </li>
     
+        <li class="chapter " data-level="1.13" data-path="异常占位图的封装.html">
+            
+                <a href="异常占位图的封装.html">
+            
+                    
+                    异常占位图的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="RxSwift的Timer.html">
+            
+                <a href="RxSwift的Timer.html">
+            
+                    
+                    RxSwift的Timer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="AppTimer的使用.html">
+            
+                <a href="AppTimer的使用.html">
+            
+                    
+                    AppTimer的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="UIViewController的Rx扩展.html">
+            
+                <a href="UIViewController的Rx扩展.html">
+            
+                    
+                    UIViewController的常用Rx扩展
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="Info.plist国际化.html">
+            
+                <a href="Info.plist国际化.html">
+            
+                    
+                    Info.plist国际化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="统一设置页面title字体样式.html">
+            
+                <a href="统一设置页面title字体样式.html">
+            
+                    
+                    统一设置页面title字体样式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="业务组件按国家子库化.html">
+            
+                <a href="业务组件按国家子库化.html">
+            
+                    
+                    业务组件按国家子库化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="App权限管理.html">
+            
+                <a href="App权限管理.html">
+            
+                    
+                    App权限管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="App定位管理.html">
+            
+                <a href="App定位管理.html">
+            
+                    
+                    App定位管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="资源包装类.html">
+            
+                <a href="资源包装类.html">
+            
+                    
+                    资源包装类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="同步未读消息.html">
+            
+                <a href="同步未读消息.html">
+            
+                    
+                    同步未读消息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="自定义错误.html">
+            
+                <a href="自定义错误.html">
+            
+                    
+                    自定义错误
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="GWError的使用.html">
+            
+                <a href="GWError的使用.html">
+            
+                    
+                    GWError的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="Swift注释.html">
+            
+                <a href="Swift注释.html">
+            
+                    
+                    Swift注释
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -1631,41 +1815,41 @@
                                 <h1 id="&#x95EE;&#x9898;&#x8BB0;&#x5F55;">&#x95EE;&#x9898;&#x8BB0;&#x5F55;</h1>
 <h2 id="ios-1313&#x4E0B;&#xFF0C;&#x4FEE;&#x590D;uitextview&#x5BCC;&#x6587;&#x672C;&#x70B9;&#x51FB;&#x4EA7;&#x751F;&#x591A;&#x6B21;&#x56DE;&#x8C03;">iOS 13.1.3&#x4E0B;&#xFF0C;&#x4FEE;&#x590D;UITextView&#x5BCC;&#x6587;&#x672C;&#x70B9;&#x51FB;&#x4EA7;&#x751F;&#x591A;&#x6B21;&#x56DE;&#x8C03;</h2>
 <p>&#x521B;&#x5EFA;&#x5BCC;&#x6587;&#x672C;</p>
-<pre class="language-"><code class="lang-objc">// &#x5220;&#x9664;
-let result = NSMutableAttributedString(string: &quot; \(GWLocalized.delete)&quot;)
-let range = NSRange(location: 0, length: result.string.count)
-result.addAttribute(NSAttributedString.Key.link, value: &quot;Delete://&quot;, range: range)
+<pre class="language-"><code class="lang-swift"><span class="token comment">// &#x5220;&#x9664;</span>
+<span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token function">NSMutableAttributedString</span><span class="token punctuation">(</span>string<span class="token punctuation">:</span> <span class="token string">&quot; <span class="token interpolation"><span class="token delimiter variable">\(</span><span class="token builtin">GWLocalized</span><span class="token punctuation">.</span>delete<span class="token delimiter variable">)</span></span>&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> range <span class="token operator">=</span> <span class="token function">NSRange</span><span class="token punctuation">(</span>location<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> length<span class="token punctuation">:</span> result<span class="token punctuation">.</span>string<span class="token punctuation">.</span><span class="token builtin">count</span><span class="token punctuation">)</span>
+result<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token builtin">NSAttributedString</span><span class="token punctuation">.</span><span class="token builtin">Key</span><span class="token punctuation">.</span>link<span class="token punctuation">,</span> value<span class="token punctuation">:</span> <span class="token string">&quot;Delete://&quot;</span><span class="token punctuation">,</span> range<span class="token punctuation">:</span> range<span class="token punctuation">)</span>
 
-result.addAttribute(NSAttributedString.Key.font, value: UIFont(regularFontWithSize: level == 1 ? 16 : 14)!, range: range)
-textView?.tintColor = UIColor(hexString: &quot;#848484&quot;)
+result<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token builtin">NSAttributedString</span><span class="token punctuation">.</span><span class="token builtin">Key</span><span class="token punctuation">.</span>font<span class="token punctuation">,</span> value<span class="token punctuation">:</span> <span class="token function">UIFont</span><span class="token punctuation">(</span>regularFontWithSize<span class="token punctuation">:</span> level <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">?</span> <span class="token number">16</span> <span class="token punctuation">:</span> <span class="token number">14</span><span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">,</span> range<span class="token punctuation">:</span> range<span class="token punctuation">)</span>
+textView<span class="token operator">?</span><span class="token punctuation">.</span>tintColor <span class="token operator">=</span> <span class="token function">UIColor</span><span class="token punctuation">(</span>hexString<span class="token punctuation">:</span> <span class="token string">&quot;#848484&quot;</span><span class="token punctuation">)</span>
 </code></pre>
 <p>&#x70B9;&#x51FB;&#x5BCC;&#x6587;&#x672C;</p>
-<pre class="language-"><code class="lang-objc">// &#x70B9;&#x51FB;&#x4E8B;&#x4EF6;
-func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -&gt; Bool {
+<pre class="language-"><code class="lang-swift"><span class="token comment">// &#x70B9;&#x51FB;&#x4E8B;&#x4EF6;</span>
+<span class="token keyword">func</span> <span class="token function">textView</span><span class="token punctuation">(</span><span class="token number">_</span> textView<span class="token punctuation">:</span> <span class="token builtin">UITextView</span><span class="token punctuation">,</span> shouldInteractWith <span class="token constant">URL</span><span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">,</span> <span class="token keyword">in</span> characterRange<span class="token punctuation">:</span> <span class="token builtin">NSRange</span><span class="token punctuation">,</span> interaction<span class="token punctuation">:</span> <span class="token builtin">UITextItemInteraction</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Bool</span> <span class="token punctuation">{</span>
 
-    // fix:iphone 7 plus 13.1.3&#x6D3B;&#x52A8;&#x7684;&#x8BC4;&#x8BBA;&#xFF0C;&#x70B9;&#x51FB;&#x5220;&#x9664;&#xFF0C;&#x5F39;&#x51FA;&#x4E09;&#x4E2A;&#x5173;&#x95ED;&#x6846;
-    var recognizedTapGesture = false
-    for ges in textView.gestureRecognizers ?? [] {
-        if let tapGes = ges as? UITapGestureRecognizer, tapGes.state == .ended {
-            recognizedTapGesture = true
-        }
-    }
-    if !recognizedTapGesture {
-        return true
-    }
+    <span class="token comment">// fix:iphone 7 plus 13.1.3&#x6D3B;&#x52A8;&#x7684;&#x8BC4;&#x8BBA;&#xFF0C;&#x70B9;&#x51FB;&#x5220;&#x9664;&#xFF0C;&#x5F39;&#x51FA;&#x4E09;&#x4E2A;&#x5173;&#x95ED;&#x6846;</span>
+    <span class="token keyword">var</span> recognizedTapGesture <span class="token operator">=</span> <span class="token boolean">false</span>
+    <span class="token keyword">for</span> ges <span class="token keyword">in</span> textView<span class="token punctuation">.</span>gestureRecognizers <span class="token operator">?</span><span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> tapGes <span class="token operator">=</span> ges <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">UITapGestureRecognizer</span><span class="token punctuation">,</span> tapGes<span class="token punctuation">.</span>state <span class="token operator">==</span> <span class="token punctuation">.</span>ended <span class="token punctuation">{</span>
+            recognizedTapGesture <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token operator">!</span>recognizedTapGesture <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
 
-    if URL.scheme == &quot;Delete&quot; {
+    <span class="token keyword">if</span> <span class="token constant">URL</span><span class="token punctuation">.</span>scheme <span class="token operator">==</span> <span class="token string">&quot;Delete&quot;</span> <span class="token punctuation">{</span>
 
-        let commentId = reactor?.currentState.comment.commentId
-        let level = reactor?.currentState.level
-        reactor?.action.onNext(.deleteComment(commentId: commentId, level: level))
+        <span class="token keyword">let</span> commentId <span class="token operator">=</span> reactor<span class="token operator">?</span><span class="token punctuation">.</span>currentState<span class="token punctuation">.</span>comment<span class="token punctuation">.</span>commentId
+        <span class="token keyword">let</span> level <span class="token operator">=</span> reactor<span class="token operator">?</span><span class="token punctuation">.</span>currentState<span class="token punctuation">.</span>level
+        reactor<span class="token operator">?</span><span class="token punctuation">.</span>action<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">deleteComment</span><span class="token punctuation">(</span>commentId<span class="token punctuation">:</span> commentId<span class="token punctuation">,</span> level<span class="token punctuation">:</span> level<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-    }
-    return true
-}
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-01-04 10:07:29
+2021-01-26 09:45:28
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -1694,10 +1878,14 @@ func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterR
 
             
                 
-                <a href="客户端网络逻辑整理及建议.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 客户端网络逻辑整理及建议">
+                <a href="客户端网络逻辑整理及建议.html" class="navigation navigation-prev " aria-label="Previous page: 客户端网络逻辑整理及建议">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="异常占位图的封装.html" class="navigation navigation-next " aria-label="Next page: 异常占位图的封装">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -1706,7 +1894,7 @@ func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterR
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"问题记录","level":"1.12","depth":1,"previous":{"title":"客户端网络逻辑整理及建议","level":"1.11","depth":1,"path":"客户端网络逻辑整理及建议.md","ref":"客户端网络逻辑整理及建议.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"问题记录.md","mtime":"2021-01-04T02:07:29.632Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-04T02:08:50.703Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"问题记录","level":"1.12","depth":1,"next":{"title":"异常占位图的封装","level":"1.13","depth":1,"path":"异常占位图的封装.md","ref":"异常占位图的封装.md","articles":[]},"previous":{"title":"客户端网络逻辑整理及建议","level":"1.11","depth":1,"path":"客户端网络逻辑整理及建议.md","ref":"客户端网络逻辑整理及建议.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"问题记录.md","mtime":"2021-01-26T01:45:28.138Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-26T01:45:40.784Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
