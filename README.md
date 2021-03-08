@@ -16,6 +16,7 @@
 * [Cannot assign to immutable expression of type 'Bool?'](https://stackoverflow.com/questions/33056612/cannot-assign-to-immutable-expression-of-type-bool)
 * [ios – 奇怪的UIView-Encapsulated-Layout-Height错误](http://www.voidcn.com/article/p-hidevpfd-bsw.html)
 * [fix:iOS 13.1.3,textView点击回调3次](https://www.it1352.com/1848705.html)
+* ["Double-quoted" issue in latest version of Firebase](https://github.com/firebase/firebase-ios-sdk/issues/5987)
 
 ## ScrollView嵌套
 
@@ -30,6 +31,10 @@
 * [使用 Swift Package Manager 集成依赖库](https://www.jianshu.com/p/8f50fe5da938)
 * [Swift化零为整：Reduce方法详解](https://www.jianshu.com/p/671760c26061)
 * [swift3.0中fileprivate，private使用](https://www.jianshu.com/p/3953ddb1d3ab/)
+* [Swift与泛型编程第四弹：类型擦除](https://www.jianshu.com/p/4cfe94238ce2)
+* [iOS 插件化开发(动态库研究)](https://gsl201600.github.io/2019/11/13/iOS%E6%8F%92%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/)
+* [在 iOS 上下载文件](https://firebase.google.com/docs/storage/ios/download-files?hl=zh-cn)
+* [iOS归档看这篇就够了](https://www.jianshu.com/p/185e9ea021a2)
 
 ## iOS·审核
 
@@ -56,6 +61,9 @@
 * [udid获取](http://www.pgyer.com/tools/udid)
 * [JSON格式化](https://c.runoob.com/front-end/53)
 * [代码格式化插件](https://github.com/nicklockwood/SwiftFormat)
+* [App图标在线制作](https://www.pgyer.com/tools/appIcon)
+* [压缩一个PDF文件](https://www.ilovepdf.com/zh-cn/compress_pdf)
+* [UIImage 二分压缩图片](http://www.colinhwang.com/2016/07/30/compress-image/)
 
 ## Gitbook
 
@@ -71,6 +79,7 @@
 * [在 markdown 中生成并导出思维导图的 Gitbook 插件](https://www.cnblogs.com/snowdreams1006/p/12514254.html)
 * [gitbook 3.2.3及之后流程图解决方案](https://blog.csdn.net/Curryth_/article/details/107333300)
 * [Markdown 中文文档](https://markdown-zh.readthedocs.io/en/latest/)
+* [markdown编辑](https://zybuluo.com/mdeditor)
 
 ## 简历
 
@@ -85,6 +94,7 @@
 * [iOS打包](https://www.pgyer.com/doc/view/jenkins_plugin)
 * [iOS归档看这篇就够了](https://www.jianshu.com/p/185e9ea021a2)
 * [fastlane官网](https://fastlane.tools)
+* [好看的博客](https://yimouleng.com/)
 
 ## Cocoapods 
 
@@ -115,6 +125,8 @@
 * [QGTextField](https://github.com/yinqinggong/QGTextField)
 * [URLNavigator](https://github.com/devxoul/URLNavigator)
 * [网络监控](https://github.com/yujitach/MenuMeters)
+* [Swift-30-Projects](https://github.com/soapyigu/Swift-30-Projects)
+* [iOSKeyPointExploration](https://github.com/huang303513/iOSKeyPointExploration)
 
 ## 学习
 
@@ -190,6 +202,7 @@
 * [cx](https://main.v2ray.cx/)
 * [vpn·周](https://linlinks.cc/auth/register?code=v7Wm)
 * [vpn·李](https://mymonocloud.com/home)
+* [有免费的梯子软件](https://github.com/Alvin9999/new-pac/wiki)
 
 ## 导航栏
 
@@ -229,3 +242,29 @@ sudo pip install openpyxl
 ## 其它
 
 * [医院等级查询](https://cs.newchinalife.com/service-center/query/other/approve-hospital)
+* [快速记](https://www.ksjyun.com/)
+
+## shell
+
+* [Shell 函数](https://www.runoob.com/linux/linux-shell-func.html)
+* [shell脚本中判断上一个命令是否执行成功](https://blog.csdn.net/Maybe_Lee/article/details/78604927)
+* [shell bash判断文件或文件夹是否存在](https://www.cnblogs.com/emanlee/p/3583769.html)
+
+## ruby
+
+* [Ruby 教程](https://www.runoob.com/ruby/ruby-tutorial.html)
+
+## webview缓存
+
+* [iOS html5使用缓存并及时更新方案总结](https://juejin.cn/post/6844903860478165005)
+* [Cache-control](https://baike.baidu.com/item/Cache-Control)
+* [iOS webView缓存，保证加载最新html](https://juejin.cn/post/6844903605619654669)
+* [iOS: 聊聊 UIWebView 缓存](http://www.veryitman.com/2017/01/15/iOS-%E8%81%8A%E8%81%8A-UIWebView-%E7%BC%93%E5%AD%98/)
+* [H5 和移动端 WebView 缓存机制解析与实战](https://mp.weixin.qq.com/s/qHm_dJBhVbv0pJs8Crp77w)
+* [iOS-WKWebView缓存并保证实时性](http://www.cocoachina.com/articles/896271)
+* [iOS代码混淆工具](https://zfj1128.blog.csdn.net/article/details/95482006)
+* [webview开启无图](https://github.com/531464049/WebUrlProtocol)
+* [iOS定制NSURLProtocol实现离线缓存](http://blog.dreamlikes.cn/archives/387)
+* [web离线技术原理](https://juejin.cn/post/6844903845483511815)
+* [iOS 开发中使用 NSURLProtocol 拦截 HTTP 请求](https://draveness.me/intercept/)
+* [使用 NSURLProtocol 拦截 APP 内的网络请求](https://juejin.cn/post/6844903473671077895)
