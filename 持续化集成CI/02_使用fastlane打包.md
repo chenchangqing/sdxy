@@ -253,6 +253,10 @@ https://www.pgyer.com/doc/view/fastlane
 
 [fastlane-plugin-firim](https://github.com/whlsxl/firim/tree/master/fastlane-plugin-firim)
 
+### Fastlane && AppStore Connect API
+
+[Fastlane && AppStore Connect API](https://www.jianshu.com/p/19c8fe142c46)
+
 ### 配置后的使用
 
 编写完各种配置后怎么使用？其实使用方法还是比较简单的，不使用.env配置，执行fastlane [lane_name]即可。

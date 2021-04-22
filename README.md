@@ -17,6 +17,8 @@
 * [ios – 奇怪的UIView-Encapsulated-Layout-Height错误](http://www.voidcn.com/article/p-hidevpfd-bsw.html)
 * [fix:iOS 13.1.3,textView点击回调3次](https://www.it1352.com/1848705.html)
 * ["Double-quoted" issue in latest version of Firebase](https://github.com/firebase/firebase-ios-sdk/issues/5987)
+* [rem布局在webview中页面错乱解决办法](https://www.jianshu.com/p/bb0c569d4536)
+* [解決UIWebView target = '_blank'不能彈出](https://www.jianshu.com/p/9ad906504645)
 
 ## ScrollView嵌套
 
@@ -64,6 +66,8 @@
 * [App图标在线制作](https://www.pgyer.com/tools/appIcon)
 * [压缩一个PDF文件](https://www.ilovepdf.com/zh-cn/compress_pdf)
 * [UIImage 二分压缩图片](http://www.colinhwang.com/2016/07/30/compress-image/)
+* [Woodpecke‪r‬](https://apps.apple.com/cn/app/woodpecker/id1333548463?mt=12)
+* [图片裁剪](https://www.gaitubao.com/)
 
 ## Gitbook
 
@@ -127,6 +131,7 @@
 * [网络监控](https://github.com/yujitach/MenuMeters)
 * [Swift-30-Projects](https://github.com/soapyigu/Swift-30-Projects)
 * [iOSKeyPointExploration](https://github.com/huang303513/iOSKeyPointExploration)
+* [语法糖](https://github.com/devxoul/Then)
 
 ## 学习
 
@@ -159,6 +164,7 @@
 
 * [git如何删除远端不存在的本地分支？](https://www.cnblogs.com/shengulong/p/10398617.html)
 * [关于Git协作，除了知道merge，你可能还需要知道rebase](https://www.jianshu.com/p/3081e33a6136)
+* [git写错分支，如何将一个分支上的修改转移到另一个分支上](https://www.jianshu.com/p/6b4cd8221436)
 
 ## RxSwift
 
@@ -268,3 +274,10 @@ sudo pip install openpyxl
 * [web离线技术原理](https://juejin.cn/post/6844903845483511815)
 * [iOS 开发中使用 NSURLProtocol 拦截 HTTP 请求](https://draveness.me/intercept/)
 * [使用 NSURLProtocol 拦截 APP 内的网络请求](https://juejin.cn/post/6844903473671077895)
+* [移动 H5 首屏秒开优化方案探讨](https://juejin.cn/post/6844903565744406536#heading-8)
+* [JWNetAutoCache](https://github.com/dengjunwen/JWNetAutoCache)
+
+# tableView
+
+* [https://www.jianshu.com/p/af4bc69839d8](https://www.jianshu.com/p/af4bc69839d8)
+* [优化UITableViewCell高度计算的那些事](http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/)
