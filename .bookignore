@@ -3,9 +3,11 @@
 gitbook.sh
 node_modules/
 ignore
-bookignore
+#bookignore
 第*学期![4]*/
 book.pdf
 RxSwift系列/
-#OpenGL系列/
+OpenGL系列/
 面试系列/
+信息系统开发与管理/
+持续化集成CI/

@@ -18,6 +18,16 @@
 * ["Double-quoted" issue in latest version of Firebase](https://github.com/firebase/firebase-ios-sdk/issues/5987)
 * [rem布局在webview中页面错乱解决办法](https://www.jianshu.com/p/bb0c569d4536)
 * [解決UIWebView target = '_blank'不能彈出](https://www.jianshu.com/p/9ad906504645)
+* [Cocoapod with optional subspecs is not installing, if subspecs in the Podfile and another dependent Cocoapod podspec doesn't match](https://github.com/CocoaPods/CocoaPods/issues/10264)
+* [Can I have an init func in a protocol?](https://stackoverflow.com/questions/25694384/can-i-have-an-init-func-in-a-protocol)
+* [构造方法不触发didSet](https://blog.csdn.net/u011961093/article/details/107559944)
+* [iOS9中调用其他APP时出现This app is not allowed to query](https://blog.csdn.net/weixin_33726943/article/details/91741248)
+* [微信怎么唤起app?](https://segmentfault.com/q/1010000021544971)
+* [facebook链接中分享的图片](https://developers.facebook.com/docs/sharing/webmasters/images/)
+* [line链接中分享的图片](https://developers.line.biz/en/faq/#how-are-the-url-previews-generated)
+* [Swift - encode URL](https://stackoverflow.com/questions/24551816/swift-encode-url)
+* [Class Only Protocols In Swift 5](https://www.jianshu.com/p/a4b0f8094938)
+* [git删除远程分支报错:remote ref does not exist](https://blog.csdn.net/a460550542/article/details/111593362)
 
 ## ScrollView嵌套
 
@@ -36,6 +46,7 @@
 * [iOS 插件化开发(动态库研究)](https://gsl201600.github.io/2019/11/13/iOS%E6%8F%92%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/)
 * [在 iOS 上下载文件](https://firebase.google.com/docs/storage/ios/download-files?hl=zh-cn)
 * [iOS归档看这篇就够了](https://www.jianshu.com/p/185e9ea021a2)
+* [ios - Swift URL查询字符串获取参数](https://www.coder.work/article/2329020)
 
 ## iOS·审核
 
@@ -67,6 +78,8 @@
 * [UIImage 二分压缩图片](http://www.colinhwang.com/2016/07/30/compress-image/)
 * [Woodpecke‪r‬](https://apps.apple.com/cn/app/woodpecker/id1333548463?mt=12)
 * [图片裁剪](https://www.gaitubao.com/)
+* [临时邮箱、临时邮、临时电子邮箱、24小时邮箱](http://24mail.chacuo.net/)
+* [JSON格式化](https://c.runoob.com/front-end/53)
 
 ## Gitbook
 
@@ -88,6 +101,7 @@
 
 * [iOS程序员简历模板](https://blog.csdn.net/Anping1993/article/details/79013595)
 * [好看的博客](https://yimouleng.com/)
+* [bawn](https://bawn.github.io/)
 
 ## Cocoapods 
 
@@ -106,6 +120,7 @@
 8. [mac管理及更新node版本](https://www.jianshu.com/p/c50d900fb68c)
 9. [安装Gitbook](https://www.bilibili.com/read/cv6932054)
 10. [mac软件网址](https://www.macbl.com/)
+11. [xcode下载](https://developer.apple.com/download/all/?q=xcode)
 
 ## 开源项目
 
@@ -121,6 +136,16 @@
 * [Swift-30-Projects](https://github.com/soapyigu/Swift-30-Projects)
 * [iOSKeyPointExploration](https://github.com/huang303513/iOSKeyPointExploration)
 * [语法糖](https://github.com/devxoul/Then)
+* [TTBaseUIKit](https://github.com/tqtuan1201/TTBaseUIKit/tree/58135b48d25f2e36ac42f73f144561aa09b99dc3/TTBaseUIKit/TTBaseUIKit/Support)
+* [GAppFramework](https://github.com/gzd0071/GAppFramework)
+* [SwiftTheme](https://github.com/wxxsw/SwiftTheme)
+* [NerdyUI](https://github.com/nerdycat/NerdyUI)
+* [Tangram-iOS](https://github.com/alibaba/Tangram-iOS)
+
+## 地图
+
+* [map](https://github.com/HPTears/map)
+* [BMKLocationKit](https://github.com/HimmaHorde/BMKLocationKit/tree/master/framework/BMKLocationKit.framework)
 
 ## 学习
 
@@ -129,11 +154,14 @@
 * [苹果官方教程swiftui](https://developer.apple.com/tutorials/swiftui)
 * [潭州课堂](https://www.shiguangkey.com)
 * [swift51](http://www.swift51.com/)
+* [csdn](https://www.csdn.net/)
 
 ## 苹果官方文档
 
 * [苹果官方文档-cn](https://developer.apple.com/cn/documentation/)
 * [苹果官方文档-en](https://developer.apple.com/documentation)
+* [ios-resolution](https://ios-resolution.com/)
+* [查询序列号](https://checkcoverage.apple.com/)
 
 ## SwiftUI
 
@@ -154,6 +182,7 @@
 * [git如何删除远端不存在的本地分支？](https://www.cnblogs.com/shengulong/p/10398617.html)
 * [关于Git协作，除了知道merge，你可能还需要知道rebase](https://www.jianshu.com/p/3081e33a6136)
 * [git写错分支，如何将一个分支上的修改转移到另一个分支上](https://www.jianshu.com/p/6b4cd8221436)
+* [Xcode连接git@osc](https://my.oschina.net/zxs/blog/142544)
 
 ## RxSwift
 
@@ -201,6 +230,7 @@
 * [iOS Swift 判断手机机型 已更新 至iPhone12](https://cloud.tencent.com/developer/article/1735194)
 * [iOS判断刘海屏幕机型](https://www.jianshu.com/p/130fd4d54537)
 * [所有机型](https://www.theiphonewiki.com/wiki/Models)
+* [iOS 设置圆角、指定位置圆角及 iOS 11圆角设置](https://www.jianshu.com/p/7bc7246ef92a)
 
 ## 脚本
 
@@ -252,7 +282,7 @@ sudo pip install openpyxl
 * [移动 H5 首屏秒开优化方案探讨](https://juejin.cn/post/6844903565744406536#heading-8)
 * [JWNetAutoCache](https://github.com/dengjunwen/JWNetAutoCache)
 
-# tableView
+## tableView
 
 * [https://www.jianshu.com/p/af4bc69839d8](https://www.jianshu.com/p/af4bc69839d8)
 * [优化UITableViewCell高度计算的那些事](http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/)
