@@ -179,4 +179,5 @@
     * [iOS集成Flutter](其他/iOS集成Flutter.md)
     * [个人信息](bookignore/个人信息.md)
     * [账号管理](bookignore/账号管理.md)
+    * [装机必备](其他/装机必备.md)
 
