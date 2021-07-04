@@ -51,7 +51,7 @@
 ## iOS·审核
 
 * [检查iOS项目中是否还有使用UIWebView](https://www.jianshu.com/p/3a645500d461)
-
+* [iOS APP内测邀请之TestFlight](https://blog.csdn.net/u010895119/article/details/79422023)
 
 ## iOS·多线程
 
