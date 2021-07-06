@@ -180,4 +180,7 @@
     * [个人信息](bookignore/个人信息.md)
     * [账号管理](bookignore/账号管理.md)
     * [装机必备](其他/装机必备.md)
+* Git
+    * [相关链接](Git/相关链接.md)
+    * [rebase使用](Git/rebase使用.md)
 

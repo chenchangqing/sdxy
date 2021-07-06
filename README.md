@@ -177,13 +177,6 @@
 
 * [iOS-OpenGL-Tutorials](https://gitee.com/chenchangqing/iOS-OpenGL-Tutorials)
 
-## Git
-
-* [git如何删除远端不存在的本地分支？](https://www.cnblogs.com/shengulong/p/10398617.html)
-* [关于Git协作，除了知道merge，你可能还需要知道rebase](https://www.jianshu.com/p/3081e33a6136)
-* [git写错分支，如何将一个分支上的修改转移到另一个分支上](https://www.jianshu.com/p/6b4cd8221436)
-* [Xcode连接git@osc](https://my.oschina.net/zxs/blog/142544)
-
 ## RxSwift
 
 * [Swift - RxSwift的使用详解1（基本介绍、安装配置）](https://www.hangge.com/blog/cache/detail_1917.html)
@@ -236,11 +229,6 @@
 
 sudo pip install openpyxl
 
-## Git
-
-* [Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
-* [git rebase 还是 merge的使用场景最通俗的解释](https://www.jianshu.com/p/4079284dd970)
-
 ## 快捷键
 
 * 注释：command+option+/
@@ -286,3 +274,7 @@ sudo pip install openpyxl
 
 * [https://www.jianshu.com/p/af4bc69839d8](https://www.jianshu.com/p/af4bc69839d8)
 * [优化UITableViewCell高度计算的那些事](http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/)
+
+## 代码规范
+
+* [《Effective Objective-C》干货三部曲（二）：规范篇](https://cloud.tencent.com/developer/article/1199334?from=article.detail.1485152)
