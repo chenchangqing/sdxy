@@ -80,12 +80,15 @@
 * [图片裁剪](https://www.gaitubao.com/)
 * [临时邮箱、临时邮、临时电子邮箱、24小时邮箱](http://24mail.chacuo.net/)
 * [JSON格式化](https://c.runoob.com/front-end/53)
+* [Woodpecker使用](http://www.woodpeck.cn/cnusage.html)
 
 ## Gitbook
 
 * [新版gitbook导出pdf](https://www.jianshu.com/p/9cbc9d3bfd16)
 * [gitbook教程](http://gitbook.hushuang.me/syntax/markdown.html)
 * [推荐12个实用的gitbook插件](https://segmentfault.com/a/1190000019473512?utm_source=tag-newest)
+* [mermaid插件](https://mermaid-js.github.io/mermaid/#/./integrations)
+* [mermaid-gb3](https://www.mapull.com/gitbook/comscore/custom/plugin/other/mermaid.html)
 
 ## Markdown
 
@@ -96,6 +99,7 @@
 * [gitbook 3.2.3及之后流程图解决方案](https://blog.csdn.net/Curryth_/article/details/107333300)
 * [Markdown 中文文档](https://markdown-zh.readthedocs.io/en/latest/)
 * [markdown编辑](https://zybuluo.com/mdeditor)
+* [学生、工作人士如何才能更优雅地记笔记、写文档?（Markdown教程，详细到超乎你想象）](https://www.bilibili.com/read/cv5731265/)
 
 ## 简历
 
