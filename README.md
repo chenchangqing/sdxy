@@ -28,6 +28,7 @@
 * [Swift - encode URL](https://stackoverflow.com/questions/24551816/swift-encode-url)
 * [Class Only Protocols In Swift 5](https://www.jianshu.com/p/a4b0f8094938)
 * [git删除远程分支报错:remote ref does not exist](https://blog.csdn.net/a460550542/article/details/111593362)
+* [ERROR | [iOS] unknown: Encountered an unknown error (/usr/bin/xcrun simctl list -j devices](https://blog.csdn.net/sunzhenglin2016/article/details/89278506)
 
 ## ScrollView嵌套
 
@@ -146,6 +147,7 @@
 * [NerdyUI](https://github.com/nerdycat/NerdyUI)
 * [Tangram-iOS](https://github.com/alibaba/Tangram-iOS)
 * [YNSearch](https://github.com/younatics/YNSearch)
+* [IOS网络请求的简单封装设计](https://www.jianshu.com/p/952668882665)
 
 ## MVVM 
 
