@@ -4,6 +4,8 @@
 
 git log --oneline -10
 
+git reflog
+
 ### 拉取远程
 
 git fetch team
@@ -23,3 +25,5 @@ git push origin feature/v3.7.0 -f
 git reflog
 
 git cherry-pick a89dbd17f
+
+git config --global pull.rebase true

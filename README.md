@@ -48,6 +48,9 @@
 * [在 iOS 上下载文件](https://firebase.google.com/docs/storage/ios/download-files?hl=zh-cn)
 * [iOS归档看这篇就够了](https://www.jianshu.com/p/185e9ea021a2)
 * [ios - Swift URL查询字符串获取参数](https://www.coder.work/article/2329020)
+* [Swift打印变量内存地址](https://www.jianshu.com/p/3c9df2705a64)
+* [swift小知识点之打印对象的地址](https://www.cnblogs.com/lxlx1798/articles/14790908.html)
+* [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
 
 ## iOS·审核
 
@@ -90,6 +93,9 @@
 * [推荐12个实用的gitbook插件](https://segmentfault.com/a/1190000019473512?utm_source=tag-newest)
 * [mermaid插件](https://mermaid-js.github.io/mermaid/#/./integrations)
 * [mermaid-gb3](https://www.mapull.com/gitbook/comscore/custom/plugin/other/mermaid.html)
+* [mermaid文档](https://mermaid-js.github.io/mermaid/#/)
+* [GitBook 插件](https://gitee.com/ji-song/gitbook-use/blob/master/plugins.md)
+* [PlantUML 简介](https://plantuml.com/zh/)
 
 ## Markdown
 
@@ -107,6 +113,7 @@
 * [iOS程序员简历模板](https://blog.csdn.net/Anping1993/article/details/79013595)
 * [好看的博客](https://yimouleng.com/)
 * [bawn](https://bawn.github.io/)
+* [YouXianMing](https://www.cnblogs.com/YouXianMing/)
 
 ## Cocoapods 
 
@@ -249,6 +256,7 @@ sudo pip install openpyxl
 
 * 注释：command+option+/
 * 打开xcode文档：command+shift+0
+* [现在在Xcode中切换标签的快捷方式？](https://www.5axxw.com/questions/content/ohjknz)
 
 ## Flutter
 
