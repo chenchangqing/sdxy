@@ -29,6 +29,7 @@
 * [Class Only Protocols In Swift 5](https://www.jianshu.com/p/a4b0f8094938)
 * [git删除远程分支报错:remote ref does not exist](https://blog.csdn.net/a460550542/article/details/111593362)
 * [ERROR | [iOS] unknown: Encountered an unknown error (/usr/bin/xcrun simctl list -j devices](https://blog.csdn.net/sunzhenglin2016/article/details/89278506)
+* [Mac解疑：处理 Adobe Genuine Software Integrity Service](https://keesenz.com/2020/873.html)
 
 ## ScrollView嵌套
 
@@ -156,6 +157,7 @@
 * [YNSearch](https://github.com/younatics/YNSearch)
 * [IOS网络请求的简单封装设计](https://www.jianshu.com/p/952668882665)
 * [YTKNetwork](https://github.com/yuantiku/YTKNetwork)
+* [QMUI_iOS](https://github.com/Tencent/QMUI_iOS)
 
 ## MVVM 
 
