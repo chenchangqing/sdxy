@@ -85,6 +85,7 @@
 * [临时邮箱、临时邮、临时电子邮箱、24小时邮箱](http://24mail.chacuo.net/)
 * [JSON格式化](https://c.runoob.com/front-end/53)
 * [Woodpecker使用](http://www.woodpeck.cn/cnusage.html)
+* [google play store](https://www.uphezi.com/access-google-play-store-china/)
 
 ## Gitbook
 
@@ -156,6 +157,7 @@
 * [YNSearch](https://github.com/younatics/YNSearch)
 * [IOS网络请求的简单封装设计](https://www.jianshu.com/p/952668882665)
 * [YTKNetwork](https://github.com/yuantiku/YTKNetwork)
+* [SDUserDefaults](https://github.com/wang82426107/SDUserDefaults)
 
 ## MVVM 
 
@@ -302,3 +304,8 @@ sudo pip install openpyxl
 ## 代码规范
 
 * [《Effective Objective-C》干货三部曲（二）：规范篇](https://cloud.tencent.com/developer/article/1199334?from=article.detail.1485152)
+* [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
+
+## 单元测试
+
+* [iOS 单元测试--异步测试](https://www.jianshu.com/p/a4ffa780d347)
