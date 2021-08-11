@@ -30,6 +30,7 @@
 * [git删除远程分支报错:remote ref does not exist](https://blog.csdn.net/a460550542/article/details/111593362)
 * [ERROR | [iOS] unknown: Encountered an unknown error (/usr/bin/xcrun simctl list -j devices](https://blog.csdn.net/sunzhenglin2016/article/details/89278506)
 * [Mac解疑：处理 Adobe Genuine Software Integrity Service](https://keesenz.com/2020/873.html)
+* [assigning to ‘NSString *_strong’ from ‘const NSString’ discards qualifiers](https://www.jianshu.com/p/cd2d2db87634)
 
 ## ScrollView嵌套
 
