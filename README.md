@@ -53,6 +53,7 @@
 * [Swift打印变量内存地址](https://www.jianshu.com/p/3c9df2705a64)
 * [swift小知识点之打印对象的地址](https://www.cnblogs.com/lxlx1798/articles/14790908.html)
 * [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
+* [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
 
 ## iOS·审核
 
@@ -87,12 +88,9 @@
 * [临时邮箱、临时邮、临时电子邮箱、24小时邮箱](http://24mail.chacuo.net/)
 * [JSON格式化](https://c.runoob.com/front-end/53)
 * [Woodpecker使用](http://www.woodpeck.cn/cnusage.html)
-<<<<<<< HEAD
 * [Xcode自定义代码块](https://www.jianshu.com/p/7e317cb54411/)
 * [时间戳](https://tool.lu/timestamp/)cuo
-=======
 * [google play store](https://www.uphezi.com/access-google-play-store-china/)
->>>>>>> ef9a217b020bf4241dba2871f8dd7ef8b045b77f
 
 ## Gitbook
 
@@ -319,3 +317,8 @@ sudo pip install openpyxl
 ## 单元测试
 
 * [iOS 单元测试--异步测试](https://www.jianshu.com/p/a4ffa780d347)
+
+## 架构
+
+* [iOS应用架构谈 网络层设计方案](https://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html)
+* [iOS - AFNetWorking打印请求时的相关信息](https://www.jianshu.com/p/6c5ffb43dbc2)
