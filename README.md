@@ -31,6 +31,7 @@
 * [ERROR | [iOS] unknown: Encountered an unknown error (/usr/bin/xcrun simctl list -j devices](https://blog.csdn.net/sunzhenglin2016/article/details/89278506)
 * [Mac解疑：处理 Adobe Genuine Software Integrity Service](https://keesenz.com/2020/873.html)
 * [assigning to ‘NSString *_strong’ from ‘const NSString’ discards qualifiers](https://www.jianshu.com/p/cd2d2db87634)
+* [iOS10 NSLog限制为1024个字符字符串](http://cn.voidcc.com/question/p-mftjbjql-qp.html)
 
 ## ScrollView嵌套
 
@@ -87,12 +88,10 @@
 * [临时邮箱、临时邮、临时电子邮箱、24小时邮箱](http://24mail.chacuo.net/)
 * [JSON格式化](https://c.runoob.com/front-end/53)
 * [Woodpecker使用](http://www.woodpeck.cn/cnusage.html)
-<<<<<<< HEAD
 * [Xcode自定义代码块](https://www.jianshu.com/p/7e317cb54411/)
 * [时间戳](https://tool.lu/timestamp/)cuo
-=======
 * [google play store](https://www.uphezi.com/access-google-play-store-china/)
->>>>>>> ef9a217b020bf4241dba2871f8dd7ef8b045b77f
+* [颜色代码表](https://www.5tu.cn/colors/yansedaimabiao.html)
 
 ## Gitbook
 
@@ -319,3 +318,4 @@ sudo pip install openpyxl
 ## 单元测试
 
 * [iOS 单元测试--异步测试](https://www.jianshu.com/p/a4ffa780d347)
+* [OC实现类似泛型效果的json数据解析](https://www.jianshu.com/p/9cdd9ccd82c5/)
