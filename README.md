@@ -54,6 +54,7 @@
 * [Swift打印变量内存地址](https://www.jianshu.com/p/3c9df2705a64)
 * [swift小知识点之打印对象的地址](https://www.cnblogs.com/lxlx1798/articles/14790908.html)
 * [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
+* [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
 
 ## iOS·审核
 
@@ -318,4 +319,12 @@ sudo pip install openpyxl
 ## 单元测试
 
 * [iOS 单元测试--异步测试](https://www.jianshu.com/p/a4ffa780d347)
+<<<<<<< HEAD
 * [OC实现类似泛型效果的json数据解析](https://www.jianshu.com/p/9cdd9ccd82c5/)
+=======
+
+## 架构
+
+* [iOS应用架构谈 网络层设计方案](https://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html)
+* [iOS - AFNetWorking打印请求时的相关信息](https://www.jianshu.com/p/6c5ffb43dbc2)
+>>>>>>> 7eeecb531097405d18970b2ce835ba21e0233fc6
