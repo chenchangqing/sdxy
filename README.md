@@ -168,6 +168,7 @@
 * [代码分类](http://code.cocoachina.com/)
 * [好库编程网](http://www.okbase.net/)
 * [SDUserDefaults](https://github.com/wang82426107/SDUserDefaults)
+* [LCHelper](https://github.com/iLiuChang/LCHelper)
 
 ## MVVM 
 
@@ -319,12 +320,9 @@ sudo pip install openpyxl
 ## 单元测试
 
 * [iOS 单元测试--异步测试](https://www.jianshu.com/p/a4ffa780d347)
-<<<<<<< HEAD
 * [OC实现类似泛型效果的json数据解析](https://www.jianshu.com/p/9cdd9ccd82c5/)
-=======
 
 ## 架构
 
 * [iOS应用架构谈 网络层设计方案](https://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html)
 * [iOS - AFNetWorking打印请求时的相关信息](https://www.jianshu.com/p/6c5ffb43dbc2)
->>>>>>> 7eeecb531097405d18970b2ce835ba21e0233fc6
