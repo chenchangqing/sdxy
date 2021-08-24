@@ -55,6 +55,7 @@
 * [swift小知识点之打印对象的地址](https://www.cnblogs.com/lxlx1798/articles/14790908.html)
 * [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
 * [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
+* [iOS开发之字符串(NSString)的拼接](https://blog.csdn.net/ziyuzhiye/article/details/77963046)
 
 ## iOS·审核
 
@@ -169,6 +170,7 @@
 * [好库编程网](http://www.okbase.net/)
 * [SDUserDefaults](https://github.com/wang82426107/SDUserDefaults)
 * [LCHelper](https://github.com/iLiuChang/LCHelper)
+* [geniusDemo](https://github.com/L-vinCent/geniusDemo)
 
 ## MVVM 
 
