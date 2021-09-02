@@ -32,6 +32,8 @@
 * [Mac解疑：处理 Adobe Genuine Software Integrity Service](https://keesenz.com/2020/873.html)
 * [assigning to ‘NSString *_strong’ from ‘const NSString’ discards qualifiers](https://www.jianshu.com/p/cd2d2db87634)
 * [iOS10 NSLog限制为1024个字符字符串](http://cn.voidcc.com/question/p-mftjbjql-qp.html)
+* [Auto property synthesis will not synthesize property ‘delegate’;it will be implemented by its superc](https://blog.csdn.net/jiadabin/article/details/51698143)
+* [NSPredicate 谓词](https://cnbin.github.io/blog/2015/11/23/nspredicate-wei-ci/)
 
 ## ScrollView嵌套
 
@@ -56,6 +58,7 @@
 * [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
 * [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
 * [iOS开发之字符串(NSString)的拼接](https://blog.csdn.net/ziyuzhiye/article/details/77963046)
+* [iOS - NSDate分类-判断时间是否为今天,昨天,一周内,年月日](https://blog.csdn.net/coderMy/article/details/54233754)
 
 ## iOS·审核
 
