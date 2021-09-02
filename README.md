@@ -331,3 +331,13 @@ sudo pip install openpyxl
 
 * [iOS应用架构谈 网络层设计方案](https://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html)
 * [iOS - AFNetWorking打印请求时的相关信息](https://www.jianshu.com/p/6c5ffb43dbc2)
+
+## 一键登录
+
+* [IOS客户端接入](https://help.aliyun.com/document_detail/144186.html)
+
+## gcd
+
+* [iOS GCD处理多个网络请求并发问题](http://blog.sina.com.cn/s/blog_147d0371c0102wi1p.html)
+* [iOS-GCD的串行队列和并行队列的任务及实现](https://blog.csdn.net/c386890506/article/details/51171898)
+
