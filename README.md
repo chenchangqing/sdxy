@@ -340,4 +340,5 @@ sudo pip install openpyxl
 
 * [iOS GCD处理多个网络请求并发问题](http://blog.sina.com.cn/s/blog_147d0371c0102wi1p.html)
 * [iOS-GCD的串行队列和并行队列的任务及实现](https://blog.csdn.net/c386890506/article/details/51171898)
+* [iOS GCD线程同步以及AFNetworking多次请求线程依赖](https://www.jianshu.com/p/efac15d882c7)
 
