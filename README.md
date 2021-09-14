@@ -131,6 +131,7 @@
 
 * [CocoaPods安装方法-2020.05.25](https://www.jianshu.com/p/f43b5964f582)
 * [XCode 10中修改cocoapods中的源码编译不生效的解决方法](https://blog.csdn.net/feosun/article/details/85097456)
+* [Cocoapods整理（三）——编写podspec文件](https://segmentfault.com/a/1190000012269307)
 
 ## 装机步骤
 
@@ -265,6 +266,7 @@
 * [iOS判断刘海屏幕机型](https://www.jianshu.com/p/130fd4d54537)
 * [所有机型](https://www.theiphonewiki.com/wiki/Models)
 * [iOS 设置圆角、指定位置圆角及 iOS 11圆角设置](https://www.jianshu.com/p/7bc7246ef92a)
+* [iOS9 Programming - Autolayout (I)](https://www.jianshu.com/p/56e0cd434e7b)
 
 ## 脚本
 
