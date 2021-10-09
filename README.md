@@ -188,6 +188,8 @@
 
 * [map](https://github.com/HPTears/map)
 * [BMKLocationKit](https://github.com/HimmaHorde/BMKLocationKit/tree/master/framework/BMKLocationKit.framework)
+* [iOS在APP中调用第三方地图地图（苹果,高德，百度，腾讯）](https://blog.csdn.net/liuyinghui523/article/details/84339538)
+* [经纬度查询](https://jingweidu.bmcx.com/)
 
 ## 学习
 
