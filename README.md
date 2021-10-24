@@ -346,3 +346,12 @@ sudo pip install openpyxl
 * [iOS-GCD的串行队列和并行队列的任务及实现](https://blog.csdn.net/c386890506/article/details/51171898)
 * [iOS GCD线程同步以及AFNetworking多次请求线程依赖](https://www.jianshu.com/p/efac15d882c7)
 
+## c++
+
+* [C++ 中的 inline 用法](https://www.runoob.com/w3cnote/cpp-inline-usage.html)
+* [在字符串string中实现一个判断函数，该函数功能是统计某一字符串类对象(仅由单词和空格组成)有多少个单词](https://zhidao.baidu.com/question/1692367994672918668.html?qbl=relate_question_0)
+
+## IM聊天
+
+* [环信·IM](https://www.easemob.com/product/im)
+* [环信·iOS SDK 快速集成](https://docs-im.easemob.com/im/ios/sdk/prepare#ios_sdk_%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90)
