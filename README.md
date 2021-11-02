@@ -59,6 +59,7 @@
 * [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
 * [iOS开发之字符串(NSString)的拼接](https://blog.csdn.net/ziyuzhiye/article/details/77963046)
 * [iOS - NSDate分类-判断时间是否为今天,昨天,一周内,年月日](https://blog.csdn.net/coderMy/article/details/54233754)
+* [Swift开发小技巧系列 - 浮点型数据的四舍五入](https://www.jianshu.com/p/73c36740bd0b)
 
 ## iOS·审核
 
@@ -355,3 +356,4 @@ sudo pip install openpyxl
 
 * [环信·IM](https://www.easemob.com/product/im)
 * [环信·iOS SDK 快速集成](https://docs-im.easemob.com/im/ios/sdk/prepare#ios_sdk_%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90)
+* [环信·集成 iOS SDK 前的准备工作](https://docs-im.easemob.com/im/ios/sdk/import#ios_sdk_介绍)
