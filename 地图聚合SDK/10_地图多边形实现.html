@@ -1,0 +1,3476 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>10.地图多边形实现 · 自考</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="陈长青">
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="09_地图标注实现.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://chenchangqing.github.io/" target="_blank" class="custom-link">Chenchangqing's Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    OpenGL系列
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../OpenGL系列/01_OpenGL渲染结构与常用图元.html">
+            
+                <a href="../OpenGL系列/01_OpenGL渲染结构与常用图元.html">
+            
+                    
+                    1.OpenGL渲染结构与常用图元
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../OpenGL系列/02_OpenGL基础渲染.html">
+            
+                <a href="../OpenGL系列/02_OpenGL基础渲染.html">
+            
+                    
+                    2.OpenGL基础渲染
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../OpenGL系列/03_OpenGL渲染问题的处理方法.html">
+            
+                <a href="../OpenGL系列/03_OpenGL渲染问题的处理方法.html">
+            
+                    
+                    3.OpenGL渲染问题的处理方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../OpenGL系列/04_OpenGL渲染技巧.html">
+            
+                <a href="../OpenGL系列/04_OpenGL渲染技巧.html">
+            
+                    
+                    4.OpenGL渲染技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../OpenGL系列/05_OpenGL三角形批次类绘制案例.html">
+            
+                <a href="../OpenGL系列/05_OpenGL三角形批次类绘制案例.html">
+            
+                    
+                    5.OpenGL三角形批次类绘制案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../OpenGL系列/06_OpenGL模型视图矩阵绘制案例.html">
+            
+                <a href="../OpenGL系列/06_OpenGL模型视图矩阵绘制案例.html">
+            
+                    
+                    6.OpenGL模型视图矩阵绘制案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../OpenGL系列/07_OpenGL顶点变化管线详解.html">
+            
+                <a href="../OpenGL系列/07_OpenGL顶点变化管线详解.html">
+            
+                    
+                    7.OpenGL顶点变化管线详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../OpenGL系列/08_OpenGL公转自转案例.html">
+            
+                <a href="../OpenGL系列/08_OpenGL公转自转案例.html">
+            
+                    
+                    8.OpenGL公转自转案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    RxSwift系列
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../RxSwift系列/01_Observable_可监听序列.html">
+            
+                <a href="../RxSwift系列/01_Observable_可监听序列.html">
+            
+                    
+                    1.Observable - 可监听序列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../RxSwift系列/02_Observable_订阅_事件监听_订阅销毁.html">
+            
+                <a href="../RxSwift系列/02_Observable_订阅_事件监听_订阅销毁.html">
+            
+                    
+                    2.Observable - 订阅、事件监听、订阅销毁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../RxSwift系列/03_Observer_观察者.html">
+            
+                <a href="../RxSwift系列/03_Observer_观察者.html">
+            
+                    
+                    3.Observer - 观察者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../RxSwift系列/04_Observer_自定义可绑定属性.html">
+            
+                <a href="../RxSwift系列/04_Observer_自定义可绑定属性.html">
+            
+                    
+                    4.Observer - 自定义可绑定属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../RxSwift系列/05_Subjects、Variables.html">
+            
+                <a href="../RxSwift系列/05_Subjects、Variables.html">
+            
+                    
+                    5.Subjects、Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../RxSwift系列/06_变换操作符_buffer_map_flatMap_scan等.html">
+            
+                <a href="../RxSwift系列/06_变换操作符_buffer_map_flatMap_scan等.html">
+            
+                    
+                    6.变换操作符：buffer、map、flatMap、scan等
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../RxSwift系列/07_过滤操作符_filter_take_skip等.html">
+            
+                <a href="../RxSwift系列/07_过滤操作符_filter_take_skip等.html">
+            
+                    
+                    7.过滤操作符：filter、take、skip等
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../RxSwift系列/08_条件和布尔操作符_amb_takeWhile_skipWhile等.html">
+            
+                <a href="../RxSwift系列/08_条件和布尔操作符_amb_takeWhile_skipWhile等.html">
+            
+                    
+                    8.条件和布尔操作符：amb、takeWhile、skipWhile等
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../RxSwift系列/09_结合操作符_startWith_merge_zip等.html">
+            
+                <a href="../RxSwift系列/09_结合操作符_startWith_merge_zip等.html">
+            
+                    
+                    9.结合操作符：startWith、merge、zip等
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../RxSwift系列/10_算数_聚合操作符_toArray_reduce_concat.html">
+            
+                <a href="../RxSwift系列/10_算数_聚合操作符_toArray_reduce_concat.html">
+            
+                    
+                    10.算数&聚合操作符：toArray、reduce、concat
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../RxSwift系列/11_连接操作符_connect_publish_replay_multicast.html">
+            
+                <a href="../RxSwift系列/11_连接操作符_connect_publish_replay_multicast.html">
+            
+                    
+                    11.连接操作符：connect、publish、replay、multicast
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../RxSwift系列/12_其他操作符_delay_materialize_timeout等.html">
+            
+                <a href="../RxSwift系列/12_其他操作符_delay_materialize_timeout等.html">
+            
+                    
+                    12.其他操作符：delay、materialize、timeout等
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="../RxSwift系列/13_错误处理操作.html">
+            
+                <a href="../RxSwift系列/13_错误处理操作.html">
+            
+                    
+                    13.错误处理操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="../RxSwift系列/14_调试操作.html">
+            
+                <a href="../RxSwift系列/14_调试操作.html">
+            
+                    
+                    14.调试操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="../RxSwift系列/15_特征序列1_Single_Completable_Maybe.html">
+            
+                <a href="../RxSwift系列/15_特征序列1_Single_Completable_Maybe.html">
+            
+                    
+                    15.特征序列1：Single、Completable、Maybe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="../RxSwift系列/16_特征序列2_Driver.html">
+            
+                <a href="../RxSwift系列/16_特征序列2_Driver.html">
+            
+                    
+                    16.特征序列2：Driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="../RxSwift系列/17_特征序列3_ControlProperty_ControlEvent.html">
+            
+                <a href="../RxSwift系列/17_特征序列3_ControlProperty_ControlEvent.html">
+            
+                    
+                    17.特征序列3：ControlProperty、ControlEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.18" data-path="../RxSwift系列/18_调度器_subscribeOn_observeOn.html">
+            
+                <a href="../RxSwift系列/18_调度器_subscribeOn_observeOn.html">
+            
+                    
+                    18.调度器、subscribeOn、observeOn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="../RxSwift系列/19_UI控件扩展1_UILabel.html">
+            
+                <a href="../RxSwift系列/19_UI控件扩展1_UILabel.html">
+            
+                    
+                    19.UI控件扩展1：UILabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.20" data-path="../RxSwift系列/20_UI控件扩展2_UITextField_UITextView.html">
+            
+                <a href="../RxSwift系列/20_UI控件扩展2_UITextField_UITextView.html">
+            
+                    
+                    20.UI控件扩展2：UITextField、UITextView
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.21" data-path="../RxSwift系列/21_UI控件扩展3_UIButton_UIBarButtonItem.html">
+            
+                <a href="../RxSwift系列/21_UI控件扩展3_UIButton_UIBarButtonItem.html">
+            
+                    
+                    21.UI控件扩展3：UIButton、UIBarButtonItem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.22" data-path="../RxSwift系列/22_UI控件扩展4_UISwitch_UISegmentedControl.html">
+            
+                <a href="../RxSwift系列/22_UI控件扩展4_UISwitch_UISegmentedControl.html">
+            
+                    
+                    22.UI控件扩展4：UISwitch、UISegmentedControl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.23" data-path="../RxSwift系列/23_UI控件扩展5_UIActivityIndicatorView_UIApplication.html">
+            
+                <a href="../RxSwift系列/23_UI控件扩展5_UIActivityIndicatorView_UIApplication.html">
+            
+                    
+                    23.UI控件扩展5：UIActivityIndicatorView、UIApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.24" data-path="../RxSwift系列/24_UI控件扩展6_UISlider_UIStepper.html">
+            
+                <a href="../RxSwift系列/24_UI控件扩展6_UISlider_UIStepper.html">
+            
+                    
+                    24.UI控件扩展6：UISlider、UIStepper
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.25" data-path="../RxSwift系列/25_双向绑定_<->.html">
+            
+                <a href="../RxSwift系列/25_双向绑定_<->.html">
+            
+                    
+                    25.双向绑定：<->
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.26" data-path="../RxSwift系列/26_UI控件扩展7_UIGestureRecognizer.html">
+            
+                <a href="../RxSwift系列/26_UI控件扩展7_UIGestureRecognizer.html">
+            
+                    
+                    26.UI控件扩展7：UIGestureRecognizer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.27" data-path="../RxSwift系列/27_UI控件扩展8_UIDatePicker.html">
+            
+                <a href="../RxSwift系列/27_UI控件扩展8_UIDatePicker.html">
+            
+                    
+                    27.UI控件扩展8：UIDatePicker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.28" data-path="../RxSwift系列/28_UITableView的使用1_基本用法.html">
+            
+                <a href="../RxSwift系列/28_UITableView的使用1_基本用法.html">
+            
+                    
+                    28.UITableView的使用1：基本用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.29" data-path="../RxSwift系列/29_UITableView的使用2_RxDataSources.html">
+            
+                <a href="../RxSwift系列/29_UITableView的使用2_RxDataSources.html">
+            
+                    
+                    29.UITableView的使用2：RxDataSources
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.30" data-path="../RxSwift系列/30_UITableView的使用3_刷新表格数据.html">
+            
+                <a href="../RxSwift系列/30_UITableView的使用3_刷新表格数据.html">
+            
+                    
+                    30.UITableView的使用3：刷新表格数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.31" data-path="../RxSwift系列/31_UITableView的使用5_可编辑表格.html">
+            
+                <a href="../RxSwift系列/31_UITableView的使用5_可编辑表格.html">
+            
+                    
+                    31.UITableView的使用5：可编辑表格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.32" data-path="../RxSwift系列/32_UITableView的使用6_不同类型的单元格混用.html">
+            
+                <a href="../RxSwift系列/32_UITableView的使用6_不同类型的单元格混用.html">
+            
+                    
+                    32.UITableView的使用6：不同类型的单元格混用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.33" data-path="../RxSwift系列/33_UITableView的使用7_样式修改.html">
+            
+                <a href="../RxSwift系列/33_UITableView的使用7_样式修改.html">
+            
+                    
+                    33.UITableView的使用7：样式修改
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.34" data-path="../RxSwift系列/34_UICollectionView的使用1_基本用法.html">
+            
+                <a href="../RxSwift系列/34_UICollectionView的使用1_基本用法.html">
+            
+                    
+                    34.UICollectionView的使用1：基本用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.35" data-path="../RxSwift系列/35_UICollectionView的使用2_RxDataSources.html">
+            
+                <a href="../RxSwift系列/35_UICollectionView的使用2_RxDataSources.html">
+            
+                    
+                    35.UICollectionView的使用2：RxDataSources
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.36" data-path="../RxSwift系列/36_UICollectionView的使用3_刷新集合数据.html">
+            
+                <a href="../RxSwift系列/36_UICollectionView的使用3_刷新集合数据.html">
+            
+                    
+                    36.UICollectionView的使用3：刷新集合数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.37" data-path="../RxSwift系列/37_UICollectionView的使用4_样式修改.html">
+            
+                <a href="../RxSwift系列/37_UICollectionView的使用4_样式修改.html">
+            
+                    
+                    37.UICollectionView的使用4：样式修改
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.38" data-path="../RxSwift系列/38_UIPickerView的使用.html">
+            
+                <a href="../RxSwift系列/38_UIPickerView的使用.html">
+            
+                    
+                    38.UIPickerView的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.39" data-path="../RxSwift系列/39_URLSession的使用1_请求数据.html">
+            
+                <a href="../RxSwift系列/39_URLSession的使用1_请求数据.html">
+            
+                    
+                    39.URLSession的使用1：请求数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.40" data-path="../RxSwift系列/40_URLSession的使用2_结果处理_模型转换.html">
+            
+                <a href="../RxSwift系列/40_URLSession的使用2_结果处理_模型转换.html">
+            
+                    
+                    40.URLSession的使用2：结果处理、模型转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.41" data-path="../RxSwift系列/41_结合RxAlamofire使用1_数据请求.html">
+            
+                <a href="../RxSwift系列/41_结合RxAlamofire使用1_数据请求.html">
+            
+                    
+                    41.结合RxAlamofire使用1：数据请求
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.42" data-path="../RxSwift系列/42_结合RxAlamofire使用2_结果处理_模型转换.html">
+            
+                <a href="../RxSwift系列/42_结合RxAlamofire使用2_结果处理_模型转换.html">
+            
+                    
+                    42.结合RxAlamofire使用2：结果处理、模型转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.43" data-path="../RxSwift系列/43_结合RxAlamofire使用3_文件上传.html">
+            
+                <a href="../RxSwift系列/43_结合RxAlamofire使用3_文件上传.html">
+            
+                    
+                    43.结合RxAlamofire使用3：文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.44" data-path="../RxSwift系列/44_结合RxAlamofire使用4_文件下载.html">
+            
+                <a href="../RxSwift系列/44_结合RxAlamofire使用4_文件下载.html">
+            
+                    
+                    44.结合RxAlamofire使用4：文件下载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.45" data-path="../RxSwift系列/45_结合Moya使用1_数据请求.html">
+            
+                <a href="../RxSwift系列/45_结合Moya使用1_数据请求.html">
+            
+                    
+                    45.结合Moya使用1：数据请求
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.46" data-path="../RxSwift系列/46_结合Moya使用2_结果处理_模型转换.html">
+            
+                <a href="../RxSwift系列/46_结合Moya使用2_结果处理_模型转换.html">
+            
+                    
+                    46.结合Moya使用2：结果处理、模型转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.47" data-path="../RxSwift系列/47_MVVM架构演示2_使用Observable样例.html">
+            
+                <a href="../RxSwift系列/47_MVVM架构演示2_使用Observable样例.html">
+            
+                    
+                    47.MVVM架构演示2：使用Observable样例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.48" data-path="../RxSwift系列/48_MVVM架构演示3_使用Driver样例.html">
+            
+                <a href="../RxSwift系列/48_MVVM架构演示3_使用Driver样例.html">
+            
+                    
+                    48.MVVM架构演示3：使用Driver样例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.49" data-path="../RxSwift系列/49_一个用户注册样例1_基本功能实现.html">
+            
+                <a href="../RxSwift系列/49_一个用户注册样例1_基本功能实现.html">
+            
+                    
+                    49.一个用户注册样例1：基本功能实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.50" data-path="../RxSwift系列/50_结合MJRefresh使用1_下拉刷新.html">
+            
+                <a href="../RxSwift系列/50_结合MJRefresh使用1_下拉刷新.html">
+            
+                    
+                    50.结合MJRefresh使用1：下拉刷新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.51" data-path="../RxSwift系列/51_DelegateProxy样例1_获取地理定位信息.html">
+            
+                <a href="../RxSwift系列/51_DelegateProxy样例1_获取地理定位信息.html">
+            
+                    
+                    51.DelegateProxy样例1：获取地理定位信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.52" data-path="../RxSwift系列/52_DelegateProxy样例2_图片选择功能.html">
+            
+                <a href="../RxSwift系列/52_DelegateProxy样例2_图片选择功能.html">
+            
+                    
+                    52.DelegateProxy样例2：图片选择功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.53" data-path="../RxSwift系列/53_DelegateProxy样例3_应用生命周期的状态变化.html">
+            
+                <a href="../RxSwift系列/53_DelegateProxy样例3_应用生命周期的状态变化.html">
+            
+                    
+                    53.DelegateProxy样例3：应用生命周期的状态变化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.54" data-path="../RxSwift系列/54_sendMessage和methodInvoked的区别.html">
+            
+                <a href="../RxSwift系列/54_sendMessage和methodInvoked的区别.html">
+            
+                    
+                    54.sendMessage和methodInvoked的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.55" data-path="../RxSwift系列/55_订阅UITableViewCell里的按钮点击事件.html">
+            
+                <a href="../RxSwift系列/55_订阅UITableViewCell里的按钮点击事件.html">
+            
+                    
+                    55.订阅UITableViewCell里的按钮点击事件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.56" data-path="../RxSwift系列/56_通知NotificationCenter的使用.html">
+            
+                <a href="../RxSwift系列/56_通知NotificationCenter的使用.html">
+            
+                    
+                    56.通知NotificationCenter的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.57" data-path="../RxSwift系列/57_键值观察KVO的使用.html">
+            
+                <a href="../RxSwift系列/57_键值观察KVO的使用.html">
+            
+                    
+                    57.键值观察KVO的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.58" data-path="../RxSwift系列/58_表格图片加载优化.html">
+            
+                <a href="../RxSwift系列/58_表格图片加载优化.html">
+            
+                    
+                    58.表格图片加载优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.59" data-path="../RxSwift系列/59_检测当前值与初始值是否相同_isEqualOriginValue.html">
+            
+                <a href="../RxSwift系列/59_检测当前值与初始值是否相同_isEqualOriginValue.html">
+            
+                    
+                    59.检测当前值与初始值是否相同：isEqualOriginValue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.60" data-path="../RxSwift系列/60_重复执行某个操作序列_repeatWhen.html">
+            
+                <a href="../RxSwift系列/60_重复执行某个操作序列_repeatWhen.html">
+            
+                    
+                    60.重复执行某个操作序列：repeatWhen
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.61" data-path="../RxSwift系列/61_监听滚动条滚动到底部的行为_reachedBottom.html">
+            
+                <a href="../RxSwift系列/61_监听滚动条滚动到底部的行为_reachedBottom.html">
+            
+                    
+                    61.监听滚动条滚动到底部的行为：reachedBottom
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.62" data-path="../RxSwift系列/62_RxFeedback架构1_安装配置、基本用法.html">
+            
+                <a href="../RxSwift系列/62_RxFeedback架构1_安装配置、基本用法.html">
+            
+                    
+                    62.RxFeedback架构1：安装配置、基本用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.63" data-path="../RxSwift系列/63_RxFeedback架构2：一个用户注册样例.html">
+            
+                <a href="../RxSwift系列/63_RxFeedback架构2：一个用户注册样例.html">
+            
+                    
+                    63.RxFeedback架构2：一个用户注册样例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.64" data-path="../RxSwift系列/64_RxFeedback架构3_GitHub资源搜索样例.html">
+            
+                <a href="../RxSwift系列/64_RxFeedback架构3_GitHub资源搜索样例.html">
+            
+                    
+                    64.RxFeedback架构3：GitHub资源搜索样例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.65" data-path="../RxSwift系列/65_ReactorKit架构1_安装配置、基本用法.html">
+            
+                <a href="../RxSwift系列/65_ReactorKit架构1_安装配置、基本用法.html">
+            
+                    
+                    65.ReactorKit架构1：安装配置、基本用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.66" data-path="../RxSwift系列/66_ReactorKit架构2_一个用户注册样例.html">
+            
+                <a href="../RxSwift系列/66_ReactorKit架构2_一个用户注册样例.html">
+            
+                    
+                    66.ReactorKit架构2：一个用户注册样例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.67" data-path="../RxSwift系列/67_ReactorKit架构3_GitHub资源搜索样例.html">
+            
+                <a href="../RxSwift系列/67_ReactorKit架构3_GitHub资源搜索样例.html">
+            
+                    
+                    67.ReactorKit架构3：GitHub资源搜索样例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    面试系列
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../面试系列/01_面试问题集锦.html">
+            
+                <a href="../面试系列/01_面试问题集锦.html">
+            
+                    
+                    1.面试问题集锦
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../面试系列/02_面试问题集锦.html">
+            
+                <a href="../面试系列/02_面试问题集锦.html">
+            
+                    
+                    2.面试问题集锦
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    WebView系列
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../WebView系列/01_WebView与iOS原生的交互.html">
+            
+                <a href="../WebView系列/01_WebView与iOS原生的交互.html">
+            
+                    
+                    1.WebView与iOS原生的交互
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../WebView系列/02_DSBridge的使用.html">
+            
+                <a href="../WebView系列/02_DSBridge的使用.html">
+            
+                    
+                    2.DSBridge的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    第2学期 4.计算机网络原理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../第2学期_4_计算机网络原理/精讲1.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲1.html">
+            
+                    
+                    1.1.精讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../第2学期_4_计算机网络原理/精讲2.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲2.html">
+            
+                    
+                    1.2.精讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../第2学期_4_计算机网络原理/精讲3.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲3.html">
+            
+                    
+                    1.3.精讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../第2学期_4_计算机网络原理/精讲4.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲4.html">
+            
+                    
+                    1.4.精讲4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../第2学期_4_计算机网络原理/精讲5.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲5.html">
+            
+                    
+                    1.5.精讲5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../第2学期_4_计算机网络原理/精讲6.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲6.html">
+            
+                    
+                    1.6.精讲6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../第2学期_4_计算机网络原理/精讲7.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲7.html">
+            
+                    
+                    1.7.精讲7
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../第2学期_4_计算机网络原理/精讲8.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲8.html">
+            
+                    
+                    1.8.精讲8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../第2学期_4_计算机网络原理/精讲9.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲9.html">
+            
+                    
+                    1.9.精讲9
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../第2学期_4_计算机网络原理/精讲10.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲10.html">
+            
+                    
+                    1.10.精讲10
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.11" data-path="../第2学期_4_计算机网络原理/精讲11.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲11.html">
+            
+                    
+                    1.11.精讲11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.12" data-path="../第2学期_4_计算机网络原理/精讲12.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲12.html">
+            
+                    
+                    1.12.精讲12
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.13" data-path="../第2学期_4_计算机网络原理/精讲13.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲13.html">
+            
+                    
+                    1.13.精讲13
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.14" data-path="../第2学期_4_计算机网络原理/精讲14.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲14.html">
+            
+                    
+                    1.14.精讲14
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.15" data-path="../第2学期_4_计算机网络原理/精讲15.html">
+            
+                <a href="../第2学期_4_计算机网络原理/精讲15.html">
+            
+                    
+                    1.15.精讲15
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.16" data-path="../第2学期_4_计算机网络原理/串讲1.html">
+            
+                <a href="../第2学期_4_计算机网络原理/串讲1.html">
+            
+                    
+                    1.16.串讲1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.17" data-path="../第2学期_4_计算机网络原理/串讲2.html">
+            
+                <a href="../第2学期_4_计算机网络原理/串讲2.html">
+            
+                    
+                    1.17.串讲2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.18" data-path="../第2学期_4_计算机网络原理/串讲3.html">
+            
+                <a href="../第2学期_4_计算机网络原理/串讲3.html">
+            
+                    
+                    1.18.串讲3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    信息系统开发与管理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" >
+            
+                <span>
+            
+                    
+                    第一章 管理信息系统导论
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../信息系统开发与管理/第一章_管理信息系统导论/第一节_管理信息系统概念及其发展.html">
+            
+                <a href="../信息系统开发与管理/第一章_管理信息系统导论/第一节_管理信息系统概念及其发展.html">
+            
+                    
+                    第一节：管理信息系统概念及其发展
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="../信息系统开发与管理/第一章_管理信息系统导论/第二节_管理信息系统的分类.html">
+            
+                <a href="../信息系统开发与管理/第一章_管理信息系统导论/第二节_管理信息系统的分类.html">
+            
+                    
+                    第二节：管理信息系统的分类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.3" data-path="../信息系统开发与管理/第一章_管理信息系统导论/第三节_管理信息系统的结构.html">
+            
+                <a href="../信息系统开发与管理/第一章_管理信息系统导论/第三节_管理信息系统的结构.html">
+            
+                    
+                    第三节：管理信息系统的结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="../信息系统开发与管理/第一章_管理信息系统导论/第四节_管理信息系统的几种典型应用.html">
+            
+                <a href="../信息系统开发与管理/第一章_管理信息系统导论/第四节_管理信息系统的几种典型应用.html">
+            
+                    
+                    第四节：管理信息系统的几种典型应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" >
+            
+                <span>
+            
+                    
+                    第二章 管理信息系统的基本知识
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../信息系统开发与管理/第二章_管理信息系统的基本知识/第一节_管理的基本知识.html">
+            
+                <a href="../信息系统开发与管理/第二章_管理信息系统的基本知识/第一节_管理的基本知识.html">
+            
+                    
+                    第一节：管理的基本知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../信息系统开发与管理/第二章_管理信息系统的基本知识/第二节_信息的基本知识.html">
+            
+                <a href="../信息系统开发与管理/第二章_管理信息系统的基本知识/第二节_信息的基本知识.html">
+            
+                    
+                    第二节：信息的基本知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../信息系统开发与管理/第二章_管理信息系统的基本知识/第三节_系统的基本知识.html">
+            
+                <a href="../信息系统开发与管理/第二章_管理信息系统的基本知识/第三节_系统的基本知识.html">
+            
+                    
+                    第三节：系统的基本知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../信息系统开发与管理/第二章_管理信息系统的基本知识/第四节_信息技术的基本知识.html">
+            
+                <a href="../信息系统开发与管理/第二章_管理信息系统的基本知识/第四节_信息技术的基本知识.html">
+            
+                    
+                    第四节：信息技术的基本知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" >
+            
+                <span>
+            
+                    
+                    第三章 系统开发方法概述
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.3.1" data-path="../信息系统开发与管理/第三章_系统开发方法概述/第一节_管理信息系统开发的基本问题.html">
+            
+                <a href="../信息系统开发与管理/第三章_系统开发方法概述/第一节_管理信息系统开发的基本问题.html">
+            
+                    
+                    第一节：管理信息系统开发的基本问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3.2" data-path="../信息系统开发与管理/第三章_系统开发方法概述/第二节_管理信息系统的开发方法.html">
+            
+                <a href="../信息系统开发与管理/第三章_系统开发方法概述/第二节_管理信息系统的开发方法.html">
+            
+                    
+                    第二节：管理信息系统的开发方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3.3" data-path="../信息系统开发与管理/第三章_系统开发方法概述/第三节_结构化开发方法的开发过程.html">
+            
+                <a href="../信息系统开发与管理/第三章_系统开发方法概述/第三节_结构化开发方法的开发过程.html">
+            
+                    
+                    第三节：结构化开发方法的开发过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3.4" data-path="../信息系统开发与管理/第三章_系统开发方法概述/第四节_开发过程组织与管理方法.html">
+            
+                <a href="../信息系统开发与管理/第三章_系统开发方法概述/第四节_开发过程组织与管理方法.html">
+            
+                    
+                    第四节：开发过程组织与管理方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" >
+            
+                <span>
+            
+                    
+                    第四章 总体规划
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.4.1" data-path="../信息系统开发与管理/第四章_总体规划/第一节_总体规划的目的和步骤.html">
+            
+                <a href="../信息系统开发与管理/第四章_总体规划/第一节_总体规划的目的和步骤.html">
+            
+                    
+                    第一节：总体规划的目的和步骤
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4.2" data-path="../信息系统开发与管理/第四章_总体规划/第二节_系统规划的主要步骤.html">
+            
+                <a href="../信息系统开发与管理/第四章_总体规划/第二节_系统规划的主要步骤.html">
+            
+                    
+                    第二节：系统规划的主要步骤
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" >
+            
+                <span>
+            
+                    
+                    第五章 系统分析
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.5.1" data-path="../信息系统开发与管理/第五章_系统分析/第一节_系统分析概论.html">
+            
+                <a href="../信息系统开发与管理/第五章_系统分析/第一节_系统分析概论.html">
+            
+                    
+                    第一节：系统分析概论
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5.2" data-path="../信息系统开发与管理/第五章_系统分析/第二节_详细调查.html">
+            
+                <a href="../信息系统开发与管理/第五章_系统分析/第二节_详细调查.html">
+            
+                    
+                    第二节：详细调查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5.3" data-path="../信息系统开发与管理/第五章_系统分析/第三节_业务流程分析.html">
+            
+                <a href="../信息系统开发与管理/第五章_系统分析/第三节_业务流程分析.html">
+            
+                    
+                    第三节：业务流程分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5.4" data-path="../信息系统开发与管理/第五章_系统分析/第四节_数据流程分析的概念.html">
+            
+                <a href="../信息系统开发与管理/第五章_系统分析/第四节_数据流程分析的概念.html">
+            
+                    
+                    第四节：数据流程分析的概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5.5" data-path="../信息系统开发与管理/第五章_系统分析/第五节_新系统逻辑模型.html">
+            
+                <a href="../信息系统开发与管理/第五章_系统分析/第五节_新系统逻辑模型.html">
+            
+                    
+                    第五节：新系统逻辑模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5.6" data-path="../信息系统开发与管理/第五章_系统分析/第六节_系统分析报告.html">
+            
+                <a href="../信息系统开发与管理/第五章_系统分析/第六节_系统分析报告.html">
+            
+                    
+                    第六节：系统分析报告
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    持续化集成CI
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../持续化集成CI/01_使用shell打包.html">
+            
+                <a href="../持续化集成CI/01_使用shell打包.html">
+            
+                    
+                    1.使用shell打包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../持续化集成CI/02_使用fastlane打包.html">
+            
+                <a href="../持续化集成CI/02_使用fastlane打包.html">
+            
+                    
+                    2.使用fastlane打包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../持续化集成CI/03_使用jenkins打包.html">
+            
+                <a href="../持续化集成CI/03_使用jenkins打包.html">
+            
+                    
+                    3.使用jenkins打包
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../iOS后台任务处理.html">
+            
+                <a href="../iOS后台任务处理.html">
+            
+                    
+                    iOS后台任务处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    安全攻防
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../安全攻防/01_常用工具.html">
+            
+                <a href="../安全攻防/01_常用工具.html">
+            
+                    
+                    1.常用工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../安全攻防/02_MonkeyDev.html">
+            
+                <a href="../安全攻防/02_MonkeyDev.html">
+            
+                    
+                    2.MonkeyDev
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    地图聚合SDK
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="01_地图显示.html">
+            
+                <a href="01_地图显示.html">
+            
+                    
+                    1.地图显示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="02_显示高德用户定位.html">
+            
+                <a href="02_显示高德用户定位.html">
+            
+                    
+                    2.显示高德用户定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="03_如何显示百度用户定位.html">
+            
+                <a href="03_如何显示百度用户定位.html">
+            
+                    
+                    3.如何显示百度用户定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="04_集成高德定位.html">
+            
+                <a href="04_集成高德定位.html">
+            
+                    
+                    4.集成高德定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="05_新增定位属性.html">
+            
+                <a href="05_新增定位属性.html">
+            
+                    
+                    5.新增定位属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="06_新增单次定位.html">
+            
+                <a href="06_新增单次定位.html">
+            
+                    
+                    6.新增单次定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="07_丰富地图代理.html">
+            
+                <a href="07_丰富地图代理.html">
+            
+                    
+                    7.丰富地图代理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="08_地图新增缩放等级.html">
+            
+                <a href="08_地图新增缩放等级.html">
+            
+                    
+                    8.地图新增缩放等级
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.9" data-path="09_地图标注实现.html">
+            
+                <a href="09_地图标注实现.html">
+            
+                    
+                    9.地图标注实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.11.10" data-path="10_地图多边形实现.html">
+            
+                <a href="10_地图多边形实现.html">
+            
+                    
+                    10.地图多边形实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    第三方分享
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../第三方分享/微信分享.html">
+            
+                <a href="../第三方分享/微信分享.html">
+            
+                    
+                    微信分享
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../第三方分享/Messenger分享.html">
+            
+                <a href="../第三方分享/Messenger分享.html">
+            
+                    
+                    Messenger分享
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../第三方分享/LinkedIn分享.html">
+            
+                <a href="../第三方分享/LinkedIn分享.html">
+            
+                    
+                    LinkedIn分享
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" >
+            
+                <span>
+            
+                    
+                    iOS组件化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../iOS组件化/参考链接.html">
+            
+                <a href="../iOS组件化/参考链接.html">
+            
+                    
+                    参考链接
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../iOS组件化/创建私有库.html">
+            
+                <a href="../iOS组件化/创建私有库.html">
+            
+                    
+                    1.创建私有库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../iOS组件化/使用中间件.html">
+            
+                <a href="../iOS组件化/使用中间件.html">
+            
+                    
+                    2.使用中间件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../iOS组件化/加载图片资源.html">
+            
+                <a href="../iOS组件化/加载图片资源.html">
+            
+                    
+                    3.加载图片资源
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
+            
+                <span>
+            
+                    
+                    其他
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../其他/长城汽车Swift编程规约.html">
+            
+                <a href="../其他/长城汽车Swift编程规约.html">
+            
+                    
+                    长城汽车Swift编程规约
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../其他/WebView与iOS原生的交互.html">
+            
+                <a href="../其他/WebView与iOS原生的交互.html">
+            
+                    
+                    WebView与iOS原生的交互
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../其他/理解MVVM架构模式.html">
+            
+                <a href="../其他/理解MVVM架构模式.html">
+            
+                    
+                    理解MVVM架构模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../其他/Swift判断刘海屏幕.html">
+            
+                <a href="../其他/Swift判断刘海屏幕.html">
+            
+                    
+                    Swift判断刘海屏幕
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.5" data-path="../其他/客户端网络逻辑整理及建议.html">
+            
+                <a href="../其他/客户端网络逻辑整理及建议.html">
+            
+                    
+                    客户端网络逻辑整理及建议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.6" data-path="../其他/问题记录.html">
+            
+                <a href="../其他/问题记录.html">
+            
+                    
+                    问题记录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.7" data-path="../其他/异常占位图的封装.html">
+            
+                <a href="../其他/异常占位图的封装.html">
+            
+                    
+                    异常占位图的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.8" data-path="../其他/RxSwift的Timer.html">
+            
+                <a href="../其他/RxSwift的Timer.html">
+            
+                    
+                    RxSwift的Timer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.9" data-path="../其他/AppTimer的使用.html">
+            
+                <a href="../其他/AppTimer的使用.html">
+            
+                    
+                    AppTimer的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.10" data-path="../其他/UIViewController的Rx扩展.html">
+            
+                <a href="../其他/UIViewController的Rx扩展.html">
+            
+                    
+                    UIViewController的常用Rx扩展
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.11" data-path="../其他/Info.plist国际化.html">
+            
+                <a href="../其他/Info.plist国际化.html">
+            
+                    
+                    Info.plist国际化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.12" data-path="../其他/统一设置页面title字体样式.html">
+            
+                <a href="../其他/统一设置页面title字体样式.html">
+            
+                    
+                    统一设置页面title字体样式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.13" data-path="../其他/业务组件按国家子库化.html">
+            
+                <a href="../其他/业务组件按国家子库化.html">
+            
+                    
+                    业务组件按国家子库化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.14" data-path="../其他/App权限管理.html">
+            
+                <a href="../其他/App权限管理.html">
+            
+                    
+                    App权限管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.15" data-path="../其他/App定位管理.html">
+            
+                <a href="../其他/App定位管理.html">
+            
+                    
+                    App定位管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.16" data-path="../其他/资源包装类.html">
+            
+                <a href="../其他/资源包装类.html">
+            
+                    
+                    资源包装类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.17" data-path="../其他/同步未读消息.html">
+            
+                <a href="../其他/同步未读消息.html">
+            
+                    
+                    同步未读消息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.18" data-path="../其他/自定义错误.html">
+            
+                <a href="../其他/自定义错误.html">
+            
+                    
+                    自定义错误
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.19" data-path="../其他/GWError的使用.html">
+            
+                <a href="../其他/GWError的使用.html">
+            
+                    
+                    GWError的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.20" data-path="../其他/Swift注释.html">
+            
+                <a href="../其他/Swift注释.html">
+            
+                    
+                    Swift注释
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.21" data-path="../其他/Universal_Links.html">
+            
+                <a href="../其他/Universal_Links.html">
+            
+                    
+                    Universal Links
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.22" data-path="../其他/Configurations.html">
+            
+                <a href="../其他/Configurations.html">
+            
+                    
+                    Configurations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.23" data-path="../其他/iOS集成Flutter.html">
+            
+                <a href="../其他/iOS集成Flutter.html">
+            
+                    
+                    iOS集成Flutter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.24" data-path="../bookignore/个人信息.md">
+            
+                <span>
+            
+                    
+                    个人信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.25" data-path="../bookignore/账号管理.md">
+            
+                <span>
+            
+                    
+                    账号管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.26" data-path="../其他/装机必备.html">
+            
+                <a href="../其他/装机必备.html">
+            
+                    
+                    装机必备
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" >
+            
+                <span>
+            
+                    
+                    Git
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../Git/相关链接.html">
+            
+                <a href="../Git/相关链接.html">
+            
+                    
+                    相关链接
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../Git/rebase使用.html">
+            
+                <a href="../Git/rebase使用.html">
+            
+                    
+                    rebase使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" >
+            
+                <span>
+            
+                    
+                    C++程序设计
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../C++程序设计/第一章_C++语言简介.html">
+            
+                <a href="../C++程序设计/第一章_C++语言简介.html">
+            
+                    
+                    第一章 C++语言简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../C++程序设计/第二章_面向对象的基本概念.html">
+            
+                <a href="../C++程序设计/第二章_面向对象的基本概念.html">
+            
+                    
+                    第二章 面向对象的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../C++程序设计/第三章_类和对象进阶.html">
+            
+                <a href="../C++程序设计/第三章_类和对象进阶.html">
+            
+                    
+                    第三章 类和对象进阶
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.4" data-path="../C++程序设计/第四章_运算符重载.html">
+            
+                <a href="../C++程序设计/第四章_运算符重载.html">
+            
+                    
+                    第四章 运算符重载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.5" data-path="../C++程序设计/第五章_类的继承与派生.html">
+            
+                <a href="../C++程序设计/第五章_类的继承与派生.html">
+            
+                    
+                    第五章 类的继承与派生
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.6" data-path="../C++程序设计/第六章_多态与虚函数.html">
+            
+                <a href="../C++程序设计/第六章_多态与虚函数.html">
+            
+                    
+                    第六章 多态与虚函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.7" data-path="../C++程序设计/第七章_输入_输出流.html">
+            
+                <a href="../C++程序设计/第七章_输入_输出流.html">
+            
+                    
+                    第七章 输入/输出流
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.8" data-path="../C++程序设计/第八章_文件操作.html">
+            
+                <a href="../C++程序设计/第八章_文件操作.html">
+            
+                    
+                    第八章 文件操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.9" data-path="../C++程序设计/第九章_函数模版与类模板.html">
+            
+                <a href="../C++程序设计/第九章_函数模版与类模板.html">
+            
+                    
+                    第九章 函数模版与类模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" >
+            
+                <span>
+            
+                    
+                    旅游安排
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../旅游安排/东极岛.html">
+            
+                <a href="../旅游安排/东极岛.html">
+            
+                    
+                    东极岛
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" >
+            
+                <span>
+            
+                    
+                    推送
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../推送/相关链接.html">
+            
+                <a href="../推送/相关链接.html">
+            
+                    
+                    相关链接
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >10.地图多边形实现</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="10&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#x5B9E;&#x73B0;">10.&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#x5B9E;&#x73B0;</h1>
+<h3 id="&#x5341;&#x516D;&#x3001;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#x5B9E;&#x73B0;">&#x5341;&#x516D;&#x3001;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#x5B9E;&#x73B0;</h3>
+<h4 id="&#x7B2C;1&#x6B65;&#xFF1A;&#x65B0;&#x589E;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x534F;&#x8BAE;&#x3001;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;renderer&#x534F;&#x8BAE;">&#x7B2C;1&#x6B65;&#xFF1A;&#x65B0;&#x589E;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x534F;&#x8BAE;&#x3001;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;Renderer&#x534F;&#x8BAE;</h4>
+<p>OverlayProtocol&#xFF08;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x534F;&#x8BAE;&#xFF09;&#x3001;OverlayRendererProtocol&#xFF08;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;Renderer&#x534F;&#x8BAE;&#xFF09;</p>
+<pre class="language-"><code class="lang-swift"><span class="token comment">/// &#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x534F;&#x8BAE;&#xFF0C;&#x6240;&#x6709;&#x5730;&#x56FE;&#x7684;&#x8986;&#x76D6;&#x7269;&#x9700;&#x8981;&#x5B9E;&#x73B0;</span>
+<span class="token keyword">public</span> <span class="token keyword">protocol</span> <span class="token builtin">OverlayProtocol</span><span class="token punctuation">:</span> <span class="token builtin">NSObjectProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/// &#x5177;&#x4F53;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">var</span> overlayImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x6784;&#x9020;&#x65B9;&#x6CD5;</span>
+    <span class="token comment">/// - Parameter annotationImpl: &#x5177;&#x4F53;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">init</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;Renderer&#x534F;&#x8BAE;</span>
+<span class="token keyword">public</span> <span class="token keyword">protocol</span> <span class="token builtin">OverlayRendererProtocol</span><span class="token punctuation">:</span> <span class="token builtin">NSObjectProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/// &#x586B;&#x5145;&#x989C;&#x8272;,&#x9ED8;&#x8BA4;&#x662F;kMAOverlayRendererDefaultFillColor</span>
+    <span class="token keyword">var</span> fillColor<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x7B14;&#x89E6;&#x989C;&#x8272;,&#x9ED8;&#x8BA4;&#x662F;kMAOverlayRendererDefaultStrokeColor</span>
+    <span class="token keyword">var</span> strokeColor<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">///&#x7B14;&#x89E6;&#x5BBD;&#x5EA6;, &#x5355;&#x4F4D;&#x5C4F;&#x5E55;&#x70B9;&#x5750;&#x6807;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;0</span>
+    <span class="token keyword">var</span> lineWidth<span class="token punctuation">:</span> <span class="token builtin">CGFloat</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x5177;&#x4F53;&#x5730;&#x56FE;&#x6807;&#x6CE8;view&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">var</span> overRendererImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x6784;&#x9020;&#x65B9;&#x6CD5;</span>
+    <span class="token comment">/// - Parameter overRendererImpl: &#x5177;&#x4F53;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;Renderer&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">init</span><span class="token punctuation">(</span>overRendererImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="&#x7B2C;2&#x6B65;&#xFF1A;&#x65B0;&#x589E;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#x5B9E;&#x73B0;&#x3001;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;renderer&#x5B9E;&#x73B0;">&#x7B2C;2&#x6B65;&#xFF1A;&#x65B0;&#x589E;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#x5B9E;&#x73B0;&#x3001;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;Renderer&#x5B9E;&#x73B0;</h4>
+<p>GaodePolygon&#xFF08;&#x9AD8;&#x5FB7;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#xFF09;&#x3001;GaodePolygonRenderer&#xFF08;&#x9AD8;&#x5FB7;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;Renderer&#xFF09;</p>
+<p>BaiduPolygon&#xFF08;&#x767E;&#x5EA6;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;&#xFF09;&#x3001;BaiduPolygonRenderer&#xFF08;&#x767E;&#x5EA6;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;Renderer&#xFF09;</p>
+<p>Polygon&#xFF08;&#x901A;&#x7528;&#x591A;&#x8FB9;&#x5F62;&#xFF09;&#x3001;PolygonRenderer&#xFF08;&#x901A;&#x7528;&#x591A;&#x8FB9;&#x5F62;Renderer&#xFF09;</p>
+<pre class="language-"><code class="lang-swift"><span class="token comment">/// &#x9AD8;&#x5FB7;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GaodePolygon</span><span class="token punctuation">:</span> <span class="token builtin">MAPolygon</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/// &#x805A;&#x5408;&#x591A;&#x8FB9;&#x5F62;&#x533A;&#x57DF;l</span>
+    <span class="token keyword">weak</span> <span class="token keyword">var</span> polygon<span class="token punctuation">:</span> <span class="token builtin">Polygon</span><span class="token operator">?</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x9AD8;&#x5FB7;&#x5730;&#x56FE;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GaodePolygonRenderer</span><span class="token punctuation">:</span> <span class="token builtin">MAPolygonRenderer</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x767E;&#x5EA6;&#x591A;&#x8FB9;&#x5F62;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BaiduPolygon</span><span class="token punctuation">:</span> <span class="token builtin">BMKPolygon</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/// &#x805A;&#x5408;&#x591A;&#x8FB9;&#x5F62;&#x533A;&#x57DF;l</span>
+    <span class="token keyword">weak</span> <span class="token keyword">var</span> polygon<span class="token punctuation">:</span> <span class="token builtin">Polygon</span><span class="token operator">?</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x767E;&#x5EA6;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BaiduPolygonRenderer</span><span class="token punctuation">:</span> <span class="token builtin">BMKPolygonView</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x901A;&#x7528;&#x591A;&#x8FB9;&#x5F62;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Polygon</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">OverlayProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/// &#x5177;&#x4F53;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">private</span><span class="token punctuation">(</span><span class="token keyword">set</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">var</span> overlayImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span>
+
+    <span class="token comment">/// &#x9AD8;&#x5FB7;&#x8986;&#x76D6;&#x7269;</span>
+    <span class="token keyword">private</span> <span class="token keyword">var</span> gaodePolygon<span class="token punctuation">:</span> <span class="token builtin">GaodePolygon</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> overlay <span class="token operator">=</span> overlayImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">GaodePolygon</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> overlay
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">nil</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x767E;&#x5EA6;&#x8986;&#x76D6;&#x7269;</span>
+    <span class="token keyword">private</span> <span class="token keyword">var</span> baiduPolygon<span class="token punctuation">:</span> <span class="token builtin">BaiduPolygon</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> overlay <span class="token operator">=</span> overlayImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">BaiduPolygon</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> overlay
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">nil</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x6784;&#x9020;&#x65B9;&#x6CD5;</span>
+    <span class="token comment">/// - Parameter overlayImpl: &#x5177;&#x4F53;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">public</span> <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>overlayImpl <span class="token operator">=</span> overlayImpl
+        gaodePolygon<span class="token operator">?</span><span class="token punctuation">.</span>polygon <span class="token operator">=</span> <span class="token keyword">self</span>
+        baiduPolygon<span class="token operator">?</span><span class="token punctuation">.</span>polygon <span class="token operator">=</span> <span class="token keyword">self</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x901A;&#x7528;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PolygonRenderer</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">OverlayRendererProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/// &#x586B;&#x5145;&#x989C;&#x8272;,&#x9ED8;&#x8BA4;&#x662F;kMAOverlayRendererDefaultFillColor</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> fillColor<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> gaodeOverRenderer <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> overRenderer<span class="token punctuation">.</span>fillColor
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> baiduOverRenderer <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> overRenderer<span class="token punctuation">.</span>fillColor
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token punctuation">.</span>red
+        <span class="token punctuation">}</span>
+        <span class="token keyword">set</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> gaodeOverRenderer <span class="token punctuation">{</span>
+                overRenderer<span class="token punctuation">.</span>fillColor <span class="token operator">=</span> newValue
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> baiduOverRenderer <span class="token punctuation">{</span>
+                overRenderer<span class="token punctuation">.</span>fillColor <span class="token operator">=</span> newValue
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x7B14;&#x89E6;&#x989C;&#x8272;,&#x9ED8;&#x8BA4;&#x662F;kMAOverlayRendererDefaultStrokeColor</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> strokeColor<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> gaodeOverRenderer <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> overRenderer<span class="token punctuation">.</span>strokeColor
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> baiduOverRenderer <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> overRenderer<span class="token punctuation">.</span>strokeColor
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token punctuation">.</span>red
+        <span class="token punctuation">}</span>
+        <span class="token keyword">set</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> gaodeOverRenderer <span class="token punctuation">{</span>
+                overRenderer<span class="token punctuation">.</span>strokeColor <span class="token operator">=</span> newValue
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> baiduOverRenderer <span class="token punctuation">{</span>
+                overRenderer<span class="token punctuation">.</span>strokeColor <span class="token operator">=</span> newValue
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">///&#x7B14;&#x89E6;&#x5BBD;&#x5EA6;, &#x5355;&#x4F4D;&#x5C4F;&#x5E55;&#x70B9;&#x5750;&#x6807;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;0</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> lineWidth<span class="token punctuation">:</span> <span class="token builtin">CGFloat</span> <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> gaodeOverRenderer <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> overRenderer<span class="token punctuation">.</span>lineWidth
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> baiduOverRenderer <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> overRenderer<span class="token punctuation">.</span>lineWidth
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">set</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> gaodeOverRenderer <span class="token punctuation">{</span>
+                overRenderer<span class="token punctuation">.</span>lineWidth <span class="token operator">=</span> newValue
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overRenderer <span class="token operator">=</span> baiduOverRenderer <span class="token punctuation">{</span>
+                overRenderer<span class="token punctuation">.</span>lineWidth <span class="token operator">=</span> newValue
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x5177;&#x4F53;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">public</span> <span class="token keyword">private</span><span class="token punctuation">(</span><span class="token keyword">set</span><span class="token punctuation">)</span> <span class="token keyword">var</span> overRendererImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span>
+
+    <span class="token comment">/// &#x9AD8;&#x5FB7;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;</span>
+    <span class="token keyword">private</span> <span class="token keyword">var</span> gaodeOverRenderer<span class="token punctuation">:</span> <span class="token builtin">GaodePolygonRenderer</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> overRendererImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">GaodePolygonRenderer</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x767E;&#x5EA6;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;</span>
+    <span class="token keyword">private</span> <span class="token keyword">var</span> baiduOverRenderer<span class="token punctuation">:</span> <span class="token builtin">BaiduPolygonRenderer</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> overRendererImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">BaiduPolygonRenderer</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x6784;&#x9020;&#x65B9;&#x6CD5;</span>
+    <span class="token comment">/// - Parameter overRendererImpl: &#x5177;&#x4F53;&#x5730;&#x56FE;&#x8986;&#x76D6;&#x7269;Renderer&#x5B9E;&#x73B0;</span>
+    <span class="token keyword">public</span> <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token punctuation">(</span>overRendererImpl<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>overRendererImpl <span class="token operator">=</span> overRendererImpl
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="&#x7B2C;3&#x6B65;&#xFF1A;&#x5730;&#x56FE;&#x5DE5;&#x5382;&#x6807;&#x51C6;&#x4FEE;&#x6539;&#x53CA;&#x5B9E;&#x73B0;">&#x7B2C;3&#x6B65;&#xFF1A;&#x5730;&#x56FE;&#x5DE5;&#x5382;&#x6807;&#x51C6;&#x4FEE;&#x6539;&#x53CA;&#x5B9E;&#x73B0;</h4>
+<pre class="language-"><code class="lang-swift"><span class="token comment">/// &#x5730;&#x56FE;&#x5DE5;&#x5382;&#x6807;&#x51C6;</span>
+<span class="token keyword">public</span> <span class="token keyword">protocol</span> <span class="token builtin">MapFactoryProtocol</span><span class="token punctuation">:</span> <span class="token builtin">NSObjectProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">/// &#x6839;&#x636E;&#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x6570;&#x636E;&#x751F;&#x6210;&#x95ED;&#x5408;&#x591A;&#x8FB9;&#x5F62;</span>
+    <span class="token comment">/// - Parameters:</span>
+    <span class="token comment">///   - coordinates: &#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x70B9;&#x6570;&#x636E;,coords&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5B58;&#x4F1A;&#x62F7;&#x8D1D;,&#x8C03;&#x7528;&#x8005;&#x8D1F;&#x8D23;&#x8BE5;&#x5185;&#x5B58;&#x7684;&#x91CA;&#x653E;</span>
+    <span class="token comment">///   - count: &#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x70B9;&#x6570;&#x7EC4;&#x4E2A;&#x6570;</span>
+    <span class="token comment">/// - Returns: &#x65B0;&#x751F;&#x6210;&#x7684;&#x591A;&#x8FB9;&#x5F62;</span>
+    <span class="token keyword">func</span> <span class="token function">getPolygon</span><span class="token punctuation">(</span>coordinates<span class="token punctuation">:</span> <span class="token builtin">UnsafeMutablePointer</span><span class="token operator">&lt;</span><span class="token builtin">CLLocationCoordinate2D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token builtin">count</span><span class="token punctuation">:</span> <span class="token builtin">UInt</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Polygon</span>
+
+    <span class="token comment">/// &#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;&#x591A;&#x8FB9;&#x5F62;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+    <span class="token comment">/// - Parameter overlay: &#x6307;&#x5B9A;&#x7684;&#x591A;&#x8FB9;&#x5F62;&#x6570;&#x636E;&#x5BF9;&#x8C61;</span>
+    <span class="token comment">/// - Returns: &#x65B0;&#x751F;&#x6210;&#x7684;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+    <span class="token keyword">func</span> <span class="token function">getPolygonRenderer</span><span class="token punctuation">(</span>overlay<span class="token punctuation">:</span> <span class="token builtin">OverlayProtocol</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">OverlayRendererProtocol</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x9AD8;&#x5FB7;&#x5730;&#x56FE;&#x5DE5;&#x5382;</span>
+<span class="token keyword">class</span> <span class="token class-name">GaodeMapFactory</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">MapFactoryProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">/// &#x6839;&#x636E;&#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x6570;&#x636E;&#x751F;&#x6210;&#x95ED;&#x5408;&#x591A;&#x8FB9;&#x5F62;</span>
+    <span class="token comment">/// - Parameters:</span>
+    <span class="token comment">///   - coordinates: &#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x70B9;&#x6570;&#x636E;,coords&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5B58;&#x4F1A;&#x62F7;&#x8D1D;,&#x8C03;&#x7528;&#x8005;&#x8D1F;&#x8D23;&#x8BE5;&#x5185;&#x5B58;&#x7684;&#x91CA;&#x653E;</span>
+    <span class="token comment">///   - count: &#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x70B9;&#x6570;&#x7EC4;&#x4E2A;&#x6570;</span>
+    <span class="token comment">/// - Returns: &#x65B0;&#x751F;&#x6210;&#x7684;&#x591A;&#x8FB9;&#x5F62;</span>
+    <span class="token keyword">func</span> <span class="token function">getPolygon</span><span class="token punctuation">(</span>coordinates<span class="token punctuation">:</span> <span class="token builtin">UnsafeMutablePointer</span><span class="token operator">&lt;</span><span class="token builtin">CLLocationCoordinate2D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token builtin">count</span><span class="token punctuation">:</span> <span class="token builtin">UInt</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Polygon</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> polygonImpl <span class="token operator">=</span> <span class="token function">GaodePolygon</span><span class="token punctuation">(</span>coordinates<span class="token punctuation">:</span> coordinates<span class="token punctuation">,</span> <span class="token builtin">count</span><span class="token punctuation">:</span> <span class="token builtin">count</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token function">Polygon</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">:</span> polygonImpl<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;&#x591A;&#x8FB9;&#x5F62;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+    <span class="token comment">/// - Parameter overlay: &#x6307;&#x5B9A;&#x7684;&#x591A;&#x8FB9;&#x5F62;&#x6570;&#x636E;&#x5BF9;&#x8C61;</span>
+    <span class="token comment">/// - Returns: &#x65B0;&#x751F;&#x6210;&#x7684;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+    <span class="token keyword">func</span> <span class="token function">getPolygonRenderer</span><span class="token punctuation">(</span>overlay<span class="token punctuation">:</span> <span class="token builtin">OverlayProtocol</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">OverlayRendererProtocol</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">var</span> polygonImpl <span class="token operator">=</span> <span class="token function">GaodePolygon</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> overlayImplParam <span class="token operator">=</span> overlay<span class="token punctuation">.</span>overlayImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">GaodePolygon</span> <span class="token punctuation">{</span>
+            polygonImpl <span class="token operator">=</span> overlayImplParam
+        <span class="token punctuation">}</span>
+        <span class="token keyword">let</span> polygonRendererImpl <span class="token operator">=</span> <span class="token function">GaodePolygonRenderer</span><span class="token punctuation">(</span>overlay<span class="token punctuation">:</span> polygonImpl<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token function">PolygonRenderer</span><span class="token punctuation">(</span>overRendererImpl<span class="token punctuation">:</span> polygonRendererImpl<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x767E;&#x5EA6;&#x5730;&#x56FE;&#x5DE5;&#x5382;</span>
+<span class="token keyword">class</span> <span class="token class-name">BaiduMapFactory</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">MapFactoryProtocol</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">/// &#x6839;&#x636E;&#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x6570;&#x636E;&#x751F;&#x6210;&#x95ED;&#x5408;&#x591A;&#x8FB9;&#x5F62;</span>
+    <span class="token comment">/// - Parameters:</span>
+    <span class="token comment">///   - coordinates: &#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x70B9;&#x6570;&#x636E;,coords&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5B58;&#x4F1A;&#x62F7;&#x8D1D;,&#x8C03;&#x7528;&#x8005;&#x8D1F;&#x8D23;&#x8BE5;&#x5185;&#x5B58;&#x7684;&#x91CA;&#x653E;</span>
+    <span class="token comment">///   - count: &#x7ECF;&#x7EAC;&#x5EA6;&#x5750;&#x6807;&#x70B9;&#x6570;&#x7EC4;&#x4E2A;&#x6570;</span>
+    <span class="token comment">/// - Returns: &#x65B0;&#x751F;&#x6210;&#x7684;&#x591A;&#x8FB9;&#x5F62;</span>
+    <span class="token keyword">func</span> <span class="token function">getPolygon</span><span class="token punctuation">(</span>coordinates<span class="token punctuation">:</span> <span class="token builtin">UnsafeMutablePointer</span><span class="token operator">&lt;</span><span class="token builtin">CLLocationCoordinate2D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token builtin">count</span><span class="token punctuation">:</span> <span class="token builtin">UInt</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Polygon</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> polygonImpl <span class="token operator">=</span> <span class="token function">BaiduPolygon</span><span class="token punctuation">(</span>coordinates<span class="token punctuation">:</span> coordinates<span class="token punctuation">,</span> <span class="token builtin">count</span><span class="token punctuation">:</span> <span class="token builtin">count</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token function">Polygon</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">:</span> polygonImpl<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;&#x591A;&#x8FB9;&#x5F62;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+    <span class="token comment">/// - Parameter overlay: &#x6307;&#x5B9A;&#x7684;&#x591A;&#x8FB9;&#x5F62;&#x6570;&#x636E;&#x5BF9;&#x8C61;</span>
+    <span class="token comment">/// - Returns: &#x65B0;&#x751F;&#x6210;&#x7684;&#x591A;&#x8FB9;&#x5F62;Renderer</span>
+    <span class="token keyword">func</span> <span class="token function">getPolygonRenderer</span><span class="token punctuation">(</span>overlay<span class="token punctuation">:</span> <span class="token builtin">OverlayProtocol</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">OverlayRendererProtocol</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">var</span> polygonImpl <span class="token operator">=</span> <span class="token function">BaiduPolygon</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> overlayImplParam <span class="token operator">=</span> overlay<span class="token punctuation">.</span>overlayImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">BaiduPolygon</span> <span class="token punctuation">{</span>
+            polygonImpl <span class="token operator">=</span> overlayImplParam
+        <span class="token punctuation">}</span>
+        <span class="token keyword">let</span> polygonRendererImpl <span class="token operator">=</span> <span class="token function">BaiduPolygonRenderer</span><span class="token punctuation">(</span>overlay<span class="token punctuation">:</span> polygonImpl<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token function">PolygonRenderer</span><span class="token punctuation">(</span>overRendererImpl<span class="token punctuation">:</span> polygonRendererImpl<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="&#x7B2C;4&#x6B65;&#xFF1A;&#x5730;&#x56FE;&#x534F;&#x8BAE;&#x4FEE;&#x6539;&#x53CA;&#x5B9E;&#x73B0;">&#x7B2C;4&#x6B65;&#xFF1A;&#x5730;&#x56FE;&#x534F;&#x8BAE;&#x4FEE;&#x6539;&#x53CA;&#x5B9E;&#x73B0;</h4>
+<pre class="language-"><code class="lang-swift"><span class="token comment">/// &#x5730;&#x56FE;&#x534F;&#x8BAE;</span>
+<span class="token keyword">public</span> <span class="token keyword">protocol</span> <span class="token builtin">MapViewProtocol</span><span class="token punctuation">:</span> <span class="token builtin">NSObjectProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">/// &#x5411;&#x5730;&#x56FE;&#x7A97;&#x53E3;&#x6DFB;&#x52A0;&#x4E00;&#x7EC4;Overlay&#xFF0C;&#x9700;&#x8981;&#x5B9E;&#x73B0;MAMapViewDelegate&#x7684;-mapView:rendererForOverlay:&#x51FD;&#x6570;&#x6765;&#x751F;&#x6210;&#x6807;&#x6CE8;&#x5BF9;&#x5E94;&#x7684;Renderer</span>
+    <span class="token comment">/// - Parameter overlays: &#x8981;&#x6DFB;&#x52A0;&#x7684;overlay&#x6570;&#x7EC4;</span>
+    <span class="token keyword">func</span> <span class="token function">addOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">OverlayProtocol</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token comment">/// &#x8BBE;&#x7F6E;&#x5730;&#x56FE;&#x4F7F;&#x5176;&#x53EF;&#x4EE5;&#x663E;&#x793A;&#x6570;&#x7EC4;&#x4E2D;&#x6240;&#x6709;&#x7684;overlay, &#x5982;&#x679C;&#x6570;&#x7EC4;&#x4E2D;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x5219;&#x76F4;&#x63A5;&#x8BBE;&#x7F6E;&#x5730;&#x56FE;&#x4E2D;&#x5FC3;&#x4E3A;overlay&#x7684;&#x4F4D;&#x7F6E;&#x3002;</span>
+    <span class="token comment">/// - Parameters:</span>
+    <span class="token comment">///   - overlays: &#x9700;&#x8981;&#x663E;&#x793A;&#x7684;overlays</span>
+    <span class="token comment">///   - animated: &#x662F;&#x5426;&#x6267;&#x884C;&#x52A8;&#x753B;</span>
+    <span class="token keyword">func</span> <span class="token function">showOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">OverlayProtocol</span><span class="token punctuation">]</span><span class="token punctuation">,</span> animated<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x9AD8;&#x5FB7;&#x5730;&#x56FE;</span>
+<span class="token keyword">class</span> <span class="token class-name">GaodeMapView</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">MapViewProtocol</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">/// &#x5411;&#x5730;&#x56FE;&#x7A97;&#x53E3;&#x6DFB;&#x52A0;&#x4E00;&#x7EC4;Overlay&#xFF0C;&#x9700;&#x8981;&#x5B9E;&#x73B0;MAMapViewDelegate&#x7684;-mapView:rendererForOverlay:&#x51FD;&#x6570;&#x6765;&#x751F;&#x6210;&#x6807;&#x6CE8;&#x5BF9;&#x5E94;&#x7684;Renderer</span>
+    <span class="token comment">/// - Parameter overlays: &#x8981;&#x6DFB;&#x52A0;&#x7684;overlay&#x6570;&#x7EC4;</span>
+    <span class="token keyword">func</span> <span class="token function">addOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">OverlayProtocol</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> overlayImpls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">Any</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> overlay <span class="token keyword">in</span> overlays <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overlayImpl <span class="token operator">=</span> overlay<span class="token punctuation">.</span>overlayImpl <span class="token punctuation">{</span>
+                overlayImpls<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        mapView<span class="token punctuation">.</span><span class="token function">addOverlays</span><span class="token punctuation">(</span>overlayImpls<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x8BBE;&#x7F6E;&#x5730;&#x56FE;&#x4F7F;&#x5176;&#x53EF;&#x4EE5;&#x663E;&#x793A;&#x6570;&#x7EC4;&#x4E2D;&#x6240;&#x6709;&#x7684;overlay, &#x5982;&#x679C;&#x6570;&#x7EC4;&#x4E2D;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x5219;&#x76F4;&#x63A5;&#x8BBE;&#x7F6E;&#x5730;&#x56FE;&#x4E2D;&#x5FC3;&#x4E3A;overlay&#x7684;&#x4F4D;&#x7F6E;&#x3002;</span>
+    <span class="token comment">/// - Parameters:</span>
+    <span class="token comment">///   - overlays: &#x9700;&#x8981;&#x663E;&#x793A;&#x7684;overlays</span>
+    <span class="token comment">///   - animated: &#x662F;&#x5426;&#x6267;&#x884C;&#x52A8;&#x753B;</span>
+    <span class="token keyword">func</span> <span class="token function">showOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">OverlayProtocol</span><span class="token punctuation">]</span><span class="token punctuation">,</span> animated<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> overlayImpls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">Any</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> overlay <span class="token keyword">in</span> overlays <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overlayImpl <span class="token operator">=</span> overlay<span class="token punctuation">.</span>overlayImpl <span class="token punctuation">{</span>
+                overlayImpls<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        mapView<span class="token punctuation">.</span><span class="token function">showOverlays</span><span class="token punctuation">(</span>overlayImpls<span class="token punctuation">,</span> animated<span class="token punctuation">:</span> animated<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x9AD8;&#x5FB7;&#x5730;&#x56FE;&#x4EE3;&#x7406;&#x5B9E;&#x73B0;</span>
+<span class="token keyword">class</span> <span class="token class-name">MAMapViewDelegateImpl</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">MAMapViewDelegate</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">func</span> <span class="token function">mapView</span><span class="token punctuation">(</span><span class="token number">_</span> mapView<span class="token punctuation">:</span> <span class="token builtin">MAMapView</span><span class="token operator">!</span><span class="token punctuation">,</span> rendererFor overlay<span class="token punctuation">:</span> <span class="token builtin">MAOverlay</span><span class="token operator">!</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">MAOverlayRenderer</span><span class="token operator">!</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> polygonOverlay <span class="token operator">=</span> overlay <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">GaodePolygon</span><span class="token punctuation">,</span> <span class="token keyword">let</span> poly <span class="token operator">=</span> polygonOverlay<span class="token punctuation">.</span>polygon <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> polygonRenderer <span class="token operator">=</span> delegate<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">mapView</span><span class="token punctuation">(</span>mapViewProtocol<span class="token punctuation">,</span> rendererFor<span class="token punctuation">:</span> poly<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>overRendererImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">MAPolygonRenderer</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> polygonRenderer
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">nil</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x767E;&#x5EA6;&#x5730;&#x56FE;</span>
+<span class="token keyword">class</span> <span class="token class-name">BaiduMapView</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">MapViewProtocol</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">/// &#x5411;&#x5730;&#x56FE;&#x7A97;&#x53E3;&#x6DFB;&#x52A0;&#x4E00;&#x7EC4;Overlay&#xFF0C;&#x9700;&#x8981;&#x5B9E;&#x73B0;MAMapViewDelegate&#x7684;-mapView:rendererForOverlay:&#x51FD;&#x6570;&#x6765;&#x751F;&#x6210;&#x6807;&#x6CE8;&#x5BF9;&#x5E94;&#x7684;Renderer</span>
+    <span class="token comment">/// - Parameter overlays: &#x8981;&#x6DFB;&#x52A0;&#x7684;overlay&#x6570;&#x7EC4;</span>
+    <span class="token keyword">func</span> <span class="token function">addOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">OverlayProtocol</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> overlayImpls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">BMKOverlay</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> overlay <span class="token keyword">in</span> overlays <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overlayImpl <span class="token operator">=</span> overlay<span class="token punctuation">.</span>overlayImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">BMKOverlay</span> <span class="token punctuation">{</span>
+                overlayImpls<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        mapView<span class="token punctuation">.</span><span class="token function">addOverlays</span><span class="token punctuation">(</span>overlayImpls<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &#x8BBE;&#x7F6E;&#x5730;&#x56FE;&#x4F7F;&#x5176;&#x53EF;&#x4EE5;&#x663E;&#x793A;&#x6570;&#x7EC4;&#x4E2D;&#x6240;&#x6709;&#x7684;overlay, &#x5982;&#x679C;&#x6570;&#x7EC4;&#x4E2D;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x5219;&#x76F4;&#x63A5;&#x8BBE;&#x7F6E;&#x5730;&#x56FE;&#x4E2D;&#x5FC3;&#x4E3A;overlay&#x7684;&#x4F4D;&#x7F6E;&#x3002;</span>
+    <span class="token comment">/// - Parameters:</span>
+    <span class="token comment">///   - overlays: &#x9700;&#x8981;&#x663E;&#x793A;&#x7684;overlays</span>
+    <span class="token comment">///   - animated: &#x662F;&#x5426;&#x6267;&#x884C;&#x52A8;&#x753B;</span>
+    <span class="token keyword">func</span> <span class="token function">showOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">OverlayProtocol</span><span class="token punctuation">]</span><span class="token punctuation">,</span> animated<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> overlayImpls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">BMKOverlay</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> overlay <span class="token keyword">in</span> overlays <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> overlayImpl <span class="token operator">=</span> overlay<span class="token punctuation">.</span>overlayImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">BMKOverlay</span> <span class="token punctuation">{</span>
+                overlayImpls<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>overlayImpl<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// &#x767E;&#x5EA6;&#x5730;&#x56FE;&#x4EE3;&#x7406;&#x5B9E;&#x73B0;</span>
+<span class="token keyword">class</span> <span class="token class-name">BMKMapViewDelegateImpl</span><span class="token punctuation">:</span> <span class="token builtin">NSObject</span><span class="token punctuation">,</span> <span class="token builtin">BMKMapViewDelegate</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">func</span> <span class="token function">mapView</span><span class="token punctuation">(</span><span class="token number">_</span> mapView<span class="token punctuation">:</span> <span class="token builtin">BMKMapView</span><span class="token operator">!</span><span class="token punctuation">,</span> viewFor overlay<span class="token punctuation">:</span> <span class="token builtin">BMKOverlay</span><span class="token operator">!</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">BMKOverlayView</span><span class="token operator">!</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> polygonOverlay <span class="token operator">=</span> overlay <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">BaiduPolygon</span><span class="token punctuation">,</span> <span class="token keyword">let</span> poly <span class="token operator">=</span> polygonOverlay<span class="token punctuation">.</span>polygon <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token keyword">let</span> polygonRenderer <span class="token operator">=</span> delegate<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">mapView</span><span class="token punctuation">(</span>mapViewProtocol<span class="token punctuation">,</span> rendererFor<span class="token punctuation">:</span> poly<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>overRendererImpl <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">BMKPolygonView</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> polygonRenderer
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">nil</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="&#x7B2C;5&#x6B65;&#xFF1A;&#x6D4B;&#x8BD5;&#x9875;&#x9762;">&#x7B2C;5&#x6B65;&#xFF1A;&#x6D4B;&#x8BD5;&#x9875;&#x9762;</h4>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">class</span> <span class="token class-name">PolygonViewController</span><span class="token punctuation">:</span> <span class="token builtin">UIViewController</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/// &#x5730;&#x56FE;&#x5DE5;&#x5382;</span>
+    <span class="token keyword">private</span> <span class="token keyword">lazy</span> <span class="token keyword">var</span> factory<span class="token punctuation">:</span> <span class="token builtin">MapFactoryProtocol</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> factory <span class="token operator">=</span> <span class="token builtin">MapEngine</span><span class="token punctuation">.</span>shared<span class="token punctuation">.</span><span class="token function">getFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">!</span>
+        <span class="token keyword">return</span> factory
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">/// &#x5730;&#x56FE;&#x5B9E;&#x4F8B;</span>
+    <span class="token keyword">private</span> <span class="token keyword">lazy</span> <span class="token keyword">var</span> mapView<span class="token punctuation">:</span> <span class="token builtin">MapViewProtocol</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token comment">// &#x663E;&#x793A;&#x5730;&#x56FE;</span>
+        <span class="token keyword">let</span> mapView <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">getMapView</span><span class="token punctuation">(</span>frame<span class="token punctuation">:</span> view<span class="token punctuation">.</span>bounds<span class="token punctuation">)</span>
+        <span class="token comment">// &#x8BBE;&#x7F6E;&#x4EE3;&#x7406;</span>
+        mapView<span class="token punctuation">.</span>delegate <span class="token operator">=</span> <span class="token keyword">self</span>
+        <span class="token comment">// &#x663E;&#x793A;&#x7528;&#x6237;&#x5B9A;&#x4F4D;(&#x653E;&#x5728;&#x8BBE;&#x7F6E;&#x4EE3;&#x7406;&#x4E4B;&#x540E;&#xFF0C;&#x786E;&#x4FDD;&#x53EF;&#x4EE5;&#x8C03;&#x7528;locationManager.requestAlwaysAuthorization())</span>
+        mapView<span class="token punctuation">.</span>showsUserLocation <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token comment">// &#x8DDF;&#x8E2A;&#x6A21;&#x5F0F;</span>
+        mapView<span class="token punctuation">.</span>userTrackingMode <span class="token operator">=</span> <span class="token punctuation">.</span>followWithHeading
+        <span class="token comment">// &#x8BBE;&#x7F6E;&#x7F29;&#x653E;</span>
+        mapView<span class="token punctuation">.</span>zoomLevel <span class="token operator">=</span> <span class="token number">16</span>
+        <span class="token keyword">return</span> mapView
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">/// &#x6807;&#x6CE8;&#x6570;&#x7EC4;</span>
+    <span class="token keyword">private</span> <span class="token keyword">lazy</span> <span class="token keyword">var</span> polygons<span class="token punctuation">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">Polygon</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> polygons <span class="token operator">=</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">Polygon</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">var</span> polygonCoordinates<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">CLLocationCoordinate2D</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token function">CLLocationCoordinate2D</span><span class="token punctuation">(</span>latitude<span class="token punctuation">:</span> <span class="token number">39.781892</span><span class="token punctuation">,</span> longitude<span class="token punctuation">:</span> <span class="token number">116.283413</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">CLLocationCoordinate2D</span><span class="token punctuation">(</span>latitude<span class="token punctuation">:</span> <span class="token number">39.787600</span><span class="token punctuation">,</span> longitude<span class="token punctuation">:</span> <span class="token number">116.391842</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">CLLocationCoordinate2D</span><span class="token punctuation">(</span>latitude<span class="token punctuation">:</span> <span class="token number">39.733187</span><span class="token punctuation">,</span> longitude<span class="token punctuation">:</span> <span class="token number">116.417932</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">CLLocationCoordinate2D</span><span class="token punctuation">(</span>latitude<span class="token punctuation">:</span> <span class="token number">39.704653</span><span class="token punctuation">,</span> longitude<span class="token punctuation">:</span> <span class="token number">116.338255</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+        <span class="token keyword">let</span> polygon <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">getPolygon</span><span class="token punctuation">(</span>coordinates<span class="token punctuation">:</span> <span class="token operator">&amp;</span>polygonCoordinates<span class="token punctuation">,</span> <span class="token builtin">count</span><span class="token punctuation">:</span> <span class="token function">UInt</span><span class="token punctuation">(</span>polygonCoordinates<span class="token punctuation">.</span><span class="token builtin">count</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        polygons<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>polygon<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> polygons
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        view<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token punctuation">.</span>white
+        view<span class="token punctuation">.</span><span class="token function">addSubview</span><span class="token punctuation">(</span>mapView<span class="token punctuation">.</span><span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function">viewDidAppear</span><span class="token punctuation">(</span><span class="token number">_</span> animated<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">viewDidAppear</span><span class="token punctuation">(</span>animated<span class="token punctuation">)</span>
+
+        mapView<span class="token punctuation">.</span><span class="token function">addOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> polygons<span class="token punctuation">)</span>
+        mapView<span class="token punctuation">.</span><span class="token function">showOverlays</span><span class="token punctuation">(</span>overlays<span class="token punctuation">:</span> polygons<span class="token punctuation">,</span> animated<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">extension</span> <span class="token builtin">PolygonViewController</span><span class="token punctuation">:</span> <span class="token builtin">MapViewDelegateProtocol</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">func</span> <span class="token function">mapView</span><span class="token punctuation">(</span><span class="token number">_</span> mapView<span class="token punctuation">:</span> <span class="token builtin">MapViewProtocol</span><span class="token punctuation">,</span> rendererFor overlay<span class="token punctuation">:</span> <span class="token builtin">OverlayProtocol</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">OverlayRendererProtocol</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">if</span> overlay<span class="token punctuation">.</span><span class="token function">isKind</span><span class="token punctuation">(</span>of<span class="token punctuation">:</span> <span class="token builtin">Polygon</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+            <span class="token keyword">let</span> renderer <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">getPolygonRenderer</span><span class="token punctuation">(</span>overlay<span class="token punctuation">:</span> overlay<span class="token punctuation">)</span>
+            renderer<span class="token punctuation">.</span>lineWidth <span class="token operator">=</span> <span class="token number">8.0</span>
+            renderer<span class="token punctuation">.</span>strokeColor <span class="token operator">=</span> <span class="token builtin">UIColor</span><span class="token punctuation">.</span>magenta
+            renderer<span class="token punctuation">.</span>fillColor <span class="token operator">=</span> <span class="token builtin">UIColor</span><span class="token punctuation">.</span>yellow<span class="token punctuation">.</span><span class="token function">withAlphaComponent</span><span class="token punctuation">(</span><span class="token number">0.4</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">return</span> renderer
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">nil</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2021-12-16 19:58:54
+</span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="09_地图标注实现.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 9.地图标注实现">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"10.地图多边形实现","level":"1.11.10","depth":2,"next":{"title":"第三方分享","level":"1.12","depth":1,"ref":"","articles":[{"title":"微信分享","level":"1.12.1","depth":2,"path":"第三方分享/微信分享.md","ref":"第三方分享/微信分享.md","articles":[]},{"title":"Messenger分享","level":"1.12.2","depth":2,"path":"第三方分享/Messenger分享.md","ref":"第三方分享/Messenger分享.md","articles":[]},{"title":"LinkedIn分享","level":"1.12.3","depth":2,"path":"第三方分享/LinkedIn分享.md","ref":"第三方分享/LinkedIn分享.md","articles":[]}]},"previous":{"title":"9.地图标注实现","level":"1.11.9","depth":2,"path":"地图聚合SDK/09_地图标注实现.md","ref":"地图聚合SDK/09_地图标注实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"地图聚合SDK/10_地图多边形实现.md","mtime":"2021-12-16T11:58:54.743Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-16T12:17:49.335Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-simple-mind-map/bundle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mermaid-gb3/book/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    <script src="../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.min.js"></script>
+
+    </body>
+</html>
+
