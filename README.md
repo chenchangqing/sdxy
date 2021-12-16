@@ -60,6 +60,7 @@
 * [iOS开发之字符串(NSString)的拼接](https://blog.csdn.net/ziyuzhiye/article/details/77963046)
 * [iOS - NSDate分类-判断时间是否为今天,昨天,一周内,年月日](https://blog.csdn.net/coderMy/article/details/54233754)
 * [Swift开发小技巧系列 - 浮点型数据的四舍五入](https://www.jianshu.com/p/73c36740bd0b)
+* [UIPresentationController简介](https://blog.csdn.net/ideaspress/article/details/51177934)
 
 ## iOS·审核
 
