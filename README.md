@@ -19,6 +19,22 @@
 * ["Double-quoted" issue in latest version of Firebase](https://github.com/firebase/firebase-ios-sdk/issues/5987)
 * [rem布局在webview中页面错乱解决办法](https://www.jianshu.com/p/bb0c569d4536)
 * [解決UIWebView target = '_blank'不能彈出](https://www.jianshu.com/p/9ad906504645)
+* [Cocoapod with optional subspecs is not installing, if subspecs in the Podfile and another dependent Cocoapod podspec doesn't match](https://github.com/CocoaPods/CocoaPods/issues/10264)
+* [Can I have an init func in a protocol?](https://stackoverflow.com/questions/25694384/can-i-have-an-init-func-in-a-protocol)
+* [构造方法不触发didSet](https://blog.csdn.net/u011961093/article/details/107559944)
+* [iOS9中调用其他APP时出现This app is not allowed to query](https://blog.csdn.net/weixin_33726943/article/details/91741248)
+* [微信怎么唤起app?](https://segmentfault.com/q/1010000021544971)
+* [facebook链接中分享的图片](https://developers.facebook.com/docs/sharing/webmasters/images/)
+* [line链接中分享的图片](https://developers.line.biz/en/faq/#how-are-the-url-previews-generated)
+* [Swift - encode URL](https://stackoverflow.com/questions/24551816/swift-encode-url)
+* [Class Only Protocols In Swift 5](https://www.jianshu.com/p/a4b0f8094938)
+* [git删除远程分支报错:remote ref does not exist](https://blog.csdn.net/a460550542/article/details/111593362)
+* [ERROR | [iOS] unknown: Encountered an unknown error (/usr/bin/xcrun simctl list -j devices](https://blog.csdn.net/sunzhenglin2016/article/details/89278506)
+* [Mac解疑：处理 Adobe Genuine Software Integrity Service](https://keesenz.com/2020/873.html)
+* [assigning to ‘NSString *_strong’ from ‘const NSString’ discards qualifiers](https://www.jianshu.com/p/cd2d2db87634)
+* [iOS10 NSLog限制为1024个字符字符串](http://cn.voidcc.com/question/p-mftjbjql-qp.html)
+* [Auto property synthesis will not synthesize property ‘delegate’;it will be implemented by its superc](https://blog.csdn.net/jiadabin/article/details/51698143)
+* [NSPredicate 谓词](https://cnbin.github.io/blog/2015/11/23/nspredicate-wei-ci/)
 
 ## ScrollView嵌套
 
@@ -37,11 +53,20 @@
 * [iOS 插件化开发(动态库研究)](https://gsl201600.github.io/2019/11/13/iOS%E6%8F%92%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/)
 * [在 iOS 上下载文件](https://firebase.google.com/docs/storage/ios/download-files?hl=zh-cn)
 * [iOS归档看这篇就够了](https://www.jianshu.com/p/185e9ea021a2)
+* [ios - Swift URL查询字符串获取参数](https://www.coder.work/article/2329020)
+* [Swift打印变量内存地址](https://www.jianshu.com/p/3c9df2705a64)
+* [swift小知识点之打印对象的地址](https://www.cnblogs.com/lxlx1798/articles/14790908.html)
+* [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
+* [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
+* [iOS开发之字符串(NSString)的拼接](https://blog.csdn.net/ziyuzhiye/article/details/77963046)
+* [iOS - NSDate分类-判断时间是否为今天,昨天,一周内,年月日](https://blog.csdn.net/coderMy/article/details/54233754)
+* [Swift开发小技巧系列 - 浮点型数据的四舍五入](https://www.jianshu.com/p/73c36740bd0b)
+* [UIPresentationController简介](https://blog.csdn.net/ideaspress/article/details/51177934)
 
 ## iOS·审核
 
 * [检查iOS项目中是否还有使用UIWebView](https://www.jianshu.com/p/3a645500d461)
-
+* [iOS APP内测邀请之TestFlight](https://blog.csdn.net/u010895119/article/details/79422023)
 
 ## iOS·多线程
 
@@ -68,12 +93,24 @@
 * [UIImage 二分压缩图片](http://www.colinhwang.com/2016/07/30/compress-image/)
 * [Woodpecke‪r‬](https://apps.apple.com/cn/app/woodpecker/id1333548463?mt=12)
 * [图片裁剪](https://www.gaitubao.com/)
+* [临时邮箱、临时邮、临时电子邮箱、24小时邮箱](http://24mail.chacuo.net/)
+* [JSON格式化](https://c.runoob.com/front-end/53)
+* [Woodpecker使用](http://www.woodpeck.cn/cnusage.html)
+* [Xcode自定义代码块](https://www.jianshu.com/p/7e317cb54411/)
+* [时间戳](https://tool.lu/timestamp/)cuo
+* [google play store](https://www.uphezi.com/access-google-play-store-china/)
+* [颜色代码表](https://www.5tu.cn/colors/yansedaimabiao.html)
 
 ## Gitbook
 
 * [新版gitbook导出pdf](https://www.jianshu.com/p/9cbc9d3bfd16)
 * [gitbook教程](http://gitbook.hushuang.me/syntax/markdown.html)
 * [推荐12个实用的gitbook插件](https://segmentfault.com/a/1190000019473512?utm_source=tag-newest)
+* [mermaid插件](https://mermaid-js.github.io/mermaid/#/./integrations)
+* [mermaid-gb3](https://www.mapull.com/gitbook/comscore/custom/plugin/other/mermaid.html)
+* [mermaid文档](https://mermaid-js.github.io/mermaid/#/)
+* [GitBook 插件](https://gitee.com/ji-song/gitbook-use/blob/master/plugins.md)
+* [PlantUML 简介](https://plantuml.com/zh/)
 
 ## Markdown
 
@@ -84,6 +121,7 @@
 * [gitbook 3.2.3及之后流程图解决方案](https://blog.csdn.net/Curryth_/article/details/107333300)
 * [Markdown 中文文档](https://markdown-zh.readthedocs.io/en/latest/)
 * [markdown编辑](https://zybuluo.com/mdeditor)
+* [学生、工作人士如何才能更优雅地记笔记、写文档?（Markdown教程，详细到超乎你想象）](https://www.bilibili.com/read/cv5731265/)
 
 ## 简历
 
@@ -99,11 +137,14 @@
 * [iOS归档看这篇就够了](https://www.jianshu.com/p/185e9ea021a2)
 * [fastlane官网](https://fastlane.tools)
 * [好看的博客](https://yimouleng.com/)
+* [bawn](https://bawn.github.io/)
+* [YouXianMing](https://www.cnblogs.com/YouXianMing/)
 
 ## Cocoapods 
 
 * [CocoaPods安装方法-2020.05.25](https://www.jianshu.com/p/f43b5964f582)
 * [XCode 10中修改cocoapods中的源码编译不生效的解决方法](https://blog.csdn.net/feosun/article/details/85097456)
+* [Cocoapods整理（三）——编写podspec文件](https://segmentfault.com/a/1190000012269307)
 
 ## 装机步骤
 
@@ -117,6 +158,7 @@
 8. [mac管理及更新node版本](https://www.jianshu.com/p/c50d900fb68c)
 9. [安装Gitbook](https://www.bilibili.com/read/cv6932054)
 10. [mac软件网址](https://www.macbl.com/)
+11. [xcode下载](https://developer.apple.com/download/all/?q=xcode)
 
 ## 开源项目
 
@@ -132,6 +174,35 @@
 * [Swift-30-Projects](https://github.com/soapyigu/Swift-30-Projects)
 * [iOSKeyPointExploration](https://github.com/huang303513/iOSKeyPointExploration)
 * [语法糖](https://github.com/devxoul/Then)
+* [TTBaseUIKit](https://github.com/tqtuan1201/TTBaseUIKit/tree/58135b48d25f2e36ac42f73f144561aa09b99dc3/TTBaseUIKit/TTBaseUIKit/Support)
+* [GAppFramework](https://github.com/gzd0071/GAppFramework)
+* [SwiftTheme](https://github.com/wxxsw/SwiftTheme)
+* [NerdyUI](https://github.com/nerdycat/NerdyUI)
+* [Tangram-iOS](https://github.com/alibaba/Tangram-iOS)
+* [YNSearch](https://github.com/younatics/YNSearch)
+* [IOS网络请求的简单封装设计](https://www.jianshu.com/p/952668882665)
+* [YTKNetwork](https://github.com/yuantiku/YTKNetwork)
+* [QMUI_iOS](https://github.com/Tencent/QMUI_iOS)
+* [代码分类](http://code.cocoachina.com/)
+* [好库编程网](http://www.okbase.net/)
+* [SDUserDefaults](https://github.com/wang82426107/SDUserDefaults)
+* [LCHelper](https://github.com/iLiuChang/LCHelper)
+* [geniusDemo](https://github.com/L-vinCent/geniusDemo)
+
+## MVVM 
+
+* [MVVMReactiveCocoa](https://github.com/leichunfeng/MVVMReactiveCocoa)
+* [BigShow1949](https://github.com/BigShow1949/BigShow1949)
+* [Monkey](https://github.com/coderyi/Monkey)
+* [MHDevelopExample_Objective_C](https://github.com/CoderMikeHe/MHDevelopExample_Objective_C)
+* [MVVMDemo](https://github.com/coderyi/MVVMDemo/tree/master/MVVMDemo)
+
+## 地图
+
+* [map](https://github.com/HPTears/map)
+* [BMKLocationKit](https://github.com/HimmaHorde/BMKLocationKit/tree/master/framework/BMKLocationKit.framework)
+* [iOS在APP中调用第三方地图地图（苹果,高德，百度，腾讯）](https://blog.csdn.net/liuyinghui523/article/details/84339538)
+* [经纬度查询](https://jingweidu.bmcx.com/)
 
 ## 学习
 
@@ -140,11 +211,14 @@
 * [苹果官方教程swiftui](https://developer.apple.com/tutorials/swiftui)
 * [潭州课堂](https://www.shiguangkey.com)
 * [swift51](http://www.swift51.com/)
+* [csdn](https://www.csdn.net/)
 
 ## 苹果官方文档
 
 * [苹果官方文档-cn](https://developer.apple.com/cn/documentation/)
 * [苹果官方文档-en](https://developer.apple.com/documentation)
+* [ios-resolution](https://ios-resolution.com/)
+* [查询序列号](https://checkcoverage.apple.com/)
 
 ## SwiftUI
 
@@ -159,12 +233,6 @@
 ## OpenGL
 
 * [iOS-OpenGL-Tutorials](https://gitee.com/chenchangqing/iOS-OpenGL-Tutorials)
-
-## Git
-
-* [git如何删除远端不存在的本地分支？](https://www.cnblogs.com/shengulong/p/10398617.html)
-* [关于Git协作，除了知道merge，你可能还需要知道rebase](https://www.jianshu.com/p/3081e33a6136)
-* [git写错分支，如何将一个分支上的修改转移到另一个分支上](https://www.jianshu.com/p/6b4cd8221436)
 
 ## RxSwift
 
@@ -226,20 +294,18 @@
 * [iOS Swift 判断手机机型 已更新 至iPhone12](https://cloud.tencent.com/developer/article/1735194)
 * [iOS判断刘海屏幕机型](https://www.jianshu.com/p/130fd4d54537)
 * [所有机型](https://www.theiphonewiki.com/wiki/Models)
+* [iOS 设置圆角、指定位置圆角及 iOS 11圆角设置](https://www.jianshu.com/p/7bc7246ef92a)
+* [iOS9 Programming - Autolayout (I)](https://www.jianshu.com/p/56e0cd434e7b)
 
 ## 脚本
 
 sudo pip install openpyxl
 
-## Git
-
-* [Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
-* [git rebase 还是 merge的使用场景最通俗的解释](https://www.jianshu.com/p/4079284dd970)
-
 ## 快捷键
 
 * 注释：command+option+/
 * 打开xcode文档：command+shift+0
+* [现在在Xcode中切换标签的快捷方式？](https://www.5axxw.com/questions/content/ohjknz)
 
 ## Flutter
 
@@ -277,7 +343,43 @@ sudo pip install openpyxl
 * [移动 H5 首屏秒开优化方案探讨](https://juejin.cn/post/6844903565744406536#heading-8)
 * [JWNetAutoCache](https://github.com/dengjunwen/JWNetAutoCache)
 
-# tableView
+## tableView
 
 * [https://www.jianshu.com/p/af4bc69839d8](https://www.jianshu.com/p/af4bc69839d8)
 * [优化UITableViewCell高度计算的那些事](http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/)
+
+## 代码规范
+
+* [《Effective Objective-C》干货三部曲（二）：规范篇](https://cloud.tencent.com/developer/article/1199334?from=article.detail.1485152)
+* [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
+
+## 单元测试
+
+* [iOS 单元测试--异步测试](https://www.jianshu.com/p/a4ffa780d347)
+* [OC实现类似泛型效果的json数据解析](https://www.jianshu.com/p/9cdd9ccd82c5/)
+
+## 架构
+
+* [iOS应用架构谈 网络层设计方案](https://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html)
+* [iOS - AFNetWorking打印请求时的相关信息](https://www.jianshu.com/p/6c5ffb43dbc2)
+
+## 一键登录
+
+* [IOS客户端接入](https://help.aliyun.com/document_detail/144186.html)
+
+## gcd
+
+* [iOS GCD处理多个网络请求并发问题](http://blog.sina.com.cn/s/blog_147d0371c0102wi1p.html)
+* [iOS-GCD的串行队列和并行队列的任务及实现](https://blog.csdn.net/c386890506/article/details/51171898)
+* [iOS GCD线程同步以及AFNetworking多次请求线程依赖](https://www.jianshu.com/p/efac15d882c7)
+
+## c++
+
+* [C++ 中的 inline 用法](https://www.runoob.com/w3cnote/cpp-inline-usage.html)
+* [在字符串string中实现一个判断函数，该函数功能是统计某一字符串类对象(仅由单词和空格组成)有多少个单词](https://zhidao.baidu.com/question/1692367994672918668.html?qbl=relate_question_0)
+
+## IM聊天
+
+* [环信·IM](https://www.easemob.com/product/im)
+* [环信·iOS SDK 快速集成](https://docs-im.easemob.com/im/ios/sdk/prepare#ios_sdk_%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90)
+* [环信·集成 iOS SDK 前的准备工作](https://docs-im.easemob.com/im/ios/sdk/import#ios_sdk_介绍)
