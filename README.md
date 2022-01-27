@@ -35,6 +35,7 @@
 * [iOS10 NSLog限制为1024个字符字符串](http://cn.voidcc.com/question/p-mftjbjql-qp.html)
 * [Auto property synthesis will not synthesize property ‘delegate’;it will be implemented by its superc](https://blog.csdn.net/jiadabin/article/details/51698143)
 * [NSPredicate 谓词](https://cnbin.github.io/blog/2015/11/23/nspredicate-wei-ci/)
+* [更改 macOS 用户帐户和个人文件夹的名称](https://support.apple.com/zh-cn/HT201548)
 
 ## ScrollView嵌套
 
@@ -383,3 +384,12 @@ sudo pip install openpyxl
 * [环信·IM](https://www.easemob.com/product/im)
 * [环信·iOS SDK 快速集成](https://docs-im.easemob.com/im/ios/sdk/prepare#ios_sdk_%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90)
 * [环信·集成 iOS SDK 前的准备工作](https://docs-im.easemob.com/im/ios/sdk/import#ios_sdk_介绍)
+
+## 电影
+
+* [你的名字](https://www.66s.cc/donghuapian/2841.html)
+
+## 后端
+
+* [docker](https://blog.csdn.net/adminBfl/article/details/109615329)
+* [腾讯云](https://cloud.tencent.com/)
