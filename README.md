@@ -61,6 +61,7 @@
 * [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
 * [iOS开发之字符串(NSString)的拼接](https://blog.csdn.net/ziyuzhiye/article/details/77963046)
 * [iOS - NSDate分类-判断时间是否为今天,昨天,一周内,年月日](https://blog.csdn.net/coderMy/article/details/54233754)
+* [IOS 保留小数点后几位](https://blog.csdn.net/ysq147310/article/details/22042797)
 * [Swift开发小技巧系列 - 浮点型数据的四舍五入](https://www.jianshu.com/p/73c36740bd0b)
 * [UIPresentationController简介](https://blog.csdn.net/ideaspress/article/details/51177934)
 
@@ -72,6 +73,7 @@
 ## iOS·多线程
 
 * [实现自定义NSOperation](https://www.jianshu.com/p/c1ad47e61c0b)
+* [开始使用Operation Queue吧](http://shinancao.cn/2019/06/18/iOS-NSOperation/)
 
 ## iOS·性能优化
 
@@ -189,6 +191,7 @@
 * [SDUserDefaults](https://github.com/wang82426107/SDUserDefaults)
 * [LCHelper](https://github.com/iLiuChang/LCHelper)
 * [geniusDemo](https://github.com/L-vinCent/geniusDemo)
+* [2018 iOS 三方库(仅供方面查看)](https://www.jianshu.com/p/e56d98a43e7e)
 
 ## MVVM 
 
@@ -393,3 +396,9 @@ sudo pip install openpyxl
 
 * [docker](https://blog.csdn.net/adminBfl/article/details/109615329)
 * [腾讯云](https://cloud.tencent.com/)
+
+
+<div style="margin: 20px;">
+    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
+            style="height: 20px;">沪ICP备2022002183号-1</a >
+</div>
