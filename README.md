@@ -103,6 +103,7 @@
 * [时间戳](https://tool.lu/timestamp/)cuo
 * [google play store](https://www.uphezi.com/access-google-play-store-china/)
 * [颜色代码表](https://www.5tu.cn/colors/yansedaimabiao.html)
+* [阿里网盘资源](https://wpxz.org/)
 
 ## Gitbook
 
@@ -397,8 +398,13 @@ sudo pip install openpyxl
 * [docker](https://blog.csdn.net/adminBfl/article/details/109615329)
 * [腾讯云](https://cloud.tencent.com/)
 
+## 算法
+
+* [算法学习笔记（目录）](https://zhuanlan.zhihu.com/p/105467597)
+* [菜鸟算法](https://www.runoob.com/w3cnote_genre/algorithm)
 
 <div style="margin: 20px;">
     <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
             style="height: 20px;">沪ICP备2022002183号-1</a >
 </div>
+
