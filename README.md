@@ -36,6 +36,7 @@
 * [Auto property synthesis will not synthesize property ‘delegate’;it will be implemented by its superc](https://blog.csdn.net/jiadabin/article/details/51698143)
 * [NSPredicate 谓词](https://cnbin.github.io/blog/2015/11/23/nspredicate-wei-ci/)
 * [更改 macOS 用户帐户和个人文件夹的名称](https://support.apple.com/zh-cn/HT201548)
+* [苹果 iOS 13 新增的 sign with Apple API 是如何实现隐私保护的？](https://www.zhihu.com/question/327761893/answer/714031255)
 
 ## ScrollView嵌套
 
