@@ -224,4 +224,7 @@
 * 重拾服务端
     * [域名的注册及备案](重拾服务端/域名的注册及备案.md)
     * [Java开发工具](重拾服务端/Java开发工具.md)
+* FFmpeg
+    * [相关链接](FFmpeg/相关链接.md)
+    * [1.编译FFmpeg库](FFmpeg/1_编译FFmpeg库.md)
 
