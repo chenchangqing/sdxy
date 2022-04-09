@@ -79,6 +79,8 @@
 
 * [iOS 关于后台持续运行](https://www.jianshu.com/p/47ff7c239ba2)
 * [iOS性能优化](https://www.jianshu.com/p/4e9c6a048f6f)
+* [iOS按钮倒计时在进入后台不继续计时的处理](https://blog.csdn.net/weixin_33816611/article/details/91928414)
+* [iOS 后台数据处理 background fetch](https://blog.csdn.net/chenhening/article/details/43197937)
 
 ## 动画
 
