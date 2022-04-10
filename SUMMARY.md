@@ -151,9 +151,6 @@
     * [1.使用shell打包](持续化集成CI/01_使用shell打包.md)
     * [2.使用fastlane打包](持续化集成CI/02_使用fastlane打包.md)
     * [3.使用jenkins打包](持续化集成CI/03_使用jenkins打包.md)
-
-* [iOS后台任务处理](iOS后台任务处理.md)
-
 * 安全攻防
     * [1.常用工具](安全攻防/01_常用工具.md)
     * [2.MonkeyDev](安全攻防/02_MonkeyDev.md)
