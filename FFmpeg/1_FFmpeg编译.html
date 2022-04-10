@@ -3280,7 +3280,7 @@
 <h2 id="&#x4E00;&#x3001;&#x4E0B;&#x8F7D;&#x97F3;&#x89C6;&#x9891;&#x6846;&#x67B6;">&#x4E00;&#x3001;&#x4E0B;&#x8F7D;&#x97F3;&#x89C6;&#x9891;&#x6846;&#x67B6;</h2>
 <h3 id="1-&#x4E0A;&#x7F51;&#x4E0B;&#x8F7D;">1. &#x4E0A;&#x7F51;&#x4E0B;&#x8F7D;</h3>
 <p>&#x4E0B;&#x8F7D;&#x7F51;&#x5740;&#xFF1A;<a href="http://www.ffmpeg.org/download.html" target="_blank">http://www.ffmpeg.org/download.html</a></p>
-<h3 id="2-&#x901A;&#x8FC7;shell&#x811A;&#x672C;&#x4E0B;&#x8F7D;&#x97F3;&#x89C6;&#x9891;&#x6846;&#x67B6;">2. &#x901A;&#x8FC7;Shell&#x811A;&#x672C;&#x4E0B;&#x8F7D;&#x97F3;&#x89C6;&#x9891;&#x6846;&#x67B6;</h3>
+<h3 id="2-shell&#x811A;&#x672C;&#x4E0B;&#x8F7D;">2. Shell&#x811A;&#x672C;&#x4E0B;&#x8F7D;</h3>
 <p>1) &#x4E0B;&#x8F7D;&#x547D;&#x4EE4;curl</p>
 <p>&#x5B83;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;http\ftp&#x7B49;&#x7B49;&#x8FD9;&#x6837;&#x7684;&#x7F51;&#x7EDC;&#x65B9;&#x5F0F;&#x4E0B;&#x8F7D;&#x548C;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#xFF08;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5F3A;&#x5927;&#x7F51;&#x7EDC;&#x5DE5;&#x5177;&#xFF09;&#x3002;</p>
 <p>2&#xFF09;&#x89E3;&#x538B;&#x547D;&#x4EE4;tar</p>
@@ -3289,21 +3289,8 @@
 <li>-x &#x8868;&#x793A;&#xFF1A;&#x89E3;&#x538B;&#x6587;&#x4EF6;&#x9009;&#x9879;&#xFF0C;</li>
 <li>-j &#x8868;&#x793A;&#xFF1A;&#x662F;&#x5426;&#x9700;&#x8981;&#x89E3;&#x538B;bz2&#x538B;&#x7F29;&#x5305;&#xFF08;&#x538B;&#x7F29;&#x5305;&#x683C;&#x5F0F;&#x7C7B;&#x578B;&#x6709;&#x5F88;&#x591A;&#xFF1A;zip&#x3001;bz2&#x7B49;&#x7B49;&#x2026;&#xFF09;&#x3002;</li>
 </ul>
-<p>3&#xFF09;&#x811A;&#x672C;&#x4EE3;&#x7801;&#xFF1A;</p>
-<p><a href="ffmpeg-download.sh">ffmpeg-download.sh</a></p>
-<pre class="language-"><code>#!/bin/bash
-# &#x5E93;&#x540D;&#x79F0;
-source=&quot;ffmpeg-3.4&quot;
-# &#x4E0B;&#x8F7D;&#x8FD9;&#x4E2A;&#x5E93;
-if [ ! -r $source ]
-then
-    echo &apos;&#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;&apos;
-else
-    rm -rf $source
-fi
-echo &quot;&#x4E0B;&#x8F7D;FFmpeg&#x5E93;&#x2026;&#x2026;&quot;
-curl http://ffmpeg.org/releases/${source}.tar.bz2 | tar xj || exit 1
-</code></pre><h2 id="&#x4E8C;&#x3001;&#x7F16;&#x8BD1;&#x914D;&#x7F6E;&#x9009;&#x9879;">&#x4E8C;&#x3001;&#x7F16;&#x8BD1;&#x914D;&#x7F6E;&#x9009;&#x9879;</h2>
+<p>3&#xFF09;Shell&#x811A;&#x672C;&#xFF1A;<a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/download-ffmpeg.sh" target="_blank">download-ffmpeg.sh</a>&#x3002;</p>
+<h2 id="&#x4E8C;&#x3001;&#x7F16;&#x8BD1;&#x914D;&#x7F6E;&#x9009;&#x9879;">&#x4E8C;&#x3001;&#x7F16;&#x8BD1;&#x914D;&#x7F6E;&#x9009;&#x9879;</h2>
 <h3 id="1-&#x67E5;&#x770B;&#x9009;&#x9879;">1. &#x67E5;&#x770B;&#x9009;&#x9879;</h3>
 <p>&#x8FDB;&#x5165;FFmpeg&#x6846;&#x67B6;&#x5305;&#x4E2D;&#xFF0C;&#x6267;&#x884C;configure&#x547D;&#x4EE4;&#xFF1A;</p>
 <pre class="language-"><code>cd ffmpeg-3.4
@@ -3352,184 +3339,26 @@ themselves, not all their features will necessarily be usable by FFmpeg.</p>
 <h4 id="10&#xFF09;developer-options&#xFF1A;&#x5F00;&#x53D1;&#x8005;&#x6A21;&#x5F0F;">10&#xFF09;Developer options&#xFF1A;&#x5F00;&#x53D1;&#x8005;&#x6A21;&#x5F0F;</h4>
 <p> --disable-debug&#xFF1A;&#x7981;&#x7528;&#x8C03;&#x8BD5;</p>
 <p> --enable-debug=LEVEL&#xFF1A;&#x8C03;&#x8BD5;&#x7EA7;&#x522B;</p>
-<h2 id="&#x4E09;&#x3001;&#x7F16;&#x5199;&#x811A;&#x672C;&#x4EE3;&#x7801;">&#x4E09;&#x3001;&#x7F16;&#x5199;&#x811A;&#x672C;&#x4EE3;&#x7801;</h2>
-<h3 id="1-&#x5B8C;&#x6574;&#x811A;&#x672C;">1. &#x5B8C;&#x6574;&#x811A;&#x672C;</h3>
-<p><a href="ffmpeg-build.sh">ffmpeg-build.sh</a></p>
-<pre class="language-"><code>#!/bin/bash
-
-#1&#x3001;&#x9996;&#x5148;&#xFF1A;&#x5B9A;&#x4E49;&#x4E0B;&#x8F7D;&#x7684;&#x5E93;&#x540D;&#x79F0;
-source=&quot;ffmpeg-3.4&quot;
-
-#2&#x3001;&#x5176;&#x6B21;&#xFF1A;&#x5B9A;&#x4E49;&quot;.h/.m/.c&quot;&#x6587;&#x4EF6;&#x7F16;&#x8BD1;&#x7684;&#x7ED3;&#x679C;&#x76EE;&#x5F55;
-#&#x76EE;&#x5F55;&#x4F5C;&#x7528;&#xFF1A;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;.h/.m/.c&#x6587;&#x4EF6;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x7ED3;&#x679C;.o&#x6587;&#x4EF6;
-cache=&quot;cache&quot;
-
-#3&#x3001;&#x5B9A;&#x4E49;&quot;.a&quot;&#x9759;&#x6001;&#x5E93;&#x4FDD;&#x5B58;&#x76EE;&#x5F55;
-#pwd&#x547D;&#x4EE4;&#xFF1A;&#x8868;&#x793A;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x76EE;&#x5F55;
-staticdir=`pwd`/&quot;ffmpeg-3.4-target-iOS&quot;
-
-#4&#x3001;&#x6DFB;&#x52A0;FFmpeg&#x914D;&#x7F6E;&#x9009;&#x9879;-&gt;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;
-#Toolchain options:&#x5DE5;&#x5177;&#x94FE;&#x9009;&#x9879;&#xFF08;&#x6307;&#x5B9A;&#x6211;&#x4E48;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x5E73;&#x53F0;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;arm64&#x3001;x86&#x7B49;&#x7B49;&#x2026;&#xFF09;
-#--enable-cross-compile: &#x4EA4;&#x53C9;&#x7F16;&#x8BD1;
-#Developer options:&#x5F00;&#x53D1;&#x8005;&#x9009;&#x9879;
-#--disable-debug: &#x7981;&#x6B62;&#x4F7F;&#x7528;&#x8C03;&#x8BD5;&#x6A21;&#x5F0F;
-#Program options&#x9009;&#x9879;
-#--disable-programs:&#x7981;&#x7528;&#x7A0B;&#x5E8F;(&#x4E0D;&#x5141;&#x8BB8;&#x5EFA;&#x7ACB;&#x547D;&#x4EE4;&#x884C;&#x7A0B;&#x5E8F;)
-#Documentation options&#xFF1A;&#x6587;&#x6863;&#x9009;&#x9879;
-#--disable-doc&#xFF1A;&#x4E0D;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x6587;&#x6863;
-#Toolchain options&#xFF1A;&#x5DE5;&#x5177;&#x94FE;&#x9009;&#x9879;
-#--enable-pic&#xFF1A;&#x5141;&#x8BB8;&#x5EFA;&#x7ACB;&#x4E0E;&#x4F4D;&#x7F6E;&#x65E0;&#x5173;&#x4EE3;&#x7801;
-configure_flags=&quot;--enable-cross-compile --disable-debug --disable-programs --disable-doc --enable-pic&quot;
-
-#5&#x3001;&#x5B9A;&#x4E49;&#x9ED8;&#x8BA4;CPU&#x5E73;&#x53F0;&#x67B6;&#x6784;&#x7C7B;&#x578B;
-#arm64 armv7-&gt;&#x771F;&#x673A;-&gt;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;
-#x86_64 i386-&gt;&#x6A21;&#x62DF;&#x5668;-&gt;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;
-archs=&quot;arm64 armv7 x86_64 i386&quot;
-
-#6&#x3001;&#x6307;&#x5B9A;&#x6211;&#x4EEC;&#x7684;&#x8FD9;&#x4E2A;&#x5E93;&#x7F16;&#x8BD1;&#x7CFB;&#x7EDF;&#x7248;&#x672C;-&gt;iOS&#x7CFB;&#x7EDF;&#x4E0B;&#x7684;7.0&#x4EE5;&#x53CA;&#x4EE5;&#x4E0A;&#x7248;&#x672C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x9759;&#x6001;&#x5E93;
-targetversion=&quot;7.0&quot;
-
-#7&#x3001;&#x63A5;&#x53D7;&#x547D;&#x4EE4;&#x540E;&#x8F93;&#x5165;&#x53C2;&#x6570;
-#&#x6211;&#x662F;&#x52A8;&#x6001;&#x63A5;&#x53D7;&#x547D;&#x4EE4;&#x884C;&#x8F93;&#x5165;CPU&#x5E73;&#x53F0;&#x67B6;&#x6784;&#x7C7B;&#x578B;(&#x8F93;&#x5165;&#x53C2;&#x6570;&#xFF1A;&#x7F16;&#x8BD1;&#x6307;&#x5B9A;&#x7684;CPU&#x5E93;)
-if [ &quot;$*&quot; ]
-then
-    #&#x5B58;&#x5728;&#x8F93;&#x5165;&#x53C2;&#x6570;&#xFF0C;&#x4E5F;&#x5C31;&#x8BF4;&#xFF1A;&#x5916;&#x90E8;&#x6307;&#x5B9A;&#x9700;&#x8981;&#x7F16;&#x8BD1;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;
-    archs=&quot;$*&quot;
-fi
-
-#8&#x3001;&#x5B89;&#x88C5;&#x6C47;&#x7F16;&#x5668;-&gt;yasm
-#&#x5224;&#x65AD;&#x4E00;&#x4E0B;&#x662F;&#x5426;&#x5B58;&#x5728;&#x8FD9;&#x4E2A;&#x6C47;&#x7F16;&#x5668;
-#&#x76EE;&#x7684;&#xFF1A;&#x901A;&#x8FC7;&#x8F6F;&#x4EF6;&#x7BA1;&#x7406;&#x5668;(Homebrew)&#xFF0C;&#x7136;&#x540E;&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;&#xFF08;&#x6216;&#x8005;&#x66F4;&#x65B0;&#xFF09;&#x6211;&#x7684;&#x6C47;&#x7F16;&#x5668;
-#&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x5C31;&#x80FD;&#x591F;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#x6240;&#x6709;&#x7684;&#x64CD;&#x4F5C;
-#&#x9519;&#x8BEF;&#x4E00;&#xFF1A;`which` yasm
-#&#x6B63;&#x786E;&#x4E00;&#xFF1A;`which yasm`
-if [ ! `which yasm`  ]
-then
-    #Homebrew:&#x8F6F;&#x4EF6;&#x7BA1;&#x7406;&#x5668;
-    #&#x4E0B;&#x8F7D;&#x4E00;&#x4E2A;&#x8F6F;&#x4EF6;&#x7BA1;&#x7406;&#x5668;:&#x5B89;&#x88C5;&#x3001;&#x5378;&#x8F7D;&#x3001;&#x66F4;&#x65B0;&#x3001;&#x641C;&#x7D22;&#x7B49;&#x7B49;...
-    #&#x9519;&#x8BEF;&#x4E8C;&#xFF1A;`which` brew
-    #&#x6B63;&#x786E;&#x4E8C;&#xFF1A;`which brew`
-    if [ ! `which brew` ]
-    then
-        echo &quot;&#x5B89;&#x88C5;brew&quot;
-        ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; || exit 1
-    fi
-    echo &quot;&#x5B89;&#x88C5;yasm&quot;
-    #&#x6210;&#x529F;&#x4E86;
-    #&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;&#x8FD9;&#x4E2A;&#x6C47;&#x7F16;&#x5668;
-    #exit 1-&gt;&#x5B89;&#x88C5;&#x5931;&#x8D25;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x9000;&#x51FA;&#x7A0B;&#x5E8F;
-    brew install yasm || exit 1
-fi
-
-echo &quot;&#x5FAA;&#x73AF;&#x7F16;&#x8BD1;&quot;
-
-#9&#x3001;for&#x5FAA;&#x73AF;&#x7F16;&#x8BD1;FFmpeg&#x9759;&#x6001;&#x5E93;
-currentdir=`pwd`
-for arch in $archs
-do
-    echo &quot;&#x5F00;&#x59CB;&#x7F16;&#x8BD1;&quot;
-    #9.1&#x3001;&#x521B;&#x5EFA;&#x76EE;&#x5F55;
-    #&#x5728;&#x7F16;&#x8BD1;&#x7ED3;&#x679C;&#x76EE;&#x5F55;&#x4E0B;-&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x7684;&#x5E73;&#x53F0;&#x67B6;&#x6784;&#x7C7B;&#x578B;
-    mkdir -p &quot;$cache/$arch&quot;
-    #9.2&#x3001;&#x8FDB;&#x5165;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;
-    cd &quot;$cache/$arch&quot;
-
-    #9.3&#x3001;&#x914D;&#x7F6E;&#x7F16;&#x8BD1;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;-&gt;&#x6307;&#x5B9A;&#x5F53;&#x524D;&#x7F16;&#x8BD1;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;
-    #&#x9519;&#x8BEF;&#x4E09;&#xFF1A;&quot;--arch $arch&quot;
-    #&#x6B63;&#x786E;&#x4E09;&#xFF1A;&quot;-arch $arch&quot;
-    archflags=&quot;-arch $arch&quot;
-
-    #9.4&#x3001;&#x5224;&#x5B9A;&#x4E00;&#x4E0B;&#x4F60;&#x5230;&#x5E95;&#x662F;&#x7F16;&#x8BD1;&#x7684;&#x662F;&#x6A21;&#x62DF;&#x5668;.a&#x9759;&#x6001;&#x5E93;&#xFF0C;&#x8FD8;&#x662F;&#x771F;&#x673A;.a&#x9759;&#x6001;&#x5E93;
-    if [ &quot;$arch&quot; = &quot;i386&quot; -o &quot;$arch&quot; = &quot;x86_64&quot; ]
-    then
-        #&#x6A21;&#x62DF;&#x5668;
-        platform=&quot;iPhoneSimulator&quot;
-        #&#x652F;&#x6301;&#x6700;&#x5C0F;&#x7CFB;&#x7EDF;&#x7248;&#x672C;-&gt;iOS&#x7CFB;&#x7EDF;
-        archflags=&quot;$archflags -mios-simulator-version-min=$targetversion&quot;
-    else
-        #&#x771F;&#x673A;(mac&#x3001;iOS&#x90FD;&#x652F;&#x6301;)
-        platform=&quot;iPhoneOS&quot;
-        #&#x652F;&#x6301;&#x6700;&#x5C0F;&#x7CFB;&#x7EDF;&#x7248;&#x672C;-&gt;iOS&#x7CFB;&#x7EDF;
-        archflags=&quot;$archflags -mios-version-min=$targetversion -fembed-bitcode&quot;
-        #&#x6CE8;&#x610F;:&#x4F18;&#x5316;&#x5904;&#x7406;(&#x53EF;&#x6709;&#x53EF;&#x65E0;)
-        #&#x5982;&#x679C;&#x67B6;&#x6784;&#x7C7B;&#x578B;&#x662F;&quot;arm64&quot;&#xFF0C;&#x90A3;&#x4E48;
-        if [ &quot;$arch&quot; = &quot;arm64&quot; ]
-        then
-            #GNU&#x6C47;&#x7F16;&#x5668;&#xFF08;GNU Assembler&#xFF09;&#xFF0C;&#x7B80;&#x79F0;&#x4E3A;GAS
-            #GASPP-&gt;&#x6C47;&#x7F16;&#x5668;&#x9884;&#x5904;&#x7406;&#x7A0B;&#x5E8F;
-            #&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF1A;&#x5206;&#x6BB5;&#x9519;&#x8BEF;
-            #&#x901A;&#x4FD7;&#x4E00;&#x70B9;&#xFF1A;&#x5C31;&#x662F;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x65F6;,&#x53D8;&#x91CF;&#x8BBF;&#x95EE;&#x8D8A;&#x754C;&#x4E00;&#x7C7B;&#x7684;&#x95EE;&#x9898;
-            EXPORT=&quot;GASPP_FIX_XCODE5=1&quot;
-        fi
-    fi
-
-
-    #10&#x3001;&#x6B63;&#x5F0F;&#x7F16;&#x8BD1;
-    #tr&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x5BF9;&#x6765;&#x81EA;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x7684;&#x5B57;&#x7B26;&#x8FDB;&#x884C;&#x66FF;&#x6362;&#x3001;&#x538B;&#x7F29;&#x548C;&#x5220;&#x9664;
-    #&apos;[:upper:]&apos;-&gt;&#x5C06;&#x5C0F;&#x5199;&#x8F6C;&#x6210;&#x5927;&#x5199;
-    #&apos;[:lower:]&apos;-&gt;&#x5C06;&#x5927;&#x5199;&#x8F6C;&#x6210;&#x5C0F;&#x5199;
-    #&#x5C06;platform-&gt;&#x8F6C;&#x6210;&#x5927;&#x5199;&#x6216;&#x8005;&#x5C0F;&#x5199;
-    XCRUN_SDK=`echo $platform | tr &apos;[:upper:]&apos; &apos;[:lower:]&apos;`
-    #&#x7F16;&#x8BD1;&#x5668;-&gt;&#x7F16;&#x8BD1;&#x5E73;&#x53F0;
-    CC=&quot;xcrun -sdk $XCRUN_SDK clang&quot;
-
-    #&#x67B6;&#x6784;&#x7C7B;&#x578B;-&gt;arm64
-    if [ &quot;$arch&quot; = &quot;arm64&quot; ]
-    then
-        #&#x97F3;&#x89C6;&#x9891;&#x9ED8;&#x8BA4;&#x4E00;&#x4E2A;&#x7F16;&#x8BD1;&#x547D;&#x4EE4;
-        #preprocessor.pl&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x7F16;&#x8BD1;FFmpeg-&gt;arm64&#x4F4D;&#x9759;&#x6001;&#x5E93;
-        AS=&quot;gas-preprocessor.pl -arch aarch64 -- $CC&quot;
-    else
-        #&#x9ED8;&#x8BA4;&#x7F16;&#x8BD1;&#x5E73;&#x53F0;
-        AS=&quot;$CC&quot;
-    fi
-
-    #&#x76EE;&#x5F55;&#x627E;&#x5230;FFmepg&#x7F16;&#x8BD1;&#x6E90;&#x4EE3;&#x7801;&#x76EE;&#x5F55;-&gt;&#x8BBE;&#x7F6E;&#x7F16;&#x8BD1;&#x914D;&#x7F6E;-&gt;&#x7F16;&#x8BD1;FFmpeg&#x6E90;&#x7801;
-    #--target-os:&#x76EE;&#x6807;&#x7CFB;&#x7EDF;-&gt;darwin(mac&#x7CFB;&#x7EDF;&#x65E9;&#x8D77;&#x7248;&#x672C;&#x540D;&#x5B57;)
-    #darwin:&#x662F;mac&#x7CFB;&#x7EDF;&#x3001;iOS&#x7CFB;&#x7EDF;&#x7956;&#x5B97;
-    #--arch:CPU&#x5E73;&#x53F0;&#x67B6;&#x6784;&#x7C7B;&#x578B;
-    #--cc&#xFF1A;&#x6307;&#x5B9A;&#x7F16;&#x8BD1;&#x5668;&#x7C7B;&#x578B;&#x9009;&#x9879;
-    #--as:&#x6C47;&#x7F16;&#x7A0B;&#x5E8F;
-    #$configure_flags&#x6700;&#x521D;&#x914D;&#x7F6E;
-    #--extra-cflags
-    #--prefix&#xFF1A;&#x9759;&#x6001;&#x5E93;&#x8F93;&#x51FA;&#x76EE;&#x5F55;
-    TMPDIR=${TMPDIR/%\/} $currentdir/$source/configure \
-        --target-os=darwin \
-        --arch=$arch \
-        --cc=&quot;$CC&quot; \
-        --as=&quot;$AS&quot; \
-        $configure_flags \
-        --extra-cflags=&quot;$archflags&quot; \
-        --extra-ldflags=&quot;$archflags&quot; \
-        --prefix=&quot;$staticdir/$arch&quot; \
-        || exit 1
-
-    echo &quot;&#x6267;&#x884C;&#x4E86;&quot;
-
-    #&#x89E3;&#x51B3;&#x95EE;&#x9898;-&gt;&#x5206;&#x6BB5;&#x9519;&#x8BEF;&#x95EE;&#x9898;
-    #&#x5B89;&#x88C5;-&gt;&#x5BFC;&#x51FA;&#x9759;&#x6001;&#x5E93;(&#x7F16;&#x8BD1;.a&#x9759;&#x6001;&#x5E93;)
-    #&#x6267;&#x884C;&#x547D;&#x4EE4;
-    make -j3 install $EXPORT || exit 1
-    #&#x56DE;&#x5230;&#x4E86;&#x6211;&#x4EEC;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x76EE;&#x5F55;
-    cd $currentdir
-done
-</code></pre><h3 id="2-&#x4F7F;&#x7528;&#x6B65;&#x9AA4;">2. &#x4F7F;&#x7528;&#x6B65;&#x9AA4;</h3>
+<h2 id="&#x4E09;&#x3001;ios&#x5E73;&#x53F0;&#x7F16;&#x8BD1;">&#x4E09;&#x3001;iOS&#x5E73;&#x53F0;&#x7F16;&#x8BD1;</h2>
+<h3 id="1-shell&#x811A;&#x672C;">1. Shell&#x811A;&#x672C;</h3>
+<p><a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/ios-build-ffmpeg.sh" target="_blank">ios-build-ffmpeg.sh</a></p>
+<h3 id="2-&#x4F7F;&#x7528;&#x6B65;&#x9AA4;">2. &#x4F7F;&#x7528;&#x6B65;&#x9AA4;</h3>
 <h4 id="1&#xFF09;&#x4E0B;&#x8F7D;&#x6E90;&#x7801;">1&#xFF09;&#x4E0B;&#x8F7D;&#x6E90;&#x7801;</h4>
-<p>&#x5148;&#x4F7F;&#x7528;ffmpeg-download.sh&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5;ffmpeg-3.4&#x4E3A;&#x4F8B;&#x3002;</p>
+<p><code>sh download-ffmpeg.sh</code>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5;ffmpeg-3.4&#x4E3A;&#x4F8B;&#x3002;</p>
 <h4 id="2&#xFF09;&#x5B89;&#x88C5;gas-preprocessor">2&#xFF09;&#x5B89;&#x88C5;gas-preprocessor</h4>
 <p>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7684;<a href="https://github.com/libav/gas-preprocessor" target="_blank">gas-preprocessor.pl</a>&#xFF0C;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;</p>
 <pre class="language-"><code>cd gas-preprocessor directory
 sudo cp -f gas-preprocessor.pl /usr/local/bin/
 chmod 777 /usr/local/bin/gas-preprocessor.pl
-</code></pre><p><strong>&#x95EE;&#x9898;</strong>&#xFF1A;&#x7F16;&#x8BD1; FFmpeg&#xFF0C;&#x6267;&#x884C; ffmpeg-build.sh &#x62A5;&#x9519;&quot;GNU assembler not found, install/update gas-preprocessor&quot;&#x3002;</p>
-<p>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;&#x6211;&#x7528;Github&#x6700;&#x65B0;&#x7684;gas-preprocessor.pl&#xFF0C;&#x6267;&#x884C;ffmpeg-build.sh&#x811A;&#x672C;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x8FD9;&#x91CC;&#x7ED9;&#x51FA;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x6210;&#x529F;&#x7684;<a href="gas-preprocessor.pl">gas-preprocessor.pl</a>&#x3002;</p>
+</code></pre><p><strong>&#x95EE;&#x9898;</strong>&#xFF1A;&#x7F16;&#x8BD1;FFmpeg&#xFF0C;&#x6267;&#x884C; ffmpeg-build.sh &#x62A5;&#x9519;&quot;GNU assembler not found, install/update gas-preprocessor&quot;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;&#x6211;&#x7528;Github&#x6700;&#x65B0;&#x7684;gas-preprocessor.pl&#xFF0C;&#x6267;&#x884C;ffmpeg-build.sh&#x811A;&#x672C;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x8FD9;&#x91CC;&#x7ED9;&#x51FA;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x6210;&#x529F;&#x7684;<a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/gas-preprocessor.pl" target="_blank">gas-preprocessor.pl</a>&#x3002;</p>
 <h4 id="3&#xFF09;&#x6267;&#x884C;&#x7F16;&#x8BD1;">3&#xFF09;&#x6267;&#x884C;&#x7F16;&#x8BD1;</h4>
 <p>a) &#x9ED8;&#x8BA4;&#x5206;&#x522B;&#x7F16;&#x8BD1;arm64&#x3001;armv7&#x3001;i386&#x3001;x86_64&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre class="language-"><code>sh ffmpeg-build.sh
+<pre class="language-"><code>sh ios-build-ffmpeg.sh
 </code></pre><p>b) &#x6307;&#x5B9A;&#x67B6;&#x6784;&#x7F16;&#x8BD1;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;arm64&#x3001;armv7&#x3001;i386&#x3001;x86_64&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre class="language-"><code>sh ffmpeg-build.sh arm64
+<pre class="language-"><code>sh ios-build-ffmpeg arm64
 </code></pre><p>c) &#x6307;&#x5B9A;armv7&#x7F16;&#x8BD1;&#x65F6;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF0C;&#x5F85;&#x89E3;&#x51B3;&#xFF1A;</p>
-<pre class="language-"><code>sh ffmpeg-build.sh armv7
+<pre class="language-"><code>sh ios-build-ffmpeg armv7
 
 AS  libavcodec/arm/aacpsdsp_neon.o
 src/libavutil/arm/asm.S:50:9: error: unknown directive
@@ -3537,8 +3366,31 @@ src/libavutil/arm/asm.S:50:9: error: unknown directive
         ^
 make: *** [libavcodec/arm/aacpsdsp_neon.o] Error 1
 make: *** Waiting for unfinished jobs....
+</code></pre><h2 id="&#x56DB;&#x3001;android&#x5E73;&#x53F0;&#x7F16;&#x8BD1;">&#x56DB;&#x3001;Android&#x5E73;&#x53F0;&#x7F16;&#x8BD1;</h2>
+<h3 id="1-shell&#x811A;&#x672C;">1. Shell&#x811A;&#x672C;</h3>
+<p><a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/android-build-ffmpeg.sh" target="_blank">android-build-ffmpeg.sh</a></p>
+<h3 id="2-&#x4F7F;&#x7528;&#x6B65;&#x9AA4;">2. &#x4F7F;&#x7528;&#x6B65;&#x9AA4;</h3>
+<h4 id="1-&#x4E0B;&#x8F7D;&#x6E90;&#x7801;">1) &#x4E0B;&#x8F7D;&#x6E90;&#x7801;</h4>
+<p><code>sh download-ffmpeg.sh</code>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5;ffmpeg-3.4&#x4E3A;&#x4F8B;&#x3002;</p>
+<h4 id="2-&#x4E0B;&#x8F7D;ndk">2) &#x4E0B;&#x8F7D;ndk</h4>
+<p><a href="https://developer.android.google.cn/ndk/downloads/older_releases.html" target="_blank">https://developer.android.google.cn/ndk/downloads/older_releases.html</a></p>
+<p>&#x6211;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x7684;&#x662F;<a href="https://dl.google.com/android/repository/android-ndk-r10e-darwin-x86_64.zip?hl=zh-cn" target="_blank">ndkr10e</a>&#x3002;</p>
+<h4 id="3-&#x4FEE;&#x6539;configure">3) &#x4FEE;&#x6539;configure</h4>
+<pre class="language-"><code># SLIBNAME_WITH_MAJOR=&apos;$(SLIBNAME).$(LIBMAJOR)&apos;
+# LIB_INSTALL_EXTRA_CMD=&apos;$$(RANLIB) &quot;$(LIBDIR)/$(LIBNAME)&quot;&apos;
+# SLIB_INSTALL_NAME=&apos;$(SLIBNAME_WITH_VERSION)&apos;
+# SLIB_INSTALL_LINKS=&apos;$(SLIBNAME_WITH_MAJOR) $(SLIBNAME)&apos;
+
+ The above code is modified as the following
+
+SLIBNAME_WITH_MAJOR=&apos;$(SLIBPREF)$(FULLNAME)-$(LIBMAJOR)$(SLIBSUF)&apos;
+LIB_INSTALL_EXTRA_CMD=&apos;$$(RANLIB) &quot;$(LIBDIR)/$(LIBNAME)&quot;&apos;
+SLIB_INSTALL_NAME=&apos;$(SLIBNAME_WITH_MAJOR)&apos;
+SLIB_INSTALL_LINKS=&apos;$(SLIBNAME)&apos;
+</code></pre><h4 id="4-&#x6267;&#x884C;&#x7F16;&#x8BD1;">4) &#x6267;&#x884C;&#x7F16;&#x8BD1;</h4>
+<pre class="language-"><code>sh android-build-ffmpeg.sh
 </code></pre><footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-04-10 14:37:33
+2022-04-11 03:34:00
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3583,7 +3435,7 @@ make: *** Waiting for unfinished jobs....
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.FFmpeg编译","level":"1.21.2","depth":2,"next":{"title":"2.FFmpeg集成","level":"1.21.3","depth":2,"path":"FFmpeg/2_FFmpeg集成.md","ref":"FFmpeg/2_FFmpeg集成.md","articles":[]},"previous":{"title":"相关链接","level":"1.21.1","depth":2,"path":"FFmpeg/相关链接.md","ref":"FFmpeg/相关链接.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/1_FFmpeg编译.md","mtime":"2022-04-10T06:37:33.090Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-10T06:38:13.013Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.FFmpeg编译","level":"1.21.2","depth":2,"next":{"title":"2.FFmpeg集成","level":"1.21.3","depth":2,"path":"FFmpeg/2_FFmpeg集成.md","ref":"FFmpeg/2_FFmpeg集成.md","articles":[]},"previous":{"title":"相关链接","level":"1.21.1","depth":2,"path":"FFmpeg/相关链接.md","ref":"FFmpeg/相关链接.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/1_FFmpeg编译.md","mtime":"2022-04-10T19:34:00.478Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-10T19:34:24.027Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
