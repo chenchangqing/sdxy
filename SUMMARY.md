@@ -223,5 +223,6 @@
     * [Java开发工具](重拾服务端/Java开发工具.md)
 * FFmpeg
     * [相关链接](FFmpeg/相关链接.md)
-    * [1.编译FFmpeg库](FFmpeg/1_编译FFmpeg库.md)
+    * [1.FFmpeg编译](FFmpeg/1_FFmpeg编译.md)
+    * [2.FFmpeg集成](FFmpeg/2_FFmpeg集成.md)
 

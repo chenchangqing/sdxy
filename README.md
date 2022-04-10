@@ -37,6 +37,7 @@
 * [NSPredicate 谓词](https://cnbin.github.io/blog/2015/11/23/nspredicate-wei-ci/)
 * [更改 macOS 用户帐户和个人文件夹的名称](https://support.apple.com/zh-cn/HT201548)
 * [苹果 iOS 13 新增的 sign with Apple API 是如何实现隐私保护的？](https://www.zhihu.com/question/327761893/answer/714031255)
+* [Xcode 11新建项目多了Scenedelegate](https://www.jianshu.com/p/25b37bd40cd7)
 
 ## ScrollView嵌套
 
@@ -417,6 +418,10 @@ sudo pip install openpyxl
 
 * [iOS开发－UITextView文字排版](https://www.cnblogs.com/tangyuanby2/p/7652085.html)
 * [UITextView换行问题解决办法](https://www.cnblogs.com/qiutangfengmian/p/5038717.html)
+
+## android studio
+
+* [用户指南](https://developer.android.com/studio/intro?hl=zh-cn)
 
 <div style="margin: 20px;">
     <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
