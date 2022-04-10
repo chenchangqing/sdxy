@@ -1,14 +1,8 @@
 # 2.FFmpeg集成
 
-[FFmpegCompiled](https://gitee.com/learnany/ffmpeg.git)
-
-工程路径：02 FFmpeg集成/FFmpegCompiled。
-
-库文件路径：01 FFmpeg编译/FFmpeg-3.4。
-
-工程默认没有库文件，需要自己拷贝到工程。
-
 ## 一、iOS集成FFmpeg
+
+[代码工程](https://gitee.com/learnany/ffmpeg/tree/master/02_ffmpeg_integrated/FFmpegCompiled/FFmpegCompiled)
 
 ### 1. 集成FFmpeg
 
@@ -121,4 +115,150 @@ console输出：
 ```
 ## 二、Android集成FFmpeg
 
-**未完待续**
+[代码工程](https://gitee.com/learnany/ffmpeg/tree/master/02_ffmpeg_integrated/AndroidFFmpegCompiled)
+
+### 1. 集成FFmpeg
+
+#### (1) 第一步：新建工程
+
+File->NewProject->Native C++->输入工程信息->Next->Finish。
+
+[三星手机开启开发者选项](https://publish.samsungsimulator.com/simulator/5e9b6c53-0b1e-499b-8096-9e3bb39502b8/#!topic)
+
+#### (2) 第二步：导入库文件。
+
+1) 项目选中Project模式->app->src->main->右键new->Directory->输入jniLibs->enter。
+
+2) 将准备好的库文件copy->选中刚才新建的jniLibs->paste。
+
+#### (3) 第三步：修改CMakeLists.txt
+
+1) app->src->main->cpp->双击CMakeLists.txt。
+
+2) 修改CMakeLists.txt。
+```c
+# FFMpeg配置
+# FFmpeg配置目录
+set(JNILIBS_DIR ${CMAKE_SOURCE_DIR}/../jniLibs)
+
+# 编解码(最重要的库)
+add_library(
+        avcodec
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avcodec
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavcodec.so)
+
+# 滤镜特效处理库
+add_library(
+        avfilter
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avfilter
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavfilter.so)
+
+# 封装格式处理库
+add_library(
+        avformat
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avformat
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavformat.so)
+
+# 工具库(大部分库都需要这个库的支持)
+add_library(
+        avutil
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avutil
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavutil.so)
+
+# 音频采样数据格式转换库
+add_library(
+        swresample
+        SHARED
+        IMPORTED)
+set_target_properties(
+        swresample
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libswresample.so)
+
+# 视频像素数据格式转换
+add_library(
+        swscale
+        SHARED
+        IMPORTED)
+set_target_properties(
+        swscale
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libswscale.so)
+
+add_library(
+        avdevice
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avdevice
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavdevice.so)
+
+add_library(
+        postproc
+        SHARED
+        IMPORTED)
+set_target_properties(
+        postproc
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libpostproc.so)
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+#判断编译器类型,如果是gcc编译器,则在编译选项中加入c++11支持
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+    message(STATUS "optional:-std=c++11")
+endif(CMAKE_COMPILER_IS_GNUCXX)
+
+#配置编译的头文件
+include_directories(${JNILIBS_DIR}/include)
+
+.
+.
+.
+
+target_link_libraries( # Specifies the target library.
+        myapplication avcodec swresample avfilter avformat avutil swscale avdevice postproc
+
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib})
+```
+#### (4) 配置CPU架构类型
+
+修改app->build.gradle：
+```c
+externalNativeBuild {
+    cmake {
+        cppFlags ''
+        abiFilters 'armeabi'
+    }
+}
+```
+发现编译失败，解决方法，修改为如下(
+[参考链接](https://blog.csdn.net/mqdxiaoxiao/article/details/99477072))：
+```
+defaultConfig {
+    ndk {
+        abiFilters 'armeabi-v7a'
+    }
+}
+```
+
+#### (5) 编译成功
