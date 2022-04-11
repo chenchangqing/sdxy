@@ -262,3 +262,128 @@ defaultConfig {
 ```
 
 #### (5) 编译成功
+
+### 2. 测试案例
+
+#### (1) 打印配置信息
+
+##### 1) 定义Java方法
+
+新建Java类FFmpegTest，定义ffmpegTestConfig方法：
+```java
+// 测试FFmpeg配置
+// native：标记这个方法是一个特殊方法，不是普通的java方法，而是用于与NDK进行交互的方法（C/C++语言交互）
+// 用native修饰方法，方法没有实现，具体的实现在C/C++里面。
+public static native void ffmpegTestConfig();
+```
+##### 2) 定义NDK方法
+
+修改native-lib.cpp。
+
+导入ffmpeg头文件，由于 FFmpeg 是使用 C 语言编写的，所在 C++ 文件中引用 #include 的时候，也需要包裹在 extern "C" { }，才能正确的编译。
+```
+#import <android/log.h>
+extern "C" {
+// 引入头文件
+// 核心库->音视频编解码库
+#include <libavcodec/avcodec.h>
+}
+```c
+在native-lib.cpp中新增Java方法ffmpegTestConfig的C++实现。
+```c
+extern "C" 
+JNIEXPORT void JNICALL
+Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegTestConfig(JNIEnv *env, jclass clazz) {
+    const char *configuration = avcodec_configuration();
+    __android_log_print(ANDROID_LOG_INFO, "ffmpeg configuration", "%s", configuration);
+}
+```
+之所以可以这么写是因为在CMakeLists.txt中有如下配置，将Java和C/C++进行关联。
+```
+add_library( # Sets the name of the library.
+        androidffmpegcompiled
+
+        # Sets the library as a shared library.
+        SHARED
+
+        # Provides a relative path to your source file(s).
+        native-lib.cpp)
+```
+##### 3) MainActivity增加测试代码。
+```
+protected void onCreate(Bundle savedInstanceState) {
+        ...
+        FFmpegTest.ffmpegTestConfig();
+}
+```
+##### 4) 运行工程，正确打印。
+```
+I/ffmpeg configuration: --prefix=/Users/chenchangqing/Documents/code/ffmpeg/01_ffmpeg_compiled/ffmpeg-3.4-target-android/armeabi-v7a --enable-shared --enable-gpl --disable-static --disable-doc --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver --disable-doc --disable-symver --enable-small --cross-prefix=/Users/chenchangqing/Documents/code/ffmpeg/01_ffmpeg_compiled/ndk/android-ndk-r10e/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi- --target-os=android --arch=armeabi-v7a --enable-cross-compile --sysroot=/Users/chenchangqing/Documents/code/ffmpeg/01_ffmpeg_compiled/ndk/android-ndk-r10e/platforms/android-18/arch-arm --extra-cflags='-Os -fpic -marm' --enable-pic
+```
+#### (2) 打开视频文件
+
+##### 1) 定义Java方法
+
+FFmpegTest定义ffmpegVideoOpenFile方法：
+```java
+// 测试FFmpeg打开视频
+// filePath:路径
+public static native void ffmpegVideoOpenFile(String filePath);
+```
+
+##### 2) 定义NDK方法
+
+导入ffmpeg头文件
+```c
+#import <android/log.h>
+extern "C" {
+// 引入头文件
+// 核心库->音视频编解码库
+#include <libavcodec/avcodec.h>
+// 导入封装格式库
+#import <libavformat/avformat.h>
+}
+```
+在native-lib.cpp中新增Java方法ffmpegVideoOpenFile的C++实现。
+```c
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegVideoOpenFile(JNIEnv *env, jclass clazz,
+                                                                  jstring file_path) {
+    // 第一步：注册组件
+    av_register_all();
+    // 第二步：打开封装格式文件
+    // 参数一：封装格式上下文
+    AVFormatContext* avformat_context = avformat_alloc_context();
+    // 参数二：打开视频地址->path
+    const char *url = env->GetStringUTFChars(file_path, NULL);
+    // 参数三：指定输入封装格式->默认格式
+    // 参数四：指定默认配置信息->默认配置
+    int avformat_open_input_reuslt = avformat_open_input(&avformat_context, url, NULL, NULL);
+    if (avformat_open_input_reuslt != 0){
+        // 失败了
+        // 获取错误信息
+        // char* error_info = NULL;
+        // av_strerror(avformat_open_input_reuslt, error_info, 1024);
+        __android_log_print(ANDROID_LOG_INFO, "ffmpeg", "打开文件失败");
+        return;
+    }
+
+    __android_log_print(ANDROID_LOG_INFO, "ffmpeg", "打开文件成功");
+}
+```
+##### 3) 增加权限
+
+在AndroidManifest.xml增加SD卡的读写权限。
+```
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+```
+##### 4) MainActivity增加测试代码。
+
+```java
+String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+String inFilePath = rootPath.concat("/FFmpeg/Test.mov");
+FFmpegTest.ffmpegVideoOpenFile(inFilePath);
+```
+
