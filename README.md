@@ -1,402 +1,391 @@
-# Introduction
-
-## iOS·问题汇总
-
-* [UITextField PlaceHolder居中显示问题](https://www.jianshu.com/p/54c206a8a326)
-* [iOS 10、设置导航栏全透明](https://www.jianshu.com/p/e97086eb1f15)
-* [两种iOS隐藏导航栏的正确方法](https://www.jb51.net/article/109743.htm)
-* [让超出父视图范围的子视图响应事件，在UIView范围外响应点击](https://www.cnblogs.com/WZLpq-home/p/5616309.html)
-* [iOS时间的处理](https://www.jianshu.com/p/0480a95098e2?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation)
-* [ios 消除 字符串 首尾空格](https://blog.csdn.net/reylen/article/details/8233353)
-* [iOS优美的侧滑返回FDFullscreenPopGesture](https://cloud.tencent.com/developer/article/1147674)
-* [iOS 设置屏幕常亮，延长休眠时间](https://www.jianshu.com/p/5ce5bd62f6a1)
-* [arm64、armv7、armv7s](https://www.jianshu.com/p/673aea016403)
-* [iOS获取手机型号](https://www.jianshu.com/p/4ac5627aa69f)
-* [Cannot find protocol definition for XXX](https://stackoverflow.com/questions/14993265/cannot-find-protocol-definition-for-xxx)
-* [ios – 奇怪的UIView-Encapsulated-Layout-Height错误](http://www.voidcn.com/article/p-hidevpfd-bsw.html)
-* [fix:iOS 13.1.3,textView点击回调3次](https://www.it1352.com/1848705.html)
-* ["Double-quoted" issue in latest version of Firebase](https://github.com/firebase/firebase-ios-sdk/issues/5987)
-* [rem布局在webview中页面错乱解决办法](https://www.jianshu.com/p/bb0c569d4536)
-* [解決UIWebView target = '_blank'不能彈出](https://www.jianshu.com/p/9ad906504645)
-* [Cocoapod with optional subspecs is not installing, if subspecs in the Podfile and another dependent Cocoapod podspec doesn't match](https://github.com/CocoaPods/CocoaPods/issues/10264)
-* [Can I have an init func in a protocol?](https://stackoverflow.com/questions/25694384/can-i-have-an-init-func-in-a-protocol)
-* [构造方法不触发didSet](https://blog.csdn.net/u011961093/article/details/107559944)
-* [iOS9中调用其他APP时出现This app is not allowed to query](https://blog.csdn.net/weixin_33726943/article/details/91741248)
-* [微信怎么唤起app?](https://segmentfault.com/q/1010000021544971)
-* [facebook链接中分享的图片](https://developers.facebook.com/docs/sharing/webmasters/images/)
-* [line链接中分享的图片](https://developers.line.biz/en/faq/#how-are-the-url-previews-generated)
-* [Swift - encode URL](https://stackoverflow.com/questions/24551816/swift-encode-url)
-* [Class Only Protocols In Swift 5](https://www.jianshu.com/p/a4b0f8094938)
-* [git删除远程分支报错:remote ref does not exist](https://blog.csdn.net/a460550542/article/details/111593362)
-* [ERROR | [iOS] unknown: Encountered an unknown error (/usr/bin/xcrun simctl list -j devices](https://blog.csdn.net/sunzhenglin2016/article/details/89278506)
-* [Mac解疑：处理 Adobe Genuine Software Integrity Service](https://keesenz.com/2020/873.html)
-* [assigning to ‘NSString *_strong’ from ‘const NSString’ discards qualifiers](https://www.jianshu.com/p/cd2d2db87634)
-* [iOS10 NSLog限制为1024个字符字符串](http://cn.voidcc.com/question/p-mftjbjql-qp.html)
-* [Auto property synthesis will not synthesize property ‘delegate’;it will be implemented by its superc](https://blog.csdn.net/jiadabin/article/details/51698143)
-* [NSPredicate 谓词](https://cnbin.github.io/blog/2015/11/23/nspredicate-wei-ci/)
-* [更改 macOS 用户帐户和个人文件夹的名称](https://support.apple.com/zh-cn/HT201548)
-* [苹果 iOS 13 新增的 sign with Apple API 是如何实现隐私保护的？](https://www.zhihu.com/question/327761893/answer/714031255)
-* [Xcode 11新建项目多了Scenedelegate](https://www.jianshu.com/p/25b37bd40cd7)
-
-## ScrollView嵌套
-
-* [iOS开发实战 - 解决UIScrollView嵌套滑动手势冲突](https://www.jianshu.com/p/8b87837d9e3a)
-* [LYEmbedScrollView](https://github.com/LustySwimmer/LYEmbedScrollView)
-* [JXCategoryView](https://github.com/pujiaxin33/JXCategoryView)
-* [MXParallaxHeader](https://github.com/maxep/MXParallaxHeader)
-* [关于嵌套滚动现实的讨论](https://bawn.github.io/2019/02/NestedScrolling/)
-
-## iOS·新知识
-
-* [使用 Swift Package Manager 集成依赖库](https://www.jianshu.com/p/8f50fe5da938)
-* [Swift化零为整：Reduce方法详解](https://www.jianshu.com/p/671760c26061)
-* [swift3.0中fileprivate，private使用](https://www.jianshu.com/p/3953ddb1d3ab/)
-* [Swift与泛型编程第四弹：类型擦除](https://www.jianshu.com/p/4cfe94238ce2)
-* [iOS 插件化开发(动态库研究)](https://gsl201600.github.io/2019/11/13/iOS%E6%8F%92%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/)
-* [在 iOS 上下载文件](https://firebase.google.com/docs/storage/ios/download-files?hl=zh-cn)
-* [iOS归档看这篇就够了](https://www.jianshu.com/p/185e9ea021a2)
-* [ios - Swift URL查询字符串获取参数](https://www.coder.work/article/2329020)
-* [Swift打印变量内存地址](https://www.jianshu.com/p/3c9df2705a64)
-* [swift小知识点之打印对象的地址](https://www.cnblogs.com/lxlx1798/articles/14790908.html)
-* [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
-* [swift5.0 字符串截取](https://www.jianshu.com/p/d1dcdb2bd561)
-* [iOS开发之字符串(NSString)的拼接](https://blog.csdn.net/ziyuzhiye/article/details/77963046)
-* [iOS - NSDate分类-判断时间是否为今天,昨天,一周内,年月日](https://blog.csdn.net/coderMy/article/details/54233754)
-* [IOS 保留小数点后几位](https://blog.csdn.net/ysq147310/article/details/22042797)
-* [Swift开发小技巧系列 - 浮点型数据的四舍五入](https://www.jianshu.com/p/73c36740bd0b)
-* [UIPresentationController简介](https://blog.csdn.net/ideaspress/article/details/51177934)
-
-## iOS·审核
-
-* [检查iOS项目中是否还有使用UIWebView](https://www.jianshu.com/p/3a645500d461)
-* [iOS APP内测邀请之TestFlight](https://blog.csdn.net/u010895119/article/details/79422023)
-
-## iOS·多线程
-
-* [实现自定义NSOperation](https://www.jianshu.com/p/c1ad47e61c0b)
-* [开始使用Operation Queue吧](http://shinancao.cn/2019/06/18/iOS-NSOperation/)
-
-## iOS·性能优化
-
-* [iOS 关于后台持续运行](https://www.jianshu.com/p/47ff7c239ba2)
-* [iOS性能优化](https://www.jianshu.com/p/4e9c6a048f6f)
-* [iOS按钮倒计时在进入后台不继续计时的处理](https://blog.csdn.net/weixin_33816611/article/details/91928414)
-* [iOS 后台数据处理 background fetch](https://blog.csdn.net/chenhening/article/details/43197937)
-
-## 动画
-
-* [iOS动画事物（CATransaction）](https://www.jianshu.com/p/5e02a8a56cc5)
-
-## 工具
-
-* [熊猫压缩](https://tinypng.com)
-* [远程](https://files02.tchspt.com/storage2/temp/Microsoft_Remote_Desktop_10.3.4_installer.pkg)
-* [udid获取](http://www.pgyer.com/tools/udid)
-* [JSON格式化](https://c.runoob.com/front-end/53)
-* [代码格式化插件](https://github.com/nicklockwood/SwiftFormat)
-* [App图标在线制作](https://www.pgyer.com/tools/appIcon)
-* [压缩一个PDF文件](https://www.ilovepdf.com/zh-cn/compress_pdf)
-* [UIImage 二分压缩图片](http://www.colinhwang.com/2016/07/30/compress-image/)
-* [Woodpecke‪r‬](https://apps.apple.com/cn/app/woodpecker/id1333548463?mt=12)
-* [图片裁剪](https://www.gaitubao.com/)
-* [临时邮箱、临时邮、临时电子邮箱、24小时邮箱](http://24mail.chacuo.net/)
-* [JSON格式化](https://c.runoob.com/front-end/53)
-* [Woodpecker使用](http://www.woodpeck.cn/cnusage.html)
-* [Xcode自定义代码块](https://www.jianshu.com/p/7e317cb54411/)
-* [时间戳](https://tool.lu/timestamp/)cuo
-* [google play store](https://www.uphezi.com/access-google-play-store-china/)
-* [颜色代码表](https://www.5tu.cn/colors/yansedaimabiao.html)
-* [阿里网盘资源](https://wpxz.org/)
-
-## Gitbook
-
-* [新版gitbook导出pdf](https://www.jianshu.com/p/9cbc9d3bfd16)
-* [gitbook教程](http://gitbook.hushuang.me/syntax/markdown.html)
-* [推荐12个实用的gitbook插件](https://segmentfault.com/a/1190000019473512?utm_source=tag-newest)
-* [mermaid插件](https://mermaid-js.github.io/mermaid/#/./integrations)
-* [mermaid-gb3](https://www.mapull.com/gitbook/comscore/custom/plugin/other/mermaid.html)
-* [mermaid文档](https://mermaid-js.github.io/mermaid/#/)
-* [GitBook 插件](https://gitee.com/ji-song/gitbook-use/blob/master/plugins.md)
-* [PlantUML 简介](https://plantuml.com/zh/)
-
-## Markdown
-
-* [用 Markdown 制作简历](http://tinylab.org/write-resume-with-markdown/?utm_source=tuicool&utm_medium=referral)
-* [Markdown Guide](https://www.markdownguide.org/basic-syntax)
-* [MarkDown代码块高亮](https://blog.csdn.net/shepherd_dirk/article/details/84646379?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-4-84646379.nonecase&utm_term=c++高亮%20markdown)
-* [在 markdown 中生成并导出思维导图的 Gitbook 插件](https://www.cnblogs.com/snowdreams1006/p/12514254.html)
-* [gitbook 3.2.3及之后流程图解决方案](https://blog.csdn.net/Curryth_/article/details/107333300)
-* [Markdown 中文文档](https://markdown-zh.readthedocs.io/en/latest/)
-* [markdown编辑](https://zybuluo.com/mdeditor)
-* [学生、工作人士如何才能更优雅地记笔记、写文档?（Markdown教程，详细到超乎你想象）](https://www.bilibili.com/read/cv5731265/)
-* [使用 Markdown 时，如何为文字加下划线？](https://www.zhihu.com/question/28375977)
-
-## 简历
-
-* [iOS程序员简历模板](https://blog.csdn.net/Anping1993/article/details/79013595)
-* [好看的博客](https://yimouleng.com/)
-* [bawn](https://bawn.github.io/)
-* [YouXianMing](https://www.cnblogs.com/YouXianMing/)
-
-## Cocoapods 
-
-* [CocoaPods安装方法-2020.05.25](https://www.jianshu.com/p/f43b5964f582)
-* [XCode 10中修改cocoapods中的源码编译不生效的解决方法](https://blog.csdn.net/feosun/article/details/85097456)
-* [Cocoapods整理（三）——编写podspec文件](https://segmentfault.com/a/1190000012269307)
-
-## 装机步骤
-
-1. [iOS 安装CocoaPods](https://www.jianshu.com/p/68568f365d18)
-2. [Mac系统如何显示隐藏文件](https://jingyan.baidu.com/article/e8cdb32beec90337052bad89.html)
-3. [临时解决GitHub的raw.githubusercontent.com无法连接问题](https://www.cnblogs.com/qiu-hua/p/12815425.html)
-4. [Mac安装git，brew出现的问题](https://www.jianshu.com/p/215b25a66700)
-5. [macos如何科学的安装homebrew跟npm?](https://www.liuyude.com/How_macos_scientifically_install_homebrew_and_npm.html)
-6. [安装brew的正确姿势](https://www.cnblogs.com/huanhao/p/installbrew.html)
-7. [GitBook 安装以及使用](https://www.jianshu.com/p/e86c702578df)
-8. [mac管理及更新node版本](https://www.jianshu.com/p/c50d900fb68c)
-9. [安装Gitbook](https://www.bilibili.com/read/cv6932054)
-10. [mac软件网址](https://www.macbl.com/)
-11. [xcode下载](https://developer.apple.com/download/all/?q=xcode)
-
-## 开源项目
-
-* [iOSExperience](https://github.com/YLBen/iOSExperience.git)
-* [functionList](https://github.com/iOSFeaturesIndexTeam/FunctionList.git)
-* [GitBook 上有哪些十分优秀的已经完成的书？](https://www.zhihu.com/question/39049150?sort=created)
-* [滴滴的哆啦A梦组件](https://github.com/didi/DoraemonKit)
-* [iOS 打点](https://github.com/luojilab/DDAutoTracker-iOS)
-* [闪屏demo](https://github.com/wxzwork/SplashScreenADView)
-* [QGTextField](https://github.com/yinqinggong/QGTextField)
-* [URLNavigator](https://github.com/devxoul/URLNavigator)
-* [网络监控](https://github.com/yujitach/MenuMeters)
-* [Swift-30-Projects](https://github.com/soapyigu/Swift-30-Projects)
-* [iOSKeyPointExploration](https://github.com/huang303513/iOSKeyPointExploration)
-* [语法糖](https://github.com/devxoul/Then)
-* [TTBaseUIKit](https://github.com/tqtuan1201/TTBaseUIKit/tree/58135b48d25f2e36ac42f73f144561aa09b99dc3/TTBaseUIKit/TTBaseUIKit/Support)
-* [GAppFramework](https://github.com/gzd0071/GAppFramework)
-* [SwiftTheme](https://github.com/wxxsw/SwiftTheme)
-* [NerdyUI](https://github.com/nerdycat/NerdyUI)
-* [Tangram-iOS](https://github.com/alibaba/Tangram-iOS)
-* [YNSearch](https://github.com/younatics/YNSearch)
-* [IOS网络请求的简单封装设计](https://www.jianshu.com/p/952668882665)
-* [YTKNetwork](https://github.com/yuantiku/YTKNetwork)
-* [QMUI_iOS](https://github.com/Tencent/QMUI_iOS)
-* [代码分类](http://code.cocoachina.com/)
-* [好库编程网](http://www.okbase.net/)
-* [SDUserDefaults](https://github.com/wang82426107/SDUserDefaults)
-* [LCHelper](https://github.com/iLiuChang/LCHelper)
-* [geniusDemo](https://github.com/L-vinCent/geniusDemo)
-* [2018 iOS 三方库(仅供方面查看)](https://www.jianshu.com/p/e56d98a43e7e)
-* [macos 12.3.1  Xcode 13.3 最新objc 838源码更新](https://github.com/LGCooci/KCCbjc4_debug)
-
-## MVVM 
-
-* [MVVMReactiveCocoa](https://github.com/leichunfeng/MVVMReactiveCocoa)
-* [BigShow1949](https://github.com/BigShow1949/BigShow1949)
-* [Monkey](https://github.com/coderyi/Monkey)
-* [MHDevelopExample_Objective_C](https://github.com/CoderMikeHe/MHDevelopExample_Objective_C)
-* [MVVMDemo](https://github.com/coderyi/MVVMDemo/tree/master/MVVMDemo)
-
-## 地图
-
-* [map](https://github.com/HPTears/map)
-* [BMKLocationKit](https://github.com/HimmaHorde/BMKLocationKit/tree/master/framework/BMKLocationKit.framework)
-* [iOS在APP中调用第三方地图地图（苹果,高德，百度，腾讯）](https://blog.csdn.net/liuyinghui523/article/details/84339538)
-* [经纬度查询](https://jingweidu.bmcx.com/)
-
-## 学习
-
-* [尚德](http://yi.sunlands.com)
-* [自考](http://zk.zjzs.net/Index/index.aspx)
-* [苹果官方教程swiftui](https://developer.apple.com/tutorials/swiftui)
-* [潭州课堂](https://www.shiguangkey.com)
-* [swift51](http://www.swift51.com/)
-* [csdn](https://www.csdn.net/)
-
-## 苹果官方文档
-
-* [苹果官方文档-cn](https://developer.apple.com/cn/documentation/)
-* [苹果官方文档-en](https://developer.apple.com/documentation)
-* [ios-resolution](https://ios-resolution.com/)
-* [查询序列号](https://checkcoverage.apple.com/)
-
-## SwiftUI
-
-* [SwiftUI-api](https://developer.apple.com/documentation/swiftui)
-* [SwiftUI-tutorials](https://developer.apple.com/tutorials/swiftui)
-* [SwiftUI-互动教程](http://coolketang.com/hdjc/swiftUI/)
-* [SwiftUI 基础之05 list 和 searchbar (2020)](https://www.jianshu.com/p/820b0e9c7d3e)
-* [SwiftUI教程与源码](https://www.jianshu.com/c/7b3e3b671970)
-* [SwiftUI Search Bar in the Navigation Bar](http://blog.eppz.eu/swiftui-search-bar-in-the-navigation-bar/)
-* [UISearchController Tutorial](https://www.raywenderlich.com/4363809-uisearchcontroller-tutorial-getting-started)
-
-## OpenGL
-
-* [iOS-OpenGL-Tutorials](https://gitee.com/chenchangqing/iOS-OpenGL-Tutorials)
-
-## RxSwift
-
-* [Swift - RxSwift的使用详解1（基本介绍、安装配置）](https://www.hangge.com/blog/cache/detail_1917.html)
-* [RxSwift的学习之路（二）——Subjects](https://www.jianshu.com/p/6ce9cae4f410)
-* [使用 RxTest 来建立基于 RxSwift 的自动化测试](https://imtx.me/blog/testing-rxswift-by-rxtest/)
-* [RxSwift中文文档](https://beeth0ven.github.io/RxSwift-Chinese-Documentation/)
-* [RxSwift学习 - share(replay:scope:)](https://www.jianshu.com/p/08b30b4181ea)
-* [RXSwift中Driver的使用](https://www.jianshu.com/p/7cc6bb93d4f2)
-* [RxSwift+Moya网络请求之项目实战](https://www.jianshu.com/p/406336b4aadc)
-* [RxMultiCounter](https://github.com/danielt1263/RxMultiCounter)
-* [RxSwift Error Handling](https://www.cnblogs.com/strengthen/p/13577440.html)
-* [RxDataSource 使用套路与解释](https://zhuanlan.zhihu.com/p/71212181)
-* [RxSwift 中的老司机](https://juejin.cn/post/6844903906745516046)
-
-## 面试
-
-* [iOS开发中 weak和assign的区别](https://www.jianshu.com/p/e9a46253f587)
-* [做了快5年iOS，这份面试题让我从15K变成了30K](https://www.jianshu.com/p/1af57f250976?utm_campaign=haruki&utm_content=note&utm_medium=reader_share&utm_source=weixin)
-* [《招聘一个靠谱的iOS》面试题参考答案](https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md#13-用property声明的nsstring或nsarraynsdictionary经常使用copy关键字为什么如果改用strong关键字可能造成什么问题)
-* [iOS性能优化](https://www.jianshu.com/p/aace73e49392)
-* [iOS]NSHashTable和NSMapTable用法](https://www.jianshu.com/p/de71385930ba)
-* [Swift中的unowned和weak](https://www.jianshu.com/p/51cb83833c9b?utm_campaign=hugo)
-
-## VPN
-
-* [cx](https://main.v2ray.cx/)
-* [vpn·周](https://linlinks.cc/auth/register?code=v7Wm)
-* [vpn·李](https://mymonocloud.com/home)
-* [有免费的梯子软件](https://github.com/Alvin9999/new-pac/wiki)
-
-## 导航栏
-
-* [iOS系统中导航栏的转场解决方案与最佳实践](https://tech.meituan.com/2018/10/25/navigation-transition-solution-and-best-practice-in-meituan.html)
-* [IOS-FDFullscreenPopGesture的使用](IOS-FDFullscreenPopGesture的使用)
-* [我的iOS开发笔记——右滑返回手势失效怎么办？](https://www.jianshu.com/p/180f88960bdd)
-* [iOS 导航栏的那些事儿](https://www.jianshu.com/p/c8ffb2bdda91)
-* [Swift - 导航栏滑动透明渐变效果的实现（透明度随视图滚动而改变）](https://www.hangge.com/blog/cache/detail_2068.html)
-
-## iOS·UI
-
-* [详解intrinsicContentSize 及 约束优先级／content Hugging／content Compression Resistance](https://blog.csdn.net/hard_man/article/details/50888377)
-* [iOS开发笔记常用工具之文本宽度和高度计算](https://www.jianshu.com/p/7388ef05f32c)
-* [iOS 获取webview高度小结](https://www.cnblogs.com/lijianyi/p/11950702.html)
-* [iOS Swift 判断手机机型 已更新 至iPhone12](https://cloud.tencent.com/developer/article/1735194)
-* [iOS判断刘海屏幕机型](https://www.jianshu.com/p/130fd4d54537)
-* [所有机型](https://www.theiphonewiki.com/wiki/Models)
-* [iOS 设置圆角、指定位置圆角及 iOS 11圆角设置](https://www.jianshu.com/p/7bc7246ef92a)
-* [iOS9 Programming - Autolayout (I)](https://www.jianshu.com/p/56e0cd434e7b)
-
-## 脚本
-
-sudo pip install openpyxl
+# FFmpeg集成
+
+## 一、iOS集成FFmpeg
+
+[代码工程](https://gitee.com/learnany/ffmpeg/tree/master/02_ffmpeg_integrated/FFmpegCompiled/FFmpegCompiled)
+
+### 1. 集成FFmpeg
+
+测试我们自己编译库FFmpeg。
+
+#### (1) 第一步：新建工程
+
+删除Scenedelegate，参考：[Xcode 11新建项目多了Scenedelegate](https://www.jianshu.com/p/25b37bd40cd7)。
+
+#### (2) 第二步：导入库文件。
+
+在工程新建FFmpeg-3.4，拷贝已经编译好的arm64静态库文件夹，删除不需要的share、lib/pkgconfig文件夹，最后将FFmpeg-3.4Add进入工程。
+
+#### (3）第三步：添加依赖库
+
+- CoreMedia.framework
+- CorGraphics.framework
+- VideoToolbox.framework
+- AudioToolbox.framework
+- libiconv.tbd 
+- libz.tbd 
+- libbz2.tbd 
+
+#### (4) 配置头文件
+
+1) 复制头文件路径
 
-## 快捷键
-
-* 注释：command+option+/
-* 打开xcode文档：command+shift+0
-* [现在在Xcode中切换标签的快捷方式？](https://www.5axxw.com/questions/content/ohjknz)
+选中Target>Build Setting>搜索Library Search>双击Library Search Paths复制FFmpeg lib路径>修改lib为include就是FFmpeg头文件路径：
 
-## Flutter
+$(PROJECT_DIR)/FFmpegCompiled/FFmpeg-3.4/arm64/include。
 
-* [Flutter 开发文档](https://flutter.cn/docs)
+2) 配置头文件路径
 
-## 其它
+选中Target>Build Setting>搜索Header Search>选中Header Search Paths>增加上面复制好头文件路径。
 
-* [医院等级查询](https://cs.newchinalife.com/service-center/query/other/approve-hospital)
-* [快速记](https://www.ksjyun.com/)
+#### (5) 编译成功
 
-## shell
+### 2. 测试案例
 
-* [Shell 函数](https://www.runoob.com/linux/linux-shell-func.html)
-* [shell脚本中判断上一个命令是否执行成功](https://blog.csdn.net/Maybe_Lee/article/details/78604927)
-* [shell bash判断文件或文件夹是否存在](https://www.cnblogs.com/emanlee/p/3583769.html)
+#### (1) 打印配置信息
 
-## ruby
-
-* [Ruby 教程](https://www.runoob.com/ruby/ruby-tutorial.html)
-
-## webview缓存
-
-* [iOS html5使用缓存并及时更新方案总结](https://juejin.cn/post/6844903860478165005)
-* [Cache-control](https://baike.baidu.com/item/Cache-Control)
-* [iOS webView缓存，保证加载最新html](https://juejin.cn/post/6844903605619654669)
-* [iOS: 聊聊 UIWebView 缓存](http://www.veryitman.com/2017/01/15/iOS-%E8%81%8A%E8%81%8A-UIWebView-%E7%BC%93%E5%AD%98/)
-* [H5 和移动端 WebView 缓存机制解析与实战](https://mp.weixin.qq.com/s/qHm_dJBhVbv0pJs8Crp77w)
-* [iOS-WKWebView缓存并保证实时性](http://www.cocoachina.com/articles/896271)
-* [iOS代码混淆工具](https://zfj1128.blog.csdn.net/article/details/95482006)
-* [webview开启无图](https://github.com/531464049/WebUrlProtocol)
-* [iOS定制NSURLProtocol实现离线缓存](http://blog.dreamlikes.cn/archives/387)
-* [web离线技术原理](https://juejin.cn/post/6844903845483511815)
-* [iOS 开发中使用 NSURLProtocol 拦截 HTTP 请求](https://draveness.me/intercept/)
-* [使用 NSURLProtocol 拦截 APP 内的网络请求](https://juejin.cn/post/6844903473671077895)
-* [移动 H5 首屏秒开优化方案探讨](https://juejin.cn/post/6844903565744406536#heading-8)
-* [JWNetAutoCache](https://github.com/dengjunwen/JWNetAutoCache)
-
-## tableView
-
-* [https://www.jianshu.com/p/af4bc69839d8](https://www.jianshu.com/p/af4bc69839d8)
-* [优化UITableViewCell高度计算的那些事](http://blog.sunnyxx.com/2015/05/17/cell-height-calculation/)
-
-## 代码规范
-
-* [《Effective Objective-C》干货三部曲（二）：规范篇](https://cloud.tencent.com/developer/article/1199334?from=article.detail.1485152)
-* [Swift 如何声明某个属性已过期](https://www.jianshu.com/p/1f8efc5ce8a9)
-
-## 单元测试
-
-* [iOS 单元测试--异步测试](https://www.jianshu.com/p/a4ffa780d347)
-* [OC实现类似泛型效果的json数据解析](https://www.jianshu.com/p/9cdd9ccd82c5/)
-
-## 架构
-
-* [iOS应用架构谈 网络层设计方案](https://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html)
-* [iOS - AFNetWorking打印请求时的相关信息](https://www.jianshu.com/p/6c5ffb43dbc2)
-
-## 一键登录
-
-* [IOS客户端接入](https://help.aliyun.com/document_detail/144186.html)
-
-## gcd
-
-* [iOS GCD处理多个网络请求并发问题](http://blog.sina.com.cn/s/blog_147d0371c0102wi1p.html)
-* [iOS-GCD的串行队列和并行队列的任务及实现](https://blog.csdn.net/c386890506/article/details/51171898)
-* [iOS GCD线程同步以及AFNetworking多次请求线程依赖](https://www.jianshu.com/p/efac15d882c7)
-
-## c++
-
-* [C++ 中的 inline 用法](https://www.runoob.com/w3cnote/cpp-inline-usage.html)
-* [在字符串string中实现一个判断函数，该函数功能是统计某一字符串类对象(仅由单词和空格组成)有多少个单词](https://zhidao.baidu.com/question/1692367994672918668.html?qbl=relate_question_0)
-
-## IM聊天
-
-* [环信·IM](https://www.easemob.com/product/im)
-* [环信·iOS SDK 快速集成](https://docs-im.easemob.com/im/ios/sdk/prepare#ios_sdk_%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90)
-* [环信·集成 iOS SDK 前的准备工作](https://docs-im.easemob.com/im/ios/sdk/import#ios_sdk_介绍)
-
-## 电影
-
-* [你的名字](https://www.66s.cc/donghuapian/2841.html)
-
-## 后端
-
-* [docker](https://blog.csdn.net/adminBfl/article/details/109615329)
-* [腾讯云](https://cloud.tencent.com/)
-
-## 算法
-
-* [算法学习笔记（目录）](https://zhuanlan.zhihu.com/p/105467597)
-* [菜鸟算法](https://www.runoob.com/w3cnote_genre/algorithm)
-
-## Swift - Codable
-
-* [Swift - Codable使用小记](https://juejin.cn/post/6971997599725256734)
-* [Swift - Codable](https://juejin.cn/post/6974036259949936653)
-
-## textview
-
-* [iOS开发－UITextView文字排版](https://www.cnblogs.com/tangyuanby2/p/7652085.html)
-* [UITextView换行问题解决办法](https://www.cnblogs.com/qiutangfengmian/p/5038717.html)
-
-## android studio
-
-* [用户指南](https://developer.android.com/studio/intro?hl=zh-cn)
+新建FFmpegTest测试类，增加类方法：
+```c
+// 引入头文件
+// 核心库->音视频编解码库
+#import <libavcodec/avcodec.h>
+
+/// 测试FFmpeg配置
++ (void)ffmpegTestConfig {
+    const char *configuration = avcodec_configuration();
+    NSLog(@"配置信息: %s", configuration);
+}
+```
+在ViewController中测试：
+```c
+#import "FFmpegTest.h"
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    //测试一
+    [FFmpegTest ffmpegTestConfig];
+}
+```
+console输出：
+```
+配置信息: --target-os=darwin --arch=arm64 --cc='xcrun -sdk iphoneos clang' --as='gas-preprocessor.pl -arch aarch64 -- xcrun -sdk iphoneos clang' --enable-cross-compile --disable-debug --disable-programs --disable-doc --enable-pic --extra-cflags='-arch arm64 -mios-version-min=7.0 -fembed-bitcode' --extra-ldflags='-arch arm64 -mios-version-min=7.0 -fembed-bitcode' --prefix=/Users/chenchangqing/Documents/FFmpeg/ffmpeg-3.4-target-iOS/arm64
+```
+
+#### (2) 打开视频文件
+
+FFmpegTest增加类方法：
+```c
+// 导入封装格式库
+#import <libavformat/avformat.h>
+
+/// 打开视频文件
++ (void)ffmpegVideoOpenfile:(NSString*)filePath {
+    // 第一步：注册组件
+    av_register_all();
+    // 第二步：打开封装格式文件
+    // 参数一：封装格式上下文
+    AVFormatContext* avformat_context = avformat_alloc_context();
+    // 参数二：打开视频地址->path
+    const char *url = [filePath UTF8String];
+    // 参数三：指定输入封装格式->默认格式
+    // 参数四：指定默认配置信息->默认配置
+    int avformat_open_input_reuslt = avformat_open_input(&avformat_context, url, NULL, NULL);
+    if (avformat_open_input_reuslt != 0){
+        // 失败了
+        // 获取错误信息
+        // char* error_info = NULL;
+        // av_strerror(avformat_open_input_reuslt, error_info, 1024);
+        NSLog(@"打开文件失败");
+        return;
+    }
+    
+    NSLog(@"打开文件成功");
+}
+```
+项目新增视频Test.mov，在ViewController中测试：
+```c
+// 测试二
+NSString *path = [[NSBundle mainBundle] pathForResource:@"Test" ofType:@".mov"];
+[FFmpegTest ffmpegVideoOpenfile:path];
+```
+console输出：
+```
+打开文件成功
+```
+## 二、Android集成FFmpeg
+
+[代码工程](https://gitee.com/learnany/ffmpeg/tree/master/02_ffmpeg_integrated/AndroidFFmpegCompiled)
+
+### 1. 集成FFmpeg
+
+#### (1) 第一步：新建工程
+
+File->NewProject->Native C++->输入工程信息->Next->Finish。
+
+[三星手机开启开发者选项](https://publish.samsungsimulator.com/simulator/5e9b6c53-0b1e-499b-8096-9e3bb39502b8/#!topic)
+
+#### (2) 第二步：导入库文件。
+
+1) 项目选中Project模式->app->src->main->右键new->Directory->输入jniLibs->enter。
+
+2) 将准备好的库文件copy->选中刚才新建的jniLibs->paste。
+
+#### (3) 第三步：修改CMakeLists.txt
+
+1) app->src->main->cpp->双击CMakeLists.txt。
+
+2) 修改CMakeLists.txt。
+```c
+# FFMpeg配置
+# FFmpeg配置目录
+set(JNILIBS_DIR ${CMAKE_SOURCE_DIR}/../jniLibs)
+
+# 编解码(最重要的库)
+add_library(
+        avcodec
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avcodec
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavcodec.so)
+
+# 滤镜特效处理库
+add_library(
+        avfilter
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avfilter
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavfilter.so)
+
+# 封装格式处理库
+add_library(
+        avformat
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avformat
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavformat.so)
+
+# 工具库(大部分库都需要这个库的支持)
+add_library(
+        avutil
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avutil
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavutil.so)
+
+# 音频采样数据格式转换库
+add_library(
+        swresample
+        SHARED
+        IMPORTED)
+set_target_properties(
+        swresample
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libswresample.so)
+
+# 视频像素数据格式转换
+add_library(
+        swscale
+        SHARED
+        IMPORTED)
+set_target_properties(
+        swscale
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libswscale.so)
+
+add_library(
+        avdevice
+        SHARED
+        IMPORTED)
+set_target_properties(
+        avdevice
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libavdevice.so)
+
+add_library(
+        postproc
+        SHARED
+        IMPORTED)
+set_target_properties(
+        postproc
+        PROPERTIES IMPORTED_LOCATION
+        ${JNILIBS_DIR}/lib/libpostproc.so)
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+#判断编译器类型,如果是gcc编译器,则在编译选项中加入c++11支持
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+    message(STATUS "optional:-std=c++11")
+endif(CMAKE_COMPILER_IS_GNUCXX)
+
+#配置编译的头文件
+include_directories(${JNILIBS_DIR}/include)
+
+.
+.
+.
+
+target_link_libraries( # Specifies the target library.
+        myapplication avcodec swresample avfilter avformat avutil swscale avdevice postproc
+
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib})
+```
+#### (4) 配置CPU架构类型
+
+修改app->build.gradle：
+```c
+externalNativeBuild {
+    cmake {
+        cppFlags ''
+        abiFilters 'armeabi'
+    }
+}
+```
+发现编译失败，解决方法，修改为如下(
+[参考链接](https://blog.csdn.net/mqdxiaoxiao/article/details/99477072))：
+```
+defaultConfig {
+    ndk {
+        abiFilters 'armeabi-v7a'
+    }
+}
+```
+
+#### (5) 编译成功
+
+### 2. 测试案例
+
+#### (1) 打印配置信息
+
+##### 1) 定义Java方法
+
+新建Java类FFmpegTest，定义ffmpegTestConfig方法：
+```java
+// 测试FFmpeg配置
+// native：标记这个方法是一个特殊方法，不是普通的java方法，而是用于与NDK进行交互的方法（C/C++语言交互）
+// 用native修饰方法，方法没有实现，具体的实现在C/C++里面。
+public static native void ffmpegTestConfig();
+```
+##### 2) 定义NDK方法
+
+修改native-lib.cpp。
+
+导入ffmpeg头文件，由于 FFmpeg 是使用 C 语言编写的，所在 C++ 文件中引用 #include 的时候，也需要包裹在 extern "C" { }，才能正确的编译。
+```
+#import <android/log.h>
+extern "C" {
+// 引入头文件
+// 核心库->音视频编解码库
+#include <libavcodec/avcodec.h>
+}
+```c
+在native-lib.cpp中新增Java方法ffmpegTestConfig的C++实现。
+```c
+extern "C" 
+JNIEXPORT void JNICALL
+Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegTestConfig(JNIEnv *env, jclass clazz) {
+    const char *configuration = avcodec_configuration();
+    __android_log_print(ANDROID_LOG_INFO, "ffmpeg configuration", "%s", configuration);
+}
+```
+之所以可以这么写是因为在CMakeLists.txt中有如下配置，将Java和C/C++进行关联。
+```
+add_library( # Sets the name of the library.
+        androidffmpegcompiled
+
+        # Sets the library as a shared library.
+        SHARED
+
+        # Provides a relative path to your source file(s).
+        native-lib.cpp)
+```
+##### 3) MainActivity增加测试代码。
+```
+protected void onCreate(Bundle savedInstanceState) {
+        ...
+        FFmpegTest.ffmpegTestConfig();
+}
+```
+##### 4) 运行工程，正确打印。
+```
+I/ffmpeg configuration: --prefix=/Users/chenchangqing/Documents/code/ffmpeg/01_ffmpeg_compiled/ffmpeg-3.4-target-android/armeabi-v7a --enable-shared --enable-gpl --disable-static --disable-doc --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver --disable-doc --disable-symver --enable-small --cross-prefix=/Users/chenchangqing/Documents/code/ffmpeg/01_ffmpeg_compiled/ndk/android-ndk-r10e/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi- --target-os=android --arch=armeabi-v7a --enable-cross-compile --sysroot=/Users/chenchangqing/Documents/code/ffmpeg/01_ffmpeg_compiled/ndk/android-ndk-r10e/platforms/android-18/arch-arm --extra-cflags='-Os -fpic -marm' --enable-pic
+```
+#### (2) 打开视频文件
+
+##### 1) 定义Java方法
+
+FFmpegTest定义ffmpegVideoOpenFile方法：
+```java
+// 测试FFmpeg打开视频
+// filePath:路径
+public static native void ffmpegVideoOpenFile(String filePath);
+```
+
+##### 2) 定义NDK方法
+
+导入ffmpeg头文件
+```c
+#import <android/log.h>
+extern "C" {
+// 引入头文件
+// 核心库->音视频编解码库
+#include <libavcodec/avcodec.h>
+// 导入封装格式库
+#import <libavformat/avformat.h>
+}
+```
+在native-lib.cpp中新增Java方法ffmpegVideoOpenFile的C++实现。
+```c
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegVideoOpenFile(JNIEnv *env, jclass clazz,
+                                                                  jstring file_path) {
+    // 第一步：注册组件
+    av_register_all();
+    // 第二步：打开封装格式文件
+    // 参数一：封装格式上下文
+    AVFormatContext* avformat_context = avformat_alloc_context();
+    // 参数二：打开视频地址->path
+    const char *url = env->GetStringUTFChars(file_path, NULL);
+    // 参数三：指定输入封装格式->默认格式
+    // 参数四：指定默认配置信息->默认配置
+    int avformat_open_input_reuslt = avformat_open_input(&avformat_context, url, NULL, NULL);
+    if (avformat_open_input_reuslt != 0){
+        // 失败了
+        // 获取错误信息
+        // char* error_info = NULL;
+        // av_strerror(avformat_open_input_reuslt, error_info, 1024);
+        __android_log_print(ANDROID_LOG_INFO, "ffmpeg", "打开文件失败");
+        return;
+    }
+
+    __android_log_print(ANDROID_LOG_INFO, "ffmpeg", "打开文件成功");
+}
+```
+##### 3) 增加权限
+
+在AndroidManifest.xml增加SD卡的读写权限。
+```
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+```
+##### 4) MainActivity增加测试代码。
+
+```java
+String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+String inFilePath = rootPath.concat("/FFmpeg/Test.mov");
+FFmpegTest.ffmpegVideoOpenFile(inFilePath);
+```
 
 <div style="margin: 20px;">
     <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"

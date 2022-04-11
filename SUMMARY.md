@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [FFmpeg集成](README.md)
 * OpenGL系列
     * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
     * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)
@@ -198,6 +198,7 @@
     * [个人信息](bookignore/个人信息.md)
     * [账号管理](bookignore/账号管理.md)
     * [装机必备](其他/装机必备.md)
+    * [常用链接](其他/常用链接.md)
 * Git
     * [相关链接](Git/相关链接.md)
     * [rebase使用](Git/rebase使用.md)
