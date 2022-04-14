@@ -1,6 +1,6 @@
 # Summary
 
-* [FFmpeg集成](README.md)
+* [最近更新](README.md)
 * OpenGL系列
     * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
     * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)
@@ -221,6 +221,7 @@
     * [Java开发工具](重拾服务端/Java开发工具.md)
 * FFmpeg
     * [相关链接](FFmpeg/相关链接.md)
-    * [1.FFmpeg编译](FFmpeg/1_FFmpeg编译.md)
-    * [2.FFmpeg集成](FFmpeg/2_FFmpeg集成.md)
+    * [1.FFmpeg编译](FFmpeg/01_FFmpeg编译.md)
+    * [2.FFmpeg集成](FFmpeg/02_FFmpeg集成.md)
+    * [3.FFmpeg基础知识](FFmpeg/03_FFmpeg基础知识.md)
 
