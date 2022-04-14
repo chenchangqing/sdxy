@@ -381,6 +381,10 @@ Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegVideoOpenFile(JNIEnv *env, j
 ```
 ##### 4) MainActivity增加测试代码。
 
+注意：如果打开失败，可能读写存储设备的权限被禁用。
+
+摩托罗拉·刀锋：设置->应用和通知->高级->权限管理器->隐私相关·读写存储设备->找到应用->如果禁用，则修改为允许。
+
 ```java
 String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 String inFilePath = rootPath.concat("/FFmpeg/Test.mov");

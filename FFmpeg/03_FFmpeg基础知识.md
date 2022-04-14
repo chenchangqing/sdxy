@@ -1,4 +1,4 @@
-# FFmpeg基础知识
+# 3.FFmpeg基础知识
 
 ## 一、视频播放
 
@@ -25,15 +25,15 @@
 MediaInfo：帮助我们查看视频完整信息。
 
 ItraEdit：直接查看视频二进制数据。
-                
+		
 视频单项信息：
 
 Elecard Format Analyzer：封装格式信息工具。
 
 Elecard Stream Eye：视频编码信息工具。
-                        
+			
 GLYUVPlayer：视频像素信息工具。
-        
+	
 Adobe Audition：音频采样数据工具。
 
 ## 二、音视频封装格式
@@ -45,15 +45,15 @@ mp4、mov、flv、wmv、avi、ts、mkv等等。
 <img src="../../images/ffmpeg_03_2.jpeg" width=100%/>
 
 ### 2. 封装格式作用
-                        
+			
 视频流+音频流按照格式进行存储在一个文件中。
-                
+		
 ### 3.MPEG2-TS格式
-                        
+			
 视频压缩数据格式：MPEG2-TS。特定：数据排版，不包含头文件，数据大小固定（188byte）的TS-Packet。
 
 ### 4. FLV格式
-                        
+			
 #### (1) 优势
 
 由于它形成的文件极小、加载速度极快，使得网络观看视频文件成为可能，它的出现有效地解决了视频文件导入Flash后，使导出的SWF文件体积庞大，不能在网络上很好的使用等问题。
@@ -65,7 +65,7 @@ FLV是一个二进制文件，由文件头（FLV header）和很多tag组成。t
 #### (3) FLV文件
 
 FLV文件=FLV头文件+ tag1+tag内容1 + tag2+tag内容2 + ...+... + tagN+tag内容N。
-                        
+			
 #### (4) FLV头文件
 
 1-3： 前3个字节是文件格式标识(FLV 0x46 0x4C 0x56)。
@@ -81,13 +81,13 @@ FLV文件=FLV头文件+ tag1+tag内容1 + tag2+tag内容2 + ...+... + tagN+tag�
 ## 三、视频编码数据
 
 ### 1. 视频编码作用
-                                
+				
 将视频像素数据（YUV、RGB）进行压缩成为视频码流，从而降低视频数据量。（减小内存暂用）
-                        
+			
 ### 2. 视频编码格式
 
 <img src="../../images/ffmpeg_03_3.jpeg" width=100%/>
-                                
+				
 ### 3. H.264视频压缩数据格式
 
 非常复杂算法->压缩->占用内存那么少？（例如：帧间预测、帧内预测…）->提高压缩性能。
@@ -165,9 +165,9 @@ Y表示：亮度，UV表示：色度。
 ### 3. 工具
 
 Audition
-                                
+				
 ### 4. PCM格式
-                                
+				
 <img src="../../images/ffmpeg_03_5.png" width=100%/>
 
 ## 七、FFmepg应用
@@ -186,8 +186,4 @@ Audition
 
 格式：ffplay {文件路径}
 
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-
+例如：./ffplay Test.mov
