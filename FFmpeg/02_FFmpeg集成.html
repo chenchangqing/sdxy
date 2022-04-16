@@ -3252,6 +3252,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.21.5" data-path="04_FFmpeg视频解码.html">
+            
+                <a href="04_FFmpeg视频解码.html">
+            
+                    
+                    4.FFmpeg视频解码
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -3531,24 +3544,23 @@ NSString <span class="token operator">*</span>path <span class="token operator">
 <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">ffmpegTestConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h5 id="2-&#x5B9A;&#x4E49;ndk&#x65B9;&#x6CD5;">2) &#x5B9A;&#x4E49;NDK&#x65B9;&#x6CD5;</h5>
-<p>&#x4FEE;&#x6539;native-lib.cpp&#x3002;</p>
-<p>&#x5BFC;&#x5165;ffmpeg&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x7531;&#x4E8E; FFmpeg &#x662F;&#x4F7F;&#x7528; C &#x8BED;&#x8A00;&#x7F16;&#x5199;&#x7684;&#xFF0C;&#x6240;&#x5728; C++ &#x6587;&#x4EF6;&#x4E2D;&#x5F15;&#x7528; #include &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x5305;&#x88F9;&#x5728; extern &quot;C&quot; { }&#xFF0C;&#x624D;&#x80FD;&#x6B63;&#x786E;&#x7684;&#x7F16;&#x8BD1;&#x3002;</p>
-<pre class="language-"><code>#import &lt;android/log.h&gt;
-extern &quot;C&quot; {
-// &#x5F15;&#x5165;&#x5934;&#x6587;&#x4EF6;
-// &#x6838;&#x5FC3;&#x5E93;-&gt;&#x97F3;&#x89C6;&#x9891;&#x7F16;&#x89E3;&#x7801;&#x5E93;
-#include &lt;libavcodec/avcodec.h&gt;
-}
-```c
-&#x5728;native-lib.cpp&#x4E2D;&#x65B0;&#x589E;Java&#x65B9;&#x6CD5;ffmpegTestConfig&#x7684;C++&#x5B9E;&#x73B0;&#x3002;
-```c
-extern &quot;C&quot; 
-JNIEXPORT void JNICALL
-Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegTestConfig(JNIEnv *env, jclass clazz) {
-    const char *configuration = avcodec_configuration();
-    __android_log_print(ANDROID_LOG_INFO, &quot;ffmpeg configuration&quot;, &quot;%s&quot;, configuration);
-}
-</code></pre><p>&#x4E4B;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x8FD9;&#x4E48;&#x5199;&#x662F;&#x56E0;&#x4E3A;&#x5728;CMakeLists.txt&#x4E2D;&#x6709;&#x5982;&#x4E0B;&#x914D;&#x7F6E;&#xFF0C;&#x5C06;Java&#x548C;C/C++&#x8FDB;&#x884C;&#x5173;&#x8054;&#x3002;</p>
+<p>&#x5728;native-lib.cpp&#x4E2D;&#xFF0C;&#x5BFC;&#x5165;FFmpeg&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x7531;&#x4E8E; FFmpeg &#x662F;&#x4F7F;&#x7528; C &#x8BED;&#x8A00;&#x7F16;&#x5199;&#x7684;&#xFF0C;&#x6240;&#x5728; C++ &#x6587;&#x4EF6;&#x4E2D;&#x5F15;&#x7528; #include &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x5305;&#x88F9;&#x5728; extern &quot;C&quot; { }&#xFF0C;&#x624D;&#x80FD;&#x6B63;&#x786E;&#x7684;&#x7F16;&#x8BD1;&#x3002;</p>
+<pre class="language-"><code class="lang-c"><span class="token macro property">#<span class="token directive keyword">import</span> &lt;android/log.h&gt;</span>
+<span class="token keyword">extern</span> <span class="token string">&quot;C&quot;</span> <span class="token punctuation">{</span>
+<span class="token comment">// &#x5F15;&#x5165;&#x5934;&#x6587;&#x4EF6;</span>
+<span class="token comment">// &#x6838;&#x5FC3;&#x5E93;-&gt;&#x97F3;&#x89C6;&#x9891;&#x7F16;&#x89E3;&#x7801;&#x5E93;</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;libavcodec/avcodec.h&gt;</span></span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;native-lib.cpp&#x4E2D;&#x65B0;&#x589E;Java&#x65B9;&#x6CD5;ffmpegTestConfig&#x7684;C++&#x5B9E;&#x73B0;&#x3002;</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">extern</span> <span class="token string">&quot;C&quot;</span> 
+JNIEXPORT <span class="token keyword">void</span> JNICALL
+<span class="token function">Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegTestConfig</span><span class="token punctuation">(</span>JNIEnv <span class="token operator">*</span>env<span class="token punctuation">,</span> jclass clazz<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>configuration <span class="token operator">=</span> <span class="token function">avcodec_configuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">__android_log_print</span><span class="token punctuation">(</span>ANDROID_LOG_INFO<span class="token punctuation">,</span> <span class="token string">&quot;ffmpeg configuration&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;%s&quot;</span><span class="token punctuation">,</span> configuration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4E4B;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x8FD9;&#x4E48;&#x5199;&#x662F;&#x56E0;&#x4E3A;&#x5728;CMakeLists.txt&#x4E2D;&#x6709;&#x5982;&#x4E0B;&#x914D;&#x7F6E;&#xFF0C;&#x5C06;Java&#x548C;C/C++&#x8FDB;&#x884C;&#x5173;&#x8054;&#x3002;</p>
 <pre class="language-"><code>add_library( # Sets the name of the library.
         androidffmpegcompiled
 
@@ -3572,7 +3584,7 @@ Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegTestConfig(JNIEnv *env, jcla
 <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">ffmpegVideoOpenFile</span><span class="token punctuation">(</span><span class="token class-name">String</span> filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h5 id="2-&#x5B9A;&#x4E49;ndk&#x65B9;&#x6CD5;">2) &#x5B9A;&#x4E49;NDK&#x65B9;&#x6CD5;</h5>
-<p>&#x5BFC;&#x5165;ffmpeg&#x5934;&#x6587;&#x4EF6;</p>
+<p>&#x5728;native-lib.cpp&#x4E2D;&#xFF0C;&#x5BFC;&#x5165;FFmpeg&#x5934;&#x6587;&#x4EF6;&#x3002;</p>
 <pre class="language-"><code class="lang-c"><span class="token macro property">#<span class="token directive keyword">import</span> &lt;android/log.h&gt;</span>
 <span class="token keyword">extern</span> <span class="token string">&quot;C&quot;</span> <span class="token punctuation">{</span>
 <span class="token comment">// &#x5F15;&#x5165;&#x5934;&#x6587;&#x4EF6;</span>
@@ -3617,11 +3629,11 @@ JNIEXPORT <span class="token keyword">void</span> JNICALL
 <p>&#x6CE8;&#x610F;&#xFF1A;&#x5982;&#x679C;&#x6253;&#x5F00;&#x5931;&#x8D25;&#xFF0C;&#x53EF;&#x80FD;&#x8BFB;&#x5199;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x7684;&#x6743;&#x9650;&#x88AB;&#x7981;&#x7528;&#x3002;</p>
 <p>&#x6469;&#x6258;&#x7F57;&#x62C9;&#xB7;&#x5200;&#x950B;&#xFF1A;&#x8BBE;&#x7F6E;-&gt;&#x5E94;&#x7528;&#x548C;&#x901A;&#x77E5;-&gt;&#x9AD8;&#x7EA7;-&gt;&#x6743;&#x9650;&#x7BA1;&#x7406;&#x5668;-&gt;&#x9690;&#x79C1;&#x76F8;&#x5173;&#xB7;&#x8BFB;&#x5199;&#x5B58;&#x50A8;&#x8BBE;&#x5907;-&gt;&#x627E;&#x5230;&#x5E94;&#x7528;-&gt;&#x5982;&#x679C;&#x7981;&#x7528;&#xFF0C;&#x5219;&#x4FEE;&#x6539;&#x4E3A;&#x5141;&#x8BB8;&#x3002;</p>
 <pre class="language-"><code class="lang-java"><span class="token class-name">String</span> rootPath <span class="token operator">=</span> <span class="token class-name">Environment</span><span class="token punctuation">.</span><span class="token function">getExternalStorageDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> inFilePath <span class="token operator">=</span> rootPath<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">&quot;/FFmpeg/Test.mov&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> inFilePath <span class="token operator">=</span> rootPath<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">&quot;/DCIM/Camera/VID_20220220_181306412.mp4&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">FFmpegTest</span><span class="token punctuation">.</span><span class="token function">ffmpegVideoOpenFile</span><span class="token punctuation">(</span>inFilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-04-15 00:10:14
+2022-04-17 03:13:26
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3666,7 +3678,7 @@ JNIEXPORT <span class="token keyword">void</span> JNICALL
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.FFmpeg集成","level":"1.21.3","depth":2,"next":{"title":"3.FFmpeg基础知识","level":"1.21.4","depth":2,"path":"FFmpeg/03_FFmpeg基础知识.md","ref":"FFmpeg/03_FFmpeg基础知识.md","articles":[]},"previous":{"title":"1.FFmpeg编译","level":"1.21.2","depth":2,"path":"FFmpeg/01_FFmpeg编译.md","ref":"FFmpeg/01_FFmpeg编译.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/02_FFmpeg集成.md","mtime":"2022-04-14T16:10:14.408Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-16T08:45:38.757Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.FFmpeg集成","level":"1.21.3","depth":2,"next":{"title":"3.FFmpeg基础知识","level":"1.21.4","depth":2,"path":"FFmpeg/03_FFmpeg基础知识.md","ref":"FFmpeg/03_FFmpeg基础知识.md","articles":[]},"previous":{"title":"1.FFmpeg编译","level":"1.21.2","depth":2,"path":"FFmpeg/01_FFmpeg编译.md","ref":"FFmpeg/01_FFmpeg编译.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/02_FFmpeg集成.md","mtime":"2022-04-16T19:13:26.276Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-16T19:13:55.387Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

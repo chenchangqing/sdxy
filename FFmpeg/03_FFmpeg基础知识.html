@@ -97,6 +97,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="04_FFmpeg视频解码.html" />
+    
     
     <link rel="prev" href="02_FFmpeg集成.html" />
     
@@ -3250,6 +3252,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.21.5" data-path="04_FFmpeg视频解码.html">
+            
+                <a href="04_FFmpeg视频解码.html">
+            
+                    
+                    4.FFmpeg视频解码
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -3435,12 +3450,23 @@ brew install homebrew-ffmpeg/ffmpeg/ffmpeg
 <h4 id="3-&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;">(3) &#x6D4B;&#x8BD5;&#x8FD0;&#x884C;</h4>
 <p>&#x4E0B;&#x8F7D;<a href="https://gitee.com/learnany/ffmpeg/tree/master/resources/test.mov" target="_blank">test.mov</a>&#xFF0C;&#x4FEE;&#x6539;&#x7801;&#x7387;&#xFF0C;mov&#x8F6C;mp4&#x3002;</p>
 <pre class="language-"><code>ffmpeg -i test.mov -b:v 234k -b:a 64k test.mp4
-</code></pre><h3 id="2-ffplay">2. ffplay</h3>
+</code></pre><h4 id="4-&#x5E38;&#x7528;&#x811A;&#x672C;">(4) &#x5E38;&#x7528;&#x811A;&#x672C;</h4>
+<p><a href="https://gitee.com/learnany/ffmpeg/blob/master/03_ffmpeg_base_knowledge/topmp4.sh" target="_blank">topmp4.sh</a>&#xFF0C;<a href="https://gitee.com/learnany/ffmpeg/blob/master/03_ffmpeg_base_knowledge/to1080pmp4.sh" target="_blank">to1080pmp4.sh</a></p>
+<h4 id="4-&#x6848;&#x4F8B;&#xFF1A;&#x89C6;&#x9891;&#x8F6C;&#x4E3A;&#x9AD8;&#x8D28;&#x91CF;gif&#x52A8;&#x56FE;">(4) &#x6848;&#x4F8B;&#xFF1A;&#x89C6;&#x9891;&#x8F6C;&#x4E3A;&#x9AD8;&#x8D28;&#x91CF;GIF&#x52A8;&#x56FE;</h4>
+<pre class="language-"><code>ffmpeg -ss 00:00:03 -t 3 -i Test.mov -s 640x360 -r &#x201C;15&#x201D; dongtu.gif
+</code></pre><p>1) -ss 00:00:03 &#x8868;&#x793A;&#x4ECE;&#x7B2C; 00 &#x5206;&#x949F; 03 &#x79D2;&#x5F00;&#x59CB;&#x5236;&#x4F5C; GIF&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4ECE;&#x7B2C; 9 &#x79D2;&#x5F00;&#x59CB;&#xFF0C;&#x5219;&#x8F93;&#x5165; -ss 00:00:09&#xFF0C;&#x6216;&#x8005; -ss 9&#xFF0C;&#x652F;&#x6301;&#x5C0F;&#x6570;&#x70B9;&#xFF0C;&#x6240;&#x4EE5;&#x4E5F;&#x53EF;&#x4EE5;&#x8F93;&#x5165; -ss 00:00:11.3&#xFF0C;&#x6216;&#x8005; -ss 34.6 &#x4E4B;&#x7C7B;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x52A0;&#x8BE5;&#x547D;&#x4EE4;&#xFF0C;&#x5219;&#x4ECE; 0 &#x79D2;&#x5F00;&#x59CB;&#x5236;&#x4F5C;&#xFF1B;</p>
+<p>2) -t 3 &#x8868;&#x793A;&#x628A;&#x6301;&#x7EED; 3 &#x79D2;&#x7684;&#x89C6;&#x9891;&#x8F6C;&#x6362;&#x4E3A; GIF&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x6539;&#x4E3A;&#x5176;&#x4ED6;&#x6570;&#x5B57;&#xFF0C;&#x4F8B;&#x5982; 1.5&#xFF0C;7 &#x7B49;&#x7B49;&#xFF0C;&#x65F6;&#x95F4;&#x8D8A;&#x957F;&#xFF0C;GIF &#x4F53;&#x79EF;&#x8D8A;&#x5927;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x52A0;&#x8BE5;&#x547D;&#x4EE4;&#xFF0C;&#x5219;&#x628A;&#x6574;&#x4E2A;&#x89C6;&#x9891;&#x8F6C;&#x4E3A; GIF&#xFF1B;</p>
+<p>3) -i &#x8868;&#x793A; invert &#x7684;&#x610F;&#x601D;&#x5427;&#xFF0C;&#x8F6C;&#x6362;&#xFF1B;</p>
+<p>4) Test.mov &#x5C31;&#x662F;&#x4F60;&#x8981;&#x8F6C;&#x6362;&#x7684;&#x89C6;&#x9891;&#xFF0C;&#x540D;&#x79F0;&#x6700;&#x597D;&#x4E0D;&#x8981;&#x6709;&#x4E2D;&#x6587;&#xFF0C;&#x4E0D;&#x8981;&#x7559;&#x7A7A;&#x683C;&#xFF0C;&#x652F;&#x6301;&#x591A;&#x79CD;&#x89C6;&#x9891;&#x683C;&#x5F0F;&#xFF1B;</p>
+<p>5) -s 640x360 &#x662F; GIF &#x7684;&#x5206;&#x8FA8;&#x7387;&#xFF0C;&#x89C6;&#x9891;&#x5206;&#x8FA8;&#x7387;&#x53EF;&#x80FD;&#x662F; 1080p&#xFF0C;&#x4F46;&#x4F60;&#x5236;&#x4F5C;&#x7684; GIF &#x53EF;&#x4EE5;&#x8F6C;&#x4E3A; 720p &#x7B49;&#xFF0C;&#x5141;&#x8BB8;&#x81EA;&#x5B9A;&#x4E49;&#xFF0C;&#x5206;&#x8FA8;&#x7387;&#x8D8A;&#x9AD8;&#x4F53;&#x79EF;&#x8D8A;&#x5927;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x52A0;&#x8BE5;&#x547D;&#x4EE4;&#xFF0C;&#x5219;&#x4FDD;&#x6301;&#x5206;&#x8FA8;&#x7387;&#x4E0D;&#x53D8;&#xFF1B;</p>
+<p>6) -r &#x201C;15&#x201D; &#x8868;&#x793A;&#x5E27;&#x7387;&#xFF0C;&#x7F51;&#x4E0A;&#x4E0B;&#x8F7D;&#x7684;&#x89C6;&#x9891;&#x5E27;&#x7387;&#x901A;&#x5E38;&#x4E3A; 24&#xFF0C;&#x8BBE;&#x4E3A; 15 &#x6548;&#x679C;&#x633A;&#x597D;&#x4E86;&#xFF0C;&#x5E27;&#x7387;&#x8D8A;&#x9AD8;&#x4F53;&#x79EF;&#x8D8A;&#x5927;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x52A0;&#x8BE5;&#x547D;&#x4EE4;&#xFF0C;&#x5219;&#x4FDD;&#x6301;&#x5E27;&#x7387;&#x4E0D;&#x53D8;&#xFF1B;</p>
+<p>7) dongtu.gif&#xFF1A;&#x5C31;&#x662F;&#x4F60;&#x8981;&#x8F93;&#x51FA;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x547D;&#x540D;&#x4E3A; hello.gif &#x7B49;&#x7B49;&#x3002;</p>
+<h3 id="2-ffplay">2. ffplay</h3>
 <p>&#x683C;&#x5F0F;&#xFF1A;ffplay {&#x6587;&#x4EF6;&#x8DEF;&#x5F84;}&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre class="language-"><code>ffplay test.mov
 </code></pre><p><img src="../images/ffmpeg_03_6.jpeg" width="100%/"></p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-04-16 16:45:06
+2022-04-17 03:13:26
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3469,10 +3495,14 @@ brew install homebrew-ffmpeg/ffmpeg/ffmpeg
 
             
                 
-                <a href="02_FFmpeg集成.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 2.FFmpeg集成">
+                <a href="02_FFmpeg集成.html" class="navigation navigation-prev " aria-label="Previous page: 2.FFmpeg集成">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="04_FFmpeg视频解码.html" class="navigation navigation-next " aria-label="Next page: 4.FFmpeg视频解码">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -3481,7 +3511,7 @@ brew install homebrew-ffmpeg/ffmpeg/ffmpeg
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.FFmpeg基础知识","level":"1.21.4","depth":2,"previous":{"title":"2.FFmpeg集成","level":"1.21.3","depth":2,"path":"FFmpeg/02_FFmpeg集成.md","ref":"FFmpeg/02_FFmpeg集成.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/03_FFmpeg基础知识.md","mtime":"2022-04-16T08:45:06.094Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-16T08:45:38.757Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.FFmpeg基础知识","level":"1.21.4","depth":2,"next":{"title":"4.FFmpeg视频解码","level":"1.21.5","depth":2,"path":"FFmpeg/04_FFmpeg视频解码.md","ref":"FFmpeg/04_FFmpeg视频解码.md","articles":[]},"previous":{"title":"2.FFmpeg集成","level":"1.21.3","depth":2,"path":"FFmpeg/02_FFmpeg集成.md","ref":"FFmpeg/02_FFmpeg集成.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/03_FFmpeg基础知识.md","mtime":"2022-04-16T19:13:26.276Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-16T19:13:55.387Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
