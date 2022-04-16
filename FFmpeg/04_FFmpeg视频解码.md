@@ -1,4 +1,4 @@
-# FFmpeg视频解码
+# 4.FFmpeg视频解码
 
 [代码工程](https://gitee.com/learnany/ffmpeg/tree/master/04_ffmpeg_decoding/AndroidFFmpegDecodingVideo)
 
@@ -369,10 +369,3 @@ ffmepgDecodeVideo(inFilePath, outFilePath);
 I/main: 解码器名称：h264
 A/libc: Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5713 (egdecodingvideo), pid 5713 (egdecodingvideo)
 ```
-
-
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-

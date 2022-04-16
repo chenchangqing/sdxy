@@ -278,17 +278,15 @@ public static native void ffmpegTestConfig();
 ```
 ##### 2) 定义NDK方法
 
-修改native-lib.cpp。
-
-导入ffmpeg头文件，由于 FFmpeg 是使用 C 语言编写的，所在 C++ 文件中引用 #include 的时候，也需要包裹在 extern "C" { }，才能正确的编译。
-```
+在native-lib.cpp中，导入FFmpeg头文件，由于 FFmpeg 是使用 C 语言编写的，所在 C++ 文件中引用 #include 的时候，也需要包裹在 extern "C" { }，才能正确的编译。
+```c
 #import <android/log.h>
 extern "C" {
 // 引入头文件
 // 核心库->音视频编解码库
 #include <libavcodec/avcodec.h>
 }
-```c
+```
 在native-lib.cpp中新增Java方法ffmpegTestConfig的C++实现。
 ```c
 extern "C" 
@@ -333,7 +331,7 @@ public static native void ffmpegVideoOpenFile(String filePath);
 
 ##### 2) 定义NDK方法
 
-导入ffmpeg头文件
+在native-lib.cpp中，导入FFmpeg头文件。
 ```c
 #import <android/log.h>
 extern "C" {
@@ -387,7 +385,7 @@ Java_com_ccq_androidffmpegcompiled_FFmpegTest_ffmpegVideoOpenFile(JNIEnv *env, j
 
 ```java
 String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-String inFilePath = rootPath.concat("/FFmpeg/Test.mov");
+String inFilePath = rootPath.concat("/DCIM/Camera/VID_20220220_181306412.mp4");
 FFmpegTest.ffmpegVideoOpenFile(inFilePath);
 ```
 
