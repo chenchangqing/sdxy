@@ -224,4 +224,5 @@
     * [1.FFmpeg编译](FFmpeg/01_FFmpeg编译.md)
     * [2.FFmpeg集成](FFmpeg/02_FFmpeg集成.md)
     * [3.FFmpeg基础知识](FFmpeg/03_FFmpeg基础知识.md)
+    * [4.FFmpeg视频解码](FFmpeg/04_FFmpeg视频解码.md)
 
