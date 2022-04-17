@@ -1,4 +1,4 @@
-# FFmpeg音频解码
+# 5.FFmpeg视频解码
 
 [代码工程](https://gitee.com/learnany/ffmpeg/tree/master/05_ffmpeg_audio_decoding/AndroidFFmpegDecodingAudio)
 
@@ -391,9 +391,3 @@ I/main: 当前解码第1帧
 .
 I/main: 当前解码第502帧
 ```
-
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-

@@ -1,6 +1,6 @@
 # 4.FFmpeg视频解码
 
-[代码工程](https://gitee.com/learnany/ffmpeg/tree/master/04_ffmpeg_decoding/AndroidFFmpegDecodingVideo)
+[代码工程](https://gitee.com/learnany/ffmpeg/tree/master/04_ffmpeg_video_decoding/AndroidFFmpegDecodingVideo)
 
 ## 一、视频解码流程
 
@@ -43,7 +43,7 @@ if (avformat_open_input_result != 0){
 }
 ```
 
-### 第三步：查找视频流
+### 第三步：查找视频基本信息
 
 `avformat_find_stream_info`：如果是视频解码，那么查找视频流，如果是音频解码，那么就查找音频流。
 
@@ -111,54 +111,48 @@ if (avcodec_open2_result != 0){
 __android_log_print(ANDROID_LOG_INFO, "main", "解码器名称：%s", avcodec->name);
 ```
 
-### 第六步：读取视频压缩数据
+### 第六步：定义类型转换参数
 
-`av_read_frame`：读取视频压缩数据。
+用于`sws_scale()`，进行音频采样数据转换操作。
+
+#### 1. 创建视频采样数据上下文
 
 ```c
-// 第七步：准备视频解码
-// ...
-
-// 第六步：读取视频压缩数据
-int current_index = 0;
-// 分析av_read_frame参数。
-// 参数一：封装格式上下文
-// 参数二：一帧压缩数据 = 一张图片
-// 结构体大小计算：字节对齐原则
-AVPacket* packet = (AVPacket*)av_malloc(sizeof(AVPacket));
-while (av_read_frame(avformat_context, packet) >= 0) {
-    // >=:读取到了
-    // <0:读取错误或者读取完毕
-    // 是否是我们的视频流
-    if (packet->stream_index == av_stream_index) {
-        // 第八步：开始视频解码
-        // ...
-        current_index++;
-        __android_log_print(ANDROID_LOG_INFO, "main", "当前解码第%d帧", current_index);
-    }
-}
+// 第六步：定义类型转换参数
+// 6.1 创建视频采样数据帧上下文
+// 参数一：源文件->原始视频像素数据格式宽
+// 参数二：源文件->原始视频像素数据格式高
+// 参数三：源文件->原始视频像素数据格式类型
+// 参数四：目标文件->目标视频像素数据格式宽
+// 参数五：目标文件->目标视频像素数据格式高
+// 参数六：目标文件->目标视频像素数据格式类型
+SwsContext *swscontext = sws_getContext(avcodec_context->width,
+                avcodec_context->height,
+                avcodec_context->pix_fmt,
+                avcodec_context->width,
+                avcodec_context->height,
+                AV_PIX_FMT_YUV420P,
+                SWS_BICUBIC,
+                NULL,
+                NULL,
+                NULL);
 ```
 
-### 第七步：准备视频解码
-
-注意：代码位置在第六步。
-
-#### 1. 创建输入帧数据
+#### 2. 创建视频压缩数据帧
 
 ```c
-// 第七步：准备视频解码
-// 7.1 创建输入帧数据：接收解码后的视频帧
-// 用于sws_scale()进行缩放/转换操作
+// 6.2 创建视频压缩数据帧
+// 视频压缩数据：H264
 AVFrame* avframe_in = av_frame_alloc();
 // 定义解码结果
 int decode_result = 0;
 ```
 
-#### 2. 创建输出帧数据
+#### 3. 创建视频采样数据帧
 
 ```c
-// 7.2 创建输出帧数据：接收转换后的输出帧
-// 用于sws_scale()进行缩放/转换操作
+// 6.3 创建视频采样数据帧
+// 视频采样数据：YUV格式
 AVFrame* avframe_yuv420p = av_frame_alloc();
 // 给缓冲区设置类型->yuv420类型
 // 得到YUV420P缓冲区大小
@@ -189,34 +183,10 @@ av_image_fill_arrays(avframe_yuv420p->data,
                  1);
 ```
 
-#### 3. 定义视频像素数据格式上下文
+### 第七步：打开.yuv文件
 
 ```c
-// 7.3 定义视频像素数据格式上下文
-// 用于sws_scale()进行缩放/转换操作
-// 注意：在这里我们不能够保证解码出来的一帧视频像素数据格式是yuv格式
-// 参数一：源文件->原始视频像素数据格式宽
-// 参数二：源文件->原始视频像素数据格式高
-// 参数三：源文件->原始视频像素数据格式类型
-// 参数四：目标文件->目标视频像素数据格式宽
-// 参数五：目标文件->目标视频像素数据格式高
-// 参数六：目标文件->目标视频像素数据格式类型
-SwsContext *swscontext = sws_getContext(avcodec_context->width,
-                avcodec_context->height,
-                avcodec_context->pix_fmt,
-                avcodec_context->width,
-                avcodec_context->height,
-                AV_PIX_FMT_YUV420P,
-                SWS_BICUBIC,
-                NULL,
-                NULL,
-                NULL);
-```
-
-#### 4. 打开写入文件
-
-```c
-// 7.4 打开写入文件
+// 第七步：打开.yuv文件
 const char *outfile = env->GetStringUTFChars(out_file_path, NULL);
 FILE* file_yuv420p = fopen(outfile, "wb+");
 if (file_yuv420p == NULL){
@@ -227,16 +197,41 @@ if (file_yuv420p == NULL){
 int y_size, u_size, v_size;
 ```
 
-### 第八步：开始视频解码
+### 第八步：读取视频压缩数据帧
 
-注意：代码位置在第六步。
+`av_read_frame`：读取视频压缩数据帧。
+
+```c
+// 第八步：读取视频压缩数据帧
+int current_index = 0;
+// 分析av_read_frame参数。
+// 参数一：封装格式上下文
+// 参数二：一帧压缩数据
+// 如果是解码视频流，是视频压缩帧数据，例如H264
+AVPacket* packet = (AVPacket*)av_malloc(sizeof(AVPacket));
+while (av_read_frame(avformat_context, packet) >= 0) {
+    // >=:读取到了
+    // <0:读取错误或者读取完毕
+    // 是否是我们的视频流
+    if (packet->stream_index == av_stream_index) {
+        // 第九步：开始视频解码
+        // ...
+        current_index++;
+        __android_log_print(ANDROID_LOG_INFO, "main", "当前解码第%d帧", current_index);
+    }
+}
+```
+
+### 第九步：开始视频解码
+
+注意：代码位置在第八步。
 
 `avcodec_send_packet`：发送一帧视频压缩数据。
 
 `avcodec_receive_frame`：解码一帧视频数据。
 
 ```c
-// 第八步：开始视频解码
+// 第九步：开始视频解码
 // 发送一帧视频压缩数据
 avcodec_send_packet(avcodec_context, packet);
 // 解码一帧视频数据
@@ -245,26 +240,22 @@ if (decode_result == 0) {
 
     // 视频解码成功
 
-    // 第九步：视频数据转换
+    // 第十步：开始类型转换
     // ...
 
-    // 第十步：写入yuv文件
+    // 第十一步：写入.yuv文件
     // ...
     
 }      
 ```
 
-### 第九步：处理转换后的视频帧
+### 第十步：开始类型转换
 
-注意：代码位置在第八步。
+注意：代码位置在第九步。
 
 ```c
-// 第九步：处理转换后的视频帧
-// 注意：在这里我们不能够保证解码出来的一帧视频像素数据格式是yuv格式
-// 视频像素数据格式很多种类型: yuv420P、yuv422p、yuv444p等等...
-// 保证：我的解码后的视频像素数据格式统一为yuv420P->通用的格式
-// 进行类型转换: 将解码出来的视频像素点数据格式->统一转类型为yuv420P
-// sws_scale作用：进行类型转换的
+// 第十步：开始类型转换
+// 将解码出来的视频像素点数据格式统一转类型为yuv420P
 // 参数一：视频像素数据格式上下文
 // 参数二：原来的视频像素数据格式->输入数据
 // 参数三：原来的视频像素数据格式->输入画面每一行大小
@@ -281,14 +272,12 @@ sws_scale(swscontext,
           avframe_yuv420p->linesize);
 ```
 
-### 第十步：处理转换后的视频帧
+### 第十一步：写入.yuv文件
 
-注意：代码位置在第八步。
+注意：代码位置在第九步。
 
 ```c
-// 第十步：写入.yuv文件
-// 方式一：直接显示视频上面去
-// 方式二：写入yuv文件格式
+// 第十一步：写入.yuv文件
 // 计算YUV大小
 // Y表示：亮度
 // UV表示：色度
@@ -297,7 +286,6 @@ sws_scale(swscontext,
 y_size = avcodec_context->width * avcodec_context->height;
 u_size = y_size / 4;
 v_size = y_size / 4;
-// 将yuv420p数据写入.yuv文件中
 // 首先->Y数据
 fwrite(avframe_yuv420p->data[0], 1, y_size, file_yuv420p);
 // 其次->U数据
@@ -306,10 +294,10 @@ fwrite(avframe_yuv420p->data[1], 1, u_size, file_yuv420p);
 fwrite(avframe_yuv420p->data[2], 1, v_size, file_yuv420p);
 ```
 
-### 第十一步：释放内存资源，关闭解码器
+### 第十二步：释放内存资源，关闭解码器
 
 ```c
-// 第十一步：释放内存资源，关闭解码器
+// 第十二步：释放内存资源，关闭解码器
 av_packet_free(&packet);
 fclose(file_yuv420p);
 av_frame_free(&avframe_in);
