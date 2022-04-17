@@ -3261,6 +3261,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.21.6" data-path="FFmpeg/05_FFmpeg音频解码.html">
+            
+                <a href="FFmpeg/05_FFmpeg音频解码.html">
+            
+                    
+                    5.FFmpeg音频解码
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -3311,8 +3324,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ffmpeg&#x89C6;&#x9891;&#x89E3;&#x7801;">FFmpeg&#x89C6;&#x9891;&#x89E3;&#x7801;</h1>
-<p><a href="https://gitee.com/learnany/ffmpeg/tree/master/04_ffmpeg_decoding/AndroidFFmpegDecodingVideo" target="_blank">&#x4EE3;&#x7801;&#x5DE5;&#x7A0B;</a></p>
+                                <h1 id="ffmpeg&#x97F3;&#x9891;&#x89E3;&#x7801;">FFmpeg&#x97F3;&#x9891;&#x89E3;&#x7801;</h1>
+<p><a href="https://gitee.com/learnany/ffmpeg/tree/master/05_ffmpeg_audio_decoding/AndroidFFmpegDecodingAudio" target="_blank">&#x4EE3;&#x7801;&#x5DE5;&#x7A0B;</a></p>
 <h2 id="&#x4E00;&#x3001;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x6D41;&#x7A0B;">&#x4E00;&#x3001;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x6D41;&#x7A0B;</h2>
 <h3 id="&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x6CE8;&#x518C;&#x7EC4;&#x4EF6;">&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x6CE8;&#x518C;&#x7EC4;&#x4EF6;</h3>
 <p><code>av_register_all</code>&#xFF1A;&#x4F8B;&#x5982;&#xFF1A;&#x7F16;&#x7801;&#x5668;&#x3001;&#x89E3;&#x7801;&#x5668;&#x7B49;&#x7B49;&#x3002;</p>
@@ -3345,7 +3358,7 @@ AVFormatContext<span class="token operator">*</span> avformat_context <span clas
     <span class="token keyword">return</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x6D41;">&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x6D41;</h3>
+<h3 id="&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x57FA;&#x672C;&#x4FE1;&#x606F;">&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x57FA;&#x672C;&#x4FE1;&#x606F;</h3>
 <p><code>avformat_find_stream_info</code>&#xFF1A;&#x5982;&#x679C;&#x662F;&#x89C6;&#x9891;&#x89E3;&#x7801;&#xFF0C;&#x90A3;&#x4E48;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x6D41;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x97F3;&#x9891;&#x89E3;&#x7801;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x67E5;&#x627E;&#x97F3;&#x9891;&#x6D41;&#x3002;</p>
 <pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x6D41;&#xFF0C;&#x62FF;&#x5230;&#x89C6;&#x9891;&#x4FE1;&#x606F;</span>
 <span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x5C01;&#x88C5;&#x683C;&#x5F0F;&#x4E0A;&#x4E0B;&#x6587;</span>
@@ -3356,23 +3369,23 @@ AVFormatContext<span class="token operator">*</span> avformat_context <span clas
     <span class="token keyword">return</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5668;">&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5668;</h3>
+<h3 id="&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x97F3;&#x9891;&#x89E3;&#x7801;&#x5668;">&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x97F3;&#x9891;&#x89E3;&#x7801;&#x5668;</h3>
 <p><code>avcodec_find_decoder</code>&#xFF1A;&#x67E5;&#x627E;&#x89E3;&#x7801;&#x5668;&#x3002;</p>
-<h4 id="1-&#x67E5;&#x627E;&#x89C6;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;">1. &#x67E5;&#x627E;&#x89C6;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;</h4>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5668;</span>
-<span class="token comment">// 4.1 &#x67E5;&#x627E;&#x89C6;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;</span>
+<h4 id="1-&#x67E5;&#x627E;&#x97F3;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;">1. &#x67E5;&#x627E;&#x97F3;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;</h4>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x97F3;&#x9891;&#x89E3;&#x7801;&#x5668;</span>
+<span class="token comment">// 4.1 &#x67E5;&#x627E;&#x97F3;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;</span>
 <span class="token keyword">int</span> av_stream_index <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> avformat_context<span class="token operator">-&gt;</span>nb_streams<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// &#x5224;&#x65AD;&#x6D41;&#x7C7B;&#x578B;&#xFF1A;&#x89C6;&#x9891;&#x6D41;&#x3001;&#x97F3;&#x9891;&#x6D41;&#x3001;&#x5B57;&#x6BCD;&#x6D41;&#x7B49;&#x7B49;...</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>avformat_context<span class="token operator">-&gt;</span>streams<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>codec<span class="token operator">-&gt;</span>codec_type <span class="token operator">==</span> AVMEDIA_TYPE_VIDEO<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>avformat_context<span class="token operator">-&gt;</span>streams<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-&gt;</span>codec<span class="token operator">-&gt;</span>codec_type <span class="token operator">==</span> AVMEDIA_TYPE_AUDIO<span class="token punctuation">)</span><span class="token punctuation">{</span>
         av_stream_index <span class="token operator">=</span> i<span class="token punctuation">;</span>
         <span class="token keyword">break</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h4 id="2-&#x83B7;&#x53D6;&#x89E3;&#x7801;&#x5668;&#x4E0A;&#x4E0B;&#x6587;">2. &#x83B7;&#x53D6;&#x89E3;&#x7801;&#x5668;&#x4E0A;&#x4E0B;&#x6587;</h4>
-<p>&#x6839;&#x636E;&#x89C6;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#xFF0C;&#x83B7;&#x53D6;&#x89E3;&#x7801;&#x5668;&#x4E0A;&#x4E0B;&#x6587;&#x3002;</p>
-<pre class="language-"><code class="lang-c"><span class="token comment">// 4.2 &#x6839;&#x636E;&#x89C6;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#xFF0C;&#x83B7;&#x53D6;&#x89E3;&#x7801;&#x5668;&#x4E0A;&#x4E0B;&#x6587;</span>
+<p>&#x6839;&#x636E;&#x97F3;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#xFF0C;&#x83B7;&#x53D6;&#x89E3;&#x7801;&#x5668;&#x4E0A;&#x4E0B;&#x6587;&#x3002;</p>
+<pre class="language-"><code class="lang-c"><span class="token comment">// 4.2 &#x6839;&#x636E;&#x97F3;&#x9891;&#x6D41;&#x7D22;&#x5F15;&#xFF0C;&#x83B7;&#x53D6;&#x89E3;&#x7801;&#x5668;&#x4E0A;&#x4E0B;&#x6587;</span>
 AVCodecContext <span class="token operator">*</span>avcodec_context <span class="token operator">=</span> avformat_context<span class="token operator">-&gt;</span>streams<span class="token punctuation">[</span>av_stream_index<span class="token punctuation">]</span><span class="token operator">-&gt;</span>codec<span class="token punctuation">;</span>
 </code></pre>
 <h4 id="3-&#x83B7;&#x5F97;&#x89E3;&#x7801;&#x5668;id">3. &#x83B7;&#x5F97;&#x89E3;&#x7801;&#x5668;ID</h4>
@@ -3392,185 +3405,161 @@ AVCodec <span class="token operator">*</span>avcodec <span class="token operator
 <span class="token comment">// &#x6253;&#x5370;&#x4FE1;&#x606F;</span>
 <span class="token function">__android_log_print</span><span class="token punctuation">(</span>ANDROID_LOG_INFO<span class="token punctuation">,</span> <span class="token string">&quot;main&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&#x89E3;&#x7801;&#x5668;&#x540D;&#x79F0;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> avcodec<span class="token operator">-&gt;</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;">&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;</h3>
-<p><code>av_read_frame</code>&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x3002;</p>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x51C6;&#x5907;&#x89C6;&#x9891;&#x89E3;&#x7801;</span>
-<span class="token comment">// ...</span>
-
-<span class="token comment">// &#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;</span>
+<h3 id="&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x53C2;&#x6570;">&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x53C2;&#x6570;</h3>
+<p>&#x7528;&#x4E8E;<code>swr_convert()</code>&#xFF0C;&#x8FDB;&#x884C;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x64CD;&#x4F5C;&#x3002;</p>
+<h4 id="1-&#x521B;&#x5EFA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x4E0A;&#x4E0B;&#x6587;">1. &#x521B;&#x5EFA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x4E0A;&#x4E0B;&#x6587;</h4>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x53C2;&#x6570;</span>
+<span class="token comment">// 6.1 &#x521B;&#x5EFA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x4E0A;&#x4E0B;&#x6587;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x4E0A;&#x4E0B;&#x6587;</span>
+<span class="token comment">// &#x4E0A;&#x4E0B;&#x6587;&#xFF1A;&#x4FDD;&#x5B58;&#x97F3;&#x9891;&#x4FE1;&#x606F;</span>
+SwrContext<span class="token operator">*</span> swr_context <span class="token operator">=</span> <span class="token function">swr_alloc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x8F93;&#x51FA;&#x58F0;&#x9053;&#x5E03;&#x5C40;&#x7C7B;&#x578B;(&#x7ACB;&#x4F53;&#x58F0;&#x3001;&#x73AF;&#x7ED5;&#x58F0;&#x3001;&#x673A;&#x5668;&#x4EBA;&#x7B49;&#x7B49;...)</span>
+<span class="token comment">// &#x7ACB;&#x4F53;&#x58F0;</span>
+int64_t out_ch_layout <span class="token operator">=</span> AV_CH_LAYOUT_STEREO<span class="token punctuation">;</span>
+<span class="token comment">//  int out_ch_layout = av_get_default_channel_layout(avcodec_context-&gt;channels);</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x8F93;&#x51FA;&#x91C7;&#x6837;&#x7CBE;&#x5EA6;&#xFF08;&#x7F16;&#x7801;&#xFF09;</span>
+<span class="token comment">// &#x4F8B;&#x5982;&#xFF1A;&#x91C7;&#x6837;&#x7CBE;&#x5EA6;8&#x4F4D; = 1&#x5B57;&#x8282;&#xFF0C;&#x91C7;&#x6837;&#x7CBE;&#x5EA6;16&#x4F4D; = 2&#x5B57;&#x8282;</span>
+<span class="token comment">// &#x76F4;&#x63A5;&#x6307;&#x5B9A;</span>
+<span class="token comment">// int out_sample_fmt = AV_SAMPLE_FMT_S16;</span>
+<span class="token comment">// &#x52A8;&#x6001;&#x83B7;&#x53D6;&#xFF0C;&#x4FDD;&#x6301;&#x4E00;&#x81F4;</span>
+AVSampleFormat out_sample_fmt <span class="token operator">=</span> avcodec_context<span class="token operator">-&gt;</span>sample_fmt<span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x56DB;&#xFF1A;&#x8F93;&#x51FA;&#x91C7;&#x6837;&#x7387;(44100HZ)</span>
+<span class="token keyword">int</span> out_sample_rate <span class="token operator">=</span> avcodec_context<span class="token operator">-&gt;</span>sample_rate<span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E94;&#xFF1A;&#x8F93;&#x5165;&#x58F0;&#x9053;&#x5E03;&#x5C40;&#x7C7B;&#x578B;</span>
+int64_t in_ch_layout <span class="token operator">=</span> <span class="token function">av_get_default_channel_layout</span><span class="token punctuation">(</span>avcodec_context<span class="token operator">-&gt;</span>channels<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x516D;&#xFF1A;&#x8F93;&#x5165;&#x91C7;&#x6837;&#x7CBE;&#x5EA6;</span>
+AVSampleFormat in_sample_fmt <span class="token operator">=</span> avcodec_context<span class="token operator">-&gt;</span>sample_fmt<span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E03;&#xFF1A;&#x8F93;&#x5165;&#x91C7;&#x6837;&#x7387;</span>
+<span class="token keyword">int</span> in_sample_rate <span class="token operator">=</span> avcodec_context<span class="token operator">-&gt;</span>sample_rate<span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x516B;&#xFF1A;log_offset-&gt;log&#x65E5;&#x5FD7;&#xFF0C;&#x4ECE;&#x90A3;&#x91CC;&#x5F00;&#x59CB;&#x7EDF;&#x8BA1;</span>
+<span class="token keyword">int</span> log_offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E5D;&#xFF1A;log&#x4E0A;&#x4E0B;&#x6587;</span>
+<span class="token function">swr_alloc_set_opts</span><span class="token punctuation">(</span>swr_context<span class="token punctuation">,</span>
+               out_ch_layout<span class="token punctuation">,</span>
+               out_sample_fmt<span class="token punctuation">,</span>
+               out_sample_rate<span class="token punctuation">,</span>
+               in_ch_layout<span class="token punctuation">,</span>
+               in_sample_fmt<span class="token punctuation">,</span>
+               in_sample_rate<span class="token punctuation">,</span>
+               log_offset<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x521D;&#x59CB;&#x5316;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x4E0A;&#x4E0B;&#x6587;</span>
+<span class="token function">swr_init</span><span class="token punctuation">(</span>swr_context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="2-&#x521B;&#x5EFA;&#x97F3;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x5E27;">2. &#x521B;&#x5EFA;&#x97F3;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x5E27;</h4>
+<pre class="language-"><code class="lang-c"><span class="token comment">// 6.2 &#x521B;&#x5EFA;&#x97F3;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x5E27;</span>
+<span class="token comment">// &#x97F3;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#xFF1A;acc&#x683C;&#x5F0F;&#x3001;mp3&#x683C;&#x5F0F;</span>
+AVFrame<span class="token operator">*</span> avframe_in <span class="token operator">=</span> <span class="token function">av_frame_alloc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x5B9A;&#x4E49;&#x89E3;&#x7801;&#x7ED3;&#x679C;</span>
+<span class="token keyword">int</span> decode_result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="3-&#x521B;&#x5EFA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x5E27;">3. &#x521B;&#x5EFA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x5E27;</h4>
+<pre class="language-"><code class="lang-c"><span class="token comment">// 6.3 &#x521B;&#x5EFA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x5E27;</span>
+<span class="token comment">// &#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#xFF1A;PCM&#x683C;&#x5F0F;</span>
+<span class="token comment">// &#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F; = &#x91C7;&#x6837;&#x7387;(44100HZ) * &#x91C7;&#x6837;&#x7CBE;&#x5EA6;(16&#x4F4D; = 2&#x5B57;&#x8282;)</span>
+<span class="token keyword">int</span> MAX_AUDIO_SIZE <span class="token operator">=</span> <span class="token number">44100</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+uint8_t <span class="token operator">*</span>out_buffer <span class="token operator">=</span> <span class="token punctuation">(</span>uint8_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">av_malloc</span><span class="token punctuation">(</span>MAX_AUDIO_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x6253;&#x5F00;pcm&#x6587;&#x4EF6;">&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x6253;&#x5F00;.pcm&#x6587;&#x4EF6;</h3>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x6253;&#x5F00;.yuv&#x6587;&#x4EF6;</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>outfile <span class="token operator">=</span> env<span class="token operator">-&gt;</span><span class="token function">GetStringUTFChars</span><span class="token punctuation">(</span>out_file_path<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+FILE<span class="token operator">*</span> file_pcm <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>outfile<span class="token punctuation">,</span> <span class="token string">&quot;wb+&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>file_pcm <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">__android_log_print</span><span class="token punctuation">(</span>ANDROID_LOG_INFO<span class="token punctuation">,</span> <span class="token string">&quot;main&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x5931;&#x8D25;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x5E27;">&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x5E27;</h3>
+<p><code>av_read_frame</code>&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x5E27;&#x3002;</p>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x5E27;</span>
 <span class="token keyword">int</span> current_index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token comment">// &#x5206;&#x6790;av_read_frame&#x53C2;&#x6570;&#x3002;</span>
 <span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x5C01;&#x88C5;&#x683C;&#x5F0F;&#x4E0A;&#x4E0B;&#x6587;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x4E00;&#x5E27;&#x538B;&#x7F29;&#x6570;&#x636E; = &#x4E00;&#x5F20;&#x56FE;&#x7247;</span>
-<span class="token comment">// &#x7ED3;&#x6784;&#x4F53;&#x5927;&#x5C0F;&#x8BA1;&#x7B97;&#xFF1A;&#x5B57;&#x8282;&#x5BF9;&#x9F50;&#x539F;&#x5219;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x4E00;&#x5E27;&#x538B;&#x7F29;&#x6570;&#x636E;</span>
+<span class="token comment">// &#x5982;&#x679C;&#x662F;&#x89E3;&#x7801;&#x97F3;&#x9891;&#x6D41;&#xFF0C;&#x662F;&#x97F3;&#x9891;&#x538B;&#x7F29;&#x5E27;&#x6570;&#x636E;&#xFF0C;&#x4F8B;&#x5982;acc&#x3001;mp3</span>
 AVPacket<span class="token operator">*</span> packet <span class="token operator">=</span> <span class="token punctuation">(</span>AVPacket<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">av_malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>AVPacket<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">av_read_frame</span><span class="token punctuation">(</span>avformat_context<span class="token punctuation">,</span> packet<span class="token punctuation">)</span> <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// &gt;=:&#x8BFB;&#x53D6;&#x5230;&#x4E86;</span>
     <span class="token comment">// &lt;0:&#x8BFB;&#x53D6;&#x9519;&#x8BEF;&#x6216;&#x8005;&#x8BFB;&#x53D6;&#x5B8C;&#x6BD5;</span>
-    <span class="token comment">// &#x662F;&#x5426;&#x662F;&#x6211;&#x4EEC;&#x7684;&#x89C6;&#x9891;&#x6D41;</span>
+    <span class="token comment">// &#x662F;&#x5426;&#x662F;&#x6211;&#x4EEC;&#x7684;&#x97F3;&#x9891;&#x6D41;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>stream_index <span class="token operator">==</span> av_stream_index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// &#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x89C6;&#x9891;&#x89E3;&#x7801;</span>
+        <span class="token comment">// &#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x97F3;&#x9891;&#x89E3;&#x7801;</span>
         <span class="token comment">// ...</span>
         current_index<span class="token operator">++</span><span class="token punctuation">;</span>
         <span class="token function">__android_log_print</span><span class="token punctuation">(</span>ANDROID_LOG_INFO<span class="token punctuation">,</span> <span class="token string">&quot;main&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&#x5F53;&#x524D;&#x89E3;&#x7801;&#x7B2C;%d&#x5E27;&quot;</span><span class="token punctuation">,</span> current_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x51C6;&#x5907;&#x89C6;&#x9891;&#x89E3;&#x7801;">&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x51C6;&#x5907;&#x89C6;&#x9891;&#x89E3;&#x7801;</h3>
-<p>&#x6CE8;&#x610F;&#xFF1A;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x5728;&#x7B2C;&#x516D;&#x6B65;&#x3002;</p>
-<h4 id="1-&#x521B;&#x5EFA;&#x8F93;&#x5165;&#x5E27;&#x6570;&#x636E;">1. &#x521B;&#x5EFA;&#x8F93;&#x5165;&#x5E27;&#x6570;&#x636E;</h4>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x51C6;&#x5907;&#x89C6;&#x9891;&#x89E3;&#x7801;</span>
-<span class="token comment">// 7.1 &#x521B;&#x5EFA;&#x8F93;&#x5165;&#x5E27;&#x6570;&#x636E;&#xFF1A;&#x63A5;&#x6536;&#x89E3;&#x7801;&#x540E;&#x7684;&#x89C6;&#x9891;&#x5E27;</span>
-<span class="token comment">// &#x7528;&#x4E8E;sws_scale()&#x8FDB;&#x884C;&#x7F29;&#x653E;/&#x8F6C;&#x6362;&#x64CD;&#x4F5C;</span>
-AVFrame<span class="token operator">*</span> avframe_in <span class="token operator">=</span> <span class="token function">av_frame_alloc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x5B9A;&#x4E49;&#x89E3;&#x7801;&#x7ED3;&#x679C;</span>
-<span class="token keyword">int</span> decode_result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-</code></pre>
-<h4 id="2-&#x521B;&#x5EFA;&#x8F93;&#x51FA;&#x5E27;&#x6570;&#x636E;">2. &#x521B;&#x5EFA;&#x8F93;&#x51FA;&#x5E27;&#x6570;&#x636E;</h4>
-<pre class="language-"><code class="lang-c"><span class="token comment">// 7.2 &#x521B;&#x5EFA;&#x8F93;&#x51FA;&#x5E27;&#x6570;&#x636E;&#xFF1A;&#x63A5;&#x6536;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x8F93;&#x51FA;&#x5E27;</span>
-<span class="token comment">// &#x7528;&#x4E8E;sws_scale()&#x8FDB;&#x884C;&#x7F29;&#x653E;/&#x8F6C;&#x6362;&#x64CD;&#x4F5C;</span>
-AVFrame<span class="token operator">*</span> avframe_yuv420p <span class="token operator">=</span> <span class="token function">av_frame_alloc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x7ED9;&#x7F13;&#x51B2;&#x533A;&#x8BBE;&#x7F6E;&#x7C7B;&#x578B;-&gt;yuv420&#x7C7B;&#x578B;</span>
-<span class="token comment">// &#x5F97;&#x5230;YUV420P&#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7C7B;&#x578B;-&gt;YUV420P&#x683C;&#x5F0F;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x5BBD; = &#x89C6;&#x9891;&#x5BBD;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x9AD8; = &#x89C6;&#x9891;&#x9AD8;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x56DB;&#xFF1A;&#x5B57;&#x8282;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;-&gt;&#x9ED8;&#x8BA4;&#x662F;1</span>
-<span class="token keyword">int</span> buffer_size <span class="token operator">=</span> <span class="token function">av_image_get_buffer_size</span><span class="token punctuation">(</span>AV_PIX_FMT_YUV420P<span class="token punctuation">,</span>
-                     avcodec_context<span class="token operator">-&gt;</span>width<span class="token punctuation">,</span>
-                     avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span>
-                     <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x5F00;&#x8F9F;&#x4E00;&#x5757;&#x5185;&#x5B58;&#x7A7A;&#x95F4;</span>
-uint8_t <span class="token operator">*</span>out_buffer <span class="token operator">=</span> <span class="token punctuation">(</span>uint8_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">av_malloc</span><span class="token punctuation">(</span>buffer_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x5411;avframe_yuv420p&#x586B;&#x5145;&#x6570;&#x636E;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x76EE;&#x6807;-&gt;&#x586B;&#x5145;&#x6570;&#x636E;(avframe_yuv420p)</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x76EE;&#x6807;-&gt;&#x6BCF;&#x4E00;&#x884C;&#x5927;&#x5C0F;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x539F;&#x59CB;&#x6570;&#x636E;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x56DB;&#xFF1A;&#x76EE;&#x6807;-&gt;&#x683C;&#x5F0F;&#x7C7B;&#x578B;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E94;&#xFF1A;&#x5BBD;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x516D;&#xFF1A;&#x9AD8;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E03;&#xFF1A;&#x5B57;&#x8282;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;</span>
-<span class="token function">av_image_fill_arrays</span><span class="token punctuation">(</span>avframe_yuv420p<span class="token operator">-&gt;</span>data<span class="token punctuation">,</span>
-                 avframe_yuv420p<span class="token operator">-&gt;</span>linesize<span class="token punctuation">,</span>
-                 out_buffer<span class="token punctuation">,</span>
-                 AV_PIX_FMT_YUV420P<span class="token punctuation">,</span>
-                 avcodec_context<span class="token operator">-&gt;</span>width<span class="token punctuation">,</span>
-                 avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span>
-                 <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h4 id="3-&#x5B9A;&#x4E49;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x4E0A;&#x4E0B;&#x6587;">3. &#x5B9A;&#x4E49;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x4E0A;&#x4E0B;&#x6587;</h4>
-<pre class="language-"><code class="lang-c"><span class="token comment">// 7.3 &#x5B9A;&#x4E49;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x4E0A;&#x4E0B;&#x6587;</span>
-<span class="token comment">// &#x7528;&#x4E8E;sws_scale()&#x8FDB;&#x884C;&#x7F29;&#x653E;/&#x8F6C;&#x6362;&#x64CD;&#x4F5C;</span>
-<span class="token comment">// &#x6CE8;&#x610F;&#xFF1A;&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x4E0D;&#x80FD;&#x591F;&#x4FDD;&#x8BC1;&#x89E3;&#x7801;&#x51FA;&#x6765;&#x7684;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x662F;yuv&#x683C;&#x5F0F;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x6E90;&#x6587;&#x4EF6;-&gt;&#x539F;&#x59CB;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x5BBD;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x6E90;&#x6587;&#x4EF6;-&gt;&#x539F;&#x59CB;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x9AD8;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x6E90;&#x6587;&#x4EF6;-&gt;&#x539F;&#x59CB;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7C7B;&#x578B;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x56DB;&#xFF1A;&#x76EE;&#x6807;&#x6587;&#x4EF6;-&gt;&#x76EE;&#x6807;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x5BBD;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E94;&#xFF1A;&#x76EE;&#x6807;&#x6587;&#x4EF6;-&gt;&#x76EE;&#x6807;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x9AD8;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x516D;&#xFF1A;&#x76EE;&#x6807;&#x6587;&#x4EF6;-&gt;&#x76EE;&#x6807;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7C7B;&#x578B;</span>
-SwsContext <span class="token operator">*</span>swscontext <span class="token operator">=</span> <span class="token function">sws_getContext</span><span class="token punctuation">(</span>avcodec_context<span class="token operator">-&gt;</span>width<span class="token punctuation">,</span>
-                avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span>
-                avcodec_context<span class="token operator">-&gt;</span>pix_fmt<span class="token punctuation">,</span>
-                avcodec_context<span class="token operator">-&gt;</span>width<span class="token punctuation">,</span>
-                avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span>
-                AV_PIX_FMT_YUV420P<span class="token punctuation">,</span>
-                SWS_BICUBIC<span class="token punctuation">,</span>
-                <span class="token constant">NULL</span><span class="token punctuation">,</span>
-                <span class="token constant">NULL</span><span class="token punctuation">,</span>
-                <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h4 id="4-&#x6253;&#x5F00;&#x5199;&#x5165;&#x6587;&#x4EF6;">4. &#x6253;&#x5F00;&#x5199;&#x5165;&#x6587;&#x4EF6;</h4>
-<pre class="language-"><code class="lang-c"><span class="token comment">// 7.4 &#x6253;&#x5F00;&#x5199;&#x5165;&#x6587;&#x4EF6;</span>
-<span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>outfile <span class="token operator">=</span> env<span class="token operator">-&gt;</span><span class="token function">GetStringUTFChars</span><span class="token punctuation">(</span>out_file_path<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-FILE<span class="token operator">*</span> file_yuv420p <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>outfile<span class="token punctuation">,</span> <span class="token string">&quot;wb+&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>file_yuv420p <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">__android_log_print</span><span class="token punctuation">(</span>ANDROID_LOG_INFO<span class="token punctuation">,</span> <span class="token string">&quot;main&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x5931;&#x8D25;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token comment">// &#x5199;&#x5165;&#x65F6;yuv&#x6570;&#x636E;&#x4F4D;&#x7F6E;</span>
-<span class="token keyword">int</span> y_size<span class="token punctuation">,</span> u_size<span class="token punctuation">,</span> v_size<span class="token punctuation">;</span>
-</code></pre>
-<h3 id="&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x89C6;&#x9891;&#x89E3;&#x7801;">&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x89C6;&#x9891;&#x89E3;&#x7801;</h3>
-<p>&#x6CE8;&#x610F;&#xFF1A;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x5728;&#x7B2C;&#x516D;&#x6B65;&#x3002;</p>
+<h3 id="&#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x89C6;&#x9891;&#x89E3;&#x7801;">&#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x89C6;&#x9891;&#x89E3;&#x7801;</h3>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x5728;&#x7B2C;&#x516B;&#x6B65;&#x3002;</p>
 <p><code>avcodec_send_packet</code>&#xFF1A;&#x53D1;&#x9001;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;&#x3002;</p>
 <p><code>avcodec_receive_frame</code>&#xFF1A;&#x89E3;&#x7801;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x6570;&#x636E;&#x3002;</p>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x89C6;&#x9891;&#x89E3;&#x7801;</span>
-<span class="token comment">// &#x53D1;&#x9001;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;</span>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x97F3;&#x9891;&#x89E3;&#x7801;</span>
+<span class="token comment">// &#x53D1;&#x9001;&#x4E00;&#x5E27;&#x97F3;&#x9891;&#x538B;&#x7F29;&#x6570;&#x636E;</span>
 <span class="token function">avcodec_send_packet</span><span class="token punctuation">(</span>avcodec_context<span class="token punctuation">,</span> packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// &#x89E3;&#x7801;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x6570;&#x636E;</span>
 decode_result <span class="token operator">=</span> <span class="token function">avcodec_receive_frame</span><span class="token punctuation">(</span>avcodec_context<span class="token punctuation">,</span> avframe_in<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span>decode_result <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-    <span class="token comment">// &#x89C6;&#x9891;&#x89E3;&#x7801;&#x6210;&#x529F;</span>
+    <span class="token comment">// &#x97F3;&#x9891;&#x89E3;&#x7801;&#x6210;&#x529F;</span>
 
-    <span class="token comment">// &#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x89C6;&#x9891;&#x6570;&#x636E;&#x8F6C;&#x6362;</span>
+    <span class="token comment">// &#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x7C7B;&#x578B;&#x8F6C;&#x6362;</span>
     <span class="token comment">// ...</span>
 
-    <span class="token comment">// &#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5199;&#x5165;yuv&#x6587;&#x4EF6;</span>
+    <span class="token comment">// &#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5199;&#x5165;.pcm&#x6587;&#x4EF6;</span>
     <span class="token comment">// ...</span>
 
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x89C6;&#x9891;&#x5E27;">&#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x89C6;&#x9891;&#x5E27;</h3>
-<p>&#x6CE8;&#x610F;&#xFF1A;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x5728;&#x7B2C;&#x516B;&#x6B65;&#x3002;</p>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x89C6;&#x9891;&#x5E27;</span>
-<span class="token comment">// &#x6CE8;&#x610F;&#xFF1A;&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x4E0D;&#x80FD;&#x591F;&#x4FDD;&#x8BC1;&#x89E3;&#x7801;&#x51FA;&#x6765;&#x7684;&#x4E00;&#x5E27;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x662F;yuv&#x683C;&#x5F0F;</span>
-<span class="token comment">// &#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x5F88;&#x591A;&#x79CD;&#x7C7B;&#x578B;: yuv420P&#x3001;yuv422p&#x3001;yuv444p&#x7B49;&#x7B49;...</span>
-<span class="token comment">// &#x4FDD;&#x8BC1;&#xFF1A;&#x6211;&#x7684;&#x89E3;&#x7801;&#x540E;&#x7684;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7EDF;&#x4E00;&#x4E3A;yuv420P-&gt;&#x901A;&#x7528;&#x7684;&#x683C;&#x5F0F;</span>
-<span class="token comment">// &#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x8F6C;&#x6362;: &#x5C06;&#x89E3;&#x7801;&#x51FA;&#x6765;&#x7684;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x70B9;&#x6570;&#x636E;&#x683C;&#x5F0F;-&gt;&#x7EDF;&#x4E00;&#x8F6C;&#x7C7B;&#x578B;&#x4E3A;yuv420P</span>
-<span class="token comment">// sws_scale&#x4F5C;&#x7528;&#xFF1A;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x7684;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x4E0A;&#x4E0B;&#x6587;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x539F;&#x6765;&#x7684;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;-&gt;&#x8F93;&#x5165;&#x6570;&#x636E;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x539F;&#x6765;&#x7684;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;-&gt;&#x8F93;&#x5165;&#x753B;&#x9762;&#x6BCF;&#x4E00;&#x884C;&#x5927;&#x5C0F;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x56DB;&#xFF1A;&#x539F;&#x6765;&#x7684;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;-&gt;&#x8F93;&#x5165;&#x753B;&#x9762;&#x6BCF;&#x4E00;&#x884C;&#x5F00;&#x59CB;&#x4F4D;&#x7F6E;(&#x586B;&#x5199;&#xFF1A;0-&gt;&#x8868;&#x793A;&#x4ECE;&#x539F;&#x70B9;&#x5F00;&#x59CB;&#x8BFB;&#x53D6;)</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E94;&#xFF1A;&#x539F;&#x6765;&#x7684;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;-&gt;&#x8F93;&#x5165;&#x6570;&#x636E;&#x884C;&#x6570;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x516D;&#xFF1A;&#x8F6C;&#x6362;&#x7C7B;&#x578B;&#x540E;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;-&gt;&#x8F93;&#x51FA;&#x6570;&#x636E;</span>
-<span class="token comment">// &#x53C2;&#x6570;&#x4E03;&#xFF1A;&#x8F6C;&#x6362;&#x7C7B;&#x578B;&#x540E;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;-&gt;&#x8F93;&#x51FA;&#x753B;&#x9762;&#x6BCF;&#x4E00;&#x884C;&#x5927;&#x5C0F;</span>
-<span class="token function">sws_scale</span><span class="token punctuation">(</span>swscontext<span class="token punctuation">,</span>
-          <span class="token punctuation">(</span><span class="token keyword">const</span> uint8_t <span class="token operator">*</span><span class="token keyword">const</span> <span class="token operator">*</span><span class="token punctuation">)</span>avframe_in<span class="token operator">-&gt;</span>data<span class="token punctuation">,</span>
-          avframe_in<span class="token operator">-&gt;</span>linesize<span class="token punctuation">,</span>
-          <span class="token number">0</span><span class="token punctuation">,</span>
-          avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span>
-          avframe_yuv420p<span class="token operator">-&gt;</span>data<span class="token punctuation">,</span>
-          avframe_yuv420p<span class="token operator">-&gt;</span>linesize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<h3 id="&#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x7C7B;&#x578B;&#x8F6C;&#x6362;">&#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x7C7B;&#x578B;&#x8F6C;&#x6362;</h3>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x5728;&#x7B2C;&#x4E5D;&#x6B65;&#x3002;</p>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5F00;&#x59CB;&#x7C7B;&#x578B;&#x8F6C;&#x6362;</span>
+<span class="token comment">// &#x5C06;&#x89E3;&#x7801;&#x51FA;&#x6765;&#x7684;&#x97F3;&#x9891;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7EDF;&#x4E00;&#x8F6C;&#x7C7B;&#x578B;&#x4E3A;PCM</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x4E0A;&#x4E0B;&#x6587;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x8F93;&#x51FA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x8F93;&#x51FA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;-&gt;&#x5927;&#x5C0F;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x56DB;&#xFF1A;&#x8F93;&#x5165;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E94;&#xFF1A;&#x8F93;&#x5165;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;-&gt;&#x5927;&#x5C0F;</span>
+<span class="token function">swr_convert</span><span class="token punctuation">(</span>swr_context<span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>out_buffer<span class="token punctuation">,</span>
+            MAX_AUDIO_SIZE<span class="token punctuation">,</span>
+            <span class="token punctuation">(</span><span class="token keyword">const</span> uint8_t <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>avframe_in<span class="token operator">-&gt;</span>data<span class="token punctuation">,</span>
+            avframe_in<span class="token operator">-&gt;</span>nb_samples<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x89C6;&#x9891;&#x5E27;">&#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x89C6;&#x9891;&#x5E27;</h3>
-<p>&#x6CE8;&#x610F;&#xFF1A;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x5728;&#x7B2C;&#x516B;&#x6B65;&#x3002;</p>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x5199;&#x5165;.yuv&#x6587;&#x4EF6;</span>
-<span class="token comment">// &#x65B9;&#x5F0F;&#x4E00;&#xFF1A;&#x76F4;&#x63A5;&#x663E;&#x793A;&#x89C6;&#x9891;&#x4E0A;&#x9762;&#x53BB;</span>
-<span class="token comment">// &#x65B9;&#x5F0F;&#x4E8C;&#xFF1A;&#x5199;&#x5165;yuv&#x6587;&#x4EF6;&#x683C;&#x5F0F;</span>
-<span class="token comment">// &#x8BA1;&#x7B97;YUV&#x5927;&#x5C0F;</span>
-<span class="token comment">// Y&#x8868;&#x793A;&#xFF1A;&#x4EAE;&#x5EA6;</span>
-<span class="token comment">// UV&#x8868;&#x793A;&#xFF1A;&#x8272;&#x5EA6;</span>
-<span class="token comment">// YUV420P&#x683C;&#x5F0F;&#x89C4;&#x8303;&#x4E00;&#xFF1A;Y&#x7ED3;&#x6784;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x50CF;&#x7D20;(&#x4E00;&#x4E2A;&#x50CF;&#x7D20;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;Y)</span>
-<span class="token comment">// YUV420P&#x683C;&#x5F0F;&#x89C4;&#x8303;&#x4E8C;&#xFF1A;4&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;(U&#x548C;V: 4Y = U = V)</span>
-y_size <span class="token operator">=</span> avcodec_context<span class="token operator">-&gt;</span>width <span class="token operator">*</span> avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">;</span>
-u_size <span class="token operator">=</span> y_size <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">;</span>
-v_size <span class="token operator">=</span> y_size <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x5C06;yuv420p&#x6570;&#x636E;&#x5199;&#x5165;.yuv&#x6587;&#x4EF6;&#x4E2D;</span>
-<span class="token comment">// &#x9996;&#x5148;-&gt;Y&#x6570;&#x636E;</span>
-<span class="token function">fwrite</span><span class="token punctuation">(</span>avframe_yuv420p<span class="token operator">-&gt;</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> y_size<span class="token punctuation">,</span> file_yuv420p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x5176;&#x6B21;-&gt;U&#x6570;&#x636E;</span>
-<span class="token function">fwrite</span><span class="token punctuation">(</span>avframe_yuv420p<span class="token operator">-&gt;</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> u_size<span class="token punctuation">,</span> file_yuv420p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x518D;&#x5176;&#x6B21;-&gt;V&#x6570;&#x636E;</span>
-<span class="token function">fwrite</span><span class="token punctuation">(</span>avframe_yuv420p<span class="token operator">-&gt;</span>data<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> v_size<span class="token punctuation">,</span> file_yuv420p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<h3 id="&#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5199;&#x5165;pcm&#x6587;&#x4EF6;">&#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5199;&#x5165;.pcm&#x6587;&#x4EF6;</h3>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x4EE3;&#x7801;&#x4F4D;&#x7F6E;&#x5728;&#x7B2C;&#x4E5D;&#x6B65;&#x3002;</p>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5199;&#x5165;.pcm&#x6587;&#x4EF6;</span>
+<span class="token comment">// &#x83B7;&#x53D6;&#x7F13;&#x51B2;&#x533A;&#x5B9E;&#x9645;&#x5B58;&#x50A8;&#x5927;&#x5C0F;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E00;&#xFF1A;&#x884C;&#x5927;&#x5C0F;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x8F93;&#x51FA;&#x58F0;&#x9053;&#x6570;&#x91CF;</span>
+<span class="token keyword">int</span> out_nb_channels <span class="token operator">=</span> <span class="token function">av_get_channel_layout_nb_channels</span><span class="token punctuation">(</span>out_ch_layout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x8F93;&#x5165;&#x5927;&#x5C0F;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x56DB;&#xFF1A;&#x8F93;&#x51FA;&#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x683C;&#x5F0F;</span>
+<span class="token comment">// &#x53C2;&#x6570;&#x4E94;&#xFF1A;&#x5B57;&#x8282;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;</span>
+<span class="token keyword">int</span> out_buffer_size <span class="token operator">=</span> <span class="token function">av_samples_get_buffer_size</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span>
+                           out_nb_channels<span class="token punctuation">,</span>
+                           avframe_in<span class="token operator">-&gt;</span>nb_samples<span class="token punctuation">,</span>
+                           out_sample_fmt<span class="token punctuation">,</span>
+                           <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x5199;&#x5165;&#x6587;&#x4EF6;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span>out_buffer<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> out_buffer_size<span class="token punctuation">,</span> file_pcm<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5173;&#x95ED;&#x89E3;&#x7801;&#x5668;">&#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5173;&#x95ED;&#x89E3;&#x7801;&#x5668;</h3>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5173;&#x95ED;&#x89E3;&#x7801;&#x5668;</span>
+<h3 id="&#x7B2C;&#x5341;&#x4E8C;&#x6B65;&#xFF1A;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5173;&#x95ED;&#x89E3;&#x7801;&#x5668;">&#x7B2C;&#x5341;&#x4E8C;&#x6B65;&#xFF1A;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5173;&#x95ED;&#x89E3;&#x7801;&#x5668;</h3>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x5341;&#x4E8C;&#x6B65;&#xFF1A;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5173;&#x95ED;&#x89E3;&#x7801;&#x5668;</span>
+<span class="token function">fclose</span><span class="token punctuation">(</span>file_pcm<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">av_packet_free</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">fclose</span><span class="token punctuation">(</span>file_yuv420p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">swr_free</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>swr_context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">av_free</span><span class="token punctuation">(</span>out_buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">av_frame_free</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>avframe_in<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">av_frame_free</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>avframe_yuv420p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">free</span><span class="token punctuation">(</span>out_buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">avcodec_close</span><span class="token punctuation">(</span>avcodec_context<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">avformat_free_context</span><span class="token punctuation">(</span>avformat_context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">avformat_close_input</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>avformat_context<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="&#x4E8C;&#x3001;&#x65B0;&#x5EFA;android&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;">&#x4E8C;&#x3001;&#x65B0;&#x5EFA;Android&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;</h2>
+<h2 id="&#x4E8C;&#x3001;&#x65B0;&#x5EFA;android&#x97F3;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;">&#x4E8C;&#x3001;&#x65B0;&#x5EFA;Android&#x97F3;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;</h2>
 <h3 id="1-&#x65B0;&#x5EFA;&#x5DE5;&#x7A0B;">1. &#x65B0;&#x5EFA;&#x5DE5;&#x7A0B;</h3>
-<p>&#x53C2;&#x8003;&#x4E4B;&#x524D;<a href="http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html" target="_blank">FFmpeg&#x96C6;&#x6210;</a>&#xFF0C;&#x65B0;&#x5EFA;ndk&#x5DE5;&#x7A0B;AndroidFFmpegDecodingVideo&#x3002;</p>
+<p>&#x53C2;&#x8003;&#x4E4B;&#x524D;<a href="http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html" target="_blank">FFmpeg&#x96C6;&#x6210;</a>&#xFF0C;&#x65B0;&#x5EFA;ndk&#x5DE5;&#x7A0B;AndroidFFmpegDecodingAudio&#x3002;</p>
 <h3 id="2-&#x5B9A;&#x4E49;java&#x65B9;&#x6CD5;">2. &#x5B9A;&#x4E49;java&#x65B9;&#x6CD5;</h3>
 <p>&#x5BFB;&#x627E;MainActivity&#xFF1A;app-&gt;src-&gt;main-&gt;java-&gt;MainActivity&#xFF0C;&#x589E;&#x52A0;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre class="language-"><code class="lang-java"><span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">ffmepgDecodeVideo</span><span class="token punctuation">(</span><span class="token class-name">String</span> inFilePath<span class="token punctuation">,</span> <span class="token class-name">String</span> outFilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="language-"><code class="lang-java"><span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">ffmepgDecodeAudio</span><span class="token punctuation">(</span><span class="token class-name">String</span> inFilePath<span class="token punctuation">,</span> <span class="token class-name">String</span> outFilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 id="3-&#x5B9A;&#x4E49;ndk&#x65B9;&#x6CD5;">3. &#x5B9A;&#x4E49;NDK&#x65B9;&#x6CD5;</h3>
 <p>&#x589E;&#x52A0;android&#x6253;&#x5370;&#x3002;</p>
@@ -3587,18 +3576,20 @@ v_size <span class="token operator">=</span> y_size <span class="token operator"
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;libavutil/imgutils.h&quot;</span></span>
 <span class="token comment">// &#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x5E93;</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;libswscale/swscale.h&quot;</span></span>
+<span class="token comment">// &#x97F3;&#x9891;&#x91C7;&#x6837;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x5E93;</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;libswresample/swresample.h&quot;</span></span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>&#x5728;native-lib.cpp&#x4E2D;&#x65B0;&#x589E;java&#x65B9;&#x6CD5;ffmepgDecodeVideo&#x7684;C++&#x5B9E;&#x73B0;&#xFF0C;&#x8F93;&#x5165;<code>MainActivity.</code>&#x5C31;&#x4F1A;&#x6709;&#x4EE3;&#x7801;&#x63D0;&#x793A;&#xFF0C;&#x9009;&#x62E9;&#x6B63;&#x786E;ffmepgDecodeVideo&#x65B9;&#x6CD5;&#x8865;&#x5168;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x5728;native-lib.cpp&#x4E2D;&#x65B0;&#x589E;java&#x65B9;&#x6CD5;ffmepgDecodeAudio&#x7684;C++&#x5B9E;&#x73B0;&#xFF0C;&#x8F93;&#x5165;<code>MainActivity.</code>&#x5C31;&#x4F1A;&#x6709;&#x4EE3;&#x7801;&#x63D0;&#x793A;&#xFF0C;&#x9009;&#x62E9;&#x6B63;&#x786E;ffmepgDecodeAudio&#x65B9;&#x6CD5;&#x8865;&#x5168;&#x4EE3;&#x7801;&#x3002;</p>
 <pre class="language-"><code class="lang-c"><span class="token keyword">extern</span> <span class="token string">&quot;C&quot;</span>
 JNIEXPORT <span class="token keyword">void</span> JNICALL
-<span class="token function">Java_com_ccq_androidffmpegdecodingvideo_MainActivity_ffmepgDecodeVideo</span><span class="token punctuation">(</span>JNIEnv <span class="token operator">*</span>env<span class="token punctuation">,</span> jobject thiz<span class="token punctuation">,</span>
+<span class="token function">Java_com_ccq_androidffmpegdecodingaudio_MainActivity_ffmepgDecodeAudio</span><span class="token punctuation">(</span>JNIEnv <span class="token operator">*</span>env<span class="token punctuation">,</span> jobject thiz<span class="token punctuation">,</span>
                                                                        jstring in_file_path<span class="token punctuation">,</span>
                                                                        jstring out_file_path<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// &#x8FD9;&#x91CC;&#x62F7;&#x8D1D;&#x4E0A;&#x9762;&#x7684;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x6D41;&#x7A0B;&#x7684;&#x4EE3;&#x7801;&#x5373;&#x53EF;&#x3002;</span>
+    <span class="token comment">// &#x8FD9;&#x91CC;&#x62F7;&#x8D1D;&#x4E0A;&#x9762;&#x7684;&#x97F3;&#x9891;&#x89E3;&#x7801;&#x6D41;&#x7A0B;&#x7684;&#x4EE3;&#x7801;&#x5373;&#x53EF;&#x3002;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="&#x4E09;&#x3001;&#x6D4B;&#x8BD5;android&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;">&#x4E09;&#x3001;&#x6D4B;&#x8BD5;Android&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;</h2>
+<h2 id="&#x4E09;&#x3001;&#x6D4B;&#x8BD5;android&#x97F3;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;">&#x4E09;&#x3001;&#x6D4B;&#x8BD5;Android&#x97F3;&#x9891;&#x89E3;&#x7801;&#x5DE5;&#x7A0B;</h2>
 <p>&#x5728;AndroidManifest.xml&#x589E;&#x52A0;SD&#x5361;&#x7684;&#x8BFB;&#x5199;&#x6743;&#x9650;&#x3002;</p>
 <pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>android.permission.WRITE_EXTERNAL_STORAGE<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>android.permission.READ_EXTERNAL_STORAGE<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
@@ -3613,7 +3604,7 @@ JNIEXPORT <span class="token keyword">void</span> JNICALL
 <span class="token class-name">String</span> rootPath <span class="token operator">=</span> <span class="token class-name">Environment</span><span class="token punctuation">.</span><span class="token function">getExternalStorageDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">String</span> inFilePath <span class="token operator">=</span> rootPath<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">&quot;/DCIM/Camera/VID_20220220_181306412.mp4&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">String</span> downloadPath <span class="token operator">=</span> <span class="token class-name">Environment</span><span class="token punctuation">.</span><span class="token function">getExternalStoragePublicDirectory</span><span class="token punctuation">(</span><span class="token class-name">Environment</span><span class="token punctuation">.</span>DIRECTORY_DOWNLOADS<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> outFilePath <span class="token operator">=</span> downloadPath<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">&quot;/VID_20220220_181306412.yuv&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> outFilePath <span class="token operator">=</span> downloadPath<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">&quot;/VID_20220220_181306412.pcm&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// &#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;&#x6211;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;</span>
 <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>outFilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -3626,38 +3617,15 @@ JNIEXPORT <span class="token keyword">void</span> JNICALL
         e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">ffmepgDecodeVideo</span><span class="token punctuation">(</span>inFilePath<span class="token punctuation">,</span> outFilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">ffmepgDecodeAudio</span><span class="token punctuation">(</span>inFilePath<span class="token punctuation">,</span> outFilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF0C;&#x5F85;&#x89E3;&#x51B3;&#xFF1A;</p>
-<pre class="language-"><code>I/main: &#x89E3;&#x7801;&#x5668;&#x540D;&#x79F0;&#xFF1A;h264
-A/libc: Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5713 (egdecodingvideo), pid 5713 (egdecodingvideo)
-</code></pre><p>&#x589E;&#x52A0;&#x6253;&#x5370;pix_fmt&#x4EE3;&#x7801;&#xFF1A;</p>
-<pre class="language-"><code class="lang-c"> <span class="token function">__android_log_print</span><span class="token punctuation">(</span>ANDROID_LOG_INFO<span class="token punctuation">,</span> <span class="token string">&quot;main&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;avcodec_context-&gt;pix_fmt&#xFF1A;%d&quot;</span><span class="token punctuation">,</span> avcodec_context<span class="token operator">-&gt;</span>pix_fmt<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<p>&#x53D1;&#x73B0;avcodec_context-&gt;pix_fmt = -1&#xFF0C;&#x5BFC;&#x81F4;sws_getContext&#x65B9;&#x6CD5;&#x51FA;&#x9519;&#xFF0C;&#x4FEE;&#x6539;sws_getContext&#x7684;srcFormat&#x53C2;&#x6570;&#x3002;</p>
-<pre class="language-"><code class="lang-c">SwsContext <span class="token operator">*</span>swscontext <span class="token operator">=</span> <span class="token function">sws_getContext</span><span class="token punctuation">(</span>avcodec_context<span class="token operator">-&gt;</span>width<span class="token punctuation">,</span>
-                avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span>
-                AV_PIX_FMT_YUV420P<span class="token punctuation">,</span>
-                <span class="token comment">//avcodec_context-&gt;pix_fmt,</span>
-                avcodec_context<span class="token operator">-&gt;</span>width<span class="token punctuation">,</span>
-                avcodec_context<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span>
-                AV_PIX_FMT_YUV420P<span class="token punctuation">,</span>
-                SWS_BICUBIC<span class="token punctuation">,</span>
-                <span class="token constant">NULL</span><span class="token punctuation">,</span>
-                <span class="token constant">NULL</span><span class="token punctuation">,</span>
-                <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<p>run&#x5DE5;&#x7A0B;&#x4EE3;&#x7801;&#xFF0C;&#x6B63;&#x786E;&#x6253;&#x5370;&#xFF0C;&#x540C;&#x65F6;&#x6B63;&#x786E;&#x751F;&#x6210;yuv&#x6587;&#x4EF6;&#x3002;</p>
-<pre class="language-"><code>I/main: &#x89E3;&#x7801;&#x5668;&#x540D;&#x79F0;&#xFF1A;h264
-I/main: avcodec_context-&gt;width&#xFF1A;640
-I/main: avcodec_context-&gt;height&#xFF1A;352
-I/main: avcodec_context-&gt;pix_fmt&#xFF1A;-1
-I/main: &#x89E3;&#x7801;&#x5668;&#x540D;&#x79F0;2&#xFF1A;h264
+<p>run&#x5DE5;&#x7A0B;&#x4EE3;&#x7801;&#xFF0C;&#x6B63;&#x786E;&#x6253;&#x5370;&#xFF0C;&#x540C;&#x65F6;&#x6B63;&#x786E;&#x751F;&#x6210;pcm&#x6587;&#x4EF6;&#x3002;</p>
+<pre class="language-"><code>I/main: &#x89E3;&#x7801;&#x5668;&#x540D;&#x79F0;&#xFF1A;acc
 I/main: &#x5F53;&#x524D;&#x89E3;&#x7801;&#x7B2C;1&#x5E27;
 .
 .
 .
-I/main: &#x5F53;&#x524D;&#x89E3;&#x7801;&#x7B2C;576&#x5E27;
+I/main: &#x5F53;&#x524D;&#x89E3;&#x7801;&#x7B2C;502&#x5E27;
 </code></pre><div style="margin: 0px;">
     <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png" style="height: 20px;">&#x6CAA;ICP&#x5907;2022002183&#x53F7;-1</a>
 </div>
@@ -3665,7 +3633,7 @@ I/main: &#x5F53;&#x524D;&#x89E3;&#x7801;&#x7B2C;576&#x5E27;
 
 
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-04-17 17:08:20
+2022-04-18 00:18:59
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3702,7 +3670,7 @@ I/main: &#x5F53;&#x524D;&#x89E3;&#x7801;&#x7B2C;576&#x5E27;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.1","depth":1,"next":{"title":"OpenGL系列","level":"1.2","depth":1,"ref":"","articles":[{"title":"1.OpenGL渲染结构与常用图元","level":"1.2.1","depth":2,"path":"OpenGL系列/01_OpenGL渲染结构与常用图元.md","ref":"OpenGL系列/01_OpenGL渲染结构与常用图元.md","articles":[]},{"title":"2.OpenGL基础渲染","level":"1.2.2","depth":2,"path":"OpenGL系列/02_OpenGL基础渲染.md","ref":"OpenGL系列/02_OpenGL基础渲染.md","articles":[]},{"title":"3.OpenGL渲染问题的处理方法","level":"1.2.3","depth":2,"path":"OpenGL系列/03_OpenGL渲染问题的处理方法.md","ref":"OpenGL系列/03_OpenGL渲染问题的处理方法.md","articles":[]},{"title":"4.OpenGL渲染技巧","level":"1.2.4","depth":2,"path":"OpenGL系列/04_OpenGL渲染技巧.md","ref":"OpenGL系列/04_OpenGL渲染技巧.md","articles":[]},{"title":"5.OpenGL三角形批次类绘制案例","level":"1.2.5","depth":2,"path":"OpenGL系列/05_OpenGL三角形批次类绘制案例.md","ref":"OpenGL系列/05_OpenGL三角形批次类绘制案例.md","articles":[]},{"title":"6.OpenGL模型视图矩阵绘制案例","level":"1.2.6","depth":2,"path":"OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md","ref":"OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md","articles":[]},{"title":"7.OpenGL顶点变化管线详解","level":"1.2.7","depth":2,"path":"OpenGL系列/07_OpenGL顶点变化管线详解.md","ref":"OpenGL系列/07_OpenGL顶点变化管线详解.md","articles":[]},{"title":"8.OpenGL公转自转案例","level":"1.2.8","depth":2,"path":"OpenGL系列/08_OpenGL公转自转案例.md","ref":"OpenGL系列/08_OpenGL公转自转案例.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"README.md","mtime":"2022-04-17T09:08:20.308Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-17T09:08:40.753Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.1","depth":1,"next":{"title":"OpenGL系列","level":"1.2","depth":1,"ref":"","articles":[{"title":"1.OpenGL渲染结构与常用图元","level":"1.2.1","depth":2,"path":"OpenGL系列/01_OpenGL渲染结构与常用图元.md","ref":"OpenGL系列/01_OpenGL渲染结构与常用图元.md","articles":[]},{"title":"2.OpenGL基础渲染","level":"1.2.2","depth":2,"path":"OpenGL系列/02_OpenGL基础渲染.md","ref":"OpenGL系列/02_OpenGL基础渲染.md","articles":[]},{"title":"3.OpenGL渲染问题的处理方法","level":"1.2.3","depth":2,"path":"OpenGL系列/03_OpenGL渲染问题的处理方法.md","ref":"OpenGL系列/03_OpenGL渲染问题的处理方法.md","articles":[]},{"title":"4.OpenGL渲染技巧","level":"1.2.4","depth":2,"path":"OpenGL系列/04_OpenGL渲染技巧.md","ref":"OpenGL系列/04_OpenGL渲染技巧.md","articles":[]},{"title":"5.OpenGL三角形批次类绘制案例","level":"1.2.5","depth":2,"path":"OpenGL系列/05_OpenGL三角形批次类绘制案例.md","ref":"OpenGL系列/05_OpenGL三角形批次类绘制案例.md","articles":[]},{"title":"6.OpenGL模型视图矩阵绘制案例","level":"1.2.6","depth":2,"path":"OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md","ref":"OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md","articles":[]},{"title":"7.OpenGL顶点变化管线详解","level":"1.2.7","depth":2,"path":"OpenGL系列/07_OpenGL顶点变化管线详解.md","ref":"OpenGL系列/07_OpenGL顶点变化管线详解.md","articles":[]},{"title":"8.OpenGL公转自转案例","level":"1.2.8","depth":2,"path":"OpenGL系列/08_OpenGL公转自转案例.md","ref":"OpenGL系列/08_OpenGL公转自转案例.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"README.md","mtime":"2022-04-17T16:18:59.655Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-17T16:19:19.420Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
