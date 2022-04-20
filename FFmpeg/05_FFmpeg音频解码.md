@@ -345,6 +345,8 @@ Java_com_ccq_androidffmpegdecodingaudio_MainActivity_ffmepgDecodeAudio(JNIEnv *e
 
 ## 三、测试Android音频解码工程
 
+准备视频文件：[test.mov](https://gitee.com/learnany/ffmpeg/tree/master/resources/test.mov)
+
 在AndroidManifest.xml增加SD卡的读写权限。
 
 ```
@@ -365,9 +367,9 @@ import java.io.IOException;
 import android.util.Log;
 
 String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-String inFilePath = rootPath.concat("/DCIM/Camera/VID_20220220_181306412.mp4");
 String downloadPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-String outFilePath = downloadPath.concat("/VID_20220220_181306412.pcm");
+String inFilePath = downloadPath.concat("/test.mov");
+String outFilePath = downloadPath.concat("/test.pcm");
 
 // 文件不存在我创建一个文件
 File file = new File(outFilePath);
@@ -390,4 +392,8 @@ I/main: 当前解码第1帧
 .
 .
 I/main: 当前解码第502帧
+```
+[pcm文件](https://gitee.com/learnany/ffmpeg/tree/master/resources/test.pcm)音频播放：
+```
+ffplay -f s16le -ac 2 -ar 44100 /Users/chenchangqing/Downloads/test.pcm
 ```
