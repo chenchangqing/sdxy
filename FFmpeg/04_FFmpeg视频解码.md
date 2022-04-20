@@ -355,6 +355,8 @@ Java_com_ccq_androidffmpegdecodingvideo_MainActivity_ffmepgDecodeVideo(JNIEnv *e
 
 ## 三、测试Android视频解码工程
 
+准备视频文件：[test.mov](https://gitee.com/learnany/ffmpeg/tree/master/resources/test.mov)
+
 在AndroidManifest.xml增加SD卡的读写权限。
 
 ```
@@ -375,9 +377,9 @@ import java.io.IOException;
 import android.util.Log;
 
 String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-String inFilePath = rootPath.concat("/DCIM/Camera/VID_20220220_181306412.mp4");
 String downloadPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-String outFilePath = downloadPath.concat("/VID_20220220_181306412.yuv");
+String inFilePath = downloadPath.concat("/test.mov");
+String outFilePath = downloadPath.concat("/test.yuv");
 
 // 文件不存在我创建一个文件
 File file = new File(outFilePath);
@@ -421,10 +423,13 @@ I/main: 解码器名称：h264
 I/main: avcodec_context->width：640
 I/main: avcodec_context->height：352
 I/main: avcodec_context->pix_fmt：-1
-I/main: 解码器名称2：h264
 I/main: 当前解码第1帧
 .
 .
 .
-I/main: 当前解码第576帧
+I/main: 当前解码第600帧
+```
+yuv文件太大（202.1M），不方便上传。yuv播放：
+```
+ffplay -f rawvideo -video_size 640x352 /Users/chenchangqing/Documents/code/ffmpeg/resources/test.yuv 
 ```
