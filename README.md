@@ -1,6 +1,8 @@
 # FFmpeg视频编码
 
-[代码工程](https://gitee.com/learnany/ffmpeg/tree/master/06_ffmpeg_video_encoding/AndroidFFmpegEncodingVideo)
+[Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/06_ffmpeg_video_encoding/AndroidFFmpegEncodingVideo)
+
+[iOS代码工程](https://gitee.com/learnany/ffmpeg/tree/master/06_ffmpeg_video_encoding/iOSFFmpegEncodingVideo)
 
 ## 一、音频编码流程
 
@@ -21,6 +23,8 @@ av_register_all();
 // 第二步：初始化封装格式上下文
 AVFormatContext *avformat_context = avformat_alloc_context();
 const char *coutFilePath = env->GetStringUTFChars(out_file_path, NULL);
+// iOS使用
+// const char *coutFilePath = [outFilePath UTF8String];
 AVOutputFormat *avoutput_format = av_guess_format(NULL, coutFilePath, NULL);
 设置视频压缩数据格式类型(h264、h265、mpeg2等等...)
 avformat_context->oformat = avoutput_format;
@@ -35,6 +39,8 @@ avformat_context->oformat = avoutput_format;
 // 参数三：权限->输出到文件中
 if (avio_open(&avformat_context->pb, coutFilePath, AVIO_FLAG_WRITE) < 0) {
     __android_log_print(ANDROID_LOG_INFO, "main", "打开输出文件失败");
+    // iOS使用
+    // NSLog(@"打开输出文件失败");
     return;
 }
 ```
@@ -174,10 +180,14 @@ avcodec_context->max_b_frames = 0;
 AVCodec *avcodec = avcodec_find_encoder(avcodec_context->codec_id);
 if (avcodec == NULL) {
     __android_log_print(ANDROID_LOG_INFO, "main", "找不到编码器");
+    // iOS使用
+    // NSLog(@"找不到编码器");
     return;
 }
 
 __android_log_print(ANDROID_LOG_INFO, "main", "编码器名称为：%s", avcodec->name);
+// iOS使用
+// NSLog(@"编码器名称为：%s", avcodec->name);
 ```
 
 #### 1. 出现问题
@@ -213,13 +223,12 @@ sh android-build-x264.sh
 ```
 执行过程会提示开机密码，看到`Android h264 builds finished`说明编译成功。
 
-##### (4) 编译Android动态库
+##### (4) 编译FFmpeg
 
-修改FFmpeg动态库编译脚本，将x264库其编译进去。[ios-build-ffmpeg.sh](https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/ios-build-ffmpeg.sh)是原来的编译脚本，在原来的编译脚本./configure增加如下选项。
+修改Android的FFmpeg动态库编译脚本，将x264库其编译进去。[android-build-ffmpeg.sh](https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/android-build-ffmpeg.sh)是原来的编译脚本，在原来的编译脚本./configure增加如下选项。
 
 ```
 # 以下是编译x264库增加的
-
 # 禁用所有编码器
 --disable-encoders \
 # 通过libx264库启用H.264编码
@@ -248,13 +257,76 @@ libavcodec/libx264.c:892:9: error: 'x264_bit_depth' undeclared (first use in thi
          ^
 make: *** [libavcodec/libx264.o] Error 1
 ```
-查询资料（[“x264_bit_depth”未声明](https://serverok.in/error-x264_bit_depth-undeclared)），是因为ffmpeg和x264不兼容，这里不使用最新版本的x264，尝试另一个版本的[x264](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/x264.zip)，重新编译x264，再重新生成.so动态库。
+查询资料（[“x264_bit_depth”未声明](https://serverok.in/error-x264_bit_depth-undeclared)），是因为ffmpeg和x264不兼容，这里不使用最新版本的x264，尝试另一个版本的[x264](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/x264.zip)，重新编译，再重新生成.so动态库。
 
 再次运行测试工程，成功输出：
 ```
 I/main: 编码器名称为：libx264
 ```
 问题解决。
+
+#### 3. 解决问题（iOS）
+
+这个问题在iOS上也是存在的，这里也列出解决步骤。
+
+##### (1) 下载源码
+
+[x264库](https://www.videolan.org/developers/x264.html)，翻墙更快。
+
+```
+git clone https://code.videolan.org/videolan/x264.git
+```
+
+##### (2) 编译x264脚本
+
+[ios_build_x264.sh](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/ios-build-x264.sh)是编译脚本，将编译脚本放在和源码的同一目录，执行：
+
+```
+sh ios-build-x264.sh
+```
+注意：如果使用旧版本的x264，比如这个[x264](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/x264.zip)，会出现下面的问题，所以我这里使用的当时最新的x264。
+```
+Out of tree builds are impossible with config.h/x264_config.h in source dir.
+```
+
+##### (3) 编译FFmpeg
+
+修改iOS的FFmpeg库编译脚本，将x264库其编译进去。[ios-build-ffmpeg.sh](https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/ios-build-ffmpeg.sh)是原来的编译脚本，在原来的编译脚本./configure增加如下选项。
+
+```
+# 以下是编译x264库增加的
+--enable-gpl \
+--disable-encoders \
+--enable-libx264 \
+--enable-encoder=libx264 \
+--enable-encoder=mjpeg \
+--enable-encoder=png \
+--extra-cflags="-I/Users/yangshaohong/Desktop/ffmpeg-test/test/thin-x264/arm64/include" \
+--extra-ldflags="-L/Users/yangshaohong/Desktop/ffmpeg-test/test/thin-x264/arm64/lib" \
+```
+[ios-build-ffmpeg-x264.sh](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/ios-build-ffmpeg-x264.sh)是修改后的脚本，再次[编译FFmpeg库](http://www.1221.site/FFmpeg/01_FFmpeg%E7%BC%96%E8%AF%91.html)，重新生成.a静态库。
+
+用了最新的x264，还是出现了问题：
+```
+src/libavcodec/libx264.c:282:9: error: use of undeclared identifier 'x264_bit_depth'
+    if (x264_bit_depth > 8)
+        ^
+src/libavcodec/libx264.c:892:9: error: use of undeclared identifier 'x264_bit_depth'
+    if (x264_bit_depth == 8)
+        ^
+src/libavcodec/libx264.c:894:14: error: use of undeclared identifier 'x264_bit_depth'
+    else if (x264_bit_depth == 9)
+             ^
+src/libavcodec/libx264.c:896:14: error: use of undeclared identifier 'x264_bit_depth'
+    else if (x264_bit_depth == 10)
+             ^
+4 errors generated.
+make: *** [libavcodec/libx264.o] Error 1
+make: *** Waiting for unfinished jobs....
+```
+查询资料（[“x264_bit_depth”未声明](https://serverok.in/error-x264_bit_depth-undeclared)），是因为ffmpeg和x264不兼容，这里不使用最新版本的x264，尝试另一个版本的[x264-snapshot-20180730-2245-stable.tar.bz2](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/x264-snapshot-20180730-2245-stable.tar.bz2)，重新编译，成功生成了支持h264编码的FFmpeg静态库。
+
+注意：这里x264和ffmpeg都指定了arm64的架构。
 
 ### 第七步：打开视频编码器
 
@@ -280,6 +352,8 @@ if (avcodec_context->codec_id == AV_CODEC_ID_H264) {
 // 打开编码器
 if (avcodec_open2(avcodec_context, avcodec, &param) < 0) {
     __android_log_print(ANDROID_LOG_INFO, "main", "打开编码器失败");
+    // iOS使用
+    // NSLog(@"打开编码器失败");
     return;
 }
 ```
@@ -297,12 +371,15 @@ avformat_write_header(avformat_context, NULL);
 // 第九步：打开yuv文件
 // 遇到问题：fopen Permission denied
 const char *cinFilePath = env->GetStringUTFChars(in_file_path, NULL);
+// iOS使用
+// const char *cinFilePath = [inFilePath UTF8String];
 int errNum = 0;
 FILE *in_file = fopen(cinFilePath, "rb");
 if (in_file == NULL) {
     errNum = errno;
-    __android_log_print(ANDROID_LOG_INFO, "main", "文件不存在:%s,in_file:%s,errNum:%d,reason:%s", cinFilePath, in_file, errNum,
-                        strerror(errNum));
+    __android_log_print(ANDROID_LOG_INFO, "main", "文件不存在:%s,in_file:%s,errNum:%d,reason:%s", cinFilePath, in_file, errNum, strerror(errNum));
+    // iOS使用
+    // NSLog(@"文件不存在");
     return;
 }
 ```
@@ -356,6 +433,8 @@ while (true) {
     // 读取大小：y_size * 3 / 2
     if (fread(out_buffer, 1, y_size * 3 / 2, in_file) <= 0) {
         __android_log_print(ANDROID_LOG_INFO, "main", "读取完毕...");
+        // iOS使用
+        // NSLog(@"读取完毕...");
         break;
     } else if (feof(in_file)) {
         break;
@@ -397,6 +476,8 @@ if (result == 0) {
     // ...
 } else {
     __android_log_print(ANDROID_LOG_INFO, "main", "编码第%d帧失败2", current_frame_index);
+    // iOS使用
+    // NSLog(@"编码第%d帧失败2", current_frame_index);
     return;
 }
 ```
@@ -413,9 +494,13 @@ current_frame_index++;
 // 是否输出成功
 if (result < 0) {
     __android_log_print(ANDROID_LOG_INFO, "main", "编码第%d帧失败", current_frame_index);
+    // iOS使用
+    // NSLog(@"编码第%d帧失败", current_frame_index);
     return;
 } else {
     __android_log_print(ANDROID_LOG_INFO, "main", "编码第%d帧成功", current_frame_index);
+    // iOS使用
+    // NSLog(@"编码第%d帧成功", current_frame_index);
 }
 ```
 
@@ -451,7 +536,7 @@ fclose(in_file);
 
 ### 1. 新建工程
 
-参考之前[FFmpeg集成](http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html)，新建ndk工程AndroidFFmpegEecodingAudio。
+参考之前[FFmpeg集成](http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html)，新建ndk工程AndroidFFmpegEncodingVideo。
 
 ### 2. 定义java方法
 
@@ -622,6 +707,130 @@ I/main: 编码第598帧成功
 ffplay test.h264
 ```
 
+## 四、新建iOS视频编码工程
+
+### 1. 新建工程
+
+参考之前[FFmpeg集成](http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html)，新建ndk工程iOSFFmpegEncodingVideo。
+
+注意：工程使用的是支持h264编码的FFmpeg库文件。
+
+### 2. 导入资源文件
+
+资源文件就是视频解码后的.yuv文件。先将.yuv文件拷贝至工程目录下，再通过add files的方式加入工程。
+
+### 3. 导入x264静态库
+
+拷贝编译好的thin-x264文件夹至工程目录，只保留arm64的文件夹，删除lib文件夹中的pkgconfig，再通过add files的方式加入工程。
+
+配置x264头文件，参考[FFmpeg集成](http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html)。
+
+### 4. 增加视频编码方法
+
+#### (1) 导入FFmpeg头文件
+
+修改`FFmpegTest.h`，新增如下：
+```c
+//核心库
+#include "libavcodec/avcodec.h"
+//封装格式处理库
+#include "libavformat/avformat.h"
+//工具库
+#include "libavutil/imgutils.h"
+```
+
+#### (2) 新增视频编码方法
+
+修改`FFmpegTest.h`，新增如下：
+```c
+/// FFmpeg视频编码
++ (void)ffmpegVideoEncode:(NSString*)filePath outFilePath:(NSString*)outFilePath;
+```
+修改`FFmpegTest.m`，新增如下：
+```c
+int flush_encoder(AVFormatContext *fmt_ctx, unsigned int stream_index) {
+    int ret;
+    int got_frame;
+    AVPacket enc_pkt;
+    if (!(fmt_ctx->streams[stream_index]->codec->codec->capabilities &
+          CODEC_CAP_DELAY))
+        return 0;
+    while (1) {
+        enc_pkt.data = NULL;
+        enc_pkt.size = 0;
+        av_init_packet(&enc_pkt);
+        ret = avcodec_encode_video2(fmt_ctx->streams[stream_index]->codec, &enc_pkt,
+                                    NULL, &got_frame);
+        av_frame_free(NULL);
+        if (ret < 0)
+            break;
+        if (!got_frame) {
+            ret = 0;
+            break;
+        }
+        NSLog(@"Flush Encoder: Succeed to encode 1 frame!\tsize:%5d\n", enc_pkt.size);
+        /* mux encoded frame */
+        ret = av_write_frame(fmt_ctx, &enc_pkt);
+        if (ret < 0)
+            break;
+    }
+    return ret;
+}
+
++ (void)ffmpegVideoEncode:(NSString*)inFilePath outFilePath:(NSString*)outFilePath {
+    // 代码复制音频编码流程中的代码
+    // 将备注`iOS使用`的代码打开
+}
+```
+
+#### (3) 增加方法测试
+
+修改ViewController.m，新增测试代码如下：
+```c
+NSString* inPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"yuv"];
+NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                     
+                                                     NSUserDomainMask, YES);
+NSString* path = [paths objectAtIndex:0];
+NSString* tmpPath = [path stringByAppendingPathComponent:@"temp"];
+[[NSFileManager defaultManager] createDirectoryAtPath:tmpPath withIntermediateDirectories:YES attributes:nil error:NULL];
+NSString* outFilePath = [tmpPath stringByAppendingPathComponent:[NSString stringWithFormat:@"test.h264"]];
+[FFmpegTest ffmpegVideoEncode:inPath outFilePath:outFilePath];
+```
+run工程代码，正确打印，同时正确生成.h264文件。
+```
+iOSFFmpegEncodingVideo[828:210395] 编码器名称为：libx264
+[libx264 @ 0x107021e00] using cpu capabilities: ARMv8 NEON
+[libx264 @ 0x107021e00] profile High, level 3.0
+[h264 @ 0x10701c200] Using AVStream.codec.time_base as a timebase hint to the muxer is deprecated. Set AVStream.time_base instead.
+[h264 @ 0x10701c200] Using AVStream.codec to pass codec parameters to muxers is deprecated, use AVStream.codecpar instead.
+[libx264 @ 0x107021e00] AVFrame.format is not set
+[libx264 @ 0x107021e00] AVFrame.width or height is not set
+2022-04-23 00:16:34.170713+0800 iOSFFmpegEncodingVideo[828:210395] 编码第1帧成功
+[libx264 @ 0x107021e00] AVFrame.format is not set
+[libx264 @ 0x107021e00] AVFrame.width or height is not set
+2022-04-23 00:16:34.175975+0800 iOSFFmpegEncodingVideo[828:210395] 编码第2帧成功
+[libx264 @ 0x107021e00] AVFrame.format is not set
+[libx264 @ 0x107021e00] AVFrame.width or height is not set
+.
+.
+.
+2022-04-23 00:16:39.831069+0800 iOSFFmpegEncodingVideo[828:210395] 编码第598帧成功
+2022-04-23 00:16:39.831365+0800 iOSFFmpegEncodingVideo[828:210395] 读取完毕...
+[libx264 @ 0x107021e00] frame I:3     Avg QP:24.64  size: 20162
+[libx264 @ 0x107021e00] frame P:595   Avg QP:25.38  size:  2245
+[libx264 @ 0x107021e00] mb I  I16..4: 13.5% 50.9% 35.6%
+[libx264 @ 0x107021e00] mb P  I16..4:  0.3%  0.5%  0.4%  P16..4: 40.8% 12.2%  4.0%  0.0%  0.0%    skip:41.7%
+[libx264 @ 0x107021e00] final ratefactor: 23.64
+[libx264 @ 0x107021e00] 8x8 transform intra:43.8% inter:54.5%
+[libx264 @ 0x107021e00] coded y,uvDC,uvAC intra: 64.8% 75.5% 30.8% inter: 9.9% 13.2% 0.3%
+[libx264 @ 0x107021e00] i16 v,h,dc,p: 21% 21%  7% 52%
+[libx264 @ 0x107021e00] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 15% 13%  8%  8% 10% 11% 11% 10% 14%
+[libx264 @ 0x107021e00] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 17% 15%  8%  9% 10% 11% 11%  8% 11%
+[libx264 @ 0x107021e00] i8c dc,h,v,p: 46% 21% 24% 10%
+[libx264 @ 0x107021e00] Weighted P-Frames: Y:0.3% UV:0.2%
+[libx264 @ 0x107021e00] kb/s:466.92
+```
 <div style="margin: 0px;">
     <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
             style="height: 20px;">沪ICP备2022002183号-1</a >
