@@ -1,4 +1,4 @@
-# FFmpeg音频编码
+# 7.FFmpeg音频编码
 
 [Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/07_ffmpeg_audio_encoding/AndroidFFmpegEncodingAudio)
 
@@ -661,9 +661,3 @@ I/main: Statistics: -2770196 seeks, -498852848 writeouts
 ```
 ffplay test.aac
 ```
-
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-
