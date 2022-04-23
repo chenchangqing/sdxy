@@ -9,6 +9,7 @@
     * [4.FFmpeg视频解码](FFmpeg/04_FFmpeg视频解码.md)
     * [5.FFmpeg音频解码](FFmpeg/05_FFmpeg音频解码.md)
     * [6.FFmpeg视频编码](FFmpeg/06_FFmpeg视频编码.md)
+    * [7.FFmpeg音频编码](FFmpeg/07_FFmpeg音频编码.md)
 * OpenGL系列
     * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
     * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)

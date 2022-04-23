@@ -4,7 +4,7 @@
 
 [iOS代码工程](https://gitee.com/learnany/ffmpeg/tree/master/06_ffmpeg_video_encoding/iOSFFmpegEncodingVideo)
 
-## 一、音频编码流程
+## 一、视频编码流程
 
 <img src="../images/ffmpeg_06_1.jpeg" width=100%/>
 
@@ -26,7 +26,7 @@ const char *coutFilePath = env->GetStringUTFChars(out_file_path, NULL);
 // iOS使用
 // const char *coutFilePath = [outFilePath UTF8String];
 AVOutputFormat *avoutput_format = av_guess_format(NULL, coutFilePath, NULL);
-设置视频压缩数据格式类型(h264、h265、mpeg2等等...)
+// 设置视频压缩数据格式类型(h264、h265、mpeg2等等...)
 avformat_context->oformat = avoutput_format;
 ```
 
@@ -279,7 +279,7 @@ git clone https://code.videolan.org/videolan/x264.git
 
 ##### (2) 编译x264脚本
 
-[ios_build_x264.sh](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/ios-build-x264.sh)是编译脚本，将编译脚本放在和源码的同一目录，执行：
+[ios-build-x264.sh](https://gitee.com/learnany/ffmpeg/blob/master/06_ffmpeg_video_encoding/ios-build-x264.sh)是编译脚本，将编译脚本放在和源码的同一目录，执行：
 
 ```
 sh ios-build-x264.sh
@@ -606,14 +606,14 @@ JNIEXPORT void JNICALL
 Java_com_ccq_androidffmpegencodingvideo_MainActivity_ffmpegVideoEncode(JNIEnv *env, jobject thiz,
                                                                        jstring in_file_path,
                                                                        jstring out_file_path) {
+    // 这里拷贝上面的视频编码流程的代码即可。
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_ccq_androidffmpegdecodingaudio_MainActivity_ffmepgDecodeAudio(JNIEnv *env, jobject thiz,
+Java_com_ccq_androidffmpegdecodingaudio_MainActivity_ffmepgDecodeVideo(JNIEnv *env, jobject thiz,
                                                                        jstring in_file_path,
                                                                        jstring out_file_path) {
-    // 这里拷贝上面的音频解码流程的代码即可。
 }
 ``` 
 
