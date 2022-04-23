@@ -264,7 +264,15 @@ libfdk_aac is incompatible with the gpl and --enable-nonfree is not specified.
 collect2: error: ld returned 1 exit status
 ERROR: libfdk_aac not found
 ```
-// TODO：待解决...
+哈哈，最后解决方案还是让我找到了，又耗费了几个小时，资料在这[mac下编译android下aac,不愿孤独-Mac 上用NDK编译lib库的问题 no archive symbol table (run ran lib)...](https://blog.csdn.net/weixin_31419249/article/details/117545210)。
+
+解决方案是，手动调用$NDK_HOME/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-runlib，对生成的.a进行接口的导出。
+```
+./arm-linux-androideabi-runlib libfdk-aac.a
+```
+经过这么一步，就可以顺利的执行支持fdk-aac的FFmpeg脚本（[android-build-ffmpeg-fdkaac.sh](https://gitee.com/learnany/ffmpeg/blob/master/07_ffmpeg_audio_encoding/android-build-ffmpeg-fdkaac.sh)）了。
+
+注意：这里有个细节，在fdk-aac编译后的安装目录执行ranlib命令是无效的，所以我新建了`android_build_fdkaac2`文件夹，将lib和include文件夹复制进来，在执行ranlib命令就可以了，编译ffmpeg时指定fdk-aac的目录为`android_build_fdkaac2`即可。
 
 #### 4. 使用fdk-aac编码器
 
