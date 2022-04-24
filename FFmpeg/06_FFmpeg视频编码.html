@@ -3657,7 +3657,65 @@ uint8_t <span class="token operator">*</span>out_buffer <span class="token opera
 AVPacket <span class="token operator">*</span>av_packet <span class="token operator">=</span> <span class="token punctuation">(</span>AVPacket <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">av_malloc</span><span class="token punctuation">(</span>buffer_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 id="&#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5FAA;&#x73AF;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;">&#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5FAA;&#x73AF;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;</h3>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5FAA;&#x73AF;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;</span>
+<p>&#x89C6;&#x9891;&#x7F16;&#x7801;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;&#x95EE;&#x9898;&#x5206;&#x6790;&#xFF1F;</p>
+<blockquote>
+<p>&#x7B54;&#x6848;&#x5982;&#x4E0B;&#xFF1A;</p>
+</blockquote>
+<pre class="language-"><code>&#x6BD4;&#x4F8B;&#x89C4;&#x8303;&#xFF1A;y : u : v = 4 : 1 : 1
+&#x7136;&#x540E;&#x89C4;&#x8303;&#xFF1A;y = width&#xFF08;&#x89C6;&#x9891;&#x5BBD;&#xFF09;* height&#xFF08;&#x9AD8;&#xFF09;
+&#x5047;&#x8BBE;&#xFF1A;width = 100&#xFF0C;height = 10
+&#x6240;&#x4EE5;&#xFF1A;y = width * height = 1000
+&#x6240;&#x4EE5;&#xFF1A;u = y / 4 = 1000 / 4 = 250&#xFF0C;v = y / 4 = 1000 / 4 = 250
+&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF1A;&#x4E00;&#x5E27;yuv&#x5927;&#x5C0F; = 1500
+&#x7F16;&#x7801;&#x7684;&#x65F6;&#x5019;&#x8BFB;&#x53D6;&#x4E00;&#x5E27;&#x6570;&#x636E;&#xFF1A;fread(out_buffer, 1, y_size * 3 / 2, in_file)
+y_size * 3 / 2 = 1000 * 3 / 2 = 1500
+&#x4EE3;&#x7801;&#xFF1A;av_frame-&gt;data[0] = out_buffer
+&#x89E3;&#x91CA;&#xFF1A;&#x6307;&#x9488;&#x662F;&#x4ECE;out_buffer = 0&#x5F00;&#x59CB;&#xFF0C;&#x6240;&#x4EE5;data[0]&#x8BFB;&#x53D6;&#x8303;&#x56F4;&#xFF1A;0-1000
+&#x4EE3;&#x7801;&#xFF1A;av_frame-&gt;data[1] = out_buffer + y_size
+&#x89E3;&#x91CA;&#xFF1A;&#x6307;&#x9488;&#x662F;&#x4ECE;out_buffer + y_size = 0 + 1000 = 1000&#x5F00;&#x59CB;&#xFF0C;&#x6240;&#x4EE5;data[1]&#x8BFB;&#x53D6;&#x8303;&#x56F4;&#xFF1A;1000-1250
+&#x4EE3;&#x7801;&#xFF1A;av_frame-&gt;data[2] = out_buffer + y_size * 5 / 4
+&#x89E3;&#x91CA;&#xFF1A;&#x6307;&#x9488;&#x662F;&#x4ECE;out_buffer + y_size * 5 / 4 = 0 + 1000 * 5 / 4 = 1250&#x5F00;&#x59CB;&#xFF0C;&#x6240;&#x4EE5;data[2]&#x8BFB;&#x53D6;&#x8303;&#x56F4;&#xFF1A;1250-1500
+
+&#x4E00;&#x5E27;&#x6570;&#x636E;-&gt;&#x5927;&#x5C0F; = Y&#x5927;&#x5C0F; + U&#x5927;&#x5C0F; + V&#x5927;&#x5C0F;
+&#x5047;&#x8BBE;&#xFF1A;width = 100&#xFF0C;height = 10
+    Y&#x5927;&#x5C0F;&#xFF1A;y = width * height = 100 * 10 = 1000
+    U&#x5927;&#x5C0F;&#xFF1A;u = y / 4 = 1000 / 4 = 250
+    V&#x5927;&#x5C0F;&#xFF1A;v = y / 4 = 1000 / 4 = 250
+    &#x4E00;&#x5E27;&#x6570;&#x636E;&#x5927;&#x5C0F; = Y + U + V = 1500
+&#x89C6;&#x9891;&#x89E3;&#x7801;&#x8BA1;&#x7B97;-&gt;&#x6307;&#x9488;&#x4F4D;&#x79FB;&#x5904;&#x7406;
+    &#x4FDD;&#x5B58;Y&#x5927;&#x5C0F;&#xFF1A;
+        fwrite(avframe_yuv420p-&gt;data[0], 1, y_size, file_yuv420p);
+        avframe_yuv420p-&gt;data[0]-&gt;&#x8868;&#x793A;Y&#x503C;
+        &#x8BFB;&#x53D6;&#xFF1A;0-&gt;1000
+    &#x4FDD;&#x5B58;U&#x5927;&#x5C0F;
+        fwrite(avframe_yuv420p-&gt;data[1], 1, u_size, file_yuv420p);
+        avframe_yuv420p-&gt;data[1]-&gt;&#x8868;&#x793A;U&#x503C;
+        &#x8BFB;&#x53D6;&#xFF1A;1000-&gt;1250
+    &#x4FDD;&#x5B58;V&#x5927;&#x5C0F;
+        fwrite(avframe_yuv420p-&gt;data[2], 1, v_size, file_yuv420p);
+        avframe_yuv420p-&gt;data[2]-&gt;&#x8868;&#x793A;V&#x503C;
+        &#x8BFB;&#x53D6;&#xFF1A;1250-&gt;1500
+&#x89C6;&#x9891;&#x7F16;&#x7801;&#x8BA1;&#x7B97;-&gt;&#x6307;&#x9488;&#x4F4D;&#x79FB;&#x8BA1;&#x7B97;
+    &#x5206;&#x6790;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x5927;&#x5C0F;&#xFF1F;
+        y = 1000
+        &#x6570;&#x636E;&#x5927;&#x5C0F; = &#x4E00;&#x5E27;YUV&#x6570;&#x636E; = Y + U + V = 1500
+        &#x6570;&#x636E;&#x5927;&#x5C0F; = y * 3 / 2 = 1000 * 3 / 2 = 1500
+        &#x73B0;&#x5728;&#x6211;&#x4EEC;&#x89C6;&#x9891;&#x7F16;&#x7801;&#x6839;&#x636E;Y&#x5927;&#x5C0F;&#xFF0C;&#x6C42;&#x51FA;YUV&#x5927;&#x5C0F;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;
+        out_buffer = 1500&#xFF08;&#x603B;&#x7684;&#x6570;&#x636E;&#x91CF;&#xFF09;
+    &#x4FDD;&#x5B58;Y&#x5927;&#x5C0F;
+        av_frame-&gt;data[0] = out_buffer;
+        &#x8BFB;&#x53D6;Y&#x6570;&#x636E;-&gt;1000
+        &#x8BFB;&#x53D6;&#xFF1A;0-&gt;1000
+    &#x4FDD;&#x5B58;U&#x5927;&#x5C0F;
+        av_frame-&gt;data[1] = out_buffer + y_size;
+        &#x8BFB;&#x53D6;U&#x6570;&#x636E;-&gt;250
+        &#x8BFB;&#x53D6;&#xFF1A;0 + 1000 -&gt; 1250
+    &#x4FDD;&#x5B58;V&#x5927;&#x5C0F;
+        av_frame-&gt;data[2] = out_buffer + y_size * 5 / 4;
+        &#x8BFB;&#x53D6;V&#x6570;&#x636E;-&gt;250
+        &#x8BFB;&#x53D6;&#xFF1A;0 + 1000 * 5 / 4 = 1250-&gt;1500
+    &#x8BF4;&#x767D;&#x4E86;&#xFF1A;&#x901A;&#x8FC7;Y&#x503C;&#x5F97;&#x5230;V&#x8BFB;&#x53D6;&#x8D77;&#x70B9;&#x4F4D;&#x7F6E;
+</code></pre><pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x5FAA;&#x73AF;&#x8BFB;&#x53D6;&#x89C6;&#x9891;&#x50CF;&#x7D20;&#x6570;&#x636E;</span>
 <span class="token comment">// &#x7F16;&#x7801;&#x662F;&#x5426;&#x6210;&#x529F;</span>
 <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> current_frame_index <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
@@ -3903,7 +3961,7 @@ I/main: &#x7F16;&#x7801;&#x7B2C;598&#x5E27;&#x6210;&#x529F;
 <h3 id="2-&#x5BFC;&#x5165;&#x8D44;&#x6E90;&#x6587;&#x4EF6;">2. &#x5BFC;&#x5165;&#x8D44;&#x6E90;&#x6587;&#x4EF6;</h3>
 <p>&#x8D44;&#x6E90;&#x6587;&#x4EF6;&#x5C31;&#x662F;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x540E;&#x7684;.yuv&#x6587;&#x4EF6;&#x3002;&#x5148;&#x5C06;.yuv&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x81F3;&#x5DE5;&#x7A0B;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x518D;&#x901A;&#x8FC7;add files&#x7684;&#x65B9;&#x5F0F;&#x52A0;&#x5165;&#x5DE5;&#x7A0B;&#x3002;</p>
 <h3 id="3-&#x5BFC;&#x5165;x264&#x9759;&#x6001;&#x5E93;">3. &#x5BFC;&#x5165;x264&#x9759;&#x6001;&#x5E93;</h3>
-<p>&#x62F7;&#x8D1D;&#x7F16;&#x8BD1;&#x597D;&#x7684;thin-x264&#x6587;&#x4EF6;&#x5939;&#x81F3;&#x5DE5;&#x7A0B;&#x76EE;&#x5F55;&#xFF0C;&#x53EA;&#x4FDD;&#x7559;arm64&#x7684;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x5220;&#x9664;lib&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684;pkgconfig&#xFF0C;&#x518D;&#x901A;&#x8FC7;add files&#x7684;&#x65B9;&#x5F0F;&#x52A0;&#x5165;&#x5DE5;&#x7A0B;&#x3002;</p>
+<p>&#x5728;&#x5DE5;&#x7A0B;&#x76EE;&#x5F55;&#x65B0;&#x5EFA;x264&#xFF0C;&#x62F7;&#x8D1D;&#x7F16;&#x8BD1;&#x597D;&#x7684;thin-x264&#x6587;&#x4EF6;&#x5939;&#x81F3;x264&#x76EE;&#x5F55;&#xFF0C;&#x53EA;&#x4FDD;&#x7559;arm64&#x7684;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x5220;&#x9664;lib&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684;pkgconfig&#xFF0C;&#x518D;&#x901A;&#x8FC7;add files&#x7684;&#x65B9;&#x5F0F;&#x52A0;&#x5165;&#x5DE5;&#x7A0B;&#x3002;</p>
 <p>&#x914D;&#x7F6E;x264&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x53C2;&#x8003;<a href="http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html" target="_blank">FFmpeg&#x96C6;&#x6210;</a>&#x3002;</p>
 <h3 id="4-&#x589E;&#x52A0;&#x89C6;&#x9891;&#x7F16;&#x7801;&#x65B9;&#x6CD5;">4. &#x589E;&#x52A0;&#x89C6;&#x9891;&#x7F16;&#x7801;&#x65B9;&#x6CD5;</h3>
 <h4 id="1-&#x5BFC;&#x5165;ffmpeg&#x5934;&#x6587;&#x4EF6;">(1) &#x5BFC;&#x5165;FFmpeg&#x5934;&#x6587;&#x4EF6;</h4>
@@ -3951,7 +4009,7 @@ I/main: &#x7F16;&#x7801;&#x7B2C;598&#x5E27;&#x6210;&#x529F;
 <span class="token punctuation">}</span>
 
 <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>ffmpegVideoEncode<span class="token operator">:</span><span class="token punctuation">(</span>NSString<span class="token operator">*</span><span class="token punctuation">)</span>inFilePath outFilePath<span class="token operator">:</span><span class="token punctuation">(</span>NSString<span class="token operator">*</span><span class="token punctuation">)</span>outFilePath <span class="token punctuation">{</span>
-    <span class="token comment">// &#x4EE3;&#x7801;&#x590D;&#x5236;&#x97F3;&#x9891;&#x7F16;&#x7801;&#x6D41;&#x7A0B;&#x4E2D;&#x7684;&#x4EE3;&#x7801;</span>
+    <span class="token comment">// &#x4EE3;&#x7801;&#x590D;&#x5236;&#x89C6;&#x9891;&#x7F16;&#x7801;&#x6D41;&#x7A0B;&#x4E2D;&#x7684;&#x4EE3;&#x7801;</span>
     <span class="token comment">// &#x5C06;&#x5907;&#x6CE8;`iOS&#x4F7F;&#x7528;`&#x7684;&#x4EE3;&#x7801;&#x6253;&#x5F00;</span>
 <span class="token punctuation">}</span>
 </code></pre>
@@ -4000,7 +4058,7 @@ NSString<span class="token operator">*</span> outFilePath <span class="token ope
 [libx264 @ 0x107021e00] Weighted P-Frames: Y:0.3% UV:0.2%
 [libx264 @ 0x107021e00] kb/s:466.92
 </code></pre><footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-04-24 01:19:16
+2022-04-24 21:29:57
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -4045,7 +4103,7 @@ NSString<span class="token operator">*</span> outFilePath <span class="token ope
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"6.FFmpeg视频编码","level":"1.2.7","depth":2,"next":{"title":"7.FFmpeg音频编码","level":"1.2.8","depth":2,"path":"FFmpeg/07_FFmpeg音频编码.md","ref":"FFmpeg/07_FFmpeg音频编码.md","articles":[]},"previous":{"title":"5.FFmpeg音频解码","level":"1.2.6","depth":2,"path":"FFmpeg/05_FFmpeg音频解码.md","ref":"FFmpeg/05_FFmpeg音频解码.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/06_FFmpeg视频编码.md","mtime":"2022-04-23T17:19:16.866Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-23T19:19:41.368Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6.FFmpeg视频编码","level":"1.2.7","depth":2,"next":{"title":"7.FFmpeg音频编码","level":"1.2.8","depth":2,"path":"FFmpeg/07_FFmpeg音频编码.md","ref":"FFmpeg/07_FFmpeg音频编码.md","articles":[]},"previous":{"title":"5.FFmpeg音频解码","level":"1.2.6","depth":2,"path":"FFmpeg/05_FFmpeg音频解码.md","ref":"FFmpeg/05_FFmpeg音频解码.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/06_FFmpeg视频编码.md","mtime":"2022-04-24T13:29:57.794Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-24T13:30:09.275Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
