@@ -2,8 +2,6 @@
 
 [Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/07_ffmpeg_audio_encoding/AndroidFFmpegEncodingAudio)
 
-// TODO：待编写
-
 [iOS代码工程](https://gitee.com/learnany/ffmpeg/tree/master/07_ffmpeg_audio_encoding/iOSFFmpegEncodingAudio)
 
 ## 一、音频编码流程
@@ -73,10 +71,10 @@ run工程时，这一步出现了问题：
 ```
 A/libc: Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x10 in tid 13086 (egencodingaudio), pid 13086 (egencodingaudio)
 ```
-困挠了好几个小时，终于找到原因了，我把编码音频的输出文件后缀写成了aac，将后缀改成aac就解决了。
+困挠了好几个小时，终于找到原因了，我把编码音频的输出文件后缀写成了acc，将后缀改成aac就解决了。
 ```java
 // 错误
-String outFilePath = downloadPath.concat("/test.aac");
+String outFilePath = downloadPath.concat("/test.acc");
 // 正确
 String outFilePath = downloadPath.concat("/test.aac");
 ```
@@ -129,7 +127,7 @@ __android_log_print(ANDROID_LOG_INFO, "main", "编码器名称为：%s", avcodec
 ```c
 // 第七步：打开音频编码器
 // 打开编码器
-if (avcodec_open2(avcodec_context, avcodec, &param) < 0) {
+if (avcodec_open2(avcodec_context, avcodec, NULL) < 0) {
     __android_log_print(ANDROID_LOG_INFO, "main", "打开编码器失败");
     // iOS使用
     // NSLog(@"打开编码器失败");
@@ -274,7 +272,60 @@ ERROR: libfdk_aac not found
 
 注意：这里有个细节，在fdk-aac编译后的安装目录执行ranlib命令是无效的，所以我新建了`android_build_fdkaac2`文件夹，将lib和include文件夹复制进来，在执行ranlib命令就可以了，编译ffmpeg时指定fdk-aac的目录为`android_build_fdkaac2`即可。
 
-#### 4. 使用fdk-aac编码器
+#### 4. 解决问题（iOS）
+
+这个问题在iOS上也是存在的，这里也列出解决步骤。
+
+##### (1) 下载源码
+
+[fdk-aac](https://www.linuxfromscratch.org/blfs/view/svn/multimedia/fdk-aac.html)。
+
+我使用的是[fdk-aac-0.1.4.zip](https://gitee.com/learnany/ffmpeg/blob/master/07_ffmpeg_audio_encoding/fdk-aac-0.1.4.zip)。
+
+注意：编译0.1.5是有问题。
+
+##### (2) 编译fdk-aac
+
+[ios-build-fdkaac.sh](https://gitee.com/learnany/ffmpeg/blob/master/07_ffmpeg_audio_encoding/ios-build-fdkaac.sh)是编译脚本，将编译脚本放在和源码的同一目录，执行：
+
+```
+sh ios-build-fdkaac.sh
+```
+出现错误：
+```
+configure: error: source directory already configured; run "make distclean" there first
+make: *** No rule to make target `install'.  Stop.
+```
+根据提示，执行`make distclean`可以解决。
+
+##### (3) 编译FFmpeg
+
+修改iOS的FFmpeg库编译脚本，将fdkaac库其编译进去。[ios-build-ffmpeg.sh](https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/ios-build-ffmpeg.sh)是原来的编译脚本，在原来的编译脚本./configure增加如下选项。
+
+```
+# 以下是编译fdkaac库增加的
+# 禁用所有编码器
+--disable-encoders \
+--enable-libfdk-aac \
+--enable-encoder=libfdk_aac \
+--enable-decoder=libfdk_aac \
+# 和FFmpeg动态库一起编译，指定你之前编译好的fdkaac静态库和头文件
+--extra-cflags="-I/Users/chenchangqing/Documents/code/ffmpeg/07_ffmpeg_audio_encoding/ios_build_fdkaac/include" \
+--extra-ldflags="-L/Users/chenchangqing/Documents/code/ffmpeg/07_ffmpeg_audio_encoding/ios_build_fdkaac/lib" \
+```
+[ios-build-ffmpeg-fdkaac.sh](https://gitee.com/learnany/ffmpeg/blob/master/07_ffmpeg_audio_encoding/ios-build-ffmpeg-fdkaac.sh)是修改后的脚本，再次[编译FFmpeg库](http://www.1221.site/FFmpeg/01_FFmpeg%E7%BC%96%E8%AF%91.html)，重新生成.a静态库。
+```
+sh ios-build-ffmpeg-fdkaac.sh arm64
+```
+
+出现下面的错误，重新下载FFmpeg就可以解决了。
+```
+Out of tree builds are impossible with config.h in source dir.
+```
+
+注意：这里fdkaac和ffmpeg都指定了arm64的架构。
+
+#### 5. 使用fdk-aac编码器
 
 ```c
 // 错误
@@ -418,7 +469,6 @@ if (result == 0) {
 // 第十三步：将音频压缩数据写入到输出文件中
 av_packet->stream_index = av_audio_stream->index;
 result = av_write_frame(avformat_context, av_packet);
-current_frame_index++;
 // 是否输出成功
 if (result < 0) {
     __android_log_print(ANDROID_LOG_INFO, "main", "编码第%d帧失败", current_frame_index);
@@ -456,8 +506,9 @@ int flush_encoder(AVFormatContext *fmt_ctx, unsigned int stream_index) {
             ret = 0;
             break;
         }
-        __android_log_print(ANDROID_LOG_INFO, "main",
-                            "Flush Encoder: Succeed to encode 1 frame!\tsize:%5d\n", enc_pkt.size);
+        __android_log_print(ANDROID_LOG_INFO, "main", "Flush Encoder: Succeed to encode 1 frame!\tsize:%5d\n", enc_pkt.size);
+        // iOS使用
+        // NSLog(@"Flush Encoder: Succeed to encode 1 frame!\tsize:%5d\n", enc_pkt.size);
         /* mux encoded frame */
         ret = av_write_frame(fmt_ctx, &enc_pkt);
         if (ret < 0)
@@ -669,6 +720,70 @@ I/main: Statistics: -2770196 seeks, -498852848 writeouts
 ```
 ffplay test.aac
 ```
+
+## 四、新建iOS视频编码工程
+
+### 1. 新建工程
+
+参考之前[FFmpeg集成](http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html)，新建ndk工程iOSFFmpegEncodingAudio。
+
+注意：工程使用的是支持fdkacc编码的FFmpeg库文件。
+
+### 2. 导入资源文件
+
+资源文件就是音频解码后的.pcm文件。先将.pcm文件拷贝至工程目录下，再通过add files的方式加入工程。
+
+### 3. 导入fdkacc静态库
+
+在工程目录新建fdk-aac，拷贝编译好的ios_build_fdkaac/thin文件夹至fdkaac-0.1.4目录，只保留arm64的文件夹，删除lib文件夹中的pkgconfig和libfdk-aac.la，再通过add files的方式加入工程。
+
+配置fdkaac头文件，参考[FFmpeg集成](http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html)。
+
+### 4. 增加音编码方法
+
+#### (1) 导入FFmpeg头文件
+
+修改`FFmpegTest.h`，新增如下：
+```c
+//核心库
+#include "libavcodec/avcodec.h"
+//封装格式处理库
+#include "libavformat/avformat.h"
+//工具库
+#include "libavutil/imgutils.h"
+#include "libswresample/swresample.h"
+```
+
+#### (2) 新增音频编码方法
+
+修改`FFmpegTest.h`，新增如下：
+```c
+/// FFmpeg音频编码
++ (void)ffmpegAudioEncode: (NSString *)inFilePath outFilePath: (NSString *)outFilePath;
+```
+修改`FFmpegTest.m`，新增如下：
+```c
++ (void)ffmpegAudioEncode: (NSString *)inFilePath outFilePath: (NSString *)outFilePath {
+    // 代码复制音频编码流程中的代码
+    // 将备注`iOS使用`的代码打开
+}
+```
+
+#### (3) 增加方法测试
+
+修改ViewController.m，新增测试代码如下：
+```c
+NSString* inPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"pcm"];
+NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                     
+                                                     NSUserDomainMask, YES);
+NSString* path = [paths objectAtIndex:0];
+NSString* tmpPath = [path stringByAppendingPathComponent:@"temp"];
+[[NSFileManager defaultManager] createDirectoryAtPath:tmpPath withIntermediateDirectories:YES attributes:nil error:NULL];
+NSString* outFilePath = [tmpPath stringByAppendingPathComponent:[NSString stringWithFormat:@"test.aac"]];
+[FFmpegTest ffmpegAudioEncode:inPath outFilePath:outFilePath];
+```
+run工程代码，正确打印，同时正确生成.aac文件。
 
 <div style="margin: 0px;">
     <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"

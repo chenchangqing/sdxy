@@ -14,12 +14,12 @@
 
 #### (2) 第二步：导入库文件。
 
-在工程新建FFmpeg-3.4，拷贝已经编译好的arm64静态库文件夹，删除不需要的share、lib/pkgconfig文件夹，最后将FFmpeg-3.4Add进入工程。
+在工程目录新建FFmpeg-3.4，拷贝已经编译好的arm64静态库文件夹，删除不需要的share、lib/pkgconfig文件夹，最后将FFmpeg-3.4Add进入工程。
 
 #### (3）第三步：添加依赖库
 
 - CoreMedia.framework
-- CorGraphics.framework
+- CoreGraphics.framework
 - VideoToolbox.framework
 - AudioToolbox.framework
 - libiconv.tbd 
