@@ -420,6 +420,65 @@ AVPacket *av_packet = (AVPacket *) av_malloc(buffer_size);
 
 ### 第十一步：循环读取视频像素数据
 
+视频编码读取视频像素数据问题分析？
+
+>答案如下：
+
+    比例规范：y : u : v = 4 : 1 : 1
+    然后规范：y = width（视频宽）* height（高）
+    假设：width = 100，height = 10
+    所以：y = width * height = 1000
+    所以：u = y / 4 = 1000 / 4 = 250，v = y / 4 = 1000 / 4 = 250
+    也就是说：一帧yuv大小 = 1500
+    编码的时候读取一帧数据：fread(out_buffer, 1, y_size * 3 / 2, in_file)
+    y_size * 3 / 2 = 1000 * 3 / 2 = 1500
+    代码：av_frame->data[0] = out_buffer
+    解释：指针是从out_buffer = 0开始，所以data[0]读取范围：0-1000
+    代码：av_frame->data[1] = out_buffer + y_size
+    解释：指针是从out_buffer + y_size = 0 + 1000 = 1000开始，所以data[1]读取范围：1000-1250
+    代码：av_frame->data[2] = out_buffer + y_size * 5 / 4
+    解释：指针是从out_buffer + y_size * 5 / 4 = 0 + 1000 * 5 / 4 = 1250开始，所以data[2]读取范围：1250-1500
+
+    一帧数据->大小 = Y大小 + U大小 + V大小
+    假设：width = 100，height = 10
+        Y大小：y = width * height = 100 * 10 = 1000
+        U大小：u = y / 4 = 1000 / 4 = 250
+        V大小：v = y / 4 = 1000 / 4 = 250
+        一帧数据大小 = Y + U + V = 1500
+    视频解码计算->指针位移处理
+        保存Y大小：
+            fwrite(avframe_yuv420p->data[0], 1, y_size, file_yuv420p);
+            avframe_yuv420p->data[0]->表示Y值
+            读取：0->1000
+        保存U大小
+            fwrite(avframe_yuv420p->data[1], 1, u_size, file_yuv420p);
+            avframe_yuv420p->data[1]->表示U值
+            读取：1000->1250
+        保存V大小
+            fwrite(avframe_yuv420p->data[2], 1, v_size, file_yuv420p);
+            avframe_yuv420p->data[2]->表示V值
+            读取：1250->1500
+    视频编码计算->指针位移计算
+        分析读取数据大小？
+            y = 1000
+            数据大小 = 一帧YUV数据 = Y + U + V = 1500
+            数据大小 = y * 3 / 2 = 1000 * 3 / 2 = 1500
+            现在我们视频编码根据Y大小，求出YUV大小计算公式
+            out_buffer = 1500（总的数据量）
+        保存Y大小
+            av_frame->data[0] = out_buffer;
+            读取Y数据->1000
+            读取：0->1000
+        保存U大小
+            av_frame->data[1] = out_buffer + y_size;
+            读取U数据->250
+            读取：0 + 1000 -> 1250
+        保存V大小
+            av_frame->data[2] = out_buffer + y_size * 5 / 4;
+            读取V数据->250
+            读取：0 + 1000 * 5 / 4 = 1250->1500
+        说白了：通过Y值得到V读取起点位置
+
 ```c
 // 第十一步：循环读取视频像素数据
 // 编码是否成功
@@ -721,7 +780,7 @@ ffplay test.h264
 
 ### 3. 导入x264静态库
 
-拷贝编译好的thin-x264文件夹至工程目录，只保留arm64的文件夹，删除lib文件夹中的pkgconfig，再通过add files的方式加入工程。
+在工程目录新建x264，拷贝编译好的thin-x264文件夹至x264目录，只保留arm64的文件夹，删除lib文件夹中的pkgconfig，再通过add files的方式加入工程。
 
 配置x264头文件，参考[FFmpeg集成](http://www.1221.site/FFmpeg/02_FFmpeg%E9%9B%86%E6%88%90.html)。
 
@@ -778,7 +837,7 @@ int flush_encoder(AVFormatContext *fmt_ctx, unsigned int stream_index) {
 }
 
 + (void)ffmpegVideoEncode:(NSString*)inFilePath outFilePath:(NSString*)outFilePath {
-    // 代码复制音频编码流程中的代码
+    // 代码复制视频编码流程中的代码
     // 将备注`iOS使用`的代码打开
 }
 ```
