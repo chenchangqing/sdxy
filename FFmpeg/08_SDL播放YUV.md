@@ -1,4 +1,4 @@
-# SDL播放YUV
+# 8.SDL播放YUV
 
 [Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/08_ffmpeg_sdl/AndroidSDLPlayYUV)
 
@@ -517,9 +517,3 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 在Download文件夹下放test.yuv，运行工程就可以直接播放了。
-
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-
