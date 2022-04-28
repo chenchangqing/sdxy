@@ -10,6 +10,8 @@
 // 第一步：初始化SDL多媒体框架
 if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER ) == -1){
     LOG_I("初始化失败：%s\", SDL_GetError()");
+    // Mac使用
+    // printf("初始化失败：%s\", SDL_GetError());
     return -1;
 }
 ```
@@ -34,6 +36,10 @@ SDL_Window* sdl_window = SDL_CreateWindow("SDL播放YUV视频",
                                           SDL_WINDOW_OPENGL);
 if (sdl_window == NULL){
     LOG_I("窗口创建失败：%s", SDL_GetError());
+    // Mac使用
+    // printf("窗口创建失败： %s\n", SDL_GetError());
+    // 退出程序
+    SDL_Quit();
     return -1;
 }
 ```
@@ -48,6 +54,10 @@ if (sdl_window == NULL){
 SDL_Renderer* sdl_renderer = SDL_CreateRenderer(sdl_window, -1, 0);
 if (sdl_renderer == NULL){
     LOG_I("渲染器创建失败：%s", SDL_GetError());
+    // Mac使用
+    // printf("渲染器创建失败： %s\n", SDL_GetError());
+    // 退出程序
+    SDL_Quit();
     return -1;
 }
 ```
@@ -68,7 +78,9 @@ SDL_Texture* sdl_texture = SDL_CreateTexture(sdl_renderer,
                                              height);
 if (sdl_texture == NULL) {
     LOG_I("纹理创建失败：%s", SDL_GetError());
-    //第十步：推出程序
+    // Mac使用
+    // printf("纹理创建失败： %s\n", SDL_GetError());
+    // 退出程序
     SDL_Quit();
     return -1;
 }
@@ -80,10 +92,14 @@ if (sdl_texture == NULL) {
 // 第五步：打开yuv文件
 int errNum = 0;
 FILE* yuv_file = fopen("/storage/emulated/0/Download/test.yuv", "rb");
+// MAC使用
+// FILE* yuv_file = fopen("/Users/chenchangqing/Documents/code/ffmpeg/resources/test.yuv", "rb");
 if (yuv_file == NULL){
     errNum = errno;
-    LOG_I("in_file:%s,errNum:%d,reason:%s", yuv_file, errNum, strerror(errNum));
-    //第十步：推出程序
+    LOG_I("打开文件失败：errNum:%d,reason:%s", errNum, strerror(errNum));
+    // Mac使用
+    // printf("打开文件失败：errNum:%d,reason:%s", errNum, strerror(errNum));
+    // 退出程序
     SDL_Quit();
     return 0;
 }
@@ -253,8 +269,6 @@ File->NewProject->Native C++->输入工程信息->Next->Finish。
 #### 1. 新建jniLibs文件夹
 
 项目选中Project模式->app->src->main->右键new->Directory->输入jniLibs->enter。
-
-ninja: error: '/Users/chenchangqing/Documents/code/ffmpeg/08_ffmpeg_sdl/AndroidSDLPlayYUV2/app/src/main/jniLibs/lib/libSDL2.so', needed by '/Users/chenchangqing/Documents/code/ffmpeg/08_ffmpeg_sdl/AndroidSDLPlayYUV2/app/build/intermediates/cxx/Debug/4g235n4q/obj/armeabi-v7a/libandroidsdlplayyuv.so', missing and no known rule to make it
 
 #### 2. 拷贝文件至jniLibs
 
@@ -451,6 +465,10 @@ protected String[] getLibraries() {
 
 ### 第八步：修改MainActivity.java
 
+这是最后一步，完成这一步，运行工程点击播放按钮就可以直接播放了。
+
+>注意：在`/storage/emulated/0/Download`文件夹下放test.yuv。
+
 ```java
 
 // 修改1：增加import
@@ -516,7 +534,48 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromJNI();
 }
 ```
-在Download文件夹下放test.yuv，运行工程就可以直接播放了。
+## 四、Mac集成SDL
+
+### 第一步：配置SDL开发环境
+
+#### 1. 下载SDL2.dmg
+https://www.libsdl.org/release/SDL2-2.0.5.dmg
+
+下载好了，点击安装，会得到`SDL2.framework`。
+
+>为了避免不必要的麻烦，这里我们依然使用2.0.5的版本。
+
+#### 2. 安装SDL2
+
+将SDL2.Framework拷贝到`/Library/Frameworks`目录下。 
+
+### 第二步：新建Mac工程
+
+新建命令行项目：`New->Project->macOS->Command Line Tool`，项目名称MacSDLPlayYUV。
+
+### 第三步：导入SDL库
+
+在工程目录新建SDLFramework，将SDL2.Framework拷贝到`SDLFramework`，通过Add的方式加入工程。
+
+### 第四步：修改main.m
+
+引入SDL头文件，在main函数拷贝“SDL播放流程”的代码即可。
+
+>注意：打印日志的方式需要修改为Mac的方式。
+
+```c
+#import <Foundation/Foundation.h>
+#include <errno.h>
+// 引入SDL头文件
+#include <SDL2/SDL.h>
+
+// SDL入口
+int main(int argc, const char * argv[]) {
+    // SDL播放YUV实现
+    // ...
+    return 0;
+}
+```
 
 <div style="margin: 0px;">
     <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
