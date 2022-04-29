@@ -2,6 +2,10 @@
 
 [Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/08_ffmpeg_sdl/AndroidSDLPlayYUV)
 
+[Mac代码工程](https://gitee.com/learnany/ffmpeg/tree/master/08_ffmpeg_sdl/MacSDLPlayYUV)
+
+[iOS代码工程](https://gitee.com/learnany/ffmpeg/tree/master/08_ffmpeg_sdl/iOSSDLPlayYUV)
+
 ## 一、SDL播放流程
 
 ### 第一步：初始化SDL多媒体框架
@@ -94,6 +98,9 @@ int errNum = 0;
 FILE* yuv_file = fopen("/storage/emulated/0/Download/test.yuv", "rb");
 // MAC使用
 // FILE* yuv_file = fopen("/Users/chenchangqing/Documents/code/ffmpeg/resources/test.yuv", "rb");
+// iOS
+// NSString* inPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"yuv"];
+// FILE* yuv_file = fopen([inPath UTF8String], "rb");
 if (yuv_file == NULL){
     errNum = errno;
     LOG_I("打开文件失败：errNum:%d,reason:%s", errNum, strerror(errNum));
@@ -119,6 +126,7 @@ int y_size = width * height;
 char buffer_pix[y_size * 3 / 2];
 // 定义渲染器区域
 SDL_Rect sdl_rect;
+int currentIndex = 1;
 while (true){
     // 一帧一帧读取
     fread(buffer_pix, 1, y_size * 3 / 2, yuv_file);
@@ -138,6 +146,8 @@ while (true){
 
     // 第十步：渲染每一帧直接间隔时间
     // ...
+    printf("当前到了第%d帧\n", currentIndex);
+    currentIndex++;
 }
 ```
 
@@ -359,7 +369,7 @@ ndk {
 extern "C"
 int main(int argc, char *argv[]) {
     // SDL播放YUV实现
-    // ...
+    // 拷贝SDL播放流程的代码
     return 0;
 }
 ```
@@ -573,6 +583,72 @@ https://www.libsdl.org/release/SDL2-2.0.5.dmg
 int main(int argc, const char * argv[]) {
     // SDL播放YUV实现
     // ...
+    return 0;
+}
+```
+
+## 五、iOS集成SDL
+
+### 第一步：编译.a静态库
+
+#### 1. 下载SDL源码
+
+http://www.libsdl.org/release/SDL2-2.0.5.tar.gz
+
+    /Users/chenchangqing/Documents/code/ffmpeg/08_ffmpeg_sdl/SDL2-2.0.5
+#### 2. 编译SDL静态库
+
+打开`SDL2-2.0.5/Xcode-iOS/SDL`工程，选择`libSDL`目标，再选择`Any iOS Device`真机编译，编译完成后可以在工程的`Products`看到`libSDL2.a`由红色变为了白色，说明静态库已经编译好了，右键`show in Finder`获取生成好的静态库。
+
+>注意：如果编译失败，可能是iOS编译版本不支持，修改SDL的`iOS Deployment Target`为9.0即可，默认是5.1.1。
+
+### 第二步：新建iOS工程
+
+删除Scenedelegate，参考：[Xcode 11新建项目多了Scenedelegate](https://www.jianshu.com/p/25b37bd40cd7)。
+
+工程名称为iOSSDLPlayYUV。
+
+### 第三步：导入库文件。
+
+在工程目录新建SDLFramework，拷贝`libSDL2.a`、`SDL2-2.0.5/include`至`SDLFramework`，最后将`SDLFramework`进入工程。
+
+### 第四步：添加依赖库
+
+- CoreGraphics.framework
+- AudioToolbox.framework
+- AVFoundation.framework
+- CoreAudio.framework
+- OpenGLES.framework
+- CoreMotion.framework
+- GameController.framework
+
+### 第五步：配置头文件
+
+#### 1. 复制头文件路径
+
+选中Target>Build Setting>搜索Library Search>双击Library Search Paths复制SDLFramework路径>追加/include就是SDL头文件路径：
+
+    $(PROJECT_DIR)/iOSSDLPlayYUV/SDLFramework/include
+
+#### 2. 配置头文件路径
+
+选中Target>Build Setting>搜索Header Search>选中Header Search Paths>增加上面复制好头文件路径。
+
+### 第六步：修改main.m
+
+引入SDL头文件，在main函数拷贝“SDL播放流程”的代码即可。
+
+>注意：打印日志的方式需要修改为iOS的方式，需要检查下yuv的路径。目前播放还是黑屏，待解决。
+
+```c
+#import <Foundation/Foundation.h>
+#include <errno.h>
+// 引入SDL头文件
+#include "SDL.h"
+// SDL入口
+int main(int argc, char * argv[]) {
+    // SDL播放YUV实现
+    // 拷贝SDL播放流程的代码
     return 0;
 }
 ```
