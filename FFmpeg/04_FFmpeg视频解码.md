@@ -19,12 +19,10 @@ av_register_all();
 
 ```c
 // 第二步：打开封装格式
-
 // 参数一：封装格式上下文
 // 作用：保存整个视频信息(解码器、编码器等等...)
 // 信息：码率、帧率等...
 AVFormatContext* avformat_context = avformat_alloc_context();
-
 // 参数二：视频路径
 // 在我们iOS里面
 // NSString* path = @"test.mov";
@@ -193,8 +191,6 @@ if (file_yuv420p == NULL){
     __android_log_print(ANDROID_LOG_INFO, "main", "输出文件打开失败");
     return;
 }
-// 写入时yuv数据位置
-int y_size, u_size, v_size;
 ```
 
 ### 第八步：读取视频压缩数据帧
@@ -204,6 +200,8 @@ int y_size, u_size, v_size;
 ```c
 // 第八步：读取视频压缩数据帧
 int current_index = 0;
+// 写入时yuv数据位置
+int y_size, u_size, v_size;
 // 分析av_read_frame参数。
 // 参数一：封装格式上下文
 // 参数二：一帧压缩数据

@@ -1,4 +1,4 @@
-# FFmpeg+SDL播放视频
+# 9.FFmpeg+SDL播放视频
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/09_display_video_while_decoding/AndroidDisplayVideoWhileDecoding)
 
@@ -402,9 +402,3 @@ int main(int argc, char *argv[]) {
     // 复制代码实现
 }
 ```
-
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-

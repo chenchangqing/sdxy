@@ -12,10 +12,10 @@
 
 ```c
 // 第一步：初始化SDL多媒体框架
-if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER ) == -1){
-    LOG_I("初始化失败：%s\", SDL_GetError()");
+if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER ) == -1) {
+    LOG_I_ARGS("初始化失败：%s", SDL_GetError());
     // Mac使用
-    // printf("初始化失败：%s\", SDL_GetError());
+    // printf("初始化失败：%s", SDL_GetError());
     return -1;
 }
 ```
@@ -38,8 +38,8 @@ SDL_Window* sdl_window = SDL_CreateWindow("SDL播放YUV视频",
                                           width,
                                           height,
                                           SDL_WINDOW_OPENGL);
-if (sdl_window == NULL){
-    LOG_I("窗口创建失败：%s", SDL_GetError());
+if (sdl_window == NULL) {
+    LOG_I_ARGS("窗口创建失败：%s", SDL_GetError());
     // Mac使用
     // printf("窗口创建失败： %s\n", SDL_GetError());
     // 退出程序
@@ -56,8 +56,8 @@ if (sdl_window == NULL){
 // 参数二：从那里开始渲染(-1:表示从第一个位置开始)
 // 参数三：渲染类型(软件渲染)
 SDL_Renderer* sdl_renderer = SDL_CreateRenderer(sdl_window, -1, 0);
-if (sdl_renderer == NULL){
-    LOG_I("渲染器创建失败：%s", SDL_GetError());
+if (sdl_renderer == NULL) {
+    LOG_I_ARGS("渲染器创建失败：%s", SDL_GetError());
     // Mac使用
     // printf("渲染器创建失败： %s\n", SDL_GetError());
     // 退出程序
@@ -81,7 +81,7 @@ SDL_Texture* sdl_texture = SDL_CreateTexture(sdl_renderer,
                                              width,
                                              height);
 if (sdl_texture == NULL) {
-    LOG_I("纹理创建失败：%s", SDL_GetError());
+    LOG_I_ARGS("纹理创建失败：%s", SDL_GetError());
     // Mac使用
     // printf("纹理创建失败： %s\n", SDL_GetError());
     // 退出程序
@@ -101,9 +101,9 @@ FILE* yuv_file = fopen("/storage/emulated/0/Download/test.yuv", "rb");
 // iOS
 // NSString* inPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"yuv"];
 // FILE* yuv_file = fopen([inPath UTF8String], "rb");
-if (yuv_file == NULL){
+if (yuv_file == NULL) {
     errNum = errno;
-    LOG_I("打开文件失败：errNum:%d,reason:%s", errNum, strerror(errNum));
+    LOG_I_ARGS("打开文件失败：errNum:%d,reason:%s", errNum, strerror(errNum));
     // Mac使用
     // printf("打开文件失败：errNum:%d,reason:%s", errNum, strerror(errNum));
     // 退出程序
@@ -127,7 +127,7 @@ char buffer_pix[y_size * 3 / 2];
 // 定义渲染器区域
 SDL_Rect sdl_rect;
 int currentIndex = 1;
-while (true){
+while (true) {
     // 一帧一帧读取
     fread(buffer_pix, 1, y_size * 3 / 2, yuv_file);
     // 判定是否读取完毕
@@ -280,15 +280,19 @@ File->NewProject->Native C++->输入工程信息->Next->Finish。
 
 项目选中Project模式->app->src->main->右键new->Directory->输入jniLibs->enter。
 
+同样的方式在jniLibs下心间lib文件夹，用来存放.so库文件。
+
 #### 2. 拷贝文件至jniLibs
 
-拷贝`SDL2-2.0.5/build/org.libsdl.testgles/libs/armeabi-v7a`至jniLibs，删除`libmain.so`。
+拷贝`SDL2-2.0.5/build/org.libsdl.testgles/libs/armeabi-v7a/libSDL2.so`至jniLibs，删除`libmain.so`。
 
 拷贝`SDL2-2.0.5/src`至jniLibs。
 
 拷贝`SDL2-2.0.5/include`至jniLibs。
 
 ### 第三步：配置SDL库
+
+修改`CMakeLists.txt`。
 
 #### 1. 设置jniLibs
 ```c
@@ -312,6 +316,9 @@ set_target_properties(
 #### 3. 配置SDL_android_main.c
 
 修改`androidsdlplayyuv`为`SDL2main`，增加`${JNILIBS_DIR}/src/main/android/SDL_android_main.c`。
+
+>`androidsdlplayyuv`为工程名称。
+
 ```c
 # 3. 配置SDL_android_main.c
 add_library( # Sets the name of the library.
@@ -326,6 +333,9 @@ add_library( # Sets the name of the library.
 #### 4. 链接SDL2mian和SDL2库
 
 修改`androidsdlplayyuv`为`SDL2main`，增加`SDL2`。
+
+>`androidsdlplayyuv`为工程名称。
+
 ```c
 # 4. 链接SDL2mian和SDL2库
 target_link_libraries( # Specifies the target library.
@@ -344,7 +354,7 @@ include_directories(${JNILIBS_DIR}/src)
 include_directories(${JNILIBS_DIR}/include)
 ```
 
-#### 6. 配置CPU架构类型
+### 第四步：配置CPU架构类型
 
 修改app->build.gradle，defaultConfig增加ndk配置。
 ```
@@ -353,17 +363,16 @@ ndk {
 }
 ```
 
-### 第四步：修改native-lib.cpp
+### 第五步：修改native-lib.cpp
 
-增加SDL入口，main函数，实现SDL播放YUV。
+引入头文件，增加SDL入口，新增main函数，实现SDL播放YUV。
 ```c
-#include <jni.h>
-#include <string>
 #include <android/log.h>
 #include <errno.h>
 #include "SDL.h"
 
-#define LOG_I(...) __android_log_print(ANDROID_LOG_ERROR , "main", __VA_ARGS__)
+#define LOG_I_ARGS(FORMAT,...) __android_log_print(ANDROID_LOG_INFO,"main",FORMAT,__VA_ARGS__);
+#define LOG_I(FORMAT) LOG_I_ARGS(FORMAT,0);
 
 // SDL入口
 extern "C"
@@ -374,7 +383,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-### 第五步：增加播放界面
+### 第六步：增加播放界面
 
 拷贝`SDL2-2.0.5/build/org.libsdl.testgles/src/org`至java。
 
@@ -405,7 +414,7 @@ protected String[] getLibraries() {
 }
 ```
 
-### 第六步：修改AndroidManifest.xml
+### 第七步：修改AndroidManifest.xml
 
 在AndroidManifest.xml中声明MANAGE_EXTERNAL_STORAGE权限。
 ```
@@ -447,9 +456,9 @@ protected String[] getLibraries() {
 </manifest>
 ```
 
-### 第七步：增加播放按钮
+### 第八步：增加播放按钮
 
-打开main->res->layout->activity_main.xml，点击右上角的`Code`。
+打开main->res->layout->activity_main.xml，点击右上角的`Code`，将原来的Text改为现在的Button。
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -458,7 +467,7 @@ protected String[] getLibraries() {
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+    <!-- 将原来的Text改为现在的Button -->
     <Button
         android:id="@+id/sample_text"
         android:layout_width="wrap_content"
@@ -473,7 +482,7 @@ protected String[] getLibraries() {
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-### 第八步：修改MainActivity.java
+### 第九步：修改MainActivity.java
 
 这是最后一步，完成这一步，运行工程点击播放按钮就可以直接播放了。
 

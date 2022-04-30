@@ -129,7 +129,7 @@ File->NewProject->Native C++->输入工程信息->Next->Finish。
 
 1) 项目选中Project模式->app->src->main->右键new->Directory->输入jniLibs->enter。
 
-2) 将准备好的库文件copy->选中刚才新建的jniLibs->paste。
+2) 将编译好的`include`和`lib`文件夹copy->选中刚才新建的jniLibs->paste。
 
 #### (3) 第三步：修改CMakeLists.txt
 
