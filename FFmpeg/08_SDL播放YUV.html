@@ -97,6 +97,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="09_FFmpeg_SDL播放视频.html" />
+    
     
     <link rel="prev" href="07_FFmpeg音频编码.html" />
     
@@ -273,6 +275,19 @@
             
                     
                     8.SDL播放YUV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="09_FFmpeg_SDL播放视频.html">
+            
+                <a href="09_FFmpeg_SDL播放视频.html">
+            
+                    
+                    9.FFmpeg+SDL播放视频
             
                 </a>
             
@@ -3372,10 +3387,10 @@
 <h2 id="&#x4E00;&#x3001;sdl&#x64AD;&#x653E;&#x6D41;&#x7A0B;">&#x4E00;&#x3001;SDL&#x64AD;&#x653E;&#x6D41;&#x7A0B;</h2>
 <h3 id="&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x521D;&#x59CB;&#x5316;sdl&#x591A;&#x5A92;&#x4F53;&#x6846;&#x67B6;">&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x521D;&#x59CB;&#x5316;SDL&#x591A;&#x5A92;&#x4F53;&#x6846;&#x67B6;</h3>
 <pre class="language-"><code class="lang-c"><span class="token comment">// &#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x521D;&#x59CB;&#x5316;SDL&#x591A;&#x5A92;&#x4F53;&#x6846;&#x67B6;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">SDL_Init</span><span class="token punctuation">(</span> SDL_INIT_VIDEO <span class="token operator">|</span> SDL_INIT_AUDIO <span class="token operator">|</span> SDL_INIT_TIMER <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">LOG_I</span><span class="token punctuation">(</span><span class="token string">&quot;&#x521D;&#x59CB;&#x5316;&#x5931;&#x8D25;&#xFF1A;%s\&quot;, SDL_GetError()&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">SDL_Init</span><span class="token punctuation">(</span> SDL_INIT_VIDEO <span class="token operator">|</span> SDL_INIT_AUDIO <span class="token operator">|</span> SDL_INIT_TIMER <span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">LOG_I_ARGS</span><span class="token punctuation">(</span><span class="token string">&quot;&#x521D;&#x59CB;&#x5316;&#x5931;&#x8D25;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> <span class="token function">SDL_GetError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// Mac&#x4F7F;&#x7528;</span>
-    <span class="token comment">// printf(&quot;&#x521D;&#x59CB;&#x5316;&#x5931;&#x8D25;&#xFF1A;%s\&quot;, SDL_GetError());</span>
+    <span class="token comment">// printf(&quot;&#x521D;&#x59CB;&#x5316;&#x5931;&#x8D25;&#xFF1A;%s&quot;, SDL_GetError());</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
@@ -3395,8 +3410,8 @@ SDL_Window<span class="token operator">*</span> sdl_window <span class="token op
                                           width<span class="token punctuation">,</span>
                                           height<span class="token punctuation">,</span>
                                           SDL_WINDOW_OPENGL<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>sdl_window <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">LOG_I</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7A97;&#x53E3;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> <span class="token function">SDL_GetError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>sdl_window <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">LOG_I_ARGS</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7A97;&#x53E3;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> <span class="token function">SDL_GetError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// Mac&#x4F7F;&#x7528;</span>
     <span class="token comment">// printf(&quot;&#x7A97;&#x53E3;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A; %s\n&quot;, SDL_GetError());</span>
     <span class="token comment">// &#x9000;&#x51FA;&#x7A0B;&#x5E8F;</span>
@@ -3410,8 +3425,8 @@ SDL_Window<span class="token operator">*</span> sdl_window <span class="token op
 <span class="token comment">// &#x53C2;&#x6570;&#x4E8C;&#xFF1A;&#x4ECE;&#x90A3;&#x91CC;&#x5F00;&#x59CB;&#x6E32;&#x67D3;(-1:&#x8868;&#x793A;&#x4ECE;&#x7B2C;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x5F00;&#x59CB;)</span>
 <span class="token comment">// &#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x6E32;&#x67D3;&#x7C7B;&#x578B;(&#x8F6F;&#x4EF6;&#x6E32;&#x67D3;)</span>
 SDL_Renderer<span class="token operator">*</span> sdl_renderer <span class="token operator">=</span> <span class="token function">SDL_CreateRenderer</span><span class="token punctuation">(</span>sdl_window<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>sdl_renderer <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">LOG_I</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6E32;&#x67D3;&#x5668;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> <span class="token function">SDL_GetError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>sdl_renderer <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">LOG_I_ARGS</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6E32;&#x67D3;&#x5668;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> <span class="token function">SDL_GetError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// Mac&#x4F7F;&#x7528;</span>
     <span class="token comment">// printf(&quot;&#x6E32;&#x67D3;&#x5668;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A; %s\n&quot;, SDL_GetError());</span>
     <span class="token comment">// &#x9000;&#x51FA;&#x7A0B;&#x5E8F;</span>
@@ -3432,7 +3447,7 @@ SDL_Texture<span class="token operator">*</span> sdl_texture <span class="token 
                                              width<span class="token punctuation">,</span>
                                              height<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span>sdl_texture <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">LOG_I</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7EB9;&#x7406;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> <span class="token function">SDL_GetError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">LOG_I_ARGS</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7EB9;&#x7406;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A;%s&quot;</span><span class="token punctuation">,</span> <span class="token function">SDL_GetError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// Mac&#x4F7F;&#x7528;</span>
     <span class="token comment">// printf(&quot;&#x7EB9;&#x7406;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF1A; %s\n&quot;, SDL_GetError());</span>
     <span class="token comment">// &#x9000;&#x51FA;&#x7A0B;&#x5E8F;</span>
@@ -3449,9 +3464,9 @@ FILE<span class="token operator">*</span> yuv_file <span class="token operator">
 <span class="token comment">// iOS</span>
 <span class="token comment">// NSString* inPath = [[NSBundle mainBundle] pathForResource:@&quot;test&quot; ofType:@&quot;yuv&quot;];</span>
 <span class="token comment">// FILE* yuv_file = fopen([inPath UTF8String], &quot;rb&quot;);</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>yuv_file <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>yuv_file <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     errNum <span class="token operator">=</span> errno<span class="token punctuation">;</span>
-    <span class="token function">LOG_I</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x5931;&#x8D25;&#xFF1A;errNum:%d,reason:%s&quot;</span><span class="token punctuation">,</span> errNum<span class="token punctuation">,</span> <span class="token function">strerror</span><span class="token punctuation">(</span>errNum<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">LOG_I_ARGS</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x5931;&#x8D25;&#xFF1A;errNum:%d,reason:%s&quot;</span><span class="token punctuation">,</span> errNum<span class="token punctuation">,</span> <span class="token function">strerror</span><span class="token punctuation">(</span>errNum<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// Mac&#x4F7F;&#x7528;</span>
     <span class="token comment">// printf(&quot;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x5931;&#x8D25;&#xFF1A;errNum:%d,reason:%s&quot;, errNum, strerror(errNum));</span>
     <span class="token comment">// &#x9000;&#x51FA;&#x7A0B;&#x5E8F;</span>
@@ -3472,7 +3487,7 @@ FILE<span class="token operator">*</span> yuv_file <span class="token operator">
 <span class="token comment">// &#x5B9A;&#x4E49;&#x6E32;&#x67D3;&#x5668;&#x533A;&#x57DF;</span>
 SDL_Rect sdl_rect<span class="token punctuation">;</span>
 <span class="token keyword">int</span> currentIndex <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// &#x4E00;&#x5E27;&#x4E00;&#x5E27;&#x8BFB;&#x53D6;</span>
     <span class="token function">fread</span><span class="token punctuation">(</span>buffer_pix<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> y_size <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> yuv_file<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// &#x5224;&#x5B9A;&#x662F;&#x5426;&#x8BFB;&#x53D6;&#x5B8C;&#x6BD5;</span>
@@ -3577,11 +3592,13 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
 <h3 id="&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x5BFC;&#x5165;&#x5E93;&#x6587;&#x4EF6;&#x3002;">&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x5BFC;&#x5165;&#x5E93;&#x6587;&#x4EF6;&#x3002;</h3>
 <h4 id="1-&#x65B0;&#x5EFA;jnilibs&#x6587;&#x4EF6;&#x5939;">1. &#x65B0;&#x5EFA;jniLibs&#x6587;&#x4EF6;&#x5939;</h4>
 <p>&#x9879;&#x76EE;&#x9009;&#x4E2D;Project&#x6A21;&#x5F0F;-&gt;app-&gt;src-&gt;main-&gt;&#x53F3;&#x952E;new-&gt;Directory-&gt;&#x8F93;&#x5165;jniLibs-&gt;enter&#x3002;</p>
+<p>&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x5728;jniLibs&#x4E0B;&#x5FC3;&#x95F4;lib&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x7528;&#x6765;&#x5B58;&#x653E;.so&#x5E93;&#x6587;&#x4EF6;&#x3002;</p>
 <h4 id="2-&#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x81F3;jnilibs">2. &#x62F7;&#x8D1D;&#x6587;&#x4EF6;&#x81F3;jniLibs</h4>
-<p>&#x62F7;&#x8D1D;<code>SDL2-2.0.5/build/org.libsdl.testgles/libs/armeabi-v7a</code>&#x81F3;jniLibs&#xFF0C;&#x5220;&#x9664;<code>libmain.so</code>&#x3002;</p>
+<p>&#x62F7;&#x8D1D;<code>SDL2-2.0.5/build/org.libsdl.testgles/libs/armeabi-v7a/libSDL2.so</code>&#x81F3;jniLibs&#xFF0C;&#x5220;&#x9664;<code>libmain.so</code>&#x3002;</p>
 <p>&#x62F7;&#x8D1D;<code>SDL2-2.0.5/src</code>&#x81F3;jniLibs&#x3002;</p>
 <p>&#x62F7;&#x8D1D;<code>SDL2-2.0.5/include</code>&#x81F3;jniLibs&#x3002;</p>
 <h3 id="&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;sdl&#x5E93;">&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;SDL&#x5E93;</h3>
+<p>&#x4FEE;&#x6539;<code>CMakeLists.txt</code>&#x3002;</p>
 <h4 id="1-&#x8BBE;&#x7F6E;jnilibs">1. &#x8BBE;&#x7F6E;jniLibs</h4>
 <pre class="language-"><code class="lang-c"># <span class="token number">1.</span> &#x8BBE;&#x7F6E;jniLibs
 <span class="token function">set</span><span class="token punctuation">(</span>JNILIBS_DIR $<span class="token punctuation">{</span>CMAKE_SOURCE_DIR<span class="token punctuation">}</span><span class="token operator">/</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>jniLibs<span class="token punctuation">)</span>
@@ -3599,6 +3616,9 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
 </code></pre>
 <h4 id="3-&#x914D;&#x7F6E;sdlandroidmainc">3. &#x914D;&#x7F6E;SDL_android_main.c</h4>
 <p>&#x4FEE;&#x6539;<code>androidsdlplayyuv</code>&#x4E3A;<code>SDL2main</code>&#xFF0C;&#x589E;&#x52A0;<code>${JNILIBS_DIR}/src/main/android/SDL_android_main.c</code>&#x3002;</p>
+<blockquote>
+<p><code>androidsdlplayyuv</code>&#x4E3A;&#x5DE5;&#x7A0B;&#x540D;&#x79F0;&#x3002;</p>
+</blockquote>
 <pre class="language-"><code class="lang-c"># <span class="token number">3.</span> &#x914D;&#x7F6E;SDL_android_main<span class="token punctuation">.</span>c
 <span class="token function">add_library</span><span class="token punctuation">(</span> # Sets the name of the library<span class="token punctuation">.</span>
         SDL2main
@@ -3610,6 +3630,9 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
 </code></pre>
 <h4 id="4-&#x94FE;&#x63A5;sdl2mian&#x548C;sdl2&#x5E93;">4. &#x94FE;&#x63A5;SDL2mian&#x548C;SDL2&#x5E93;</h4>
 <p>&#x4FEE;&#x6539;<code>androidsdlplayyuv</code>&#x4E3A;<code>SDL2main</code>&#xFF0C;&#x589E;&#x52A0;<code>SDL2</code>&#x3002;</p>
+<blockquote>
+<p><code>androidsdlplayyuv</code>&#x4E3A;&#x5DE5;&#x7A0B;&#x540D;&#x79F0;&#x3002;</p>
+</blockquote>
 <pre class="language-"><code class="lang-c"># <span class="token number">4.</span> &#x94FE;&#x63A5;SDL2mian&#x548C;SDL2&#x5E93;
 <span class="token function">target_link_libraries</span><span class="token punctuation">(</span> # Specifies the target library<span class="token punctuation">.</span>
         SDL2main SDL2
@@ -3626,20 +3649,19 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
 <span class="token function">include_directories</span><span class="token punctuation">(</span>$<span class="token punctuation">{</span>JNILIBS_DIR<span class="token punctuation">}</span><span class="token operator">/</span>src<span class="token punctuation">)</span>
 <span class="token function">include_directories</span><span class="token punctuation">(</span>$<span class="token punctuation">{</span>JNILIBS_DIR<span class="token punctuation">}</span><span class="token operator">/</span>include<span class="token punctuation">)</span>
 </code></pre>
-<h4 id="6-&#x914D;&#x7F6E;cpu&#x67B6;&#x6784;&#x7C7B;&#x578B;">6. &#x914D;&#x7F6E;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;</h4>
+<h3 id="&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;cpu&#x67B6;&#x6784;&#x7C7B;&#x578B;">&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;CPU&#x67B6;&#x6784;&#x7C7B;&#x578B;</h3>
 <p>&#x4FEE;&#x6539;app-&gt;build.gradle&#xFF0C;defaultConfig&#x589E;&#x52A0;ndk&#x914D;&#x7F6E;&#x3002;</p>
 <pre class="language-"><code>ndk {
     abiFilters &apos;armeabi-v7a&apos;
 }
-</code></pre><h3 id="&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;native-libcpp">&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;native-lib.cpp</h3>
-<p>&#x589E;&#x52A0;SDL&#x5165;&#x53E3;&#xFF0C;main&#x51FD;&#x6570;&#xFF0C;&#x5B9E;&#x73B0;SDL&#x64AD;&#x653E;YUV&#x3002;</p>
-<pre class="language-"><code class="lang-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;jni.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;android/log.h&gt;</span></span>
+</code></pre><h3 id="&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;native-libcpp">&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;native-lib.cpp</h3>
+<p>&#x5F15;&#x5165;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x589E;&#x52A0;SDL&#x5165;&#x53E3;&#xFF0C;&#x65B0;&#x589E;main&#x51FD;&#x6570;&#xFF0C;&#x5B9E;&#x73B0;SDL&#x64AD;&#x653E;YUV&#x3002;</p>
+<pre class="language-"><code class="lang-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;android/log.h&gt;</span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;errno.h&gt;</span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;SDL.h&quot;</span></span>
 
-<span class="token macro property">#<span class="token directive keyword">define</span> LOG_I(...) __android_log_print(ANDROID_LOG_ERROR , &quot;main&quot;, __VA_ARGS__)</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> LOG_I_ARGS(FORMAT,...) __android_log_print(ANDROID_LOG_INFO,&quot;main&quot;,FORMAT,__VA_ARGS__);</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> LOG_I(FORMAT) LOG_I_ARGS(FORMAT,0);</span>
 
 <span class="token comment">// SDL&#x5165;&#x53E3;</span>
 <span class="token keyword">extern</span> <span class="token string">&quot;C&quot;</span>
@@ -3649,7 +3671,7 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x754C;&#x9762;">&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x754C;&#x9762;</h3>
+<h3 id="&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x754C;&#x9762;">&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x754C;&#x9762;</h3>
 <p>&#x62F7;&#x8D1D;<code>SDL2-2.0.5/build/org.libsdl.testgles/src/org</code>&#x81F3;java&#x3002;</p>
 <p>&#x4FEE;&#x6539;<code>SDLActivity.java</code>&#xFF0C;&#x539F;&#x6765;</p>
 <pre class="language-"><code class="lang-java"><span class="token keyword">protected</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getLibraries</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -3675,7 +3697,7 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;androidmanifestxml">&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;AndroidManifest.xml</h3>
+<h3 id="&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;androidmanifestxml">&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;AndroidManifest.xml</h3>
 <p>&#x5728;AndroidManifest.xml&#x4E2D;&#x58F0;&#x660E;MANAGE_EXTERNAL_STORAGE&#x6743;&#x9650;&#x3002;</p>
 <pre class="language-"><code><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token comment">&lt;!-- &#x6240;&#x6709;&#x6587;&#x4EF6;&#x6743;&#x9650;1&#xFF1A;add xmlns:tools=&quot;http://schemas.android.com/tools&quot; --&gt;</span>
@@ -3713,8 +3735,8 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
-</code></pre><h3 id="&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x6309;&#x94AE;">&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x6309;&#x94AE;</h3>
-<p>&#x6253;&#x5F00;main-&gt;res-&gt;layout-&gt;activity_main.xml&#xFF0C;&#x70B9;&#x51FB;&#x53F3;&#x4E0A;&#x89D2;&#x7684;<code>Code</code>&#x3002;</p>
+</code></pre><h3 id="&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x6309;&#x94AE;">&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x589E;&#x52A0;&#x64AD;&#x653E;&#x6309;&#x94AE;</h3>
+<p>&#x6253;&#x5F00;main-&gt;res-&gt;layout-&gt;activity_main.xml&#xFF0C;&#x70B9;&#x51FB;&#x53F3;&#x4E0A;&#x89D2;&#x7684;<code>Code</code>&#xFF0C;&#x5C06;&#x539F;&#x6765;&#x7684;Text&#x6539;&#x4E3A;&#x73B0;&#x5728;&#x7684;Button&#x3002;</p>
 <pre class="language-"><code><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
@@ -3722,7 +3744,7 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
     <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
     <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
     <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-
+    <span class="token comment">&lt;!-- &#x5C06;&#x539F;&#x6765;&#x7684;Text&#x6539;&#x4E3A;&#x73B0;&#x5728;&#x7684;Button --&gt;</span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
         <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>@+id/sample_text<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
@@ -3735,7 +3757,7 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toTopOf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
-</code></pre><h3 id="&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;mainactivityjava">&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;MainActivity.java</h3>
+</code></pre><h3 id="&#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;mainactivityjava">&#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x4FEE;&#x6539;MainActivity.java</h3>
 <p>&#x8FD9;&#x662F;&#x6700;&#x540E;&#x4E00;&#x6B65;&#xFF0C;&#x5B8C;&#x6210;&#x8FD9;&#x4E00;&#x6B65;&#xFF0C;&#x8FD0;&#x884C;&#x5DE5;&#x7A0B;&#x70B9;&#x51FB;&#x64AD;&#x653E;&#x6309;&#x94AE;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x64AD;&#x653E;&#x4E86;&#x3002;</p>
 <blockquote>
 <p>&#x6CE8;&#x610F;&#xFF1A;&#x5728;<code>/storage/emulated/0/Download</code>&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x653E;test.yuv&#x3002;</p>
@@ -3883,7 +3905,7 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
 <span class="token punctuation">}</span>
 </code></pre>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-04-29 13:00:08
+2022-04-30 20:25:49
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3912,10 +3934,14 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
 
             
                 
-                <a href="07_FFmpeg音频编码.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 7.FFmpeg音频编码">
+                <a href="07_FFmpeg音频编码.html" class="navigation navigation-prev " aria-label="Previous page: 7.FFmpeg音频编码">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="09_FFmpeg_SDL播放视频.html" class="navigation navigation-next " aria-label="Next page: 9.FFmpeg+SDL播放视频">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -3924,7 +3950,7 @@ ANT=&quot;/Users/chenchangqing/Documents/code/ffmpeg/resources/ant/apache-ant-1.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"8.SDL播放YUV","level":"1.2.9","depth":2,"next":{"title":"OpenGL系列","level":"1.3","depth":1,"ref":"","articles":[{"title":"1.OpenGL渲染结构与常用图元","level":"1.3.1","depth":2,"path":"OpenGL系列/01_OpenGL渲染结构与常用图元.md","ref":"OpenGL系列/01_OpenGL渲染结构与常用图元.md","articles":[]},{"title":"2.OpenGL基础渲染","level":"1.3.2","depth":2,"path":"OpenGL系列/02_OpenGL基础渲染.md","ref":"OpenGL系列/02_OpenGL基础渲染.md","articles":[]},{"title":"3.OpenGL渲染问题的处理方法","level":"1.3.3","depth":2,"path":"OpenGL系列/03_OpenGL渲染问题的处理方法.md","ref":"OpenGL系列/03_OpenGL渲染问题的处理方法.md","articles":[]},{"title":"4.OpenGL渲染技巧","level":"1.3.4","depth":2,"path":"OpenGL系列/04_OpenGL渲染技巧.md","ref":"OpenGL系列/04_OpenGL渲染技巧.md","articles":[]},{"title":"5.OpenGL三角形批次类绘制案例","level":"1.3.5","depth":2,"path":"OpenGL系列/05_OpenGL三角形批次类绘制案例.md","ref":"OpenGL系列/05_OpenGL三角形批次类绘制案例.md","articles":[]},{"title":"6.OpenGL模型视图矩阵绘制案例","level":"1.3.6","depth":2,"path":"OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md","ref":"OpenGL系列/06_OpenGL模型视图矩阵绘制案例.md","articles":[]},{"title":"7.OpenGL顶点变化管线详解","level":"1.3.7","depth":2,"path":"OpenGL系列/07_OpenGL顶点变化管线详解.md","ref":"OpenGL系列/07_OpenGL顶点变化管线详解.md","articles":[]},{"title":"8.OpenGL公转自转案例","level":"1.3.8","depth":2,"path":"OpenGL系列/08_OpenGL公转自转案例.md","ref":"OpenGL系列/08_OpenGL公转自转案例.md","articles":[]}]},"previous":{"title":"7.FFmpeg音频编码","level":"1.2.8","depth":2,"path":"FFmpeg/07_FFmpeg音频编码.md","ref":"FFmpeg/07_FFmpeg音频编码.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/08_SDL播放YUV.md","mtime":"2022-04-29T05:00:08.775Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-29T05:08:07.117Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"8.SDL播放YUV","level":"1.2.9","depth":2,"next":{"title":"9.FFmpeg+SDL播放视频","level":"1.2.10","depth":2,"path":"FFmpeg/09_FFmpeg_SDL播放视频.md","ref":"FFmpeg/09_FFmpeg_SDL播放视频.md","articles":[]},"previous":{"title":"7.FFmpeg音频编码","level":"1.2.8","depth":2,"path":"FFmpeg/07_FFmpeg音频编码.md","ref":"FFmpeg/07_FFmpeg音频编码.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/08_SDL播放YUV.md","mtime":"2022-04-30T12:25:49.607Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-30T12:26:08.089Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
