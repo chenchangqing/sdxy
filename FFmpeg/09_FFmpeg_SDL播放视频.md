@@ -16,6 +16,7 @@ av_register_all();
 
 ```c
 // 第二步：打开封装格式
+// 打开视频文件，读文件头内容，取得文件容器的封装信息及码流参数并存储在avformat_context中
 // 参数一：封装格式上下文
 // 作用：保存整个视频信息(解码器、编码器等等...)
 // 信息：码率、帧率等...
@@ -39,6 +40,7 @@ if (avformat_open_input_result != 0){
 
 ```c
 // 第三步：查找视频流，拿到视频信息
+// 取得文件中保存的码流信息，并填充到avformat_context->stream 字段
 // 参数一：封装格式上下文
 // 参数二：指定默认配置
 int avformat_find_stream_info_result = avformat_find_stream_info(avformat_context, NULL);
@@ -85,7 +87,7 @@ __android_log_print(ANDROID_LOG_INFO, "main", "解码器名称：%s", avcodec->n
 
 ```c
 // 第六步：定义类型转换参数
-// 6.1 创建视频采样数据帧上下文
+// 6.1 设置图像转换像素格式为AV_PIX_FMT_YUV420P
 // 参数一：源文件->原始视频像素数据格式宽
 // 参数二：源文件->原始视频像素数据格式高
 // 参数三：源文件->原始视频像素数据格式类型
@@ -102,12 +104,12 @@ SwsContext *swscontext = sws_getContext(avcodec_context->width,
                                         NULL,
                                         NULL,
                                         NULL);
-// 6.2 创建视频压缩数据帧
+// 6.2 解码后的视频信息结构体
 // 视频压缩数据：H264
 AVFrame* avframe_in = av_frame_alloc();
 // 定义解码结果
 int decode_result = 0;
-// 6.3 创建视频采样数据帧
+// 6.3 保存转换为AV_PIX_FMT_YUV420P格式的视频帧
 // 视频采样数据：YUV格式
 AVFrame* avframe_yuv420p = av_frame_alloc();
 // 给缓冲区设置类型->yuv420类型
@@ -161,13 +163,11 @@ if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER ) == -1) {
 // 参数四：窗口在屏幕上宽
 // 参数五：窗口在屏幕上高
 // 参数六：窗口状态(打开)
-int width = 640;
-int height = 352;
 SDL_Window* sdl_window = SDL_CreateWindow("SDL播放YUV视频",
                                           SDL_WINDOWPOS_CENTERED,
                                           SDL_WINDOWPOS_CENTERED,
-                                          width,
-                                          height,
+                                          avcodec_context->width,
+                                          avcodec_context->height,
                                           SDL_WINDOW_OPENGL);
 if (sdl_window == NULL){
     __android_log_print(ANDROID_LOG_INFO, "main", "窗口创建失败：%s", SDL_GetError());
@@ -177,6 +177,7 @@ if (sdl_window == NULL){
     SDL_Quit();
     return -1;
 }
+__android_log_print(ANDROID_LOG_INFO, "main", "窗口创建成功width：%d，height：%d", avcodec_context->width,avcodec_context->height);
 ```
 
 ### 第九步：创建渲染器->渲染窗口
@@ -211,8 +212,8 @@ SDL_Rect sdl_rect;
 SDL_Texture* sdl_texture = SDL_CreateTexture(sdl_renderer,
                                              SDL_PIXELFORMAT_IYUV,
                                              SDL_TEXTUREACCESS_STREAMING,
-                                             width,
-                                             height);
+                                             avcodec_context->width,
+                                             avcodec_context->height);
 if (sdl_texture == NULL) {
     __android_log_print(ANDROID_LOG_INFO, "main", "纹理创建失败：%s", SDL_GetError());
     // Mac使用
@@ -318,8 +319,8 @@ SDL_UpdateTexture(sdl_texture, NULL, avframe_yuv420p->data[0], avframe_yuv420p->
 // 设置左上角位置(全屏)
 sdl_rect.x = 100;
 sdl_rect.y = 100;
-sdl_rect.w = width;
-sdl_rect.h = height;
+sdl_rect.w = avcodec_context->width;
+sdl_rect.h = avcodec_context->height;
 SDL_RenderClear(sdl_renderer);
 SDL_RenderCopy(sdl_renderer, sdl_texture, NULL, &sdl_rect);
 ```
