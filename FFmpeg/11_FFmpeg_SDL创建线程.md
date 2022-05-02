@@ -1,4 +1,4 @@
-# FFmpeg+SDL创建线程
+# 11.FFmpeg+SDL创建线程
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/11_ffmpeg_sdl_play_on_thread/FFmpegSDLPlayOnThread)
 
@@ -184,9 +184,9 @@ int packet_queue_put(PacketQueue *q, AVPacket *pkt) {
     }
     pktlist->pkt = *pkt;// 将输入数据包赋值给新建链表节点对象中的数据包对象
     pktlist->next = NULL;// 链表后继指针为空
-    //  if (av_packet_ref(pkt, pkt) < 0) {// 增加pkt编码数据的引用计数(输入参数中的pkt与新建链表节点中的pkt共享同一缓存空间)
-    //      return -1;
-    //  }
+    //	if (av_packet_ref(pkt, pkt) < 0) {// 增加pkt编码数据的引用计数(输入参数中的pkt与新建链表节点中的pkt共享同一缓存空间)
+    //		return -1;
+    //	}
     /*---------将新建节点插入队列-------*/
     SDL_LockMutex(q->qlock);// 队列互斥量加锁，保护队列数据
 
@@ -507,10 +507,10 @@ int stream_component_open(VideoState *is, int stream_index) {
     }
 
     /*-----------------------
-     * Find the decoder for the video stream，根据视频流对应的解码器上下文查找对应的解码器，返回对应的解码器(信息结构体)
-     * The stream's information about the codec is in what we call the "codec context.
-     * This contains all the information about the codec that the stream is using
-     -----------------------*/
+	 * Find the decoder for the video stream，根据视频流对应的解码器上下文查找对应的解码器，返回对应的解码器(信息结构体)
+	 * The stream's information about the codec is in what we call the "codec context.
+	 * This contains all the information about the codec that the stream is using
+	 -----------------------*/
     codec = avcodec_find_decoder(codecCtx->codec_id);
     AVDictionary *optionsDict = NULL;
     if (!codec || (avcodec_open2(codecCtx, codec, &optionsDict) < 0)) {
@@ -552,12 +552,12 @@ int parse_thread(void *arg) {
 
     /*-------------------------
      * 打开封装格式
-     * 打开视频文件，读文件头内容，取得文件容器的封装信息及码流参数并存储在avformat_context中
-     * 参数一：封装格式上下文
+	 * 打开视频文件，读文件头内容，取得文件容器的封装信息及码流参数并存储在avformat_context中
+	 * 参数一：封装格式上下文
      * 参数二：视频路径
      * 参数三：指定输入的格式
      * 参数四：设置默认参数
-     --------------------------*/
+ 	 --------------------------*/
     AVFormatContext *avformat_context = NULL;// 参数一：封装格式上下文
     int avformat_open_input_result = avformat_open_input(&avformat_context, is->filename, NULL, NULL);
     if (avformat_open_input_result != 0){
@@ -786,9 +786,3 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 ```
-
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-

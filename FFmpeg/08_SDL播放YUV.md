@@ -284,7 +284,7 @@ File->NewProject->Native C++->输入工程信息->Next->Finish。
 
 #### 2. 拷贝文件至jniLibs
 
-拷贝`SDL2-2.0.5/build/org.libsdl.testgles/libs/armeabi-v7a/libSDL2.so`至jniLibs，删除`libmain.so`。
+拷贝`SDL2-2.0.5/build/org.libsdl.testgles/libs/armeabi-v7a/libSDL2.so`至jniLibs/lib。
 
 拷贝`SDL2-2.0.5/src`至jniLibs。
 
