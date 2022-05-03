@@ -14,6 +14,7 @@
     * [9.FFmpeg+SDL播放视频](FFmpeg/09_FFmpeg_SDL播放视频.md)
     * [10.FFmpeg+SDL播放音频](FFmpeg/10_FFmpeg_SDL播放音频.md)
     * [11.FFmpeg+SDL创建线程](FFmpeg/11_FFmpeg_SDL创建线程.md)
+    * [12.FFmpeg+SDL同步视频](FFmpeg/12_FFmpeg_SDL同步视频.md)
 * OpenGL系列
     * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
     * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)
