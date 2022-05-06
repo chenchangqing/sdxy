@@ -1,4 +1,4 @@
-# 9.FFmpeg+SDL播放视频
+# FFmpeg+SDL播放视频
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/09_display_video_while_decoding/AndroidDisplayVideoWhileDecoding)
 

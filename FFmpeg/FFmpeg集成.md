@@ -1,4 +1,4 @@
-# 2.FFmpeg集成
+# FFmpeg集成
 
 ## 一、iOS集成FFmpeg
 

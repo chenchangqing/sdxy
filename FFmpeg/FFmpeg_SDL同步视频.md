@@ -1,4 +1,4 @@
-# 12.FFmpeg+SDL同步视频
+# FFmpeg+SDL同步视频
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/12_ffmpeg_sdl_syn_video/AndroidFFmpegSDLSynVideo)
 

@@ -1,4 +1,4 @@
-# 10.FFmpeg+SDL播放音频
+# FFmpeg+SDL播放音频
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/10_ffmpeg_sdl_play_audio/AndroidFFmpegSDLPlayAudio)
 

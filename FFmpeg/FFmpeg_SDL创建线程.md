@@ -1,4 +1,4 @@
-# 11.FFmpeg+SDL创建线程
+# FFmpeg+SDL创建线程
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/11_ffmpeg_sdl_play_on_thread/FFmpegSDLPlayOnThread)
 

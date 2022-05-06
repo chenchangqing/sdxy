@@ -1,4 +1,4 @@
-# 13.FFmpeg+SDL同步音频
+# FFmpeg+SDL同步音频
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/13_ffmpeg_sdl_syn_audio/AndroidFFmpegSDLSynAudio)
 

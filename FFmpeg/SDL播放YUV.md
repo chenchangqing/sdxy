@@ -1,4 +1,4 @@
-# 8.SDL播放YUV
+# SDL播放YUV
 
 [Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/08_ffmpeg_sdl/AndroidSDLPlayYUV)
 

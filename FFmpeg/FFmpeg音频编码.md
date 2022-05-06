@@ -1,4 +1,4 @@
-# 7.FFmpeg音频编码
+# FFmpeg音频编码
 
 [Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/07_ffmpeg_audio_encoding/AndroidFFmpegEncodingAudio)
 

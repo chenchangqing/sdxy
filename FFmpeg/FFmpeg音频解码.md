@@ -1,4 +1,4 @@
-# 5.FFmpeg视频解码
+# FFmpeg视频解码
 
 [代码工程](https://gitee.com/learnany/ffmpeg/tree/master/05_ffmpeg_audio_decoding/AndroidFFmpegDecodingAudio)
 

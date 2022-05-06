@@ -1,4 +1,4 @@
-# 6.FFmpeg视频编码
+# FFmpeg视频编码
 
 [Android代码工程](https://gitee.com/learnany/ffmpeg/tree/master/06_ffmpeg_video_encoding/AndroidFFmpegEncodingVideo)
 
