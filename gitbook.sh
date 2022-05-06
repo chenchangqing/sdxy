@@ -1,15 +1,24 @@
-gitbook build
-git checkout master
-git add .
-git commit -m 'build'
-git push -u origin master
-git checkout gh-pages
-git pull origin gh-pages
-#rm -rf !(_book|node_modules)
-cp -r _book/* .
-git add .
-git commit -m 'build'
-git push -u origin gh-pages
-rm -r -f _book
-git checkout master
-echo "提交OK"
+if [ ! -n "$1" ] ;then
+	git add .
+	git commit -m '$1'
+	git push -u origin develop
+else
+    git add .
+	git commit -m 'no comment'
+	git push -u origin develop
+fi
+
+# git checkout master
+# git fetch origin
+# git rebase origin/develop
+# git push -u origin master
+# gitbook build
+# git checkout gh-pages
+# git pull origin gh-pages
+# rm -rf !(_book|.git|.gitignore|ignore|node_modules)
+# cp -r _book/* .
+# git add .
+# git commit -m 'build gh-pages'
+# git push -u origin gh-pages
+# rm -r -f _book
+# echo "提交OK"
