@@ -1,7 +1,7 @@
 if [ "$*" ]
 then
     git add .
-	git commit -m '$*'
+	git commit -m "$*"
 	git push -u origin develop
 else
     git add .
