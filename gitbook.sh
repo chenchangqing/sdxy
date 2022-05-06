@@ -1,10 +1,10 @@
 if [ ! -n "$1" ] ;then
-	git add .
-	git commit -m '$1'
-	git push -u origin develop
-else
     git add .
 	git commit -m 'no comment'
+	git push -u origin develop
+else
+	git add .
+	git commit -m '$1'
 	git push -u origin develop
 fi
 
