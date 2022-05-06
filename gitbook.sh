@@ -22,4 +22,5 @@ git add .
 git commit -m 'build gh-pages'
 git push -u origin gh-pages
 rm -r -f _book
+git chekout develop
 echo "提交OK"
