@@ -112,50 +112,6 @@ themselves, not all their features will necessarily be usable by FFmpeg.
 
  --enable-debug=LEVEL：调试级别
 
-## 三、iOS平台编译
-
-### 1. 下载源码
-
-[download-ffmpeg.sh](https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/download-ffmpeg.sh)是下载脚本，执行`sh download-ffmpeg.sh`下载源码，这里以ffmpeg-3.4为例。
-
-### 2. 安装gas-preprocessor
-
-下载最新的[gas-preprocessor.pl](https://github.com/libav/gas-preprocessor)，执行以下命令：
-
-```
-cd gas-preprocessor directory
-sudo cp -f gas-preprocessor.pl /usr/local/bin/
-chmod 777 /usr/local/bin/gas-preprocessor.pl
-```
-
-**问题**：编译FFmpeg，执行 ffmpeg-build.sh 报错"GNU assembler not found, install/update gas-preprocessor"。
-
-解决方法：我用Github最新的gas-preprocessor.pl，执行ffmpeg-build.sh脚本会报错，这里给出可以编译成功的[gas-preprocessor.pl](https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/gas-preprocessor.pl)。
-
-### 3. 执行编译
-
-[ios-build-ffmpeg.sh](https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/ios-build-ffmpeg.sh)是编译脚本，将编译脚本放在和源码的同一目录，执行：
-
-#### (1) 默认分别编译arm64、armv7、i386、x86_64，代码如下：
-```
-sh ios-build-ffmpeg.sh
-```
-#### (2) 指定架构编译，可以指定arm64、armv7、i386、x86_64，代码如下：
-```
-sh ios-build-ffmpeg arm64
-```
-#### (3) 指定armv7编译时出现问题，待解决：
-```
-sh ios-build-ffmpeg armv7
-
-AS  libavcodec/arm/aacpsdsp_neon.o
-src/libavutil/arm/asm.S:50:9: error: unknown directive
-        .arch armv7-a
-        ^
-make: *** [libavcodec/arm/aacpsdsp_neon.o] Error 1
-make: *** Waiting for unfinished jobs....
-```
-
 ## 四、Android平台编译
 
 ### 1. 下载源码

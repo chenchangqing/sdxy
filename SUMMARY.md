@@ -5,6 +5,7 @@
     * [相关链接](FFmpeg/相关链接.md)
     * [FFmpeg编译](FFmpeg/FFmpeg编译.md)
     * [FFmpeg集成](FFmpeg/FFmpeg集成.md)
+    * [iOS集成FFmpeg](FFmpeg/iOS集成FFmpeg.md)
     * [FFmpeg基础知识](FFmpeg/FFmpeg基础知识.md)
     * [FFmpeg视频解码](FFmpeg/FFmpeg视频解码.md)
     * [FFmpeg音频解码](FFmpeg/FFmpeg音频解码.md)

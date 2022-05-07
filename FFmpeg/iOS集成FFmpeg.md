@@ -78,9 +78,3 @@ $(PROJECT_DIR)/FFmpegCompiled/FFmpeg-3.4/arm64/include
 ## 编译
 
 编译成功，完成。
-
-<div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
-</div>
-
