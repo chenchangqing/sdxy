@@ -204,7 +204,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="FFmpeg基础知识.html">
+        <li class="chapter " data-level="1.2.4" data-path="iOS集成FFmpeg.html">
+            
+                <a href="iOS集成FFmpeg.html">
+            
+                    
+                    iOS集成FFmpeg
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="FFmpeg基础知识.html">
             
                 <a href="FFmpeg基础知识.html">
             
@@ -217,7 +230,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="FFmpeg视频解码.html">
+        <li class="chapter " data-level="1.2.6" data-path="FFmpeg视频解码.html">
             
                 <a href="FFmpeg视频解码.html">
             
@@ -230,7 +243,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="FFmpeg音频解码.html">
+        <li class="chapter " data-level="1.2.7" data-path="FFmpeg音频解码.html">
             
                 <a href="FFmpeg音频解码.html">
             
@@ -243,7 +256,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="FFmpeg视频编码.html">
+        <li class="chapter " data-level="1.2.8" data-path="FFmpeg视频编码.html">
             
                 <a href="FFmpeg视频编码.html">
             
@@ -256,7 +269,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="FFmpeg音频编码.html">
+        <li class="chapter " data-level="1.2.9" data-path="FFmpeg音频编码.html">
             
                 <a href="FFmpeg音频编码.html">
             
@@ -269,7 +282,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.9" data-path="SDL播放YUV.html">
+        <li class="chapter " data-level="1.2.10" data-path="SDL播放YUV.html">
             
                 <a href="SDL播放YUV.html">
             
@@ -282,7 +295,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.10" data-path="FFmpeg_SDL播放视频.html">
+        <li class="chapter " data-level="1.2.11" data-path="FFmpeg_SDL播放视频.html">
             
                 <a href="FFmpeg_SDL播放视频.html">
             
@@ -295,7 +308,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.11" data-path="FFmpeg_SDL播放音频.html">
+        <li class="chapter " data-level="1.2.12" data-path="FFmpeg_SDL播放音频.html">
             
                 <a href="FFmpeg_SDL播放音频.html">
             
@@ -308,7 +321,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.12" data-path="FFmpeg_SDL创建线程.html">
+        <li class="chapter " data-level="1.2.13" data-path="FFmpeg_SDL创建线程.html">
             
                 <a href="FFmpeg_SDL创建线程.html">
             
@@ -321,7 +334,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.13" data-path="FFmpeg_SDL同步视频.html">
+        <li class="chapter " data-level="1.2.14" data-path="FFmpeg_SDL同步视频.html">
             
                 <a href="FFmpeg_SDL同步视频.html">
             
@@ -334,7 +347,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.14" data-path="FFmpeg_SDL同步音频.html">
+        <li class="chapter " data-level="1.2.15" data-path="FFmpeg_SDL同步音频.html">
             
                 <a href="FFmpeg_SDL同步音频.html">
             
@@ -3495,32 +3508,7 @@ themselves, not all their features will necessarily be usable by FFmpeg.</p>
 <h4 id="10&#xFF09;developer-options&#xFF1A;&#x5F00;&#x53D1;&#x8005;&#x6A21;&#x5F0F;">10&#xFF09;Developer options&#xFF1A;&#x5F00;&#x53D1;&#x8005;&#x6A21;&#x5F0F;</h4>
 <p> --disable-debug&#xFF1A;&#x7981;&#x7528;&#x8C03;&#x8BD5;</p>
 <p> --enable-debug=LEVEL&#xFF1A;&#x8C03;&#x8BD5;&#x7EA7;&#x522B;</p>
-<h2 id="&#x4E09;&#x3001;ios&#x5E73;&#x53F0;&#x7F16;&#x8BD1;">&#x4E09;&#x3001;iOS&#x5E73;&#x53F0;&#x7F16;&#x8BD1;</h2>
-<h3 id="1-&#x4E0B;&#x8F7D;&#x6E90;&#x7801;">1. &#x4E0B;&#x8F7D;&#x6E90;&#x7801;</h3>
-<p><a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/download-ffmpeg.sh" target="_blank">download-ffmpeg.sh</a>&#x662F;&#x4E0B;&#x8F7D;&#x811A;&#x672C;&#xFF0C;&#x6267;&#x884C;<code>sh download-ffmpeg.sh</code>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5;ffmpeg-3.4&#x4E3A;&#x4F8B;&#x3002;</p>
-<h3 id="2-&#x5B89;&#x88C5;gas-preprocessor">2. &#x5B89;&#x88C5;gas-preprocessor</h3>
-<p>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7684;<a href="https://github.com/libav/gas-preprocessor" target="_blank">gas-preprocessor.pl</a>&#xFF0C;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;</p>
-<pre class="language-"><code>cd gas-preprocessor directory
-sudo cp -f gas-preprocessor.pl /usr/local/bin/
-chmod 777 /usr/local/bin/gas-preprocessor.pl
-</code></pre><p><strong>&#x95EE;&#x9898;</strong>&#xFF1A;&#x7F16;&#x8BD1;FFmpeg&#xFF0C;&#x6267;&#x884C; ffmpeg-build.sh &#x62A5;&#x9519;&quot;GNU assembler not found, install/update gas-preprocessor&quot;&#x3002;</p>
-<p>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;&#x6211;&#x7528;Github&#x6700;&#x65B0;&#x7684;gas-preprocessor.pl&#xFF0C;&#x6267;&#x884C;ffmpeg-build.sh&#x811A;&#x672C;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x8FD9;&#x91CC;&#x7ED9;&#x51FA;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x6210;&#x529F;&#x7684;<a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/gas-preprocessor.pl" target="_blank">gas-preprocessor.pl</a>&#x3002;</p>
-<h3 id="3-&#x6267;&#x884C;&#x7F16;&#x8BD1;">3. &#x6267;&#x884C;&#x7F16;&#x8BD1;</h3>
-<p><a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/ios-build-ffmpeg.sh" target="_blank">ios-build-ffmpeg.sh</a>&#x662F;&#x7F16;&#x8BD1;&#x811A;&#x672C;&#xFF0C;&#x5C06;&#x7F16;&#x8BD1;&#x811A;&#x672C;&#x653E;&#x5728;&#x548C;&#x6E90;&#x7801;&#x7684;&#x540C;&#x4E00;&#x76EE;&#x5F55;&#xFF0C;&#x6267;&#x884C;&#xFF1A;</p>
-<h4 id="1-&#x9ED8;&#x8BA4;&#x5206;&#x522B;&#x7F16;&#x8BD1;arm64&#x3001;armv7&#x3001;i386&#x3001;x8664&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;">(1) &#x9ED8;&#x8BA4;&#x5206;&#x522B;&#x7F16;&#x8BD1;arm64&#x3001;armv7&#x3001;i386&#x3001;x86_64&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</h4>
-<pre class="language-"><code>sh ios-build-ffmpeg.sh
-</code></pre><h4 id="2-&#x6307;&#x5B9A;&#x67B6;&#x6784;&#x7F16;&#x8BD1;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;arm64&#x3001;armv7&#x3001;i386&#x3001;x8664&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;">(2) &#x6307;&#x5B9A;&#x67B6;&#x6784;&#x7F16;&#x8BD1;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;arm64&#x3001;armv7&#x3001;i386&#x3001;x86_64&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</h4>
-<pre class="language-"><code>sh ios-build-ffmpeg arm64
-</code></pre><h4 id="3-&#x6307;&#x5B9A;armv7&#x7F16;&#x8BD1;&#x65F6;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF0C;&#x5F85;&#x89E3;&#x51B3;&#xFF1A;">(3) &#x6307;&#x5B9A;armv7&#x7F16;&#x8BD1;&#x65F6;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF0C;&#x5F85;&#x89E3;&#x51B3;&#xFF1A;</h4>
-<pre class="language-"><code>sh ios-build-ffmpeg armv7
-
-AS  libavcodec/arm/aacpsdsp_neon.o
-src/libavutil/arm/asm.S:50:9: error: unknown directive
-        .arch armv7-a
-        ^
-make: *** [libavcodec/arm/aacpsdsp_neon.o] Error 1
-make: *** Waiting for unfinished jobs....
-</code></pre><h2 id="&#x56DB;&#x3001;android&#x5E73;&#x53F0;&#x7F16;&#x8BD1;">&#x56DB;&#x3001;Android&#x5E73;&#x53F0;&#x7F16;&#x8BD1;</h2>
+<h2 id="&#x56DB;&#x3001;android&#x5E73;&#x53F0;&#x7F16;&#x8BD1;">&#x56DB;&#x3001;Android&#x5E73;&#x53F0;&#x7F16;&#x8BD1;</h2>
 <h3 id="1-&#x4E0B;&#x8F7D;&#x6E90;&#x7801;">1. &#x4E0B;&#x8F7D;&#x6E90;&#x7801;</h3>
 <p><a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/download-ffmpeg.sh" target="_blank">download-ffmpeg.sh</a>&#x662F;&#x4E0B;&#x8F7D;&#x811A;&#x672C;&#xFF0C;&#x6267;&#x884C;<code>sh download-ffmpeg.sh</code>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5;ffmpeg-3.4&#x4E3A;&#x4F8B;&#x3002;</p>
 <h3 id="2-&#x4E0B;&#x8F7D;ndk">2. &#x4E0B;&#x8F7D;ndk</h3>
@@ -3543,7 +3531,7 @@ SLIB_INSTALL_LINKS=&apos;$(SLIBNAME)&apos;
 <p><a href="https://gitee.com/learnany/ffmpeg/blob/master/01_ffmpeg_compiled/android-build-ffmpeg.sh" target="_blank">android-build-ffmpeg.sh</a>&#x662F;&#x7F16;&#x8BD1;&#x811A;&#x672C;&#xFF0C;&#x5C06;&#x7F16;&#x8BD1;&#x811A;&#x672C;&#x653E;&#x5728;&#x548C;&#x6E90;&#x7801;&#x7684;&#x540C;&#x4E00;&#x76EE;&#x5F55;&#xFF0C;&#x6267;&#x884C;&#xFF1A;</p>
 <pre class="language-"><code>sh android-build-ffmpeg.sh
 </code></pre><footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-05-06 22:49:59
+2022-05-07 13:37:10
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3588,7 +3576,7 @@ SLIB_INSTALL_LINKS=&apos;$(SLIBNAME)&apos;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"FFmpeg编译","level":"1.2.2","depth":2,"next":{"title":"FFmpeg集成","level":"1.2.3","depth":2,"path":"FFmpeg/FFmpeg集成.md","ref":"FFmpeg/FFmpeg集成.md","articles":[]},"previous":{"title":"相关链接","level":"1.2.1","depth":2,"path":"FFmpeg/相关链接.md","ref":"FFmpeg/相关链接.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/FFmpeg编译.md","mtime":"2022-05-06T14:49:59.392Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-06T15:08:23.673Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"FFmpeg编译","level":"1.2.2","depth":2,"next":{"title":"FFmpeg集成","level":"1.2.3","depth":2,"path":"FFmpeg/FFmpeg集成.md","ref":"FFmpeg/FFmpeg集成.md","articles":[]},"previous":{"title":"相关链接","level":"1.2.1","depth":2,"path":"FFmpeg/相关链接.md","ref":"FFmpeg/相关链接.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"FFmpeg/FFmpeg编译.md","mtime":"2022-05-07T05:37:10.833Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-05-07T05:37:12.509Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
