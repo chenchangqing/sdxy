@@ -50,7 +50,7 @@ make: *** Waiting for unfinished jobs....
 
 ## 导入库文件
 
-在工程目录新建FFmpeg-3.4，拷贝已经编译好的arm64静态库文件夹至FFmpeg-3.4，删除不需要的share、lib/pkgconfig文件夹，最后将FFmpeg-3.4Add进入工程。
+在工程目录新建FFmpeg-3.4，拷贝已经编译好的arm64静态库文件夹至FFmpeg-3.4，删除不需要的share、lib/pkgconfig文件夹，最后将FFmpeg-3.4通过Add Files加入工程。
 
 ## 配置头文件
 
@@ -58,7 +58,7 @@ make: *** Waiting for unfinished jobs....
 
 选中Target>Build Setting>搜索Library Search>双击Library Search Paths复制FFmpeg lib路径>修改lib为include就是FFmpeg头文件路径：
 ```
-$(PROJECT_DIR)/FFmpegCompiled/FFmpeg-3.4/arm64/include
+$(PROJECT_DIR)/iOSIntegrationWithFFmpeg（工程名）/FFmpeg-3.4/arm64/include
 ```
 
 2) 配置头文件路径
