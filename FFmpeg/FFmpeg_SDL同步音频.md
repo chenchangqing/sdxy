@@ -2,6 +2,8 @@
 
 [Android工程代码](https://gitee.com/learnany/ffmpeg/tree/master/13_ffmpeg_sdl_syn_audio/AndroidFFmpegSDLSynAudio)
 
+[iOS工程代码](https://gitee.com/learnany/ffmpeg/tree/master/13_ffmpeg_sdl_syn_audio/iOSIntegrationWithFFmpegSDL)
+
 ffmpeg播放器实现详解 - 音频同步控制：https://www.cnblogs.com/breakpointlab/p/15791998.html
 
 ## 源代码一览

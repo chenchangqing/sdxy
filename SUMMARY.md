@@ -13,6 +13,7 @@
     * [FFmpeg音频编码](FFmpeg/FFmpeg音频编码.md)
     * [SDL播放YUV](FFmpeg/SDL播放YUV.md)
     * [iOS集成SDL](FFmpeg/iOS集成SDL.md)
+    * [iOS集成SDL（源码）](FFmpeg/iOS集成SDL_源码.md)
     * [FFmpeg+SDL播放视频](FFmpeg/FFmpeg_SDL播放视频.md)
     * [FFmpeg+SDL播放音频](FFmpeg/FFmpeg_SDL播放音频.md)
     * [FFmpeg+SDL创建线程](FFmpeg/FFmpeg_SDL创建线程.md)
