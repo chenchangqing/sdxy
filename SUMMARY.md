@@ -19,6 +19,7 @@
     * [FFmpeg+SDL创建线程](FFmpeg/FFmpeg_SDL创建线程.md)
     * [FFmpeg+SDL同步视频](FFmpeg/FFmpeg_SDL同步视频.md)
     * [FFmpeg+SDL同步音频](FFmpeg/FFmpeg_SDL同步音频.md)
+    * [FFmpeg+SDL快进快退](FFmpeg/FFmpeg_SDL快进快退.md)
 * OpenGL系列
     * [1.OpenGL渲染结构与常用图元](OpenGL系列/01_OpenGL渲染结构与常用图元.md)
     * [2.OpenGL基础渲染](OpenGL系列/02_OpenGL基础渲染.md)
