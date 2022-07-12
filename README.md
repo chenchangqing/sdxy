@@ -606,7 +606,9 @@ int main(int argc, char *argv[]) {
 ```
 
 <div style="margin: 0px;">
-    <a href="#" target="_self"><img src="https://api.azpay.cn/808/1.png"
-            style="height: 20px;">沪ICP备2022002183号-1</a >
+    备案号：
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
+    </a >
 </div>
 
