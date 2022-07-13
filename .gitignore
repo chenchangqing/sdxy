@@ -1,6 +1,7 @@
 *~
-_book
+/_book
 .DS_Store
-node_modules
-ignore
+/node_modules
+/ignore/*
+!/ignore/pages
 book.pdf

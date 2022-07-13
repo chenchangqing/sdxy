@@ -290,8 +290,19 @@ else
 ```c
 sprintf(portNo, "%d", port);
     RTMP_Log(RTMP_LOGDEBUG, "CCQ: portNo：%d", portNo);
-// DEBUG: CCQ: portNo：1834470648
+// DEBUG: CCQ: portNo：1935
 ```
+sprintf：https://baike.baidu.com/item/sprintf/9703430?fr=aladdin
+
+这里就是给portNo赋值，将`int`转`char *`。
+
+**代码片段分析3**
+```c
+memset(&hints, 0, sizeof(struct addrinfo));
+  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_family = AF_UNSPEC;
+```
+
 
 <div style="margin: 0px;">
     备案号：
