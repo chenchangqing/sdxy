@@ -10,6 +10,7 @@ else
 fi
 
 git checkout master
+git pull
 git fetch origin
 git rebase origin/develop
 git push -u origin master
