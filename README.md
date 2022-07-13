@@ -1,608 +1,296 @@
-# ffplay源码-event_loop函数、refresh_loop_wait_event函数
+# librttmp源码之RTMP_Connect
 
-[iOS工程代码](https://gitee.com/learnany/ffmpeg/tree/master/15_ffplay_debug/iOSFFmpegSDLFastForwardAndBackward)
+分析`RTMP_Connect`之前，有必要了解下一下定义。
 
-## 源代码一览
+## Ip Protocol
 
 ```c
-//
-//  main.m
-//  iOSFFmpegSDLFastForwardAndBackward
-//
-//  Created by 陈长青 on 2022/5/8.
-//
+/* Standard well-defined IP protocols.  */
+enum {
+    IPPROTO_IP = 0,    /* Dummy protocol for TCP.  */
+    IPPROTO_ICMP = 1,      /* Internet Control Message Protocol.  */
+    IPPROTO_IGMP = 2,      /* Internet Group Management Protocol. */
+    IPPROTO_IPIP = 4,      /* IPIP tunnels (older KA9Q tunnels use 94).  */
+    IPPROTO_TCP = 6,       /* Transmission Control Protocol.  */
+    IPPROTO_EGP = 8,       /* Exterior Gateway Protocol.  */
+    IPPROTO_PUP = 12,      /* PUP protocol.  */
+    IPPROTO_UDP = 17,      /* User Datagram Protocol.  */
+    IPPROTO_IDP = 22,      /* XNS IDP protocol.  */
+    IPPROTO_TP = 29,       /* SO Transport Protocol Class 4.  */
+    IPPROTO_DCCP = 33,     /* Datagram Congestion Control Protocol.  */
+    IPPROTO_IPV6 = 41,     /* IPv6 header.  */
+    IPPROTO_RSVP = 46,     /* Reservation Protocol.  */
+    IPPROTO_GRE = 47,      /* General Routing Encapsulation.  */
+    IPPROTO_ESP = 50,      /* encapsulating security payload.  */
+    IPPROTO_AH = 51,       /* authentication header.  */
+    IPPROTO_MTP = 92,      /* Multicast Transport Protocol.  */
+    IPPROTO_BEETPH = 94,   /* IP option pseudo header for BEET.  */
+    IPPROTO_ENCAP = 98,    /* Encapsulation Header.  */
+    IPPROTO_PIM = 103,     /* Protocol Independent Multicast.  */
+    IPPROTO_COMP = 108,    /* Compression Header Protocol.  */
+    IPPROTO_SCTP = 132,    /* Stream Control Transmission Protocol.  */
+    IPPROTO_UDPLITE = 136, /* UDP-Lite protocol.  */
+    IPPROTO_RAW = 255,     /* Raw IP packets.  */
+    IPPROTO_MAX
+};
+```
 
-#import <UIKit/UIKit.h>
+## struct sockaddr
 
-#include "libavutil/avstring.h"
-#include "libavutil/eval.h"
-#include "libavutil/mathematics.h"
-#include "libavutil/pixdesc.h"
-#include "libavutil/imgutils.h"
-#include "libavutil/dict.h"
-#include "libavutil/parseutils.h"
-#include "libavutil/samplefmt.h"
-#include "libavutil/avassert.h"
-#include "libavutil/time.h"
-#include "libavformat/avformat.h"
-#include "libavdevice/avdevice.h"
-#include "libswscale/swscale.h"
-#include "libavutil/opt.h"
-#include "libavcodec/avfft.h"
-#include "libswresample/swresample.h"
+内容来源于：https://www.cnblogs.com/cyx-b/p/12450811.html
 
-#include <SDL.h>
-#include <SDL_thread.h>
+```c
+struct sockaddr
+{ 
+　　unsigned short sa_family;// 2字节，地址族，AF_xxx
+　　char sa_data[14]; // 14字节，包含套接字中的目标地址和端口信息 
+};
+```
 
-const char program_name[] = "ffplay";
+## struct addrinfo
 
-/* Step size for volume control in dB */
-#define SDL_VOLUME_STEP (0.75)
+内容来源于：https://www.cnblogs.com/LubinLew/p/POSIX-DataStructure.html
 
-/* polls for possible required screen refresh at least this often, should be less than 1/fps */
-#define REFRESH_RATE 0.01
+The `<netdb.h>` header shall define the `addrinfo` structure, which shall include at least the following members:
+```c
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
 
-#define CURSOR_HIDE_DELAY 1000000
-
-/* options specified by the user */
-static AVInputFormat *file_iformat;
-static const char *input_filename;
-static int default_width  = 640;
-static int default_height = 480;
-static int screen_width  = 0;
-static int screen_height = 0;
-static int cursor_hidden = 0;
-static int64_t cursor_last_shown;
-
-/* current context */
-// 命令行 -fs 指定，控制是否全屏显示
-static int is_full_screen;
-
-static AVPacket flush_pkt;
-
-#define FF_QUIT_EVENT    (SDL_USEREVENT + 2)
-
-static SDL_Window *window;
-static SDL_Renderer *renderer;
-static SDL_RendererInfo renderer_info = {0};
-
-// MARK: 视频状态
-typedef struct VideoState {
-    int force_refresh;
-    int paused;
-    int seek_req;
-    int seek_flags;
-    int64_t seek_pos;
-    int64_t seek_rel;
-    AVFormatContext *ic;
+/* ======================Types of sockets====================== */
+enum __socket_type {
+    SOCK_STREAM = 1,        /* Sequenced, reliable, connection-based byte streams.  */
+    SOCK_DGRAM = 2,         /* Connectionless, unreliable datagrams of fixed maximum length.  */
+    SOCK_RAW = 3,           /* Raw protocol interface.  */
+    SOCK_RDM = 4,           /* Reliably-delivered messages.  */
+    SOCK_SEQPACKET = 5,     /* Sequenced, reliable, connection-based,datagrams of fixed maximum length.  */
+    SOCK_DCCP = 6,          /* Datagram Congestion Control Protocol.  */
+    SOCK_PACKET = 10,       /* Linux specific way of getting packets at the dev level.  For writing rarp and other similar things on the user level. */
     
-    int muted;
-    int width, height, xleft, ytop;
-    int step;
-    
-    // 命令行 -showmode 指定
-    enum ShowMode {
-        SHOW_MODE_NONE = -1, SHOW_MODE_VIDEO = 0, SHOW_MODE_WAVES, SHOW_MODE_RDFT, SHOW_MODE_NB
-    } show_mode;
-    
-    SDL_Texture *vis_texture;
-    
-    SDL_cond *continue_read_thread;
-} VideoState;
+    /* Flags to be ORed into the type parameter of socket and socketpair and used for the flags parameter of paccept.  */
+    SOCK_CLOEXEC =  02000000,   /* Atomically set close-on-exec flag for the new descriptor(s).  */
+    SOCK_NONBLOCK = 00004000    /* Atomically mark descriptor(s) as non-blocking.  */
+};
 
-// MARK: 关闭码流
-static void stream_close(VideoState *is)
-{
-    // TODO: stream_close
-}
+/* ============Protocol families(只列出常用几个)================= */
+#define PF_UNSPEC       0   /* Unspecified.  */
+#define PF_LOCAL        1   /* Local to host (pipes and file-domain).  */
+#define PF_INET         2   /* IP protocol family.  */
+#define PF_IPX          4   /* Novell Internet Protocol.  */
+#define PF_APPLETALK    5   /* Appletalk DDP.  */
+#define PF_INET6        10  /* IP version 6.  */
+#define PF_TIPC         30  /* TIPC sockets.  */
+#define PF_BLUETOOTH    31  /* Bluetooth sockets.  */
 
-// MARK: 打开码流
-static VideoState *stream_open(const char *filename, AVInputFormat *iformat)
-{
-    // TODO: stream_open
-    VideoState *is;
+/* ==============Address families(只列出常用几个)================= */
+#define AF_UNSPEC   PF_UNSPEC
+#define AF_LOCAL    PF_LOCAL
+#define AF_UNIX     PF_UNIX
+#define AF_FILE     PF_FILE
+#define AF_INET     PF_INET
+#define AF_IPX      PF_IPX
+#define AF_APPLETALK    PF_APPLETALK
+#define AF_INET6    PF_INET6
+#define AF_ROSE     PF_ROSE
+#define AF_NETLINK  PF_NETLINK
+#define AF_TIPC     PF_TIPC
+#define AF_BLUETOOTH    PF_BLUETOOTH
 
-    is = av_mallocz(sizeof(VideoState));
-    if (!is)
-        return NULL;
-    return is;
-}
-
-// MARK: 切换码流
-static void stream_cycle_channel(VideoState *is, int codec_type)
-{
-    // TODO: stream_cycle_channel
-}
-
-// MARK: 退出
-static void do_exit(VideoState *is)
-{
-    if (is) {
-        stream_close(is);
-    }
-    if (renderer)
-        SDL_DestroyRenderer(renderer);
-    if (window)
-        SDL_DestroyWindow(window);
-    // uninit_opts();
-//#if CONFIG_AVFILTER
-    // av_freep(&vfilters_list);
-//#endif
-    // avformat_network_deinit();
-    // if (show_status)
-    //    printf("\n");
-    SDL_Quit();
-    av_log(NULL, AV_LOG_QUIET, "%s", "");
-    exit(0);
-}
-
-// MARK: 刷新视频
-/* called to display each frame */
-static void video_refresh(void *opaque, double *remaining_time)
-{
-    // TODO: video_refresh
-    // av_log(NULL, AV_LOG_INFO, "player，刷新视频\n");
-}
-
-static void toggle_full_screen(VideoState *is)
-{
-    is_full_screen = !is_full_screen;
-    SDL_SetWindowFullscreen(window, is_full_screen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
-}
-
-// MARK: 主时钟
-/* get the current master clock value */
-static double get_master_clock(VideoState *is)
-{
-    // TODO: get_master_clock
-    return 0;
-}
-
-// MARK: Seek
-/* seek in the stream */
-static void stream_seek(VideoState *is, int64_t pos, int64_t rel, int seek_by_bytes)
-{
-    if (!is->seek_req) {
-        is->seek_pos = pos;
-        is->seek_rel = rel;
-        is->seek_flags &= ~AVSEEK_FLAG_BYTE;
-        if (seek_by_bytes)
-            is->seek_flags |= AVSEEK_FLAG_BYTE;
-        is->seek_req = 1;
-        SDL_CondSignal(is->continue_read_thread);
-    }
-}
-
-// MARK: 暂停2
-/* pause or resume the video */
-static void stream_toggle_pause(VideoState *is)
-{
-    // TODO: stream_toggle_pause
-}
-
-// MARK: 暂停
-static void toggle_pause(VideoState *is)
-{
-    stream_toggle_pause(is);
-    is->step = 0;
-}
-
-// MARK: 禁音
-static void toggle_mute(VideoState *is)
-{
-    is->muted = !is->muted;
-}
-
-// MARK: 调声音
-static void update_volume(VideoState *is, int sign, double step)
-{
-    // TODO: update_volume
-}
-
-// MARK: 进入下一帧
-static void step_to_next_frame(VideoState *is)
-{
-    /* if the stream is paused unpause it, then step */
-    if (is->paused)
-        stream_toggle_pause(is);
-    is->step = 1;
-}
-
-// MARK: SDL事件
-/**
- *  SDL 事件
- *
- * 循环检测并优先处理用户输入事件
- * 内置刷新率控制，约10ms刷新一次
- * https://blog.csdn.net/qq_36783046/article/details/88706162
- */
-static void refresh_loop_wait_event(VideoState *is, SDL_Event *event) {
-    double remaining_time = 0.0;
-    /* 从输入设备收集事件并放到事件队列中 */
-    SDL_PumpEvents();
-    /**
-     * SDL_PeepEvents
-     * 从事件队列中提取事件，由于这里使用的是SDL_GETEVENT, 所以获取事件时会从队列中移除
-     * 如果有事件发生，返回事件数量，则while循环不执行。
-     * 如果出错，返回负数的错误码，则while循环不执行。
-     * 如果当前没有事件发生，且没有出错，返回0，进入while循环。
-     */
-    while (!SDL_PeepEvents(event, 1, SDL_GETEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT)) {
-        /* 隐藏鼠标指针， CURSOR_HIDE_DELAY = 1s */
-        if (!cursor_hidden && av_gettime_relative() - cursor_last_shown > CURSOR_HIDE_DELAY) {
-            SDL_ShowCursor(0);
-            cursor_hidden = 1;
-        }
-        /* 默认屏幕刷新率控制，REFRESH_RATE = 10ms */
-        if (remaining_time > 0.0)
-            av_usleep((int64_t)(remaining_time * 1000000.0));
-        remaining_time = REFRESH_RATE;
-        /* 显示视频 */
-        if (is->show_mode != SHOW_MODE_NONE && (!is->paused || is->force_refresh))
-            video_refresh(is, &remaining_time);
-        /* 再次检测输入事件 */
-        SDL_PumpEvents();
-    }
-}
-
-// MARK: 事件循环
-/* handle an event sent by the GUI */
-static void event_loop(VideoState *cur_stream)
-{
-    SDL_Event event;
-    double incr, pos, frac;
-
-    for (;;) {
-        double x;
-        refresh_loop_wait_event(cur_stream, &event);
-        switch (event.type) {
-        // 按键按下事件
-        case SDL_KEYDOWN:
-            // 按esc,q退出
-            if (1/**exit_on_keydown*/ || event.key.keysym.sym == SDLK_ESCAPE || event.key.keysym.sym == SDLK_q) {
-                do_exit(cur_stream);
-                break;
-            }
-            // If we don't yet have a window, skip all key events, because read_thread might still be initializing...
-            if (!cur_stream->width)
-                continue;
-            switch (event.key.keysym.sym) {
-            // 按F键，全屏
-            case SDLK_f:
-                toggle_full_screen(cur_stream);
-                // 调用video_refresh()刷新视频
-                cur_stream->force_refresh = 1;
-                break;
-            // 按P、SPACE键，暂停
-            case SDLK_p:
-            case SDLK_SPACE:
-                toggle_pause(cur_stream);
-                break;
-            // 按M键，静音
-            case SDLK_m:
-                toggle_mute(cur_stream);
-                break;
-            // 按+、0键，增加音量
-            // https://blog.csdn.net/huzhifei/article/details/112682390
-            case SDLK_KP_MULTIPLY:
-            case SDLK_0:
-                update_volume(cur_stream, 1, SDL_VOLUME_STEP);
-                break;
-            // 按-、9键，减小音量
-            case SDLK_KP_DIVIDE:
-            case SDLK_9:
-                update_volume(cur_stream, -1, SDL_VOLUME_STEP);
-                break;
-            // 按S键，下一帧
-            case SDLK_s: // S: Step to next frame
-                step_to_next_frame(cur_stream);
-                break;
-            // 按A键，切换音频流
-            case SDLK_a:
-                stream_cycle_channel(cur_stream, AVMEDIA_TYPE_AUDIO);
-                break;
-            // 按V键，切换视频流
-            case SDLK_v:
-                stream_cycle_channel(cur_stream, AVMEDIA_TYPE_VIDEO);
-                break;
-            // 按C键，循环切换节目（切换音频、视频、字幕流）
-            case SDLK_c:
-                stream_cycle_channel(cur_stream, AVMEDIA_TYPE_VIDEO);
-                stream_cycle_channel(cur_stream, AVMEDIA_TYPE_AUDIO);
-                stream_cycle_channel(cur_stream, AVMEDIA_TYPE_SUBTITLE);
-                break;
-            // 按T键，切换字幕流
-            case SDLK_t:
-                stream_cycle_channel(cur_stream, AVMEDIA_TYPE_SUBTITLE);
-                break;
-            // 按W键，循环切换过滤器或显示模式
-            case SDLK_w:
-//#if CONFIG_AVFILTER
-                // if (cur_stream->show_mode == SHOW_MODE_VIDEO && cur_stream->vfilter_idx < nb_vfilters - 1) {
-                //     if (++cur_stream->vfilter_idx >= nb_vfilters)
-                //         cur_stream->vfilter_idx = 0;
-                // } else {
-                //     cur_stream->vfilter_idx = 0;
-                //     toggle_audio_display(cur_stream);
-                // }
-//#else
-                // toggle_audio_display(cur_stream);
-//#endif
-                break;
-            // mac上好像没找到这个键
-            case SDLK_PAGEUP:
-                // 如果只有一个视频则向前10分钟
-                // if (cur_stream->ic->nb_chapters <= 1) {
-                    incr = 600.0;
-                    goto do_seek;
-                // }
-                // 有多个视频则寻找下一视频
-                // seek_chapter(cur_stream, 1);
-                break;
-            // mac上好像没找到这个键
-            case SDLK_PAGEDOWN:
-                // 如果只有一个视频则向后10分钟
-                // if (cur_stream->ic->nb_chapters <= 1) {
-                    incr = -600.0;
-                    goto do_seek;
-                // }
-                // 有多个视频则寻找上一视频
-                // seek_chapter(cur_stream, -1);
-                break;
-            // 按LEFT键，向后10秒
-            case SDLK_LEFT:
-                // seek_interval：命令行 -seek_interval 指定
-                incr = /**seek_interval ? -seek_interval : */-10.0;
-                goto do_seek;
-            // 按RIGHT键，向前10秒
-            case SDLK_RIGHT:
-                incr = /**seek_interval ? seek_interval :*/ 10.0;
-                goto do_seek;
-            // 按UP键，向前60秒
-            case SDLK_UP:
-                incr = 60.0;
-                goto do_seek;
-            // 按UP键，向后60秒
-            case SDLK_DOWN:
-                incr = -60.0;
-            do_seek:
-                    // seek_by_bytes：命令行 -bytes 指定，默认-1
-                    // if (seek_by_bytes) {
-                    //     pos = -1;
-                    //     if (pos < 0 && cur_stream->video_stream >= 0)
-                    //         pos = frame_queue_last_pos(&cur_stream->pictq);
-                    //     if (pos < 0 && cur_stream->audio_stream >= 0)
-                    //         pos = frame_queue_last_pos(&cur_stream->sampq);
-                    //     if (pos < 0)
-                    //         pos = avio_tell(cur_stream->ic->pb);
-                    //     if (cur_stream->ic->bit_rate)
-                    //         incr *= cur_stream->ic->bit_rate / 8.0;
-                    //     else
-                    //         incr *= 180000.0;
-                    //     pos += incr;
-                    //     stream_seek(cur_stream, pos, incr, 1);
-                    // } else {
-                         pos = get_master_clock(cur_stream);
-                         if (isnan(pos))
-                             pos = (double)cur_stream->seek_pos / AV_TIME_BASE;
-                         pos += incr;
-                         if (cur_stream->ic->start_time != AV_NOPTS_VALUE && pos < cur_stream->ic->start_time / (double)AV_TIME_BASE)
-                             pos = cur_stream->ic->start_time / (double)AV_TIME_BASE;
-                         stream_seek(cur_stream, (int64_t)(pos * AV_TIME_BASE), (int64_t)(incr * AV_TIME_BASE), 0);
-                    // }
-                break;
-            default:
-                break;
-            }
-            break;
-        case SDL_MOUSEBUTTONDOWN:
-            // exit_on_mousedown：命令行 -exitonmousedown 指定，鼠标单击左键退出
-            // if (exit_on_mousedown) {
-            //    do_exit(cur_stream);
-            //    break;
-            // }
-            // 双击左键全屏
-            if (event.button.button == SDL_BUTTON_LEFT) {
-                static int64_t last_mouse_left_click = 0;
-                if (av_gettime_relative() - last_mouse_left_click <= 500000) {
-                    toggle_full_screen(cur_stream);
-                    cur_stream->force_refresh = 1;
-                    last_mouse_left_click = 0;
-                } else {
-                    last_mouse_left_click = av_gettime_relative();
-                }
-            }
-        // 鼠标移动事件，执行Seek（暂时不会用）
-        case SDL_MOUSEMOTION:
-            // if (cursor_hidden) {
-            //     SDL_ShowCursor(1);
-            //     cursor_hidden = 0;
-            // }
-            // cursor_last_shown = av_gettime_relative();
-            // if (event.type == SDL_MOUSEBUTTONDOWN) {
-            //     if (event.button.button != SDL_BUTTON_RIGHT)
-            //         break;
-            //     x = event.button.x;
-            // } else {
-            //     if (!(event.motion.state & SDL_BUTTON_RMASK))
-            //         break;
-            //     x = event.motion.x;
-            // }
-            //     if (seek_by_bytes || cur_stream->ic->duration <= 0) {
-            //         uint64_t size =  avio_size(cur_stream->ic->pb);
-            //         stream_seek(cur_stream, size*x/cur_stream->width, 0, 1);
-            //     } else {
-            //         int64_t ts;
-            //         int ns, hh, mm, ss;
-            //         int tns, thh, tmm, tss;
-            //         tns  = cur_stream->ic->duration / 1000000LL;
-            //         thh  = tns / 3600;
-            //         tmm  = (tns % 3600) / 60;
-            //         tss  = (tns % 60);
-            //         frac = x / cur_stream->width;
-            //         ns   = frac * tns;
-            //         hh   = ns / 3600;
-            //         mm   = (ns % 3600) / 60;
-            //         ss   = (ns % 60);
-            //         av_log(NULL, AV_LOG_INFO,
-            //                "Seek to %2.0f%% (%2d:%02d:%02d) of total duration (%2d:%02d:%02d)       \n", frac*100,
-            //                 hh, mm, ss, thh, tmm, tss);
-            //         ts = frac * cur_stream->ic->duration;
-            //         if (cur_stream->ic->start_time != AV_NOPTS_VALUE)
-            //             ts += cur_stream->ic->start_time;
-            //         stream_seek(cur_stream, ts, 0, 0);
-            //     }
-            break;
-        case SDL_WINDOWEVENT:
-            switch (event.window.event) {
-                case SDL_WINDOWEVENT_SIZE_CHANGED:
-                    screen_width  = cur_stream->width  = event.window.data1;
-                    screen_height = cur_stream->height = event.window.data2;
-                    if (cur_stream->vis_texture) {
-                        SDL_DestroyTexture(cur_stream->vis_texture);
-                        cur_stream->vis_texture = NULL;
-                    }
-                case SDL_WINDOWEVENT_EXPOSED:
-                    cur_stream->force_refresh = 1;
-            }
-            break;
-        case SDL_QUIT:
-        case FF_QUIT_EVENT:
-            do_exit(cur_stream);
-            break;
-        default:
-            break;
-        }
-    }
-}
-
-// MARK: 入口函数
-int main(int argc, char *argv[]) {
-    int flags;
-    VideoState *is;
-    
-    // 动态加载的初始化，这是Windows平台的dll库相关处理；
-    // https://blog.csdn.net/ericbar/article/details/79541420
-    // init_dynload();
-
-    // 设置打印的标记，AV_LOG_SKIP_REPEATED表示对于重复打印的语句，不重复输出；
-    // https://blog.csdn.net/ericbar/article/details/79541420
-    av_log_set_flags(AV_LOG_SKIP_REPEATED);
-    // 使命令行'-loglevel'生效
-    // parse_loglevel(argc, argv, options);
-
-    /* register all codecs, demux and protocols */
-//#if CONFIG_AVDEVICE
-    // 在使用libavdevice之前，必须先运行avdevice_register_all()对设备进行注册，否则就会出错
-    // https://blog.csdn.net/leixiaohua1020/article/details/41211121
-    avdevice_register_all();
-//#endif
-    // 打开网络流的话，前面要加上函数
-    // avformat_network_init();
-    // Initialize the cmdutils option system, in particular allocate the *_opts contexts.
-    // 初始化 cmdutils 选项系统，特别是分配 *_opts 上下文。
-    // init_opts();
-
-    // signal(SIGINT , sigterm_handler); /* Interrupt (ANSI).    */
-    // signal(SIGTERM, sigterm_handler); /* Termination (ANSI).  */
-
-    // 将程序横幅打印到 stderr。 横幅内容取决于当前版本的存储库和程序使用的 libav* 库。
-    // Print the program banner to stderr. The banner contents depend
-    // on the current version of the repository and of the libav* libraries used by
-    // the program.
-    // show_banner(argc, argv, options);
-
-    // parse_options(NULL, argc, argv, options, opt_input_file);
-
-    // input_filename：命令行 -i 指定，视频路径
-    NSString *inPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"];
-    input_filename = [inPath UTF8String];
-    if (!input_filename) {
-    //     show_usage();
-    //     av_log(NULL, AV_LOG_FATAL, "An input file must be specified\n");
-    //     av_log(NULL, AV_LOG_FATAL,
-    //            "Use -h to get full help or, even better, run 'man %s'\n", program_name);
-        exit(1);
-    }
-
-    // display_disable：命令行 -nodisp 指定，不渲染画面不播放声音
-    // if (display_disable) {
-    //     video_disable = 1;
-    // }
-    flags = SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER;
-    // audio_disable：命令行 -an 指定，渲染画面不播放声音
-    // if (audio_disable)
-    //     flags &= ~SDL_INIT_AUDIO;
-    // else {
-    //     /* Try to work around an occasional ALSA buffer underflow issue when the
-    //      * period size is NPOT due to ALSA resampling by forcing the buffer size. */
-    //     if (!SDL_getenv("SDL_AUDIO_ALSA_SET_BUFFER_SIZE"))
-    //         SDL_setenv("SDL_AUDIO_ALSA_SET_BUFFER_SIZE","1", 1);
-    // }
-    // if (display_disable)
-    //     flags &= ~SDL_INIT_VIDEO;
-    // 指定flags，SDL初始化
-    if (SDL_Init (flags)) {
-        av_log(NULL, AV_LOG_FATAL, "Could not initialize SDL - %s\n", SDL_GetError());
-        av_log(NULL, AV_LOG_FATAL, "(Did you set the DISPLAY variable?)\n");
-        exit(1);
-    }
-
-    // 禁用一些事件
-    SDL_EventState(SDL_SYSWMEVENT, SDL_IGNORE);
-    SDL_EventState(SDL_USEREVENT, SDL_IGNORE);
-
-    av_init_packet(&flush_pkt);
-    flush_pkt.data = (uint8_t *)&flush_pkt;
-
-    if (1/**!display_disable*/) {
-        int flags = SDL_WINDOW_HIDDEN;
-        // if (alwaysontop)
-#if SDL_VERSION_ATLEAST(2,0,5)
-            flags |= SDL_WINDOW_ALWAYS_ON_TOP;
-#else
-            av_log(NULL, AV_LOG_WARNING, "Your SDL version doesn't support SDL_WINDOW_ALWAYS_ON_TOP. Feature will be inactive.\n");
+/* ====Possible values for `ai_flags' field in `addrinfo' structure.===== */
+#define AI_PASSIVE        0x0001  /* Socket address is intended for `bind'. */
+#define AI_CANONNAME      0x0002  /* Request for canonical name. */
+#define AI_NUMERICHOST    0x0004  /* Don't use name resolution. */
+#define AI_V4MAPPED       0x0008  /* IPv4 mapped addresses are acceptable. */
+#define AI_ALL            0x0010  /* Return IPv4 mapped and IPv6 addresses. */
+#define AI_ADDRCONFIG     0x0020  /* Use configuration of this host to choose returned address type. */
+#ifdef __USE_GNU
+#define AI_IDN                      0x0040  /* IDN encode input (assuming it is encoded
+                  in the current locale's character set) before looking it up. */
+#define AI_CANONIDN                 0x0080  /* Translate canonical name from IDN format. */
+#define AI_IDN_ALLOW_UNASSIGNED     0x0100 /* Don't reject unassigned Unicode code points. */
+#define AI_IDN_USE_STD3_ASCII_RULES 0x0200 /* Validate strings according to STD3 rules. */
 #endif
-        // borderless：命令行 -noborder 指定，没有边框
-        // if (borderless)
-        //     flags |= SDL_WINDOW_BORDERLESS;
-        // else
-            // 可以自由拉伸
-            flags |= SDL_WINDOW_RESIZABLE;
-        window = SDL_CreateWindow(program_name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, default_width, default_height, flags);
-        // "0" or "nearest" - Nearest pixel sampling
-        // "1" or "linear"  - Linear filtering (supported by OpenGL and Direct3D)
-        // "2" or "best"    - Currently this is the same as "linear"
-        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-        if (window) {
-            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-            if (!renderer) {
-                av_log(NULL, AV_LOG_WARNING, "Failed to initialize a hardware accelerated renderer: %s\n", SDL_GetError());
-                renderer = SDL_CreateRenderer(window, -1, 0);
-            }
-            if (renderer) {
-                if (!SDL_GetRendererInfo(renderer, &renderer_info))
-                    av_log(NULL, AV_LOG_VERBOSE, "Initialized %s renderer.\n", renderer_info.name);
-            }
-        }
-        if (!window || !renderer || !renderer_info.num_texture_formats) {
-            av_log(NULL, AV_LOG_FATAL, "Failed to create window or renderer: %s", SDL_GetError());
-            do_exit(NULL);
-        }
+#define AI_NUMERICSERV              0x0400  /* Don't use name resolution.  */
+
+/* =======================struct addrinfo======================= */
+struct addrinfo {
+int ai_flags;              /* 附加选项,多个选项可以使用或操作结合 */
+int ai_family;             /* 指定返回地址的协议簇,取值范围:AF_INET(IPv4)、AF_INET6(IPv6)、AF_UNSPEC(IPv4 and IPv6) */ 
+int ai_socktype;           /* enum __socket_type 类型，设置为0表示任意类型 */
+int ai_protocol;           /* 协议类型，设置为0表示任意类型,具体见上一节的 Ip Protocol */
+socklen_t ai_addrlen;      /* socket address 的长度 */
+struct sockaddr *ai_addr;  /* socket address 的地址 */
+char *ai_canonname;        /* Canonical name of service location. */
+struct addrinfo *ai_next;  /* 指向下一条信息,因为可能返回多个地址 */
+};
+```
+
+## RTMP_Connect
+
+```c
+int
+RTMP_Connect(RTMP *r, RTMPPacket *cp)
+{
+  struct addrinfo *service;
+  
+  if (!r->Link.hostname.av_len)
+    return FALSE;
+    
+  // 设置直接连接的服务器地址
+  if (r->Link.socksport)
+    {
+
+      /* Connect via SOCKS */
+      if (!add_addr_info(&service, &r->Link.sockshost, r->Link.socksport))
+        return FALSE;
+    }
+  else
+    {
+
+      /* Connect directly */
+      if (!add_addr_info(&service, &r->Link.hostname, r->Link.port))
+        return FALSE;
+    }
+    
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_flags:%d", service->ai_flags);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_family:%d", service->ai_family);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_socktype:%d", service->ai_socktype);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_protocol:%d", service->ai_protocol);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addrlen:%d", service->ai_addrlen);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_family:%d", service->ai_addr->sa_family);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_data:%s", service->ai_addr->sa_data);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_canonname:%s", service->ai_canonname);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_next:%s", service->ai_next);
+    
+  if (!RTMP_Connect0(r, service))
+    {
+      freeaddrinfo(service);
+      return FALSE;
     }
 
-    is = stream_open(input_filename, file_iformat);
-    if (!is) {
-        av_log(NULL, AV_LOG_FATAL, "Failed to initialize VideoState!\n");
-        do_exit(NULL);
-    }
+  freeaddrinfo(service);
+  r->m_bSendCounter = TRUE;
 
-    event_loop(is);
-
-    /* never returns */
-
-    return 0;
+  return RTMP_Connect1(r, cp);
 }
+```
+**代码片段分析1**
+```c
+// 设置直接连接的服务器地址
+if (r->Link.socksport)
+{
+
+  /* Connect via SOCKS */
+  if (!add_addr_info(&service, &r->Link.sockshost, r->Link.socksport))
+    return FALSE;
+}
+else
+{
+
+  /* Connect directly */
+  if (!add_addr_info(&service, &r->Link.hostname, r->Link.port))
+    return FALSE;
+}
+
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_flags:%d", service->ai_flags);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_family:%d", service->ai_family);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_socktype:%d", service->ai_socktype);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_protocol:%d", service->ai_protocol);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addrlen:%d", service->ai_addrlen);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_family:%d", service->ai_addr->sa_family);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_data:%s", service->ai_addr->sa_data);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_canonname:%s", service->ai_canonname);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_next:%s", service->ai_next);
+
+// DEBUG: CCQ: addrinfo->ai_flags:0 /* 0代表没有设值，如果设值，取值范围见上`AI_PASSIVE`... */
+// DEBUG: CCQ: addrinfo->ai_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
+// DEBUG: CCQ: addrinfo->ai_socktype:1 /* 1代表`SOCK_STREAM`，取值范围见上`__socket_type` */
+// DEBUG: CCQ: addrinfo->ai_protocol:6 /* 6代表`IPPROTO_TCP`，取之范围见上`Ip Protocol` */
+// DEBUG: CCQ: addrinfo->ai_addrlen:16 /* socket address 的长度 */
+// DEBUG: CCQ: addrinfo->ai_addr->sa_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
+// DEBUG: CCQ: addrinfo->ai_addr->sa_data:\217\300\250
+// DEBUG: CCQ: addrinfo->ai_canonname:(null) /* Canonical name of service location. */
+// DEBUG: CCQ: addrinfo->ai_next:(null)
+```
+
+## add_addr_info
+
+内容来源于：https://blog.csdn.net/weixin_37921201/article/details/90111641
+
+填充struct addrinfo结构体用于之后的socket通信。
+
+```c
+/**
+ 填充struct addrinfo结构体用于之后的socket通信。
+ service: addrinfo指针的指针
+ host: 192.168.0.12:1935/zbcs/room
+ port: 1935
+ */
+static int
+add_addr_info(struct addrinfo **service, AVal *host, int port)
+{
+  struct addrinfo hints;
+  char *hostname, portNo[32];
+  int ret = TRUE;
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: host->av_val：%s", host->av_val);
+  if (host->av_val[host->av_len])
+    {
+      hostname = malloc(host->av_len+1);
+      memcpy(hostname, host->av_val, host->av_len);
+      hostname[host->av_len] = '\0';
+        RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname：%s", hostname);
+    }
+  else
+    {
+      hostname = host->av_val;
+        RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname2：%s", hostname);
+    }
+
+  sprintf(portNo, "%d", port);
+      RTMP_Log(RTMP_LOGDEBUG, "CCQ: portNo：%d", portNo);
+  
+  memset(&hints, 0, sizeof(struct addrinfo));
+  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_family = AF_UNSPEC;
+  
+    // https://www.cnblogs.com/LubinLew/p/POSIX-getaddrinfo.html
+  if(getaddrinfo(hostname, portNo, &hints, service) != 0)
+    {
+      RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
+      ret = FALSE;
+    }
+finish:
+  if (hostname != host->av_val)
+    free(hostname);
+  return ret;
+}
+```
+**代码片段分析1**
+```c
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: host->av_val：%s", host->av_val);
+if (host->av_val[host->av_len])
+{
+  hostname = malloc(host->av_len+1);
+  memcpy(hostname, host->av_val, host->av_len);
+  hostname[host->av_len] = '\0';
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname：%s", hostname);
+}
+else
+{
+  hostname = host->av_val;
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname2：%s", hostname);
+}
+// 输出结果：
+// DEBUG: host->av_val：192.168.0.12:1935/zbcs/room
+// DEBUG: hostname：192.168.0.12
+```
+通过打印结果分析，这段代码就是给hostname赋值，得到IP地址段。
+
+**代码片段分析2**
+```c
+sprintf(portNo, "%d", port);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: portNo：%d", portNo);
+// DEBUG: CCQ: portNo：1834470648
 ```
 
 <div style="margin: 0px;">
