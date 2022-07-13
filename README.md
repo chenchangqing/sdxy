@@ -247,13 +247,12 @@ add_addr_info(struct addrinfo **service, AVal *host, int port)
     }
 
   sprintf(portNo, "%d", port);
-      RTMP_Log(RTMP_LOGDEBUG, "CCQ: portNo：%d", portNo);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: portNo：%s", portNo);
   
   memset(&hints, 0, sizeof(struct addrinfo));
   hints.ai_socktype = SOCK_STREAM;
   hints.ai_family = AF_UNSPEC;
   
-    // https://www.cnblogs.com/LubinLew/p/POSIX-getaddrinfo.html
   if(getaddrinfo(hostname, portNo, &hints, service) != 0)
     {
       RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
@@ -298,11 +297,51 @@ sprintf：https://baike.baidu.com/item/sprintf/9703430?fr=aladdin
 
 **代码片段分析3**
 ```c
-memset(&hints, 0, sizeof(struct addrinfo));
-  hints.ai_socktype = SOCK_STREAM;
-  hints.ai_family = AF_UNSPEC;
+memset(&hints, 0, sizeof(struct addrinfo));// 给hints分配内存
+  hints.ai_socktype = SOCK_STREAM;// 设置sock类型，设置范围：__socket_type
+  hints.ai_family = AF_UNSPEC;// 指定返回地址的协议簇
+```
+内容来源于：
+
+https://blog.csdn.net/u011003120/article/details/78277133 
+
+https://www.cnblogs.com/LubinLew/p/POSIX-getaddrinfo.html
+
+ai_family解释：指定返回地址的协议簇，取值范围:AF_INET(IPv4)、AF_INET6(IPv6)、AF_UNSPEC(IPv4 and IPv6)。
+
+**代码片段分析4**
+```c
+// hostname：IP地址，例如：192.168.0.12
+// portNo：端口号，例如：1935
+// hints：struct addrinfo地址
+// service：传进来的struct addrinfo，用于获取信息结果
+if(getaddrinfo(hostname, portNo, &hints, service) != 0)
+{
+  RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
+  ret = FALSE;
+}
+```
+内容来源于：
+
+https://www.cnblogs.com/LubinLew/p/POSIX-getaddrinfo.html
+
+函数注释：
+```c
+int getaddrinfo(const char *restrict nodename, /* host 或者IP地址 */
+    const char *restrict servname, /* 十进制端口号 或者常用服务名称如"ftp"、"http"等 */
+    const struct addrinfo *restrict hints, /* 获取信息要求设置 */
+    struct addrinfo **restrict res); /* 获取信息结果 */
 ```
 
+IPv4中使用gethostbyname()函数完成主机名到地址解析，这个函数仅仅支持IPv4，且不允许调用者指定所需地址类型的任何信息，返回的结构只包含了用于存储IPv4地址的空间。IPv6中引入了新的API getaddrinfo()，它是协议无关的，既可用于IPv4也可用于IPv6。getaddrinfo() 函数能够处理名字到地址以及服务到端口这两种转换，返回的是一个 struct addrinfo 的结构体(列表)指针而不是一个地址清单。这些 struct addrinfo 结构体随后可由套接口函数直接使用。如此以来，getaddrinfo()函数把协议相关性安全隐藏在这个库函数内部。应用程序只要处理由getaddrinfo()函数填写的套接口地址结构。
+
+**代码片段分析5**
+```c
+finish:
+  if (hostname != host->av_val)
+    free(hostname);
+```
+释放hostname内存，至此`add_addr_info`函数分析完毕。
 
 <div style="margin: 0px;">
     备案号：
