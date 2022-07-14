@@ -13,7 +13,7 @@ git checkout master
 git pull
 git fetch origin
 git rebase origin/develop
-git push -u origin master
+git push -u origin master -f
 gitbook build
 git checkout gh-pages
 git pull origin gh-pages
