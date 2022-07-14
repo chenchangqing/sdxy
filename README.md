@@ -343,6 +343,65 @@ finish:
 ```
 释放hostname内存，至此`add_addr_info`函数分析完毕。
 
+## RTMP_Connect0
+
+```c
+int
+RTMP_Connect0(RTMP *r, struct addrinfo * service)
+{
+  int on = 1;
+  r->m_sb.sb_timedout = FALSE;
+  r->m_pausing = 0;
+  r->m_fDuration = 0.0;
+    // 创建套接字
+  r->m_sb.sb_socket = socket(service->ai_family, service->ai_socktype, service->ai_protocol);
+  if (r->m_sb.sb_socket != -1)
+    {// 连接对端
+      if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
+    {
+      int err = GetSockError();
+      RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
+          __FUNCTION__, err, strerror(err));
+      RTMP_Close(r);
+      return FALSE;
+    }
+        // 执行Socks协商
+      if (r->Link.socksport)
+    {
+      RTMP_Log(RTMP_LOGDEBUG, "%s ... SOCKS negotiation", __FUNCTION__);
+      if (!SocksNegotiate(r))
+        {
+          RTMP_Log(RTMP_LOGERROR, "%s, SOCKS negotiation failed.", __FUNCTION__);
+          RTMP_Close(r);
+          return FALSE;
+        }
+    }
+    }
+  else
+    {
+      RTMP_Log(RTMP_LOGERROR, "%s, failed to create socket. Error: %d", __FUNCTION__,
+      GetSockError());
+      return FALSE;
+    }
+
+  /* set timeout */
+  {
+    SET_RCVTIMEO(tv, r->Link.timeout);
+    if (setsockopt
+        (r->m_sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)))
+      {
+        RTMP_Log(RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
+        __FUNCTION__, r->Link.timeout);
+      }
+  }
+
+  setsockopt(r->m_sb.sb_socket, SOL_SOCKET, SO_NOSIGPIPE, (char *) &on, sizeof(on));
+  setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
+
+  return TRUE;
+}
+```
+
 <div style="margin: 0px;">
     备案号：
     <a href="https://beian.miit.gov.cn/" target="_blank">
