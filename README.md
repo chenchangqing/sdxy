@@ -125,6 +125,70 @@ struct addrinfo *ai_next;  /* 指向下一条信息,因为可能返回多个地�
 };
 ```
 
+## RTMP
+
+内容来源于：https://www.jianshu.com/p/05b1e5d70c06
+
+RTMP定义在`rtmp.h`。
+
+```c
+typedef struct RTMPSockBuf
+{
+  int sb_socket;    // 套接字
+  int sb_size;    // 缓冲区可读大小
+  char *sb_start;    // 缓冲区读取位置
+  char sb_buf[RTMP_BUFFER_CACHE_SIZE];    // 套接字读取缓冲区
+  int sb_timedout;    // 超时标志
+  void *sb_ssl;    // TLS上下文
+} RTMPSockBuf;
+
+typedef struct RTMP
+{
+  int m_inChunkSize;    // 最大接收块大小
+  int m_outChunkSize;    // 最大发送块大小
+  int m_nBWCheckCounter;    // 带宽检测计数器
+  int m_nBytesIn;    // 接收数据计数器
+  int m_nBytesInSent;    // 当前数据已回应计数器
+  int m_nBufferMS;    // 当前缓冲的时间长度，以MS为单位
+  int m_stream_id;    // 当前连接的流ID
+  int m_mediaChannel;    // 当前连接媒体使用的块流ID
+  uint32_t m_mediaStamp;    // 当前连接媒体最新的时间戳
+  uint32_t m_pauseStamp;    // 当前连接媒体暂停时的时间戳
+  int m_pausing;    // 是否暂停状态
+  int m_nServerBW;    // 服务器带宽
+  int m_nClientBW;    // 客户端带宽
+  uint8_t m_nClientBW2;    // 客户端带宽调节方式
+  uint8_t m_bPlaying;    // 当前是否推流或连接中
+  uint8_t m_bSendEncoding;    // 连接服务器时发送编码
+  uint8_t m_bSendCounter;    // 设置是否向服务器发送接收字节应答
+
+  int m_numInvokes;    // 0x14命令远程过程调用计数
+  int m_numCalls;    // 0x14命令远程过程请求队列数量
+  RTMP_METHOD *m_methodCalls;    // 远程过程调用请求队列
+
+  RTMPPacket *m_vecChannelsIn[RTMP_CHANNELS];    // 对应块流ID上一次接收的报文
+  RTMPPacket *m_vecChannelsOut[RTMP_CHANNELS];    // 对应块流ID上一次发送的报文
+  int m_channelTimestamp[RTMP_CHANNELS];    // 对应块流ID媒体的最新时间戳
+
+  double m_fAudioCodecs;    // 音频编码器代码
+  double m_fVideoCodecs;    // 视频编码器代码
+  double m_fEncoding;         /* AMF0 or AMF3 */
+
+  double m_fDuration;    // 当前媒体的时长
+
+  int m_msgCounter;    // 使用HTTP协议发送请求的计数器
+  int m_polling;    // 使用HTTP协议接收消息主体时的位置
+  int m_resplen;    // 使用HTTP协议接收消息主体时的未读消息计数
+  int m_unackd;    // 使用HTTP协议处理时无响应的计数
+  AVal m_clientID;    // 使用HTTP协议处理时的身份ID
+
+  RTMP_READ m_read;    // RTMP_Read()操作的上下文
+  RTMPPacket m_write;    // RTMP_Write()操作使用的可复用报文对象
+  RTMPSockBuf m_sb;    // RTMP_ReadPacket()读包操作的上下文
+  RTMP_LNK Link;    // RTMP连接上下文
+} RTMP;
+```
+
 ## RTMP_Connect
 
 ```c
@@ -399,6 +463,87 @@ RTMP_Connect0(RTMP *r, struct addrinfo * service)
   setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
 
   return TRUE;
+}
+```
+
+## RTMP_Connect0
+
+```c
+int
+RTMP_Connect0(RTMP *r, struct addrinfo * service)
+{
+  int on = 1;
+  r->m_sb.sb_timedout = FALSE;
+  r->m_pausing = 0;
+  r->m_fDuration = 0.0;
+    // 创建套接字
+  r->m_sb.sb_socket = socket(service->ai_family, service->ai_socktype, service->ai_protocol);
+  if (r->m_sb.sb_socket != -1)
+    {// 连接对端
+      if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
+  {
+    int err = GetSockError();
+    RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
+        __FUNCTION__, err, strerror(err));
+    RTMP_Close(r);
+    return FALSE;
+  }
+        // 执行Socks协商
+      if (r->Link.socksport)
+  {
+    RTMP_Log(RTMP_LOGDEBUG, "%s ... SOCKS negotiation", __FUNCTION__);
+    if (!SocksNegotiate(r))
+      {
+        RTMP_Log(RTMP_LOGERROR, "%s, SOCKS negotiation failed.", __FUNCTION__);
+        RTMP_Close(r);
+        return FALSE;
+      }
+  }
+    }
+  else
+    {
+      RTMP_Log(RTMP_LOGERROR, "%s, failed to create socket. Error: %d", __FUNCTION__,
+    GetSockError());
+      return FALSE;
+    }
+
+  /* set timeout */
+  {
+    SET_RCVTIMEO(tv, r->Link.timeout);
+    if (setsockopt
+        (r->m_sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)))
+      {
+        RTMP_Log(RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
+      __FUNCTION__, r->Link.timeout);
+      }
+  }
+
+  setsockopt(r->m_sb.sb_socket, SOL_SOCKET, SO_NOSIGPIPE, (char *) &on, sizeof(on));
+  setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
+
+  return TRUE;
+}
+```
+**代码片段分析1**
+```c
+int on = 1;
+r->m_sb.sb_timedout = FALSE;// 超时标志
+r->m_pausing = 0;// 是否暂停状态
+r->m_fDuration = 0.0;// 当前媒体的时长
+```
+**代码片段分析2**
+```c
+// 创建套接字
+r->m_sb.sb_socket = socket(service->ai_family, service->ai_socktype, service->ai_protocol);
+if (r->m_sb.sb_socket != -1)
+  {// 连接对端
+    if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
+{
+  int err = GetSockError();
+  RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
+      __FUNCTION__, err, strerror(err));
+  RTMP_Close(r);
+  return FALSE;
 }
 ```
 
