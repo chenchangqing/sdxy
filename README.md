@@ -422,65 +422,6 @@ RTMP_Connect0(RTMP *r, struct addrinfo * service)
   if (r->m_sb.sb_socket != -1)
     {// 连接对端
       if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
-    {
-      int err = GetSockError();
-      RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
-          __FUNCTION__, err, strerror(err));
-      RTMP_Close(r);
-      return FALSE;
-    }
-        // 执行Socks协商
-      if (r->Link.socksport)
-    {
-      RTMP_Log(RTMP_LOGDEBUG, "%s ... SOCKS negotiation", __FUNCTION__);
-      if (!SocksNegotiate(r))
-        {
-          RTMP_Log(RTMP_LOGERROR, "%s, SOCKS negotiation failed.", __FUNCTION__);
-          RTMP_Close(r);
-          return FALSE;
-        }
-    }
-    }
-  else
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, failed to create socket. Error: %d", __FUNCTION__,
-      GetSockError());
-      return FALSE;
-    }
-
-  /* set timeout */
-  {
-    SET_RCVTIMEO(tv, r->Link.timeout);
-    if (setsockopt
-        (r->m_sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)))
-      {
-        RTMP_Log(RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
-        __FUNCTION__, r->Link.timeout);
-      }
-  }
-
-  setsockopt(r->m_sb.sb_socket, SOL_SOCKET, SO_NOSIGPIPE, (char *) &on, sizeof(on));
-  setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
-
-  return TRUE;
-}
-```
-
-## RTMP_Connect0
-
-```c
-int
-RTMP_Connect0(RTMP *r, struct addrinfo * service)
-{
-  int on = 1;
-  r->m_sb.sb_timedout = FALSE;
-  r->m_pausing = 0;
-  r->m_fDuration = 0.0;
-    // 创建套接字
-  r->m_sb.sb_socket = socket(service->ai_family, service->ai_socktype, service->ai_protocol);
-  if (r->m_sb.sb_socket != -1)
-    {// 连接对端
-      if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
   {
     int err = GetSockError();
     RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
@@ -546,6 +487,22 @@ if (r->m_sb.sb_socket != -1)
   return FALSE;
 }
 ```
+内容来源于：http://c.biancheng.net/view/2131.html
+
+在 Linux 下使用 <sys/socket.h> 头文件中 socket() 函数来创建套接字，原型为：
+```c
+int socket(int af, int type, int protocol);
+```
+
+1) af 为地址族（Address Family），也就是 IP 地址类型，常用的有 AF_INET 和 AF_INET6。AF 是“Address Family”的简写，INET是“Inetnet”的简写。AF_INET 表示 IPv4 地址，例如 127.0.0.1；AF_INET6 表示 IPv6 地址，例如 1030::C9B4:FF12:48AA:1A2B。
+
+大家需要记住127.0.0.1，它是一个特殊IP地址，表示本机地址，后面的教程会经常用到。
+
+>你也可以使用 PF 前缀，PF 是“Protocol Family”的简写，它和 AF 是一样的。例如，PF_INET 等价于 AF_INET，PF_INET6 等价于 AF_INET6。
+
+2) type 为数据传输方式/套接字类型，常用的有 SOCK_STREAM（流格式套接字/面向连接的套接字） 和 SOCK_DGRAM（数据报套接字/无连接的套接字），我们已经在《套接字有哪些类型》一节中进行了介绍。
+
+3) protocol 表示传输协议，常用的有 IPPROTO_TCP 和 IPPTOTO_UDP，分别表示 TCP 传输协议和 UDP 传输协议。
 
 <div style="margin: 0px;">
     备案号：
