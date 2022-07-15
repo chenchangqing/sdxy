@@ -189,6 +189,62 @@ typedef struct RTMP
 } RTMP;
 ```
 
+## RTMP_LINK
+
+内容来源于：https://www.jianshu.com/p/05b1e5d70c06
+
+```c
+typedef struct RTMP_LNK
+{
+  AVal hostname;    // 目标主机地址
+  AVal sockshost;    // socks代理地址
+
+  // 连接和推拉流涉及的一些参数信息
+  AVal playpath0;     /* parsed from URL */
+  AVal playpath;      /* passed in explicitly */
+  AVal tcUrl;
+  AVal swfUrl;
+  AVal pageUrl;
+  AVal app;
+  AVal auth;
+  AVal flashVer;
+  AVal subscribepath;
+  AVal token;
+  AMFObject extras;
+  int edepth;
+
+  int seekTime;    // 播放流的开始时间
+  int stopTime;    // 播放流的停止时间
+
+#define RTMP_LF_AUTH    0x0001  /* using auth param */
+#define RTMP_LF_LIVE    0x0002  /* stream is live */
+#define RTMP_LF_SWFV    0x0004  /* do SWF verification */
+#define RTMP_LF_PLST    0x0008  /* send playlist before play */
+#define RTMP_LF_BUFX    0x0010  /* toggle stream on BufferEmpty msg */
+#define RTMP_LF_FTCU    0x0020  /* free tcUrl on close */
+  int lFlags;
+
+  int swfAge;
+
+  int protocol;    // 连接使用的协议
+  int timeout;    // 连接超时时间
+
+  unsigned short socksport;    // socks代理端口
+  unsigned short port;    // 目标主机端口
+
+#ifdef CRYPTO
+#define RTMP_SWF_HASHLEN        32
+  void *dh;                   /* for encryption */
+  void *rc4keyIn;
+  void *rc4keyOut;
+
+  uint32_t SWFSize;
+  uint8_t SWFHash[RTMP_SWF_HASHLEN];
+  char SWFVerificationResponse[RTMP_SWF_HASHLEN+10];
+#endif
+} RTMP_LNK;
+```
+
 ## RTMP_Connect
 
 ```c
@@ -475,9 +531,15 @@ r->m_fDuration = 0.0;// 当前媒体的时长
 **代码片段分析2**
 ```c
 // 创建套接字
+// DEBUG: CCQ: addrinfo->ai_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
+// DEBUG: CCQ: addrinfo->ai_socktype:1 /* 1代表`SOCK_STREAM`，取值范围见上`__socket_type` */
+// DEBUG: CCQ: addrinfo->ai_protocol:6 /* 6代表`IPPROTO_TCP`，取之范围见上`Ip Protocol` */
 r->m_sb.sb_socket = socket(service->ai_family, service->ai_socktype, service->ai_protocol);
 if (r->m_sb.sb_socket != -1)
-  {// 连接对端
+  { // 连接对端
+    // DEBUG: CCQ: addrinfo->ai_addrlen:16 /* socket address 的长度 */
+    // DEBUG: CCQ: addrinfo->ai_addr->sa_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
+    // DEBUG: CCQ: addrinfo->ai_addr->sa_data:\217\300\250
     if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
 {
   int err = GetSockError();
@@ -503,6 +565,46 @@ int socket(int af, int type, int protocol);
 2) type 为数据传输方式/套接字类型，常用的有 SOCK_STREAM（流格式套接字/面向连接的套接字） 和 SOCK_DGRAM（数据报套接字/无连接的套接字），我们已经在《套接字有哪些类型》一节中进行了介绍。
 
 3) protocol 表示传输协议，常用的有 IPPROTO_TCP 和 IPPTOTO_UDP，分别表示 TCP 传输协议和 UDP 传输协议。
+
+**代码片段分析3**
+```c
+// 执行Socks协商
+      RTMP_Log(RTMP_LOGDEBUG, "CCQ: r->Link.socksport：%d", r->Link.socksport);
+      // DEBUG: CCQ: r->Link.socksport：0
+    if (r->Link.socksport)
+{
+  RTMP_Log(RTMP_LOGDEBUG, "%s ... SOCKS negotiation", __FUNCTION__);
+  if (!SocksNegotiate(r))
+    {
+      RTMP_Log(RTMP_LOGERROR, "%s, SOCKS negotiation failed.", __FUNCTION__);
+      RTMP_Close(r);
+      return FALSE;
+    }
+}
+```
+r->Link.socksport：0，首次不会执行`SocksNegotiate`。
+
+**代码片段分析4**
+```c
+/* set timeout */
+  {
+      RTMP_Log(RTMP_LOGDEBUG, "CCQ: r->Link.timeout：%d", r->Link.timeout);
+      // DEBUG: CCQ: r->Link.timeout：30
+    SET_RCVTIMEO(tv, r->Link.timeout);
+    if (setsockopt
+        (r->m_sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)))
+      {
+        RTMP_Log(RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
+      __FUNCTION__, r->Link.timeout);
+      }
+  }
+```
+
+**代码片段分析5**
+```c
+setsockopt(r->m_sb.sb_socket, SOL_SOCKET, SO_NOSIGPIPE, (char *) &on, sizeof(on));
+setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
+```
 
 <div style="margin: 0px;">
     备案号：
