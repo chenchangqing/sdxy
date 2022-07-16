@@ -25,7 +25,9 @@
     * [ffplay源码-event_loop函数、refresh_loop_wait_event函数](pages/FFmpeg/ffplay源码_event_loop函数_refresh_loop_wait_event函数.md)
 * librtmp
     * [调试librtmp](pages/librtmp/调试librtmp.md)
+    * [librttmp源码之相关结构体](pages/librtmp/librttmp源码之相关结构体.md)
     * [librttmp源码之RTMP_Connect](pages/librtmp/librttmp源码之RTMP_Connect.md)
+    * [librttmp源码之RTMP_Connect](pages/librtmp/librttmp源码之HandShake.md)
 * OpenGL系列
     * [1.OpenGL渲染结构与常用图元](pages/OpenGL系列/01_OpenGL渲染结构与常用图元.md)
     * [2.OpenGL基础渲染](pages/OpenGL系列/02_OpenGL基础渲染.md)
@@ -223,8 +225,6 @@
     * [Universal Links](pages/其他/Universal_Links.md)
     * [Configurations](pages/其他/Configurations.md)
     * [iOS集成Flutter](pages/其他/iOS集成Flutter.md)
-    * [个人信息](pages/bookignore/个人信息.md)
-    * [账号管理](pages/bookignore/账号管理.md)
     * [装机必备](pages/其他/装机必备.md)
     * [常用链接](pages/其他/常用链接.md)
 * Git
