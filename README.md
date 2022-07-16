@@ -817,9 +817,11 @@ RTMP_Connect1(RTMP *r, RTMPPacket *cp)
 ```c
     RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol:%d", __FUNCTION__, r->Link.protocol);
     RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, RTMP_FEATURE_SSL:%d", __FUNCTION__, RTMP_FEATURE_SSL);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol & RTMP_FEATURE_SSL:%d", __FUNCTION__, r->Link.protocol & RTMP_FEATURE_SSL);
     // DEBUG: CCQ: RTMP_Connect1, r->Link.protocol:16
     // DEBUG: CCQ: RTMP_Connect1, RTMP_FEATURE_SSL:4
     // #define RTMP_FEATURE_SSL 0x04
+    // DEBUG: CCQ: RTMP_Connect1, r->Link.protocol & RTMP_FEATURE_SSL:0
   if (r->Link.protocol & RTMP_FEATURE_SSL)
     {
 #if defined(CRYPTO) && !defined(NO_SSL)
@@ -856,6 +858,33 @@ RTMP_EnableWrite(_rtmp);
 RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol2:%d", __FUNCTION__, _rtmp->Link.protocol);
 // DEBUG: CCQ: -[RTMPPusher connectWithURL:], r->Link.protocol2:16 
 ```
+
+2.`r->Link.protocol & RTMP_FEATURE_SSL`为0，不会执行if后的代码。
+
+**代码片段分析2**
+
+```c
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol & RTMP_FEATURE_HTTP:%d", __FUNCTION__, r->Link.protocol & RTMP_FEATURE_HTTP);
+    // DEBUG: CCQ: RTMP_Connect1, r->Link.protocol & RTMP_FEATURE_HTTP:0
+  if (r->Link.protocol & RTMP_FEATURE_HTTP)
+    {
+      r->m_msgCounter = 1;
+      r->m_clientID.av_val = NULL;
+      r->m_clientID.av_len = 0;
+      HTTP_Post(r, RTMPT_OPEN, "", 1);
+      if (HTTP_read(r, 1) != 0)
+  {
+    r->m_msgCounter = 0;
+    RTMP_Log(RTMP_LOGDEBUG, "%s, Could not connect for handshake", __FUNCTION__);
+    RTMP_Close(r);
+    return 0;
+  }
+      r->m_msgCounter = 0;
+    }
+  RTMP_Log(RTMP_LOGDEBUG, "%s, ... connected, handshaking", __FUNCTION__);
+```
+
+r->Link.protocol & RTMP_FEATURE_HTTP为0，不会执行if后的代码。连接成功，开始执行`handshaking`。
 
 <div style="margin: 0px;">
     备案号：
