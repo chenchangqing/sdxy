@@ -132,6 +132,15 @@ struct addrinfo *ai_next;  /* 指向下一条信息,因为可能返回多个地�
 RTMP定义在`rtmp.h`。
 
 ```c
+/*
+** 远程调用方法
+*/
+typedef struct RTMP_METHOD
+{
+AVal name;
+int num;
+} RTMP_METHOD;
+
 typedef struct RTMPSockBuf
 {
   int sb_socket;    // 套接字
@@ -245,6 +254,114 @@ typedef struct RTMP_LNK
 } RTMP_LNK;
 ```
 
+## RTMPPacket
+
+内容来源于：https://blog.csdn.net/NB_vol_1/article/details/58660181
+
+https://blog.csdn.net/bwangk/article/details/112802823
+ 
+```c
+
+// 原始的rtmp消息块
+typedef struct RTMPChunk
+{
+int c_headerSize; // 头部的长度
+int c_chunkSize; // chunk的大小
+char *c_chunk; // 数据
+char c_header[RTMP_MAX_HEADER_SIZE]; // chunk头部
+} RTMPChunk;
+
+// rtmp消息块
+typedef struct RTMPPacket
+{
+    // chunk basic header（大部分情况是一个字节）
+    uint8_t m_headerType;
+
+    // Message type ID（1-7协议控制；8，9音视频；10以后为AMF编码消息）
+    uint8_t m_packetType;
+
+    // 是否含有Extend timeStamp字段
+    uint8_t m_hasAbsTimestamp;  /* timestamp absolute or relative? */
+
+    // channel 即 stream id字段
+    int m_nChannel;
+
+    // 时间戳
+    uint32_t m_nTimeStamp;  /* timestamp */
+
+    // message stream id
+    int32_t m_nInfoField2;  /* last 4 bytes in a long header */
+
+    // chunk体的长度
+    uint32_t m_nBodySize;
+    uint32_t m_nBytesRead;
+    RTMPChunk *m_chunk; // 原始rtmp消息块
+    char *m_body;
+} RTMPPacket;
+
+typedef struct RTMPPacket
+  {
+    uint8_t m_headerType;       //basic header 中的type头字节，值为(0,1,2,3)表示ChunkMsgHeader的类型（4种）
+    uint8_t m_packetType;       //Chunk Msg Header中msg type 1字节：消息类型id（8: audio；9:video；18:AMF0编码的元数据）
+    uint8_t m_hasAbsTimestamp;  //bool值，是否是绝对时间戳(类型1时为true)
+    int m_nChannel;             //块流ID  ，通过设置ChannelID来设置Basic stream id的长度和值
+    uint32_t m_nTimeStamp;      //时间戳，消息头前三字节
+    int32_t m_nInfoField2;      //Chunk Msg Header中msg StreamID 4字节：消息流id
+    uint32_t m_nBodySize;       //Chunk Msg Header中msg length 4字节：消息长度
+    uint32_t m_nBytesRead;      //已读取的数据
+    RTMPChunk *m_chunk;         //raw chunk结构体指针，把RTMPPacket的真实头部和数据段拷贝进来
+    char *m_body;               //数据段指针
+  } RTMPPacket;
+```
+
+## RTMP_READ
+
+内容来源于：https://blog.csdn.net/NB_vol_1/article/details/58660181
+
+```c
+/*
+** AVal表示一个字符串
+*/
+typedef struct AVal
+{
+char *av_val;
+int av_len;
+} AVal;
+
+/* state for read() wrapper */
+  // read函数的包装器，包括状态等等
+typedef struct RTMP_READ
+{
+char *buf;
+char *bufpos;
+unsigned int buflen;
+uint32_t timestamp;
+uint8_t dataType;
+uint8_t flags;
+#define RTMP_READ_HEADER    0x01
+#define RTMP_READ_RESUME    0x02
+#define RTMP_READ_NO_IGNORE 0x04
+#define RTMP_READ_GOTKF     0x08
+#define RTMP_READ_GOTFLVK   0x10
+#define RTMP_READ_SEEKING   0x20
+int8_t status;
+#define RTMP_READ_COMPLETE  -3
+#define RTMP_READ_ERROR -2
+#define RTMP_READ_EOF   -1
+#define RTMP_READ_IGNORE    0
+
+/* if bResume == TRUE */
+uint8_t initialFrameType;
+uint32_t nResumeTS;
+char *metaHeader;
+char *initialFrame;
+uint32_t nMetaHeaderSize;
+uint32_t nInitialFrameSize;
+uint32_t nIgnoredFrameCounter;
+uint32_t nIgnoredFlvFrameCounter;
+} RTMP_READ;
+```
+
 ## RTMP_Connect
 
 ```c
@@ -332,6 +449,23 @@ RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_next:%s", service->ai_next);
 // DEBUG: CCQ: addrinfo->ai_canonname:(null) /* Canonical name of service location. */
 // DEBUG: CCQ: addrinfo->ai_next:(null)
 ```
+
+**代码片段分析2**
+```c
+if (!RTMP_Connect0(r, service))
+{
+  freeaddrinfo(service);
+  return FALSE;
+}
+
+freeaddrinfo(service);
+r->m_bSendCounter = TRUE;// 设置是否向服务器发送接收字节应答
+return RTMP_Connect1(r, cp);
+```
+
+内容来源于：https://www.jianshu.com/p/05b1e5d70c06
+
+开始调用`RTMP_Connect1`，继续执行SSL或HTTP协商，以及RTMP握手。
 
 ## add_addr_info
 
@@ -523,7 +657,7 @@ RTMP_Connect0(RTMP *r, struct addrinfo * service)
 ```
 **代码片段分析1**
 ```c
-int on = 1;
+int on = 1;// setsockopt函数使用
 r->m_sb.sb_timedout = FALSE;// 超时标志
 r->m_pausing = 0;// 是否暂停状态
 r->m_fDuration = 0.0;// 当前媒体的时长
@@ -590,7 +724,12 @@ r->Link.socksport：0，首次不会执行`SocksNegotiate`。
   {
       RTMP_Log(RTMP_LOGDEBUG, "CCQ: r->Link.timeout：%d", r->Link.timeout);
       // DEBUG: CCQ: r->Link.timeout：30
+      // #define SET_RCVTIMEO(tv,s)  int tv = s*1000
     SET_RCVTIMEO(tv, r->Link.timeout);
+    // r->m_sb.sb_socket：标识一个套接口的描述字（RTMP->RTMPSockBuf->sb_socket）
+    // SOL_SOCKET：选项定义的层次；目前仅支持SOL_SOCKET和IPPROTO_TCP层次。
+    // SO_RCVTIMEO：接收超时。
+    // tv：超时时间
     if (setsockopt
         (r->m_sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)))
       {
@@ -599,11 +738,106 @@ r->Link.socksport：0，首次不会执行`SocksNegotiate`。
       }
   }
 ```
+内容来源于：https://www.cnblogs.com/cthon/p/9270778.html
+
+`SET_RCVTIMEO`是宏定义，给`tv`赋值，这里`tv`为30*1000。
 
 **代码片段分析5**
 ```c
 setsockopt(r->m_sb.sb_socket, SOL_SOCKET, SO_NOSIGPIPE, (char *) &on, sizeof(on));
 setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
+```
+
+内容来源于：https://www.cnblogs.com/cthon/p/9270778.html
+
+TCP_NODELAY选项禁止Nagle算法。Nagle算法通过将未确认的数据存入缓冲区直到蓄足一个包一起发送的方法，来减少主机发送的零碎小数据包的数目。但对于某些应用来说，这种算法将降低系统性能。所以TCP_NODELAY可用来将此算法关闭。应用程序编写者只有在确切了解它的效果并确实需要的情况下，才设置TCP_NODELAY选项，因为设置后对网络性能有明显的负面影响。TCP_NODELAY是唯一使用IPPROTO_TCP层的选项，其他所有选项都使用SOL_SOCKET层。
+
+内容来源于：http://www.sinohandset.com/mac-osx%E4%B8%8Bso_nosigpipe%E7%9A%84%E6%80%AA%E5%BC%82%E8%A1%A8%E7%8E%B0
+
+在linux下为了避免网络出错引起程序退出，我们一般采用`MSG_NOSIGNAL`来避免系统发送singal。这种错误一般发送在网络断开，但是程序仍然发送数据时，在接收时，没有必要使用。但是在linux下，使用此参数，也不会引起不好的结果。
+
+## RTMP_Connect1
+ 
+```c
+int
+RTMP_Connect1(RTMP *r, RTMPPacket *cp)
+{
+  if (r->Link.protocol & RTMP_FEATURE_SSL)
+    {
+#if defined(CRYPTO) && !defined(NO_SSL)
+      TLS_client(RTMP_TLS_ctx, r->m_sb.sb_ssl);
+      TLS_setfd(r->m_sb.sb_ssl, r->m_sb.sb_socket);
+      if (TLS_connect(r->m_sb.sb_ssl) < 0)
+    {
+      RTMP_Log(RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
+      RTMP_Close(r);
+      return FALSE;
+    }
+#else
+      RTMP_Log(RTMP_LOGERROR, "%s, no SSL/TLS support", __FUNCTION__);
+      RTMP_Close(r);
+      return FALSE;
+
+#endif
+    }
+  if (r->Link.protocol & RTMP_FEATURE_HTTP)
+    {
+      r->m_msgCounter = 1;
+      r->m_clientID.av_val = NULL;
+      r->m_clientID.av_len = 0;
+      HTTP_Post(r, RTMPT_OPEN, "", 1);
+      if (HTTP_read(r, 1) != 0)
+    {
+      r->m_msgCounter = 0;
+      RTMP_Log(RTMP_LOGDEBUG, "%s, Could not connect for handshake", __FUNCTION__);
+      RTMP_Close(r);
+      return 0;
+    }
+      r->m_msgCounter = 0;
+    }
+  RTMP_Log(RTMP_LOGDEBUG, "%s, ... connected, handshaking", __FUNCTION__);
+  if (!HandShake(r, TRUE))
+    {
+      RTMP_Log(RTMP_LOGERROR, "%s, handshake failed.", __FUNCTION__);
+      RTMP_Close(r);
+      return FALSE;
+    }
+  RTMP_Log(RTMP_LOGDEBUG, "%s, handshaked", __FUNCTION__);
+
+  if (!SendConnectPacket(r, cp))
+    {
+      RTMP_Log(RTMP_LOGERROR, "%s, RTMP connect failed.", __FUNCTION__);
+      RTMP_Close(r);
+      return FALSE;
+    }
+  return TRUE;
+}
+```
+**代码片段分析1**
+```c
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol:%d", __FUNCTION__, r->Link.protocol);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, RTMP_FEATURE_SSL:%d", __FUNCTION__, RTMP_FEATURE_SSL);
+    // DEBUG: CCQ: RTMP_Connect1, r->Link.protocol:16
+    // DEBUG: CCQ: RTMP_Connect1, RTMP_FEATURE_SSL:4
+    // #define RTMP_FEATURE_SSL 0x04
+  if (r->Link.protocol & RTMP_FEATURE_SSL)
+    {
+#if defined(CRYPTO) && !defined(NO_SSL)
+      TLS_client(RTMP_TLS_ctx, r->m_sb.sb_ssl);
+      TLS_setfd(r->m_sb.sb_ssl, r->m_sb.sb_socket);
+      if (TLS_connect(r->m_sb.sb_ssl) < 0)
+    {
+      RTMP_Log(RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
+      RTMP_Close(r);
+      return FALSE;
+    }
+#else
+      RTMP_Log(RTMP_LOGERROR, "%s, no SSL/TLS support", __FUNCTION__);
+      RTMP_Close(r);
+      return FALSE;
+
+#endif
+    }
 ```
 
 <div style="margin: 0px;">
