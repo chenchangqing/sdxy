@@ -839,6 +839,23 @@ RTMP_Connect1(RTMP *r, RTMPPacket *cp)
 #endif
     }
 ```
+1.为什么r->Link.protocol=16？
+
+```c
+#define RTMP_FEATURE_WRITE  0x10  /* publish, not play */
+
+void
+RTMP_EnableWrite(RTMP *r)
+{
+  r->Link.protocol |= RTMP_FEATURE_WRITE;
+}
+
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol1:%d", __FUNCTION__, _rtmp->Link.protocol);
+// DEBUG: CCQ: -[RTMPPusher connectWithURL:], r->Link.protocol1:0
+RTMP_EnableWrite(_rtmp);
+RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol2:%d", __FUNCTION__, _rtmp->Link.protocol);
+// DEBUG: CCQ: -[RTMPPusher connectWithURL:], r->Link.protocol2:16 
+```
 
 <div style="margin: 0px;">
     备案号：
