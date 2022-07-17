@@ -1,585 +1,644 @@
-# librttmp源码之RTMP_Connect
+# librttmp源码之HandShake
 
-## RTMP_Connect
-
-```c
-int
-RTMP_Connect(RTMP *r, RTMPPacket *cp)
-{
-  struct addrinfo *service;
-  
-  if (!r->Link.hostname.av_len)
-    return FALSE;
-    
-  // 设置直接连接的服务器地址
-  if (r->Link.socksport)
-    {
-
-      /* Connect via SOCKS */
-      if (!add_addr_info(&service, &r->Link.sockshost, r->Link.socksport))
-        return FALSE;
-    }
-  else
-    {
-
-      /* Connect directly */
-      if (!add_addr_info(&service, &r->Link.hostname, r->Link.port))
-        return FALSE;
-    }
-    
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_flags:%d", service->ai_flags);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_family:%d", service->ai_family);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_socktype:%d", service->ai_socktype);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_protocol:%d", service->ai_protocol);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addrlen:%d", service->ai_addrlen);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_family:%d", service->ai_addr->sa_family);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_data:%s", service->ai_addr->sa_data);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_canonname:%s", service->ai_canonname);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_next:%s", service->ai_next);
-    
-  if (!RTMP_Connect0(r, service))
-    {
-      freeaddrinfo(service);
-      return FALSE;
-    }
-
-  freeaddrinfo(service);
-  r->m_bSendCounter = TRUE;
-
-  return RTMP_Connect1(r, cp);
-}
-```
-**代码片段分析1**
-```c
-// 设置直接连接的服务器地址
-if (r->Link.socksport)
-{
-
-  /* Connect via SOCKS */
-  if (!add_addr_info(&service, &r->Link.sockshost, r->Link.socksport))
-    return FALSE;
-}
-else
-{
-
-  /* Connect directly */
-  if (!add_addr_info(&service, &r->Link.hostname, r->Link.port))
-    return FALSE;
-}
-
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_flags:%d", service->ai_flags);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_family:%d", service->ai_family);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_socktype:%d", service->ai_socktype);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_protocol:%d", service->ai_protocol);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addrlen:%d", service->ai_addrlen);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_family:%d", service->ai_addr->sa_family);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_addr->sa_data:%s", service->ai_addr->sa_data);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_canonname:%s", service->ai_canonname);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: addrinfo->ai_next:%s", service->ai_next);
-
-// DEBUG: CCQ: addrinfo->ai_flags:0 /* 0代表没有设值，如果设值，取值范围见上`AI_PASSIVE`... */
-// DEBUG: CCQ: addrinfo->ai_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
-// DEBUG: CCQ: addrinfo->ai_socktype:1 /* 1代表`SOCK_STREAM`，取值范围见上`__socket_type` */
-// DEBUG: CCQ: addrinfo->ai_protocol:6 /* 6代表`IPPROTO_TCP`，取之范围见上`Ip Protocol` */
-// DEBUG: CCQ: addrinfo->ai_addrlen:16 /* socket address 的长度 */
-// DEBUG: CCQ: addrinfo->ai_addr->sa_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
-// DEBUG: CCQ: addrinfo->ai_addr->sa_data:\217\300\250
-// DEBUG: CCQ: addrinfo->ai_canonname:(null) /* Canonical name of service location. */
-// DEBUG: CCQ: addrinfo->ai_next:(null)
-```
-
-**代码片段分析2**
-```c
-if (!RTMP_Connect0(r, service))
-{
-  freeaddrinfo(service);
-  return FALSE;
-}
-
-freeaddrinfo(service);
-r->m_bSendCounter = TRUE;// 设置是否向服务器发送接收字节应答
-return RTMP_Connect1(r, cp);
-```
-
-内容来源于：https://www.jianshu.com/p/05b1e5d70c06
-
-开始调用`RTMP_Connect1`，继续执行SSL或HTTP协商，以及RTMP握手。
-
-## add_addr_info
-
-内容来源于：https://blog.csdn.net/weixin_37921201/article/details/90111641
-
-填充struct addrinfo结构体用于之后的socket通信。
+## HandShake
 
 ```c
-/**
- 填充struct addrinfo结构体用于之后的socket通信。
- service: addrinfo指针的指针
- host: 192.168.0.12:1935/zbcs/room
- port: 1935
- */
 static int
-add_addr_info(struct addrinfo **service, AVal *host, int port)
+HandShake(RTMP * r, int FP9HandShake)
 {
-  struct addrinfo hints;
-  char *hostname, portNo[32];
-  int ret = TRUE;
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: host->av_val：%s", host->av_val);
-  if (host->av_val[host->av_len])
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s start", __FUNCTION__);
+  int i, offalg = 0;
+  int dhposClient = 0;
+  int digestPosClient = 0;
+  int encrypted = r->Link.protocol & RTMP_FEATURE_ENC;
+
+  RC4_handle keyIn = 0;
+  RC4_handle keyOut = 0;
+
+  int32_t *ip;
+  uint32_t uptime;
+
+  uint8_t clientbuf[RTMP_SIG_SIZE + 4], *clientsig=clientbuf+4;
+  uint8_t serversig[RTMP_SIG_SIZE], client2[RTMP_SIG_SIZE], *reply;
+  uint8_t type;
+  getoff *getdh = NULL, *getdig = NULL;
+
+  if (encrypted || r->Link.SWFSize)
+    FP9HandShake = TRUE;
+  else
+    FP9HandShake = FALSE;
+
+  r->Link.rc4keyIn = r->Link.rc4keyOut = 0;
+
+  if (encrypted)
     {
-      hostname = malloc(host->av_len+1);
-      memcpy(hostname, host->av_val, host->av_len);
-      hostname[host->av_len] = '\0';
-        RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname：%s", hostname);
+      clientsig[-1] = 0x06; /* 0x08 is RTMPE as well */
+      offalg = 1;
+    }
+  else
+    clientsig[-1] = 0x03;
+
+  uptime = htonl(RTMP_GetTime());
+  memcpy(clientsig, &uptime, 4);
+
+  if (FP9HandShake)
+    {
+      /* set version to at least 9.0.115.0 */
+      if (encrypted)
+  {
+    clientsig[4] = 128;
+    clientsig[6] = 3;
+  }
+      else
+        {
+    clientsig[4] = 10;
+    clientsig[6] = 45;
+  }
+      clientsig[5] = 0;
+      clientsig[7] = 2;
+
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Client type: %02X", __FUNCTION__, clientsig[-1]);
+      getdig = digoff[offalg];
+      getdh  = dhoff[offalg];
     }
   else
     {
-      hostname = host->av_val;
-        RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname2：%s", hostname);
+      memset(&clientsig[4], 0, 4);
     }
 
-  sprintf(portNo, "%d", port);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: portNo：%s", portNo);
-  
-  memset(&hints, 0, sizeof(struct addrinfo));
-  hints.ai_socktype = SOCK_STREAM;
-  hints.ai_family = AF_UNSPEC;
-  
-  if(getaddrinfo(hostname, portNo, &hints, service) != 0)
+  /* generate random data */
+#ifdef _DEBUG
+  memset(clientsig+8, 0, RTMP_SIG_SIZE-8);
+#else
+  ip = (int32_t *)(clientsig+8);
+  for (i = 2; i < RTMP_SIG_SIZE/4; i++)
+    *ip++ = rand();
+#endif
+
+  /* set handshake digest */
+  if (FP9HandShake)
     {
-      RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
-      ret = FALSE;
-    }
-finish:
-  if (hostname != host->av_val)
-    free(hostname);
-  return ret;
-}
-```
-**代码片段分析1**
-```c
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: host->av_val：%s", host->av_val);
-if (host->av_val[host->av_len])
-{
-  hostname = malloc(host->av_len+1);
-  memcpy(hostname, host->av_val, host->av_len);
-  hostname[host->av_len] = '\0';
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname：%s", hostname);
-}
-else
-{
-  hostname = host->av_val;
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: hostname2：%s", hostname);
-}
-// 输出结果：
-// DEBUG: host->av_val：192.168.0.12:1935/zbcs/room
-// DEBUG: hostname：192.168.0.12
-```
-通过打印结果分析，这段代码就是给hostname赋值，得到IP地址段。
-
-**代码片段分析2**
-```c
-sprintf(portNo, "%d", port);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: portNo：%d", portNo);
-// DEBUG: CCQ: portNo：1935
-```
-sprintf：https://baike.baidu.com/item/sprintf/9703430?fr=aladdin
-
-这里就是给portNo赋值，将`int`转`char *`。
-
-**代码片段分析3**
-```c
-memset(&hints, 0, sizeof(struct addrinfo));// 给hints分配内存
-  hints.ai_socktype = SOCK_STREAM;// 设置sock类型，设置范围：__socket_type
-  hints.ai_family = AF_UNSPEC;// 指定返回地址的协议簇
-```
-内容来源于：
-
-https://blog.csdn.net/u011003120/article/details/78277133 
-
-https://www.cnblogs.com/LubinLew/p/POSIX-getaddrinfo.html
-
-ai_family解释：指定返回地址的协议簇，取值范围:AF_INET(IPv4)、AF_INET6(IPv6)、AF_UNSPEC(IPv4 and IPv6)。
-
-**代码片段分析4**
-```c
-// hostname：IP地址，例如：192.168.0.12
-// portNo：端口号，例如：1935
-// hints：struct addrinfo地址
-// service：传进来的struct addrinfo，用于获取信息结果
-if(getaddrinfo(hostname, portNo, &hints, service) != 0)
-{
-  RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
-  ret = FALSE;
-}
-```
-内容来源于：
-
-https://www.cnblogs.com/LubinLew/p/POSIX-getaddrinfo.html
-
-函数注释：
-```c
-int getaddrinfo(const char *restrict nodename, /* host 或者IP地址 */
-    const char *restrict servname, /* 十进制端口号 或者常用服务名称如"ftp"、"http"等 */
-    const struct addrinfo *restrict hints, /* 获取信息要求设置 */
-    struct addrinfo **restrict res); /* 获取信息结果 */
-```
-
-IPv4中使用gethostbyname()函数完成主机名到地址解析，这个函数仅仅支持IPv4，且不允许调用者指定所需地址类型的任何信息，返回的结构只包含了用于存储IPv4地址的空间。IPv6中引入了新的API getaddrinfo()，它是协议无关的，既可用于IPv4也可用于IPv6。getaddrinfo() 函数能够处理名字到地址以及服务到端口这两种转换，返回的是一个 struct addrinfo 的结构体(列表)指针而不是一个地址清单。这些 struct addrinfo 结构体随后可由套接口函数直接使用。如此以来，getaddrinfo()函数把协议相关性安全隐藏在这个库函数内部。应用程序只要处理由getaddrinfo()函数填写的套接口地址结构。
-
-**代码片段分析5**
-```c
-finish:
-  if (hostname != host->av_val)
-    free(hostname);
-```
-释放hostname内存，至此`add_addr_info`函数分析完毕。
-
-## RTMP_Connect0
-
-```c
-int
-RTMP_Connect0(RTMP *r, struct addrinfo * service)
-{
-  int on = 1;
-  r->m_sb.sb_timedout = FALSE;
-  r->m_pausing = 0;
-  r->m_fDuration = 0.0;
-    // 创建套接字
-  r->m_sb.sb_socket = socket(service->ai_family, service->ai_socktype, service->ai_protocol);
-  if (r->m_sb.sb_socket != -1)
-    {// 连接对端
-      if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
+      if (encrypted)
   {
-    int err = GetSockError();
-    RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
-        __FUNCTION__, err, strerror(err));
-    RTMP_Close(r);
-    return FALSE;
-  }
-        // 执行Socks协商
-      if (r->Link.socksport)
-  {
-    RTMP_Log(RTMP_LOGDEBUG, "%s ... SOCKS negotiation", __FUNCTION__);
-    if (!SocksNegotiate(r))
+    /* generate Diffie-Hellmann parameters */
+    r->Link.dh = DHInit(1024);
+    if (!r->Link.dh)
       {
-        RTMP_Log(RTMP_LOGERROR, "%s, SOCKS negotiation failed.", __FUNCTION__);
-        RTMP_Close(r);
+        RTMP_Log(RTMP_LOGERROR, "%s: Couldn't initialize Diffie-Hellmann!",
+      __FUNCTION__);
+        return FALSE;
+      }
+
+    dhposClient = getdh(clientsig, RTMP_SIG_SIZE);
+    RTMP_Log(RTMP_LOGDEBUG, "%s: DH pubkey position: %d", __FUNCTION__, dhposClient);
+
+    if (!DHGenerateKey(r->Link.dh))
+      {
+        RTMP_Log(RTMP_LOGERROR, "%s: Couldn't generate Diffie-Hellmann public key!",
+      __FUNCTION__);
+        return FALSE;
+      }
+
+    if (!DHGetPublicKey(r->Link.dh, &clientsig[dhposClient], 128))
+      {
+        RTMP_Log(RTMP_LOGERROR, "%s: Couldn't write public key!", __FUNCTION__);
         return FALSE;
       }
   }
+
+      digestPosClient = getdig(clientsig, RTMP_SIG_SIZE); /* reuse this value in verification */
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Client digest offset: %d", __FUNCTION__,
+    digestPosClient);
+
+      CalculateDigest(digestPosClient, clientsig, GenuineFPKey, 30,
+          &clientsig[digestPosClient]);
+
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Initial client digest: ", __FUNCTION__);
+      RTMP_LogHex(RTMP_LOGDEBUG, clientsig + digestPosClient,
+       SHA256_DIGEST_LENGTH);
+    }
+
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "Clientsig: ");
+  RTMP_LogHex(RTMP_LOGDEBUG, clientsig, RTMP_SIG_SIZE);
+#endif
+
+  if (!WriteN(r, (char *)clientsig-1, RTMP_SIG_SIZE + 1))
+    return FALSE;
+
+  if (ReadN(r, (char *)&type, 1) != 1)  /* 0x03 or 0x06 */
+    return FALSE;
+
+  RTMP_Log(RTMP_LOGDEBUG, "%s: Type Answer   : %02X", __FUNCTION__, type);
+
+  if (type != clientsig[-1])
+    RTMP_Log(RTMP_LOGWARNING, "%s: Type mismatch: client sent %d, server answered %d",
+  __FUNCTION__, clientsig[-1], type);
+
+  if (ReadN(r, (char *)serversig, RTMP_SIG_SIZE) != RTMP_SIG_SIZE)
+    return FALSE;
+
+  /* decode server response */
+  memcpy(&uptime, serversig, 4);
+  uptime = ntohl(uptime);
+
+  RTMP_Log(RTMP_LOGDEBUG, "%s: Server Uptime : %d", __FUNCTION__, uptime);
+  RTMP_Log(RTMP_LOGDEBUG, "%s: FMS Version   : %d.%d.%d.%d", __FUNCTION__, serversig[4],
+      serversig[5], serversig[6], serversig[7]);
+
+  if (FP9HandShake && type == 3 && !serversig[4])
+    FP9HandShake = FALSE;
+
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "Server signature:");
+  RTMP_LogHex(RTMP_LOGDEBUG, serversig, RTMP_SIG_SIZE);
+#endif
+
+  if (FP9HandShake)
+    {
+      uint8_t digestResp[SHA256_DIGEST_LENGTH];
+      uint8_t *signatureResp = NULL;
+
+      /* we have to use this signature now to find the correct algorithms for getting the digest and DH positions */
+      int digestPosServer = getdig(serversig, RTMP_SIG_SIZE);
+
+      if (!VerifyDigest(digestPosServer, serversig, GenuineFMSKey, 36))
+  {
+    RTMP_Log(RTMP_LOGWARNING, "Trying different position for server digest!");
+    offalg ^= 1;
+    getdig = digoff[offalg];
+    getdh  = dhoff[offalg];
+    digestPosServer = getdig(serversig, RTMP_SIG_SIZE);
+
+    if (!VerifyDigest(digestPosServer, serversig, GenuineFMSKey, 36))
+      {
+        RTMP_Log(RTMP_LOGERROR, "Couldn't verify the server digest"); /* continuing anyway will probably fail */
+        return FALSE;
+      }
+  }
+
+      /* generate SWFVerification token (SHA256 HMAC hash of decompressed SWF, key are the last 32 bytes of the server handshake) */
+      if (r->Link.SWFSize)
+  {
+    const char swfVerify[] = { 0x01, 0x01 };
+    char *vend = r->Link.SWFVerificationResponse+sizeof(r->Link.SWFVerificationResponse);
+
+    memcpy(r->Link.SWFVerificationResponse, swfVerify, 2);
+    AMF_EncodeInt32(&r->Link.SWFVerificationResponse[2], vend, r->Link.SWFSize);
+    AMF_EncodeInt32(&r->Link.SWFVerificationResponse[6], vend, r->Link.SWFSize);
+    HMACsha256(r->Link.SWFHash, SHA256_DIGEST_LENGTH,
+         &serversig[RTMP_SIG_SIZE - SHA256_DIGEST_LENGTH],
+         SHA256_DIGEST_LENGTH,
+         (uint8_t *)&r->Link.SWFVerificationResponse[10]);
+  }
+
+      /* do Diffie-Hellmann Key exchange for encrypted RTMP */
+      if (encrypted)
+  {
+    /* compute secret key */
+    uint8_t secretKey[128] = { 0 };
+    int len, dhposServer;
+
+    dhposServer = getdh(serversig, RTMP_SIG_SIZE);
+    RTMP_Log(RTMP_LOGDEBUG, "%s: Server DH public key offset: %d", __FUNCTION__,
+      dhposServer);
+    len = DHComputeSharedSecretKey(r->Link.dh, &serversig[dhposServer],
+            128, secretKey);
+    if (len < 0)
+      {
+        RTMP_Log(RTMP_LOGDEBUG, "%s: Wrong secret key position!", __FUNCTION__);
+        return FALSE;
+      }
+
+    RTMP_Log(RTMP_LOGDEBUG, "%s: Secret key: ", __FUNCTION__);
+    RTMP_LogHex(RTMP_LOGDEBUG, secretKey, 128);
+
+    InitRC4Encryption(secretKey,
+          (uint8_t *) & serversig[dhposServer],
+          (uint8_t *) & clientsig[dhposClient],
+          &keyIn, &keyOut);
+  }
+
+
+      reply = client2;
+#ifdef _DEBUG
+      memset(reply, 0xff, RTMP_SIG_SIZE);
+#else
+      ip = (int32_t *)reply;
+      for (i = 0; i < RTMP_SIG_SIZE/4; i++)
+        *ip++ = rand();
+#endif
+      /* calculate response now */
+      signatureResp = reply+RTMP_SIG_SIZE-SHA256_DIGEST_LENGTH;
+
+      HMACsha256(&serversig[digestPosServer], SHA256_DIGEST_LENGTH,
+     GenuineFPKey, sizeof(GenuineFPKey), digestResp);
+      HMACsha256(reply, RTMP_SIG_SIZE - SHA256_DIGEST_LENGTH, digestResp,
+     SHA256_DIGEST_LENGTH, signatureResp);
+
+      /* some info output */
+      RTMP_Log(RTMP_LOGDEBUG,
+    "%s: Calculated digest key from secure key and server digest: ",
+    __FUNCTION__);
+      RTMP_LogHex(RTMP_LOGDEBUG, digestResp, SHA256_DIGEST_LENGTH);
+
+#ifdef FP10
+      if (type == 8 )
+        {
+    uint8_t *dptr = digestResp;
+    uint8_t *sig = signatureResp;
+    /* encrypt signatureResp */
+          for (i=0; i<SHA256_DIGEST_LENGTH; i+=8)
+      rtmpe8_sig(sig+i, sig+i, dptr[i] % 15);
+        }
+      else if (type == 9)
+        {
+    uint8_t *dptr = digestResp;
+    uint8_t *sig = signatureResp;
+    /* encrypt signatureResp */
+          for (i=0; i<SHA256_DIGEST_LENGTH; i+=8)
+            rtmpe9_sig(sig+i, sig+i, dptr[i] % 15);
+        }
+#endif
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Client signature calculated:", __FUNCTION__);
+      RTMP_LogHex(RTMP_LOGDEBUG, signatureResp, SHA256_DIGEST_LENGTH);
     }
   else
     {
-      RTMP_Log(RTMP_LOGERROR, "%s, failed to create socket. Error: %d", __FUNCTION__,
-    GetSockError());
-      return FALSE;
+      reply = serversig;
+#if 0
+      uptime = htonl(RTMP_GetTime());
+      memcpy(reply+4, &uptime, 4);
+#endif
     }
 
-  /* set timeout */
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "%s: Sending handshake response: ",
+    __FUNCTION__);
+  RTMP_LogHex(RTMP_LOGDEBUG, reply, RTMP_SIG_SIZE);
+#endif
+  if (!WriteN(r, (char *)reply, RTMP_SIG_SIZE))
+    return FALSE;
+
+  /* 2nd part of handshake */
+  if (ReadN(r, (char *)serversig, RTMP_SIG_SIZE) != RTMP_SIG_SIZE)
+    return FALSE;
+
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "%s: 2nd handshake: ", __FUNCTION__);
+  RTMP_LogHex(RTMP_LOGDEBUG, serversig, RTMP_SIG_SIZE);
+#endif
+
+  if (FP9HandShake)
+    {
+      uint8_t signature[SHA256_DIGEST_LENGTH];
+      uint8_t digest[SHA256_DIGEST_LENGTH];
+
+      if (serversig[4] == 0 && serversig[5] == 0 && serversig[6] == 0
+    && serversig[7] == 0)
   {
-    SET_RCVTIMEO(tv, r->Link.timeout);
-    if (setsockopt
-        (r->m_sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)))
-      {
-        RTMP_Log(RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
-      __FUNCTION__, r->Link.timeout);
-      }
+    RTMP_Log(RTMP_LOGDEBUG,
+        "%s: Wait, did the server just refuse signed authentication?",
+        __FUNCTION__);
+  }
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Server sent signature:", __FUNCTION__);
+      RTMP_LogHex(RTMP_LOGDEBUG, &serversig[RTMP_SIG_SIZE - SHA256_DIGEST_LENGTH],
+       SHA256_DIGEST_LENGTH);
+
+      /* verify server response */
+      HMACsha256(&clientsig[digestPosClient], SHA256_DIGEST_LENGTH,
+     GenuineFMSKey, sizeof(GenuineFMSKey), digest);
+      HMACsha256(serversig, RTMP_SIG_SIZE - SHA256_DIGEST_LENGTH, digest,
+     SHA256_DIGEST_LENGTH, signature);
+
+      /* show some information */
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Digest key: ", __FUNCTION__);
+      RTMP_LogHex(RTMP_LOGDEBUG, digest, SHA256_DIGEST_LENGTH);
+
+#ifdef FP10
+      if (type == 8 )
+        {
+    uint8_t *dptr = digest;
+    uint8_t *sig = signature;
+    /* encrypt signature */
+          for (i=0; i<SHA256_DIGEST_LENGTH; i+=8)
+      rtmpe8_sig(sig+i, sig+i, dptr[i] % 15);
+        }
+      else if (type == 9)
+        {
+    uint8_t *dptr = digest;
+    uint8_t *sig = signature;
+    /* encrypt signatureResp */
+          for (i=0; i<SHA256_DIGEST_LENGTH; i+=8)
+            rtmpe9_sig(sig+i, sig+i, dptr[i] % 15);
+        }
+#endif
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Signature calculated:", __FUNCTION__);
+      RTMP_LogHex(RTMP_LOGDEBUG, signature, SHA256_DIGEST_LENGTH);
+      if (memcmp
+    (signature, &serversig[RTMP_SIG_SIZE - SHA256_DIGEST_LENGTH],
+     SHA256_DIGEST_LENGTH) != 0)
+  {
+    RTMP_Log(RTMP_LOGWARNING, "%s: Server not genuine Adobe!", __FUNCTION__);
+    return FALSE;
+  }
+      else
+  {
+    RTMP_Log(RTMP_LOGDEBUG, "%s: Genuine Adobe Flash Media Server", __FUNCTION__);
   }
 
-  setsockopt(r->m_sb.sb_socket, SOL_SOCKET, SO_NOSIGPIPE, (char *) &on, sizeof(on));
-  setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
+      if (encrypted)
+  {
+    char buff[RTMP_SIG_SIZE];
+    /* set keys for encryption from now on */
+    r->Link.rc4keyIn = keyIn;
+    r->Link.rc4keyOut = keyOut;
 
+
+    /* update the keystreams */
+    if (r->Link.rc4keyIn)
+      {
+        RC4_encrypt(r->Link.rc4keyIn, RTMP_SIG_SIZE, (uint8_t *) buff);
+      }
+
+    if (r->Link.rc4keyOut)
+      {
+        RC4_encrypt(r->Link.rc4keyOut, RTMP_SIG_SIZE, (uint8_t *) buff);
+      }
+  }
+    }
+  else
+    {
+      if (memcmp(serversig, clientsig, RTMP_SIG_SIZE) != 0)
+  {
+    RTMP_Log(RTMP_LOGWARNING, "%s: client signature does not match!",
+        __FUNCTION__);
+  }
+    }
+
+  RTMP_Log(RTMP_LOGDEBUG, "%s: Handshaking finished....", __FUNCTION__);
   return TRUE;
 }
 ```
+
 **代码片段分析1**
 ```c
-int on = 1;// setsockopt函数使用
-r->m_sb.sb_timedout = FALSE;// 超时标志
-r->m_pausing = 0;// 是否暂停状态
-r->m_fDuration = 0.0;// 当前媒体的时长
+int i, offalg = 0;// offalg加密才使用
+int dhposClient = 0;// 加密才使用
+int digestPosClient = 0;// 加密才使用
+int encrypted = r->Link.protocol & RTMP_FEATURE_ENC;
+  RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s encrypted:%d", __FUNCTION__, encrypted);
+  // DEBUG: CCQ: HandShake encrypted:0
+  // 不加密
+RC4_handle keyIn = 0;// 加密才使用
+RC4_handle keyOut = 0;// 加密才使用
+
+int32_t *ip;/* generate random data */
+uint32_t uptime;// 当前时间，填充C1前4字节
 ```
+
 **代码片段分析2**
+
 ```c
-// 创建套接字
-// DEBUG: CCQ: addrinfo->ai_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
-// DEBUG: CCQ: addrinfo->ai_socktype:1 /* 1代表`SOCK_STREAM`，取值范围见上`__socket_type` */
-// DEBUG: CCQ: addrinfo->ai_protocol:6 /* 6代表`IPPROTO_TCP`，取之范围见上`Ip Protocol` */
-r->m_sb.sb_socket = socket(service->ai_family, service->ai_socktype, service->ai_protocol);
-if (r->m_sb.sb_socket != -1)
-  { // 连接对端
-    // DEBUG: CCQ: addrinfo->ai_addrlen:16 /* socket address 的长度 */
-    // DEBUG: CCQ: addrinfo->ai_addr->sa_family:2 /* 2代表`AF_INET`，也就是`PF_INET`，取之范围见上`AF_UNSPEC`... */
-    // DEBUG: CCQ: addrinfo->ai_addr->sa_data:\217\300\250
-    if (connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen) < 0)
-{
-  int err = GetSockError();
-  RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
-      __FUNCTION__, err, strerror(err));
-  RTMP_Close(r);
-  return FALSE;
-}
+RC4_handle keyIn = 0;// 加密才使用
+RC4_handle keyOut = 0;// 加密才使用
+
+int32_t *ip;/* generate random data */
+uint32_t uptime;// 当前时间，填充C1前4字节
+// #define RTMP_SIG_SIZE 1536:C1和S1消息有1536字节长
+uint8_t clientbuf[RTMP_SIG_SIZE + 4], *clientsig=clientbuf+4;
+uint8_t serversig[RTMP_SIG_SIZE], client2[RTMP_SIG_SIZE], *reply;// reply,client2加密才使用
+uint8_t type;// ReadN(r, (char *)&type, 1)之后获得
+getoff *getdh = NULL, *getdig = NULL;// 加密才使用
 ```
-内容来源于：http://c.biancheng.net/view/2131.html
-
-在 Linux 下使用 <sys/socket.h> 头文件中 socket() 函数来创建套接字，原型为：
-```c
-int socket(int af, int type, int protocol);
-```
-
-1) af 为地址族（Address Family），也就是 IP 地址类型，常用的有 AF_INET 和 AF_INET6。AF 是“Address Family”的简写，INET是“Inetnet”的简写。AF_INET 表示 IPv4 地址，例如 127.0.0.1；AF_INET6 表示 IPv6 地址，例如 1030::C9B4:FF12:48AA:1A2B。
-
-大家需要记住127.0.0.1，它是一个特殊IP地址，表示本机地址，后面的教程会经常用到。
-
->你也可以使用 PF 前缀，PF 是“Protocol Family”的简写，它和 AF 是一样的。例如，PF_INET 等价于 AF_INET，PF_INET6 等价于 AF_INET6。
-
-2) type 为数据传输方式/套接字类型，常用的有 SOCK_STREAM（流格式套接字/面向连接的套接字） 和 SOCK_DGRAM（数据报套接字/无连接的套接字），我们已经在《套接字有哪些类型》一节中进行了介绍。
-
-3) protocol 表示传输协议，常用的有 IPPROTO_TCP 和 IPPTOTO_UDP，分别表示 TCP 传输协议和 UDP 传输协议。
-
-`connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen)`抓包结果：
-
-过滤条件：ip.addr eq 81.68.250.191
-
-9833  2261.079011 192.168.1.3 81.68.250.191 TCP 78  51965 → 1935 [SYN] Seq=0 Win=65535 Len=0 MSS=1460 WS=64 TSval=45457028 TSecr=0 SACK_PERM=1
-
-9834  2261.090254 81.68.250.191 192.168.1.3 TCP 74  1935 → 51965 [SYN, ACK] Seq=0 Ack=1 Win=28960 Len=0 MSS=1400 SACK_PERM=1 TSval=2657772015 TSecr=45457028 WS=128
-
-9835  2261.090325 192.168.1.3 81.68.250.191 TCP 66  51965 → 1935 [ACK] Seq=1 Ack=1 Win=131840 Len=0 TSval=45457039 TSecr=2657772015
 
 **代码片段分析3**
+
 ```c
-// 执行Socks协商
-      RTMP_Log(RTMP_LOGDEBUG, "CCQ: r->Link.socksport：%d", r->Link.socksport);
-      // DEBUG: CCQ: r->Link.socksport：0
-    if (r->Link.socksport)
-{
-  RTMP_Log(RTMP_LOGDEBUG, "%s ... SOCKS negotiation", __FUNCTION__);
-  if (!SocksNegotiate(r))
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, SOCKS negotiation failed.", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
-    }
-}
+if (encrypted || r->Link.SWFSize)
+  FP9HandShake = TRUE;
+else
+  //普通的
+  FP9HandShake = FALSE;
+
+r->Link.rc4keyIn = r->Link.rc4keyOut = 0;// 加密才使用
+
+/*C0 字段已经写入clientsig*/
+if (encrypted)
+  {
+    clientsig[-1] = 0x06; /* 0x08 is RTMPE as well */
+    offalg = 1;
+  }
+else
+  //0x03代表RTMP协议的版本（客户端要求的）  
+  //数组竟然能有“-1”下标,因为clientsig指向的是clientbuf+4,所以不存在非法地址
+  //C0中的字段(1B) 
+  clientsig[-1] = 0x03;
+
+uptime = htonl(RTMP_GetTime());
+//void *memcpy(void *dest, const void *src, int n);
+//由src指向地址为起始地址的连续n个字节的数据复制到以dest指向地址为起始地址的空间内
+//把uptime的前4字节（其实一共就4字节）数据拷贝到clientsig指向的地址中
+//C1中的字段(4B)
+// ————————————————
+// 版权声明：本文为CSDN博主「雷霄骅」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+// 原文链接：https://blog.csdn.net/leixiaohua1020/article/details/12954329
+memcpy(clientsig, &uptime, 4);
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: uptime: ");
+    RTMP_LogHexString(RTMP_LOGDEBUG, clientsig, 4);
+    // DEBUG: Clientsig:
+    // DEBUG:   0000:  0c b7 58 56                                        ..XV
 ```
-r->Link.socksport：0，首次不会执行`SocksNegotiate`。
+
+`clientsig[-1] = 0x03;`将RTMP协议的版本号写入，1字节。
+
+`memcpy(clientsig, &uptime, 4);`将当前时间写入`clientsig`，4字节。
 
 **代码片段分析4**
-```c
-/* set timeout */
-  {
-      RTMP_Log(RTMP_LOGDEBUG, "CCQ: r->Link.timeout：%d", r->Link.timeout);
-      // DEBUG: CCQ: r->Link.timeout：30
-      // #define SET_RCVTIMEO(tv,s)  int tv = s*1000
-    SET_RCVTIMEO(tv, r->Link.timeout);
-    // r->m_sb.sb_socket：标识一个套接口的描述字（RTMP->RTMPSockBuf->sb_socket）
-    // SOL_SOCKET：选项定义的层次；目前仅支持SOL_SOCKET和IPPROTO_TCP层次。
-    // SO_RCVTIMEO：接收超时。
-    // tv：超时时间
-    if (setsockopt
-        (r->m_sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)))
-      {
-        RTMP_Log(RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
-      __FUNCTION__, r->Link.timeout);
-      }
-  }
-```
-内容来源于：https://www.cnblogs.com/cthon/p/9270778.html
 
-`SET_RCVTIMEO`是宏定义，给`tv`赋值，这里`tv`为30*1000。
+```c
+if (FP9HandShake)// 加密才处理
+    {
+      /* set version to at least 9.0.115.0 */
+      if (encrypted)
+  {
+    clientsig[4] = 128;
+    clientsig[6] = 3;
+  }
+      else
+        {
+    clientsig[4] = 10;
+    clientsig[6] = 45;
+  }
+      clientsig[5] = 0;
+      clientsig[7] = 2;
+
+      RTMP_Log(RTMP_LOGDEBUG, "%s: Client type: %02X", __FUNCTION__, clientsig[-1]);
+      getdig = digoff[offalg];
+      getdh  = dhoff[offalg];
+    }
+  else
+    {
+      memset(&clientsig[4], 0, 4);
+    }
+```
+
+`memset(&clientsig[4], 0, 4);`当前时间的后补0，占4字节。
 
 **代码片段分析5**
+
 ```c
-setsockopt(r->m_sb.sb_socket, SOL_SOCKET, SO_NOSIGPIPE, (char *) &on, sizeof(on));
-setsockopt(r->m_sb.sb_socket, IPPROTO_TCP, TCP_NODELAY, (char *) &on, sizeof(on));
+
+  /* generate random data */
+#ifdef _DEBUG
+  //将clientsig+8开始的1528个字节替换为0（这是一种简单的方法）
+  //这是C1中的random字段
+  memset(clientsig+8, 0, RTMP_SIG_SIZE-8);
+#else
+  //实际中使用rand()循环生成1528字节的伪随机数
+  ip = (int32_t *)(clientsig+8);
+  for (i = 2; i < RTMP_SIG_SIZE/4; i++)
+    *ip++ = rand();
+    
+  RTMP_Log(RTMP_LOGDEBUG, "CCQ: ip: ");
+  RTMP_LogHexString(RTMP_LOGDEBUG, (int32_t *)(clientsig+8), 1528);
+#endif
 ```
 
-内容来源于：https://www.cnblogs.com/cthon/p/9270778.html
+根据上面的分析，得知`clientsig`的-1位置存放这0x03（RTMP）的版本号，占1字节；0-4位置存放这当前时间uptime，占4字节；之后5-8位置补0，占4字节；而`clientsig`的总长度是1536个字节，已经占用了8字节，所以上面代码是在补全剩下的1528个字节，补全的方式是使用随机数。
 
-TCP_NODELAY选项禁止Nagle算法。Nagle算法通过将未确认的数据存入缓冲区直到蓄足一个包一起发送的方法，来减少主机发送的零碎小数据包的数目。但对于某些应用来说，这种算法将降低系统性能。所以TCP_NODELAY可用来将此算法关闭。应用程序编写者只有在确切了解它的效果并确实需要的情况下，才设置TCP_NODELAY选项，因为设置后对网络性能有明显的负面影响。TCP_NODELAY是唯一使用IPPROTO_TCP层的选项，其他所有选项都使用SOL_SOCKET层。
+**代码片段分析5**
 
-内容来源于：http://www.sinohandset.com/mac-osx%E4%B8%8Bso_nosigpipe%E7%9A%84%E6%80%AA%E5%BC%82%E8%A1%A8%E7%8E%B0
-
-在linux下为了避免网络出错引起程序退出，我们一般采用`MSG_NOSIGNAL`来避免系统发送singal。这种错误一般发送在网络断开，但是程序仍然发送数据时，在接收时，没有必要使用。但是在linux下，使用此参数，也不会引起不好的结果。
-
-## RTMP_Connect1
- 
 ```c
-int
-RTMP_Connect1(RTMP *r, RTMPPacket *cp)
-{
-  if (r->Link.protocol & RTMP_FEATURE_SSL)
-    {
-#if defined(CRYPTO) && !defined(NO_SSL)
-      TLS_client(RTMP_TLS_ctx, r->m_sb.sb_ssl);
-      TLS_setfd(r->m_sb.sb_ssl, r->m_sb.sb_socket);
-      if (TLS_connect(r->m_sb.sb_ssl) < 0)
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
-    }
-#else
-      RTMP_Log(RTMP_LOGERROR, "%s, no SSL/TLS support", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "Clientsig: ");
+  RTMP_LogHex(RTMP_LOGDEBUG, clientsig, RTMP_SIG_SIZE);
+#endif
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: Clientsig: ");
+    RTMP_LogHexString(RTMP_LOGDEBUG, clientsig, RTMP_SIG_SIZE);
+//发送数据报C0+C1
+  //从clientsig-1开始发，长度1536+1，两个包合并
+  //握手----------------
+  RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。发送握手数据C0+C1", __FUNCTION__);
+if (!WriteN(r, (char *)clientsig-1, RTMP_SIG_SIZE + 1))
+  return FALSE;
+  //读取数据报，长度1，存入type
+  //是服务器的S0，表示服务器使用的RTMP版本
+if (ReadN(r, (char *)&type, 1) != 1)  /* 0x03 or 0x06 */
+  return FALSE;
+  RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。接收握手数据S0", __FUNCTION__);
 
+RTMP_Log(RTMP_LOGDEBUG, "%s: Type Answer   : %02X", __FUNCTION__, type);
+  //客户端要求的版本和服务器提供的版本不同
+if (type != clientsig[-1])
+  RTMP_Log(RTMP_LOGWARNING, "%s: Type mismatch: client sent %d, server answered %d",
+__FUNCTION__, clientsig[-1], type);
+  RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。接收握手数据S1", __FUNCTION__);
+  //客户端和服务端随机序列长度是否相同
+if (ReadN(r, (char *)serversig, RTMP_SIG_SIZE) != RTMP_SIG_SIZE)
+  return FALSE;
+  RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。接收握手数据S1", __FUNCTION__);
+
+/* decode server response */
+  //把serversig的前四个字节赋值给uptime
+memcpy(&uptime, serversig, 4);
+uptime = ntohl(uptime);//大端转小端
+
+RTMP_Log(RTMP_LOGDEBUG, "%s: Server Uptime : %d", __FUNCTION__, uptime);
+RTMP_Log(RTMP_LOGDEBUG, "%s: FMS Version   : %d.%d.%d.%d", __FUNCTION__, serversig[4],
+    serversig[5], serversig[6], serversig[7]);
+```
+
+内容来源于：https://blog.csdn.net/bwangk/article/details/112802823
+
+C0 和 S0消息格式：C0和S0是单独的一个字节，表示版本信息。
+
+在C0中这个字段表示客户端要求的RTMP版本 。在S0中这个字段表示服务器选择的RTMP版本。本规范所定义的版本是3；0-2是早期产品所用的，已被丢弃；4-31保留在未来使用 ；32-255不允许使用 （为了区分其他以某一字符开始的文本协议）。如果服务无法识别客户端请求的版本，应该返回3 。客户端可以选择减到版本3或选择取消握手
+
+C1 和 S1消息格式：C1和S1消息有1536字节长。
+
+时间：4字节：本字段包含时间戳。该时间戳应该是发送这个数据块的端点的后续块的时间起始点。可以是0，或其他的任何值。为了同步多个流，端点可能发送其块流的当前值。
+零：4字节：本字段必须是全零。
+随机数据：1528字节。本字段可以包含任何值。因为每个端点必须用自己初始化的握手和对端初始化的握手来区分身份，所以这个数据应有充分的随机性。但是并不需要加密安全的随机值，或者动态值。
+
+C2 和 S2 消息格式：C2和S2消息有1536字节长，只是S1和C1的回复。
+
+时间：4字节：本字段必须包含对等段发送的时间（对C2来说是S1，对S2来说是C1）。
+时间2：4字节：本字段必须包含先前发送的并被对端读取的包的时间戳。
+随机回复：1528字节：本字段必须包含对端发送的随机数据字段（对C2来说是S1，对S2来说是C1）。每个对等端可以用时间和时间2字段中的时间戳来快速地估计带宽和延迟。但这样做可能并不实用。
+
+上面代码的功能简单说：发送C0+C1，解析S0、S1。
+
+**代码片段分析6**
+```c
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "Server signature:");
+  RTMP_LogHex(RTMP_LOGDEBUG, serversig, RTMP_SIG_SIZE);
+#endif
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: Server signature:");
+    RTMP_LogHexString(RTMP_LOGDEBUG, serversig, RTMP_SIG_SIZE);
+  if (FP9HandShake)
+    {}
+  else
+    {
+        RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s reply = serversig", __FUNCTION__);
+        //直接赋值
+      reply = serversig;
+#if 0
+      uptime = htonl(RTMP_GetTime());
+      memcpy(reply+4, &uptime, 4);
 #endif
     }
-  if (r->Link.protocol & RTMP_FEATURE_HTTP)
-    {
-      r->m_msgCounter = 1;
-      r->m_clientID.av_val = NULL;
-      r->m_clientID.av_len = 0;
-      HTTP_Post(r, RTMPT_OPEN, "", 1);
-      if (HTTP_read(r, 1) != 0)
-    {
-      r->m_msgCounter = 0;
-      RTMP_Log(RTMP_LOGDEBUG, "%s, Could not connect for handshake", __FUNCTION__);
-      RTMP_Close(r);
-      return 0;
-    }
-      r->m_msgCounter = 0;
-    }
-  RTMP_Log(RTMP_LOGDEBUG, "%s, ... connected, handshaking", __FUNCTION__);
-  if (!HandShake(r, TRUE))
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, handshake failed.", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
-    }
-  RTMP_Log(RTMP_LOGDEBUG, "%s, handshaked", __FUNCTION__);
-
-  if (!SendConnectPacket(r, cp))
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, RTMP connect failed.", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
-    }
-  return TRUE;
-}
 ```
-**代码片段分析1**
-```c
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol:%d", __FUNCTION__, r->Link.protocol);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, RTMP_FEATURE_SSL:%d", __FUNCTION__, RTMP_FEATURE_SSL);
-    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol & RTMP_FEATURE_SSL:%d", __FUNCTION__, r->Link.protocol & RTMP_FEATURE_SSL);
-    // DEBUG: CCQ: RTMP_Connect1, r->Link.protocol:16
-    // DEBUG: CCQ: RTMP_Connect1, RTMP_FEATURE_SSL:4
-    // #define RTMP_FEATURE_SSL 0x04
-    // DEBUG: CCQ: RTMP_Connect1, r->Link.protocol & RTMP_FEATURE_SSL:0
-  if (r->Link.protocol & RTMP_FEATURE_SSL)
-    {
-#if defined(CRYPTO) && !defined(NO_SSL)
-      TLS_client(RTMP_TLS_ctx, r->m_sb.sb_ssl);
-      TLS_setfd(r->m_sb.sb_ssl, r->m_sb.sb_socket);
-      if (TLS_connect(r->m_sb.sb_ssl) < 0)
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
-    }
-#else
-      RTMP_Log(RTMP_LOGERROR, "%s, no SSL/TLS support", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
 
+**代码片段分析7**
+```c
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "%s: Sending handshake response: ",
+    __FUNCTION__);
+  RTMP_LogHex(RTMP_LOGDEBUG, reply, RTMP_SIG_SIZE);
 #endif
-    }
-```
-1.为什么r->Link.protocol=16？
+    //把reply中的1536字节数据发送出去
+    //对应C2
+    //握手----------------
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。发送握手数据C2", __FUNCTION__);
+  if (!WriteN(r, (char *)reply, RTMP_SIG_SIZE))
+    return FALSE;
 
-```c
-#define RTMP_FEATURE_WRITE  0x10  /* publish, not play */
+  /* 2nd part of handshake */
+    //读取1536字节数据到serversig
+    //握手----------------
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。读取握手数据S2", __FUNCTION__);
+  if (ReadN(r, (char *)serversig, RTMP_SIG_SIZE) != RTMP_SIG_SIZE)
+    return FALSE;
 
-void
-RTMP_EnableWrite(RTMP *r)
-{
-  r->Link.protocol |= RTMP_FEATURE_WRITE;
-}
+#ifdef _DEBUG
+  RTMP_Log(RTMP_LOGDEBUG, "%s: 2nd handshake: ", __FUNCTION__);
+  RTMP_LogHex(RTMP_LOGDEBUG, serversig, RTMP_SIG_SIZE);
+#endif
+    RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s: 2nd handshake: ", __FUNCTION__);
+    RTMP_LogHexString(RTMP_LOGDEBUG, serversig, RTMP_SIG_SIZE);
 
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol1:%d", __FUNCTION__, _rtmp->Link.protocol);
-// DEBUG: CCQ: -[RTMPPusher connectWithURL:], r->Link.protocol1:0
-RTMP_EnableWrite(_rtmp);
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol2:%d", __FUNCTION__, _rtmp->Link.protocol);
-// DEBUG: CCQ: -[RTMPPusher connectWithURL:], r->Link.protocol2:16 
-```
-
-2.`r->Link.protocol & RTMP_FEATURE_SSL`为0，不会执行if后的代码。
-
-**代码片段分析2**
-
-```c
-RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s, r->Link.protocol & RTMP_FEATURE_HTTP:%d", __FUNCTION__, r->Link.protocol & RTMP_FEATURE_HTTP);
-    // DEBUG: CCQ: RTMP_Connect1, r->Link.protocol & RTMP_FEATURE_HTTP:0
-  if (r->Link.protocol & RTMP_FEATURE_HTTP)
+  if (FP9HandShake)// 加密才执行
+    {}
+  else
     {
-      r->m_msgCounter = 1;
-      r->m_clientID.av_val = NULL;
-      r->m_clientID.av_len = 0;
-      HTTP_Post(r, RTMPT_OPEN, "", 1);
-      if (HTTP_read(r, 1) != 0)
+        //int memcmp(const void *buf1, const void *buf2, unsigned int count); 当buf1=buf2时，返回值=0
+        //比较serversig和clientsig是否相等
+        //握手----------------
+        RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。比较握手数据签名", __FUNCTION__);
+      if (memcmp(serversig, clientsig, RTMP_SIG_SIZE) != 0)
   {
-    r->m_msgCounter = 0;
-    RTMP_Log(RTMP_LOGDEBUG, "%s, Could not connect for handshake", __FUNCTION__);
-    RTMP_Close(r);
-    return 0;
+        RTMP_Log(RTMP_LOGDEBUG, "CCQ: %s 建立连接：第1次连接。握手数据签名不匹配！", __FUNCTION__);
+    RTMP_Log(RTMP_LOGWARNING, "%s: client signature does not match!",
+        __FUNCTION__);
   }
-      r->m_msgCounter = 0;
-    }
-  RTMP_Log(RTMP_LOGDEBUG, "%s, ... connected, handshaking", __FUNCTION__);
-```
-
-r->Link.protocol & RTMP_FEATURE_HTTP为0，不会执行if后的代码。连接成功，开始执行`handshaking`。
-
-**代码片段3**
-```c
-// 进行HandShake
-if (!HandShake(r, TRUE))
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, handshake failed.", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
-    }
-  RTMP_Log(RTMP_LOGDEBUG, "%s, handshaked", __FUNCTION__);
-```
-
-`connect(r->m_sb.sb_socket, service->ai_addr, service->ai_addrlen)`：
-
-```
-14  6.159961  192.168.1.3 81.68.250.191 TCP 78  52049 → 1935 [SYN] Seq=0 Win=65535 Len=0 MSS=1460 WS=64 TSval=1695460720 TSecr=0 SACK_PERM=1
-15  6.177631  81.68.250.191 192.168.1.3 TCP 74  1935 → 52049 [SYN, ACK] Seq=0 Ack=1 Win=28960 Len=0 MSS=1400 SACK_PERM=1 TSval=2658240513 TSecr=1695460720 WS=128
-16  6.177717  192.168.1.3 81.68.250.191 TCP 66  52049 → 1935 [ACK] Seq=1 Ack=1 Win=131840 Len=0 TSval=1695460737 TSecr=2658240513
-```
-
-`HandShake`：
-
-```
-17  6.177792  192.168.1.3 81.68.250.191 TCP 1454  52049 → 1935 [ACK] Seq=1 Ack=1 Win=131840 Len=1388 TSval=1695460737 TSecr=2658240513
-18  6.177793  192.168.1.3 81.68.250.191 RTMP  215 Handshake C0+C1
-19  6.186903  81.68.250.191 192.168.1.3 TCP 66  1935 → 52049 [ACK] Seq=1 Ack=1538 Win=32128 Len=0 TSval=2658240524 TSecr=1695460737
-20  6.187494  81.68.250.191 192.168.1.3 TCP 1454  1935 → 52049 [ACK] Seq=1 Ack=1538 Win=32128 Len=1388 TSval=2658240524 TSecr=1695460737
-21  6.187498  81.68.250.191 192.168.1.3 TCP 1454  1935 → 52049 [ACK] Seq=1389 Ack=1538 Win=32128 Len=1388 TSval=2658240524 TSecr=1695460737
-22  6.187499  81.68.250.191 192.168.1.3 RTMP  363 Handshake S0+S1+S2
-23  6.187559  192.168.1.3 81.68.250.191 TCP 66  52049 → 1935 [ACK] Seq=1538 Ack=3074 Win=128768 Len=0 TSval=1695460746 TSecr=2658240524
-24  6.187636  192.168.1.3 81.68.250.191 TCP 1454  52049 → 1935 [ACK] Seq=1538 Ack=3074 Win=131072 Len=1388 TSval=1695460746 TSecr=2658240524
-25  6.187636  192.168.1.3 81.68.250.191 RTMP  214 Handshake C2
-26  6.195197  81.68.250.191 192.168.1.3 TCP 66  1935 → 52049 [ACK] Seq=3074 Ack=3074 Win=35200 Len=0 TSval=2658240532 TSecr=1695460746
-```
-
-**代码片段4**
-```c
-
-// /*握手成功之后，发送Connect Packet*/
-if (!SendConnectPacket(r, cp))
-    {
-      RTMP_Log(RTMP_LOGERROR, "%s, RTMP connect failed.", __FUNCTION__);
-      RTMP_Close(r);
-      return FALSE;
     }
 ```
+
+上面代码简单说：发送C2，解析S2，客户端成功解析S2，服务端成功接收C2，第一次连接握手成功。
+
+至此，HandShake的代码分析完毕。
 
 <div style="margin: 0px;">
     备案号：
