@@ -174,12 +174,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="pages/librtmp/librttmp源码之相关结构体.html">
+        <li class="chapter " data-level="1.2.2" data-path="pages/librtmp/librtmp源码之相关结构体.html">
             
-                <a href="pages/librtmp/librttmp源码之相关结构体.html">
+                <a href="pages/librtmp/librtmp源码之相关结构体.html">
             
                     
-                    librttmp源码之相关结构体
+                    librtmp源码之相关结构体
             
                 </a>
             
@@ -187,12 +187,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="pages/librtmp/librttmp源码之RTMP_Connect.html">
+        <li class="chapter " data-level="1.2.3" data-path="pages/librtmp/librtmp源码之RTMP_Connect.html">
             
-                <a href="pages/librtmp/librttmp源码之RTMP_Connect.html">
+                <a href="pages/librtmp/librtmp源码之RTMP_Connect.html">
             
                     
-                    librttmp源码之RTMP_Connect
+                    librtmp源码之RTMP_Connect
             
                 </a>
             
@@ -200,12 +200,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="pages/librtmp/librttmp源码之HandShake.html">
+        <li class="chapter " data-level="1.2.4" data-path="pages/librtmp/librtmp源码之HandShake.html">
             
-                <a href="pages/librtmp/librttmp源码之HandShake.html">
+                <a href="pages/librtmp/librtmp源码之HandShake.html">
             
                     
-                    librttmp源码之RTMP_Connect
+                    librtmp源码之HandShake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="pages/librtmp/librtmp源码之SendConnectPacket.html">
+            
+                <a href="pages/librtmp/librtmp源码之SendConnectPacket.html">
+            
+                    
+                    librtmp源码之SendConnectPacket
             
                 </a>
             
@@ -3564,609 +3577,255 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="librttmp&#x6E90;&#x7801;&#x4E4B;handshake">librttmp&#x6E90;&#x7801;&#x4E4B;HandShake</h1>
-<h2 id="handshake">HandShake</h2>
+                                <h1 id="librtmp&#x6E90;&#x7801;&#x4E4B;sendconnectpacket">librtmp&#x6E90;&#x7801;&#x4E4B;SendConnectPacket</h1>
+<h2 id="sendconnectpacket">SendConnectPacket</h2>
 <pre class="language-"><code class="lang-c"><span class="token keyword">static</span> <span class="token keyword">int</span>
-<span class="token function">HandShake</span><span class="token punctuation">(</span>RTMP <span class="token operator">*</span> r<span class="token punctuation">,</span> <span class="token keyword">int</span> FP9HandShake<span class="token punctuation">)</span>
+<span class="token function">SendConnectPacket</span><span class="token punctuation">(</span>RTMP <span class="token operator">*</span>r<span class="token punctuation">,</span> RTMPPacket <span class="token operator">*</span>cp<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s start&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">int</span> i<span class="token punctuation">,</span> offalg <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">int</span> dhposClient <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">int</span> digestPosClient <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">int</span> encrypted <span class="token operator">=</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_ENC<span class="token punctuation">;</span>
+  RTMPPacket packet<span class="token punctuation">;</span>
+  <span class="token keyword">char</span> pbuf<span class="token punctuation">[</span><span class="token number">4096</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">*</span>pend <span class="token operator">=</span> pbuf <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>pbuf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>enc<span class="token punctuation">;</span>
 
-  RC4_handle keyIn <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  RC4_handle keyOut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>cp<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token function">RTMP_SendPacket</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> cp<span class="token punctuation">,</span> TRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  int32_t <span class="token operator">*</span>ip<span class="token punctuation">;</span>
-  uint32_t uptime<span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_nChannel <span class="token operator">=</span> <span class="token number">0x03</span><span class="token punctuation">;</span> <span class="token comment">/* control channel (invoke) */</span>
+  packet<span class="token punctuation">.</span>m_headerType <span class="token operator">=</span> RTMP_PACKET_SIZE_LARGE<span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_packetType <span class="token operator">=</span> RTMP_PACKET_TYPE_INVOKE<span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_nTimeStamp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_nInfoField2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_hasAbsTimestamp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_body <span class="token operator">=</span> pbuf <span class="token operator">+</span> RTMP_MAX_HEADER_SIZE<span class="token punctuation">;</span>
 
-  uint8_t clientbuf<span class="token punctuation">[</span>RTMP_SIG_SIZE <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">*</span>clientsig<span class="token operator">=</span>clientbuf<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">;</span>
-  uint8_t serversig<span class="token punctuation">[</span>RTMP_SIG_SIZE<span class="token punctuation">]</span><span class="token punctuation">,</span> client2<span class="token punctuation">[</span>RTMP_SIG_SIZE<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">*</span>reply<span class="token punctuation">;</span>
-  uint8_t type<span class="token punctuation">;</span>
-  getoff <span class="token operator">*</span>getdh <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">*</span>getdig <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  enc <span class="token operator">=</span> packet<span class="token punctuation">.</span>m_body<span class="token punctuation">;</span>
+  enc <span class="token operator">=</span> <span class="token function">AMF_EncodeString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_connect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">++</span>r<span class="token operator">-&gt;</span>m_numInvokes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> AMF_OBJECT<span class="token punctuation">;</span>
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted <span class="token operator">||</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFSize<span class="token punctuation">)</span>
-    FP9HandShake <span class="token operator">=</span> TRUE<span class="token punctuation">;</span>
-  <span class="token keyword">else</span>
-    FP9HandShake <span class="token operator">=</span> FALSE<span class="token punctuation">;</span>
-
-  r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyIn <span class="token operator">=</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyOut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-      clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0x06</span><span class="token punctuation">;</span> <span class="token comment">/* 0x08 is RTMPE as well */</span>
-      offalg <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token keyword">else</span>
-    clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0x03</span><span class="token punctuation">;</span>
-
-  uptime <span class="token operator">=</span> <span class="token function">htonl</span><span class="token punctuation">(</span><span class="token function">RTMP_GetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">memcpy</span><span class="token punctuation">(</span>clientsig<span class="token punctuation">,</span> <span class="token operator">&amp;</span>uptime<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-      <span class="token comment">/* set version to at least 9.0.115.0 */</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">128</span><span class="token punctuation">;</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-      <span class="token keyword">else</span>
-        <span class="token punctuation">{</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">45</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-      clientsig<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-      clientsig<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Client type: %02X&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      getdig <span class="token operator">=</span> digoff<span class="token punctuation">[</span>offalg<span class="token punctuation">]</span><span class="token punctuation">;</span>
-      getdh  <span class="token operator">=</span> dhoff<span class="token punctuation">[</span>offalg<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token keyword">else</span>
-    <span class="token punctuation">{</span>
-      <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>clientsig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-  <span class="token comment">/* generate random data */</span>
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">memset</span><span class="token punctuation">(</span>clientsig<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">else</span></span>
-  ip <span class="token operator">=</span> <span class="token punctuation">(</span>int32_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>clientsig<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> RTMP_SIG_SIZE<span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token operator">*</span>ip<span class="token operator">++</span> <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-
-  <span class="token comment">/* set handshake digest */</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    <span class="token comment">/* generate Diffie-Hellmann parameters */</span>
-    r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>dh <span class="token operator">=</span> <span class="token function">DHInit</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>dh<span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGERROR<span class="token punctuation">,</span> <span class="token string">&quot;%s: Couldn&apos;t initialize Diffie-Hellmann!&quot;</span><span class="token punctuation">,</span>
-      __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-
-    dhposClient <span class="token operator">=</span> <span class="token function">getdh</span><span class="token punctuation">(</span>clientsig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: DH pubkey position: %d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> dhposClient<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">DHGenerateKey</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>dh<span class="token punctuation">)</span><span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGERROR<span class="token punctuation">,</span> <span class="token string">&quot;%s: Couldn&apos;t generate Diffie-Hellmann public key!&quot;</span><span class="token punctuation">,</span>
-      __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">DHGetPublicKey</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>dh<span class="token punctuation">,</span> <span class="token operator">&amp;</span>clientsig<span class="token punctuation">[</span>dhposClient<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGERROR<span class="token punctuation">,</span> <span class="token string">&quot;%s: Couldn&apos;t write public key!&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-
-      digestPosClient <span class="token operator">=</span> <span class="token function">getdig</span><span class="token punctuation">(</span>clientsig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* reuse this value in verification */</span>
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Client digest offset: %d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span>
-    digestPosClient<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-      <span class="token function">CalculateDigest</span><span class="token punctuation">(</span>digestPosClient<span class="token punctuation">,</span> clientsig<span class="token punctuation">,</span> GenuineFPKey<span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span>
-          <span class="token operator">&amp;</span>clientsig<span class="token punctuation">[</span>digestPosClient<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Initial client digest: &quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> clientsig <span class="token operator">+</span> digestPosClient<span class="token punctuation">,</span>
-       SHA256_DIGEST_LENGTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;Clientsig: &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> clientsig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">WriteN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>clientsig<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> RTMP_SIG_SIZE <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_app<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>app<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
     <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ReadN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>type<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">/* 0x03 or 0x06 */</span>
-    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Type Answer   : %02X&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">!=</span> clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;%s: Type mismatch: client sent %d, server answered %d&quot;</span><span class="token punctuation">,</span>
-  __FUNCTION__<span class="token punctuation">,</span> clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ReadN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span> <span class="token operator">!=</span> RTMP_SIG_SIZE<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-
-  <span class="token comment">/* decode server response */</span>
-  <span class="token function">memcpy</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>uptime<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  uptime <span class="token operator">=</span> <span class="token function">ntohl</span><span class="token punctuation">(</span>uptime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Server Uptime : %d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> uptime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: FMS Version   : %d.%d.%d.%d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> serversig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-      serversig<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> serversig<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span> serversig<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake <span class="token operator">&amp;&amp;</span> type <span class="token operator">==</span> <span class="token number">3</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>serversig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    FP9HandShake <span class="token operator">=</span> FALSE<span class="token punctuation">;</span>
-
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;Server signature:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake<span class="token punctuation">)</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_WRITE<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-      uint8_t digestResp<span class="token punctuation">[</span>SHA256_DIGEST_LENGTH<span class="token punctuation">]</span><span class="token punctuation">;</span>
-      uint8_t <span class="token operator">*</span>signatureResp <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-
-      <span class="token comment">/* we have to use this signature now to find the correct algorithms for getting the digest and DH positions */</span>
-      <span class="token keyword">int</span> digestPosServer <span class="token operator">=</span> <span class="token function">getdig</span><span class="token punctuation">(</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">VerifyDigest</span><span class="token punctuation">(</span>digestPosServer<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> GenuineFMSKey<span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;Trying different position for server digest!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    offalg <span class="token operator">^=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    getdig <span class="token operator">=</span> digoff<span class="token punctuation">[</span>offalg<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    getdh  <span class="token operator">=</span> dhoff<span class="token punctuation">[</span>offalg<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    digestPosServer <span class="token operator">=</span> <span class="token function">getdig</span><span class="token punctuation">(</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">VerifyDigest</span><span class="token punctuation">(</span>digestPosServer<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> GenuineFMSKey<span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGERROR<span class="token punctuation">,</span> <span class="token string">&quot;Couldn&apos;t verify the server digest&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* continuing anyway will probably fail */</span>
-        <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-
-      <span class="token comment">/* generate SWFVerification token (SHA256 HMAC hash of decompressed SWF, key are the last 32 bytes of the server handshake) */</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFSize<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> <span class="token keyword">char</span> swfVerify<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0x01</span><span class="token punctuation">,</span> <span class="token number">0x01</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">char</span> <span class="token operator">*</span>vend <span class="token operator">=</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFVerificationResponse<span class="token operator">+</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFVerificationResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token function">memcpy</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFVerificationResponse<span class="token punctuation">,</span> swfVerify<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">AMF_EncodeInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFVerificationResponse<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> vend<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">AMF_EncodeInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFVerificationResponse<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span> vend<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">HMACsha256</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFHash<span class="token punctuation">,</span> SHA256_DIGEST_LENGTH<span class="token punctuation">,</span>
-         <span class="token operator">&amp;</span>serversig<span class="token punctuation">[</span>RTMP_SIG_SIZE <span class="token operator">-</span> SHA256_DIGEST_LENGTH<span class="token punctuation">]</span><span class="token punctuation">,</span>
-         SHA256_DIGEST_LENGTH<span class="token punctuation">,</span>
-         <span class="token punctuation">(</span>uint8_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFVerificationResponse<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-      <span class="token comment">/* do Diffie-Hellmann Key exchange for encrypted RTMP */</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    <span class="token comment">/* compute secret key */</span>
-    uint8_t secretKey<span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> len<span class="token punctuation">,</span> dhposServer<span class="token punctuation">;</span>
-
-    dhposServer <span class="token operator">=</span> <span class="token function">getdh</span><span class="token punctuation">(</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Server DH public key offset: %d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span>
-      dhposServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    len <span class="token operator">=</span> <span class="token function">DHComputeSharedSecretKey</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>dh<span class="token punctuation">,</span> <span class="token operator">&amp;</span>serversig<span class="token punctuation">[</span>dhposServer<span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token number">128</span><span class="token punctuation">,</span> secretKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Wrong secret key position!&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Secret key: &quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> secretKey<span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token function">InitRC4Encryption</span><span class="token punctuation">(</span>secretKey<span class="token punctuation">,</span>
-          <span class="token punctuation">(</span>uint8_t <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> serversig<span class="token punctuation">[</span>dhposServer<span class="token punctuation">]</span><span class="token punctuation">,</span>
-          <span class="token punctuation">(</span>uint8_t <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> clientsig<span class="token punctuation">[</span>dhposClient<span class="token punctuation">]</span><span class="token punctuation">,</span>
-          <span class="token operator">&amp;</span>keyIn<span class="token punctuation">,</span> <span class="token operator">&amp;</span>keyOut<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-
-      reply <span class="token operator">=</span> client2<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-      <span class="token function">memset</span><span class="token punctuation">(</span>reply<span class="token punctuation">,</span> <span class="token number">0xff</span><span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">else</span></span>
-      ip <span class="token operator">=</span> <span class="token punctuation">(</span>int32_t <span class="token operator">*</span><span class="token punctuation">)</span>reply<span class="token punctuation">;</span>
-      <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> RTMP_SIG_SIZE<span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-        <span class="token operator">*</span>ip<span class="token operator">++</span> <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-      <span class="token comment">/* calculate response now */</span>
-      signatureResp <span class="token operator">=</span> reply<span class="token operator">+</span>RTMP_SIG_SIZE<span class="token operator">-</span>SHA256_DIGEST_LENGTH<span class="token punctuation">;</span>
-
-      <span class="token function">HMACsha256</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>serversig<span class="token punctuation">[</span>digestPosServer<span class="token punctuation">]</span><span class="token punctuation">,</span> SHA256_DIGEST_LENGTH<span class="token punctuation">,</span>
-     GenuineFPKey<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>GenuineFPKey<span class="token punctuation">)</span><span class="token punctuation">,</span> digestResp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">HMACsha256</span><span class="token punctuation">(</span>reply<span class="token punctuation">,</span> RTMP_SIG_SIZE <span class="token operator">-</span> SHA256_DIGEST_LENGTH<span class="token punctuation">,</span> digestResp<span class="token punctuation">,</span>
-     SHA256_DIGEST_LENGTH<span class="token punctuation">,</span> signatureResp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-      <span class="token comment">/* some info output */</span>
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span>
-    <span class="token string">&quot;%s: Calculated digest key from secure key and server digest: &quot;</span><span class="token punctuation">,</span>
-    __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> digestResp<span class="token punctuation">,</span> SHA256_DIGEST_LENGTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> FP10</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">==</span> <span class="token number">8</span> <span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-    uint8_t <span class="token operator">*</span>dptr <span class="token operator">=</span> digestResp<span class="token punctuation">;</span>
-    uint8_t <span class="token operator">*</span>sig <span class="token operator">=</span> signatureResp<span class="token punctuation">;</span>
-    <span class="token comment">/* encrypt signatureResp */</span>
-          <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>SHA256_DIGEST_LENGTH<span class="token punctuation">;</span> i<span class="token operator">+=</span><span class="token number">8</span><span class="token punctuation">)</span>
-      <span class="token function">rtmpe8_sig</span><span class="token punctuation">(</span>sig<span class="token operator">+</span>i<span class="token punctuation">,</span> sig<span class="token operator">+</span>i<span class="token punctuation">,</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-      <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-    uint8_t <span class="token operator">*</span>dptr <span class="token operator">=</span> digestResp<span class="token punctuation">;</span>
-    uint8_t <span class="token operator">*</span>sig <span class="token operator">=</span> signatureResp<span class="token punctuation">;</span>
-    <span class="token comment">/* encrypt signatureResp */</span>
-          <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>SHA256_DIGEST_LENGTH<span class="token punctuation">;</span> i<span class="token operator">+=</span><span class="token number">8</span><span class="token punctuation">)</span>
-            <span class="token function">rtmpe9_sig</span><span class="token punctuation">(</span>sig<span class="token operator">+</span>i<span class="token punctuation">,</span> sig<span class="token operator">+</span>i<span class="token punctuation">,</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Client signature calculated:&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> signatureResp<span class="token punctuation">,</span> SHA256_DIGEST_LENGTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_type<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_nonprivate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-  <span class="token keyword">else</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>flashVer<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-      reply <span class="token operator">=</span> serversig<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
-      uptime <span class="token operator">=</span> <span class="token function">htonl</span><span class="token punctuation">(</span><span class="token function">RTMP_GetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">memcpy</span><span class="token punctuation">(</span>reply<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>uptime<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_flashVer<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>flashVer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Sending handshake response: &quot;</span><span class="token punctuation">,</span>
-    __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">WriteN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>reply<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-
-  <span class="token comment">/* 2nd part of handshake */</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ReadN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span> <span class="token operator">!=</span> RTMP_SIG_SIZE<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: 2nd handshake: &quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake<span class="token punctuation">)</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>swfUrl<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-      uint8_t signature<span class="token punctuation">[</span>SHA256_DIGEST_LENGTH<span class="token punctuation">]</span><span class="token punctuation">;</span>
-      uint8_t digest<span class="token punctuation">[</span>SHA256_DIGEST_LENGTH<span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>serversig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> serversig<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> serversig<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span>
-    <span class="token operator">&amp;&amp;</span> serversig<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_swfUrl<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>swfUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>tcUrl<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_tcUrl<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>tcUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_WRITE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedBoolean</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_fpad<span class="token punctuation">,</span> FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_capabilities<span class="token punctuation">,</span> <span class="token number">15.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_audioCodecs<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>m_fAudioCodecs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_videoCodecs<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>m_fVideoCodecs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_videoFunction<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>pageUrl<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
   <span class="token punctuation">{</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span>
-        <span class="token string">&quot;%s: Wait, did the server just refuse signed authentication?&quot;</span><span class="token punctuation">,</span>
-        __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Server sent signature:&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token operator">&amp;</span>serversig<span class="token punctuation">[</span>RTMP_SIG_SIZE <span class="token operator">-</span> SHA256_DIGEST_LENGTH<span class="token punctuation">]</span><span class="token punctuation">,</span>
-       SHA256_DIGEST_LENGTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-      <span class="token comment">/* verify server response */</span>
-      <span class="token function">HMACsha256</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>clientsig<span class="token punctuation">[</span>digestPosClient<span class="token punctuation">]</span><span class="token punctuation">,</span> SHA256_DIGEST_LENGTH<span class="token punctuation">,</span>
-     GenuineFMSKey<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>GenuineFMSKey<span class="token punctuation">)</span><span class="token punctuation">,</span> digest<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">HMACsha256</span><span class="token punctuation">(</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE <span class="token operator">-</span> SHA256_DIGEST_LENGTH<span class="token punctuation">,</span> digest<span class="token punctuation">,</span>
-     SHA256_DIGEST_LENGTH<span class="token punctuation">,</span> signature<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-      <span class="token comment">/* show some information */</span>
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Digest key: &quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> digest<span class="token punctuation">,</span> SHA256_DIGEST_LENGTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> FP10</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">==</span> <span class="token number">8</span> <span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-    uint8_t <span class="token operator">*</span>dptr <span class="token operator">=</span> digest<span class="token punctuation">;</span>
-    uint8_t <span class="token operator">*</span>sig <span class="token operator">=</span> signature<span class="token punctuation">;</span>
-    <span class="token comment">/* encrypt signature */</span>
-          <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>SHA256_DIGEST_LENGTH<span class="token punctuation">;</span> i<span class="token operator">+=</span><span class="token number">8</span><span class="token punctuation">)</span>
-      <span class="token function">rtmpe8_sig</span><span class="token punctuation">(</span>sig<span class="token operator">+</span>i<span class="token punctuation">,</span> sig<span class="token operator">+</span>i<span class="token punctuation">,</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-      <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-    uint8_t <span class="token operator">*</span>dptr <span class="token operator">=</span> digest<span class="token punctuation">;</span>
-    uint8_t <span class="token operator">*</span>sig <span class="token operator">=</span> signature<span class="token punctuation">;</span>
-    <span class="token comment">/* encrypt signatureResp */</span>
-          <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>SHA256_DIGEST_LENGTH<span class="token punctuation">;</span> i<span class="token operator">+=</span><span class="token number">8</span><span class="token punctuation">)</span>
-            <span class="token function">rtmpe9_sig</span><span class="token punctuation">(</span>sig<span class="token operator">+</span>i<span class="token punctuation">,</span> sig<span class="token operator">+</span>i<span class="token punctuation">,</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Signature calculated:&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> signature<span class="token punctuation">,</span> SHA256_DIGEST_LENGTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">memcmp</span>
-    <span class="token punctuation">(</span>signature<span class="token punctuation">,</span> <span class="token operator">&amp;</span>serversig<span class="token punctuation">[</span>RTMP_SIG_SIZE <span class="token operator">-</span> SHA256_DIGEST_LENGTH<span class="token punctuation">]</span><span class="token punctuation">,</span>
-     SHA256_DIGEST_LENGTH<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;%s: Server not genuine Adobe!&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-      <span class="token keyword">else</span>
-  <span class="token punctuation">{</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Genuine Adobe Flash Media Server&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    <span class="token keyword">char</span> buff<span class="token punctuation">[</span>RTMP_SIG_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token comment">/* set keys for encryption from now on */</span>
-    r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyIn <span class="token operator">=</span> keyIn<span class="token punctuation">;</span>
-    r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyOut <span class="token operator">=</span> keyOut<span class="token punctuation">;</span>
-
-
-    <span class="token comment">/* update the keystreams */</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyIn<span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-        <span class="token function">RC4_encrypt</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyIn<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">,</span> <span class="token punctuation">(</span>uint8_t <span class="token operator">*</span><span class="token punctuation">)</span> buff<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyOut<span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-        <span class="token function">RC4_encrypt</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyOut<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">,</span> <span class="token punctuation">(</span>uint8_t <span class="token operator">*</span><span class="token punctuation">)</span> buff<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
+    enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_pageUrl<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>pageUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-  <span class="token keyword">else</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>m_fEncoding <span class="token operator">!=</span> <span class="token number">0.0</span> <span class="token operator">||</span> r<span class="token operator">-&gt;</span>m_bSendEncoding<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token comment">/* AMF0, AMF3 not fully supported yet */</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_objectEncoding<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>m_fEncoding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>enc <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">&gt;=</span> pend<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>     <span class="token comment">/* end of object - 0x00 0x00 0x09 */</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> AMF_OBJECT_END<span class="token punctuation">;</span>
+
+  <span class="token comment">/* add auth string */</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">memcmp</span><span class="token punctuation">(</span>serversig<span class="token punctuation">,</span> clientsig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeBoolean</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>lFlags <span class="token operator">&amp;</span> RTMP_LF_AUTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>auth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>extras<span class="token punctuation">.</span>o_num<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>extras<span class="token punctuation">.</span>o_num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
   <span class="token punctuation">{</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;%s: client signature does not match!&quot;</span><span class="token punctuation">,</span>
-        __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    enc <span class="token operator">=</span> <span class="token function">AMFProp_Encode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>extras<span class="token punctuation">.</span>o_props<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> enc<span class="token punctuation">,</span> pend<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
+  packet<span class="token punctuation">.</span>m_nBodySize <span class="token operator">=</span> enc <span class="token operator">-</span> packet<span class="token punctuation">.</span>m_body<span class="token punctuation">;</span>
 
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Handshaking finished....&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">RTMP_SendPacket</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token operator">&amp;</span>packet<span class="token punctuation">,</span> TRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;1</strong></p>
-<pre class="language-"><code class="lang-c"><span class="token keyword">int</span> i<span class="token punctuation">,</span> offalg <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// offalg&#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
-<span class="token keyword">int</span> dhposClient <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
-<span class="token keyword">int</span> digestPosClient <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
-<span class="token keyword">int</span> encrypted <span class="token operator">=</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_ENC<span class="token punctuation">;</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s encrypted:%d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> encrypted<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">// DEBUG: CCQ: HandShake encrypted:0</span>
-  <span class="token comment">// &#x4E0D;&#x52A0;&#x5BC6;</span>
-RC4_handle keyIn <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
-RC4_handle keyOut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
+<h2 id="&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;1">&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;1</h2>
+<pre class="language-"><code class="lang-c">RTMPPacket packet<span class="token punctuation">;</span>
+    <span class="token comment">// pend&#xFF1A;AMF_EncodeNamedString&#x51FD;&#x6570;&#x53C2;&#x6570;</span>
+    <span class="token comment">// pbuf: packet.m_body = pbuf + RTMP_MAX_HEADER_SIZE;</span>
+  <span class="token keyword">char</span> pbuf<span class="token punctuation">[</span><span class="token number">4096</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">*</span>pend <span class="token operator">=</span> pbuf <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>pbuf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>enc<span class="token punctuation">;</span>
 
-int32_t <span class="token operator">*</span>ip<span class="token punctuation">;</span><span class="token comment">/* generate random data */</span>
-uint32_t uptime<span class="token punctuation">;</span><span class="token comment">// &#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF0C;&#x586B;&#x5145;C1&#x524D;4&#x5B57;&#x8282;</span>
+    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s cp2:%s&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> cp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// DEBUG: CCQ: SendConnectPacket cp2:(null)</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>cp<span class="token punctuation">)</span>
+    <span class="token comment">// &#x4E0D;&#x4F1A;&#x8D70;</span>
+    <span class="token keyword">return</span> <span class="token function">RTMP_SendPacket</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> cp<span class="token punctuation">,</span> TRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;2</strong></p>
-<pre class="language-"><code class="lang-c">RC4_handle keyIn <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
-RC4_handle keyOut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
+<h2 id="&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;2">&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;2</h2>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x586B;&#x5199;&#x5757;&#x5934;&#x5B57;&#x6BB5;</span>
+    <span class="token comment">//&#x5757;&#x6D41;ID</span>
+  packet<span class="token punctuation">.</span>m_nChannel <span class="token operator">=</span> <span class="token number">0x03</span><span class="token punctuation">;</span> <span class="token comment">/* control channel (invoke) */</span>
+  packet<span class="token punctuation">.</span>m_headerType <span class="token operator">=</span> RTMP_PACKET_SIZE_LARGE<span class="token punctuation">;</span>
+    <span class="token comment">//&#x6D88;&#x606F;&#x7C7B;&#x578B;&#x4E3A;20&#x7684;&#x7528;AMF0&#x7F16;&#x7801;&#xFF0C;&#x8FD9;&#x4E9B;&#x6D88;&#x606F;&#x7528;&#x4E8E;&#x5728;&#x8FDC;&#x7AEF;&#x5B9E;&#x73B0;&#x8FDE;&#x63A5;&#xFF0C;&#x521B;&#x5EFA;&#x6D41;&#xFF0C;&#x53D1;&#x5E03;&#xFF0C;&#x64AD;&#x653E;&#x548C;&#x6682;&#x505C;&#x7B49;&#x64CD;&#x4F5C;</span>
+<span class="token comment">//#define RTMP_PACKET_TYPE_INVOKE             0x14</span>
+  packet<span class="token punctuation">.</span>m_packetType <span class="token operator">=</span> RTMP_PACKET_TYPE_INVOKE<span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_nTimeStamp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">//&#x6D41;ID&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x4E3A;0</span>
+  packet<span class="token punctuation">.</span>m_nInfoField2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_hasAbsTimestamp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  packet<span class="token punctuation">.</span>m_body <span class="token operator">=</span> pbuf <span class="token operator">+</span> RTMP_MAX_HEADER_SIZE<span class="token punctuation">;</span>
 
-int32_t <span class="token operator">*</span>ip<span class="token punctuation">;</span><span class="token comment">/* generate random data */</span>
-uint32_t uptime<span class="token punctuation">;</span><span class="token comment">// &#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF0C;&#x586B;&#x5145;C1&#x524D;4&#x5B57;&#x8282;</span>
-<span class="token comment">// #define RTMP_SIG_SIZE 1536:C1&#x548C;S1&#x6D88;&#x606F;&#x6709;1536&#x5B57;&#x8282;&#x957F;</span>
-uint8_t clientbuf<span class="token punctuation">[</span>RTMP_SIG_SIZE <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">*</span>clientsig<span class="token operator">=</span>clientbuf<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">;</span>
-uint8_t serversig<span class="token punctuation">[</span>RTMP_SIG_SIZE<span class="token punctuation">]</span><span class="token punctuation">,</span> client2<span class="token punctuation">[</span>RTMP_SIG_SIZE<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">*</span>reply<span class="token punctuation">;</span><span class="token comment">// reply,client2&#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
-uint8_t type<span class="token punctuation">;</span><span class="token comment">// ReadN(r, (char *)&amp;type, 1)&#x4E4B;&#x540E;&#x83B7;&#x5F97;</span>
-getoff <span class="token operator">*</span>getdh <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">*</span>getdig <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
+  enc <span class="token operator">=</span> packet<span class="token punctuation">.</span>m_body<span class="token punctuation">;</span>
+    <span class="token comment">// &#x538B;&#x5165;connect&#x547D;&#x4EE4;&#x548C;&#x64CD;&#x4F5C;&#x6D41;&#x6C34;&#x53F7;</span>
+    <span class="token comment">//connect&#x4F7F;&#x7528;##&#x8FDB;&#x884C;&#x5B57;&#x7B26;&#x4E32;&#x5316;&#x8FDE;&#x63A5;&#xFF0C;&#x6B64;&#x5904;&#x7F16;&#x7801;connect&#x5B57;&#x7B26;&#x4E32;</span>
+  enc <span class="token operator">=</span> <span class="token function">AMF_EncodeString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_connect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">++</span>r<span class="token operator">-&gt;</span>m_numInvokes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> AMF_OBJECT<span class="token punctuation">;</span>
+    <span class="token comment">// &#x538B;&#x5165;&#x5BF9;&#x8C61;&#x7684;&#x5404;&#x4E2A;&#x5C5E;&#x6027;</span>
+  enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_app<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>app<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;3</strong></p>
-<pre class="language-"><code class="lang-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted <span class="token operator">||</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>SWFSize<span class="token punctuation">)</span>
-  FP9HandShake <span class="token operator">=</span> TRUE<span class="token punctuation">;</span>
-<span class="token keyword">else</span>
-  <span class="token comment">//&#x666E;&#x901A;&#x7684;</span>
-  FP9HandShake <span class="token operator">=</span> FALSE<span class="token punctuation">;</span>
-
-r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyIn <span class="token operator">=</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyOut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x4F7F;&#x7528;</span>
-
-<span class="token comment">/*C0 &#x5B57;&#x6BB5;&#x5DF2;&#x7ECF;&#x5199;&#x5165;clientsig*/</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0x06</span><span class="token punctuation">;</span> <span class="token comment">/* 0x08 is RTMPE as well */</span>
-    offalg <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token keyword">else</span>
-  <span class="token comment">//0x03&#x4EE3;&#x8868;RTMP&#x534F;&#x8BAE;&#x7684;&#x7248;&#x672C;&#xFF08;&#x5BA2;&#x6237;&#x7AEF;&#x8981;&#x6C42;&#x7684;&#xFF09;  </span>
-  <span class="token comment">//&#x6570;&#x7EC4;&#x7ADF;&#x7136;&#x80FD;&#x6709;&#x201C;-1&#x201D;&#x4E0B;&#x6807;,&#x56E0;&#x4E3A;clientsig&#x6307;&#x5411;&#x7684;&#x662F;clientbuf+4,&#x6240;&#x4EE5;&#x4E0D;&#x5B58;&#x5728;&#x975E;&#x6CD5;&#x5730;&#x5740;</span>
-  <span class="token comment">//C0&#x4E2D;&#x7684;&#x5B57;&#x6BB5;(1B) </span>
-  clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0x03</span><span class="token punctuation">;</span>
-
-uptime <span class="token operator">=</span> <span class="token function">htonl</span><span class="token punctuation">(</span><span class="token function">RTMP_GetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">//void *memcpy(void *dest, const void *src, int n);</span>
-<span class="token comment">//&#x7531;src&#x6307;&#x5411;&#x5730;&#x5740;&#x4E3A;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x8FDE;&#x7EED;n&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x6570;&#x636E;&#x590D;&#x5236;&#x5230;&#x4EE5;dest&#x6307;&#x5411;&#x5730;&#x5740;&#x4E3A;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x7A7A;&#x95F4;&#x5185;</span>
-<span class="token comment">//&#x628A;uptime&#x7684;&#x524D;4&#x5B57;&#x8282;&#xFF08;&#x5176;&#x5B9E;&#x4E00;&#x5171;&#x5C31;4&#x5B57;&#x8282;&#xFF09;&#x6570;&#x636E;&#x62F7;&#x8D1D;&#x5230;clientsig&#x6307;&#x5411;&#x7684;&#x5730;&#x5740;&#x4E2D;</span>
-<span class="token comment">//C1&#x4E2D;&#x7684;&#x5B57;&#x6BB5;(4B)</span>
-<span class="token comment">// &#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;</span>
-<span class="token comment">// &#x7248;&#x6743;&#x58F0;&#x660E;&#xFF1A;&#x672C;&#x6587;&#x4E3A;CSDN&#x535A;&#x4E3B;&#x300C;&#x96F7;&#x9704;&#x9A85;&#x300D;&#x7684;&#x539F;&#x521B;&#x6587;&#x7AE0;&#xFF0C;&#x9075;&#x5FAA;CC 4.0 BY-SA&#x7248;&#x6743;&#x534F;&#x8BAE;&#xFF0C;&#x8F6C;&#x8F7D;&#x8BF7;&#x9644;&#x4E0A;&#x539F;&#x6587;&#x51FA;&#x5904;&#x94FE;&#x63A5;&#x53CA;&#x672C;&#x58F0;&#x660E;&#x3002;</span>
-<span class="token comment">// &#x539F;&#x6587;&#x94FE;&#x63A5;&#xFF1A;https://blog.csdn.net/leixiaohua1020/article/details/12954329</span>
-<span class="token function">memcpy</span><span class="token punctuation">(</span>clientsig<span class="token punctuation">,</span> <span class="token operator">&amp;</span>uptime<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: uptime: &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_LogHexString</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> clientsig<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// DEBUG: Clientsig:</span>
-    <span class="token comment">// DEBUG:   0000:  0c b7 58 56                                        ..XV</span>
-</code></pre>
-<p><code>clientsig[-1] = 0x03;</code>&#x5C06;RTMP&#x534F;&#x8BAE;&#x7684;&#x7248;&#x672C;&#x53F7;&#x5199;&#x5165;&#xFF0C;1&#x5B57;&#x8282;&#x3002;</p>
-<p><code>memcpy(clientsig, &amp;uptime, 4);</code>&#x5C06;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x5199;&#x5165;<code>clientsig</code>&#xFF0C;4&#x5B57;&#x8282;&#x3002;</p>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;4</strong></p>
-<pre class="language-"><code class="lang-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake<span class="token punctuation">)</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x5904;&#x7406;</span>
-    <span class="token punctuation">{</span>
-      <span class="token comment">/* set version to at least 9.0.115.0 */</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">128</span><span class="token punctuation">;</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-      <span class="token keyword">else</span>
-        <span class="token punctuation">{</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-    clientsig<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">45</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-      clientsig<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-      clientsig<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-
-      <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Client type: %02X&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      getdig <span class="token operator">=</span> digoff<span class="token punctuation">[</span>offalg<span class="token punctuation">]</span><span class="token punctuation">;</span>
-      getdh  <span class="token operator">=</span> dhoff<span class="token punctuation">[</span>offalg<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token keyword">else</span>
-    <span class="token punctuation">{</span>
-      <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>clientsig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<p><code>memset(&amp;clientsig[4], 0, 4);</code>&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x7684;&#x540E;&#x8865;0&#xFF0C;&#x5360;4&#x5B57;&#x8282;&#x3002;</p>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;5</strong></p>
-<pre class="language-"><code class="lang-c">
-  <span class="token comment">/* generate random data */</span>
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token comment">//&#x5C06;clientsig+8&#x5F00;&#x59CB;&#x7684;1528&#x4E2A;&#x5B57;&#x8282;&#x66FF;&#x6362;&#x4E3A;0&#xFF08;&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#xFF09;</span>
-  <span class="token comment">//&#x8FD9;&#x662F;C1&#x4E2D;&#x7684;random&#x5B57;&#x6BB5;</span>
-  <span class="token function">memset</span><span class="token punctuation">(</span>clientsig<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">else</span></span>
-  <span class="token comment">//&#x5B9E;&#x9645;&#x4E2D;&#x4F7F;&#x7528;rand()&#x5FAA;&#x73AF;&#x751F;&#x6210;1528&#x5B57;&#x8282;&#x7684;&#x4F2A;&#x968F;&#x673A;&#x6570;</span>
-  ip <span class="token operator">=</span> <span class="token punctuation">(</span>int32_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>clientsig<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> RTMP_SIG_SIZE<span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token operator">*</span>ip<span class="token operator">++</span> <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: ip: &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHexString</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token punctuation">(</span>int32_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>clientsig<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1528</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-</code></pre>
-<p>&#x6839;&#x636E;&#x4E0A;&#x9762;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x5F97;&#x77E5;<code>clientsig</code>&#x7684;-1&#x4F4D;&#x7F6E;&#x5B58;&#x653E;&#x8FD9;0x03&#xFF08;RTMP&#xFF09;&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x5360;1&#x5B57;&#x8282;&#xFF1B;0-4&#x4F4D;&#x7F6E;&#x5B58;&#x653E;&#x8FD9;&#x5F53;&#x524D;&#x65F6;&#x95F4;uptime&#xFF0C;&#x5360;4&#x5B57;&#x8282;&#xFF1B;&#x4E4B;&#x540E;5-8&#x4F4D;&#x7F6E;&#x8865;0&#xFF0C;&#x5360;4&#x5B57;&#x8282;&#xFF1B;&#x800C;<code>clientsig</code>&#x7684;&#x603B;&#x957F;&#x5EA6;&#x662F;1536&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x5DF2;&#x7ECF;&#x5360;&#x7528;&#x4E86;8&#x5B57;&#x8282;&#xFF0C;&#x6240;&#x4EE5;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x662F;&#x5728;&#x8865;&#x5168;&#x5269;&#x4E0B;&#x7684;1528&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x8865;&#x5168;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x4F7F;&#x7528;&#x968F;&#x673A;&#x6570;&#x3002;</p>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;5</strong></p>
-<pre class="language-"><code class="lang-c"><span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;Clientsig: &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> clientsig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: Clientsig: &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_LogHexString</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> clientsig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">//&#x53D1;&#x9001;&#x6570;&#x636E;&#x62A5;C0+C1</span>
-  <span class="token comment">//&#x4ECE;clientsig-1&#x5F00;&#x59CB;&#x53D1;&#xFF0C;&#x957F;&#x5EA6;1536+1&#xFF0C;&#x4E24;&#x4E2A;&#x5305;&#x5408;&#x5E76;</span>
-  <span class="token comment">//&#x63E1;&#x624B;----------------</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x53D1;&#x9001;&#x63E1;&#x624B;&#x6570;&#x636E;C0+C1&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">WriteN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>clientsig<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> RTMP_SIG_SIZE <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-  <span class="token comment">//&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x62A5;&#xFF0C;&#x957F;&#x5EA6;1&#xFF0C;&#x5B58;&#x5165;type</span>
-  <span class="token comment">//&#x662F;&#x670D;&#x52A1;&#x5668;&#x7684;S0&#xFF0C;&#x8868;&#x793A;&#x670D;&#x52A1;&#x5668;&#x4F7F;&#x7528;&#x7684;RTMP&#x7248;&#x672C;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ReadN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>type<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">/* 0x03 or 0x06 */</span>
-  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x63A5;&#x6536;&#x63E1;&#x624B;&#x6570;&#x636E;S0&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Type Answer   : %02X&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">//&#x5BA2;&#x6237;&#x7AEF;&#x8981;&#x6C42;&#x7684;&#x7248;&#x672C;&#x548C;&#x670D;&#x52A1;&#x5668;&#x63D0;&#x4F9B;&#x7684;&#x7248;&#x672C;&#x4E0D;&#x540C;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">!=</span> clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;%s: Type mismatch: client sent %d, server answered %d&quot;</span><span class="token punctuation">,</span>
-__FUNCTION__<span class="token punctuation">,</span> clientsig<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x63A5;&#x6536;&#x63E1;&#x624B;&#x6570;&#x636E;S1&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">//&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x968F;&#x673A;&#x5E8F;&#x5217;&#x957F;&#x5EA6;&#x662F;&#x5426;&#x76F8;&#x540C;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ReadN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span> <span class="token operator">!=</span> RTMP_SIG_SIZE<span class="token punctuation">)</span>
-  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x63A5;&#x6536;&#x63E1;&#x624B;&#x6570;&#x636E;S1&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">/* decode server response */</span>
-  <span class="token comment">//&#x628A;serversig&#x7684;&#x524D;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#x8D4B;&#x503C;&#x7ED9;uptime</span>
-<span class="token function">memcpy</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>uptime<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-uptime <span class="token operator">=</span> <span class="token function">ntohl</span><span class="token punctuation">(</span>uptime<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//&#x5927;&#x7AEF;&#x8F6C;&#x5C0F;&#x7AEF;</span>
-
-<span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Server Uptime : %d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> uptime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: FMS Version   : %d.%d.%d.%d&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span> serversig<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    serversig<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> serversig<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span> serversig<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<p>&#x5185;&#x5BB9;&#x6765;&#x6E90;&#x4E8E;&#xFF1A;<a href="https://blog.csdn.net/bwangk/article/details/112802823" target="_blank">https://blog.csdn.net/bwangk/article/details/112802823</a></p>
-<p>C0 &#x548C; S0&#x6D88;&#x606F;&#x683C;&#x5F0F;&#xFF1A;C0&#x548C;S0&#x662F;&#x5355;&#x72EC;&#x7684;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x8868;&#x793A;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x3002;</p>
-<p>&#x5728;C0&#x4E2D;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x8868;&#x793A;&#x5BA2;&#x6237;&#x7AEF;&#x8981;&#x6C42;&#x7684;RTMP&#x7248;&#x672C; &#x3002;&#x5728;S0&#x4E2D;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x8868;&#x793A;&#x670D;&#x52A1;&#x5668;&#x9009;&#x62E9;&#x7684;RTMP&#x7248;&#x672C;&#x3002;&#x672C;&#x89C4;&#x8303;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x7248;&#x672C;&#x662F;3&#xFF1B;0-2&#x662F;&#x65E9;&#x671F;&#x4EA7;&#x54C1;&#x6240;&#x7528;&#x7684;&#xFF0C;&#x5DF2;&#x88AB;&#x4E22;&#x5F03;&#xFF1B;4-31&#x4FDD;&#x7559;&#x5728;&#x672A;&#x6765;&#x4F7F;&#x7528; &#xFF1B;32-255&#x4E0D;&#x5141;&#x8BB8;&#x4F7F;&#x7528; &#xFF08;&#x4E3A;&#x4E86;&#x533A;&#x5206;&#x5176;&#x4ED6;&#x4EE5;&#x67D0;&#x4E00;&#x5B57;&#x7B26;&#x5F00;&#x59CB;&#x7684;&#x6587;&#x672C;&#x534F;&#x8BAE;&#xFF09;&#x3002;&#x5982;&#x679C;&#x670D;&#x52A1;&#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x5E94;&#x8BE5;&#x8FD4;&#x56DE;3 &#x3002;&#x5BA2;&#x6237;&#x7AEF;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x51CF;&#x5230;&#x7248;&#x672C;3&#x6216;&#x9009;&#x62E9;&#x53D6;&#x6D88;&#x63E1;&#x624B;</p>
-<p>C1 &#x548C; S1&#x6D88;&#x606F;&#x683C;&#x5F0F;&#xFF1A;C1&#x548C;S1&#x6D88;&#x606F;&#x6709;1536&#x5B57;&#x8282;&#x957F;&#x3002;</p>
-<p>&#x65F6;&#x95F4;&#xFF1A;4&#x5B57;&#x8282;&#xFF1A;&#x672C;&#x5B57;&#x6BB5;&#x5305;&#x542B;&#x65F6;&#x95F4;&#x6233;&#x3002;&#x8BE5;&#x65F6;&#x95F4;&#x6233;&#x5E94;&#x8BE5;&#x662F;&#x53D1;&#x9001;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x5757;&#x7684;&#x7AEF;&#x70B9;&#x7684;&#x540E;&#x7EED;&#x5757;&#x7684;&#x65F6;&#x95F4;&#x8D77;&#x59CB;&#x70B9;&#x3002;&#x53EF;&#x4EE5;&#x662F;0&#xFF0C;&#x6216;&#x5176;&#x4ED6;&#x7684;&#x4EFB;&#x4F55;&#x503C;&#x3002;&#x4E3A;&#x4E86;&#x540C;&#x6B65;&#x591A;&#x4E2A;&#x6D41;&#xFF0C;&#x7AEF;&#x70B9;&#x53EF;&#x80FD;&#x53D1;&#x9001;&#x5176;&#x5757;&#x6D41;&#x7684;&#x5F53;&#x524D;&#x503C;&#x3002;
-&#x96F6;&#xFF1A;4&#x5B57;&#x8282;&#xFF1A;&#x672C;&#x5B57;&#x6BB5;&#x5FC5;&#x987B;&#x662F;&#x5168;&#x96F6;&#x3002;
-&#x968F;&#x673A;&#x6570;&#x636E;&#xFF1A;1528&#x5B57;&#x8282;&#x3002;&#x672C;&#x5B57;&#x6BB5;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x503C;&#x3002;&#x56E0;&#x4E3A;&#x6BCF;&#x4E2A;&#x7AEF;&#x70B9;&#x5FC5;&#x987B;&#x7528;&#x81EA;&#x5DF1;&#x521D;&#x59CB;&#x5316;&#x7684;&#x63E1;&#x624B;&#x548C;&#x5BF9;&#x7AEF;&#x521D;&#x59CB;&#x5316;&#x7684;&#x63E1;&#x624B;&#x6765;&#x533A;&#x5206;&#x8EAB;&#x4EFD;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x5E94;&#x6709;&#x5145;&#x5206;&#x7684;&#x968F;&#x673A;&#x6027;&#x3002;&#x4F46;&#x662F;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x52A0;&#x5BC6;&#x5B89;&#x5168;&#x7684;&#x968F;&#x673A;&#x503C;&#xFF0C;&#x6216;&#x8005;&#x52A8;&#x6001;&#x503C;&#x3002;</p>
-<p>C2 &#x548C; S2 &#x6D88;&#x606F;&#x683C;&#x5F0F;&#xFF1A;C2&#x548C;S2&#x6D88;&#x606F;&#x6709;1536&#x5B57;&#x8282;&#x957F;&#xFF0C;&#x53EA;&#x662F;S1&#x548C;C1&#x7684;&#x56DE;&#x590D;&#x3002;</p>
-<p>&#x65F6;&#x95F4;&#xFF1A;4&#x5B57;&#x8282;&#xFF1A;&#x672C;&#x5B57;&#x6BB5;&#x5FC5;&#x987B;&#x5305;&#x542B;&#x5BF9;&#x7B49;&#x6BB5;&#x53D1;&#x9001;&#x7684;&#x65F6;&#x95F4;&#xFF08;&#x5BF9;C2&#x6765;&#x8BF4;&#x662F;S1&#xFF0C;&#x5BF9;S2&#x6765;&#x8BF4;&#x662F;C1&#xFF09;&#x3002;
-&#x65F6;&#x95F4;2&#xFF1A;4&#x5B57;&#x8282;&#xFF1A;&#x672C;&#x5B57;&#x6BB5;&#x5FC5;&#x987B;&#x5305;&#x542B;&#x5148;&#x524D;&#x53D1;&#x9001;&#x7684;&#x5E76;&#x88AB;&#x5BF9;&#x7AEF;&#x8BFB;&#x53D6;&#x7684;&#x5305;&#x7684;&#x65F6;&#x95F4;&#x6233;&#x3002;
-&#x968F;&#x673A;&#x56DE;&#x590D;&#xFF1A;1528&#x5B57;&#x8282;&#xFF1A;&#x672C;&#x5B57;&#x6BB5;&#x5FC5;&#x987B;&#x5305;&#x542B;&#x5BF9;&#x7AEF;&#x53D1;&#x9001;&#x7684;&#x968F;&#x673A;&#x6570;&#x636E;&#x5B57;&#x6BB5;&#xFF08;&#x5BF9;C2&#x6765;&#x8BF4;&#x662F;S1&#xFF0C;&#x5BF9;S2&#x6765;&#x8BF4;&#x662F;C1&#xFF09;&#x3002;&#x6BCF;&#x4E2A;&#x5BF9;&#x7B49;&#x7AEF;&#x53EF;&#x4EE5;&#x7528;&#x65F6;&#x95F4;&#x548C;&#x65F6;&#x95F4;2&#x5B57;&#x6BB5;&#x4E2D;&#x7684;&#x65F6;&#x95F4;&#x6233;&#x6765;&#x5FEB;&#x901F;&#x5730;&#x4F30;&#x8BA1;&#x5E26;&#x5BBD;&#x548C;&#x5EF6;&#x8FDF;&#x3002;&#x4F46;&#x8FD9;&#x6837;&#x505A;&#x53EF;&#x80FD;&#x5E76;&#x4E0D;&#x5B9E;&#x7528;&#x3002;</p>
-<p>&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x7684;&#x529F;&#x80FD;&#x7B80;&#x5355;&#x8BF4;&#xFF1A;&#x53D1;&#x9001;C0+C1&#xFF0C;&#x89E3;&#x6790;S0&#x3001;S1&#x3002;</p>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;6</strong></p>
-<pre class="language-"><code class="lang-c"><span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;Server signature:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: Server signature:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_LogHexString</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token keyword">else</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s reply = serversig&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//&#x76F4;&#x63A5;&#x8D4B;&#x503C;</span>
-      reply <span class="token operator">=</span> serversig<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
-      uptime <span class="token operator">=</span> <span class="token function">htonl</span><span class="token punctuation">(</span><span class="token function">RTMP_GetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">memcpy</span><span class="token punctuation">(</span>reply<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>uptime<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<p><strong>&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;7</strong></p>
-<pre class="language-"><code class="lang-c"><span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: Sending handshake response: &quot;</span><span class="token punctuation">,</span>
-    __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-    <span class="token comment">//&#x628A;reply&#x4E2D;&#x7684;1536&#x5B57;&#x8282;&#x6570;&#x636E;&#x53D1;&#x9001;&#x51FA;&#x53BB;</span>
-    <span class="token comment">//&#x5BF9;&#x5E94;C2</span>
-    <span class="token comment">//&#x63E1;&#x624B;----------------</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x53D1;&#x9001;&#x63E1;&#x624B;&#x6570;&#x636E;C2&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">WriteN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>reply<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<h2 id="&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;3">&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;3</h2>
+<pre class="language-"><code class="lang-c"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
     <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-
-  <span class="token comment">/* 2nd part of handshake */</span>
-    <span class="token comment">//&#x8BFB;&#x53D6;1536&#x5B57;&#x8282;&#x6570;&#x636E;&#x5230;serversig</span>
-    <span class="token comment">//&#x63E1;&#x624B;----------------</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x8BFB;&#x53D6;&#x63E1;&#x624B;&#x6570;&#x636E;S2&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ReadN</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span> <span class="token operator">!=</span> RTMP_SIG_SIZE<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
-
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-  <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s: 2nd handshake: &quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s: 2nd handshake: &quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_LogHexString</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> serversig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>FP9HandShake<span class="token punctuation">)</span><span class="token comment">// &#x52A0;&#x5BC6;&#x624D;&#x6267;&#x884C;</span>
-    <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token keyword">else</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_WRITE<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-        <span class="token comment">//int memcmp(const void *buf1, const void *buf2, unsigned int count); &#x5F53;buf1=buf2&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;=0</span>
-        <span class="token comment">//&#x6BD4;&#x8F83;serversig&#x548C;clientsig&#x662F;&#x5426;&#x76F8;&#x7B49;</span>
-        <span class="token comment">//&#x63E1;&#x624B;----------------</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x6BD4;&#x8F83;&#x63E1;&#x624B;&#x6570;&#x636E;&#x7B7E;&#x540D;&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">memcmp</span><span class="token punctuation">(</span>serversig<span class="token punctuation">,</span> clientsig<span class="token punctuation">,</span> RTMP_SIG_SIZE<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_type<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_nonprivate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>flashVer<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_flashVer<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>flashVer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>swfUrl<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_swfUrl<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>swfUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>tcUrl<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_tcUrl<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>tcUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_WRITE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedBoolean</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_fpad<span class="token punctuation">,</span> FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_capabilities<span class="token punctuation">,</span> <span class="token number">15.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_audioCodecs<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>m_fAudioCodecs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_videoCodecs<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>m_fVideoCodecs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_videoFunction<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>pageUrl<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
   <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF1A;&#x7B2C;1&#x6B21;&#x8FDE;&#x63A5;&#x3002;&#x63E1;&#x624B;&#x6570;&#x636E;&#x7B7E;&#x540D;&#x4E0D;&#x5339;&#x914D;&#xFF01;&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;%s: client signature does not match!&quot;</span><span class="token punctuation">,</span>
-        __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_pageUrl<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>pageUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>m_fEncoding <span class="token operator">!=</span> <span class="token number">0.0</span> <span class="token operator">||</span> r<span class="token operator">-&gt;</span>m_bSendEncoding<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token comment">/* AMF0, AMF3 not fully supported yet */</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeNamedNumber</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>av_objectEncoding<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>m_fEncoding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>enc <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">&gt;=</span> pend<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token comment">// &#x538B;&#x5165;&#x5C5E;&#x6027;&#x7ED3;&#x675F;&#x6807;&#x8BB0;</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>     <span class="token comment">/* end of object - 0x00 0x00 0x09 */</span>
+  <span class="token operator">*</span>enc<span class="token operator">++</span> <span class="token operator">=</span> AMF_OBJECT_END<span class="token punctuation">;</span>
 </code></pre>
-<p>&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x7B80;&#x5355;&#x8BF4;&#xFF1A;&#x53D1;&#x9001;C2&#xFF0C;&#x89E3;&#x6790;S2&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x6210;&#x529F;&#x89E3;&#x6790;S2&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x6210;&#x529F;&#x63A5;&#x6536;C2&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x8FDE;&#x63A5;&#x63E1;&#x624B;&#x6210;&#x529F;&#x3002;</p>
-<p>&#x81F3;&#x6B64;&#xFF0C;HandShake&#x7684;&#x4EE3;&#x7801;&#x5206;&#x6790;&#x5B8C;&#x6BD5;&#x3002;</p>
+<h2 id="&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;4">&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5206;&#x6790;4</h2>
+<pre class="language-"><code class="lang-c"><span class="token comment">/* add auth string */</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>av_len<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeBoolean</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>lFlags <span class="token operator">&amp;</span> RTMP_LF_AUTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+      enc <span class="token operator">=</span> <span class="token function">AMF_EncodeString</span><span class="token punctuation">(</span>enc<span class="token punctuation">,</span> pend<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>auth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>extras<span class="token punctuation">.</span>o_num<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>extras<span class="token punctuation">.</span>o_num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    enc <span class="token operator">=</span> <span class="token function">AMFProp_Encode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>extras<span class="token punctuation">.</span>o_props<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> enc<span class="token punctuation">,</span> pend<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>enc<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  packet<span class="token punctuation">.</span>m_nBodySize <span class="token operator">=</span> enc <span class="token operator">-</span> packet<span class="token punctuation">.</span>m_body<span class="token punctuation">;</span>
+    <span class="token comment">// &#x53D1;&#x9001;&#x62A5;&#x6587;&#xFF0C;&#x5E76;&#x8BB0;&#x5165;&#x5E94;&#x7B54;&#x961F;&#x5217;</span>
+  <span class="token keyword">return</span> <span class="token function">RTMP_SendPacket</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token operator">&amp;</span>packet<span class="token punctuation">,</span> TRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="&#x62A5;&#x6587;&#x6570;&#x636E;">&#x62A5;&#x6587;&#x6570;&#x636E;</h2>
+<pre class="language-"><code>DEBUG2:   0000:  03 00 00 00 00 00 55 14  00 00 00 00               ......U.....      
+DEBUG2:   0000:  02 00 07 63 6f 6e 6e 65  63 74 00 3f f0 00 00 00   ...connect.?....  
+DEBUG2:   0010:  00 00 00 03 00 03 61 70  70 02 00 04 6c 69 76 65   ......app...live  
+DEBUG2:   0020:  00 04 74 79 70 65 02 00  0a 6e 6f 6e 70 72 69 76   ..type...nonpriv  
+DEBUG2:   0030:  61 74 65 00 05 74 63 55  72 6c 02 00 15 72 74 6d   ate..tcUrl...rtm  
+DEBUG2:   0040:  70 3a 2f 2f 31 32 32 31  2e 73 69 74 65 2f 6c 69   p://1221.site/li  
+DEBUG2:   0050:  76 65 00 00 09                                     ve...
+</code></pre><p>&#x5185;&#x5BB9;&#x6765;&#x6E90;&#x4E8E;&#xFF1A;</p>
+<p><a href="https://blog.csdn.net/bwangk/article/details/112802823" target="_blank">https://blog.csdn.net/bwangk/article/details/112802823</a></p>
+<p><a href="https://www.jianshu.com/p/05b1e5d70c06" target="_blank">https://www.jianshu.com/p/05b1e5d70c06</a></p>
 <div style="margin: 0px;">
     &#x5907;&#x6848;&#x53F7;&#xFF1A;
     <a href="https://beian.miit.gov.cn/" target="_blank">
@@ -4177,7 +3836,7 @@ uptime <span class="token operator">=</span> <span class="token function">ntohl<
 
 
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-07-18 01:34:25
+2022-07-21 02:03:45
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -4214,7 +3873,7 @@ uptime <span class="token operator">=</span> <span class="token function">ntohl<
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.1","depth":1,"next":{"title":"librtmp","level":"1.2","depth":1,"ref":"","articles":[{"title":"调试librtmp","level":"1.2.1","depth":2,"path":"pages/librtmp/调试librtmp.md","ref":"pages/librtmp/调试librtmp.md","articles":[]},{"title":"librttmp源码之相关结构体","level":"1.2.2","depth":2,"path":"pages/librtmp/librttmp源码之相关结构体.md","ref":"pages/librtmp/librttmp源码之相关结构体.md","articles":[]},{"title":"librttmp源码之RTMP_Connect","level":"1.2.3","depth":2,"path":"pages/librtmp/librttmp源码之RTMP_Connect.md","ref":"pages/librtmp/librttmp源码之RTMP_Connect.md","articles":[]},{"title":"librttmp源码之RTMP_Connect","level":"1.2.4","depth":2,"path":"pages/librtmp/librttmp源码之HandShake.md","ref":"pages/librtmp/librttmp源码之HandShake.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"README.md","mtime":"2022-07-17T17:34:25.074Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-07-17T17:34:27.369Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.1","depth":1,"next":{"title":"librtmp","level":"1.2","depth":1,"ref":"","articles":[{"title":"调试librtmp","level":"1.2.1","depth":2,"path":"pages/librtmp/调试librtmp.md","ref":"pages/librtmp/调试librtmp.md","articles":[]},{"title":"librtmp源码之相关结构体","level":"1.2.2","depth":2,"path":"pages/librtmp/librtmp源码之相关结构体.md","ref":"pages/librtmp/librtmp源码之相关结构体.md","articles":[]},{"title":"librtmp源码之RTMP_Connect","level":"1.2.3","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_Connect.md","ref":"pages/librtmp/librtmp源码之RTMP_Connect.md","articles":[]},{"title":"librtmp源码之HandShake","level":"1.2.4","depth":2,"path":"pages/librtmp/librtmp源码之HandShake.md","ref":"pages/librtmp/librtmp源码之HandShake.md","articles":[]},{"title":"librtmp源码之SendConnectPacket","level":"1.2.5","depth":2,"path":"pages/librtmp/librtmp源码之SendConnectPacket.md","ref":"pages/librtmp/librtmp源码之SendConnectPacket.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"README.md","mtime":"2022-07-20T18:03:45.399Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-07-20T18:03:47.633Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
