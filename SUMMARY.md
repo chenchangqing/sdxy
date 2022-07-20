@@ -3,9 +3,10 @@
 * [最近更新](README.md)
 * librtmp
     * [调试librtmp](pages/librtmp/调试librtmp.md)
-    * [librttmp源码之相关结构体](pages/librtmp/librttmp源码之相关结构体.md)
-    * [librttmp源码之RTMP_Connect](pages/librtmp/librttmp源码之RTMP_Connect.md)
-    * [librttmp源码之RTMP_Connect](pages/librtmp/librttmp源码之HandShake.md)
+    * [librtmp源码之相关结构体](pages/librtmp/librtmp源码之相关结构体.md)
+    * [librtmp源码之RTMP_Connect](pages/librtmp/librtmp源码之RTMP_Connect.md)
+    * [librtmp源码之HandShake](pages/librtmp/librtmp源码之HandShake.md)
+    * [librtmp源码之SendConnectPacket](pages/librtmp/librtmp源码之SendConnectPacket.md)
 * FFmpeg
     * [相关链接](pages/FFmpeg/相关链接.md)
     * [FFmpeg编译](pages/FFmpeg/FFmpeg编译.md)
