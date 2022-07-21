@@ -3,6 +3,7 @@
 ## SendConnectPacket
 
 ```c
+/// 发起0x14命令connect远程调用
 static int
 SendConnectPacket(RTMP *r, RTMPPacket *cp)
 {
@@ -137,13 +138,16 @@ RTMPPacket packet;
 // 填写块头字段
     //块流ID
   packet.m_nChannel = 0x03; /* control channel (invoke) */
+    // chunk basic header（大部分情况是一个字节）
   packet.m_headerType = RTMP_PACKET_SIZE_LARGE;
     //消息类型为20的用AMF0编码，这些消息用于在远端实现连接，创建流，发布，播放和暂停等操作
 //#define RTMP_PACKET_TYPE_INVOKE             0x14
+    // Message type ID（1-7协议控制；8，9音视频；10以后为AMF编码消息）
   packet.m_packetType = RTMP_PACKET_TYPE_INVOKE;
   packet.m_nTimeStamp = 0;
     //流ID需要设置为0
   packet.m_nInfoField2 = 0;
+    // 是否含有Extend timeStamp字段
   packet.m_hasAbsTimestamp = 0;
   packet.m_body = pbuf + RTMP_MAX_HEADER_SIZE;
 
