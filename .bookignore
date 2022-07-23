@@ -3,8 +3,8 @@
 gitbook.sh
 book.pdf
 
-#/pages/*
-#!/pages/librtmp
+/pages/*
+!/pages/librtmp
 
 
 
