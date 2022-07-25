@@ -13,9 +13,9 @@ WriteN(RTMP *r, const char *buffer, int n)
   if (r->Link.rc4keyOut)
     {
       if (n > sizeof(buf))
-  encrypted = (char *)malloc(n);
+	encrypted = (char *)malloc(n);
       else
-  encrypted = (char *)buf;
+	encrypted = (char *)buf;
       ptr = encrypted;
       RC4_encrypt2(r->Link.rc4keyOut, n, buffer, ptr);
     }
@@ -34,21 +34,21 @@ WriteN(RTMP *r, const char *buffer, int n)
 
         // 成功发送字节数<0
       if (nBytes < 0)
-  {
-    int sockerr = GetSockError();
-    RTMP_Log(RTMP_LOGERROR, "%s, RTMP send error %d (%d bytes)", __FUNCTION__,
-        sockerr, n);
+	{
+	  int sockerr = GetSockError();
+	  RTMP_Log(RTMP_LOGERROR, "%s, RTMP send error %d (%d bytes)", __FUNCTION__,
+	      sockerr, n);
 
-    if (sockerr == EINTR && !RTMP_ctrlC)
-      continue;
+	  if (sockerr == EINTR && !RTMP_ctrlC)
+	    continue;
 
-    RTMP_Close(r);
-    n = 1;
-    break;
-  }
+	  RTMP_Close(r);
+	  n = 1;
+	  break;
+	}
 
       if (nBytes == 0)
-  break;
+	break;
 
       n -= nBytes;
       ptr += nBytes;
@@ -97,11 +97,3 @@ RTMPSockBuf_Send(RTMPSockBuf *sb, const char *buf, int len)
 >参考：
 
 [RTMPdump（libRTMP） 源代码分析 8： 发送消息（Message）](https://blog.csdn.net/leixiaohua1020/article/details/12958747)
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
