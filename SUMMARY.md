@@ -9,6 +9,7 @@
     * [librtmp源码之SendConnectPacket](pages/librtmp/librtmp源码之SendConnectPacket.md)
     * [librtmp源码之RTMP_SendPacket](pages/librtmp/librtmp源码之RTMP_SendPacket.md)
     * [librtmp源码之WriteN](pages/librtmp/librtmp源码之WriteN.md)
+    * [librtmp源码之RTMP_ConnectStream](pages/librtmp/librtmp源码之RTMP_ConnectStream.md)
 * FFmpeg
     * [相关链接](pages/FFmpeg/相关链接.md)
     * [FFmpeg编译](pages/FFmpeg/FFmpeg编译.md)
