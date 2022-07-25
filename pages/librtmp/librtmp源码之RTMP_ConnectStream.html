@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>librtmp源码之调试 · 自考</title>
+        <title>librtmp源码之RTMP_ConnectStream · 自考</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -97,8 +97,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="librtmp源码之相关结构体.html" />
     
+    <link rel="prev" href="librtmp源码之WriteN.html" />
     
 
     </head>
@@ -163,7 +163,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="librtmp源码之调试.html">
+        <li class="chapter " data-level="1.2.1" data-path="librtmp源码之调试.html">
             
                 <a href="librtmp源码之调试.html">
             
@@ -254,7 +254,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="librtmp源码之RTMP_ConnectStream.html">
+        <li class="chapter active" data-level="1.2.8" data-path="librtmp源码之RTMP_ConnectStream.html">
             
                 <a href="librtmp源码之RTMP_ConnectStream.html">
             
@@ -3603,7 +3603,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >librtmp源码之调试</a>
+        <a href="../.." >librtmp源码之RTMP_ConnectStream</a>
     </h1>
 </div>
 
@@ -3618,9 +3618,61 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="librtmp&#x6E90;&#x7801;&#x4E4B;&#x8C03;&#x8BD5;">librtmp&#x6E90;&#x7801;&#x4E4B;&#x8C03;&#x8BD5;</h1>
+                                <h1 id="librtmp&#x6E90;&#x7801;&#x4E4B;rtmpconnectstream">librtmp&#x6E90;&#x7801;&#x4E4B;RTMP_ConnectStream</h1>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x5EFA;&#x7ACB;&#x6D41;&#xFF08;NetStream&#xFF09;</span>
+<span class="token keyword">int</span>
+<span class="token function">RTMP_ConnectStream</span><span class="token punctuation">(</span>RTMP <span class="token operator">*</span>r<span class="token punctuation">,</span> <span class="token keyword">int</span> seekTime<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    RTMPPacket packet <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* seekTime was already set by SetupStream / SetupURL.
+     * This is only needed by ReconnectStream.
+     */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>seekTime <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>seekTime <span class="token operator">=</span> seekTime<span class="token punctuation">;</span>
+
+    <span class="token comment">// &#x5F53;&#x524D;&#x8FDE;&#x63A5;&#x5A92;&#x4F53;&#x4F7F;&#x7528;&#x7684;&#x5757;&#x6D41;ID</span>
+    r<span class="token operator">-&gt;</span>m_mediaChannel <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// &#x63A5;&#x6536;&#x5230;&#x7684;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x5757;(Chunk)&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6D88;&#x606F;(Message)&#xFF0C;&#x56E0;&#x4E3A;&#x6D88;&#x606F;&#x5728;&#x7F51;&#x4E0A;&#x4F20;&#x8F93;&#x7684;&#x65F6;&#x5019;&#x8981;&#x5206;&#x5272;&#x6210;&#x5757;.</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_bPlaying <span class="token operator">&amp;&amp;</span> <span class="token function">RTMP_IsConnected</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">RTMP_ReadPacket</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token operator">&amp;</span>packet<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// &#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x53EF;&#x80FD;&#x88AB;&#x5C01;&#x88C5;&#x6210;&#x591A;&#x4E2A;&#x5757;(Chunk)&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x6240;&#x6709;&#x5757;&#x8BFB;&#x53D6;&#x5B8C;&#x624D;&#x5904;&#x7406;&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x5305;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">RTMPPacket_IsReady</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>packet<span class="token punctuation">.</span>m_nBodySize<span class="token punctuation">)</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token comment">// &#x8BFB;&#x53D6;&#x5230;flv&#x6570;&#x636E;&#x5305;&#xFF0C;&#x5219;&#x7EE7;&#x7EED;&#x8BFB;&#x53D6;&#x4E0B;&#x4E00;&#x4E2A;&#x5305;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>packet<span class="token punctuation">.</span>m_packetType <span class="token operator">==</span> RTMP_PACKET_TYPE_AUDIO<span class="token punctuation">)</span> <span class="token operator">||</span>
+                <span class="token punctuation">(</span>packet<span class="token punctuation">.</span>m_packetType <span class="token operator">==</span> RTMP_PACKET_TYPE_VIDEO<span class="token punctuation">)</span> <span class="token operator">||</span>
+                <span class="token punctuation">(</span>packet<span class="token punctuation">.</span>m_packetType <span class="token operator">==</span> RTMP_PACKET_TYPE_INFO<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;Received FLV packet before play()! Ignoring.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">RTMPPacket_Free</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// &#x5904;&#x7406;&#x6536;&#x5230;&#x7684;&#x6570;&#x636E;&#x5305;</span>
+            <span class="token function">RTMP_ClientPacket</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token operator">&amp;</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// &#x5904;&#x7406;&#x5B8C;&#x6BD5;&#xFF0C;&#x6E05;&#x9664;&#x6570;&#x636E;</span>
+            <span class="token function">RTMPPacket_Free</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// &#x5F53;&#x524D;&#x662F;&#x5426;&#x63A8;&#x6D41;&#x6216;&#x8FDE;&#x63A5;&#x4E2D;</span>
+    <span class="token keyword">return</span> r<span class="token operator">-&gt;</span>m_bPlaying<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x7B80;&#x5355;&#x7684;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x5224;&#x65AD;&#xFF0C;&#x91CD;&#x70B9;&#x5728;while&#x5FAA;&#x73AF;&#x91CC;&#x3002;&#x9996;&#x5148;&#xFF0C;&#x5FC5;&#x987B;&#x8981;&#x6EE1;&#x8DB3;&#x4E09;&#x4E2A;&#x6761;&#x4EF6;&#x3002;&#x5176;&#x6B21;&#xFF0C;&#x8FDB;&#x5165;&#x5FAA;&#x73AF;&#x4EE5;&#x540E;&#x53EA;&#x6709;&#x51FA;&#x9519;&#x6216;&#x8005;&#x5EFA;&#x7ACB;&#x6D41;&#xFF08;NetStream&#xFF09;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x624D;&#x80FD;&#x9000;&#x51FA;&#x5FAA;&#x73AF;&#x3002; </p>
+<p>&#x5728;RTMP_ConnectStream()&#x5904;&#x7406;&#x4EA4;&#x4E92;&#x51C6;&#x5907;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6709;&#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x51FD;&#x6570;&#xFF1A;RTMP_ReadPacket()&#x8D1F;&#x8D23;&#x63A5;&#x6536;&#x62A5;&#x6587;&#xFF0C;RTMP_ClientPacket()&#x8D1F;&#x8D23;&#x903B;&#x8F91;&#x7684;&#x5206;&#x6D3E;&#x5904;&#x7406;&#x3002;</p>
+<blockquote>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/leixiaohua1020/article/details/12957877" target="_blank">RTMPdump&#xFF08;libRTMP&#xFF09; &#x6E90;&#x4EE3;&#x7801;&#x5206;&#x6790; 6&#xFF1A; &#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x6D41;&#x5A92;&#x4F53;&#x8FDE;&#x63A5; &#xFF08;NetStream&#x90E8;&#x5206; 1&#xFF09;</a></p>
+<p><a href="https://blog.csdn.net/huangyimo/article/details/83858620" target="_blank">RTMP&#x63A8;&#x6D41;&#x53CA;&#x534F;&#x8BAE;&#x5B66;&#x4E60;</a></p>
+<p><a href="https://www.jianshu.com/p/05b1e5d70c06" target="_blank">librtmp&#x6E90;&#x7801;&#x5206;&#x6790;&#x4E4B;&#x6838;&#x5FC3;&#x5B9E;&#x73B0;&#x89E3;&#x8BFB;</a></p>
+<p><a href="https://www.cnblogs.com/Kingfans/p/7064902.html" target="_blank">&#x3010;&#x539F;&#x3011;librtmp&#x6E90;&#x7801;&#x8BE6;&#x89E3;</a> </p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-07-25 23:51:40
+2022-07-26 00:49:26
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3649,10 +3701,10 @@
 
             
                 
-                
-                <a href="librtmp源码之相关结构体.html" class="navigation navigation-next navigation-unique" aria-label="Next page: librtmp源码之相关结构体">
-                    <i class="fa fa-angle-right"></i>
+                <a href="librtmp源码之WriteN.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: librtmp源码之WriteN">
+                    <i class="fa fa-angle-left"></i>
                 </a>
+                
                 
             
         
@@ -3661,7 +3713,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"librtmp源码之调试","level":"1.2.1","depth":2,"next":{"title":"librtmp源码之相关结构体","level":"1.2.2","depth":2,"path":"pages/librtmp/librtmp源码之相关结构体.md","ref":"pages/librtmp/librtmp源码之相关结构体.md","articles":[]},"previous":{"title":"librtmp","level":"1.2","depth":1,"ref":"","articles":[{"title":"librtmp源码之调试","level":"1.2.1","depth":2,"path":"pages/librtmp/librtmp源码之调试.md","ref":"pages/librtmp/librtmp源码之调试.md","articles":[]},{"title":"librtmp源码之相关结构体","level":"1.2.2","depth":2,"path":"pages/librtmp/librtmp源码之相关结构体.md","ref":"pages/librtmp/librtmp源码之相关结构体.md","articles":[]},{"title":"librtmp源码之RTMP_Connect","level":"1.2.3","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_Connect.md","ref":"pages/librtmp/librtmp源码之RTMP_Connect.md","articles":[]},{"title":"librtmp源码之HandShake","level":"1.2.4","depth":2,"path":"pages/librtmp/librtmp源码之HandShake.md","ref":"pages/librtmp/librtmp源码之HandShake.md","articles":[]},{"title":"librtmp源码之SendConnectPacket","level":"1.2.5","depth":2,"path":"pages/librtmp/librtmp源码之SendConnectPacket.md","ref":"pages/librtmp/librtmp源码之SendConnectPacket.md","articles":[]},{"title":"librtmp源码之RTMP_SendPacket","level":"1.2.6","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_SendPacket.md","ref":"pages/librtmp/librtmp源码之RTMP_SendPacket.md","articles":[]},{"title":"librtmp源码之WriteN","level":"1.2.7","depth":2,"path":"pages/librtmp/librtmp源码之WriteN.md","ref":"pages/librtmp/librtmp源码之WriteN.md","articles":[]},{"title":"librtmp源码之RTMP_ConnectStream","level":"1.2.8","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_ConnectStream.md","ref":"pages/librtmp/librtmp源码之RTMP_ConnectStream.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"pages/librtmp/librtmp源码之调试.md","mtime":"2022-07-25T15:51:40.091Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-07-25T16:49:28.537Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"librtmp源码之RTMP_ConnectStream","level":"1.2.8","depth":2,"next":{"title":"FFmpeg","level":"1.3","depth":1,"ref":"","articles":[{"title":"相关链接","level":"1.3.1","depth":2,"path":"pages/FFmpeg/相关链接.md","ref":"pages/FFmpeg/相关链接.md","articles":[]},{"title":"FFmpeg编译","level":"1.3.2","depth":2,"path":"pages/FFmpeg/FFmpeg编译.md","ref":"pages/FFmpeg/FFmpeg编译.md","articles":[]},{"title":"FFmpeg集成","level":"1.3.3","depth":2,"path":"pages/FFmpeg/FFmpeg集成.md","ref":"pages/FFmpeg/FFmpeg集成.md","articles":[]},{"title":"iOS集成FFmpeg","level":"1.3.4","depth":2,"path":"pages/FFmpeg/iOS集成FFmpeg.md","ref":"pages/FFmpeg/iOS集成FFmpeg.md","articles":[]},{"title":"FFmpeg基础知识","level":"1.3.5","depth":2,"path":"pages/FFmpeg/FFmpeg基础知识.md","ref":"pages/FFmpeg/FFmpeg基础知识.md","articles":[]},{"title":"FFmpeg视频解码","level":"1.3.6","depth":2,"path":"pages/FFmpeg/FFmpeg视频解码.md","ref":"pages/FFmpeg/FFmpeg视频解码.md","articles":[]},{"title":"FFmpeg音频解码","level":"1.3.7","depth":2,"path":"pages/FFmpeg/FFmpeg音频解码.md","ref":"pages/FFmpeg/FFmpeg音频解码.md","articles":[]},{"title":"FFmpeg视频编码","level":"1.3.8","depth":2,"path":"pages/FFmpeg/FFmpeg视频编码.md","ref":"pages/FFmpeg/FFmpeg视频编码.md","articles":[]},{"title":"FFmpeg音频编码","level":"1.3.9","depth":2,"path":"pages/FFmpeg/FFmpeg音频编码.md","ref":"pages/FFmpeg/FFmpeg音频编码.md","articles":[]},{"title":"SDL播放YUV","level":"1.3.10","depth":2,"path":"pages/FFmpeg/SDL播放YUV.md","ref":"pages/FFmpeg/SDL播放YUV.md","articles":[]},{"title":"iOS集成SDL","level":"1.3.11","depth":2,"path":"pages/FFmpeg/iOS集成SDL.md","ref":"pages/FFmpeg/iOS集成SDL.md","articles":[]},{"title":"iOS集成SDL（源码）","level":"1.3.12","depth":2,"path":"pages/FFmpeg/iOS集成SDL_源码.md","ref":"pages/FFmpeg/iOS集成SDL_源码.md","articles":[]},{"title":"FFmpeg+SDL播放视频","level":"1.3.13","depth":2,"path":"pages/FFmpeg/FFmpeg_SDL播放视频.md","ref":"pages/FFmpeg/FFmpeg_SDL播放视频.md","articles":[]},{"title":"FFmpeg+SDL播放音频","level":"1.3.14","depth":2,"path":"pages/FFmpeg/FFmpeg_SDL播放音频.md","ref":"pages/FFmpeg/FFmpeg_SDL播放音频.md","articles":[]},{"title":"FFmpeg+SDL创建线程","level":"1.3.15","depth":2,"path":"pages/FFmpeg/FFmpeg_SDL创建线程.md","ref":"pages/FFmpeg/FFmpeg_SDL创建线程.md","articles":[]},{"title":"FFmpeg+SDL同步视频","level":"1.3.16","depth":2,"path":"pages/FFmpeg/FFmpeg_SDL同步视频.md","ref":"pages/FFmpeg/FFmpeg_SDL同步视频.md","articles":[]},{"title":"FFmpeg+SDL同步音频","level":"1.3.17","depth":2,"path":"pages/FFmpeg/FFmpeg_SDL同步音频.md","ref":"pages/FFmpeg/FFmpeg_SDL同步音频.md","articles":[]},{"title":"FFmpeg+SDL快进快退","level":"1.3.18","depth":2,"path":"pages/FFmpeg/FFmpeg_SDL快进快退.md","ref":"pages/FFmpeg/FFmpeg_SDL快进快退.md","articles":[]},{"title":"ffplay源码","level":"1.3.19","depth":2,"path":"pages/FFmpeg/ffplay源码.md","ref":"pages/FFmpeg/ffplay源码.md","articles":[]},{"title":"ffplay源码-main函数，do_exit函数","level":"1.3.20","depth":2,"path":"pages/FFmpeg/ffplay源码_main函数_do_exit函数.md","ref":"pages/FFmpeg/ffplay源码_main函数_do_exit函数.md","articles":[]},{"title":"ffplay源码-event_loop函数、refresh_loop_wait_event函数","level":"1.3.21","depth":2,"path":"pages/FFmpeg/ffplay源码_event_loop函数_refresh_loop_wait_event函数.md","ref":"pages/FFmpeg/ffplay源码_event_loop函数_refresh_loop_wait_event函数.md","articles":[]}]},"previous":{"title":"librtmp源码之WriteN","level":"1.2.7","depth":2,"path":"pages/librtmp/librtmp源码之WriteN.md","ref":"pages/librtmp/librtmp源码之WriteN.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"pages/librtmp/librtmp源码之RTMP_ConnectStream.md","mtime":"2022-07-25T16:49:26.704Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-07-25T16:49:28.537Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
