@@ -287,6 +287,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.2.11" data-path="pages/librtmp/librtmp源码之ReadN.html">
+            
+                <a href="pages/librtmp/librtmp源码之ReadN.html">
+            
+                    
+                    librtmp源码之ReadN
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -3638,186 +3651,181 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="librtmp&#x6E90;&#x7801;&#x4E4B;rtmpclientpacket">librtmp&#x6E90;&#x7801;&#x4E4B;RTMP_ClientPacket</h1>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x5904;&#x7406;&#x6D88;&#x606F;&#xFF08;Message&#xFF09;&#xFF0C;&#x5E76;&#x505A;&#x51FA;&#x54CD;&#x5E94;</span>
-<span class="token keyword">int</span>
-<span class="token function">RTMP_ClientPacket</span><span class="token punctuation">(</span>RTMP <span class="token operator">*</span>r<span class="token punctuation">,</span> RTMPPacket <span class="token operator">*</span>packet<span class="token punctuation">)</span>
+                                <h1 id="librtmp&#x6E90;&#x7801;&#x4E4B;readn">librtmp&#x6E90;&#x7801;&#x4E4B;ReadN</h1>
+<pre class="language-"><code class="lang-c"><span class="token comment">// &#x4ECE;HTTP&#x6216;SOCKET&#x4E2D;&#x8BFB;&#x53D6;n&#x4E2A;&#x6570;&#x636E;&#x5B58;&#x653E;&#x5728;buffer&#x4E2D;.</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span>
+<span class="token function">ReadN</span><span class="token punctuation">(</span>RTMP <span class="token operator">*</span>r<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>buffer<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token comment">// &#x8FD4;&#x56DE;&#x503C;&#x4E3A;1&#x8868;&#x793A;&#x63A8;&#x62C9;&#x6D41;&#x6B63;&#x5728;&#x6B63;&#x4F5C;&#x4E2D;&#xFF0C;&#x4E3A;2&#x8868;&#x793A;&#x5DF2;&#x7ECF;&#x505C;&#x6B62;</span>
-    <span class="token keyword">int</span> bHasMediaPacket <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">switch</span> <span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>m_packetType<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=1,&#x8BBE;&#x7F6E;&#x5757;&#x5927;&#x5C0F;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_CHUNK_SIZE<span class="token operator">:</span>
-        <span class="token comment">/* chunk size */</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5904;&#x7406;&#x6D88;&#x606F; Set Chunk Size (typeID=1)&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// &#x66F4;&#x65B0;&#x63A5;&#x6536;&#x5904;&#x7406;&#x65F6;&#x7684;&#x5757;&#x9650;&#x5236;</span>
-        <span class="token function">HandleChangeChunkSize</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// &#x5BF9;&#x7AEF;&#x53CD;&#x9988;&#x7684;&#x5DF2;&#x8BFB;&#x5927;&#x5C0F;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=3</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_BYTES_READ_REPORT<span class="token operator">:</span>
-        <span class="token comment">/* bytes read report */</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, received: bytes read report&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=4&#xFF0C;&#x7528;&#x6237;&#x63A7;&#x5236;</span>
-    <span class="token comment">// &#x5904;&#x7406;&#x5BF9;&#x7AEF;&#x53D1;&#x9001;&#x7684;&#x63A7;&#x5236;&#x62A5;&#x6587;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_CONTROL<span class="token operator">:</span>
-        <span class="token comment">/* ctrl */</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5904;&#x7406;&#x6D88;&#x606F; User Control (typeID=4)&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">HandleCtrl</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=5</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_SERVER_BW<span class="token operator">:</span>
-        <span class="token comment">/* server bw */</span>
-        <span class="token comment">// &#x5904;&#x7406;&#x5BF9;&#x7AEF;&#x53D1;&#x9001;&#x7684;&#x5E94;&#x7B54;&#x7A97;&#x53E3;&#x5927;&#x5C0F;&#xFF0C;&#x8FD9;&#x91CC;&#x7531;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x9001;&#xFF0C;&#x5373;&#x544A;&#x4E4B;&#x5BA2;&#x6237;&#x7AEF;&#x6536;&#x5230;&#x5BF9;&#x5E94;&#x5927;&#x5C0F;&#x7684;&#x6570;&#x636E;&#x540E;&#x5E94;&#x53D1;&#x9001;&#x53CD;&#x9988;</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5904;&#x7406;&#x6D88;&#x606F; Window Acknowledgement Size (typeID=5)&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">HandleServerBW</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=6</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_CLIENT_BW<span class="token operator">:</span>
-        <span class="token comment">/* client bw */</span>
-        <span class="token comment">// &#x5904;&#x7406;&#x5BF9;&#x7AEF;&#x53D1;&#x9001;&#x7684;&#x8BBE;&#x7F6E;&#x53D1;&#x9001;&#x5E26;&#x5BBD;&#x5927;&#x5C0F;&#xFF0C;&#x8FD9;&#x91CC;&#x7531;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x9001;&#xFF0C;&#x5373;&#x8BBE;&#x7F6E;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x53D1;&#x9001;&#x5E26;&#x5BBD;</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5904;&#x7406;&#x6D88;&#x606F; Set Peer Bandwidth (typeID=6)&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">HandleClientBW</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=8&#xFF0C;&#x97F3;&#x9891;&#x6570;&#x636E;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_AUDIO<span class="token operator">:</span>
-        <span class="token comment">/* audio data */</span>
-        <span class="token comment">/*RTMP_Log(RTMP_LOGDEBUG, &quot;%s, received: audio %lu bytes&quot;, __FUNCTION__, packet.m_nBodySize); */</span>
-        <span class="token function">HandleAudio</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        bHasMediaPacket <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_mediaChannel<span class="token punctuation">)</span>
-            r<span class="token operator">-&gt;</span>m_mediaChannel <span class="token operator">=</span> packet<span class="token operator">-&gt;</span>m_nChannel<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_pausing<span class="token punctuation">)</span>
-            r<span class="token operator">-&gt;</span>m_mediaStamp <span class="token operator">=</span> packet<span class="token operator">-&gt;</span>m_nTimeStamp<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=9&#xFF0C;&#x89C6;&#x9891;&#x6570;&#x636E;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_VIDEO<span class="token operator">:</span>
-        <span class="token comment">/* video data */</span>
-        <span class="token comment">/*RTMP_Log(RTMP_LOGDEBUG, &quot;%s, received: video %lu bytes&quot;, __FUNCTION__, packet.m_nBodySize); */</span>
-        <span class="token function">HandleVideo</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        bHasMediaPacket <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_mediaChannel<span class="token punctuation">)</span>
-            r<span class="token operator">-&gt;</span>m_mediaChannel <span class="token operator">=</span> packet<span class="token operator">-&gt;</span>m_nChannel<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_pausing<span class="token punctuation">)</span>
-            r<span class="token operator">-&gt;</span>m_mediaStamp <span class="token operator">=</span> packet<span class="token operator">-&gt;</span>m_nTimeStamp<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=15&#xFF0C;AMF3&#x7F16;&#x7801;&#xFF0C;&#x5FFD;&#x7565;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_FLEX_STREAM_SEND<span class="token operator">:</span>
-        <span class="token comment">/* flex stream send */</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span>
-                <span class="token string">&quot;%s, flex stream send, size %u bytes, not supported, ignoring&quot;</span><span class="token punctuation">,</span>
-                __FUNCTION__<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=16&#xFF0C;AMF3&#x7F16;&#x7801;&#xFF0C;&#x5FFD;&#x7565;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_FLEX_SHARED_OBJECT<span class="token operator">:</span>
-        <span class="token comment">/* flex shared object */</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span>
-                <span class="token string">&quot;%s, flex shared object, size %u bytes, not supported, ignoring&quot;</span><span class="token punctuation">,</span>
-                 __FUNCTION__<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=17&#xFF0C;AMF3&#x7F16;&#x7801;&#xFF0C;&#x5FFD;&#x7565;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_FLEX_MESSAGE<span class="token operator">:</span>
-    <span class="token comment">/* flex message */</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span>
-                 <span class="token string">&quot;%s, flex message, size %u bytes, not fully supported&quot;</span><span class="token punctuation">,</span>
-                 __FUNCTION__<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">/*RTMP_LogHex(packet.m_body, packet.m_nBodySize); */</span>
+    <span class="token keyword">int</span> nOriginalSize <span class="token operator">=</span> n<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> avail<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>ptr<span class="token punctuation">;</span>
 
-        <span class="token comment">/* some DEBUG code */</span>
-<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
-        RTMP_LIB_AMFObject obj<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> nRes <span class="token operator">=</span> obj<span class="token punctuation">.</span><span class="token function">Decode</span><span class="token punctuation">(</span>packet<span class="token punctuation">.</span>m_body<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> packet<span class="token punctuation">.</span>m_nBodySize<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>nRes <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-           <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGERROR<span class="token punctuation">,</span> <span class="token string">&quot;%s, error decoding AMF3 packet&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token comment">/*return; */</span>
-        <span class="token punctuation">}</span>
+    r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_timedout <span class="token operator">=</span> FALSE<span class="token punctuation">;</span>
 
-        obj<span class="token punctuation">.</span><span class="token function">Dump</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">HandleInvoke</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_body <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_nBodySize <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-            bHasMediaPacket <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=18&#xFF0C;AMF0&#x7F16;&#x7801;&#xFF0C;&#x6570;&#x636E;&#x6D88;&#x606F;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_INFO<span class="token operator">:</span>
-        <span class="token comment">/* metadata (notify) */</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, received: notify %u bytes&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span>
-                 packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">HandleMetadata</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_body<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            bHasMediaPacket <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=19&#xFF0C;AMF0&#x7F16;&#x7801;&#xFF0C;&#x5FFD;&#x7565;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_SHARED_OBJECT<span class="token operator">:</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, shared object, not supported, ignoring&quot;</span><span class="token punctuation">,</span>
-                 __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=20&#xFF0C;AMF0&#x7F16;&#x7801;&#xFF0C;&#x547D;&#x4EE4;&#x6D88;&#x606F;</span>
-    <span class="token comment">// &#x5904;&#x7406;&#x547D;&#x4EE4;&#x6D88;&#x606F;&#xFF01;</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_INVOKE<span class="token operator">:</span>
-        <span class="token comment">/* invoke */</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, received: invoke %u bytes&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span>
-                 packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;CCQ: %s &#x5904;&#x7406;&#x6D88;&#x606F; (typeID=20&#xFF0C;AMF0&#x7F16;&#x7801;)&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">/*RTMP_LogHex(packet.m_body, packet.m_nBodySize); */</span>
-
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">HandleInvoke</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_body<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-            bHasMediaPacket <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token comment">// RTMP&#x6D88;&#x606F;&#x7C7B;&#x578B;ID=22</span>
-    <span class="token keyword">case</span> RTMP_PACKET_TYPE_FLASH_VIDEO<span class="token operator">:</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment">/* go through FLV packets and handle metadata packets */</span>
-        <span class="token keyword">unsigned</span> <span class="token keyword">int</span> pos <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        uint32_t nTimeStamp <span class="token operator">=</span> packet<span class="token operator">-&gt;</span>m_nTimeStamp<span class="token punctuation">;</span>
-
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>pos <span class="token operator">+</span> <span class="token number">11</span> <span class="token operator">&lt;</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            uint32_t dataSize <span class="token operator">=</span> <span class="token function">AMF_DecodeInt24</span><span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>m_body <span class="token operator">+</span> pos <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* size without header (11) and prevTagSize (4) */</span>
-
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">+</span> <span class="token number">11</span> <span class="token operator">+</span> dataSize <span class="token operator">+</span> <span class="token number">4</span> <span class="token operator">&gt;</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGWARNING<span class="token punctuation">,</span> <span class="token string">&quot;Stream corrupt?!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>m_body<span class="token punctuation">[</span>pos<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0x12</span><span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token function">HandleMetadata</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_body <span class="token operator">+</span> pos <span class="token operator">+</span> <span class="token number">11</span><span class="token punctuation">,</span> dataSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>m_body<span class="token punctuation">[</span>pos<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">8</span> <span class="token operator">||</span> packet<span class="token operator">-&gt;</span>m_body<span class="token punctuation">[</span>pos<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                nTimeStamp <span class="token operator">=</span> <span class="token function">AMF_DecodeInt24</span><span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>m_body <span class="token operator">+</span> pos <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                nTimeStamp <span class="token operator">|=</span> <span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>m_body<span class="token punctuation">[</span>pos <span class="token operator">+</span> <span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            pos <span class="token operator">+=</span> <span class="token punctuation">(</span><span class="token number">11</span> <span class="token operator">+</span> dataSize <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_pausing<span class="token punctuation">)</span>
-            r<span class="token operator">-&gt;</span>m_mediaStamp <span class="token operator">=</span> nTimeStamp<span class="token punctuation">;</span>
-
-        <span class="token comment">/* FLV tag(s) */</span>
-        <span class="token comment">/*RTMP_Log(RTMP_LOGDEBUG, &quot;%s, received: FLV tag(s) %lu bytes&quot;, __FUNCTION__, packet.m_nBodySize); */</span>
-        bHasMediaPacket <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">default</span><span class="token operator">:</span>
-        <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, unknown packet type received: 0x%02x&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">,</span>
-                 packet<span class="token operator">-&gt;</span>m_packetType<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
-        <span class="token function">RTMP_LogHex</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_body<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>m_nBodySize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+    ptr <span class="token operator">=</span> buffer<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>n <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> nBytes <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> nRead<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_HTTP<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> refill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_resplen<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">int</span> ret<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_size <span class="token operator">&lt;</span> <span class="token number">13</span> <span class="token operator">||</span> refill<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_unackd<span class="token punctuation">)</span>
+                        <span class="token function">HTTP_Post</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> RTMPT_IDLE<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">RTMPSockBuf_Fill</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_timedout<span class="token punctuation">)</span>
+                            <span class="token function">RTMP_Close</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ret <span class="token operator">=</span> <span class="token function">HTTP_read</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, No valid HTTP response found&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token function">RTMP_Close</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    refill <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    refill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>m_resplen <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_size<span class="token punctuation">)</span>
+                <span class="token function">RTMPSockBuf_Fill</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            avail <span class="token operator">=</span> r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_size<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>avail <span class="token operator">&gt;</span> r<span class="token operator">-&gt;</span>m_resplen<span class="token punctuation">)</span>
+                avail <span class="token operator">=</span> r<span class="token operator">-&gt;</span>m_resplen<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            avail <span class="token operator">=</span> r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_size<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>avail <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">RTMPSockBuf_Fill</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_timedout<span class="token punctuation">)</span>
+                        <span class="token function">RTMP_Close</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                avail <span class="token operator">=</span> r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_size<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        nRead <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>n <span class="token operator">&lt;</span> avail<span class="token punctuation">)</span> <span class="token operator">?</span> n <span class="token operator">:</span> avail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nRead <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">memcpy</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_start<span class="token punctuation">,</span> nRead<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_start <span class="token operator">+=</span> nRead<span class="token punctuation">;</span>
+            r<span class="token operator">-&gt;</span>m_sb<span class="token punctuation">.</span>sb_size <span class="token operator">-=</span> nRead<span class="token punctuation">;</span>
+            nBytes <span class="token operator">=</span> nRead<span class="token punctuation">;</span>
+            r<span class="token operator">-&gt;</span>m_nBytesIn <span class="token operator">+=</span> nRead<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>m_bSendCounter
+                <span class="token operator">&amp;&amp;</span> r<span class="token operator">-&gt;</span>m_nBytesIn <span class="token operator">&gt;</span> <span class="token punctuation">(</span> r<span class="token operator">-&gt;</span>m_nBytesInSent <span class="token operator">+</span> r<span class="token operator">-&gt;</span>m_nClientBW <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">SendBytesReceived</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">/*RTMP_Log(RTMP_LOGDEBUG, &quot;%s: %d bytes\n&quot;, __FUNCTION__, nBytes); */</span>
+<span class="token macro property">#<span class="token directive keyword">ifdef</span> _DEBUG</span>
+        <span class="token function">fwrite</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> nBytes<span class="token punctuation">,</span> netstackdump_read<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nBytes <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, RTMP socket closed by peer&quot;</span><span class="token punctuation">,</span> __FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">/*goto again; */</span>
+            <span class="token function">RTMP_Close</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>protocol <span class="token operator">&amp;</span> RTMP_FEATURE_HTTP<span class="token punctuation">)</span>
+            r<span class="token operator">-&gt;</span>m_resplen <span class="token operator">-=</span> nBytes<span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">ifdef</span> CRYPTO</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyIn<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">RC4_encrypt</span><span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>Link<span class="token punctuation">.</span>rc4keyIn<span class="token punctuation">,</span> nBytes<span class="token punctuation">,</span> ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+        n <span class="token operator">-=</span> nBytes<span class="token punctuation">;</span>
+        ptr <span class="token operator">+=</span> nBytes<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token comment">// &#x8FD4;&#x56DE;&#x503C;&#x4E3A;1&#x8868;&#x793A;&#x63A8;&#x62C9;&#x6D41;&#x6B63;&#x5728;&#x6B63;&#x4F5C;&#x4E2D;&#xFF0C;&#x4E3A;2&#x8868;&#x793A;&#x5DF2;&#x7ECF;&#x505C;&#x6B62;</span>
-    <span class="token keyword">return</span> bHasMediaPacket<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> nOriginalSize <span class="token operator">-</span> n<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// &#x8C03;&#x7528;Socket&#x7F16;&#x7A0B;&#x4E2D;&#x7684;recv()&#x51FD;&#x6570;&#xFF0C;&#x63A5;&#x6536;&#x6570;&#x636E;</span>
+<span class="token keyword">int</span>
+<span class="token function">RTMPSockBuf_Fill</span><span class="token punctuation">(</span>RTMPSockBuf <span class="token operator">*</span>sb<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> nBytes<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>sb<span class="token operator">-&gt;</span>sb_size<span class="token punctuation">)</span>
+        sb<span class="token operator">-&gt;</span>sb_start <span class="token operator">=</span> sb<span class="token operator">-&gt;</span>sb_buf<span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// &#x7F13;&#x51B2;&#x533A;&#x957F;&#x5EA6;&#xFF1A;&#x603B;&#x957F;-&#x672A;&#x5904;&#x7406;&#x5B57;&#x8282;-&#x5DF2;&#x5904;&#x7406;&#x5B57;&#x8282;</span>
+        <span class="token comment">// |-----&#x5DF2;&#x5904;&#x7406;--------|-----&#x672A;&#x5904;&#x7406;--------|---------&#x7F13;&#x51B2;&#x533A;----------|</span>
+        <span class="token comment">// sb_buf        sb_start    sb_size</span>
+        nBytes <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>sb<span class="token operator">-&gt;</span>sb_buf<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">-</span> sb<span class="token operator">-&gt;</span>sb_size <span class="token operator">-</span> <span class="token punctuation">(</span>sb<span class="token operator">-&gt;</span>sb_start <span class="token operator">-</span> sb<span class="token operator">-&gt;</span>sb_buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> defined(CRYPTO) &amp;&amp; !defined(NO_SSL)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sb<span class="token operator">-&gt;</span>sb_ssl<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            nBytes <span class="token operator">=</span> <span class="token function">TLS_read</span><span class="token punctuation">(</span>sb<span class="token operator">-&gt;</span>sb_ssl<span class="token punctuation">,</span> sb<span class="token operator">-&gt;</span>sb_start <span class="token operator">+</span> sb<span class="token operator">-&gt;</span>sb_size<span class="token punctuation">,</span> nBytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// int recv( SOCKET s, char * buf, int len, int flags);</span>
+            <span class="token comment">// s    &#xFF1A;&#x4E00;&#x4E2A;&#x6807;&#x8BC6;&#x5DF2;&#x8FDE;&#x63A5;&#x5957;&#x63A5;&#x53E3;&#x7684;&#x63CF;&#x8FF0;&#x5B57;&#x3002;</span>
+            <span class="token comment">// buf  &#xFF1A;&#x7528;&#x4E8E;&#x63A5;&#x6536;&#x6570;&#x636E;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x3002;</span>
+            <span class="token comment">// len  &#xFF1A;&#x7F13;&#x51B2;&#x533A;&#x957F;&#x5EA6;&#x3002;</span>
+            <span class="token comment">// flags&#xFF1A;&#x6307;&#x5B9A;&#x8C03;&#x7528;&#x65B9;&#x5F0F;&#x3002;</span>
+            <span class="token comment">// &#x4ECE;sb_start&#xFF08;&#x5F85;&#x5904;&#x7406;&#x7684;&#x4E0B;&#x4E00;&#x5B57;&#x8282;&#xFF09; + sb_size&#xFF08;&#xFF09;&#x8FD8;&#x672A;&#x5904;&#x7406;&#x7684;&#x5B57;&#x8282;&#x5F00;&#x59CB;buffer&#x4E3A;&#x7A7A;&#xFF0C;&#x53EF;&#x4EE5;&#x5B58;&#x50A8;</span>
+            nBytes <span class="token operator">=</span> <span class="token function">recv</span><span class="token punctuation">(</span>sb<span class="token operator">-&gt;</span>sb_socket<span class="token punctuation">,</span> sb<span class="token operator">-&gt;</span>sb_start <span class="token operator">+</span> sb<span class="token operator">-&gt;</span>sb_size<span class="token punctuation">,</span> nBytes<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nBytes <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// &#x672A;&#x5904;&#x7406;&#x7684;&#x5B57;&#x8282;&#x53C8;&#x591A;&#x4E86;</span>
+            sb<span class="token operator">-&gt;</span>sb_size <span class="token operator">+=</span> nBytes<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> sockerr <span class="token operator">=</span> <span class="token function">GetSockError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">RTMP_Log</span><span class="token punctuation">(</span>RTMP_LOGDEBUG<span class="token punctuation">,</span> <span class="token string">&quot;%s, recv returned %d. GetSockError(): %d (%s)&quot;</span><span class="token punctuation">,</span>
+                     __FUNCTION__<span class="token punctuation">,</span> nBytes<span class="token punctuation">,</span> sockerr<span class="token punctuation">,</span> <span class="token function">strerror</span><span class="token punctuation">(</span>sockerr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>sockerr <span class="token operator">==</span> EINTR <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>RTMP_ctrlC<span class="token punctuation">)</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>sockerr <span class="token operator">==</span> EWOULDBLOCK <span class="token operator">||</span> sockerr <span class="token operator">==</span> EAGAIN<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                sb<span class="token operator">-&gt;</span>sb_timedout <span class="token operator">=</span> TRUE<span class="token punctuation">;</span>
+                nBytes <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> nBytes<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <blockquote>
 <p>&#x53C2;&#x8003;&#xFF1A;</p>
 </blockquote>
-<p><a href="https://blog.csdn.net/leixiaohua1020/article/details/12958617" target="_blank">RTMPdump&#xFF08;libRTMP&#xFF09; &#x6E90;&#x4EE3;&#x7801;&#x5206;&#x6790; 7&#xFF1A; &#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x6D41;&#x5A92;&#x4F53;&#x8FDE;&#x63A5; &#xFF08;NetStream&#x90E8;&#x5206; 2&#xFF09;</a></p>
-<p><a href="https://www.jianshu.com/p/05b1e5d70c06" target="_blank">librtmp&#x6E90;&#x7801;&#x5206;&#x6790;&#x4E4B;&#x6838;&#x5FC3;&#x5B9E;&#x73B0;&#x89E3;&#x8BFB;</a></p>
+<p><a href="https://blog.csdn.net/huangyimo/article/details/83858620" target="_blank">RTMP&#x63A8;&#x6D41;&#x53CA;&#x534F;&#x8BAE;&#x5B66;&#x4E60;</a></p>
+<p><a href="https://blog.csdn.net/leixiaohua1020/article/details/12971635" target="_blank">RTMPdump&#xFF08;libRTMP&#xFF09; &#x6E90;&#x4EE3;&#x7801;&#x5206;&#x6790; 9&#xFF1A; &#x63A5;&#x6536;&#x6D88;&#x606F;&#xFF08;Message&#xFF09;&#xFF08;&#x63A5;&#x6536;&#x89C6;&#x97F3;&#x9891;&#x6570;&#x636E;&#xFF09;</a></p>
 <div style="margin: 0px;">
     &#x5907;&#x6848;&#x53F7;&#xFF1A;
     <a href="https://beian.miit.gov.cn/" target="_blank">
@@ -3828,7 +3836,7 @@
 
 
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2022-07-28 01:30:28
+2022-07-29 00:11:11
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -3865,7 +3873,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.1","depth":1,"next":{"title":"librtmp","level":"1.2","depth":1,"ref":"","articles":[{"title":"librtmp源码之调试","level":"1.2.1","depth":2,"path":"pages/librtmp/librtmp源码之调试.md","ref":"pages/librtmp/librtmp源码之调试.md","articles":[]},{"title":"librtmp源码之相关结构体","level":"1.2.2","depth":2,"path":"pages/librtmp/librtmp源码之相关结构体.md","ref":"pages/librtmp/librtmp源码之相关结构体.md","articles":[]},{"title":"librtmp源码之RTMP_Connect","level":"1.2.3","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_Connect.md","ref":"pages/librtmp/librtmp源码之RTMP_Connect.md","articles":[]},{"title":"librtmp源码之HandShake","level":"1.2.4","depth":2,"path":"pages/librtmp/librtmp源码之HandShake.md","ref":"pages/librtmp/librtmp源码之HandShake.md","articles":[]},{"title":"librtmp源码之SendConnectPacket","level":"1.2.5","depth":2,"path":"pages/librtmp/librtmp源码之SendConnectPacket.md","ref":"pages/librtmp/librtmp源码之SendConnectPacket.md","articles":[]},{"title":"librtmp源码之RTMP_SendPacket","level":"1.2.6","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_SendPacket.md","ref":"pages/librtmp/librtmp源码之RTMP_SendPacket.md","articles":[]},{"title":"librtmp源码之WriteN","level":"1.2.7","depth":2,"path":"pages/librtmp/librtmp源码之WriteN.md","ref":"pages/librtmp/librtmp源码之WriteN.md","articles":[]},{"title":"librtmp源码之RTMP_ConnectStream","level":"1.2.8","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_ConnectStream.md","ref":"pages/librtmp/librtmp源码之RTMP_ConnectStream.md","articles":[]},{"title":"librtmp源码之RTMP_ReadPacket","level":"1.2.9","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_ReadPacket.md","ref":"pages/librtmp/librtmp源码之RTMP_ReadPacket.md","articles":[]},{"title":"librtmp源码之RTMP_ClientPacket","level":"1.2.10","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_ClientPacket.md","ref":"pages/librtmp/librtmp源码之RTMP_ClientPacket.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"README.md","mtime":"2022-07-27T17:30:28.136Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-07-27T17:30:29.891Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.1","depth":1,"next":{"title":"librtmp","level":"1.2","depth":1,"ref":"","articles":[{"title":"librtmp源码之调试","level":"1.2.1","depth":2,"path":"pages/librtmp/librtmp源码之调试.md","ref":"pages/librtmp/librtmp源码之调试.md","articles":[]},{"title":"librtmp源码之相关结构体","level":"1.2.2","depth":2,"path":"pages/librtmp/librtmp源码之相关结构体.md","ref":"pages/librtmp/librtmp源码之相关结构体.md","articles":[]},{"title":"librtmp源码之RTMP_Connect","level":"1.2.3","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_Connect.md","ref":"pages/librtmp/librtmp源码之RTMP_Connect.md","articles":[]},{"title":"librtmp源码之HandShake","level":"1.2.4","depth":2,"path":"pages/librtmp/librtmp源码之HandShake.md","ref":"pages/librtmp/librtmp源码之HandShake.md","articles":[]},{"title":"librtmp源码之SendConnectPacket","level":"1.2.5","depth":2,"path":"pages/librtmp/librtmp源码之SendConnectPacket.md","ref":"pages/librtmp/librtmp源码之SendConnectPacket.md","articles":[]},{"title":"librtmp源码之RTMP_SendPacket","level":"1.2.6","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_SendPacket.md","ref":"pages/librtmp/librtmp源码之RTMP_SendPacket.md","articles":[]},{"title":"librtmp源码之WriteN","level":"1.2.7","depth":2,"path":"pages/librtmp/librtmp源码之WriteN.md","ref":"pages/librtmp/librtmp源码之WriteN.md","articles":[]},{"title":"librtmp源码之RTMP_ConnectStream","level":"1.2.8","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_ConnectStream.md","ref":"pages/librtmp/librtmp源码之RTMP_ConnectStream.md","articles":[]},{"title":"librtmp源码之RTMP_ReadPacket","level":"1.2.9","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_ReadPacket.md","ref":"pages/librtmp/librtmp源码之RTMP_ReadPacket.md","articles":[]},{"title":"librtmp源码之RTMP_ClientPacket","level":"1.2.10","depth":2,"path":"pages/librtmp/librtmp源码之RTMP_ClientPacket.md","ref":"pages/librtmp/librtmp源码之RTMP_ClientPacket.md","articles":[]},{"title":"librtmp源码之ReadN","level":"1.2.11","depth":2,"path":"pages/librtmp/librtmp源码之ReadN.md","ref":"pages/librtmp/librtmp源码之ReadN.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","simple-mind-map","mermaid-gb3"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"colorful","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"自考","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Chenchangqing's Blog":"https://chenchangqing.github.io/"}},"gitbook":"*","description":"尚德学院-学习记录","extension":null},"file":{"path":"README.md","mtime":"2022-07-28T16:11:11.708Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-07-28T16:11:17.577Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
