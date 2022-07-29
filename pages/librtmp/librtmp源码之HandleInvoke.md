@@ -337,11 +337,3 @@ leave:
 [RTMPdump（libRTMP） 源代码分析 7： 建立一个流媒体连接 （NetStream部分 2）](https://blog.csdn.net/leixiaohua1020/article/details/12958617)
 
 [手撕Rtmp协议细节（3）——Rtmp Body](https://cloud.tencent.com/developer/article/1630594)
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
