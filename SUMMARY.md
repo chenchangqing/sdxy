@@ -15,6 +15,7 @@
     * [librtmp源码之ReadN](pages/librtmp/librtmp源码之ReadN.md)
     * [librtmp源码之HandleInvoke](pages/librtmp/librtmp源码之HandleInvoke.md)
     * [librtmp源码之SendReleaseStream](pages/librtmp/librtmp源码之SendReleaseStream.md)
+    * [librtmp源码之SendFCPublish](pages/librtmp/librtmp源码之SendFCPublish.md)
 * FFmpeg
     * [相关链接](pages/FFmpeg/相关链接.md)
     * [FFmpeg编译](pages/FFmpeg/FFmpeg编译.md)
