@@ -275,6 +275,12 @@ char c_header[RTMP_MAX_HEADER_SIZE]; // chunk头部
 typedef struct RTMPPacket
 {
     // chunk basic header（大部分情况是一个字节）
+    // #define RTMP_PACKET_SIZE_LARGE    0 onMetaData流开始的绝对时间戳控制消息（如connect）
+    // #define RTMP_PACKET_SIZE_MEDIUM   1 大部分的rtmp header都是8字节的
+    // #define RTMP_PACKET_SIZE_SMALL    2 比较少见
+    // #define RTMP_PACKET_SIZE_MINIMUM  3 偶尔出现，低于8字节频率
+    // chunk type id (2bit)fmt 对应message head {0,3,7,11} + (6bit)chunk stream id
+    // 块类型ID，消息头的第1个字节的前2位，决定消息头长度
     uint8_t m_headerType;
 
     // Message type ID（1-7协议控制；8，9音视频；10以后为AMF编码消息）

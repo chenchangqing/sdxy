@@ -63,11 +63,3 @@ SendReleaseStream(RTMP *r)
 [手撕rtmp协议细节（2）——rtmp Header](https://cloud.tencent.com/developer/article/1630595?from=article.detail.1630594)
 
 [手撕Rtmp协议细节（3）——Rtmp Body](https://cloud.tencent.com/developer/article/1630594)
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
