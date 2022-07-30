@@ -19,6 +19,7 @@
     * [librtmp源码之RTMP_SendServerBW](pages/librtmp/librtmp源码之RTMP_SendServerBW.md)
     * [librtmp源码之RTMP_SendCtrl](pages/librtmp/librtmp源码之RTMP_SendCtrl.md)
     * [librtmp源码之RTMP_SendCreateStream](pages/librtmp/librtmp源码之RTMP_SendCreateStream.md)
+    * [librtmp源码之SendPublish](pages/librtmp/librtmp源码之SendPublish.md)
 * FFmpeg
     * [相关链接](pages/FFmpeg/相关链接.md)
     * [FFmpeg编译](pages/FFmpeg/FFmpeg编译.md)
