@@ -36,11 +36,3 @@ RTMP_SendServerBW(RTMP *r)
 >参考：
 
 [librtmp源码分析之核心实现解读](https://www.jianshu.com/p/05b1e5d70c06)
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-

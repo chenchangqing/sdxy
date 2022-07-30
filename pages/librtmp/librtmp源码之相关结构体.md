@@ -290,6 +290,14 @@ typedef struct RTMPPacket
     uint8_t m_hasAbsTimestamp;  /* timestamp absolute or relative? */
 
     // channel 即 stream id字段
+    // 第一个字节的低6位，命名为Chunk Stream ID，Chunk Stream ID用来表示消息的级别：
+    // chunk stream id 级别 
+    // 2 low level
+    // 3 high level(像connect, create_stream一类消息)
+    // 4 control stream
+    // 5 video
+    // 6 audio
+    // 8 control stream
     int m_nChannel;
 
     // 时间戳
