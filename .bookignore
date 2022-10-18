@@ -3,8 +3,8 @@
 gitbook.sh
 book.pdf
 
-/pages/**/*
-!/pages/操作系统概论
+#/pages/**/*
+#!/pages/操作系统概论
 
 
 
