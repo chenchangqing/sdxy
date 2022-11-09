@@ -1,7 +1,7 @@
 {
   "author": "陈长青",
-  "description": "个人简历",
-  "title": "个人简历",
+  "description": "每天进步一点点",
+  "title": "技术博客",
   "language": "zh-hans",
   "variables": {},
   "extension": null,
@@ -41,7 +41,9 @@
     "popup",
     "todo",
     "hide-element",
-    "back-to-top-button"
+    "back-to-top-button",                
+    "simple-mind-map",
+    "mermaid-gb3"
   ],
   "pluginsConfig": {
     "github": {
