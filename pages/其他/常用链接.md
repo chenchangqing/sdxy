@@ -154,6 +154,11 @@
 * [mermaid文档](https://mermaid-js.github.io/mermaid/#/)
 * [GitBook 插件](https://gitee.com/ji-song/gitbook-use/blob/master/plugins.md)
 * [PlantUML 简介](https://plantuml.com/zh/)
+* [GitBookW3C](https://www.w3cschool.cn/gitbook/gitbook-6fxy3ew2.html)
+* [Gitbook详解（四）-配置和说明详解](https://www.jianshu.com/p/6d0fcfa55460)
+* [定义右面页面的宽度](https://blog.csdn.net/u014458692/article/details/106401916)
+* [npmjs](https://www.npmjs.com/)
+* [GitBook 本地使用排雷，及导出基本可用的 PDF 版本](https://www.jianshu.com/p/617a467bfe40)
 
 ## Markdown
 
@@ -166,6 +171,8 @@
 * [markdown编辑](https://zybuluo.com/mdeditor)
 * [学生、工作人士如何才能更优雅地记笔记、写文档?（Markdown教程，详细到超乎你想象）](https://www.bilibili.com/read/cv5731265/)
 * [使用 Markdown 时，如何为文字加下划线？](https://www.zhihu.com/question/28375977)
+* [Markdown 简介](https://m.imooc.com/wiki/markdownlesson-markdownoverview)
+* [MarkDown中如何换行？](https://blog.csdn.net/u014163312/article/details/117934339)
 
 ## 简历
 

@@ -1,89 +1,65 @@
 {
-    "author": "陈长青",
-    "description": "尚德学院-学习记录",
-    "title": "自考",
-    "variables": {},
-    "extension": null,
-    "generator": "site",
-    "isbn": "",
-    "links": {
-        "sharing": {
-            "all": null,
-            "facebook": null,
-            "google": null,
-            "twitter": null,
-            "weibo": null
-        },
-        "sidebar": {
-            "Chenchangqing's Blog": "https://chenchangqing.github.io/"
-        }
+  "author": "陈长青",
+  "description": "个人简历",
+  "title": "个人简历",
+  "language": "zh-hans",
+  "variables": {},
+  "extension": null,
+  "generator": "site",
+  "isbn": "",
+  "links": {},
+  "output": null,
+  "pdf": {
+    "fontSize": 14,
+    "footerTemplate": null,
+    "headerTemplate": null,
+    "margin": {
+      "bottom": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0
     },
-    "output": null,
-    "pdf": {
-        "fontSize": 12,
-        "footerTemplate": null,
-        "headerTemplate": null,
-        "margin": {
-            "bottom": 36,
-            "left": 62,
-            "right": 62,
-            "top": 36
-        },
-        "pageNumbers": false,
-        "paperSize": "a4"
+    "pageNumbers": false,
+    "paperSize": "a4"
+  },
+  "plugins": [
+    "-highlight",
+    "-lunr",
+    "-search",
+    "search-pro",
+    "-sharing",
+    "chapter-fold",
+    "flexible-alerts",
+    "prism",
+    "expandable-chapters-small",
+    "expandable-chapters",
+    "github",
+    "splitter",
+    "copy-code-button",
+    "page-toc-button",
+    "klipse",
+    "popup",
+    "todo",
+    "hide-element",
+    "back-to-top-button"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/chenchangqing"
     },
-    "plugins": ["chapter-fold",
-                "expandable-chapters-small",
-                "expandable-chapters",
-                "advanced-emoji",
-                "github",
-                "splitter",
-                "-sharing", "sharing-plus",
-                "simple-page-toc",
-                "copy-code-button",
-                "page-toc-button",
-                "klipse",
-                "popup",
-                "tbfed-pagefooter",
-                "todo",
-                "prism", "-highlight",
-                "simple-mind-map",
-                "mermaid-gb3"
-                ],
-    "pluginsConfig": {
-        "simple-mind-map": {
-            "type": "markdown",
-            "preset": "colorful",
-            "linkShape": "diagonal",
-            "autoFit": true
-        },
-        "github": {"url": "https://github.com/chenchangqing"},
-        "sharing": {
-                   "douban": true,
-                   "google": true,
-                   "twitter": true,
-                   "weibo": true,
-                   "all": [
-                       "google", "twitter", "weibo"
-                   ]
-               },
-        "simple-page-toc": {
-                "maxDepth": 3,
-                "skipFirstH1": true
-                },
-        "page-toc-button": {
-            "maxTocDepth": 3,
-            "minTocSize": 3
-           },
-        "tbfed-pagefooter": {
-                    "copyright":"",
-                    "modify_label": "该文件最后修改时间：",
-                    "modify_format": "YYYY-MM-DD HH:mm:ss"
-                },
-        "prism": {
-          "css": [
-            "prismjs/themes/prism.css"
-          ]
-        }
+    "prism": {
+      "css": [
+        "prismjs/themes/prism.css"
+      ]
+    },
+    "hide-element": {
+      "elements": [
+        ".summary .gitbook-link"
+      ]
     }
+  },
+  "styles": {
+    "pdf": "./styles/pdf.css",
+    "website": "./styles/website.css"
+  }
 }

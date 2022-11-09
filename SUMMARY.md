@@ -1,6 +1,8 @@
 # Summary
 
 * [最近更新](README.md)
+* Flutter
+    * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
 * 数据结构导论
     * [第二章 线性表](pages/数据结构导论/第二章_线性表.md)
 * 操作系统概论
