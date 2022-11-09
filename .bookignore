@@ -3,8 +3,8 @@
 gitbook.sh
 book.pdf
 
-/pages/**/*
-!/pages/fultter
+#/pages/**/*
+#!/pages/fultter
 
 
 
