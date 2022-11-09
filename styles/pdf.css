@@ -1,0 +1,4 @@
+blockquote {
+  border-left: 2px dashed #333 !important;
+  background: linear-gradient(to bottom, #F1FAFA 100%,#F1FAFA 100%) !important;
+}
