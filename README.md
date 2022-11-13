@@ -159,6 +159,7 @@
 * [定义右面页面的宽度](https://blog.csdn.net/u014458692/article/details/106401916)
 * [npmjs](https://www.npmjs.com/)
 * [GitBook 本地使用排雷，及导出基本可用的 PDF 版本](https://www.jianshu.com/p/617a467bfe40)
+* [案例](https://www.chengweiyang.cn/gitbook/customize/book.json.html)
 
 ## Markdown
 

@@ -1,6 +1,12 @@
 # Summary
 
 * [最近更新](README.md)
+* 面试题
+    * [取东西](pages/面试题/取东西.md)
+    * [sizeof](pages/面试题/sizeof.md)
+    * [复制构造函数](pages/面试题/复制构造函数.md)
+    * [赋值运算符函数](pages/面试题/赋值运算符函数.md)
+    * [实现Singleton模式](pages/面试题/实现Singleton模式.md)
 * Flutter
     * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
 * 数据结构导论
@@ -264,6 +270,4 @@
 * 重拾服务端
     * [域名的注册及备案](pages/重拾服务端/域名的注册及备案.md)
     * [Java开发工具](pages/重拾服务端/Java开发工具.md)
-* 面试题
-    * [取东西](pages/面试题/取东西.md)
 
