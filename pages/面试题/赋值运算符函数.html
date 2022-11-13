@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>取东西 · 技术博客</title>
+        <title>赋值运算符函数 · 技术博客</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -87,8 +87,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="sizeof.html" />
+    <link rel="next" href="实现Singleton模式.html" />
     
+    
+    <link rel="prev" href="复制构造函数.html" />
     
 
     </head>
@@ -144,7 +146,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="取东西.html">
+        <li class="chapter " data-level="1.2.1" data-path="取东西.html">
             
                 <a href="取东西.html">
             
@@ -183,7 +185,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="赋值运算符函数.html">
+        <li class="chapter active" data-level="1.2.4" data-path="赋值运算符函数.html">
             
                 <a href="赋值运算符函数.html">
             
@@ -3861,7 +3863,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >取东西</a>
+        <a href="../.." >赋值运算符函数</a>
     </h1>
 </div>
 
@@ -3876,140 +3878,76 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x53D6;&#x4E1C;&#x897F;">&#x53D6;&#x4E1C;&#x897F;</h1>
-<p><a href="http://www.1221.site/mianshi.html" target="_blank">&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;</a></p>
-<pre class="language-"><code class="lang-javascript"><span class="token operator">&lt;</span>html<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span><span class="token operator">&gt;</span>
+                                <h1 id="&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;">&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;</h1>
+<blockquote>
+<p>&#x9898;&#x76EE;&#xFF1A;&#x5982;&#x4E0B;&#x4E3A;&#x7C7B;&#x578B;CMyString&#x7684;&#x58F0;&#x660E;&#xFF0C;&#x8BF7;&#x4E3A;&#x8BE5;&#x7C7B;&#x578B;&#x6DFB;&#x52A0;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;&#x3002;</p>
+</blockquote>
+<pre class="language-"><code class="lang-c">class CMyString
+<span class="token punctuation">{</span>
+public<span class="token operator">:</span>
+    <span class="token function">CMyString</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> pData <span class="token operator">=</span> nullptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">CMyString</span><span class="token punctuation">(</span><span class="token keyword">const</span> CMyString<span class="token operator">&amp;</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CMyString</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// &#x521D;&#x59CB;&#x5316;&#x6BCF;&#x884C;&#x6570;&#x91CF;</span>
-<span class="token keyword">var</span> row1Count <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> row2Count <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> row3Count <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+    CMyString<span class="token operator">&amp;</span> operator <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">const</span> CMyString<span class="token operator">&amp;</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// &#x83B7;&#x53D6;&#x884C;&#x5269;&#x4F59;&#x6570;&#x91CF;</span>
-<span class="token keyword">function</span> <span class="token function">getRemainCount</span><span class="token punctuation">(</span><span class="token parameter">rowNum</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">switch</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>rowNum<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
-        <span class="token keyword">return</span> row1Count<span class="token punctuation">;</span>
-    <span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span>
-        <span class="token keyword">return</span> row2Count<span class="token punctuation">;</span>
-    <span class="token keyword">case</span> <span class="token number">3</span><span class="token operator">:</span> 
-        <span class="token keyword">return</span> row3Count<span class="token punctuation">;</span>
-    <span class="token keyword">default</span><span class="token operator">:</span>
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// &#x66F4;&#x65B0;&#x884C;&#x6570;&#x91CF;</span>
-<span class="token comment">// rowNum: &#x7B2C;&#x51E0;&#x884C;&#xFF08;1,2,3&#xFF09;</span>
-<span class="token comment">// getCount: &#x53D6;&#x6570;&#x91CF;</span>
-<span class="token keyword">function</span> <span class="token function">updateRemainCount</span><span class="token punctuation">(</span><span class="token parameter">rowNum<span class="token punctuation">,</span> getCount</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">switch</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>rowNum<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
-        row1Count <span class="token operator">-=</span> getCount<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span>
-        row2Count <span class="token operator">-=</span> getCount<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> <span class="token number">3</span><span class="token operator">:</span> 
-        row3Count <span class="token operator">-=</span> getCount<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">default</span><span class="token operator">:</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+private<span class="token operator">:</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> m_pData<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment">// &#x5224;&#x65AD;&#x662F;&#x5426;&#x53D6;&#x5B8C;&#x6240;&#x6709;</span>
-<span class="token keyword">function</span> <span class="token function">judgeFinish</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>row1Count <span class="token operator">+</span> row2Count <span class="token operator">+</span> row3Count<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment">// &#x53D6;&#x4E1C;&#x897F;</span>
-<span class="token comment">// rowNum: &#x7B2C;&#x51E0;&#x884C;&#xFF08;1,2,3&#xFF09;</span>
-<span class="token comment">// getCount: &#x53D6;&#x6570;&#x91CF;</span>
-<span class="token comment">// &#x8FD4;&#x56DE;&#x503C; 0:&#x6210;&#x529F;&#x53D6;&#x51FA; -1:&#x4F60;&#x662F;&#x8F93;&#x5BB6;&#xFF0C;-2:&#x7B2C;x&#x884C;&#x7A7A;&#xFF0C;-3:&#x7B2C;x&#x884C;&#x6570;&#x91CF;&#x4E0D;&#x8DB3;</span>
-<span class="token keyword">function</span> <span class="token function">getThing</span><span class="token punctuation">(</span><span class="token parameter">rowNum<span class="token punctuation">,</span> getCount</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> remainCount <span class="token operator">=</span> <span class="token function">getRemainCount</span><span class="token punctuation">(</span>rowNum<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>remainCount <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>getCount <span class="token operator">&gt;</span> remainCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">;</span><span class="token comment">// &#x7B2C;x&#x884C;&#x6570;&#x91CF;&#x4E0D;&#x8DB3;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            <span class="token comment">// &#x66F4;&#x65B0;&#x884C;&#x6570;&#x91CF;</span>
-            <span class="token function">updateRemainCount</span><span class="token punctuation">(</span>rowNum<span class="token punctuation">,</span> getCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">// &#x5224;&#x65AD;&#x662F;&#x5426;&#x53D6;&#x5B8C;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">judgeFinish</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">// &#x4F60;&#x662F;&#x8F93;&#x5BB6;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">// &#x6210;&#x529F;&#x53D6;&#x51FA;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">;</span><span class="token comment">// &#x7B2C;x&#x884C;&#x7A7A;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">// &#x6267;&#x884C;&#x56DE;&#x5408;</span>
-<span class="token comment">// getCount: &#x53D6;&#x6570;&#x91CF;</span>
-<span class="token comment">// rowNum: &#x7B2C;&#x51E0;&#x884C;&#xFF08;1,2,3&#xFF09;</span>
-<span class="token keyword">function</span> <span class="token function">round</span><span class="token punctuation">(</span><span class="token parameter">rowNum<span class="token punctuation">,</span> getCount</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token function">getThing</span><span class="token punctuation">(</span>rowNum<span class="token punctuation">,</span> getCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">switch</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> <span class="token number">0</span><span class="token operator">:</span> 
-        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6210;&#x529F;&#x53D6;&#x51FA;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> <span class="token operator">-</span><span class="token number">1</span><span class="token operator">:</span> 
-        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">&quot;&#x4F60;&#x662F;&#x8F93;&#x5BB6;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> <span class="token operator">-</span><span class="token number">2</span><span class="token operator">:</span> 
-        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7B2C;&quot;</span><span class="token operator">+</span>rowNum<span class="token operator">+</span><span class="token string">&quot;&#x884C;&#x7A7A;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> <span class="token operator">-</span><span class="token number">3</span><span class="token operator">:</span>
-        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7B2C;&quot;</span><span class="token operator">+</span>rowNum<span class="token operator">+</span><span class="token string">&quot;&#x884C;&#x6570;&#x91CF;&#x4E0D;&#x8DB3;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">default</span><span class="token operator">:</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment">// &#x8FD0;&#x884C;</span>
-<span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> rowNum <span class="token operator">=</span> <span class="token function">prompt</span><span class="token punctuation">(</span><span class="token string">&quot;&#x53D6;&#x7B2C;&#x51E0;&#x884C;:&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">var</span> getCount <span class="token operator">=</span> <span class="token function">prompt</span><span class="token punctuation">(</span><span class="token string">&quot;&#x53D6;&#x591A;&#x5C11;:&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">round</span><span class="token punctuation">(</span>rowNum<span class="token punctuation">,</span> getCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
-
-<span class="token number">15</span>&#x4E2A;&#x4EFB;&#x610F;&#x7269;&#x54C1;&#xFF08;&#x53EF;&#x4EE5;&#x662F;&#x706B;&#x67F4;&#x7259;&#x7B7E;poker&#xFF09;
-
-&#x4EE5;&#x4E0B;&#x6309;&#x7259;&#x7B7E;&#x4E3A;&#x4F8B;
-
-&#x5C06;<span class="token number">15</span>&#x6839;&#x7259;&#x7B7E;
-
-&#x5206;&#x6210;&#x4E09;&#x884C;
-
-&#x6BCF;&#x884C;&#x81EA;&#x4E0A;&#x800C;&#x4E0B;&#xFF08;&#x5176;&#x5B9E;&#x65B9;&#x5411;&#x4E0D;&#x9650;&#xFF09;&#x5206;&#x522B;&#x662F;<span class="token number">3</span>&#x3001;<span class="token number">5</span>&#x3001;<span class="token number">7</span>&#x6839;
-
-&#x5B89;&#x6392;&#x4E24;&#x4E2A;&#x73A9;&#x5BB6;&#xFF0C;&#x6BCF;&#x4EBA;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x8F6E;&#x5185;&#xFF0C;&#x5728;&#x4EFB;&#x610F;&#x884C;&#x62FF;&#x4EFB;&#x610F;&#x6839;&#x7259;&#x7B7E;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x8DE8;&#x884C;
-
-&#x62FF;&#x6700;&#x540E;&#x4E00;&#x6839;&#x7259;&#x7B7E;&#x7684;&#x4EBA;&#x5373;&#x4E3A;&#x8F93;&#x5BB6;
-
-&#x9898;&#x76EE;
-
-&#x8BF7;&#x7528;&#x4F60;&#x6700;&#x64C5;&#x957F;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x4EE5;&#x4F60;&#x89C9;&#x5F97;&#x6700;&#x4F18;&#x96C5;&#x7684;&#x65B9;&#x5F0F;&#x5199;&#x4E00;&#x4E2A;&#x7B26;&#x5408;&#x4EE5;&#x4E0A;&#x6E38;&#x620F;&#x89C4;&#x5219;&#x7684;&#x7A0B;&#x5E8F;&#x3002;&#x5B8C;&#x6210;&#x540E;&#x628A;&#x5199;&#x597D;&#x7684;&#x4EE3;&#x7801;&#x548C;&#x7B80;&#x5386;&#x540C;&#x65F6;&#x53D1;&#x5230;&#x4EE5;&#x4E0B;&#x90AE;&#x7BB1;&#xFF08;&#x5907;&#x6CE8;&#x59D3;&#x540D;<span class="token operator">+</span>&#x5C97;&#x4F4D;&#xFF09;&#xFF0C;&#x5E76;&#x52A0;&#x4E0A;&#x4E00;&#x6BB5;&#x7B80;&#x77ED;&#x7684;&#x6587;&#x5B57;&#x63CF;&#x8FF0;&#x4E00;&#x4E0B;&#x4F60;&#x7684;&#x60F3;&#x6CD5;
-
-&#xFF08;&#x8BF7;&#x4F7F;&#x7528;javascript&#xFF0C;typescript&#x6216;<span class="token constant">C</span>#&#x7684;&#x5176;&#x4E2D;&#x4E00;&#x79CD;&#x8BED;&#x8A00;&#x5B8C;&#x6210;&#x6D4B;&#x8BD5;&#x9898;&#xFF09;
-<span class="token operator">&lt;</span>br<span class="token operator">/</span><span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>br<span class="token operator">/</span><span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">&quot;button&quot;</span> onclick<span class="token operator">=</span><span class="token string">&quot;run()&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;&#x53D6;&#x4E1C;&#x897F;&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
-
-<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
 </code></pre>
+<p>&#x5F53;&#x9762;&#x8BD5;&#x5B98;&#x8981;&#x6C42;&#x5E94;&#x8058;&#x8005;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x4ED6;&#x4F1A;&#x5728;&#x68C0;&#x67E5;&#x5E94;&#x8058;&#x8005;&#x5199;&#x51FA;&#x7684;&#x4EE3;&#x7801;&#x65F6;&#x5173;&#x6CE8;&#x5982;&#x4E0B;&#x51E0;&#x70B9;&#xFF1A;</p>
+<ul>
+<li><p>&#x662F;&#x5426;&#x628A;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B;&#x58F0;&#x660E;&#x4E3A;&#x8BE5;&#x7C7B;&#x578B;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x5E76;&#x5728;&#x51FD;&#x6570;&#x7ED3;&#x675F;&#x524D;&#x8FD4;&#x56DE;&#x5B9E;&#x4F8B;&#x81EA;&#x8EAB;&#x7684;&#x5F15;&#x7528;(*this)&#x3002;&#x53EA;&#x6709;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5F15;&#x7528;&#xFF0C;&#x624D;&#x53EF;&#x4EE5;&#x5141;&#x8BB8;&#x8FDE;&#x7EED;&#x8D4B;&#x503C;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5982;&#x679C;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x662F;void,&#x5219;&#x5E94;&#x7528;&#x8BE5;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x5C06;&#x4E0D;&#x80FD;&#x8FDB;&#x884C;&#x8FDE;&#x7EED;&#x8D4B;&#x503C;&#x3002;&#x5047;&#x8BBE;&#x6709;3&#x4E2A;CMyString&#x7684;&#x5BF9;&#x8C61;&#xFF1A;strl&#x3001;str2&#x548C;str3,&#x5728;&#x7A0B;&#x5E8F;&#x4E2D;&#x8BED;&#x53E5;str1=str2=str3&#x5C06;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;&#x7F16;&#x8BD1;&#x3002;</p>
+</li>
+<li><p>&#x662F;&#x5426;&#x628A;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#x58F0;&#x660E;&#x4E3A;&#x5E38;&#x91CF;&#x5F15;&#x7528;&#x3002;&#x5982;&#x679C;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x4E0D;&#x662F;&#x5F15;&#x7528;&#x800C;&#x662F;&#x5B9E;&#x4F8B;&#xFF0C;&#x90A3;&#x4E48;&#x4ECE;&#x5F62;&#x53C2;&#x5230;&#x5B9E;&#x53C2;&#x4F1A;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;&#x628A;&#x53C2;&#x6570;&#x58F0;&#x660E;&#x4E3A;&#x5F15;&#x7528;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x8FD9;&#x6837;&#x7684;&#x65E0;&#x8C13;&#x6D88;&#x8017;&#xFF0C;&#x80FD;&#x63D0;&#x9AD8;&#x4EE3;&#x7801;&#x7684;&#x6548;&#x7387;&#x3002;&#x540C;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;&#x5185;&#x4E0D;&#x4F1A;&#x6539;&#x53D8;&#x4F20;&#x5165;&#x7684;&#x5B9E;&#x4F8B;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x6B64;&#x5E94;&#x8BE5;&#x4E3A;&#x4F20;&#x5165;&#x7684;&#x5F15;&#x7528;&#x53C2;&#x6570;&#x52A0;&#x4E0A;const&#x5173;&#x952E;&#x5B57;&#x3002;</p>
+</li>
+<li><p>&#x662F;&#x5426;&#x91CA;&#x653E;&#x5B9E;&#x4F8B;&#x81EA;&#x8EAB;&#x5DF2;&#x6709;&#x7684;&#x5185;&#x5B58;&#x3002;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5FD8;&#x8BB0;&#x5728;&#x5206;&#x914D;&#x65B0;&#x5185;&#x5B58;&#x4E4B;&#x524D;&#x91CA;&#x653E;&#x81EA;&#x8EAB;&#x5DF2;&#x6709;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x5219;&#x7A0B;&#x5E8F;&#x5C06;&#x51FA;&#x73B0;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x3002;</p>
+</li>
+<li><p>&#x5224;&#x65AD;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x548C;&#x5F53;&#x524D;&#x7684;&#x5B9E;&#x4F8B;(*this)&#x662F;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;&#x5982;&#x679C;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#xFF0C;&#x5219;&#x4E0D;&#x8FDB;&#x884C;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x3002;&#x5982;&#x679C;&#x4E8B;&#x5148;&#x4E0D;&#x5224;&#x65AD;&#x5C31;&#x8FDB;&#x884C;&#x8D4B;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x91CA;&#x653E;&#x5B9E;&#x4F8B;&#x81EA;&#x8EAB;&#x5185;&#x5B58;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x4F1A;&#x5BFC;&#x81F4;&#x4E25;&#x91CD;&#x7684;&#x95EE;&#x9898;&#xFF1A;&#x5F53;*this&#x548C;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x65F6;&#xFF0C;&#x4E00;&#x65E6;&#x91CA;&#x653E;&#x4E86;&#x81EA;&#x8EAB;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x7684;&#x5185;&#x5B58;&#x4E5F;&#x540C;&#x65F6;&#x88AB;&#x91CA;&#x653E;&#x4E86;&#xFF0C;&#x56E0;&#x6B64;&#x518D;&#x4E5F;&#x627E;&#x4E0D;&#x5230;&#x9700;&#x8981;&#x8D4B;&#x503C;&#x7684;&#x5185;&#x5BB9;&#x4E86;&#x3002;</p>
+</li>
+</ul>
+<blockquote>
+<p>&#x7ECF;&#x5178;&#x7684;&#x89E3;&#x6CD5;&#xFF0C;&#x9002;&#x7528;&#x4E8E;&#x521D;&#x7EA7;&#x7A0B;&#x5E8F;&#x5458;</p>
+</blockquote>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x5B8C;&#x6574;&#x5730;&#x8003;&#x8651;&#x4E86;&#x4E0A;&#x8FF0;4&#x4E2A;&#x65B9;&#x9762;&#x4E4B;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x5199;&#x51FA;&#x5982;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c">CMyString<span class="token operator">&amp;</span> CMyString<span class="token operator">::</span>operator <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">const</span> CMyString<span class="token operator">&amp;</span> str<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>this <span class="token operator">==</span> <span class="token operator">&amp;</span>str<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span>this<span class="token punctuation">;</span>
+
+    delete <span class="token punctuation">[</span><span class="token punctuation">]</span>m_pData<span class="token punctuation">;</span>
+    m_pData <span class="token operator">=</span> nullptr<span class="token punctuation">;</span>
+
+    m_pData <span class="token operator">=</span> new <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token function">strlen</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>m_pData<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>m_pData<span class="token punctuation">,</span> str<span class="token punctuation">.</span>m_pData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token operator">*</span>this<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>&#x8003;&#x8651;&#x5F02;&#x5E38;&#x5B89;&#x5168;&#x6027;&#x7684;&#x89E3;&#x6CD5;&#xFF0C;&#x9AD8;&#x7EA7;&#x7A0B;&#x5E8F;&#x5458;&#x5FC5;&#x5907;</p>
+</blockquote>
+<p>&#x5728;&#x524D;&#x9762;&#x7684;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x5206;&#x914D;&#x5185;&#x5B58;&#x4E4B;&#x524D;&#x5148;&#x7528;delete&#x91CA;&#x653E;&#x4E86;&#x5B9E;&#x4F8B;m_pData&#x7684;&#x5185;&#x5B58;&#x3002;&#x5982;&#x679C;&#x6B64;&#x65F6;&#x5185;&#x5B58;&#x4E0D;&#x8DB3;&#x5BFC;&#x81F4;new char&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x5219;m_pData&#x5C06;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x6307;&#x9488;&#xFF0C;&#x8FD9;&#x6837;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#x5BFC;&#x81F4;&#x7A0B;&#x5E8F;&#x5D29;&#x6E83;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4E00;&#x65E6;&#x5728;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;&#x5185;&#x90E8;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;CMyString&#x7684;&#x5B9E;&#x4F8B;&#x4E0D;&#x518D;&#x4FDD;&#x6301;&#x6709;&#x6548;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x8FD9;&#x5C31;&#x8FDD;&#x80CC;&#x4E86;&#x5F02;&#x5E38;&#x5B89;&#x5168;&#x6027;(Exception Safety)&#x539F;&#x5219;&#x3002;</p>
+<p>&#x8981;&#x60F3;&#x5728;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;&#x4E2D;&#x5B9E;&#x73B0;&#x5F02;&#x5E38;&#x5B89;&#x5168;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x3002;&#x4E00;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x529E;&#x6CD5;&#x662F;&#x6211;&#x4EEC;&#x5148;&#x7528;new&#x5206;&#x914D;&#x65B0;&#x5185;&#x5BB9;&#xFF0C;&#x518D;&#x7528;delete&#x91CA;&#x653E;&#x5DF2;&#x6709;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x8FD9;&#x6837;&#x53EA;&#x5728;&#x5206;&#x914D;&#x5185;&#x5BB9;&#x6210;&#x529F;&#x4E4B;&#x540E;&#x518D;&#x91CA;&#x653E;&#x539F;&#x6765;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5F53;&#x5206;&#x914D;&#x5185;&#x5B58;&#x5931;&#x8D25;&#x65F6;&#x6211;&#x4EEC;&#x80FD;&#x786E;&#x4FDD;CMyString&#x7684;&#x5B9E;&#x4F8B;&#x4E0D;&#x4F1A;&#x88AB;&#x4FEE;&#x6539;&#x3002;&#x6211;&#x4EEC;&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x66F4;&#x597D;&#x7684;&#x529E;&#x6CD5;&#xFF0C;&#x5373;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x5B9E;&#x4F8B;&#xFF0C;&#x518D;&#x4EA4;&#x6362;&#x4E34;&#x65F6;&#x5B9E;&#x4F8B;&#x548C;&#x539F;&#x6765;&#x7684;&#x5B9E;&#x4F8B;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x8FD9;&#x79CD;&#x601D;&#x8DEF;&#x7684;&#x53C2;&#x8003;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c">CMyString<span class="token operator">&amp;</span> CMyString<span class="token operator">::</span>operator <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">const</span> CMyString<span class="token operator">&amp;</span> str<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>this <span class="token operator">!=</span> <span class="token operator">&amp;</span>str<span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+        CMyString <span class="token function">strTemp</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">char</span><span class="token operator">*</span>pTemp<span class="token operator">=</span>strTemp<span class="token punctuation">.</span>m_pData<span class="token punctuation">;</span>
+        strTemp<span class="token punctuation">.</span>m_pData<span class="token operator">=</span>m_pData<span class="token punctuation">;</span>
+        m_pData<span class="token operator">=</span>pTemp<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span>this<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x5B9E;&#x4F8B;strTemp,&#x63A5;&#x7740;&#x628A;strTemp.m_pData&#x548C;&#x5B9E;&#x4F8B;&#x81EA;&#x8EAB;&#x7684;m_pData&#x8FDB;&#x884C;&#x4EA4;&#x6362;&#x3002;&#x7531;&#x4E8E;strTemp&#x662F;&#x4E00;&#x4E2A;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x4F46;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x5230;if&#x7684;&#x5916;&#x9762;&#x65F6;&#x4E5F;&#x5C31;&#x51FA;&#x4E86;&#x8BE5;&#x53D8;&#x91CF;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x5C31;&#x4F1A;&#x81EA;&#x52A8;&#x8C03;&#x7528;strTemp&#x7684;&#x6790;&#x6784;&#x51FD;&#x6570;&#xFF0C;&#x628A;strTemp.m_pData&#x6240;&#x6307;&#x5411;&#x7684;&#x5185;&#x5B58;&#x91CA;&#x653E;&#x6389;&#x3002;&#x7531;&#x4E8E;strTemp.m_pData&#x6307;&#x5411;&#x7684;&#x5185;&#x5B58;&#x5C31;&#x662F;&#x5B9E;&#x4F8B;&#x4E4B;&#x524D;m_pData&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x8FD9;&#x5C31;&#x76F8;&#x5F53;&#x4E8E;&#x81EA;&#x52A8;&#x8C03;&#x7528;&#x6790;&#x6784;&#x51FD;&#x6570;&#x91CA;&#x653E;&#x5B9E;&#x4F8B;&#x7684;&#x5185;&#x5B58;&#x3002;</p>
+<p>&#x5728;&#x65B0;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5728;CMyString&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x91CC;&#x7528;new&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002;&#x5982;&#x679C;&#x7531;&#x4E8E;&#x5185;&#x5B58;&#x4E0D;&#x8DB3;&#x629B;&#x51FA;&#x8BF8;&#x5982;bad alloc&#x7B49;&#x5F02;&#x5E38;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x8FD8;&#x6CA1;&#x6709;&#x4FEE;&#x6539;&#x539F;&#x6765;&#x5B9E;&#x4F8B;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x6B64;&#x5B9E;&#x4F8B;&#x7684;&#x72B6;&#x6001;&#x8FD8;&#x662F;&#x6709;&#x6548;&#x7684;&#xFF0C;&#x8FD9;&#x4E5F;&#x5C31;&#x4FDD;&#x8BC1;&#x4E86;&#x5F02;&#x5E38;&#x5B89;&#x5168;&#x6027;&#x3002;</p>
+<blockquote>
+<p>&#x6E90;&#x4EE3;&#x7801;&#xFF1A;<a href="https://github.com/zhedahht/CodingInterviewChinese2/tree/master/01_AssignmentOperator" target="_blank">https://github.com/zhedahht/CodingInterviewChinese2/tree/master/01_AssignmentOperator</a></p>
+</blockquote>
  <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -4038,8 +3976,12 @@
 
             
                 
+                <a href="复制构造函数.html" class="navigation navigation-prev " aria-label="Previous page: 复制构造函数">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="sizeof.html" class="navigation navigation-next navigation-unique" aria-label="Next page: sizeof">
+                
+                <a href="实现Singleton模式.html" class="navigation navigation-next " aria-label="Next page: 实现Singleton模式">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -4050,7 +3992,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"取东西","level":"1.2.1","depth":2,"next":{"title":"sizeof","level":"1.2.2","depth":2,"path":"pages/面试题/sizeof.md","ref":"pages/面试题/sizeof.md","articles":[]},"previous":{"title":"面试题","level":"1.2","depth":1,"ref":"","articles":[{"title":"取东西","level":"1.2.1","depth":2,"path":"pages/面试题/取东西.md","ref":"pages/面试题/取东西.md","articles":[]},{"title":"sizeof","level":"1.2.2","depth":2,"path":"pages/面试题/sizeof.md","ref":"pages/面试题/sizeof.md","articles":[]},{"title":"复制构造函数","level":"1.2.3","depth":2,"path":"pages/面试题/复制构造函数.md","ref":"pages/面试题/复制构造函数.md","articles":[]},{"title":"赋值运算符函数","level":"1.2.4","depth":2,"path":"pages/面试题/赋值运算符函数.md","ref":"pages/面试题/赋值运算符函数.md","articles":[]},{"title":"实现Singleton模式","level":"1.2.5","depth":2,"path":"pages/面试题/实现Singleton模式.md","ref":"pages/面试题/实现Singleton模式.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/面试题/取东西.md","mtime":"2022-11-09T20:19:52.383Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-13T15:55:23.360Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"赋值运算符函数","level":"1.2.4","depth":2,"next":{"title":"实现Singleton模式","level":"1.2.5","depth":2,"path":"pages/面试题/实现Singleton模式.md","ref":"pages/面试题/实现Singleton模式.md","articles":[]},"previous":{"title":"复制构造函数","level":"1.2.3","depth":2,"path":"pages/面试题/复制构造函数.md","ref":"pages/面试题/复制构造函数.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/面试题/赋值运算符函数.md","mtime":"2022-11-13T15:55:21.031Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-11-13T15:55:23.360Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
