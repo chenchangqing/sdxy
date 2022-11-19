@@ -296,15 +296,6 @@
 * [RxDataSource 使用套路与解释](https://zhuanlan.zhihu.com/p/71212181)
 * [RxSwift 中的老司机](https://juejin.cn/post/6844903906745516046)
 
-## 面试
-
-* [iOS开发中 weak和assign的区别](https://www.jianshu.com/p/e9a46253f587)
-* [做了快5年iOS，这份面试题让我从15K变成了30K](https://www.jianshu.com/p/1af57f250976?utm_campaign=haruki&utm_content=note&utm_medium=reader_share&utm_source=weixin)
-* [《招聘一个靠谱的iOS》面试题参考答案](https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md#13-用property声明的nsstring或nsarraynsdictionary经常使用copy关键字为什么如果改用strong关键字可能造成什么问题)
-* [iOS性能优化](https://www.jianshu.com/p/aace73e49392)
-* [iOS]NSHashTable和NSMapTable用法](https://www.jianshu.com/p/de71385930ba)
-* [Swift中的unowned和weak](https://www.jianshu.com/p/51cb83833c9b?utm_campaign=hugo)
-
 ## VPN
 
 * [cx](https://main.v2ray.cx/)
