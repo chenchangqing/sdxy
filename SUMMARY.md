@@ -7,6 +7,7 @@
     * [复制构造函数](pages/面试题/复制构造函数.md)
     * [赋值运算符函数](pages/面试题/赋值运算符函数.md)
     * [实现Singleton模式](pages/面试题/实现Singleton模式.md)
+    * [排序算法](pages/面试题/排序算法.md)
 * Flutter
     * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
 * 数据结构导论
