@@ -1,15 +1,19 @@
 # Summary
 
 * [最近更新](README.md)
-* 面试题
-    * [取东西](pages/面试题/取东西.md)
-    * [sizeof](pages/面试题/sizeof.md)
-    * [复制构造函数](pages/面试题/复制构造函数.md)
-    * [赋值运算符函数](pages/面试题/赋值运算符函数.md)
-    * [实现Singleton模式](pages/面试题/实现Singleton模式.md)
-    * [排序算法](pages/面试题/排序算法.md)
-    * [RSA](pages/面试题/RSA.md)
-    * [面试题链接](pages/面试题/面试题链接.md)
+* 面试系列
+    * [面试问题集锦1](pages/面试系列/01_面试问题集锦.md)
+    * [面试问题集锦2](pages/面试系列/02_面试问题集锦.md)
+    * [取东西](pages/面试系列/取东西.md)
+    * [sizeof](pages/面试系列/sizeof.md)
+    * [复制构造函数](pages/面试系列/复制构造函数.md)
+    * [赋值运算符函数](pages/面试系列/赋值运算符函数.md)
+    * [实现Singleton模式](pages/面试系列/实现Singleton模式.md)
+    * [排序算法](pages/面试系列/排序算法.md)
+    * [RSA](pages/面试系列/RSA.md)
+    * [面试题链接](pages/面试系列/面试题链接.md)
+    * [数组与指针](pages/面试系列/数组与指针.md)
+    * [数组中重复的数字](pages/面试系列/数组中重复的数字.md)
 * Flutter
     * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
 * 数据结构导论
@@ -162,9 +166,6 @@
     * [65.ReactorKit架构1：安装配置、基本用法](pages/RxSwift系列/65_ReactorKit架构1_安装配置、基本用法.md)
     * [66.ReactorKit架构2：一个用户注册样例](pages/RxSwift系列/66_ReactorKit架构2_一个用户注册样例.md)
     * [67.ReactorKit架构3：GitHub资源搜索样例](pages/RxSwift系列/67_ReactorKit架构3_GitHub资源搜索样例.md)
-* 面试系列
-    * [1.面试问题集锦](pages/面试系列/01_面试问题集锦.md)
-    * [2.面试问题集锦](pages/面试系列/02_面试问题集锦.md)
 * WebView系列
     * [1.WebView与iOS原生的交互](pages/WebView系列/01_WebView与iOS原生的交互.md)
     * [2.DSBridge的使用](pages/WebView系列/02_DSBridge的使用.md)
