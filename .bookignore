@@ -3,7 +3,7 @@
 gitbook.sh
 book.pdf
 
-#/pages/**/*
+/pages/**/*
 #!/pages/C++程序设计
 #!/pages/FFmpeg
 #!/pages/fultter
@@ -27,3 +27,4 @@ book.pdf
 #!/pages/第三方分享
 #!/pages/重拾服务端
 #!/pages/面试系列
+!/pages/游戏UI设计
