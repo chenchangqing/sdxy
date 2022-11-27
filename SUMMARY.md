@@ -21,6 +21,13 @@
     * [链表](pages/面试系列/链表.md)
     * [从尾到头打印链表](pages/面试系列/从尾到头打印链表.md)
     * [面试准备](pages/面试系列/面试准备.md)
+    * [视频播放器](pages/面试系列/视频播放器.md)
+    * [组件化开发](pages/面试系列/组件化开发.md)
+    * [设计模式](pages/面试系列/设计模式.md)
+    * [数据结构](pages/面试系列/数据结构.md)
+    * [CICD](pages/面试系列/CICD.md)
+    * [SwiftUI](pages/面试系列/SwiftUI.md)
+    * [敏捷开发](pages/面试系列/敏捷开发.md)
 * Flutter
     * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
 * 数据结构导论
