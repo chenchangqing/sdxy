@@ -25,7 +25,6 @@
     * [组件化开发](pages/面试系列/组件化开发.md)
     * [设计模式](pages/面试系列/设计模式.md)
     * [数据结构](pages/面试系列/数据结构.md)
-    * [CICD](pages/面试系列/CICD.md)
     * [SwiftUI](pages/面试系列/SwiftUI.md)
     * [敏捷开发](pages/面试系列/敏捷开发.md)
 * Flutter
