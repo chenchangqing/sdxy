@@ -2,6 +2,7 @@
 /ignore/*
 gitbook.sh
 book.pdf
+*.pdf
 
 #/pages/**/*
 #!/pages/C++程序设计

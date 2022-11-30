@@ -8,3 +8,4 @@
 * [SwiftUI教程与源码](https://www.jianshu.com/c/7b3e3b671970)
 * [SwiftUI Search Bar in the Navigation Bar](http://blog.eppz.eu/swiftui-search-bar-in-the-navigation-bar/)
 * [UISearchController Tutorial](https://www.raywenderlich.com/4363809-uisearchcontroller-tutorial-getting-started)
+* [弄清 SwiftUI，才看得懂苹果的强大](https://sspai.com/post/65567)
