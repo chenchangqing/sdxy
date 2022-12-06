@@ -27,6 +27,8 @@
     * [数据结构](pages/面试系列/数据结构.md)
     * [SwiftUI](pages/面试系列/SwiftUI.md)
     * [敏捷开发](pages/面试系列/敏捷开发.md)
+    * [重建二叉树](pages/面试系列/重建二叉树.md)
+    * [二叉树的下一个节点](pages/面试系列/二叉树的下一个节点.md)
 * Flutter
     * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
 * 数据结构导论
