@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>面试准备 · 技术博客</title>
+        <title>用两个栈实现队列 · 技术博客</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -87,10 +87,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="视频播放器.html" />
     
-    
-    <link rel="prev" href="从尾到头打印链表.html" />
+    <link rel="prev" href="二叉树的下一个节点.html" />
     
 
     </head>
@@ -386,7 +384,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.18" data-path="面试准备.html">
+        <li class="chapter " data-level="1.2.18" data-path="面试准备.html">
             
                 <a href="面试准备.html">
             
@@ -503,7 +501,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.27" data-path="用两个栈实现队列.html">
+        <li class="chapter active" data-level="1.2.27" data-path="用两个栈实现队列.html">
             
                 <a href="用两个栈实现队列.html">
             
@@ -4136,7 +4134,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >面试准备</a>
+        <a href="../.." >用两个栈实现队列</a>
     </h1>
 </div>
 
@@ -4151,52 +4149,58 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x9762;&#x8BD5;&#x51C6;&#x5907;">&#x9762;&#x8BD5;&#x51C6;&#x5907;</h1>
+                                <h1 id="&#x7528;&#x4E24;&#x4E2A;&#x6808;&#x5B9E;&#x73B0;&#x961F;&#x5217;">&#x7528;&#x4E24;&#x4E2A;&#x6808;&#x5B9E;&#x73B0;&#x961F;&#x5217;</h1>
+<p><strong>&#x9898;&#x76EE;&#xFF1A;&#x7528;&#x4E24;&#x4E2A;&#x6808;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x3002;&#x961F;&#x5217;&#x7684;&#x58F0;&#x660E;&#x5982;&#x4E0B;&#xFF0C;&#x8BF7;&#x5B9E;&#x73B0;&#x5B83;&#x7684;&#x4E24;&#x4E2A;&#x51FD;&#x6570;appendTail&#x548C;deleteHead&#xFF0C;&#x5206;&#x522B;&#x5B8C;&#x6210;&#x5728;&#x961F;&#x5217;&#x5C3E;&#x90E8;&#x63D2;&#x5165;&#x8282;&#x70B9;&#x548C;&#x5728;&#x961F;&#x5217;&#x5934;&#x90E8;&#x5220;&#x9664;&#x8282;&#x70B9;&#x7684;&#x529F;&#x80FD;&#x3002;</strong></p>
+<pre class="language-"><code class="lang-c">template <span class="token operator">&lt;</span>typename T<span class="token operator">&gt;</span>class CQueue
+<span class="token punctuation">{</span>
+public<span class="token operator">:</span>
+    <span class="token function">CQueue</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CQueue</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    T <span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+private<span class="token operator">:</span>
+    stack<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>stack1<span class="token punctuation">;</span>
+    stack<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>stack2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x4ECE;&#x4E0A;&#x8FF0;&#x961F;&#x5217;&#x7684;&#x58F0;&#x660E;&#x4E2D;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x5305;&#x542B;&#x4E86;&#x4E24;&#x4E2A;&#x6808;stack1&#x548C;stack2&#xFF0C;&#x56E0;&#x6B64;&#x8FD9;&#x9053;&#x9898;&#x7684;&#x610F;&#x56FE;&#x662F;&#x8981;&#x6C42;&#x6211;&#x4EEC;&#x64CD;&#x4F5C;&#x8FD9;&#x4E24;&#x4E2A;&#x201C;&#x5148;&#x8FDB;&#x540E;&#x51FA;&#x201D;&#x7684;&#x6808;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x201C;&#x5148;&#x8FDB;&#x5148;&#x51FA;&#x201D;&#x7684;&#x961F;&#x5217;CQueue&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x4F8B;&#x5B50;&#x6765;&#x5206;&#x6790;&#x5F80;&#x8BE5;&#x961F;&#x5217;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x5143;&#x7D20;&#x7684;&#x8FC7;&#x7A0B;&#x3002;&#x9996;&#x5148;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x5143;&#x7D20;a&#xFF0C;&#x4E0D;&#x59A8;&#x5148;&#x628A;&#x5B83;&#x63D2;&#x5165;stack1&#xFF0C;&#x6B64;&#x65F6;stack1&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x6709;{a}&#xFF0C;stack2&#x4E3A;&#x7A7A;&#x3002;&#x518D;&#x538B;&#x5165;&#x4E24;&#x4E2A;&#x5143;&#x7D20;b&#x548C;c&#xFF0C;&#x8FD8;&#x662F;&#x63D2;&#x5165;stack1&#xFF0C;&#x6B64;&#x65F6;stack1&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x6709;{a,b,c}&#xFF0C;&#x5176;&#x4E2D;c&#x4F4D;&#x4E8E;&#x6808;&#x9876;&#xFF0C;&#x800C;stack2&#x4ECD;&#x7136;&#x662F;&#x7A7A;&#x7684;&#xFF0C;&#x5982;&#x56FE;2.9(a)&#x6240;&#x793A;&#x3002;</p>
+<p>&#x8FD9;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x8BD5;&#x7740;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x3002;&#x6309;&#x7167;&#x961F;&#x5217;&#x5148;&#x5165;&#x5148;&#x51FA;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x7531;&#x4E8E;a&#x6BD4;b&#x3001;c&#x5148;&#x63D2;&#x5165;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x6700;&#x5148;&#x88AB;&#x5220;&#x9664;&#x7684;&#x5143;&#x7D20;&#x5E94;&#x8BE5;&#x662F;a&#x3002;&#x5143;&#x7D20;a&#x5B58;&#x50A8;&#x5728;stack1&#x4E2D;&#xFF0C;&#x4F46;&#x5E76;&#x4E0D;&#x5728;&#x6808;&#x9876;&#x4E0A;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x5220;&#x9664;&#x3002;&#x6CE8;&#x610F;&#x5230;stack2&#x4E00;&#x76F4;&#x6CA1;&#x6709;&#x88AB;&#x4F7F;&#x7528;&#x8FC7;&#xFF0C;&#x73B0;&#x5728;&#x662F;&#x8BA9;stack2&#x53D1;&#x6325;&#x4F5C;&#x7528;&#x7684;&#x65F6;&#x5019;&#x4E86;&#x3002;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x628A;stack1&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x9010;&#x4E2A;&#x5F39;&#x51FA;&#x5E76;&#x538B;&#x5165;stack2&#xFF0C;&#x5219;&#x5143;&#x7D20;&#x5728;stack2&#x4E2D;&#x7684;&#x987A;&#x5E8F;&#x6B63;&#x597D;&#x548C;&#x539F;&#x6765;&#x5728;stack1&#x4E2D;&#x7684;&#x987A;&#x5E8F;&#x76F8;&#x53CD;&#x3002;&#x56E0;&#x6B64;&#x7ECF;&#x8FC7;3&#x6B21;&#x5F39;&#x51FA;stack1&#x548C;&#x538B;&#x5165;stack2&#x7684;&#x64CD;&#x4F5C;&#x4E4B;&#x540E;&#xFF0C;stack1&#x4E3A;&#x7A7A;&#xFF0C;&#x800C;stack2&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x662F;{c,b,a}&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x5C31;&#x53EF;&#x4EE5;&#x5F39;&#x51FA;stack2&#x7684;&#x6808;&#x9876;a&#x4E86;&#x3002;&#x6B64;&#x65F6;&#x7684;stack1&#x4E3A;&#x7A7A;&#xFF0C;&#x800C;stack2&#x7684;&#x5143;&#x7D20;&#x4E3A;{c,b}&#xFF0C;&#x5176;&#x4E2D;b&#x5728;&#x6808;&#x9876;&#xFF0C;&#x5982;&#x56FE;2.9(b)&#x6240;&#x793A;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8FD8;&#x60F3;&#x7EE7;&#x7EED;&#x5220;&#x9664;&#x961F;&#x5217;&#x7684;&#x5934;&#x90E8;&#x5E94;&#x8BE5;&#x600E;&#x4E48;&#x529E;&#x5462;&#xFF1F;&#x5269;&#x4E0B;&#x7684;&#x4E24;&#x4E2A;&#x5143;&#x7D20;&#x662F;b&#x548C;c&#xFF0C;b&#x6BD4;c&#x65E9;&#x8FDB;&#x5165;&#x961F;&#x5217;&#xFF0C;&#x56E0;&#x6B64;b&#x5E94;&#x8BE5;&#x5148;&#x5220;&#x9664;&#x3002;&#x800C;&#x6B64;&#x65F6;b&#x6070;&#x597D;&#x53C8;&#x5728;&#x6808;&#x9876;&#x4E0A;&#xFF0C;&#x56E0;&#x6B64;&#x76F4;&#x63A5;&#x5F39;&#x51FA;stack2&#x7684;&#x6808;&#x9876;&#x5373;&#x53EF;&#x3002;&#x5728;&#x8FD9;&#x6B21;&#x5F39;&#x51FA;&#x64CD;&#x4F5C;&#x4E4B;&#x540E;&#xFF0C;stackl&#x4ECD;&#x7136;&#x4E3A;&#x7A7A;&#xFF0C;&#x800C;stack2&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x4E3A;{c}&#xFF0C;&#x5982;&#x56FE;2.9(c)&#x6240;&#x793A;&#x3002;</p>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x5206;&#x6790;&#x4E2D;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x603B;&#x7ED3;&#x51FA;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6B65;&#x9AA4;&#xFF1A;&#x5F53;stack2&#x4E0D;&#x4E3A;&#x7A7A;&#x65F6;&#xFF0C;&#x5728;stack2&#x4E2D;&#x7684;&#x6808;&#x9876;&#x5143;&#x7D20;&#x662F;&#x6700;&#x5148;&#x8FDB;&#x5165;&#x961F;&#x5217;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x53EF;&#x4EE5;&#x5F39;&#x51FA;&#x3002;&#x5F53;stack2&#x4E3A;&#x7A7A;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x628A;stack1&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x9010;&#x4E2A;&#x5F39;&#x51FA;&#x5E76;&#x538B;&#x5165;stack2&#x3002;&#x7531;&#x4E8E;&#x5148;&#x8FDB;&#x5165;&#x961F;&#x5217;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x538B;&#x5230;stack1&#x7684;&#x5E95;&#x7AEF;&#xFF0C;&#x7ECF;&#x8FC7;&#x5F39;&#x51FA;&#x548C;&#x538B;&#x5165;&#x64CD;&#x4F5C;&#x4E4B;&#x540E;&#x5C31;&#x5904;&#x4E8E;stack2&#x7684;&#x9876;&#x7AEF;&#xFF0C;&#x53C8;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5F39;&#x51FA;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x518D;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x5143;&#x7D20;d&#x3002;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x628A;&#x5B83;&#x538B;&#x5165;stack1,&#x5982;&#x56FE;2.9(d)&#x6240;&#x793A;&#xFF0C;&#x8FD9;&#x6837;&#x4F1A;&#x4E0D;&#x4F1A;&#x6709;&#x95EE;&#x9898;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x8003;&#x8651;&#x4E0B;&#x4E00;&#x6B21;&#x5220;&#x9664;&#x961F;&#x5217;&#x7684;&#x5934;&#x90E8;stack2&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x76F4;&#x63A5;&#x5F39;&#x51FA;&#x5B83;&#x7684;&#x6808;&#x9876;&#x5143;&#x7D20;c&#xFF0C;&#x5982;&#x56FE;2.9(e)&#x6240;&#x793A;&#x3002;&#x800C;c&#x7684;&#x786E;&#x6BD4;d&#x5148;&#x8FDB;&#x5165;&#x961F;&#x5217;&#xFF0C;&#x5E94;&#x8BE5;&#x5728;d&#x4E4B;&#x524D;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x5220;&#x9664;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x4EFB;&#x4F55;&#x77DB;&#x76FE;&#x3002;</p>
+<p><img src="images/interview_questions_12.jpeg" width="80%/"></p>
+<p>&#x603B;&#x7ED3;&#x5B8C;&#x6BCF;&#x4E00;&#x6B21;&#x5728;&#x961F;&#x5217;&#x4E2D;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#x7684;&#x8FC7;&#x7A0B;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x52A8;&#x624B;&#x5199;&#x4EE3;&#x7801;&#x4E86;&#x3002;&#x53C2;&#x8003;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c">template<span class="token operator">&lt;</span>typename T<span class="token operator">&gt;</span> <span class="token keyword">void</span> CQueue<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> element<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    stack1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> 
+
+template<span class="token operator">&lt;</span>typename T<span class="token operator">&gt;</span> T CQueue<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>stack2<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>stack1<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&gt;</span><span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            T<span class="token operator">&amp;</span> data <span class="token operator">=</span> stack1<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            stack1<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            stack2<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>stack2<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        throw new <span class="token function">exception</span><span class="token punctuation">(</span><span class="token string">&quot;queue is empty&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    T head <span class="token operator">=</span> stack2<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    stack2<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <blockquote>
-<h2 id="&#x81EA;&#x6211;&#x4ECB;&#x7ECD;">&#x81EA;&#x6211;&#x4ECB;&#x7ECD;</h2>
+<p>&#x5251;&#x6307; Offer P68&#xFF0C;&#x672C;&#x9898;&#x5B8C;&#x6574;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#xFF1A;<a href="https://github.com/zhedahht/CodingInterviewChinese2/tree/master/09_QueueWithTwoStacks" target="_blank">https://github.com/zhedahht/CodingInterviewChinese2/tree/master/09_QueueWithTwoStacks</a></p>
 </blockquote>
-<p>&#x8C22;&#x8C22;&#x60A8;&#x4ECA;&#x5929;&#x7ED9;&#x6211;&#x7684;&#x8FD9;&#x6B21;&#x673A;&#x4F1A;&#xFF0C;&#x6211;&#x662F;Green&#xFF0C;&#x6211;&#x7684;&#x4E13;&#x4E1A;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x901A;&#x4FE1;&#xFF0C;9&#x5E74;iOS&#x5F00;&#x53D1;&#x7ECF;&#x9A8C;&#xFF0C;3&#x5E74;Java&#x5F00;&#x53D1;&#x7ECF;&#x9A8C;&#xFF0C;&#x62C5;&#x4EFB;&#x8FC7;iOS&#x56E2;&#x961F;&#x8D1F;&#x8D23;&#x4EBA;&#xFF0C;&#x6709;&#x56E2;&#x961F;&#x7BA1;&#x7406;&#x7ECF;&#x9A8C;&#xFF0C;&#x6709;&#x7EC4;&#x4EF6;&#x5316;&#x5F00;&#x53D1;&#x7ECF;&#x9A8C;&#xFF0C;&#x5177;&#x5907;&#x72EC;&#x7ACB;&#x5F00;&#x53D1;&#x80FD;&#x529B;&#xFF0C;&#x5177;&#x5907;&#x6587;&#x6863;&#x7F16;&#x5199;&#x80FD;&#x529B;&#xFF0C;&#x6709;&#x826F;&#x597D;&#x7684;&#x4EE3;&#x7801;&#x4E60;&#x60EF;&#x3002;</p>
-<p>Thank you for giving me the opportunity to be interviewed for this position today. I&apos;m Green. My major is computer communication. I have 9 years of experience in iOS development, 3 years of experience in Java development, and served as the leader of the iOS team. I have experience in team management, component development, independent development, document writing, and good code habits.</p>
-<blockquote>
-<h2 id="&#x64C5;&#x957F;&#x6280;&#x672F;">&#x64C5;&#x957F;&#x6280;&#x672F;</h2>
-</blockquote>
-<p>&#x719F;&#x7EC3;<code>OC</code>&#x3001;<code>Swift</code>&#x3001;<code>Java</code>&#x3001;<code>RxSwift</code>&#x3001;<code>MVVM</code>&#x3001;<code>MVC</code>&#x3001;<code>Cocoapods</code>&#x3001;<code>GCD</code>&#x3001;<code>Git Flow</code>&#x3002;<br>&#x719F;&#x6089;<code>C</code>&#x3001;<code>C++</code>&#x3001;<code>Maven</code>&#x3001;<code>HTML</code>&#x3001;<code>JS</code>&#x3001;<code>CSS</code>&#x3001;<code>SQL</code>&#x3001;<code>Mysql</code>&#x3001;<code>Tomcat</code>&#x3001;<code>JDBC</code>&#x3001;<code>SSH</code>&#x3002;<br>&#x4E86;&#x89E3;<code>Android</code>&#x3001;<code>Flutter</code>&#x3001;<code>ReactNative</code>&#x3001;<code>libRTMP</code>&#x3001;<code>OpenGLES</code>&#x3001;<code>FFmpeg</code>&#x3002;</p>
-<p><a href="&#x89C6;&#x9891;&#x64AD;&#x653E;&#x5668;.html">&#x89C6;&#x9891;&#x64AD;&#x653E;&#x5668;</a> <a href="&#x7EC4;&#x4EF6;&#x5316;&#x5F00;&#x53D1;.html">&#x7EC4;&#x4EF6;&#x5316;&#x5F00;&#x53D1;</a> <a href="&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;.html">&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;</a> <a href="&#x6392;&#x5E8F;&#x7B97;&#x6CD5;.html">&#x6392;&#x5E8F;&#x7B97;&#x6CD5;</a> <a href="&#x6570;&#x636E;&#x7ED3;&#x6784;.html">&#x6570;&#x636E;&#x7ED3;&#x6784;</a> <a href="RSA.html">RSA</a> <a href="../&#x6301;&#x7EED;&#x5316;&#x96C6;&#x6210;CI/03_&#x4F7F;&#x7528;jenkins&#x6253;&#x5305;.html">CICD</a> <a href="SwiftUI.html">SwiftUI</a> <a href="&#x654F;&#x6377;&#x5F00;&#x53D1;.html">&#x654F;&#x6377;&#x5F00;&#x53D1;</a></p>
-<blockquote>
-<h2 id="&#x5982;&#x4F55;&#x5B66;&#x4E60;">&#x5982;&#x4F55;&#x5B66;&#x4E60;</h2>
-</blockquote>
-<p>&#x5728;&#x5DE5;&#x4F5C;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x9047;&#x5230;&#x81EA;&#x5DF1;&#x4E0D;&#x4F1A;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x901A;&#x8FC7;Google&#x3001;&#x767E;&#x5EA6;&#x76F8;&#x5173;&#x8D44;&#x6599;&#xFF0C;&#x7136;&#x540E;&#x603B;&#x7ED3;&#x8BB0;&#x5F55;&#x3002;&#x5B66;&#x4E60;&#x4E00;&#x95E8;&#x65B0;&#x6280;&#x672F;&#xFF0C;&#x6211;&#x4F1A;&#x901A;&#x8FC7;&#x67E5;&#x770B;&#x5176;&#x5B98;&#x65B9;&#x6559;&#x7A0B;&#x6216;&#x627E;&#x5B66;&#x4E60;&#x89C6;&#x9891;&#xFF0C;&#x540C;&#x65F6;&#x4E70;&#x4E00;&#x672C;&#x4E66;&#x7C4D;&#x9605;&#x8BFB;&#xFF0C;&#x7136;&#x540E;&#x5B9E;&#x8DF5;&#xFF0C;&#x518D;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x7684;&#x7406;&#x89E3;&#x603B;&#x7ED3;&#x5199;&#x6587;&#x7AE0;&#x8BB0;&#x5F55;&#x3002;</p>
-<blockquote>
-<h2 id="&#x804C;&#x4E1A;&#x89C4;&#x5212;">&#x804C;&#x4E1A;&#x89C4;&#x5212;</h2>
-</blockquote>
-<p>&#x7ED3;&#x5408;&#x81EA;&#x8EAB;&#x8FD8;&#x6709;&#x76EE;&#x524D;&#x7684;&#x804C;&#x4E1A;&#x73AF;&#x5883;&#xFF0C;&#x6211;&#x6709;&#x8BA4;&#x771F;&#x60F3;&#x8FC7;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;&#x5728;&#x5DE5;&#x4F5C;&#x65B9;&#x9762;&#xFF0C;&#x6211;&#x60F3;&#x901A;&#x8FC7;&#x79EF;&#x6781;&#x5B8C;&#x6210;&#x5DE5;&#x4F5C;&#x4EFB;&#x52A1;&#xFF0C;&#x79EF;&#x7D2F;&#x5404;&#x65B9;&#x9762;&#x7ECF;&#x9A8C;&#xFF0C;&#x8BA9;&#x81EA;&#x5DF1;&#x6210;&#x4E3A;&#x8FD9;&#x4E2A;&#x9886;&#x57DF;&#x7684;&#x4E13;&#x4E1A;&#x4EBA;&#x58EB;&#xFF0C;&#x4E5F;&#x5E0C;&#x671B;&#x6709;&#x673A;&#x4F1A;&#x80FD;&#x591F;&#x5E26;&#x9886;&#x56E2;&#x961F;&#xFF0C;&#x6210;&#x4E3A;&#x4F18;&#x79C0;&#x7684;&#x7BA1;&#x7406;&#x8005;&#xFF0C;&#x4E3A;&#x5355;&#x4F4D;&#x4F5C;&#x51FA;&#x66F4;&#x5927;&#x7684;&#x8D21;&#x732E;&#xFF0C;&#x5B9E;&#x73B0;&#x53CC;&#x8D62;&#x3002;&#x5728;&#x5B66;&#x4E60;&#x65B9;&#x9762;&#xFF0C;&#x6253;&#x7B97;&#x5728;iOS&#x4E13;&#x4E1A;&#x9886;&#x57DF;&#x505A;&#x8FDB;&#x4E00;&#x6B65;&#x5B66;&#x4E60;&#x548C;&#x7814;&#x7A76;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x5B66;&#x4E60;Android&#x3001;H5&#x7B49;&#x6280;&#x672F;&#xFF0C;&#x4E3A;&#x4EE5;&#x540E;&#x81EA;&#x5DF1;&#x6210;&#x4E3A;&#x7BA1;&#x7406;&#x8005;&#x505A;&#x4E0B;&#x94FA;&#x57AB;&#x3002;</p>
-<blockquote>
-<h2 id="&#x63D0;&#x95EE;&#x73AF;&#x8282;">&#x63D0;&#x95EE;&#x73AF;&#x8282;</h2>
-</blockquote>
-<p>&#x9879;&#x76EE;&#x4E2D;&#x4F1A;&#x4F7F;&#x7528;SwiftUI&#x5417;&#xFF1F;</p>
-<p>&#x9879;&#x76EE;&#x662F;&#x9488;&#x5BF9;&#x6D77;&#x5916;&#x5BA2;&#x6237;&#x5417;&#xFF1F;</p>
-<p>&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x9700;&#x6C42;&#x4E0B;&#x6765;&#xFF0C;&#x5728;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x5F00;&#x53D1;&#x7740;&#x524D;&#xFF0C;&#x60A8;&#x6700;&#x5E0C;&#x671B;&#x5B83;&#x505A;&#x597D;&#x54EA;&#x4E9B;&#x5F00;&#x53D1;&#x51C6;&#x5907;&#xFF1F;</p>
-<p>&#x9879;&#x76EE;&#x4E2D;&#x96BE;&#x514D;&#x5B58;&#x5728;&#x4E00;&#x4E9B;&#x4E0D;&#x5F97;&#x4E0D;&#x8FDB;&#x884C;&#x91CD;&#x6784;&#x4F18;&#x5316;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x60A8;&#x662F;&#x5982;&#x4F55;&#x770B;&#x5F85;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x7684;&#xFF1F;</p>
-<blockquote>
-<h2 id="&#x9762;&#x8BD5;&#x95EE;&#x9898;">&#x9762;&#x8BD5;&#x95EE;&#x9898;</h2>
-</blockquote>
-<p>&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#xFF1A;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x7684;&#x4E00;&#x4E2A;&#x7279;&#x70B9;&#x5C31;&#x662F;&#xFF0C;&#x5141;&#x8BB8;&#x628A;&#x51FD;&#x6570;&#x672C;&#x8EAB;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x53E6;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8FD8;&#x5141;&#x8BB8;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF01;</p>
-<p>&#x7EBF;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;&#xFF1A;&#x5185;&#x5B58;&#x5171;&#x4EAB;&#x3001;&#x901A;&#x77E5;&#x3001;&#x7B49;&#x5F85;&#x3001;&#x9501;&#x3002;</p>
-<p>swift&#x7279;&#x6027;&#xFF1A;&#x5143;&#x7EC4;&#x3001;&#x53EF;&#x9009;&#x3001;&#x89E3;&#x5305;&#x3001;&#x6269;&#x5C55;&#x3001;&#x6CDB;&#x578B;&#x3001;&#x679A;&#x4E3E;&#x3001;&#x6CDB;&#x578B;&#x5173;&#x8054;&#x3001;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3001;&#x6743;&#x9650;&#x5173;&#x952E;&#x5B57;&#x3001;&#x534F;&#x8BAE;&#x3001;&#x95ED;&#x5305;&#x3002;</p>
-<p>&#x5185;&#x5B58;&#x7BA1;&#x7406;&#xFF1A;Swift&#x4F7F;&#x7528;&#x81EA;&#x52A8;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#xFF08;ARC&#xFF09;&#x6765;&#x7B80;&#x5316;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#xFF0C;&#x4E0E;OC&#x4E00;&#x81F4;&#x3002;</p>
-<p>swift&#x8BED;&#x8A00;&#x3001;&#x67B6;&#x6784;&#x80FD;&#x529B;&#x3001;block&#x539F;&#x7406;&#x3001;swift&#x7279;&#x6027;&#x3001;&#x9879;&#x76EE;&#x7BA1;&#x7406;&#x3001;&#x4EE3;&#x7801;&#x89C4;&#x8303;&#x3002;</p>
-<blockquote>
-<h2 id="&#x5185;&#x5B58;&#x7BA1;&#x7406;">&#x5185;&#x5B58;&#x7BA1;&#x7406;</h2>
-</blockquote>
-<p><a href="https://alvinzhu.me/2017/11/15/ios-weak-references.html" target="_blank">OC &#x548C; Swift &#x7684;&#x5F31;&#x5F15;&#x7528;&#x6E90;&#x7801;&#x5206;&#x6790;</a><br><a href="https://juejin.cn/post/6938755477165572132" target="_blank">iOS&#x5185;&#x5B58;&#x5206;&#x914D;-&#x6808;&#x548C;&#x5806;</a></p>
-<blockquote>
-<h2 id="&#x591A;&#x7EBF;&#x7A0B;">&#x591A;&#x7EBF;&#x7A0B;</h2>
-</blockquote>
-<p><a href="https://www.jianshu.com/p/0b0d9b1f1f19" target="_blank">&#x5173;&#x4E8E;iOS&#x591A;&#x7EBF;&#x7A0B;&#xFF0C;&#x4F60;&#x770B;&#x6211;&#x5C31;&#x591F;&#x4E86;</a></p>
-<blockquote>
-<h2 id="&#x53C2;&#x8003;&#x94FE;&#x63A5;">&#x53C2;&#x8003;&#x94FE;&#x63A5;</h2>
-</blockquote>
-<p><a href="https://juejin.cn/post/6844903933786210317" target="_blank">Swift &#x8BED;&#x8A00;&#x7684;&#x4E00;&#x4E9B;&#x529F;&#x80FD;&#x7279;&#x6027;</a><br><a href="https://www.zhihu.com/question/20054953" target="_blank">&#x4E3A;&#x4F55;&#x9762;&#x8BD5;&#x65F6;&#x90FD;&#x4F1A;&#x95EE;&#x4F60;&#x7684;&#x804C;&#x4E1A;&#x89C4;&#x5212;&#x5462;&#xFF1F;&#x8BE5;&#x5982;&#x4F55;&#x56DE;&#x7B54;&#x5462;&#xFF1F;</a><br><a href="https://www.jianshu.com/p/fb2d7370f38a" target="_blank">IOS&#x9762;&#x8BD5;&#x9898;(&#x5176;&#x4ED6;) --- &#x82F1;&#x6587;&#x81EA;&#x6211;&#x4ECB;&#x7ECD;</a>  </p>
  <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -4225,14 +4229,10 @@
 
             
                 
-                <a href="从尾到头打印链表.html" class="navigation navigation-prev " aria-label="Previous page: 从尾到头打印链表">
+                <a href="二叉树的下一个节点.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 二叉树的下一个节点">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="视频播放器.html" class="navigation navigation-next " aria-label="Next page: 视频播放器">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -4241,7 +4241,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"面试准备","level":"1.2.18","depth":2,"next":{"title":"视频播放器","level":"1.2.19","depth":2,"path":"pages/面试系列/视频播放器.md","ref":"pages/面试系列/视频播放器.md","articles":[]},"previous":{"title":"从尾到头打印链表","level":"1.2.17","depth":2,"path":"pages/面试系列/从尾到头打印链表.md","ref":"pages/面试系列/从尾到头打印链表.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/面试系列/面试准备.md","mtime":"2022-12-06T14:14:00.195Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-07T13:30:50.618Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"用两个栈实现队列","level":"1.2.27","depth":2,"next":{"title":"Flutter","level":"1.3","depth":1,"ref":"","articles":[{"title":"在MacOS上搭建Flutter开发环境","level":"1.3.1","depth":2,"path":"pages/fultter/在MacOS上搭建Flutter开发环境.md","ref":"pages/fultter/在MacOS上搭建Flutter开发环境.md","articles":[]}]},"previous":{"title":"二叉树的下一个节点","level":"1.2.26","depth":2,"path":"pages/面试系列/二叉树的下一个节点.md","ref":"pages/面试系列/二叉树的下一个节点.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/面试系列/用两个栈实现队列.md","mtime":"2022-12-07T13:30:48.245Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-07T13:30:50.618Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
