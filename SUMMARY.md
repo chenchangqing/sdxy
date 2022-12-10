@@ -1,5 +1,8 @@
 # Summary
 
+* Flutter
+    * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
+    * [创建Flutter应用](pages/fultter/创建Flutter应用.md)
 * 游戏UI设计
     * [平面构成的基本形与骨骼](pages/游戏UI设计/平面构成的基本形与骨骼.md)
 * 面试系列
@@ -30,8 +33,6 @@
     * [重建二叉树](pages/面试系列/重建二叉树.md)
     * [二叉树的下一个节点](pages/面试系列/二叉树的下一个节点.md)
     * [用两个栈实现队列](pages/面试系列/用两个栈实现队列.md)
-* Flutter
-    * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
 * 数据结构导论
     * [第二章 线性表](pages/数据结构导论/第二章_线性表.md)
 * 操作系统概论
