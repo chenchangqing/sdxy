@@ -104,9 +104,9 @@ Widget build(BuildContext context) {
   );
 }
 ```
-    * `Scaffold`是 Material 库中提供的页面脚手架。
-    * `body`是具体的组件树。
-    * `floatingActionButton`右下角的加号按钮。
+	* `Scaffold`是 Material 库中提供的页面脚手架。
+	* `body`是具体的组件树。
+	* `floatingActionButton`右下角的加号按钮。
 
 现在，我们将整个计数器执行流程串起来：当右下角的`floatingActionButton`按钮被点击之后，会调用`_incrementCounter`方法。在`_incrementCounter`方法中，首先会自增`_counter`计数器（状态），然后`setState`会通知 Flutter 框架状态发生变化，接着，Flutter 框架会调用`build`方法以新的状态重新构建UI，最终显示在设备屏幕上。
 
@@ -116,18 +116,12 @@ Widget build(BuildContext context) {
 
 * 状态访问不便。
 
-    将build方法放在widget中，由于构建UI需要访问State的属性，例如上面的`_counter`，也就是说`build`方法需要依赖State ，并且公开`_counter`，这就会导致对状态的修改将会变的不可控。反之，`build`放在State中，可以直接访问状态，并且拿到`_counter`，这会非常方便。
+	将build方法放在widget中，由于构建UI需要访问State的属性，例如上面的`_counter`，也就是说`build`方法需要依赖State ，并且公开`_counter`，这就会导致对状态的修改将会变的不可控。反之，`build`放在State中，可以直接访问状态，并且拿到`_counter`，这会非常方便。
 
 * 继承`StatefulWidget`不便。
 
-    子类在调用父类`build`方法时，需要依赖父类State类，这是不合理的，因为父类的状态是父类内部的实现细节，不应该暴露给子类。
+	子类在调用父类`build`方法时，需要依赖父类State类，这是不合理的，因为父类的状态是父类内部的实现细节，不应该暴露给子类。
 
 [模板代码分析](https://book.flutterchina.club/chapter2/first_flutter_app.html#_2-1-1-%E5%88%9B%E5%BB%BAflutter%E5%BA%94%E7%94%A8%E6%A8%A1%E6%9D%BF)
 
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
 

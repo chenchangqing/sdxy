@@ -3,6 +3,8 @@
 * Flutter
     * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
     * [创建Flutter应用](pages/fultter/创建Flutter应用.md)
+    * [第一个Flutter应用](pages/fultter/第一个Flutter应用.md)
+    * [Widget简介](pages/fultter/Widget简介.md)
 * 游戏UI设计
     * [平面构成的基本形与骨骼](pages/游戏UI设计/平面构成的基本形与骨骼.md)
 * 面试系列
