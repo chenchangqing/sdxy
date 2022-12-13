@@ -23,3 +23,8 @@ https://stackoverflow.com/questions/70719767/android-sdkmanager-not-found-update
 ### ! NO_PROXY is not set
 
 https://zhuanlan.zhihu.com/p/474652737
+
+[Flutter 开发文档](https://flutter.cn/docs)  
+[Flutter Gallery](https://gallery.flutter.dev/#/)  
+[推荐几个优质Flutter 开源项目](https://www.wanandroid.com/blog/show/2260)  
+[Flutter 快速上手 - 4.2 assets导入资源 | 猫哥](https://www.bilibili.com/video/BV1ve4y197Ly/?spm_id_from=333.788&vd_source=0e0265662467c6caea699dd58aec6891)  
