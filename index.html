@@ -183,6 +183,32 @@
             
         </li>
     
+        <li class="chapter " data-level="1.1.5" data-path="pages/fultter/状态管理.html">
+            
+                <a href="pages/fultter/状态管理.html">
+            
+                    
+                    状态管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="pages/fultter/路由管理.html">
+            
+                <a href="pages/fultter/路由管理.html">
+            
+                    
+                    路由管理
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -4188,246 +4214,191 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="widget&#x7B80;&#x4ECB;">Widget&#x7B80;&#x4ECB;</h1>
-<h2 id="widget&#x6982;&#x5FF5;"><code>Widget</code>&#x6982;&#x5FF5;</h2>
+                                <h1 id="&#x8DEF;&#x7531;&#x7BA1;&#x7406;">&#x8DEF;&#x7531;&#x7BA1;&#x7406;</h1>
+<h2 id="&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x793A;&#x4F8B;">&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x793A;&#x4F8B;</h2>
 <hr>
-<p>&#x63CF;&#x8FF0;&#x4E00;&#x4E2A;UI&#x5143;&#x7D20;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#x5BF9;&#x4E8E;<code>Text</code>&#x6765;&#x8BB2;&#xFF0C;&#x6587;&#x672C;&#x7684;&#x5185;&#x5BB9;&#x3001;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;&#x3001;&#x6587;&#x672C;&#x6837;&#x5F0F;&#x90FD;&#x662F;&#x5B83;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x3002;</p>
-<p><code>Widget</code>&#x7C7B;&#x7684;&#x58F0;&#x660E;&#xFF1A;</p>
-<pre class="language-"><code class="lang-c">@immutable <span class="token comment">// &#x4E0D;&#x53EF;&#x53D8;&#x7684;</span>
-abstract class`Widget`extends DiagnosticableTree <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> <span class="token function">Widget</span><span class="token punctuation">(</span><span class="token punctuation">{</span> this<span class="token punctuation">.</span>key <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  final Key<span class="token operator">?</span> key<span class="token punctuation">;</span>
-
-  @protected
-  @factory
-  Element <span class="token function">createElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  @override
-  String <span class="token function">toStringShort</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    final String type <span class="token operator">=</span> <span class="token function">objectRuntimeType</span><span class="token punctuation">(</span>this<span class="token punctuation">,</span> <span class="token string">&apos;Widget&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> key <span class="token operator">==</span> null <span class="token operator">?</span> type <span class="token operator">:</span> <span class="token string">&apos;$type-$key&apos;</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  @override
-  <span class="token keyword">void</span> <span class="token function">debugFillProperties</span><span class="token punctuation">(</span>DiagnosticPropertiesBuilder properties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    super<span class="token punctuation">.</span><span class="token function">debugFillProperties</span><span class="token punctuation">(</span>properties<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    properties<span class="token punctuation">.</span>defaultDiagnosticsTreeStyle <span class="token operator">=</span> DiagnosticsTreeStyle<span class="token punctuation">.</span>dense<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  @override
-  @nonVirtual
-  bool operator <span class="token operator">==</span><span class="token punctuation">(</span>Object other<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> super <span class="token operator">==</span> other<span class="token punctuation">;</span>
-
-  @override
-  @nonVirtual
-  <span class="token keyword">int</span> get hashCode <span class="token operator">=</span><span class="token operator">&gt;</span> super<span class="token punctuation">.</span>hashCode<span class="token punctuation">;</span>
-
-  <span class="token keyword">static</span> bool <span class="token function">canUpdate</span><span class="token punctuation">(</span>Widget oldWidget<span class="token punctuation">,</span>`Widget`newWidget<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> oldWidget<span class="token punctuation">.</span>runtimeType <span class="token operator">==</span> newWidget<span class="token punctuation">.</span>runtimeType
-        <span class="token operator">&amp;&amp;</span> oldWidget<span class="token punctuation">.</span>key <span class="token operator">==</span> newWidget<span class="token punctuation">.</span>key<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<ul>
-<li><code>@immutable</code>&#x4EE3;&#x8868;<code>Widget</code>&#x662F;&#x4E0D;&#x53EF;&#x53D8;&#x7684;&#xFF0C;&#x9650;&#x5236;Widget&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x5FC5;&#x987B;&#x4F7F;&#x7528;<code>final</code>&#x4FEE;&#x9970;&#x3002;
-  &#x4E3A;&#x5565;&#x4E0D;&#x5141;&#x8BB8;&#x5C5E;&#x6027;&#x4FEE;&#x6539;&#x5462;&#xFF1F;&#x5C5E;&#x6027;&#x4FEE;&#x6539;&#x4F1A;&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x65B0;&#x7684;Widget&#x5B9E;&#x4F8B;&#xFF0C;&#x8FD9;&#x6CA1;&#x6709;&#x610F;&#x4E49;&#xFF0C;&#x8FD8;&#x6709;&#x5C31;&#x662F;&#x53EF;&#x53D8;&#x5C5E;&#x6027;&#x5E94;&#x8BE5;&#x4EA4;&#x7ED9;State&#x7BA1;&#x7406;&#x3002;</li>
-<li><code>key</code>&#x7684;&#x4F5C;&#x7528;&#x662F;&#x51B3;&#x5B9A;&#x4E0B;&#x4E00;&#x6B21;<code>build</code>&#x662F;&#x5426;&#x590D;&#x7528;&#x65E7;&#x7684;<code>widget</code>&#xFF0C;&#x51B3;&#x5B9A;&#x7684;&#x6761;&#x4EF6;&#x5728;<code>canUpdate()</code>&#x65B9;&#x6CD5;&#x3002;</li>
-<li><code>createElement</code>&#x6784;&#x5EFA;UI&#x6811;&#x65F6;&#xFF0C;&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x8282;&#x70B9;&#x7684;Element&#x5BF9;&#x8C61;&#x3002;&#x4E00;&#x4E2A;<code>widget</code>&#x53EF;&#x4EE5;&#x5BF9;&#x5E94;&#x591A;&#x4E2A;Element&#x3002;</li>
-<li><code>canUpdate(...)</code>&#xFF1A;&#x662F;&#x5426;&#x7528;&#x65B0;&#x7684;<code>widget</code>&#x5BF9;&#x8C61;&#x53BB;&#x66F4;&#x65B0;&#x65E7;UI&#x6811;&#x4E0A;&#x6240;&#x5BF9;&#x5E94;&#x7684;Element&#x5BF9;&#x8C61;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x8FD4;&#x56DE;false&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x65B0;&#x7684;<code>Element</code>&#x3002;</li>
-</ul>
-<p>Widget&#x7C7B;&#x662F;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x5176;&#x4E2D;&#x6700;&#x6838;&#x5FC3;&#x7684;&#x5C31;&#x662F;&#x5B9A;&#x4E49;&#x4E86;createElement()&#x63A5;&#x53E3;&#x3002;</p>
-<h2 id="flutter&#x4E2D;&#x7684;&#x56DB;&#x68F5;&#x6811;">Flutter&#x4E2D;&#x7684;&#x56DB;&#x68F5;&#x6811;</h2>
-<hr>
-<p>Widget &#x53EA;&#x662F;&#x63CF;&#x8FF0;&#x4E00;&#x4E2A;UI&#x5143;&#x7D20;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x90A3;&#x4E48;&#x771F;&#x6B63;&#x7684;&#x5E03;&#x5C40;&#x3001;&#x7ED8;&#x5236;&#x662F;&#x7531;&#x8C01;&#x6765;&#x5B8C;&#x6210;&#x7684;&#x5462;&#xFF1F;Flutter &#x6846;&#x67B6;&#x7684;&#x7684;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
 <ol>
-<li>&#x6839;&#x636E;<code>Widget</code>&#x6811;&#x751F;&#x6210;&#x4E00;&#x4E2A; Element &#x6811;&#xFF0C;Element &#x6811;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x90FD;&#x7EE7;&#x627F;&#x81EA; Element &#x7C7B;&#x3002;</li>
-<li>&#x6839;&#x636E; Element &#x6811;&#x751F;&#x6210;<code>Render</code>&#x6811;&#xFF08;&#x6E32;&#x67D3;&#x6811;&#xFF09;&#xFF0C;&#x6E32;&#x67D3;&#x6811;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x90FD;&#x7EE7;&#x627F;&#x81EA;RenderObject &#x7C7B;&#x3002;</li>
-<li>&#x6839;&#x636E;&#x6E32;&#x67D3;&#x6811;&#x751F;&#x6210; Layer &#x6811;&#xFF0C;&#x7136;&#x540E;&#x4E0A;&#x5C4F;&#x663E;&#x793A;&#xFF0C;Layer &#x6811;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x90FD;&#x7EE7;&#x627F;&#x81EA; Layer &#x7C7B;&#x3002;</li>
-</ol>
-<p>&#x771F;&#x6B63;&#x7684;&#x5E03;&#x5C40;&#x548C;&#x6E32;&#x67D3;&#x903B;&#x8F91;&#x5728;<code>Render</code>&#x6811;&#x4E2D;&#xFF0C;Element &#x662F;<code>Widget</code>&#x548C; RenderObject &#x7684;&#x7C98;&#x5408;&#x5242;&#xFF0C;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x4E00;&#x4E2A;&#x4E2D;&#x95F4;&#x4EE3;&#x7406;&#x3002;</p>
-<h2 id="widget&#x7C7B;">Widget&#x7C7B;</h2>
-<hr>
-<h3 id="1-statelesswidget">1. StatelessWidget</h3>
-<ul>
-<li>&#x7EE7;&#x627F;<code>Widget</code>&#x7C7B;&#xFF0C;&#x91CD;&#x5199;&#x4E86;<code>createElement()</code>&#x65B9;&#x6CD5;&#xFF0C;&#x5BF9;&#x5E94;<code>StatelessElement</code>&#x7C7B;&#x3002;</li>
-<li>&#x7528;&#x4E8E;&#x4E0D;&#x9700;&#x8981;&#x7EF4;&#x62A4;&#x72B6;&#x6001;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;<code>build</code>&#x65B9;&#x6CD5;&#x7528;&#x6765;&#x6784;&#x5EFA;UI&#x3002;</li>
-</ul>
-<h3 id="2-buildcontext">2. BuildContext</h3>
-<ul>
-<li><code>build</code>&#x65B9;&#x6CD5;&#x7684;<code>context</code>&#x53C2;&#x6570;&#xFF0C;&#x8868;&#x793A;&#x5F53;&#x524D;<code>widget</code>&#x5728;<code>widget</code>&#x6811;&#x4E2D;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x6BCF;&#x4E2A;<code>widget</code>&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;<code>context</code>&#x3002;</li>
-<li><code>context</code>&#x662F;&#x5F53;&#x524D;<code>widget</code>&#x5728;<code>widget</code>&#x6811;&#x4E2D;&#x4F4D;&#x7F6E;&#x4E2D;&#x6267;&#x884C;&#x201D;&#x76F8;&#x5173;&#x64CD;&#x4F5C;&#x201C;&#x7684;&#x4E00;&#x4E2A;&#x53E5;&#x67C4;&#x3002;</li>
-</ul>
-<h3 id="3-statefulwidget">3. StatefulWidget</h3>
-<ul>
-<li>&#x5BF9;&#x5E94;<code>StatefulElement</code>&#xFF0C;&#x591A;&#x4E86;&#x4E00;&#x4E2A;<code>createState()</code>&#x65B9;&#x6CD5;&#x3002;</li>
-<li><code>StatefulElement</code>&#x4E2D;&#x53EF;&#x80FD;&#x4F1A;&#x591A;&#x6B21;&#x8C03;&#x7528;<code>createState()</code>&#x6765;&#x521B;&#x5EFA;&#x72B6;&#x6001;&#xFF08;State&#xFF09;&#x5BF9;&#x8C61;&#x3002;</li>
-<li><code>createState()</code>&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x548C;<code>StatefulWidget</code>&#x76F8;&#x5173;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5B83;&#x5728;<code>StatefulWidget</code>&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E2D;&#x53EF;&#x80FD;&#x4F1A;&#x88AB;&#x591A;&#x6B21;&#x8C03;&#x7528;&#x3002;</li>
-<li>&#x5728;<code>StatefulWidget</code>&#x4E2D;&#xFF0C;<code>State</code>&#x5BF9;&#x8C61;&#x548C;<code>StatefulElement</code>&#x5177;&#x6709;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x7684;&#x5173;&#x7CFB;&#x3002;</li>
-</ul>
-<h2 id="state">State</h2>
-<hr>
-<h3 id="1-&#x7B80;&#x4ECB;">1. &#x7B80;&#x4ECB;</h3>
-<p>&#x4E00;&#x4E2A;<code>StatefulWidget</code>&#x7C7B;&#x4F1A;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;<code>State</code>&#x7C7B;&#xFF0C;<code>State</code>&#x8868;&#x793A;&#x4E0E;&#x5176;&#x5BF9;&#x5E94;&#x7684;<code>StatefulWidget</code>&#x8981;&#x7EF4;&#x62A4;&#x7684;&#x72B6;&#x6001;&#x3002;State &#x4E2D;&#x7684;&#x4FDD;&#x5B58;&#x7684;&#x72B6;&#x6001;&#x4FE1;&#x606F;&#x53EF;&#x4EE5;&#xFF1A;</p>
-<ol>
-<li>&#x5728;<code>widget</code>&#x6784;&#x5EFA;&#x65F6;&#x53EF;&#x4EE5;&#x88AB;&#x540C;&#x6B65;&#x8BFB;&#x53D6;&#x3002;</li>
-<li>&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#xFF0C;&#x7136;&#x540E;&#x624B;&#x52A8;&#x8C03;&#x7528;&#x5176;<code>setState()</code>&#x65B9;&#x6CD5;&#xFF0C;&#x91CD;&#x65B0;&#x8C03;&#x7528;&#x5176;<code>build</code>&#x65B9;&#x6CD5;&#x8FBE;&#x5230;&#x66F4;&#x65B0;UI&#x7684;&#x76EE;&#x7684;&#x3002;</li>
-</ol>
-<p>State &#x4E2D;&#x6709;&#x4E24;&#x4E2A;&#x5E38;&#x7528;&#x5C5E;&#x6027;&#xFF1A;</p>
-<ol>
-<li><code>widget</code>&#xFF0C;&#x91CD;&#x65B0;&#x6784;&#x5EFA;&#x65F6;&#x53EF;&#x80FD;&#x4F1A;&#x53D8;&#x5316;&#xFF0C;&#x4F46;State&#x5B9E;&#x4F8B;&#x53EA;&#x4F1A;&#x5728;&#x7B2C;&#x4E00;&#x6B21;&#x63D2;&#x5165;&#x5230;&#x6811;&#x4E2D;&#x65F6;&#x88AB;&#x521B;&#x5EFA;&#x3002;</li>
-<li><code>context</code>&#xFF0C;StatefulWidget&#x5BF9;&#x5E94;&#x7684;BuildContext&#x3002;</li>
-</ol>
-<h3 id="2-state&#x751F;&#x547D;&#x5468;&#x671F;">2. State&#x751F;&#x547D;&#x5468;&#x671F;</h3>
-<ul>
-<li><code>initState</code>&#xFF1A;&#x5F53;<code>widget</code>&#x7B2C;&#x4E00;&#x6B21;&#x63D2;&#x5165;&#x5230;<code>widget</code>&#x6811;&#x65F6;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#x3002;</li>
-<li><code>didChangeDependencies</code>&#xFF1A;&#x5F53;State&#x5BF9;&#x8C61;&#x7684;&#x4F9D;&#x8D56;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#x3002;</li>
-<li><code>build()</code>&#x4F1A;&#x5728;&#x5982;&#x4E0B;&#x573A;&#x666F;&#x88AB;&#x8C03;&#x7528;&#xFF1A;<ol>
-<li>&#x5728;&#x8C03;&#x7528;initState()&#x4E4B;&#x540E;&#x3002;</li>
-<li>&#x5728;&#x8C03;&#x7528;didUpdateWidget()&#x4E4B;&#x540E;&#x3002;</li>
-<li>&#x5728;&#x8C03;&#x7528;setState()&#x4E4B;&#x540E;&#x3002;</li>
-<li>&#x5728;&#x8C03;&#x7528;didChangeDependencies()&#x4E4B;&#x540E;&#x3002;</li>
-<li>&#x5728;State&#x5BF9;&#x8C61;&#x4ECE;&#x6811;&#x4E2D;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x79FB;&#x9664;&#x540E;&#xFF08;&#x4F1A;&#x8C03;&#x7528;deactivate&#xFF09;&#x53C8;&#x91CD;&#x65B0;&#x63D2;&#x5165;&#x5230;&#x6811;&#x7684;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#x4E4B;&#x540E;&#x3002;</li>
-</ol>
-</li>
-<li><code>reassemble</code>&#xFF1A;&#x70ED;&#x91CD;&#x8F7D;(hot reload)&#x65F6;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x6B64;&#x56DE;&#x8C03;&#x5728;Release&#x6A21;&#x5F0F;&#x4E0B;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#x3002;</li>
-<li><code>didUpdateWidget</code>&#xFF1A;&#x5728;<code>widget</code>&#x91CD;&#x65B0;&#x6784;&#x5EFA;&#x65F6;&#xFF0C;Flutter &#x6846;&#x67B6;&#x4F1A;&#x8C03;&#x7528;widget.canUpdate&#x6765;&#x68C0;&#x6D4B;<code>widget</code>&#x6811;&#x4E2D;&#x540C;&#x4E00;&#x4F4D;&#x7F6E;&#x7684;&#x65B0;&#x65E7;&#x8282;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x9700;&#x8981;&#x66F4;&#x65B0;&#xFF0C;&#x5982;&#x679C;widget.canUpdate&#x8FD4;&#x56DE;true&#x5219;&#x4F1A;&#x8C03;&#x7528;&#x6B64;&#x56DE;&#x8C03;&#x3002;</li>
-<li><code>deactivate</code>&#xFF1A;&#x5F53; State &#x5BF9;&#x8C61;&#x4ECE;&#x6811;&#x4E2D;&#x88AB;&#x79FB;&#x9664;&#x65F6;&#xFF0C;&#x4F1A;&#x8C03;&#x7528;&#x6B64;&#x56DE;&#x8C03;&#x3002;</li>
-<li><code>dispose</code>&#xFF1A;&#x5F53; State &#x5BF9;&#x8C61;&#x4ECE;&#x6811;&#x4E2D;&#x88AB;&#x6C38;&#x4E45;&#x79FB;&#x9664;&#x65F6;&#x8C03;&#x7528;&#x3002;</li>
-</ul>
-<h2 id="&#x5728;widget&#x6811;&#x4E2D;&#x83B7;&#x53D6;state&#x5BF9;&#x8C61;">&#x5728;<code>widget</code>&#x6811;&#x4E2D;&#x83B7;&#x53D6;State&#x5BF9;&#x8C61;</h2>
-<hr>
-<h3 id="1-&#x901A;&#x8FC7;context&#x83B7;&#x53D6;">1. &#x901A;&#x8FC7;Context&#x83B7;&#x53D6;</h3>
-<ol>
-<li><code>findAncestorStateOfType</code>&#x65B9;&#x6CD5;&#xFF1A;<pre class="language-"><code class="lang-c"> <span class="token comment">// &#x67E5;&#x627E;&#x7236;&#x7EA7;&#x6700;&#x8FD1;&#x7684;Scaffold&#x5BF9;&#x5E94;&#x7684;ScaffoldState&#x5BF9;&#x8C61;</span>
- ScaffoldState _state <span class="token operator">=</span> context<span class="token punctuation">.</span>findAncestorStateOfType<span class="token operator">&lt;</span>ScaffoldState<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">;</span>
- <span class="token comment">// &#x6253;&#x5F00;&#x62BD;&#x5C49;&#x83DC;&#x5355;</span>
- _state<span class="token punctuation">.</span><span class="token function">openDrawer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-</li>
-<li>StatefulWidget&#x4E2D;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;<code>of</code>&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x53D6;&#x5176;<code>State</code>&#x5BF9;&#x8C61;&#x3002;<pre class="language-"><code class="lang-c"><span class="token comment">// &#x76F4;&#x63A5;&#x901A;&#x8FC7;of&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x53D6;ScaffoldState</span>
-ScaffoldState _state<span class="token operator">=</span>Scaffold<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#x6253;&#x5F00;&#x62BD;&#x5C49;&#x83DC;&#x5355;</span>
-_state<span class="token punctuation">.</span><span class="token function">openDrawer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-</li>
-</ol>
-<h3 id="2-&#x901A;&#x8FC7;globalkey">2. &#x901A;&#x8FC7;GlobalKey</h3>
-<ol>
-<li>&#x7ED9;&#x76EE;&#x6807;StatefulWidget&#x6DFB;&#x52A0;GlobalKey&#x3002;<pre class="language-"><code class="lang-c"> <span class="token comment">//&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;globalKey, &#x7531;&#x4E8E;GlobalKey&#x8981;&#x4FDD;&#x6301;&#x5168;&#x5C40;&#x552F;&#x4E00;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x5B58;&#x50A8;</span>
- <span class="token keyword">static</span> GlobalKey<span class="token operator">&lt;</span>ScaffoldState<span class="token operator">&gt;</span> _globalKey<span class="token operator">=</span> <span class="token function">GlobalKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
- <span class="token function">Scaffold</span><span class="token punctuation">(</span>
-     key<span class="token operator">:</span> _globalKey <span class="token punctuation">,</span> <span class="token comment">//&#x8BBE;&#x7F6E;key</span>
-     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  
- <span class="token punctuation">)</span>
-</code></pre>
-</li>
-<li>&#x901A;&#x8FC7;GlobalKey&#x6765;&#x83B7;&#x53D6;State&#x5BF9;&#x8C61;<pre class="language-"><code class="lang-c"> _globalKey<span class="token punctuation">.</span>currentState<span class="token punctuation">.</span><span class="token function">openDrawer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
-</li>
-</ol>
-<h2 id="&#x901A;&#x8FC7;-renderobject-&#x81EA;&#x5B9A;&#x4E49;-widget">&#x901A;&#x8FC7; RenderObject &#x81EA;&#x5B9A;&#x4E49; Widget</h2>
-<hr>
-<p>&#x901A;&#x8FC7;RenderObject&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;</p>
-<pre class="language-"><code class="lang-c">class CustomWidget extends LeafRenderObjectWidget<span class="token punctuation">{</span>
-  @override
-  RenderObject <span class="token function">createRenderObject</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// &#x521B;&#x5EFA; RenderObject</span>
-    <span class="token keyword">return</span> <span class="token function">RenderCustomObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  @override
-  <span class="token keyword">void</span> <span class="token function">updateRenderObject</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">,</span> RenderCustomObject  renderObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// &#x66F4;&#x65B0; RenderObject</span>
-    super<span class="token punctuation">.</span><span class="token function">updateRenderObject</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> renderObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-class RenderCustomObject extends RenderBox<span class="token punctuation">{</span>
-
-  @override
-  <span class="token keyword">void</span> <span class="token function">performLayout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// &#x5B9E;&#x73B0;&#x5E03;&#x5C40;&#x903B;&#x8F91;</span>
-  <span class="token punctuation">}</span>
-
-  @override
-  <span class="token keyword">void</span> <span class="token function">paint</span><span class="token punctuation">(</span>PaintingContext context<span class="token punctuation">,</span> Offset offset<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// &#x5B9E;&#x73B0;&#x7ED8;&#x5236;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<ol>
-<li><p>&#x5982;&#x679C;&#x7EC4;&#x4EF6;&#x4E0D;&#x4F1A;&#x5305;&#x542B;&#x5B50;&#x7EC4;&#x4EF6;&#xFF0C;&#x5219;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7EE7;&#x627F;&#x81EA; LeafRenderObjectWidget&#x3002;</p>
-<pre class="language-"><code class="lang-c"> abstract class LeafRenderObjectWidget extends RenderObjectWidget <span class="token punctuation">{</span>
-   <span class="token keyword">const</span> <span class="token function">LeafRenderObjectWidget</span><span class="token punctuation">(</span><span class="token punctuation">{</span> Key<span class="token operator">?</span> key <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">super</span><span class="token punctuation">(</span>key<span class="token operator">:</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
+<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x8DEF;&#x7531;&#xFF0C;&#x547D;&#x540D;&#x201C;NewRoute&#x201D;&#x3002;<pre class="language-"><code class="lang-c"> class NewRoute extends StatelessWidget <span class="token punctuation">{</span>
    @override
-   LeafRenderObjectElement <span class="token function">createElement</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">LeafRenderObjectElement</span><span class="token punctuation">(</span>this<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+       appBar<span class="token operator">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+         title<span class="token operator">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;New route&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token punctuation">)</span><span class="token punctuation">,</span>
+       body<span class="token operator">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+         child<span class="token operator">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;This is new route&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token punctuation">)</span><span class="token punctuation">,</span>
+     <span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
  <span class="token punctuation">}</span>
 </code></pre>
 </li>
-<li>&#x91CD;&#x5199;&#x4E86; createRenderObject &#x65B9;&#x6CD5;&#x3002;&#x8BE5;&#x65B9;&#x6CD5;&#x88AB;&#x7EC4;&#x4EF6;&#x5BF9;&#x5E94;&#x7684; Element &#x8C03;&#x7528;&#xFF08;&#x6784;&#x5EFA;&#x6E32;&#x67D3;&#x6811;&#x65F6;&#xFF09;&#x7528;&#x4E8E;&#x751F;&#x6210;&#x6E32;&#x67D3;&#x5BF9;&#x8C61;&#x3002;</li>
-<li>updateRenderObject &#x65B9;&#x6CD5;&#x662F;&#x7528;&#x4E8E;&#x5728;&#x7EC4;&#x4EF6;&#x6811;&#x72B6;&#x6001;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x4F46;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x521B;&#x5EFA; RenderObject &#x65F6;&#x7528;&#x4E8E;&#x66F4;&#x65B0;&#x7EC4;&#x4EF6;&#x6E32;&#x67D3;&#x5BF9;&#x8C61;&#x7684;&#x56DE;&#x8C03;&#x3002;</li>
-<li>RenderCustomObject &#x7C7B;&#x662F;&#x7EE7;&#x627F;&#x81EA; RenderBox&#xFF0C;&#x800C; RenderBox &#x7EE7;&#x627F;&#x81EA; RenderObject&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728; RenderCustomObject &#x4E2D;&#x5B9E;&#x73B0;&#x5E03;&#x5C40;&#x3001;&#x7ED8;&#x5236;&#x3001;&#x4E8B;&#x4EF6;&#x54CD;&#x5E94;&#x7B49;&#x903B;&#x8F91;</li>
-</ol>
-<h2 id="flutter-sdk&#x5185;&#x7F6E;&#x7EC4;&#x4EF6;&#x5E93;&#x4ECB;&#x7ECD;">Flutter SDK&#x5185;&#x7F6E;&#x7EC4;&#x4EF6;&#x5E93;&#x4ECB;&#x7ECD;</h2>
-<hr>
-<h3 id="1-&#x57FA;&#x7840;&#x7EC4;&#x4EF6;">1. &#x57FA;&#x7840;&#x7EC4;&#x4EF6;</h3>
-<p>&#x8981;&#x4F7F;&#x7528;&#x57FA;&#x7840;&#x7EC4;&#x4EF6;&#x5E93;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x5BFC;&#x5165;&#xFF1A;</p>
-<pre class="language-"><code class="lang-c">import <span class="token string">&apos;package:flutter/widgets.dart&apos;</span><span class="token punctuation">;</span>
-</code></pre>
-<ul>
-<li><code>Text</code>&#xFF1A;&#x6587;&#x672C;&#x3002;</li>
-<li><code>Row</code>&#x3001;<code>Column</code>&#xFF1A;&#x5728;&#x6C34;&#x5E73;&#xFF08;Row&#xFF09;&#x548C;&#x5782;&#x76F4;&#xFF08;Column&#xFF09;&#x65B9;&#x5411;&#x4E0A;&#x521B;&#x5EFA;&#x7075;&#x6D3B;&#x7684;&#x5E03;&#x5C40;&#x3002;</li>
-<li><code>Stack</code>&#xFF1A;&#x53D6;&#x4EE3;&#x7EBF;&#x6027;&#x5E03;&#x5C40;&#x3002;</li>
-<li><code>Container</code>&#xFF1A;&#x77E9;&#x5F62;&#x89C6;&#x89C9;&#x5143;&#x7D20;&#x3002;</li>
-</ul>
-<h3 id="2-material&#x7EC4;&#x4EF6;">2. Material&#x7EC4;&#x4EF6;</h3>
-<p>Android&#x7CFB;UI&#x3002;</p>
-<p>&#x8981;&#x4F7F;&#x7528; Material &#x7EC4;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x5F15;&#x5165;&#x5B83;&#xFF1A;</p>
-<pre class="language-"><code class="lang-c">import <span class="token string">&apos;package:flutter/material.dart&apos;</span><span class="token punctuation">;</span>
-</code></pre>
-<ul>
-<li>Material &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE5;MaterialApp (opens new window) &#x7EC4;&#x4EF6;&#x5F00;&#x59CB;&#x3002;</li>
-<li>Material &#x7EC4;&#x4EF6;&#x6709;Scaffold&#x3001;AppBar&#x3001;TextButton&#x7B49;&#x3002;</li>
-</ul>
-<h3 id="3-cupertino&#x7EC4;&#x4EF6;">3. Cupertino&#x7EC4;&#x4EF6;</h3>
-<p>iOS&#x7CFB;UI&#x3002;</p>
-<ul>
-<li>MaterialPageRoute&#xFF1A;&#x5728;&#x8DEF;&#x7531;&#x5207;&#x6362;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x662F; Android &#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x5C06;&#x4F1A;&#x4F7F;&#x7528; Android &#x7CFB;&#x7EDF;&#x9ED8;&#x8BA4;&#x7684;&#x9875;&#x9762;&#x5207;&#x6362;&#x52A8;&#x753B;(&#x4ECE;&#x5E95;&#x5411;&#x4E0A;)&#xFF1B;&#x5982;&#x679C;&#x662F; iOS &#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x4F1A;&#x4F7F;&#x7528; iOS &#x7CFB;&#x7EDF;&#x9ED8;&#x8BA4;&#x7684;&#x9875;&#x9762;&#x5207;&#x6362;&#x52A8;&#x753B;&#xFF08;&#x4ECE;&#x53F3;&#x5411;&#x5DE6;&#xFF09;&#x3002;</li>
-<li><p>Cupertino &#x7EC4;&#x4EF6;&#x98CE;&#x683C;&#x7684;&#x9875;&#x9762;&#xFF1A;</p>
-<pre class="language-"><code class="lang-c">  <span class="token comment">//&#x5BFC;&#x5165;cupertino `widget`&#x5E93;</span>
-  import <span class="token string">&apos;package:flutter/cupertino.dart&apos;</span><span class="token punctuation">;</span>
-
-  class CupertinoTestRoute extends StatelessWidget  <span class="token punctuation">{</span>
-    @override
-   `widget`<span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> <span class="token function">CupertinoPageScaffold</span><span class="token punctuation">(</span>
-        navigationBar<span class="token operator">:</span> <span class="token function">CupertinoNavigationBar</span><span class="token punctuation">(</span>
-          middle<span class="token operator">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;Cupertino Demo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        <span class="token punctuation">)</span><span class="token punctuation">,</span>
-        child<span class="token operator">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
-          child<span class="token operator">:</span> <span class="token function">CupertinoButton</span><span class="token punctuation">(</span>
-              color<span class="token operator">:</span> CupertinoColors<span class="token punctuation">.</span>activeBlue<span class="token punctuation">,</span>
-              child<span class="token operator">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;Press&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              onPressed<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-          <span class="token punctuation">)</span><span class="token punctuation">,</span>
-        <span class="token punctuation">)</span><span class="token punctuation">,</span>
-      <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
+<li>&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x6253;&#x5F00;&#x65B0;&#x8DEF;&#x7531;&#x7684;&#x6309;&#x94AE;&#xFF0C;&#x70B9;&#x51FB;&#x8BE5;&#x6309;&#x94AE;&#x540E;&#x5C31;&#x4F1A;&#x6253;&#x5F00;&#x65B0;&#x7684;&#x8DEF;&#x7531;&#x9875;&#x9762;&#x3002;<pre class="language-"><code class="lang-c"> <span class="token function">Column</span><span class="token punctuation">(</span>
+   mainAxisAlignment<span class="token operator">:</span> MainAxisAlignment<span class="token punctuation">.</span>center<span class="token punctuation">,</span>
+   children<span class="token operator">:</span> <span class="token operator">&lt;</span>Widget<span class="token operator">&gt;</span><span class="token punctuation">[</span>
+     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment">//&#x7701;&#x7565;&#x65E0;&#x5173;&#x4EE3;&#x7801;</span>
+     <span class="token function">TextButton</span><span class="token punctuation">(</span>
+       child<span class="token operator">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;open new route&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+       onPressed<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token comment">//&#x5BFC;&#x822A;&#x5230;&#x65B0;&#x8DEF;&#x7531;   </span>
+         Navigator<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> 
+           context<span class="token punctuation">,</span>
+           <span class="token function">MaterialPageRoute</span><span class="token punctuation">(</span>builder<span class="token operator">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             <span class="token keyword">return</span> <span class="token function">NewRoute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+         <span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span><span class="token punctuation">,</span>
+     <span class="token punctuation">)</span><span class="token punctuation">,</span>
+   <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span>
 </code></pre>
 </li>
-</ul>
-<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+</ol>
+<h2 id="materialpageroute">MaterialPageRoute</h2>
 <hr>
+<p>MaterialPageRoute&#x7EE7;&#x627F;&#x81EA;PageRoute&#x7C7B;&#xFF0C;PageRoute&#x7C7B;&#x662F;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x8868;&#x793A;&#x5360;&#x6709;&#x6574;&#x4E2A;&#x5C4F;&#x5E55;&#x7A7A;&#x95F4;&#x7684;&#x4E00;&#x4E2A;&#x6A21;&#x6001;&#x8DEF;&#x7531;&#x9875;&#x9762;&#x3002;</p>
+<p>MaterialPageRoute &#x662F; Material&#x7EC4;&#x4EF6;&#x5E93;&#x63D0;&#x4F9B;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x9488;&#x5BF9;&#x4E0D;&#x540C;&#x5E73;&#x53F0;&#xFF0C;&#x5B9E;&#x73B0;&#x4E0E;&#x5E73;&#x53F0;&#x9875;&#x9762;&#x5207;&#x6362;&#x52A8;&#x753B;&#x98CE;&#x683C;&#x4E00;&#x81F4;&#x7684;&#x8DEF;&#x7531;&#x5207;&#x6362;&#x52A8;&#x753B;&#x3002;</p>
+<p>MaterialPageRoute &#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x5404;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x610F;&#x4E49;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c"><span class="token function">MaterialPageRoute</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    WidgetBuilder builder<span class="token punctuation">,</span>
+    RouteSettings settings<span class="token punctuation">,</span>
+    bool maintainState <span class="token operator">=</span> true<span class="token punctuation">,</span>
+    bool fullscreenDialog <span class="token operator">=</span> false<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
 <ul>
-<li>Flutter &#x7684;<code>widget</code>&#x7C7B;&#x578B;&#x5206;&#x4E3A;StatefulWidget &#x548C; StatelessWidget &#x4E24;&#x79CD;&#x3002;</li>
-<li>&#x5F15;&#x5165;&#x8FC7;&#x591A;&#x7EC4;&#x4EF6;&#x5E93;&#x4F1A;&#x8BA9;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x5B89;&#x88C5;&#x5305;&#x53D8;&#x5927;&#x3002;</li>
-<li>&#x7531;&#x4E8E; Material &#x548C; Cupertino &#x90FD;&#x662F;&#x5728;&#x57FA;&#x7840;&#x7EC4;&#x4EF6;&#x5E93;&#x4E4B;&#x4E0A;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x4E2D;&#x5F15;&#x5165;&#x4E86;&#x8FD9;&#x4E24;&#x8005;&#x4E4B;&#x4E00;&#xFF0C;&#x5219;&#x4E0D;&#x9700;&#x8981;&#x518D;&#x5F15;&#x5165;flutter/ widgets.dart&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x5185;&#x90E8;&#x5DF2;&#x7ECF;&#x5F15;&#x5165;&#x8FC7;&#x4E86;&#x3002;</li>
+<li>builder&#xFF1A;&#x662F;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x4E00;&#x4E2A;widget&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x8DF3;&#x8F6C;&#x7684;&#x9875;&#x9762;&#x3002;</li>
+<li>settings&#xFF1A;&#x5305;&#x542B;&#x8DEF;&#x7531;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x5982;&#x8DEF;&#x7531;&#x540D;&#x79F0;&#x3001;&#x662F;&#x5426;&#x521D;&#x59CB;&#x8DEF;&#x7531;&#xFF08;&#x9996;&#x9875;&#xFF09;&#x3002;</li>
+<li>maintainState&#xFF1A;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x4E0D;&#x53EF;&#x89C1;(&#x88AB;&#x4E0A;&#x9762;&#x7684;&#x76D6;&#x4F4F;&#x5B8C;&#x5168;&#x770B;&#x4E0D;&#x5230;&#x5566;~)&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x662F;&#x5426;&#x8FD8;&#x9700;&#x8981;&#x4FDD;&#x5B58;&#x72B6;&#x6001;&#x3002;</li>
+<li>fullscreenDialog&#xFF1A;&#x8868;&#x793A;&#x65B0;&#x7684;&#x8DEF;&#x7531;&#x9875;&#x9762;&#x662F;&#x5426;&#x662F;&#x4E00;&#x4E2A;&#x5168;&#x5C4F;&#x7684;&#x6A21;&#x6001;&#x5BF9;&#x8BDD;&#x6846;&#x3002;</li>
 </ul>
-<p><a href="https://book.flutterchina.club/chapter2/flutter_widget_intro.html#_2-2-1-widget-%E6%A6%82%E5%BF%B5" target="_blank">Widget &#x7B80;&#x4ECB;</a><br><a href="https://developer.huawei.com/consumer/cn/forum/topic/0202327746887030154" target="_blank">Flutter&#x4E2D;Widget &#x3001;Element&#x3001;RenderObject&#x89D2;&#x8272;&#x6DF1;&#x5165;&#x5206;&#x6790;</a><br><a href="https://www.bilibili.com/video/BV1ET4y1a7xY/?spm_id_from=333.788&amp;vd_source=0e0265662467c6caea699dd58aec6891" target="_blank">Flutter State&#x751F;&#x547D;&#x5468;&#x671F;</a>  </p>
+<h2 id="navigator">Navigator</h2>
+<hr>
+<p>Navigator&#x662F;&#x4E00;&#x4E2A;&#x8DEF;&#x7531;&#x7BA1;&#x7406;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x6253;&#x5F00;&#x548C;&#x9000;&#x51FA;&#x8DEF;&#x7531;&#x9875;&#x65B9;&#x6CD5;&#x3002;</p>
+<ol>
+<li>Future push(BuildContext context, Route route)
+ &#x5C06;&#x7ED9;&#x5B9A;&#x7684;&#x8DEF;&#x7531;&#x5165;&#x6808;&#xFF08;&#x5373;&#x6253;&#x5F00;&#x65B0;&#x7684;&#x9875;&#x9762;&#xFF09;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x4E00;&#x4E2A;Future&#x5BF9;&#x8C61;&#xFF0C;&#x7528;&#x4EE5;&#x63A5;&#x6536;&#x65B0;&#x8DEF;&#x7531;&#x51FA;&#x6808;&#xFF08;&#x5373;&#x5173;&#x95ED;&#xFF09;&#x65F6;&#x7684;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x3002;</li>
+<li>bool pop(BuildContext context, [ result ])
+ &#x5C06;&#x6808;&#x9876;&#x8DEF;&#x7531;&#x51FA;&#x6808;&#xFF0C;result &#x4E3A;&#x9875;&#x9762;&#x5173;&#x95ED;&#x65F6;&#x8FD4;&#x56DE;&#x7ED9;&#x4E0A;&#x4E00;&#x4E2A;&#x9875;&#x9762;&#x7684;&#x6570;&#x636E;&#x3002;</li>
+<li>&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;
+ Navigator.push(BuildContext context, Route route)&#x7B49;&#x4EF7;&#x4E8E;Navigator.of(context).push(Route route)&#x3002;</li>
+</ol>
+<h2 id="&#x8DEF;&#x7531;&#x4F20;&#x503C;">&#x8DEF;&#x7531;&#x4F20;&#x503C;</h2>
+<hr>
+<p>&#x4F20;&#x503C;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c">Navigator<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;&#x6211;&#x662F;&#x8FD4;&#x56DE;&#x503C;&quot;</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x83B7;&#x53D6;&#x503C;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c"><span class="token punctuation">(</span><span class="token punctuation">)</span> async <span class="token punctuation">{</span>
+  <span class="token comment">// &#x6253;&#x5F00;`TipRoute`&#xFF0C;&#x5E76;&#x7B49;&#x5F85;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;</span>
+  var result <span class="token operator">=</span> await Navigator<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>
+    context<span class="token punctuation">,</span>
+    <span class="token function">MaterialPageRoute</span><span class="token punctuation">(</span>
+      builder<span class="token operator">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">TipRoute</span><span class="token punctuation">(</span>
+          <span class="token comment">// &#x8DEF;&#x7531;&#x53C2;&#x6570;</span>
+          text<span class="token operator">:</span> <span class="token string">&quot;&#x6211;&#x662F;&#x63D0;&#x793A;xxxx&quot;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//&#x8F93;&#x51FA;`TipRoute`&#x8DEF;&#x7531;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;</span>
+  <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x8DEF;&#x7531;&#x8FD4;&#x56DE;&#x503C;: $result&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="&#x547D;&#x540D;&#x8DEF;&#x7531;">&#x547D;&#x540D;&#x8DEF;&#x7531;</h2>
+<hr>
+<h3 id="1-&#x8DEF;&#x7531;&#x8868;">1. &#x8DEF;&#x7531;&#x8868;</h3>
+<p>&#x5B83;&#x662F;&#x4E00;&#x4E2A;Map&#xFF0C;key&#x4E3A;&#x8DEF;&#x7531;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x662F;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF1B;value&#x662F;&#x4E2A;builder&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x4E8E;&#x751F;&#x6210;&#x76F8;&#x5E94;&#x7684;&#x8DEF;&#x7531;widget&#x3002;</p>
+<pre class="language-"><code class="lang-c">Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> WidgetBuilder<span class="token operator">&gt;</span> routes<span class="token punctuation">;</span>
+</code></pre>
+<h3 id="2-&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x8868;">2. &#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x8868;</h3>
+<p>MaterialApp&#x6DFB;&#x52A0;routes&#x5C5E;&#x6027;:</p>
+<pre class="language-"><code class="lang-c"><span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+  title<span class="token operator">:</span> <span class="token string">&apos;Flutter Demo&apos;</span><span class="token punctuation">,</span>
+  theme<span class="token operator">:</span> <span class="token function">ThemeData</span><span class="token punctuation">(</span>
+    primarySwatch<span class="token operator">:</span> Colors<span class="token punctuation">.</span>blue<span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token comment">//&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x8868;</span>
+  routes<span class="token operator">:</span><span class="token punctuation">{</span>
+   <span class="token string">&quot;new_page&quot;</span><span class="token operator">:</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">NewRoute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment">// &#x7701;&#x7565;&#x5176;&#x4ED6;&#x8DEF;&#x7531;&#x6CE8;&#x518C;&#x4FE1;&#x606F;</span>
+  <span class="token punctuation">}</span> <span class="token punctuation">,</span>
+  home<span class="token operator">:</span> <span class="token function">MyHomePage</span><span class="token punctuation">(</span>title<span class="token operator">:</span> <span class="token string">&apos;Flutter Demo Home Page&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x5C06;home&#x6CE8;&#x518C;&#x4E3A;&#x547D;&#x540D;&#x8DEF;&#x7531;:</p>
+<pre class="language-"><code class="lang-c"><span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+  title<span class="token operator">:</span> <span class="token string">&apos;Flutter Demo&apos;</span><span class="token punctuation">,</span>
+  initialRoute<span class="token operator">:</span><span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span> <span class="token comment">//&#x540D;&#x4E3A;&quot;/&quot;&#x7684;&#x8DEF;&#x7531;&#x4F5C;&#x4E3A;&#x5E94;&#x7528;&#x7684;home(&#x9996;&#x9875;)</span>
+  theme<span class="token operator">:</span> <span class="token function">ThemeData</span><span class="token punctuation">(</span>
+    primarySwatch<span class="token operator">:</span> Colors<span class="token punctuation">.</span>blue<span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token comment">//&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x8868;</span>
+  routes<span class="token operator">:</span><span class="token punctuation">{</span>
+   <span class="token string">&quot;new_page&quot;</span><span class="token operator">:</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">NewRoute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   <span class="token string">&quot;/&quot;</span><span class="token operator">:</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">MyHomePage</span><span class="token punctuation">(</span>title<span class="token operator">:</span> <span class="token string">&apos;Flutter Demo Home Page&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">//&#x6CE8;&#x518C;&#x9996;&#x9875;&#x8DEF;&#x7531;</span>
+  <span class="token punctuation">}</span> 
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="3-&#x6253;&#x5F00;&#x65B0;&#x8DEF;&#x7531;&#x9875;">3. &#x6253;&#x5F00;&#x65B0;&#x8DEF;&#x7531;&#x9875;</h3>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Navigator &#x7684;pushNamed&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c">Future <span class="token function">pushNamed</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">,</span> String routeName<span class="token punctuation">,</span><span class="token punctuation">{</span>Object arguments<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c">onPressed<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  Navigator<span class="token punctuation">.</span><span class="token function">pushNamed</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;new_page&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//Navigator.push(context,</span>
+  <span class="token comment">//  MaterialPageRoute(builder: (context) {</span>
+  <span class="token comment">//  return NewRoute();</span>
+  <span class="token comment">//}));  </span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+<h3 id="4-&#x547D;&#x540D;&#x8DEF;&#x7531;&#x53C2;&#x6570;&#x4F20;&#x9012;">4. &#x547D;&#x540D;&#x8DEF;&#x7531;&#x53C2;&#x6570;&#x4F20;&#x9012;</h3>
+<p>&#x4F20;&#x9012;&#x53C2;&#x6570;:</p>
+<pre class="language-"><code class="lang-c">Navigator<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pushNamed</span><span class="token punctuation">(</span><span class="token string">&quot;new_page&quot;</span><span class="token punctuation">,</span> arguments<span class="token operator">:</span> <span class="token string">&quot;hi&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x83B7;&#x53D6;&#x8DEF;&#x7531;&#x53C2;&#x6570;:</p>
+<pre class="language-"><code class="lang-c">@override
+Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//&#x83B7;&#x53D6;&#x8DEF;&#x7531;&#x53C2;&#x6570;  </span>
+    var args<span class="token operator">=</span>ModalRoute<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span>settings<span class="token punctuation">.</span>arguments<span class="token punctuation">;</span>
+    <span class="token comment">//...&#x7701;&#x7565;&#x65E0;&#x5173;&#x4EE3;&#x7801;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="5-&#x5E26;&#x53C2;&#x6570;&#x7684;&#x8DEF;&#x7531;">5. &#x5E26;&#x53C2;&#x6570;&#x7684;&#x8DEF;&#x7531;</h3>
+<pre class="language-"><code class="lang-c"><span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment">//&#x7701;&#x7565;&#x65E0;&#x5173;&#x4EE3;&#x7801;</span>
+  routes<span class="token operator">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;tip2&quot;</span><span class="token operator">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token function">TipRoute</span><span class="token punctuation">(</span>text<span class="token operator">:</span> ModalRoute<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">.</span>settings<span class="token punctuation">.</span>arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span> 
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="&#x8DEF;&#x7531;&#x751F;&#x6210;&#x94A9;&#x5B50;">&#x8DEF;&#x7531;&#x751F;&#x6210;&#x94A9;&#x5B50;</h2>
+<hr>
+<p>MaterialApp&#x6709;&#x4E00;&#x4E2A;onGenerateRoute&#x5C5E;&#x6027;&#xFF0C;&#x5B83;&#x5728;&#x6253;&#x5F00;&#x547D;&#x540D;&#x8DEF;&#x7531;&#x65F6;&#x53EF;&#x80FD;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x4E4B;&#x6240;&#x4EE5;&#x8BF4;&#x53EF;&#x80FD;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x5F53;&#x8C03;&#x7528;Navigator.pushNamed(...)&#x6253;&#x5F00;&#x547D;&#x540D;&#x8DEF;&#x7531;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x6307;&#x5B9A;&#x7684;&#x8DEF;&#x7531;&#x540D;&#x5728;&#x8DEF;&#x7531;&#x8868;&#x4E2D;&#x5DF2;&#x6CE8;&#x518C;&#xFF0C;&#x5219;&#x4F1A;&#x8C03;&#x7528;&#x8DEF;&#x7531;&#x8868;&#x4E2D;&#x7684;builder&#x51FD;&#x6570;&#x6765;&#x751F;&#x6210;&#x8DEF;&#x7531;&#x7EC4;&#x4EF6;&#xFF1B;&#x5982;&#x679C;&#x8DEF;&#x7531;&#x8868;&#x4E2D;&#x6CA1;&#x6709;&#x6CE8;&#x518C;&#xFF0C;&#x624D;&#x4F1A;&#x8C03;&#x7528;onGenerateRoute&#x6765;&#x751F;&#x6210;&#x8DEF;&#x7531;&#x3002;onGenerateRoute&#x56DE;&#x8C03;&#x7B7E;&#x540D;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c">Route<span class="token operator">&lt;</span>dynamic<span class="token operator">&gt;</span> <span class="token function">Function</span><span class="token punctuation">(</span>RouteSettings settings<span class="token punctuation">)</span>
+</code></pre>
+<p>&#x6709;&#x4E86;onGenerateRoute&#x56DE;&#x8C03;&#xFF0C;&#x8981;&#x5B9E;&#x73B0;&#x4E0A;&#x9762;&#x63A7;&#x5236;&#x9875;&#x9762;&#x6743;&#x9650;&#x7684;&#x529F;&#x80FD;&#x5C31;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#xFF1A;&#x6211;&#x4EEC;&#x653E;&#x5F03;&#x4F7F;&#x7528;&#x8DEF;&#x7531;&#x8868;&#xFF0C;&#x53D6;&#x800C;&#x4EE3;&#x4E4B;&#x7684;&#x662F;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;onGenerateRoute&#x56DE;&#x8C03;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x8BE5;&#x56DE;&#x8C03;&#x4E2D;&#x8FDB;&#x884C;&#x7EDF;&#x4E00;&#x7684;&#x6743;&#x9650;&#x63A7;&#x5236;&#xFF0C;&#x5982;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c"><span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment">//&#x7701;&#x7565;&#x65E0;&#x5173;&#x4EE3;&#x7801;</span>
+  onGenerateRoute<span class="token operator">:</span><span class="token punctuation">(</span>RouteSettings settings<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token function">MaterialPageRoute</span><span class="token punctuation">(</span>builder<span class="token operator">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           String routeName <span class="token operator">=</span> settings<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+       <span class="token comment">// &#x5982;&#x679C;&#x8BBF;&#x95EE;&#x7684;&#x8DEF;&#x7531;&#x9875;&#x9700;&#x8981;&#x767B;&#x5F55;&#xFF0C;&#x4F46;&#x5F53;&#x524D;&#x672A;&#x767B;&#x5F55;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x767B;&#x5F55;&#x9875;&#x8DEF;&#x7531;&#xFF0C;</span>
+       <span class="token comment">// &#x5F15;&#x5BFC;&#x7528;&#x6237;&#x767B;&#x5F55;&#xFF1B;&#x5176;&#x4ED6;&#x60C5;&#x51B5;&#x5219;&#x6B63;&#x5E38;&#x6253;&#x5F00;&#x8DEF;&#x7531;&#x3002;</span>
+     <span class="token punctuation">}</span>
+   <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>onGenerateRoute onUnknownRoute&#x533A;&#x522B;&#xFF1A;onGenerateRoute &#x65E0;&#x6CD5;&#x751F;&#x6210;&#x8DEF;&#x7531;&#xFF0C;&#x4F1A;&#x89E6;&#x53D1;OnUnknownRoute &#x5C5E;&#x6027;&#x6765;&#x5904;&#x7406;&#x8BE5;&#x573A;&#x666F;&#x3002;</p>
+<blockquote>
+<p>&#x6CE8;&#x610F;&#xFF0C;onGenerateRoute &#x53EA;&#x4F1A;&#x5BF9;&#x547D;&#x540D;&#x8DEF;&#x7531;&#x751F;&#x6548;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x9700;&#x8981;&#x8C03;&#x7528;<code>Navigator.pushNamed</code>&#x3002;</p>
+</blockquote>
+<p><a href="https://juejin.cn/post/6844903798398255111" target="_blank">Flutter &#x8DEF;&#x7531;&#x539F;&#x7406;&#x89E3;&#x6790;</a><br><a href="https://www.likecs.com/ask-339645.html#sc=2528.5" target="_blank">Flutter &#x4E2D;&#x7684; onUnknownRoute &#x662F;&#x4EC0;&#x4E48;</a> </p>
 <div style="margin: 0px;">
     &#x5907;&#x6848;&#x53F7;&#xFF1A;
     <a href="https://beian.miit.gov.cn/" target="_blank">
@@ -4475,7 +4446,7 @@ class RenderCustomObject extends RenderBox<span class="token punctuation">{</spa
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.25","depth":1,"previous":{"title":"Java开发工具","level":"1.24.2","depth":2,"path":"pages/重拾服务端/Java开发工具.md","ref":"pages/重拾服务端/Java开发工具.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"README.md","mtime":"2022-12-13T12:28:05.506Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-13T12:28:09.529Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.25","depth":1,"previous":{"title":"Java开发工具","level":"1.24.2","depth":2,"path":"pages/重拾服务端/Java开发工具.md","ref":"pages/重拾服务端/Java开发工具.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"README.md","mtime":"2022-12-13T14:58:39.928Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-13T14:58:46.910Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
