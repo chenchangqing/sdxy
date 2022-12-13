@@ -5,6 +5,8 @@
     * [创建Flutter应用](pages/fultter/创建Flutter应用.md)
     * [第一个Flutter应用](pages/fultter/第一个Flutter应用.md)
     * [Widget简介](pages/fultter/Widget简介.md)
+    * [状态管理](pages/fultter/状态管理.md)
+    * [路由管理](pages/fultter/路由管理.md)
 * 游戏UI设计
     * [平面构成的基本形与骨骼](pages/游戏UI设计/平面构成的基本形与骨骼.md)
 * 面试系列
