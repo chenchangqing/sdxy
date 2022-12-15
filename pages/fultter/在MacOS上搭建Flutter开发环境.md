@@ -28,3 +28,5 @@ https://zhuanlan.zhihu.com/p/474652737
 [Flutter Gallery](https://gallery.flutter.dev/#/)  
 [推荐几个优质Flutter 开源项目](https://www.wanandroid.com/blog/show/2260)  
 [Flutter 快速上手 - 4.2 assets导入资源 | 猫哥](https://www.bilibili.com/video/BV1ve4y197Ly/?spm_id_from=333.788&vd_source=0e0265662467c6caea699dd58aec6891)  
+[Flutter学习记录——28.Flutter 调试及 Android 和 iOS 打包](https://blog.51cto.com/u_15781233/5654543#16_debugDumpSemanticsTree_132)  
+[FLUTTER开发之DART线程与异步](https://www.freesion.com/article/1166661201/)
