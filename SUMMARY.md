@@ -7,6 +7,8 @@
     * [Widget简介](pages/fultter/Widget简介.md)
     * [状态管理](pages/fultter/状态管理.md)
     * [路由管理](pages/fultter/路由管理.md)
+    * [包管理](pages/fultter/包管理.md)
+    * [资源管理](pages/fultter/资源管理.md)
 * 游戏UI设计
     * [平面构成的基本形与骨骼](pages/游戏UI设计/平面构成的基本形与骨骼.md)
 * 面试系列
