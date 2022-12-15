@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>包管理 · 技术博客</title>
+        <title>图片样式 · 技术博客</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -87,10 +87,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="资源管理.html" />
+    <link rel="next" href="单选开关和复选框.html" />
     
     
-    <link rel="prev" href="路由管理.html" />
+    <link rel="prev" href="按钮样式.html" />
     
 
     </head>
@@ -211,7 +211,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.7" data-path="包管理.html">
+        <li class="chapter " data-level="1.1.7" data-path="包管理.html">
             
                 <a href="包管理.html">
             
@@ -263,7 +263,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.11" data-path="图片样式.html">
+        <li class="chapter active" data-level="1.1.11" data-path="图片样式.html">
             
                 <a href="图片样式.html">
             
@@ -4279,7 +4279,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >包管理</a>
+        <a href="../.." >图片样式</a>
     </h1>
 </div>
 
@@ -4294,66 +4294,41 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5305;&#x7BA1;&#x7406;">&#x5305;&#x7BA1;&#x7406;</h1>
-<h2 id="yaml">YAML</h2>
+                                <h1 id="&#x56FE;&#x7247;&#x6837;&#x5F0F;">&#x56FE;&#x7247;&#x6837;&#x5F0F;</h1>
+<p><a href="https://gitee.com/learnany/flutter/blob/master/lib/imagestyle.dart" target="_blank">&#x6E90;&#x7801;</a>  <a href="https://book.flutterchina.club/chapter3/img_and_icon.html#_3-3-1-%E5%9B%BE%E7%89%87" target="_blank">&#x56FE;&#x7247;&#x53CA;ICON</a>  <a href="https://www.vcg.com/creative/1365017698" target="_blank">&#x56FE;&#x7247;&#x8D44;&#x6E90;</a>  <a href="https://zhuanlan.zhihu.com/p/47465069" target="_blank">&#x4F7F;&#x7528;flutter&#x52A0;&#x8F7D;&#x672C;&#x5730;&#x56FE;&#x7247;&#x62A5;&#x9519;</a></p>
+<h2 id="&#x56FE;&#x7247;">&#x56FE;&#x7247;</h2>
 <hr>
-<pre class="language-"><code class="lang-c">name<span class="token operator">:</span> flutter_in_action
-description<span class="token operator">:</span> First Flutter Application<span class="token punctuation">.</span>
-
-version<span class="token operator">:</span> <span class="token number">1.0</span><span class="token number">.0</span><span class="token operator">+</span><span class="token number">1</span>
-
-dependencies<span class="token operator">:</span>
-  flutter<span class="token operator">:</span>
-    sdk<span class="token operator">:</span> flutter
-  cupertino_icons<span class="token operator">:</span> <span class="token operator">^</span><span class="token number">0.1</span><span class="token number">.2</span>
-
-dev_dependencies<span class="token operator">:</span>
-  flutter_test<span class="token operator">:</span>
-    sdk<span class="token operator">:</span> flutter
-
-flutter<span class="token operator">:</span>
-  uses<span class="token operator">-</span>material<span class="token operator">-</span>design<span class="token operator">:</span> true
+<p>Flutter &#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;Image&#x7EC4;&#x4EF6;&#x6765;&#x52A0;&#x8F7D;&#x5E76;&#x663E;&#x793A;&#x56FE;&#x7247;&#xFF0C;Image&#x7684;&#x6570;&#x636E;&#x6E90;&#x53EF;&#x4EE5;&#x662F;asset&#x3001;&#x6587;&#x4EF6;&#x3001;&#x5185;&#x5B58;&#x4EE5;&#x53CA;&#x7F51;&#x7EDC;&#x3002;</p>
+<h3 id="1-imageprovider">1. ImageProvider</h3>
+<p>ImageProvider &#x662F;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x4E3B;&#x8981;&#x5B9A;&#x4E49;&#x4E86;&#x56FE;&#x7247;&#x6570;&#x636E;&#x83B7;&#x53D6;&#x7684;&#x63A5;&#x53E3;load()&#xFF0C;&#x4ECE;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#x6E90;&#x83B7;&#x53D6;&#x56FE;&#x7247;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x7684;ImageProvider &#xFF0C;&#x5982;AssetImage&#x662F;&#x5B9E;&#x73B0;&#x4E86;&#x4ECE;Asset&#x4E2D;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x7684; ImageProvider&#xFF0C;&#x800C;NetworkImage &#x5B9E;&#x73B0;&#x4E86;&#x4ECE;&#x7F51;&#x7EDC;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x7684; ImageProvider&#x3002;</p>
+<h3 id="2-image">2. Image</h3>
+<p>Image widget &#x6709;&#x4E00;&#x4E2A;&#x5FC5;&#x9009;&#x7684;image&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A; ImageProvider&#x3002;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x5206;&#x522B;&#x6F14;&#x793A;&#x4E00;&#x4E0B;&#x5982;&#x4F55;&#x4ECE; asset &#x548C;&#x7F51;&#x7EDC;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x3002;</p>
+<p>1&#xFF09;&#x5148;&#x914D;&#x7F6E;.yaml&#xFF0C;&#x518D;&#x4ECE;asset&#x4E2D;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c"><span class="token function">Image</span><span class="token punctuation">(</span>
+  image<span class="token operator">:</span> <span class="token function">AssetImage</span><span class="token punctuation">(</span><span class="token string">&quot;images/avatar.png&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  width<span class="token operator">:</span> <span class="token number">100.0</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="pub&#x4ED3;&#x5E93;">Pub&#x4ED3;&#x5E93;</h2>
-<hr>
-<p>Pub&#xFF08;<a href="https://pub.dev/" target="_blank">https://pub.dev/</a> &#xFF09;&#x662F; Google &#x5B98;&#x65B9;&#x7684; Dart Packages &#x4ED3;&#x5E93;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E; node &#x4E2D;&#x7684; npm&#x4ED3;&#x5E93;&#x3001;Android&#x4E2D;&#x7684; jcenter&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728; Pub &#x4E0A;&#x9762;&#x67E5;&#x627E;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;&#x5305;&#x548C;&#x63D2;&#x4EF6;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5411; Pub &#x53D1;&#x5E03;&#x6211;&#x4EEC;&#x7684;&#x5305;&#x548C;&#x63D2;&#x4EF6;&#x3002;</p>
-<h2 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h2>
-<hr>
-<p>1.&#x5C06;&#x201C;english_words&#x201D; &#x6DFB;&#x52A0;&#x5230;&#x4F9D;&#x8D56;&#x9879;&#x5217;&#x8868;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre class="language-"><code>dependencies:
-  flutter:
-    sdk: flutter
-  # &#x65B0;&#x6DFB;&#x52A0;&#x7684;&#x4F9D;&#x8D56;
-  english_words: ^4.0.0
-</code></pre><p>2.&#x4E0B;&#x8F7D;&#x5305;&#x3002;&#x5728;Android Studio&#x7684;&#x7F16;&#x8F91;&#x5668;&#x89C6;&#x56FE;&#x4E2D;&#x67E5;&#x770B;pubspec.yaml&#x65F6;&#xFF08;&#x56FE;2-13&#xFF09;&#xFF0C;&#x5355;&#x51FB;&#x53F3;&#x4E0A;&#x89D2;&#x7684; Pub get &#x3002;<br>3.&#x5F15;&#x5165;english_words&#x5305;&#x3002;</p>
-<pre class="language-"><code class="lang-c">import <span class="token string">&apos;package:english_words/english_words.dart&apos;</span><span class="token punctuation">;</span>
+<p>&#x6216;</p>
+<pre class="language-"><code class="lang-c">Image<span class="token punctuation">.</span><span class="token function">asset</span><span class="token punctuation">(</span><span class="token string">&quot;images/avatar.png&quot;</span><span class="token punctuation">,</span>
+  width<span class="token operator">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
 </code></pre>
-<p>4.&#x4F7F;&#x7528;english_words&#x5305;&#x6765;&#x751F;&#x6210;&#x968F;&#x673A;&#x5B57;&#x7B26;&#x4E32;&#x3002;</p>
-<pre class="language-"><code class="lang-c"><span class="token comment">// &#x751F;&#x6210;&#x968F;&#x673A;&#x5B57;&#x7B26;&#x4E32;</span>
-final wordPair <span class="token operator">=</span> WordPair<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>2) &#x4ECE;&#x7F51;&#x7EDC;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#xFF1A;</p>
+<pre class="language-"><code class="lang-c"><span class="token function">Image</span><span class="token punctuation">(</span>
+  image<span class="token operator">:</span> <span class="token function">NetworkImage</span><span class="token punctuation">(</span>
+      <span class="token string">&quot;https://avatars2.githubusercontent.com/u/20411648?s=460&amp;v=4&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  width<span class="token operator">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
 </code></pre>
-<h2 id="&#x5176;&#x4ED6;&#x4F9D;&#x8D56;&#x65B9;&#x5F0F;">&#x5176;&#x4ED6;&#x4F9D;&#x8D56;&#x65B9;&#x5F0F;</h2>
-<hr>
-<p>1.&#x4F9D;&#x8D56;&#x672C;&#x5730;&#x5305;</p>
-<pre class="language-"><code class="lang-c">dependencies<span class="token operator">:</span>
-    pkg1<span class="token operator">:</span>
-        path<span class="token operator">:</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>code<span class="token operator">/</span>pkg1
+<p>&#x6216;</p>
+<pre class="language-"><code class="lang-c">Image<span class="token punctuation">.</span><span class="token function">network</span><span class="token punctuation">(</span>
+  <span class="token string">&quot;https://avatars2.githubusercontent.com/u/20411648?s=460&amp;v=4&quot;</span><span class="token punctuation">,</span>
+  width<span class="token operator">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
 </code></pre>
-<p>2.&#x4F9D;&#x8D56;Git</p>
-<pre class="language-"><code class="lang-c">dependencies<span class="token operator">:</span>
-  pkg1<span class="token operator">:</span>
-    git<span class="token operator">:</span>
-      url<span class="token operator">:</span> git<span class="token operator">:</span><span class="token comment">//github.com/xxx/pkg1.git</span>
-</code></pre>
-<p>3.&#x4F7F;&#x7528;path&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;</p>
-<pre class="language-"><code class="lang-c">dependencies<span class="token operator">:</span>
-  package1<span class="token operator">:</span>
-    git<span class="token operator">:</span>
-      url<span class="token operator">:</span> git<span class="token operator">:</span><span class="token comment">//github.com/flutter/packages.git</span>
-      path<span class="token operator">:</span> packages<span class="token operator">/</span>package1
-</code></pre>
-<p>&#x4F9D;&#x8D56;&#x65B9;&#x5F0F;:<a href="https://www.dartlang.org/tools/pub/dependencies" target="_blank">https://www.dartlang.org/tools/pub/dependencies</a> </p>
-<p><a href="https://book.flutterchina.club/chapter2/flutter_package_mgr.html" target="_blank">&#x5305;&#x7BA1;&#x7406;</a></p>
+<p>3&#xFF09;&#x53C2;&#x6570;</p>
+<h2 id="icon">ICON</h2>
  <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -4382,12 +4357,12 @@ final wordPair <span class="token operator">=</span> WordPair<span class="token 
 
             
                 
-                <a href="路由管理.html" class="navigation navigation-prev " aria-label="Previous page: 路由管理">
+                <a href="按钮样式.html" class="navigation navigation-prev " aria-label="Previous page: 按钮样式">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="资源管理.html" class="navigation navigation-next " aria-label="Next page: 资源管理">
+                <a href="单选开关和复选框.html" class="navigation navigation-next " aria-label="Next page: 单选开关和复选框">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -4398,7 +4373,7 @@ final wordPair <span class="token operator">=</span> WordPair<span class="token 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"包管理","level":"1.1.7","depth":2,"next":{"title":"资源管理","level":"1.1.8","depth":2,"path":"pages/fultter/资源管理.md","ref":"pages/fultter/资源管理.md","articles":[]},"previous":{"title":"路由管理","level":"1.1.6","depth":2,"path":"pages/fultter/路由管理.md","ref":"pages/fultter/路由管理.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/fultter/包管理.md","mtime":"2022-12-15T13:12:11.902Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-15T14:51:00.003Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"图片样式","level":"1.1.11","depth":2,"next":{"title":"单选开关和复选框","level":"1.1.12","depth":2,"path":"pages/fultter/单选开关和复选框.md","ref":"pages/fultter/单选开关和复选框.md","articles":[]},"previous":{"title":"按钮样式","level":"1.1.10","depth":2,"path":"pages/fultter/按钮样式.md","ref":"pages/fultter/按钮样式.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/fultter/图片样式.md","mtime":"2022-12-15T14:50:57.466Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-15T14:51:00.003Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
