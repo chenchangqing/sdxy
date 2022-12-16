@@ -13,6 +13,8 @@
     * [按钮样式](pages/fultter/按钮样式.md)
     * [图片样式](pages/fultter/图片样式.md)
     * [单选开关和复选框](pages/fultter/单选开关和复选框.md)
+    * [输入框及表单](pages/fultter/输入框及表单.md)
+    * [进度指示器](pages/fultter/进度指示器.md)
 * 游戏UI设计
     * [平面构成的基本形与骨骼](pages/游戏UI设计/平面构成的基本形与骨骼.md)
 * 面试系列
