@@ -15,6 +15,14 @@
     * [单选开关和复选框](pages/fultter/单选开关和复选框.md)
     * [输入框及表单](pages/fultter/输入框及表单.md)
     * [进度指示器](pages/fultter/进度指示器.md)
+    * [布局类组件介绍](pages/fultter/布局类组件介绍.md)
+    * [布局原理与约束](pages/fultter/布局原理与约束.md)
+    * [线性布局](pages/fultter/线性布局.md)
+    * [弹性布局](pages/fultter/弹性布局.md)
+    * [流式布局](pages/fultter/流式布局.md)
+    * [层叠布局](pages/fultter/层叠布局.md)
+    * [对齐与相对定位](pages/fultter/对齐与相对定位.md)
+    * [LayoutBuilder](pages/fultter/LayoutBuilder.md)
 * 游戏UI设计
     * [平面构成的基本形与骨骼](pages/游戏UI设计/平面构成的基本形与骨骼.md)
 * 面试系列
