@@ -48,6 +48,7 @@
         * [CustomScrollView](pages/fultter/CustomScrollView.md)
         * [CustomSliver](pages/fultter/CustomSliver.md)
         * [NestedScrollView](pages/fultter/NestedScrollView.md)
+    * [Flutter学习记录](pages/fultter/Flutter学习记录.md)
 * 游戏UI设计
     * [平面构成的基本形与骨骼](pages/游戏UI设计/平面构成的基本形与骨骼.md)
 * 面试系列
