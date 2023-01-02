@@ -1,5 +1,9 @@
 # Flutter学习记录
 
+## 问题记录
+
+* [" Error: Member not found: 'packageRoot' " in Flutter [duplicate]](https://stackoverflow.com/questions/70389267/error-member-not-found-packageroot-in-flutter)
+
 ## flutter
 
 [Flutter 开发文档](https://flutter.cn/docs)  
@@ -16,6 +20,11 @@
 * [Flutter-状态管理](http://www.noobyard.com/article/p-xhhycaft-bs.html)
 * [Flutter学习笔记：Flutter状态管理（使用Provider进行状态管理）](https://zhuanlan.zhihu.com/p/392551608)
 * [Flutter中文网](https://doc.flutterchina.club/cookbook/design/themes/)
+
+## dart
+
+* [dart.cn](https://dart.cn/guides)
+* [Dart | 浅析dart中库的导入与拆分](https://juejin.cn/post/6844903649617936392)
 
 ## GSYGithubApp
 
@@ -38,9 +47,32 @@
 * [flutter-Intl国际化、格式化日期、数字](https://juejin.cn/post/7106003875282780196)
 * [Flutter 多语言国际化配置 -- 使用Intl插件](https://blog.csdn.net/weixin_43865737/article/details/126972693?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-4-126972693-blog-120580468.pc_relevant_3mothn_strategy_and_data_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-4-126972693-blog-120580468.pc_relevant_3mothn_strategy_and_data_recovery&utm_relevant_index=9)
 
-## 只是
+## 知识
 
 * systemOverlayStyle可以设置状态栏颜色
 * [Flutter ThemeData详解](https://blog.csdn.net/weixin_52262025/article/details/123561960)
 * [BaseAppBar](https://github.com/viethoa2410py/Beat-Seller/blob/a64b511382204214955bac599eb80f7f09c3db5a/lib/widgets/app_bar.dart)
 * [Complete Guide To Flutter Drawer](https://appmaking.com/flutter-drawer-example/)
+* [Flutter下拉刷新组件CupertinoSliverRefreshControl苹果风格刷新效果](https://zhuanlan.zhihu.com/p/285358886)
+* [Flutter 基于NestedScrollView+RefreshIndicator完美解决滑动冲突](https://blog.csdn.net/jaynm/article/details/105486590)
+* [GraphQL 入门看这篇就够了](https://www.freecodecamp.org/chinese/news/a-detailed-guide-to-graphql/)
+
+## 主题
+
+* [Flutter 处理主题 Theme 的一些建议](https://mdnice.com/writing/116bbd4b5f794407a2ab019df2ad47f3)
+* [用抽象工厂方法构建 Flutter 主题](https://ducafecat.tech/2021/07/07/translation/flutter-build-theme-with-abstract-factory-method/)
+* [Flutter之textTheme](https://www.cnblogs.com/sundaysme/p/13545038.html)
+* [FlutterComponent最佳实践之色彩管理](https://xuyisheng.top/flutter_color/)
+* [Flutter 小技巧之 Flutter 3 下的 ThemeExtensions 和 Material3](https://blog.51cto.com/u_15641473/5365058)
+* [Flutter TextStyle参数解析](https://www.jianshu.com/p/0c3e4d9ccc92)
+* [如何在FLutter ThemeData中使用ColorScheme？](https://www.5axxw.com/questions/content/0jpyid)
+* [Flutter 深色模式分析&实践](https://www.modb.pro/db/436627)
+* [Flutter: 如何扩展ThemeData](https://www.shirne.com/blog/flutter/flutter_extend_themedata.html)
+
+## 实战项目
+
+* [Flutter 手把手写出超漂亮的登录注册 UI - 饮料食谱App - Speed Code](https://juejin.cn/post/6954286149766479903)
+
+## 教程
+
+* [Flutter App Development Tutorial Series' Articles](https://dev.to/kcl/series/17729)
