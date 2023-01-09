@@ -40,6 +40,9 @@
 * [Dart | 浅析dart中库的导入与拆分](https://juejin.cn/post/6844903649617936392)
 * [【-Flutter/Dart 语法补遗-】 sync* 和 async* 、yield 和yield* 、async 和 await](https://juejin.cn/post/6844904163407577096)
 * [Dart中两个点..和三个点...的用法](https://www.jianshu.com/p/35063261c583)
+* [Flutter 事件机制 - Future 和 MicroTask 全解析](https://juejin.cn/post/6844903816215658509)
+* [Dart中的Future及其then、catchError方法](https://www.jianshu.com/p/a3ee37535a16)
+* [Dart:factory工厂构造函数的使用场景](https://juejin.cn/post/6966099469527941156)
 
 ## GSYGithubApp
 
@@ -98,6 +101,7 @@
 
 * [Flutter App Development Tutorial Series' Articles](https://dev.to/kcl/series/17729)
 * [Flutter基础教程](https://book.flutterchina.club/chapter6/nestedscrollview.html#_6-12-4-%E5%B5%8C%E5%A5%97-tabbarview)
+* [fluttervideo](https://www.fluttervideo.com/)
 
 ## 快捷键
 
@@ -122,3 +126,11 @@
 * [Flutter 入门与实战（九十）：使用 BlocConsumer 同时构建响应式组件和监听状态](https://juejin.cn/post/7015295053857816583)
 * [Flutter 入门与实战（九十一）：使用 RepositoryProvider简化父子组件的传值](https://juejin.cn/post/7015769792955039775)
 * [flutter_bloc使用解析---骚年，你还在手搭bloc吗！](https://juejin.cn/post/6856268776510504968)
+* [slaw-getx](https://github.com/jonataslaw/getx/blob/master/documentation/zh_CN/dependency_management.md)
+* [Flutter GetX使用---简洁的魅力！](https://juejin.cn/post/6924104248275763208#heading-33)
+* [get-cli](https://pub.dev/packages/get_cli)
+* [getx_pattern](https://github.com/kauemurakami/getx_pattern)
+* [flutter_ducafecat_news_getx](https://github.com/ducafecat/flutter_ducafecat_news_getx)
+
+
+
