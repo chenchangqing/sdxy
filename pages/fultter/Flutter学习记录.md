@@ -43,6 +43,7 @@
 * [Flutter 事件机制 - Future 和 MicroTask 全解析](https://juejin.cn/post/6844903816215658509)
 * [Dart中的Future及其then、catchError方法](https://www.jianshu.com/p/a3ee37535a16)
 * [Dart:factory工厂构造函数的使用场景](https://juejin.cn/post/6966099469527941156)
+* [Dart String转数值int或double](https://blog.csdn.net/mqdxiaoxiao/article/details/102745734)
 
 ## GSYGithubApp
 
@@ -78,6 +79,12 @@
 * [获取屏幕尺寸](https://www.jianshu.com/p/35607982879f)
 * [Flutter-获取屏幕高度、密度、安全区域等](https://www.jianshu.com/p/fc293f3b1f00)
 
+## 工具
+
+* [Flutter中计算文字的宽度/高度](https://www.jianshu.com/p/cc3e6f78c85d)
+* [Flutter Utils 全网最齐全的工具类](https://blog.51cto.com/u_15127649/4898419)
+* [Flutter-出生日期计算年龄工具类](https://www.cnblogs.com/ssjf/p/12221701.html)
+
 ## 主题
 
 * [Flutter 处理主题 Theme 的一些建议](https://mdnice.com/writing/116bbd4b5f794407a2ab019df2ad47f3)
@@ -91,6 +98,8 @@
 * [Flutter: 如何扩展ThemeData](https://www.shirne.com/blog/flutter/flutter_extend_themedata.html)
 * [如何在 Flutter 中更改颜色的色调、饱和度或值？](https://qa.1r1g.com/sf/ask/4277909401/)
 * [flutter Icons全部图标](https://www.cnblogs.com/sundaysme/p/12557775.html)
+* [iconfont](https://www.iconfont.cn/)
+* [Flutter3.3对Material3设计风格的支持](https://www.bilibili.com/read/cv19372293)
 
 ## 实战项目
 
@@ -131,6 +140,11 @@
 * [get-cli](https://pub.dev/packages/get_cli)
 * [getx_pattern](https://github.com/kauemurakami/getx_pattern)
 * [flutter_ducafecat_news_getx](https://github.com/ducafecat/flutter_ducafecat_news_getx)
+* [getx-docs](https://chornthorn.github.io/getx-docs/)
+
+## 使用组件
+
+* [Flutter 仿iOS左滑删除，长按拖动](https://www.jianshu.com/p/c808f9315484)
 
 
 
