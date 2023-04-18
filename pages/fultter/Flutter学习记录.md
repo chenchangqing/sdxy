@@ -8,6 +8,7 @@
 * [Do not use BuildContexts across async gaps](https://stackoverflow.com/questions/68871880/do-not-use-buildcontexts-across-async-gaps)
 * [Bad state: add Fetch Article was called without a registered event handler](https://stackoverflow.com/questions/70255422/bad-state-add-fetch-article-was-called-without-a-registered-event-handler)
 * [[Discussion] Should Cubit expose Stream API? #1429](https://github.com/felangel/bloc/issues/1429)
+* [Flutter TextField输入框如何优雅的禁止弹出软键盘](https://www.jianshu.com/p/4f24d21d46b8)
 
 ## 入门
 
@@ -78,6 +79,7 @@
 * [GraphQL 入门看这篇就够了](https://www.freecodecamp.org/chinese/news/a-detailed-guide-to-graphql/)
 * [获取屏幕尺寸](https://www.jianshu.com/p/35607982879f)
 * [Flutter-获取屏幕高度、密度、安全区域等](https://www.jianshu.com/p/fc293f3b1f00)
+* [Flutter控制组件显示和隐藏三种方式详解](https://www.jb51.net/article/266550.htm)
 
 ## 工具
 

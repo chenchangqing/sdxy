@@ -1,5 +1,10 @@
 # Summary
 
+* 重拾服务端
+    * [域名的注册及备案](pages/重拾服务端/域名的注册及备案.md)
+    * [Java开发工具](pages/重拾服务端/Java开发工具.md)
+    * MYSQL
+        * [Mac下MYSQL的安装](pages/mysql/Mac下MYSQL的安装.md)
 * Flutter
     * 第一章 起步
         * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
@@ -334,8 +339,5 @@
     * [东极岛](pages/旅游安排/东极岛.md)
 * 推送
     * [相关链接](pages/推送/相关链接.md)
-* 重拾服务端
-    * [域名的注册及备案](pages/重拾服务端/域名的注册及备案.md)
-    * [Java开发工具](pages/重拾服务端/Java开发工具.md)
 * [最近更新](README.md)
 
