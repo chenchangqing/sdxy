@@ -5,6 +5,9 @@
     * [Java开发工具](pages/重拾服务端/Java开发工具.md)
     * MYSQL
         * [Mac下MYSQL的安装](pages/mysql/Mac下MYSQL的安装.md)
+    * JDBC
+        * [准备工作](pages/jdbc/prepare.md)
+        * [JDBC本质](pages/jdbc/nature.md)
 * Flutter
     * 第一章 起步
         * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
