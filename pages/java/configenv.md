@@ -67,11 +67,6 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.80-b11, mixed mode)
 ```
 >参考：https://juejin.cn/post/6844903878694010893  
 参考：https://blog.csdn.net/chwshuang/article/details/54925950
-    
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
+
+
 
