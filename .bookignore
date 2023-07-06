@@ -4,7 +4,7 @@ gitbook.sh
 book.pdf
 *.pdf
 
-/pages/**/*
+#/pages/**/*
 #!/pages/C++程序设计
 #!/pages/FFmpeg
 #!/pages/fultter
@@ -29,7 +29,7 @@ book.pdf
 #!/pages/重拾服务端
 #!/pages/面试系列
 #!/pages/游戏UI设计
-!/pages/MYSQL
-!/pages/jdbc
-!/pages/java
-!/pages/modernchinese
+#!/pages/MYSQL
+#!/pages/jdbc
+#!/pages/java
+#!/pages/modernchine
