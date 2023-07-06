@@ -13,6 +13,11 @@
 ### 编写测试类
 
 ```java
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Connection;
+
 public class JDBCTest01 {
 	public static void main(String[] args) {
 		try {
@@ -26,6 +31,7 @@ public class JDBCTest01 {
 			Connection conn = DriverManager.getConnection(url, user, password);
 			System.out.println("数据库连接对象 = " + conn);
 			// 第三步：获取数据库操作对象（专门执行sql语句的对象）  
+
 			// 第四步：执行SQL语句（DML、DQL...）  
 			// 第五步：处理查询结果（只有当第四步执行的是select语句的时候，才有这第五步处理查询结果集）  
 			// 第六步：释放资源（使用完资源后一定要关闭资源）
@@ -58,3 +64,4 @@ Exception in thread "main" java.lang.UnsupportedClassVersionError: com/mysql/jdb
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
 	at JDBCTest01.main(JDBCTest01.java:10)
 ```
+配置的驱动使用的是JDK1.8，但是本地编译代码的JDK是1.7，升级本地JDK为1.8，问题解决。

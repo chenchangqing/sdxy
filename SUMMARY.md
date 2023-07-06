@@ -1,5 +1,8 @@
 # Summary
 
+* 现代汉语
+    * [第一章](pages/modernchinese/chapter1.md)
+    * [第二章](pages/modernchinese/chapter2.md)
 * Java
     * [Mac下配置JDK](pages/java/configenv.md)
 * MYSQL
