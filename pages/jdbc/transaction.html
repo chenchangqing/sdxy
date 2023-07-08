@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>JDBC本质 · 技术博客</title>
+        <title>JDBC事务 · 技术博客</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -87,10 +87,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="programming.html" />
+    <link rel="next" href="tool.html" />
     
     
-    <link rel="prev" href="configmysql.html" />
+    <link rel="prev" href="login.html" />
     
 
     </head>
@@ -268,7 +268,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.3" data-path="nature.html">
+        <li class="chapter " data-level="1.4.3" data-path="nature.html">
             
                 <a href="nature.html">
             
@@ -307,7 +307,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.6" data-path="transaction.html">
+        <li class="chapter active" data-level="1.4.6" data-path="transaction.html">
             
                 <a href="transaction.html">
             
@@ -5002,7 +5002,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >JDBC本质</a>
+        <a href="../.." >JDBC事务</a>
     </h1>
 </div>
 
@@ -5017,140 +5017,79 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="jdbc&#x672C;&#x8D28;">JDBC&#x672C;&#x8D28;</h2>
-<hr>
-<h3 id="jdbc&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">JDBC&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
-<p>Java Database Connectivity&#xFF08;Java&#x8BED;&#x8A00;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#xFF09;&#x3002;</p>
-<h3 id="jdbc&#x7684;&#x672C;&#x8D28;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">JDBC&#x7684;&#x672C;&#x8D28;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h3>
-<p>JDBC&#x662F;SUN&#x516C;&#x53F8;&#x5236;&#x5B9A;&#x7684;&#x4E00;&#x5957;&#x63A5;&#x53E3;&#xFF08;interface&#xFF09;&#x3002;&#x63A5;&#x53E3;&#x90FD;&#x6709;&#x8C03;&#x7528;&#x8005;&#x548C;&#x5B9E;&#x73B0;&#x8005;&#xFF0C;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x8C03;&#x7528;&#x3001;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x5199;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x8FD9;&#x90FD;&#x5C5E;&#x4E8E;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#x3002;java.sql.*&#xFF0C;&#x8FD9;&#x4E2A;&#x8F6F;&#x4EF6;&#x5305;&#x4E0B;&#x6709;&#x5F88;&#x591A;&#x7684;&#x63A5;&#x53E3;&#x3002;</p>
-<h3 id="&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF1F;">&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF1F;</h3>
-<p>&#x89E3;&#x8026;&#x5408;&#xFF1A;&#x964D;&#x4F4E;&#x7A0B;&#x5E8F;&#x7684;&#x8026;&#x5408;&#x5EA6;&#xFF0C;&#x63D0;&#x4F9B;&#x7A0B;&#x5E8F;&#x7684;&#x6269;&#x5C55;&#x529B;&#x3002;&#x591A;&#x6001;&#x673A;&#x5236;&#x5C31;&#x662F;&#x975E;&#x5E38;&#x5178;&#x578B;&#x7684;&#x9762;&#x5411;&#x62BD;&#x8C61;&#x7F16;&#x7A0B;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x9762;&#x5411;&#x5177;&#x4F53;&#x7F16;&#x7A0B;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x5EFA;&#x8BAE;&#xFF1A;</p>
-<pre class="language-"><code class="lang-java"><span class="token class-name">Animal</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">Animal</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                <h1 id="jdbc&#x4E8B;&#x52A1;">JDBC&#x4E8B;&#x52A1;</h1>
+<p>JDBC&#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#x662F;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;&#x7684;&#xFF0C;&#x4EC0;&#x4E48;&#x4E8B;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;&#xFF1F;</p>
+<p>&#x53EA;&#x8981;&#x6267;&#x884C;&#x4EFB;&#x610F;&#x4E00;&#x6761;DML&#x8BED;&#x53E5;&#xFF0C;&#x5219;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;&#x4E00;&#x6B21;&#xFF0C;&#x8FD9;&#x662F;JDBC&#x9ED8;&#x8BA4;&#x7684;&#x4E8B;&#x52A1;&#x884C;&#x4E3A;&#x3002;&#x4F46;&#x662F;&#x5728;&#x5B9E;&#x9645;&#x7684;&#x4E1A;&#x52A1;&#x4E2D;&#xFF0C;&#x901A;&#x5E38;&#x90FD;&#x662F;N&#x6761;DML&#x8BED;&#x53E5;&#x5171;&#x540C;&#x8054;&#x5408;&#x624D;&#x80FD;&#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x5FC5;&#x987B;&#x4FDD;&#x8BC1;&#x4ED6;&#x4EEC;&#x8FD9;&#x4E9B;DML&#x8BED;&#x53E5;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x4E2D;&#x540C;&#x65F6;&#x6210;&#x529F;&#x6216;&#x8005;&#x540C;&#x65F6;&#x5931;&#x8D25;&#x3002;</p>
+<h3 id="&#x8D26;&#x6237;&#x8F6C;&#x8D26;&#x4E8B;&#x52A1;">&#x8D26;&#x6237;&#x8F6C;&#x8D26;&#x4E8B;&#x52A1;</h3>
+<p>sql&#x811A;&#x672C;&#xFF1A;</p>
+<pre class="language-"><code>drop table if exists t_act;
+create table t_act {
+    actno int,
+    balance double(7, 2)// &#x6CE8;&#x610F;&#xFF0C;7&#x8868;&#x793A;&#x6709;&#x6548;&#x6570;&#x5B57;&#x7684;&#x4E2A;&#x6570;&#xFF0C;2&#x8868;&#x793A;&#x5C0F;&#x6570;&#x4F4D;&#x7684;&#x4E2A;&#x6570;&#x3002;
+};
+insert into t_act(actno, balance) values (111, 20000);
+insert into t_act(actno, balance) values (222, 0);
+commit;
+select * from t_act;
+</code></pre><p>java&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql</span><span class="token punctuation">.</span>*<span class="token punctuation">;</span>
 
-<span class="token comment">// &#x5582;&#x517B;&#x7684;&#x65B9;&#x6CD5;</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">feed</span><span class="token punctuation">(</span><span class="token class-name">Animal</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// &#x9762;&#x5411;&#x7236;&#x7C7B;&#x578B;&#x7F16;&#x7A0B;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>&#x6211;&#x4EEC;&#x4E0D;&#x5EFA;&#x8BAE;&#xFF1A;</p>
-<pre class="language-"><code class="lang-java"><span class="token class-name">Cat</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">Dog</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// &#x5582;&#x517B;&#x7684;&#x65B9;&#x6CD5;</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">feed</span><span class="token punctuation">(</span><span class="token class-name">Cat</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// &#x9762;&#x5411;&#x5B9E;&#x73B0;&#x7C7B;&#x7F16;&#x7A0B;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="&#x4E3A;&#x4EC0;&#x4E48;sun&#x5236;&#x5B9A;&#x4E00;&#x5957;jdbc&#x63A5;&#x53E3;&#x5462;&#xFF1F;">&#x4E3A;&#x4EC0;&#x4E48;SUN&#x5236;&#x5B9A;&#x4E00;&#x5957;JDBC&#x63A5;&#x53E3;&#x5462;&#xFF1F;</h3>
-<p>&#x56E0;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;Oracle&#x6570;&#x636E;&#x5E93;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x539F;&#x7406;&#xFF0C;MYSQL&#x6570;&#x636E;&#x5E93;&#x4E5F;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x539F;&#x7406;&#xFF0C;MS SQLServer&#x6570;&#x636E;&#x5E93;&#x4E5F;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x539F;&#x7406;&#xFF0C;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x72EC;&#x7279;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x3002;</p>
-<p><img src="images/jdbc_01.png" width="100%/"></p>
-<h3 id="&#x7F16;&#x5199;&#x7A0B;&#x5E8F;&#x6A21;&#x62DF;jdbc&#x672C;&#x8D28;">&#x7F16;&#x5199;&#x7A0B;&#x5E8F;&#x6A21;&#x62DF;JDBC&#x672C;&#x8D28;</h3>
-<p>SUN&#x89D2;&#x8272;&#xFF1A;</p>
-<pre class="language-"><code class="lang-java"><span class="token comment">/*
-SUN&#x89D2;&#x8272;
-SUN&#x516C;&#x53F8;&#x8D1F;&#x8D23;&#x5236;&#x5B9A;&#x8FD9;&#x5957;JDBC&#x63A5;&#x53E3;
-*/</span>
-<span class="token keyword">public</span> <span class="token keyword">interface</span> JDBC <span class="token punctuation">{</span>
-    <span class="token comment">/*
-    &#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x7684;&#x65B9;&#x6CD5;
-    */</span>
-    <span class="token keyword">void</span> <span class="token function">getConnectoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>&#x5B9E;&#x73B0;&#x8005;&#x89D2;&#x8272;&#xFF1A;</p>
-<pre class="language-"><code class="lang-java"><span class="token comment">/*
-MySQL&#x9A71;&#x52A8;
-MySQL&#x7684;&#x6570;&#x636E;&#x5E93;&#x5382;&#x5BB6;&#x8D1F;&#x8D23;&#x5199;JDBC&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;
-*/</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MySQL</span> <span class="token keyword">implements</span> JDBC <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">getConnectoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// &#x5177;&#x4F53;&#x8FD9;&#x91CC;&#x7684;&#x4EE3;&#x7801;&#x600E;&#x4E48;&#x5199;&#xFF0C;&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;Java&#x7A0B;&#x5E8F;&#x5458;&#x6765;&#x8BF4;&#x6CA1;&#x5173;&#x7CFB;</span>
-        <span class="token comment">// &#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x6D89;&#x53CA;&#x5230;MySQL&#x5E95;&#x5C42;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;&#x8FDE;&#x63A5;MySQL&#x6570;&#x636E;&#x5E93;&#x6210;&#x529F;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">/*
-Oracle&#x9A71;&#x52A8;
-Oracle&#x7684;&#x6570;&#x636E;&#x5E93;&#x5382;&#x5BB6;&#x8D1F;&#x8D23;&#x5199;JDBC&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;
-*/</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Oracle</span> <span class="token keyword">implements</span> JDBC <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">getConnectoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// &#x5177;&#x4F53;&#x8FD9;&#x91CC;&#x7684;&#x4EE3;&#x7801;&#x600E;&#x4E48;&#x5199;&#xFF0C;&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;Java&#x7A0B;&#x5E8F;&#x5458;&#x6765;&#x8BF4;&#x6CA1;&#x5173;&#x7CFB;</span>
-        <span class="token comment">// &#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x6D89;&#x53CA;&#x5230;Oracle&#x5E95;&#x5C42;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;&#x8FDE;&#x63A5;Oracle&#x6570;&#x636E;&#x5E93;&#x6210;&#x529F;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">/*
-SqlServer&#x9A71;&#x52A8;
-SqlServer&#x7684;&#x6570;&#x636E;&#x5E93;&#x5382;&#x5BB6;&#x8D1F;&#x8D23;&#x5199;JDBC&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;
-*/</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SqlServer</span> <span class="token keyword">implements</span> JDBC <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">getConnectoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// &#x5177;&#x4F53;&#x8FD9;&#x91CC;&#x7684;&#x4EE3;&#x7801;&#x600E;&#x4E48;&#x5199;&#xFF0C;&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;Java&#x7A0B;&#x5E8F;&#x5458;&#x6765;&#x8BF4;&#x6CA1;&#x5173;&#x7CFB;</span>
-        <span class="token comment">// &#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x6D89;&#x53CA;&#x5230;SqlServer&#x5E95;&#x5C42;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;&#x8FDE;&#x63A5;SqlServer&#x6570;&#x636E;&#x5E93;&#x6210;&#x529F;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>Java&#x7A0B;&#x5E8F;&#x5458;&#xFF1A;</p>
-<pre class="language-"><code class="lang-java"><span class="token comment">/*
-Java&#x7A0B;&#x5E8F;&#x5458;
-&#x4E0D;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x5177;&#x4F53;&#x662F;&#x54EA;&#x4E2A;&#x54C1;&#x724C;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x9762;&#x5411;JDBC&#x63A5;&#x53E3;&#x5199;&#x4EE3;&#x7801;
-&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF0C;&#x9762;&#x5411;&#x62BD;&#x8C61;&#x7F16;&#x7A0B;&#xFF0C;&#x4E0D;&#x8981;&#x9762;&#x5411;&#x5177;&#x4F53;&#x7F16;&#x7A0B;
-*/</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JavaProgramer</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JDBCTest08</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token class-name">JDBC</span> jdbc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MySQL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// &#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x90FD;&#x662F;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;</span>
-        jdbc<span class="token punctuation">.</span><span class="token function">getConnectoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">Connection</span> conn <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">PreparedStatement</span> ps <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 1&#x3001;&#x6CE8;&#x518C;&#x9A71;&#x52A8;</span>
+            <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>driver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 2&#x3001;&#x83B7;&#x53D6;&#x8FDE;&#x63A5;</span>
+            conn <span class="token operator">=</span> <span class="token class-name">DriverManager</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> user<span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// &#x5C06;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;&#x673A;&#x5236;&#x4FEE;&#x6539;&#x4E3A;&#x624B;&#x52A8;&#x63D0;&#x4EA4;</span>
+            conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 3&#x3001;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;</span>
+            <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">&quot;update t_act set balance = ? where actno = ?&quot;</span><span class="token punctuation">;</span>
+            ps <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span>sql<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 4&#x3001;&#x6267;&#x884C;SQL&#x8BED;&#x53E5;</span>
+            ps<span class="token punctuation">.</span><span class="token function">setDouble</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ps<span class="token punctuation">.</span><span class="token function">setInt</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> count <span class="token operator">=</span> ps<span class="token punctuation">.</span><span class="token function">executeUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ps<span class="token punctuation">.</span><span class="token function">setDouble</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ps<span class="token punctuation">.</span><span class="token function">setInt</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">222</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            count <span class="token operator">+=</span> ps<span class="token punctuation">.</span><span class="token function">executeUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">?</span> <span class="token string">&quot;&#x8F6C;&#x8D26;&#x6210;&#x529F;&quot;</span> <span class="token operator">:</span> <span class="token string">&quot;&#x8F6C;&#x8D26;&#x5931;&#x8D25;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// &#x7A0B;&#x5E8F;&#x80FD;&#x591F;&#x8D70;&#x5230;&#x8FD9;&#x91CC;&#x8BF4;&#x660E;&#x4EE5;&#x4E0A;&#x7A0B;&#x5E8F;&#x6CA1;&#x6709;&#x5F02;&#x5E38;&#xFF0C;&#x4E8B;&#x52A1;&#x7ED3;&#x675F;&#xFF0C;&#x624B;&#x52A8;&#x63D0;&#x4EA4;&#x4E8B;&#x52A1;</span>
+            conn<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// &#x56DE;&#x6EDA;&#x4E8B;&#x52A1;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>conn <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    conn<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e1<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    e1<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 6&#x3001;&#x91CA;&#x653E;&#x8D44;&#x6E90;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>ps <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    ps<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>conn <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    conn<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>&#x7F16;&#x8BD1;&#xFF1A;</p>
-<pre class="language-"><code>javac *.java
-</code></pre><p>&#x8FD0;&#x884C;&#xFF1A;</p>
-<pre class="language-"><code>java JavaProgramer
-</code></pre><p>&#x8F93;&#x51FA;&#xFF1A;&#x8FDE;&#x63A5;MySQL&#x6570;&#x636E;&#x5E93;&#x6210;&#x529F;</p>
-<p>&#x4F7F;&#x7528;&#x201C;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x201D;&#xFF1A;</p>
-<pre class="language-"><code class="lang-java"><span class="token comment">/*
-Java&#x7A0B;&#x5E8F;&#x5458;
-&#x4E0D;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x5177;&#x4F53;&#x662F;&#x54EA;&#x4E2A;&#x54C1;&#x724C;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x9762;&#x5411;JDBC&#x63A5;&#x53E3;&#x5199;&#x4EE3;&#x7801;
-&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF0C;&#x9762;&#x5411;&#x62BD;&#x8C61;&#x7F16;&#x7A0B;&#xFF0C;&#x4E0D;&#x8981;&#x9762;&#x5411;&#x5177;&#x4F53;&#x7F16;&#x7A0B;
-*/</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JavaProgramer</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// &#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x673A;&#x5236;</span>
-        <span class="token class-name">Class</span> c <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">&quot;Oracle&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">JDBC</span> jdbc <span class="token operator">=</span> <span class="token punctuation">(</span>JDBC<span class="token punctuation">)</span>c<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// &#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x90FD;&#x662F;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;</span>
-        jdbc<span class="token punctuation">.</span><span class="token function">getConnectoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;jdbc.properties:<code>className=Oracle</code></p>
-<pre class="language-"><code class="lang-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span>*<span class="token punctuation">;</span>
-<span class="token comment">/*
-Java&#x7A0B;&#x5E8F;&#x5458;
-&#x4E0D;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x5177;&#x4F53;&#x662F;&#x54EA;&#x4E2A;&#x54C1;&#x724C;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x9762;&#x5411;JDBC&#x63A5;&#x53E3;&#x5199;&#x4EE3;&#x7801;
-&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF0C;&#x9762;&#x5411;&#x62BD;&#x8C61;&#x7F16;&#x7A0B;&#xFF0C;&#x4E0D;&#x8981;&#x9762;&#x5411;&#x5177;&#x4F53;&#x7F16;&#x7A0B;
-*/</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JavaProgramer</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
-        <span class="token comment">// &#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x673A;&#x5236;</span>
-        <span class="token class-name">ResourceBundle</span> bundle <span class="token operator">=</span> <span class="token class-name">ResourceBundle</span><span class="token punctuation">.</span><span class="token function">getBundle</span><span class="token punctuation">(</span><span class="token string">&quot;jdbc&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">String</span> className <span class="token operator">=</span> bundle<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;className&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Class</span> c <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>className<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">JDBC</span> jdbc <span class="token operator">=</span> <span class="token punctuation">(</span>JDBC<span class="token punctuation">)</span>c<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// &#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x90FD;&#x662F;&#x9762;&#x5411;&#x63A5;&#x53E3;&#x7F16;&#x7A0B;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;</span>
-        jdbc<span class="token punctuation">.</span><span class="token function">getConnectoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>&#x89C6;&#x9891;&#x5730;&#x5740;&#xFF1A;<a href="https://www.bilibili.com/video/BV1Bt41137iB?p=2" target="_blank">https://www.bilibili.com/video/BV1Bt41137iB?p=2</a></p>
+<p>&#x4EE5;&#x4E0A;&#x662F;&#x5355;&#x673A;&#x4E8B;&#x52A1;&#xFF0C;&#x8FD8;&#x6709;&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;&#x3002;</p>
  <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -5179,12 +5118,12 @@ Java&#x7A0B;&#x5E8F;&#x5458;
 
             
                 
-                <a href="configmysql.html" class="navigation navigation-prev " aria-label="Previous page: Mac下配置MySQL驱动">
+                <a href="login.html" class="navigation navigation-prev " aria-label="Previous page: JDBC登录">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="programming.html" class="navigation navigation-next " aria-label="Next page: JDBC编程">
+                <a href="tool.html" class="navigation navigation-next " aria-label="Next page: JDBC工具类">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -5195,7 +5134,7 @@ Java&#x7A0B;&#x5E8F;&#x5458;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JDBC本质","level":"1.4.3","depth":2,"next":{"title":"JDBC编程","level":"1.4.4","depth":2,"path":"pages/jdbc/programming.md","ref":"pages/jdbc/programming.md","articles":[]},"previous":{"title":"Mac下配置MySQL驱动","level":"1.4.2","depth":2,"path":"pages/jdbc/configmysql.md","ref":"pages/jdbc/configmysql.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/jdbc/nature.md","mtime":"2023-07-06T17:59:28.850Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-07-08T18:02:50.769Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JDBC事务","level":"1.4.6","depth":2,"next":{"title":"JDBC工具类","level":"1.4.7","depth":2,"path":"pages/jdbc/tool.md","ref":"pages/jdbc/tool.md","articles":[]},"previous":{"title":"JDBC登录","level":"1.4.5","depth":2,"path":"pages/jdbc/login.md","ref":"pages/jdbc/login.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/jdbc/transaction.md","mtime":"2023-07-08T18:02:48.546Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-07-08T18:02:50.769Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
