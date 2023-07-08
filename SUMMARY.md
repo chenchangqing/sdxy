@@ -12,6 +12,9 @@
     * [Mac下配置MySQL驱动](pages/jdbc/configmysql.md)
     * [JDBC本质](pages/jdbc/nature.md)
     * [JDBC编程](pages/jdbc/programming.md)
+    * [JDBC登录](pages/jdbc/login.md)
+    * [JDBC事务](pages/jdbc/transaction.md)
+    * [JDBC工具类](pages/jdbc/tool.md)
 * 重拾服务端
     * [域名的注册及备案](pages/重拾服务端/域名的注册及备案.md)
     * [Java开发工具](pages/重拾服务端/Java开发工具.md)
