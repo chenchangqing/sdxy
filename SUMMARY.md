@@ -1,5 +1,8 @@
 # Summary
 
+* Servlet
+    * [Servlet规范](pages/servlet/rule.md)
+    * [Servlet生命周期](pages/servlet/life.md)
 * 现代汉语
     * [第一章](pages/modernchinese/chapter1.md)
     * [第二章](pages/modernchinese/chapter2.md)
@@ -15,6 +18,7 @@
     * [JDBC登录](pages/jdbc/login.md)
     * [JDBC事务](pages/jdbc/transaction.md)
     * [JDBC工具类](pages/jdbc/tool.md)
+    * [悲观锁和乐观锁](pages/jdbc/lock.md)
 * 重拾服务端
     * [域名的注册及备案](pages/重拾服务端/域名的注册及备案.md)
     * [Java开发工具](pages/重拾服务端/Java开发工具.md)

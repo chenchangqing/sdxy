@@ -230,9 +230,9 @@ public class JDBCTest04 {
 					e.printStackTrace();
 				}
 			}
-			if (conn != null) {
+			if (stmt != null) {
 				try {
-					conn.close()
+					stmt.close()
 				} catch(SQLException e) {
 					e.printStackTrace();
 				}
