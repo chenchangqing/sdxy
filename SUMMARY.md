@@ -3,6 +3,8 @@
 * IDEA
     * [IDEA环境配置](pages/idea/env.md)
     * [IDEA创建项目](pages/idea/createp.md)
+    * [IDEA快捷键](pages/idea/quickkey.md)
+    * [IDEA模版](pages/idea/template.md)
 * Servlet
     * [Servlet规范](pages/servlet/rule.md)
     * [Servlet生命周期](pages/servlet/life.md)
