@@ -183,6 +183,32 @@
             
         </li>
     
+        <li class="chapter " data-level="1.1.5" data-path="pages/idea/tomcat.html">
+            
+                <a href="pages/idea/tomcat.html">
+            
+                    
+                    IDEA配置Tomcat
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="pages/idea/mavenconfig.html">
+            
+                <a href="pages/idea/mavenconfig.html">
+            
+                    
+                    Maven的安装与配置
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -5157,21 +5183,78 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="idea&#x5FEB;&#x6377;&#x952E;">IDEA&#x5FEB;&#x6377;&#x952E;</h1>
-<object data="pages/idea/pdfs/ReferenceCardForMac.pdf" type="application/pdf" width="700px" height="555px"> 
-    <embed src="pages/idea/pdfs/ReferenceCardForMac.pdf"> 
-     This browser does not support PDFs. Please download the PDF to view it: <a href="pages/idea/pdfs/ReferenceCardForMac.pdf">Download PDF</a>.<p></p> 
-    
-</object> 
+                                <h1 id="maven&#x7684;&#x5B89;&#x88C5;&#x4E0E;&#x914D;&#x7F6E;">Maven&#x7684;&#x5B89;&#x88C5;&#x4E0E;&#x914D;&#x7F6E;</h1>
+<p>Maven&#x662F;&#x4E00;&#x4E2A;&#x514D;&#x5B89;&#x88C5;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x5373;&#x89E3;&#x538B;&#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#xFF0C;&#x4F46;&#x662F;Maven&#x7BA1;&#x7406;&#x9879;&#x76EE;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x63D2;&#x4EF6;&#x7BA1;&#x7406;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;&#x800C;&#x9700;&#x8981;&#x4F7F;&#x7528;Maven&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x914D;&#x7F6E;Maven&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x3002;Maven&#x672C;&#x8EAB;&#x4F7F;&#x7528;Java&#x5F00;&#x53D1;&#xFF0C;&#x4E5F;&#x4F9D;&#x8D56;JDK&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x3002;</p>
+<h3 id="maven&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;">Maven&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;</h3>
+<hr>
+<p><img src="pages/idea/images/idea_40.png" width="100%/"></p>
+<h3 id="maven&#x7684;&#x4E0B;&#x8F7D;">Maven&#x7684;&#x4E0B;&#x8F7D;</h3>
+<hr>
+<p>&#x5B98;&#x65B9;&#x7F51;&#x7AD9;&#xFF1A;<a href="https://maven.apache.org/" target="_blank">https://maven.apache.org/</a></p>
+<p>&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#xFF1A;<a href="https://maven.apache.org/download.cgi" target="_blank">https://maven.apache.org/download.cgi</a></p>
+<p>&#x67E5;&#x770B;IDEA&#x5BF9;Maven&#x7684;&#x7248;&#x672C;&#x8981;&#x6C42;&#xFF1A;</p>
+<p>Setting-&gt;Preferences-&gt;Build,Execution,Deployment-&gt;Build Tools-&gt;Maven</p>
+<h3 id="&#x73AF;&#x5883;&#x53D8;&#x91CF;">&#x73AF;&#x5883;&#x53D8;&#x91CF;</h3>
+<hr>
+<p>&#x547D;&#x4EE4;&#x884C;&#x8F93;&#x5165;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;</p>
+<pre class="language-"><code>vi ~/bash_profile
+</code></pre><p>&#x7F16;&#x8F91;&#x8F93;&#x5165;&#xFF0C;&#x7136;&#x540E;&#x4FDD;&#x5B58;&#xFF1A;</p>
+<pre class="language-"><code>MAVEN_HOME=~/Documents/apps/apache-maven-3.9.3
+PATH=$MAVEN_HOME/bin:$PATH:.
+export JAVA_HOME
+export PATH
+</code></pre><p>&#x547D;&#x4EE4;&#x884C;&#x8F93;&#x5165;&#xFF1A;</p>
+<pre class="language-"><code>source ~/.bash_profile
+</code></pre><p>&#x9A8C;&#x8BC1;Maven&#xFF1A;</p>
+<pre class="language-"><code>mvn -version
+</code></pre><h3 id="settingsxml">settings.xml</h3>
+<hr>
+<p>&#x6253;&#x5F00;&#xFF1A;MAVEN_HOME/conf/settings.xml</p>
+<blockquote>
+<p>&#x914D;&#x7F6E;&#x4ED3;&#x5E93;&#x5730;&#x5740;</p>
+</blockquote>
+<p>&#x627E;&#x5230;localRepository&#xFF0C;&#x9ED8;&#x8BA4;${user.home}/.m2/repository&#xFF0C;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x3002;</p>
+<blockquote>
+<p>&#x914D;&#x7F6E;&#x963F;&#x91CC;&#x4E91;&#x955C;&#x50CF;</p>
+</blockquote>
+<pre class="language-"><code><span class="token comment">&lt;!--&lt;mirror&gt;
+  &lt;id&gt;maven-default-http-blocker&lt;/id&gt;
+  &lt;mirrorOf&gt;external:http:*&lt;/mirrorOf&gt;
+  &lt;name&gt;Pseudo repository to mirror external repositories initially using HTTP.&lt;/name&gt;
+  &lt;url&gt;http://0.0.0.0/&lt;/url&gt;
+  &lt;blocked&gt;true&lt;/blocked&gt;
+&lt;/mirror&gt;
+ --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>alimaven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>aliyun maven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">&gt;</span></span>http://maven.aliyun.com/nexus/content/groups/public<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">&gt;</span></span>
+</code></pre><blockquote>
+<p>&#x914D;&#x7F6E;JDK</p>
+</blockquote>
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>jdk1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
 
-<h3 id="&#x8BBE;&#x7F6E;&#x5FEB;&#x6377;&#x952E;&#x98CE;&#x683C;">&#x8BBE;&#x7F6E;&#x5FEB;&#x6377;&#x952E;&#x98CE;&#x683C;</h3>
-<p><img src="pages/idea/images/idea_22.png" width="100%/"></p>
-<h3 id="&#x4FEE;&#x6539;&#x5FEB;&#x6377;&#x952E;">&#x4FEE;&#x6539;&#x5FEB;&#x6377;&#x952E;</h3>
-<p><img src="pages/idea/images/idea_23.png" width="100%/"></p>
-<h3 id="&#x5E38;&#x7528;&#x5FEB;&#x6377;&#x952E;">&#x5E38;&#x7528;&#x5FEB;&#x6377;&#x952E;</h3>
-<p><img src="pages/idea/images/idea_24.png" width="100%/">
-<img src="pages/idea/images/idea_25.png" width="100%/">
-Alt + 7 &#x6539;&#x4E3A; Alt + F12</p>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">&gt;</span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jdk</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jdk</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.source</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.source</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.target</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.target</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.compilerVersion</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.compilerVersion</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">&gt;</span></span>
+</code></pre><blockquote>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x6307;&#x5B9A;JDK</p>
+</blockquote>
+<p><img src="pages/idea/images/idea_41.png" width="100%/"></p>
+<h3 id="idea&#x96C6;&#x6210;maven">IDEA&#x96C6;&#x6210;Maven</h3>
+<hr>
+<p>Setting-&gt;Preferences-&gt;Build,Execution,Deployment-&gt;Build Tools-&gt;Maven-&gt;&#x4FEE;&#x6539;Maven home path&#x3001;setting.xml path</p>
 <div style="margin: 0px;">
     &#x5907;&#x6848;&#x53F7;&#xFF1A;
     <a href="https://beian.miit.gov.cn/" target="_blank">
@@ -5219,7 +5302,7 @@ Alt + 7 &#x6539;&#x4E3A; Alt + F12</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.31","depth":1,"previous":{"title":"相关链接","level":"1.30.1","depth":2,"path":"pages/推送/相关链接.md","ref":"pages/推送/相关链接.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"README.md","mtime":"2023-07-22T17:13:57.936Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-07-22T17:23:03.903Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"最近更新","level":"1.31","depth":1,"previous":{"title":"相关链接","level":"1.30.1","depth":2,"path":"pages/推送/相关链接.md","ref":"pages/推送/相关链接.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"README.md","mtime":"2023-07-23T16:32:28.997Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-07-23T16:32:31.531Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
