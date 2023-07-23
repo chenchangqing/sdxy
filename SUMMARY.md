@@ -5,6 +5,8 @@
     * [IDEA创建项目](pages/idea/createp.md)
     * [IDEA快捷键](pages/idea/quickkey.md)
     * [IDEA模版](pages/idea/template.md)
+    * [IDEA配置Tomcat](pages/idea/tomcat.md)
+    * [Maven的安装与配置](pages/idea/mavenconfig.md)
 * Servlet
     * [Servlet规范](pages/servlet/rule.md)
     * [Servlet生命周期](pages/servlet/life.md)

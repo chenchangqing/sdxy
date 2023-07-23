@@ -4,7 +4,7 @@ Maven是一个免安装的程序，即解压则可以使用，但是Maven管理�
 
 ### Maven的目录结构
 --- 
-<img src="pages/idea/images/idea_40.png" width=100%/>
+<img src="images/idea_40.png" width=100%/>
 
 ### Maven的下载
 ---
@@ -85,17 +85,9 @@ mvn -version
 ```
 >项目中指定JDK
 
-<img src="pages/idea/images/idea_41.png" width=100%/>
+<img src="images/idea_41.png" width=100%/>
 
 ### IDEA集成Maven
 ---
 Setting->Preferences->Build,Execution,Deployment->Build Tools->Maven->修改Maven home path、setting.xml path
-
-    
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
 
