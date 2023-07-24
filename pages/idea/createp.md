@@ -62,3 +62,68 @@
 1. 创建一个Java项目
 2. 删除src
 3. 右键项目名称，New->Module
+
+### 创建Maven的Java项目
+---
+>新建项目
+
+<img src="images/idea_42.png" width=100%/>
+
+>编辑pom.xml
+
+输入：
+```
+<dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.3.16</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.2.8</version>
+    </dependency>
+</dependencies>
+```
+点击右上角的刷新，即可自动下载对应版本的jar，查看如下：
+
+<img src="images/idea_43.png" width=100%/>
+
+### 创建Maven的Web项目
+---
+>新建Module
+
+<img src="images/idea_44.png" width=100%/>
+选中maven-archetype-webapp
+
+>新建java文件夹
+
+<img src="images/idea_45.png" width=100%/>
+
+>运行
+
+<img src="images/idea_46.png" width=100%/>
+
+点击 Add new run configuration，选择Tomcat Local
+
+<img src="images/idea_47.png" width=100%/>
+点击fix，点击xxx war，点击apply，点击OK，点击运行。
+<img src="images/idea_48.png" width=100%/>
+
+### 使用Maven创建SpringBoot项目
+---
+<img src="images/idea_49.png" width=100%/>
+<img src="images/idea_50.png" width=100%/>
+
+[IntelliJ IDEA右键无法创建Java Class文件](https://www.jianshu.com/p/3951df1c2a4d)
+
+[错误:(3, 32) java: 程序包org.springframework.boot不存在的解决访问](http://www.ganhuopu.run/archives/%E9%94%99%E8%AF%AF332java%E7%A8%8B%E5%BA%8F%E5%8C%85orgspringframeworkboot%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E8%AE%BF%E9%97%AE)
+
+[java 程序包org.springframework.boot不存在](https://juejin.cn/s/java%20%E7%A8%8B%E5%BA%8F%E5%8C%85org.springframework.boot%E4%B8%8D%E5%AD%98%E5%9C%A8)
+
+[HttpMessageNotWritableException: No converter for [...] with preset Content-Type 'null'] with OpenApi Spring generator](https://stackoverflow.com/questions/63832966/httpmessagenotwritableexception-no-converter-for-with-preset-content-type)
+
+[HttpMessageNotWritableException: No Converter for [class …] With Preset Content-Type](https://www.baeldung.com/spring-no-converter-with-preset)
+
+

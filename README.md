@@ -1,97 +1,132 @@
-# Maven的安装与配置
+# IDEA创建项目
 
-Maven是一个免安装的程序，即解压则可以使用，但是Maven管理项目需要使用插件管理生命周期。而需要使用Maven的命令，所以需要配置Maven的环境变量。Maven本身使用Java开发，也依赖JDK的环境变量。
-
-### Maven的目录结构
+### 创建Java项目
 --- 
-<img src="pages/idea/images/idea_40.png" width=100%/>
+1. 打开IDEA
+2. 点击NewProject，显示NewProject窗口
+3. 左边菜单默认选中New Project
+4. 输入项目名称，指定项目路径、语言、Build System、JDK
+5. 点击Create
 
-### Maven的下载
+### 创建Java中的package
 ---
-官方网站：https://maven.apache.org/
+<img src="pages/idea/images/idea_05.png" width=100%/>
 
-下载地址：https://maven.apache.org/download.cgi
+### 创建类、接口、枚举、注解
+---
+<img src="pages/idea/images/idea_06.png" width=100%/>
 
-查看IDEA对Maven的版本要求：
+### 创建空项目和Module及相关操作
+---
+1. 打开IDEA
+2. 点击NewProject，显示NewProject窗口
+3. 左边菜单默认选中Empty Project
+4. 输入项目名称
+5. 点击Create
 
-Setting->Preferences->Build,Execution,Deployment->Build Tools->Maven
+>创建Module
 
-### 环境变量
---- 
-命令行输入以下命令
-```
-vi ~/bash_profile
-```
-编辑输入，然后保存：
-```
-MAVEN_HOME=~/Documents/apps/apache-maven-3.9.3
-PATH=$MAVEN_HOME/bin:$PATH:.
-export JAVA_HOME
-export PATH
-```
-命令行输入：
-```
-source ~/.bash_profile
-```
-验证Maven：
-```
-mvn -version
-```
+方式一：
+1. 点击File->New->Module
+2. 输入Module名称->点击Create
 
-### settings.xml
+方式二：
+1. 点击右上角设置
+2. 点击Project Structure
+3. 选中Modules，点击+
+4. 输入Module名称->点击Create
+
+>项目支持web
+
+1. 右键module名称
+2. Add Framework Support
+3. 勾选Java EE->Web Application(4.0)
+4. 点击OK
+
+>删除Module
+
+方式一：
+1. 右键module名称
+2. Remove Module
+
+方式二：
+1. 点击右上角设置
+2. 点击Project Structure
+3. 选中Modules，点击-
+
+注意：Remove Module后，需要删除硬盘里的Module文件夹。
+
+### 创建Java空项目和Module及相关操作
 ---
 
-打开：MAVEN_HOME/conf/settings.xml
+1. 创建一个Java项目
+2. 删除src
+3. 右键项目名称，New->Module
 
->配置仓库地址
-
-找到localRepository，默认${user.home}/.m2/repository，可以修改。
-
->配置阿里云镜像
-
-```
-<!--<mirror>
-  <id>maven-default-http-blocker</id>
-  <mirrorOf>external:http:*</mirrorOf>
-  <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
-  <url>http://0.0.0.0/</url>
-  <blocked>true</blocked>
-</mirror>
- -->
-<mirror>
-  <id>alimaven</id>
-  <mirrorOf>central</mirrorOf>
-  <name>aliyun maven</name>
-  <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-</mirror>
-```
->配置JDK
-
-```
-<profile>
-  <id>jdk1.8</id>
-
-  <activation>
-    <activeByDefault>true</activeByDefault>
-    <jdk>1.8</jdk>
-  </activation>
-
-  <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-  </properties>
-</profile>
-```
->项目中指定JDK
-
-<img src="pages/idea/images/idea_41.png" width=100%/>
-
-### IDEA集成Maven
+### 创建Maven的Java项目
 ---
-Setting->Preferences->Build,Execution,Deployment->Build Tools->Maven->修改Maven home path、setting.xml path
+>新建项目
 
-    
+<img src="pages/idea/images/idea_42.png" width=100%/>
+
+>编辑pom.xml
+
+输入：
+```
+<dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.3.16</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.2.8</version>
+    </dependency>
+</dependencies>
+```
+点击右上角的刷新，即可自动下载对应版本的jar，查看如下：
+
+<img src="pages/idea/images/idea_43.png" width=100%/>
+
+### 创建Maven的Web项目
+---
+>新建Module
+
+<img src="pages/idea/images/idea_44.png" width=100%/>
+选中maven-archetype-webapp
+
+>新建java文件夹
+
+<img src="pages/idea/images/idea_45.png" width=100%/>
+
+>运行
+
+<img src="pages/idea/images/idea_46.png" width=100%/>
+
+点击 Add new run configuration，选择Tomcat Local
+
+<img src="pages/idea/images/idea_47.png" width=100%/>
+点击fix，点击xxx war，点击apply，点击OK，点击运行。
+<img src="pages/idea/images/idea_48.png" width=100%/>
+
+### 使用Maven创建SpringBoot项目
+---
+<img src="pages/idea/images/idea_49.png" width=100%/>
+<img src="pages/idea/images/idea_50.png" width=100%/>
+
+[IntelliJ IDEA右键无法创建Java Class文件](https://www.jianshu.com/p/3951df1c2a4d)
+
+[错误:(3, 32) java: 程序包org.springframework.boot不存在的解决访问](http://www.ganhuopu.run/archives/%E9%94%99%E8%AF%AF332java%E7%A8%8B%E5%BA%8F%E5%8C%85orgspringframeworkboot%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E8%AE%BF%E9%97%AE)
+
+[java 程序包org.springframework.boot不存在](https://juejin.cn/s/java%20%E7%A8%8B%E5%BA%8F%E5%8C%85org.springframework.boot%E4%B8%8D%E5%AD%98%E5%9C%A8)
+
+[HttpMessageNotWritableException: No converter for [...] with preset Content-Type 'null'] with OpenApi Spring generator](https://stackoverflow.com/questions/63832966/httpmessagenotwritableexception-no-converter-for-with-preset-content-type)
+
+[HttpMessageNotWritableException: No Converter for [class …] With Preset Content-Type](https://www.baeldung.com/spring-no-converter-with-preset)
+
+
 <div style="margin: 0px;">
     备案号：
     <a href="https://beian.miit.gov.cn/" target="_blank">
