@@ -1,131 +1,284 @@
-# IDEA创建项目
+# Servlet考试管理系统
 
-### 创建Java项目
---- 
-1. 打开IDEA
-2. 点击NewProject，显示NewProject窗口
-3. 左边菜单默认选中New Project
-4. 输入项目名称，指定项目路径、语言、Build System、JDK
-5. 点击Create
-
-### 创建Java中的package
----
-<img src="pages/idea/images/idea_05.png" width=100%/>
-
-### 创建类、接口、枚举、注解
----
-<img src="pages/idea/images/idea_06.png" width=100%/>
-
-### 创建空项目和Module及相关操作
----
-1. 打开IDEA
-2. 点击NewProject，显示NewProject窗口
-3. 左边菜单默认选中Empty Project
-4. 输入项目名称
-5. 点击Create
-
->创建Module
-
-方式一：
-1. 点击File->New->Module
-2. 输入Module名称->点击Create
-
-方式二：
-1. 点击右上角设置
-2. 点击Project Structure
-3. 选中Modules，点击+
-4. 输入Module名称->点击Create
-
->项目支持web
-
-1. 右键module名称
-2. Add Framework Support
-3. 勾选Java EE->Web Application(4.0)
-4. 点击OK
-
->删除Module
-
-方式一：
-1. 右键module名称
-2. Remove Module
-
-方式二：
-1. 点击右上角设置
-2. 点击Project Structure
-3. 选中Modules，点击-
-
-注意：Remove Module后，需要删除硬盘里的Module文件夹。
-
-### 创建Java空项目和Module及相关操作
+### 准备工作
 ---
 
-1. 创建一个Java项目
-2. 删除src
-3. 右键项目名称，New->Module
+1. 创建用户信息表Users
 
-### 创建Maven的Java项目
+    ```sql
+    CREATE TABLE Users(
+        userId int primary key auto_increment, #用户编号
+        userName varchar(50), #用户名称
+        password varchar(50), #用户密码
+        sex char(1), #用户性别 ‘男’ 或 ‘女’
+        email varchar(50) # 用户邮箱
+    );
+    ```
+2. 在src下新建com.c1221.entity.Users实体类
+    ```java
+    package com.c1221.entity;
+
+    public class Users {
+        private Integer userId;
+        private String userName;
+        private String password;
+        private String sex;
+        private String email;
+
+        public User(Integer userId, String userName, String password, String sex, String email) {
+            this.userId = userId;
+            this.userName = userName;
+            this.password = password;
+            this.sex = sex;
+            this.email = email;
+        }
+
+        /// Getter
+
+        /// Setter
+    }
+    ```
+    生成get、set、构造方法：右键类文件编辑区（Command+N）->Generate->Constructor、Getter、Setter
+3. 在web下WEB-INF下创建lib文件夹，存放mysql提供的JDBC实现jar包
+3. 在src下新建com.c1221.util.JdbcUtil工具类
+    ```java
+    package com.c1221.util;
+
+    import java.sql.*;
+
+    /**
+     * JDBC工具类，简化JDBC编程
+     */
+    public class JdbcUtil {
+
+        static final String URL = "jdbc:mysql://localhost:3306/mysql";
+        static final String USERNAME = "root";
+        static final String PASSWORD = "333";
+
+        /**
+         * 工具类中的构造方法都是私有的
+         * 因为工具类当中的方法都是静态的，不需要new对象，直接采用类名调用
+         */
+        private JdbcUtil(){}
+
+        // 静态代码块在类加载时执行，并且只执行一次
+        static {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * 获取数据库连接对象
+         *
+         * @return 连接对象
+         * @throws SQLException
+         */
+        public static Connection getConnection() throws SQLException {
+            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        }
+
+        /**
+         * 关闭资源
+         * @param conn 连接对象
+         * @param ps 数据库操作对象
+         * @param rs 结果集
+         */
+        public static void close(Connection conn, Statement ps, ResultSet rs) {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }catch(SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch(SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch(SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    ```
+
+### 用户信息注册流程图
 ---
->新建项目
+<img src="images/servlet_02.png" width=100%/>
 
-<img src="pages/idea/images/idea_42.png" width=100%/>
-
->编辑pom.xml
-
-输入：
+### 注册页面
+---
+在web下，新建user_add.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <center>
+        <form action="/examsystem/user/add" method="get">
+            <table>
+                <tr>
+                    <td>用户姓名</td>
+                    <td><input type="text" name="userName"></td>
+                </tr>
+                <tr>
+                    <td>用户密码</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td>用户性别</td>
+                    <td>
+                        <input type="radio" name="sex" value="1"/>男
+                        <input type="radio" name="sex" value="2"/>女
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户邮箱</td>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="用户注册"/></td>
+                    <td><input type="reset"/></td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
+</html>
 ```
-<dependencies>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>5.3.16</version>
-    </dependency>
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid</artifactId>
-      <version>1.2.8</version>
-    </dependency>
-</dependencies>
+
+### 编写UserDao
+---
+在src下新建com.c1221.dao.UserDao
+```java
+package com.c1221.com.c1221.dao;
+
+import com.c1221.entity.Users;
+import com.c1221.util.JdbcUtil;
+
+import java.sql.*;
+
+public class UserDao {
+
+    public int add(Users users) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int result = 0;
+        try {
+            // 2、获取连接
+            conn = JdbcUtil.getConnection();
+            // 将自动提交机制修改为手动提交
+            conn.setAutoCommit(false);
+            // 3、获取数据库操作对象
+            String sql = "insert into users(userName,password,sex,email)" +
+                    " values(?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            // 4、执行SQL语句
+            ps.setString(1, users.getUserName());
+            ps.setString(2, users.getPassword());
+            ps.setString(3, users.getSex());
+            ps.setString(4, users.getEmail());
+            result = ps.executeUpdate();
+            conn.commit();
+        } catch(Exception e) {
+            // 回滚事务
+            if(conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(conn, ps, null);
+        }
+        return result;
+    }
+}
+
 ```
-点击右上角的刷新，即可自动下载对应版本的jar，查看如下：
 
-<img src="pages/idea/images/idea_43.png" width=100%/>
-
-### 创建Maven的Web项目
+### 注册Servlet
 ---
->新建Module
+1. 导入servlet-api.jar：https://blog.51cto.com/laoshifu/4839810
+2. 修改web.xml
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+             version="4.0">
+        <servlet>
+            <servlet-name>UserAddServlet</servlet-name>
+            <servlet-class>com.c1221.controller.UserAddServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>UserAddServlet</servlet-name>
+            <url-pattern>/user/add</url-pattern>
+        </servlet-mapping>
+    </web-app>
+    ```
+3. 在src下新建com.c1221.controller.UserAddServlet
+    ```java
+    package com.c1221.controller;
 
-<img src="pages/idea/images/idea_44.png" width=100%/>
-选中maven-archetype-webapp
+    import com.c1221.com.c1221.dao.UserDao;
+    import com.c1221.entity.Users;
 
->新建java文件夹
+    import javax.servlet.ServletException;
+    import javax.servlet.http.HttpServlet;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+    import java.io.IOException;
+    import java.io.PrintWriter;
 
-<img src="pages/idea/images/idea_45.png" width=100%/>
+    public class UserAddServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String userName,password,sex,email;
+            UserDao dao = new UserDao();
+            Users user = null;
+            int result = 0;
+            PrintWriter out = null;
+            // 1.【调用请求对象】读取【请求头】参数信息，得到用户的信息
+            userName = req.getParameter("userName");
+            password = req.getParameter("password");
+            sex = req.getParameter("sex");
+            email = req.getParameter("email");
+            // 2.【调用UserDao】将用户信息填充到INSERT命令借助JDBC规范发送到数据库服务器
+            user = new Users(null, userName, password, sex, email);
+            result = dao.add(user);
+            // 3.【调用响应对象】将【处理结果】以二进制形式写入到响应体
+            resp.setContentType("text/html;charset=utf-8");
+            out = resp.getWriter();
+            if (result == 1) {
+                out.print("<font style='color:red;font-size:40'>用户信息注册成功</font>");
+            } else {
+                out.print("<font style='color:red;font-size:40'>用户信息注册失败</font>");
+            }
+            out.close();
+            // Tomcat负责销毁【请求对象】和【响应对象】
+            // Tomcat负责将Http响应协议包推送到发起请求的浏览器上
+            // 浏览器根据响应头content-type指定编译器对响应体二进制内容编辑
+            // 浏览器将编辑后结果在窗口中展示给用户【结束】
+        }
+    }
 
->运行
-
-<img src="pages/idea/images/idea_46.png" width=100%/>
-
-点击 Add new run configuration，选择Tomcat Local
-
-<img src="pages/idea/images/idea_47.png" width=100%/>
-点击fix，点击xxx war，点击apply，点击OK，点击运行。
-<img src="pages/idea/images/idea_48.png" width=100%/>
-
-### 使用Maven创建SpringBoot项目
----
-<img src="pages/idea/images/idea_49.png" width=100%/>
-<img src="pages/idea/images/idea_50.png" width=100%/>
-
-[IntelliJ IDEA右键无法创建Java Class文件](https://www.jianshu.com/p/3951df1c2a4d)
-
-[错误:(3, 32) java: 程序包org.springframework.boot不存在的解决访问](http://www.ganhuopu.run/archives/%E9%94%99%E8%AF%AF332java%E7%A8%8B%E5%BA%8F%E5%8C%85orgspringframeworkboot%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E8%AE%BF%E9%97%AE)
-
-[java 程序包org.springframework.boot不存在](https://juejin.cn/s/java%20%E7%A8%8B%E5%BA%8F%E5%8C%85org.springframework.boot%E4%B8%8D%E5%AD%98%E5%9C%A8)
-
-[HttpMessageNotWritableException: No converter for [...] with preset Content-Type 'null'] with OpenApi Spring generator](https://stackoverflow.com/questions/63832966/httpmessagenotwritableexception-no-converter-for-with-preset-content-type)
-
-[HttpMessageNotWritableException: No Converter for [class …] With Preset Content-Type](https://www.baeldung.com/spring-no-converter-with-preset)
-
+    ```
 
 <div style="margin: 0px;">
     备案号：

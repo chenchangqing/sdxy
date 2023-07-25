@@ -139,6 +139,10 @@ chenchangqingdeMacBook-Pro-2:local chenchangqing$ mysql.server status
  SUCCESS! MySQL running (1725)
 ```
 
+### 创建数据库
+
+http://c.biancheng.net/view/2413.html
+
 ## 八、参考
 ---
 
