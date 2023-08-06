@@ -1347,3 +1347,432 @@ application.setAttribute("key1", 200);// 更新共享数据
 application.removeAttribute("key1")；// 删除共享数据
 ```
 
+### 监听器接口提高程序运行速度
+---
+
+todo
+
+### 过滤器接口
+---
+#### 1. 介绍
+
+1）来自于Servlet规范下接口，在Tomcat中存在于servlet-api.jar包。
+
+2）Filter接口实现类由开发人员负责提供，Http服务器不负责提供。
+
+3）Filter接口在Http服务器调用资源文件之前，对Http服务器进行拦截。
+
+#### 2. 具体作用
+
+1）拦截Http服务器，帮助Http服务器检测当前请求合法性。
+
+2）拦截Http服务器，对当前请求进行增强操作。
+
+#### 3. Filter接口实现类开发步骤：三步
+
+1）创建一个Java类实现Filter接口。
+
+2）充血Filter接口中doFilter方法。
+
+3）web.xml将过滤器接口实现类注册到Http服务器。
+
+### 过滤器示例一：拦截一张图片
+---
+
+#### 1. 在web目录下新增一张图片资源文件（fj.jpg）。
+
+#### 2. 新建OneFilter
+
+```java
+package com.c1221.filter;
+
+import javax.servlet.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class OneFilter implements Filter {
+    public void init(FilterConfig config) throws ServletException {
+    }
+
+    public void destroy() {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+        // 1. 通过拦截请求对象得到请求包参数信息，从而得到来访用户的真实年龄
+        String age = request.getParameter("age");
+        // 2. 根据年龄，帮助Http服务器判断本次请求合法性
+        if (Integer.valueOf(age) < 70) {// 合法请求
+            // 将拦截请求对象和响应对象交还给Tomcat，由Tomcat继续调用资源文件
+            chain.doFilter(request, response);// 放行
+        } else {
+            // 过滤器代替Http服务器拒绝本次请求
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.print("<center><font style='color:red;font-size:40px'>大爷，珍爱生命啊！</font></center>");
+        }
+    }
+}
+```
+
+#### 3. 修改web.xml
+```xml
+<filter>
+    <filter-name>OneFilter</filter-name>
+    <filter-class>com.c1221.filter.OneFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>OneFilter</filter-name>
+    <url-pattern>/fj.jpg</url-pattern>
+</filter-mapping>
+```
+
+### 过滤器示例二：对request设置编码方式
+---
+<img src="images/servlet_14.png" width=100%/>
+
+#### 1. 新建index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <center>
+    <form action="/filterexample2/one" method="post">
+      参数：<input type="text" name="userName"/><br/>
+      <input type="submit" value="POST方式访问OneServlet">
+    </form>
+    <form action="/filterexample2/two" method="post">
+      参数：<input type="text" name="userName"/><br/>
+      <input type="submit" value="POST方式访问TwoServlet">
+    </form>
+  </center>
+</body>
+</html>
+```
+
+#### 1. 新建OneServlet
+```java
+package com.c1221.controller;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class OneServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 直接从请求体读取请求参数
+        String userName = request.getParameter("userName");
+        System.out.println("OneServlet 从请求体得到参数 "+userName);
+    }
+}
+```
+
+#### 2. 新建TwoServlet
+```java
+package com.c1221.controller;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class TwoServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 直接从请求体读取请求参数
+        String userName = request.getParameter("userName");
+        System.out.println("TwoServlet 从请求体得到参数 "+userName);
+    }
+}
+```
+
+#### 3. 新建OneFilter
+```java
+package com.c1221.filter;
+
+import javax.servlet.*;
+import java.io.IOException;
+
+public class OneFilter implements Filter {
+    public void init(FilterConfig config) throws ServletException {
+    }
+
+    public void destroy() {
+    }
+
+    // 通知拦截的请求对象，使用UTF-8字符集对当前请求体信息进行一次重新编辑
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");// 增强
+        chain.doFilter(request, response);
+    }
+}
+```
+修改web.xml
+```xml
+<filter>
+    <filter-name>OneFilter</filter-name>
+    <filter-class>com.c1221.filter.OneFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>OneFilter</filter-name>
+    <!-- 通知Tomcat在调用所有资源文件之前都需要调用OneFilter进行拦截 -->
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
+### 过滤器拦截地址格式
+---
+
+#### 1. 命令格式
+```xml
+<filter-mapping>
+    <filter-name>OneFilter</filter-name>
+    <url-pattern>拦截地址</url-pattern>
+</filter-mapping>
+```
+
+#### 2. 命令作用
+
+拦截地址通知Tomcat在调用何种资源文件之前需要调用OneFilter过滤进行拦截。
+
+#### 3. 拦截具体文件
+要求Tomcat在调用某一个具体文件之前，来调用OneFilter拦截
+```xml
+<url-pattern>/img/fj.jpg<url-pattern>
+```
+
+#### 4. 拦截文件夹
+要求Tomcat在调用某一个文件夹下所有的资源文件之前，来调用OneFilter拦截
+```xml
+<url-pattern>/img/*</url-pattern>
+```
+
+#### 5. 拦截某种类型
+要求Tomcat在调用任意文件夹下某种类型文件之前，来调用OneFilter拦截
+```xml
+<url-pattern>*.jpg</url-pattern>
+```
+
+#### 6. 拦截所有
+要求Tomcat在调用网站中任意文件时，来调用OneFilter拦截
+```xml
+<url-pattern>/*</url-pattern>
+```
+
+### 过滤器防止用户恶意登录行为
+--- 
+<img src="images/servlet_15.png" width=100%/>
+
+#### 1. 修改LoginServlet
+
+```java
+package com.c1221.controller;
+
+import com.c1221.com.c1221.dao.UserDao;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class LoginServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userName,password;
+        UserDao dao = new UserDao();
+        int result = 0;
+        // 1. 调用请求对象对请求体使用utf-8字符集进行重新编辑
+        request.setCharacterEncoding("utf-8");
+        // 2. 调用请求对象读取请求体参数信息
+        userName = request.getParameter("userName");
+        password = request.getParameter("password");
+        // 3. 调用DAO将查询验证信息推送到数据库服务器上
+        result = dao.login(userName, password);
+        // 4. 调用响应对象，根据验证码结果将不同资源文件地址写入到响应体，交给浏览器
+        if (result == 1) {
+            // 在判定来访用户身份合法后，通过请求对象向Tomcat申请为当前用户申请一个HttpSession
+            HttpSession session = request.getSession();
+            // 用户存在
+            response.sendRedirect("/examsystem/index.html");
+        } else {
+            response.sendRedirect("/examsystem/login_error.html");
+        }
+    }
+}
+```
+
+#### 2. 修改UserFindServlet
+```java
+package com.c1221.controller;
+
+import com.c1221.com.c1221.dao.UserDao;
+import com.c1221.entity.Users;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+public class UserFindServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserDao dao;
+        PrintWriter out;
+        // 索要当前用户在服务端HttpSession
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect("/login_error.html");
+            return;
+        }
+        // 1【调用DAO】将查询命令推送到数据服务器上，得到所有用户信息【List】
+        dao = new UserDao();
+        List<Users> userList = dao.findAll();
+        // 2【调用响应对象】将用户信息结合《table》标签命令以二进制形式写入到响应体
+        response.setContentType("text/html;charset=utf-8");
+        out = response.getWriter();
+        out.print("<table border='2' align='center'>");
+        out.print("<tr>");
+        out.print("<td>用户编号</td>");
+        out.print("<td>用户姓名</td>");
+        out.print("<td>用户密码</td>");
+        out.print("<td>用户性别</td>");
+        out.print("<td>用户邮箱</td>");
+        out.print("<td>操作</td>");
+        out.print("</tr>");
+        for (Users users:userList) {
+            out.print("<tr>");
+            out.print("<td>"+users.getUserId()+"</td>");
+            out.print("<td>"+users.getUserName()+"</td>");
+            out.print("<td>"+users.getPassword()+"</td>");
+            out.print("<td>"+users.getSex()+"</td>");
+            out.print("<td>"+users.getEmail()+"</td>");
+            out.print("<td><a href='/examsystem/user/delete?userId="+users.getUserId()+"'>删除用户</a></td>");
+            out.print("</tr>");
+        }
+        out.print("</table>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}
+```
+#### 3. 使用过滤器
+
+问题示意图：
+<img src="images/servlet_16.png" width=100%/>
+使用过滤器：
+<img src="images/servlet_17.png" width=100%/>
+
+##### 1）新建OneFilter
+```java
+package com.c1221;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+public class OneFilter implements Filter {
+    public void init(FilterConfig config) throws ServletException {
+    }
+
+    public void destroy() {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+        HttpServletRequest request2 = (HttpServletRequest)request;
+        HttpServletResponse response2 = (HttpServletResponse)response;
+        // 1. 拦截后，通过请求对象向Tomcat索要当前用户的HttpSession
+        HttpSession session = request2.getSession(false);
+        // 2. 判断来访用户身份合法性
+        if (session == null) {
+            request2.getRequestDispatcher("/login_error.html").forward(request, response);
+            return;
+        }
+        // 3. 放行
+        chain.doFilter(request, response);
+    }
+}
+```
+修改web.xml
+```xml
+<filter>
+    <filter-name>OneFilter</filter-name>
+    <filter-class>com.c1221.OneFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>OneFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+#### 4. 互联网通信流程图
+<img src="images/servlet_18.png" width=100%/>
+<img src="images/servlet_18a.png" width=100%/>
+<img src="images/servlet_18b.png" width=100%/>
+
+#### 5. 解决拦截所有后，无法登录问题
+修改OneServlet
+```java
+package com.c1221;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+public class OneFilter implements Filter {
+    public void init(FilterConfig config) throws ServletException {
+    }
+
+    public void destroy() {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+        HttpServletRequest request2 = (HttpServletRequest)request;
+        HttpServletResponse response2 = (HttpServletResponse)response;
+        HttpSession session = null;
+        // 1. 调用请求对象读取请求包中请求行URI，了解用户访问的资源文件是谁
+        String uri = request2.getRequestURI();//【/网站名/资源文件名】/examsystem/login.html or /examsystem/login
+        // 2. 如果本次请求资源文件与登录相关【login.html or LoginServlet】此时应该无条件放行
+        if (uri.indexOf("login") != -1 || "/examsystem/".equals(uri)) {
+            chain.doFilter(request, response);
+            return;
+        }
+        // 3. 如果本次请求访问的是其他资源文件，需要得到用户在服务器HttpSession
+        session = request2.getSession(false);
+        if (session != null) {// 判断来访用户身份合法性
+            chain.doFilter(request, response);// 放行
+            return;
+        }
+        // 4. 做拒绝请求
+        request2.getRequestDispatcher("/login_error.html").forward(request, response);
+    }
+}
+
+```
