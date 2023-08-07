@@ -36,14 +36,13 @@
     "github",
     "splitter",
     "copy-code-button",
-    "page-toc-button",
     "klipse",
     "popup",
     "todo",
-    "hide-element",
-    "back-to-top-button",                
+    "hide-element",              
     "simple-mind-map",
     "mermaid-gb3",
+    "anchor-navigation-ex",
     "statistics"
   ],
   "pluginsConfig": {

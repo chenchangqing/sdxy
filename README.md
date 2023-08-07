@@ -1,9 +1,9 @@
 # Servlet考试管理系统
 
-### 准备工作
+## 准备工作
 ---
 
-#### 1. 创建用户信息表Users
+### 创建用户信息表Users
 
 ```sql
 CREATE TABLE Users(
@@ -11,10 +11,10 @@ CREATE TABLE Users(
     userName varchar(50), #用户名称
     password varchar(50), #用户密码
     sex char(1), #用户性别 ‘男’ 或 ‘女’
-    email varchar(50) # 用户邮箱
+    email varchar(50) ## 用户邮箱
 );
 ```
-#### 2. 在src下新建com.c1221.entity.Users实体类
+### 在src下新建com.c1221.entity.Users实体类
 ```java
 package com.c1221.entity;
 
@@ -39,8 +39,10 @@ public class Users {
 }
 ```
 生成get、set、构造方法：右键类文件编辑区（Command+N）->Generate->Constructor、Getter、Setter
-#### 3. 在web下WEB-INF下创建lib文件夹，存放mysql提供的JDBC实现jar包
-#### 4. 在src下新建com.c1221.util.JdbcUtil工具类
+### 新增Mysql驱动 
+在web下WEB-INF下创建lib文件夹，存放mysql提供的JDBC实现jar包
+
+### 在src下新建com.c1221.util.JdbcUtil工具类
 ```java
 package com.c1221.util;
 
@@ -112,11 +114,11 @@ public class JdbcUtil {
 }
 ```
 
-### 用户信息注册流程图
+## 用户信息注册流程图
 ---
-<img src="/pages/servlet/images/servlet_02.png" width=100%/>
+<img src="pages/servlet/images/servlet_02.png" width=100%/>
 
-### 注册页面
+## 注册页面
 ---
 在web下，新建user_add.html
 ```html
@@ -160,7 +162,7 @@ public class JdbcUtil {
 </html>
 ```
 
-### 编写UserDao
+## 编写UserDao
 ---
 在src下新建com.c1221.dao.UserDao
 ```java
@@ -212,10 +214,13 @@ public class UserDao {
 
 ```
 
-### 注册Servlet
+## 注册Servlet
 ---
-#### 1. 导入servlet-api.jar：https://blog.51cto.com/laoshifu/4839810
-#### 2. 修改web.xml
+### 导入servlet-api.jar
+
+https://blog.51cto.com/laoshifu/4839810
+
+### 修改web.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
@@ -232,7 +237,7 @@ public class UserDao {
     </servlet-mapping>
 </web-app>
 ```
-#### 3. 在src下新建com.c1221.controller.UserAddServlet
+### 在src下新建com.c1221.controller.UserAddServlet
 
 ```java
 package com.c1221.controller;
@@ -280,11 +285,11 @@ public class UserAddServlet extends HttpServlet {
 }
 
 ```
-### 查询Servlet
+## 查询Servlet
 ---
-<img src="/pages/servlet/images/servlet_03.png" width=100%/>
+<img src="pages/servlet/images/servlet_03.png" width=100%/>
 
-#### 1. 修改web.xml
+### 修改web.xml
 
 ```xml
 <servlet>
@@ -297,7 +302,7 @@ public class UserAddServlet extends HttpServlet {
 </servlet-mapping>
 ```
 
-#### 2. 新增UserFindServlet
+### 新增UserFindServlet
 ```java
 @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -330,7 +335,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 }
 ```
 
-#### 3. 修改UserDao
+### 修改UserDao
 
 ```java
 // 查询用户信息
@@ -364,9 +369,9 @@ public List findAll() {
 }
 ```
 
-### 导航栏
+## 导航栏
 --- 
-#### 1. 新建index.html
+### 新建index.html
 ```html
 <html>
 <head>
@@ -382,7 +387,7 @@ public List findAll() {
 </frameset>
 </html>
 ```
-#### 2. 新建top.html
+### 新建top.html
 ```html
 <html>
 <head>
@@ -397,7 +402,7 @@ public List findAll() {
 </html>
 ```
 
-#### 3. 新建left.html
+### 新建left.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -419,10 +424,10 @@ public List findAll() {
 </html>
 ```
 
-### UserDeleteServlet
+## UserDeleteServlet
 ---
 
-#### 1. 修改UserFindServlet
+### 修改UserFindServlet
 ```java
 @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -456,7 +461,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     out.print("</table>");
 }
 ```
-#### 2. 修改UserDAO，新增删除方法
+### 修改UserDAO，新增删除方法
 ```java
 // 根据用户编号删除用户信息
 public int delete(String userId) {
@@ -491,7 +496,7 @@ public int delete(String userId) {
 }
 ```
 
-#### 3. 新增UserDeleteServlet
+### 新增UserDeleteServlet
 ```java
 @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -513,11 +518,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     }
 }
 ```
-### 登录验证
+## 登录验证
 ---
-<img src="/pages/servlet/images/servlet_04.png" width=100%/>
+<img src="pages/servlet/images/servlet_04.png" width=100%/>
 
-#### 1. 新建login.html
+### 新建login.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -547,7 +552,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 </body>
 </html>
 ```
-#### 2. 修改UserDao，新增login方法
+### 修改UserDao，新增login方法
 ```java
 // 登录验证
 public int login(String userName, String password) {
@@ -575,7 +580,7 @@ public int login(String userName, String password) {
     return result;
 }
 ```
-#### 3. 新增login_error.html
+### 新增login_error.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -606,21 +611,21 @@ public int login(String userName, String password) {
 </body>
 </html>
 ```
-#### 4. 新建LoginServlet
+### 新建LoginServlet
 ```java
 @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String userName,password;
     UserDao dao = new UserDao();
     int result = 0;
-    // 1. 调用请求对象对请求体使用utf-8字符集进行重新编辑
+    // 调用请求对象对请求体使用utf-8字符集进行重新编辑
     request.setCharacterEncoding("utf-8");
-    // 2. 调用请求对象读取请求体参数信息
+    // 调用请求对象读取请求体参数信息
     userName = request.getParameter("userName");
     password = request.getParameter("password");
-    // 3. 调用DAO将查询验证信息推送到数据库服务器上
+    // 调用DAO将查询验证信息推送到数据库服务器上
     result = dao.login(userName, password);
-    // 4. 调用响应对象，根据验证码结果将不同资源文件地址写入到响应体，交给浏览器
+    // 调用响应对象，根据验证码结果将不同资源文件地址写入到响应体，交给浏览器
     if (result == 1) {
         // 用户存在
         response.sendRedirect("/examsystem/index.html");
@@ -629,7 +634,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     }
 }
 ```
-#### 5. 修改web.xml
+### 修改web.xml
 ```xml
 <servlet>
     <servlet-name>LoginServlet</servlet-name>
@@ -640,19 +645,19 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     <url-pattern>/user/login</url-pattern>
 </servlet-mapping>
 ```
-### 欢迎资源文件
+## 欢迎资源文件
 ---
-#### 1. 前提
+### 前提
 
 用户可以记住网站名，但是不会记住网站资源文件名
 
-#### 2. 默认欢迎资源文件
+### 默认欢迎资源文件
 
 用户发送了一个针对某个网站的【默认请求】时，此时由Http服务器自动从当前网站返回的资源文件。
 * 正常请求：http://localhost:8080/examsystem/index.html
 * 默认请求：http://localhost:8080/examsystem
 
-#### 3. Tomcat对默认欢迎资源文件定位规则
+### Tomcat对默认欢迎资源文件定位规则
 
 1）规则位置：Tomcat安装位置/conf/web.xml
 
@@ -665,7 +670,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 </welcome-file-list>
 ```
 
-#### 4. 设置当前网站的默认欢迎资源文件规则
+### 设置当前网站的默认欢迎资源文件规则
 
 1）规则位置：网站/web/WEB-INF/web.xml
 
@@ -676,22 +681,22 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 </welcome-file-list>
 ```
 
-### Http状态码
+## Http状态码
 ---
-#### 1. 介绍
+### 介绍
 
 1）由三位数字组成的一个符号。  
 2）Http服务器在推送响应包之前，根据本次请求处理情况将Http状态码写入到响应包中【状态行】上。  
 3）如果Http服务器针对本次请求，返回了对应的资源文件。通过Http状态码通知浏览器应该如何处理这个结果。  
 4）如果Http服务器针对本次请求，无法返回对应的资源文件。通过Http状态码向浏览器解释不能提供服务的原因。  
 
-#### 2. 分类
+### 分类
 
 1）组成：100～599，分为5个大类
 
 2）1XX
 最有特征的是100：通知浏览器本次返回的资源文件并不是一个独立的资源文件，需要浏览器在接受响应包之后，继续向Http服务器所要依赖。
-<img src="/pages/servlet/images/servlet_05.png" width=100%/>
+<img src="pages/servlet/images/servlet_05.png" width=100%/>
 
 3）2XX  
 最有特征的是200：通知浏览器本次返回的资源文件是一个完整独立资源文件，浏览器在接收到之后不需要所要其他关联文件。  
@@ -709,40 +714,40 @@ response.sendRedirect("资源文件地址")写入到响应头中location，而�
 
 500：通知浏览器，在服务端已经定位到被访问的资源文件（Servlet），这个Servlet可以接收浏览器采用请求方式，但是Servlet在处理请求期间，由于Java异常导致处理失败。
 
-### 做个Servlet之间的调用规则
+## 做个Servlet之间的调用规则
 ---
-<img src="/pages/servlet/images/servlet_06.png" width=100%/>
+<img src="pages/servlet/images/servlet_06.png" width=100%/>
 
-#### 1. 前提条件
+### 前提条件
 
 某些来自于浏览器发送请求，往往需要服务端中多个Servlet协同处理。但是浏览器一次只能访问一个Servlet，导致用户需要手动通过浏览器发起多次请求才能得到服务。这样增加用户获得服务难度，导致用户放弃访问当前网站。
 
-#### 2. 提高用户使用感受规则
+### 提高用户使用感受规则
 
 无论本次请求涉及到多少个Servlet，用户只需要【手动】通知浏览器发起一次请求即可。
 
-#### 3. 多个Servlet之间调用规则
+### 多个Servlet之间调用规则
 
 1）重定向解决方案
 
 2）请求转发解决方案
 
-### 重定向解决方案
+## 重定向解决方案
 --- 
 
-<img src="/pages/servlet/images/servlet_07.png" width=100%/>
+<img src="pages/servlet/images/servlet_07.png" width=100%/>
 
-#### 1. 工作原理
+### 工作原理
 
 用户第一次通过【手动方式】通知浏览器返回OneServlet。OneServlet工作完毕后，将TwoServlet地址写入到响应头location属性中，导致Tomcat将302状态码写入到状态行。
 
 在浏览器接收到响应之后，会读取302状态。此时浏览器自动根据响应头中location属性地址发起第二次请求，访问TwoServlet去完成请求中剩余任务。
 
-#### 2. 实现命令
+### 实现命令
 
 response.sendRedirect("请求地址")，将地址写入到响应包中响应头中的location属性。
 
-#### 3. 特征
+### 特征
 
 1）请求地址：既可以把当前网站内部的资源文件地址发送给浏览器（/网站名/资源文件名），也可以把其他网站资源文件地址发送给浏览器（http://ip地址：端口号/网站名称/资源文件名)。
 
@@ -752,16 +757,16 @@ response.sendRedirect("请求地址")，将地址写入到响应包中响应头�
 
 4）缺点：重定向解决方案需要在浏览器与服务器之间进行多次往返，大量时间消耗在往返次数上，增加用户等待服务时间。
 
-### 请求转发解决方案
+## 请求转发解决方案
 ---
 
-<img src="/pages/servlet/images/servlet_08.png" width=100%/>
+<img src="pages/servlet/images/servlet_08.png" width=100%/>
 
-#### 1. 原理
+### 原理
 
 用户第一次通过手动方式要求浏览器访问OneServlet，OneServlet工作完毕后，通过当前的请求对象代替浏览器向Tomcat发起请求，申请调用TwoServlet，Tomcat在接收到这个请求之后，自动调用TwoServlet来完成剩余任务。
 
-#### 2. 实现命令
+### 实现命令
 
 1) 通过当前请求对象生成资源文件申请报告对象
 ```java
@@ -773,13 +778,13 @@ RequestDispatcher report = request.getRequestDispatcher("/资源文件名");
 report.forward(当前请求对象, 当前响应对象);
 ```
 
-#### 3. 优点
+### 优点
 
 1）无论本次请求涉及到多少个Servlet，用户只需要手动通过浏览器发送一次请求。
 
 2）Servlet之间调用发生在服务端计算上，节省服务器与浏览器之间往返次数，增加处理服务速度。
 
-#### 4. 特征
+### 特征
 
 1）请求次数：在请求转发过程中，浏览器只发送一次请求。
 
@@ -787,33 +792,33 @@ report.forward(当前请求对象, 当前响应对象);
 
 3）请求方式：在请求转发过程中，浏览器只发送一个Http请求协议包，参与本次请求的所有Servlet共享同一个请求协议包，因此这些Servlet接收的请求方式与浏览器发送的请求方式保持一致。
 
-### 多个Servlet之间数据共享实现方案
+## 多个Servlet之间数据共享实现方案
 ---
 数据共享，OneServlet工作完毕后，将产生数据交给TwoServlet来使用。
 
-#### 1. Servlet规范中提供四种数据共享方案
+### Servlet规范中提供四种数据共享方案
 
 1. ServletContext接口
 2. Cookie类
 3. HttpSession接口
 4. HttpServletRequest接口
 
-### ServletContext接口
+## ServletContext接口
 ---
-<img src="/pages/servlet/images/servlet_09.png" width=100%/>
+<img src="pages/servlet/images/servlet_09.png" width=100%/>
 
-#### 1. 介绍
+### 介绍
 
 1. 来自于Servlet规范中一个接口，在Tomcat中存在servlet-api.jar，在Tomcat中负责提供这个接口实现类。
 2. 如果两个Servlet来自于同一个网站，彼此之间通过网站的ServletContext实例对象实现数据共享。
 3. 开发人员习惯于将ServletContext对象称为【全局作用域对象】。
 
-#### 2. 工作原理
+### 工作原理
 
 每个网站都存在一个全局作用域对象，这个全局作用域对象【相当于】一个Map，在这个网站中OneServlet可以将一个数据存入到全局作用域对象，当前网站中其他Servlet此时都可以从全局作用域对象得到这个数据进行使用。
 
 
-#### 3. 全局对象作用域的生命周期
+### 全局对象作用域的生命周期
 
 1）在Http服务器启动过程中，自动为当前在内存中创建一个全局作用域对象。
 
@@ -825,29 +830,29 @@ report.forward(当前请求对象, 当前响应对象);
 
 **全局作用域对象生命周期贯穿网站整个运行期间**
 
-#### 4. 命令实现
+### 命令实现
 
 【同一个网站】OneServlet将数据共享给TwoServlet
 ```java
-// 1. 通过【请求对象】向Tomcat索要当前网站中【全局作用域对象】
+// 通过【请求对象】向Tomcat索要当前网站中【全局作用域对象】
 ServletContext application = request.getServletContext();
-// 2. 将数据添加到全局作用域对象作为【共享数据】
+// 将数据添加到全局作用域对象作为【共享数据】
 application.setAttribute("key1", 数据);
 ```
 取数据
 ```java
-// 1. 通过【请求对象】向Tomcat索要当前网站中【全局作用域对象】
+// 通过【请求对象】向Tomcat索要当前网站中【全局作用域对象】
 ServletContext application = request.getServletContext();
-// 2. 从全局作用域对象得到指定关键字对应数据
+// 从全局作用域对象得到指定关键字对应数据
 Object 数据 = application.getAttribute("key1");
 ```
 
-### Cookie
+## Cookie
 ---
 
-<img src="/pages/servlet/images/servlet_10.png" width=100%/>
+<img src="pages/servlet/images/servlet_10.png" width=100%/>
 
-#### 1. 介绍
+### 介绍
 
 1）Cookie来自于Servlet规范中一个工具类，存在于Tomcat提供Servlet-api.jar中。
 
@@ -857,7 +862,7 @@ Object 数据 = application.getAttribute("key1");
 
 4）在现实生活场景中，Cookie相当于用户在服务端得到【会员卡】。
 
-#### 2. 原理
+### 原理
 
 用户通过浏览器第一次向MyWeb网站发送请求申请OneServlet，OneServlet在运行期间创建一个Cookie存储于当前用户相关数据，OneServlet工作完毕后，【将Cookie写入到响应头】交还给当前浏览。
 
@@ -865,11 +870,11 @@ Object 数据 = application.getAttribute("key1");
 
 此时TwoServlet在运行时，就可以通过读取请求头中的Cookie中信息，得到OneServlet提供的共享数据。
 
-#### 3. 实现命令
+### 实现命令
 
 同一个网站OneServlet于TwoServlet借助于Cookie实现数据共享
 ```java
-// 1. 创建一个Cookie对象，保存共享数据（当前用户数据）
+// 创建一个Cookie对象，保存共享数据（当前用户数据）
 // Cookie相当于一个map，一个cookie中只能存放一个键值对，这个键值对的key于value只能是String，键值对中key不能时中文
 Cookie card = new Cookie("key1", "abc");
 Cookie card1 = new Cookie("key2", "abc2");;
@@ -879,9 +884,9 @@ response.addCookie(card1);
 ```
 取数据
 ```java
-// 1. 调用请求对象从请求头得到浏览器返回的cookie
+// 调用请求对象从请求头得到浏览器返回的cookie
 Cookie cookieArray[] = request.getCookies();
-// 2. 循环遍历数据得到每一个cookie的key与value
+// 循环遍历数据得到每一个cookie的key与value
 for(Cookie card: cookieArray) {
     // 读取key “key1”
     String key = card.getName();
@@ -890,11 +895,11 @@ for(Cookie card: cookieArray) {
 }
 ```
 
-### 会员卡订单
+## 会员卡订单
 ---
-<img src="/pages/servlet/images/servlet_11.png" width=100%/>
+<img src="pages/servlet/images/servlet_11.png" width=100%/>
 
-#### 1. 新建index.html
+### 新建index.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -926,7 +931,7 @@ for(Cookie card: cookieArray) {
 </html>
 ```
 
-#### 2. 新建OneServlet
+### 新建OneServlet
 ```java
 package com.c1221.controller;
 
@@ -938,16 +943,16 @@ public class OneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName,money;
-        // 1. 调用请求对象读取【请求头】参数信息
+        // 调用请求对象读取【请求头】参数信息
         userName = request.getParameter("userName");
         money = request.getParameter("money");
-        // 2. 开卡
+        // 开卡
         Cookie card1 = new Cookie("userName", userName);
         Cookie card2 = new Cookie("money", money);
-        // 3. 发卡，将Cookie写入到响应头交给浏览器
+        // 发卡，将Cookie写入到响应头交给浏览器
         response.addCookie(card1);
         response.addCookie(card2);
-        // 4. 通知浏览器【点餐页面】内容写入到响应体交给浏览器（请求转发）
+        // 通知浏览器【点餐页面】内容写入到响应体交给浏览器（请求转发）
         request.getRequestDispatcher("/index_2.html").forward(request, response);
     }
 
@@ -959,7 +964,7 @@ public class OneServlet extends HttpServlet {
 
 ```
 
-#### 3. 新建index_2.html
+### 新建index_2.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -981,7 +986,7 @@ public class OneServlet extends HttpServlet {
 </html>
 ```
 
-#### 4. 新建TwoServlet
+### 新建TwoServlet
 ```java
 package com.c1221.controller;
 
@@ -1002,11 +1007,11 @@ public class TwoServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         Cookie newCard = null;
-        // 1. 读取请求头参数信息，得到用户点餐食物类型
+        // 读取请求头参数信息，得到用户点餐食物类型
         food = request.getParameter("food");
-        // 2. 读取请求中的Cookie
+        // 读取请求中的Cookie
         cookieArray = request.getCookies();
-        // 3. 刷卡消费
+        // 刷卡消费
         for(Cookie card: cookieArray) {
              String key = card.getName();
              String value = card.getValue();
@@ -1041,9 +1046,9 @@ public class TwoServlet extends HttpServlet {
                  }
              }
         }
-        // 4. 将用户会员卡返还给用户
+        // 将用户会员卡返还给用户
         response.addCookie(newCard);
-        // 5. 将消费记录写入响应
+        // 将消费记录写入响应
         out.print("用户"+userName+"本次消费 "+xiaofei+" 余额："+balance);
     }
 
@@ -1054,10 +1059,10 @@ public class TwoServlet extends HttpServlet {
 }
 ```
 
-### Cookie生命周期
+## Cookie生命周期
 ---
 
-#### 1. Cookie销毁时机
+### Cookie销毁时机
 
 1）在默认情况下，Cookie对象存放在浏览器的缓存中，因此只要浏览器关闭，Cookie对象就被销毁掉。
 
@@ -1068,10 +1073,10 @@ public class TwoServlet extends HttpServlet {
 cookie.setMaxAge(60);
 ```
 
-### HttpSession接口
+## HttpSession接口
 ---
 
-#### 1. 介绍
+### 介绍
 
 1）HttpSession接口来自于Servlet规范下一个接口，存在于Tomcat中servlet-api.jar，其实现类由Http服务器提供。Tomcat体统实现类存在于servlet-api.jar。
 
@@ -1079,7 +1084,7 @@ cookie.setMaxAge(60);
 
 3）开发人员习惯于将HttpSession接口修饰对象称为【会话作用域对象】。
 
-#### 2. HttpSession于Cookie区别
+### HttpSession于Cookie区别
 
 1）存储位置：一个在天上，一个在地下
 
@@ -1099,15 +1104,15 @@ cookie.setMaxAge(60);
 
 Cookie相当于客户在服务端【会员卡】，HttpSession相当于客户在服务端【私人保险柜】。
 
-#### 3. 命令实现
+### 命令实现
 
 同一个网站下OneServlet将数据传递给TwoServlet
 ```java
 OneServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        // 1. 调用请求对象向Tomcat索要当前用户在服务端的私人存储柜
+        // 调用请求对象向Tomcat索要当前用户在服务端的私人存储柜
         HttpSession session = request.getSession();
-        // 2. 将数据添加到用户私人存储柜
+        // 将数据添加到用户私人存储柜
         session.setAttribute("key1", 共享数据);
     }
 }
@@ -1116,25 +1121,25 @@ OneServlet {
 ```java
 OneServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        // 1. 调用请求对象向Tomcat索要当前用户在服务端的私人存储柜
+        // 调用请求对象向Tomcat索要当前用户在服务端的私人存储柜
         HttpSession session = request.getSession();
-        // 2. 从会话作用域对象得到OneServlet提供的共享数据
+        // 从会话作用域对象得到OneServlet提供的共享数据
         Object 共享数据 = session.getAttribute("key1");
     }
 }
 ```
 
-#### 4. Http服务器如何将用户于HttpSession关联起来
+### Http服务器如何将用户于HttpSession关联起来
 cookie
-<img src="/pages/servlet/images/servlet_13.png" width=100%/>
+<img src="pages/servlet/images/servlet_13.png" width=100%/>
 
-#### 5. getSession于getSession(false)
+### getSession于getSession(false)
 
 1）getSession()：如果当前用户在服务端已经拥有了自己的私人储物柜，邀请Tomcat将这个私人储物柜进行返回；如果当前用户在服务端尚未拥有自己的私人储物柜，邀请Tomcat为当前用户创建一个全新的私人储物柜。
 
 2）getSession(false)：如果当亲啊用户在服务端已经拥有了自己的私人储物柜，要求Tomcat将这个私人储物柜进行返回；如果当前用户在服务端尚未拥有自己的的私人储物柜，此时Tomcat将返回null。
 
-#### 6. HttpSession的销毁时机
+### HttpSession的销毁时机
 
 1）用户与HttpSession关联是使用的Cookie只能存放在浏览器缓存中。
 
@@ -1144,7 +1149,7 @@ cookie
 
 4）为了解决这个问题，Tomcat为每一个HttpSession对象设置【空闲时间】，这个空闲时间默认30分钟，如果当前HttpSession对象空闲时达到30分钟，此时Tomcat认为用户已经放弃了自己的HttpSession，此时Tomcat就会销毁掉这个HttpSession。
 
-#### 7. HttpSession空闲时间手动设置
+### HttpSession空闲时间手动设置
 
 在当前网站/web/WEB-INF/web.xml
 ```xml
@@ -1153,11 +1158,11 @@ cookie
 </session-config>
 ```
 
-### Session购物车示例
+## Session购物车示例
 ---
-<img src="/pages/servlet/images/servlet_12.png" width=100%/>
+<img src="pages/servlet/images/servlet_12.png" width=100%/>
 
-#### 1. 新建index.html
+### 新建index.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1201,7 +1206,7 @@ cookie
 </html>
 ```
 
-#### 2. 新建OneServlet
+### 新建OneServlet
 ```java
 package com.c1221.controller;
 
@@ -1213,11 +1218,11 @@ public class OneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String goodsName;
-        // 1. 调用请求对象，读取请求头参数，得到用户选择商品名
+        // 调用请求对象，读取请求头参数，得到用户选择商品名
         goodsName = request.getParameter("goodsName");
-        // 2. 调用请求对象，向Tomcat索要当前用户服务端的私人储物柜
+        // 调用请求对象，向Tomcat索要当前用户服务端的私人储物柜
         HttpSession session = request.getSession();
-        // 3. 将用户选购商品添加到当前用户私人储物柜
+        // 将用户选购商品添加到当前用户私人储物柜
         Integer goodsNum = (Integer)session.getAttribute(goodsName);
         if (goodsNum == null) {
             session.setAttribute(goodsName, 1);
@@ -1233,7 +1238,7 @@ public class OneServlet extends HttpServlet {
 }
 ```
 
-#### 3. 新建TwoServlet
+### 新建TwoServlet
 
 ```java
 package com.c1221.controller;
@@ -1246,9 +1251,9 @@ import java.util.Enumeration;
 public class TwoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 1. 调用请求对象，向Tomcat索要当前用户在服务端私人储物柜
+        // 调用请求对象，向Tomcat索要当前用户在服务端私人储物柜
         HttpSession session = request.getSession();
-        // 2. 将session中所有的key读取出来，存放一个枚举对象
+        // 将session中所有的key读取出来，存放一个枚举对象
         Enumeration goodsNames = session.getAttributeNames();
         while (goodsNames.hasMoreElements()) {
             String goodsName = (String)goodsNames.nextElement();
@@ -1264,24 +1269,24 @@ public class TwoServlet extends HttpServlet {
 }
 ```
 
-### HttpServletRequest接口实现数据共享
+## HttpServletRequest接口实现数据共享
 ---
 
-#### 1. 介绍
+### 介绍
 
 1）在同一个网站中，如果两个Servlet之间通过【请求转发】方式进行调用，彼此之间共享同一个请求协议包。而一个请求协议包只对应一个请求对象，因此Servlet之间共享同一个请求对象，此时可以利用这个请求对象在两个Servlet之间实现数据共享。
 
 2）在请求对象实现Servlet之间数据共享功能时，开发人员将请求数据对象称为【请求作用域对象】。
 
-#### 2. 命令实现
+### 命令实现
 
 OneServlet通过请求转发申请调用TwoServlet时，需要给TwoServlet提供共享数据
 ```java
 OneServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        // 1. 将数据添加到【请求作用域对象】中attribute属性
+        // 将数据添加到【请求作用域对象】中attribute属性
         request.setAttribute("key1", 数据);// 数据类型可以任意类型Object
-        // 2. 向Tomcat申请调用TwoServlet
+        // 向Tomcat申请调用TwoServlet
         request.getRequestDispatcher("/two").forward(request, response);
     }
 }
@@ -1293,10 +1298,10 @@ TwoServlet {
 }
 ```
 
-### 监听器接口
+## 监听器接口
 --- 
 
-#### 1. 介绍
+### 介绍
 
 1）一组来自于Servlet规范下接口，共有8个接口。在Tomcat存在servlet-api.jar包。
 
@@ -1304,7 +1309,7 @@ TwoServlet {
 
 3）监听器接口用于监控【作用域对象生命周期变化时刻】以及【作用域对象共享数据变化时刻】
 
-#### 2. 作用域对象
+### 作用域对象
 
 1）在Servlet规范中，认为在服务端内存中可以在某些条件下为两个Servlet之间提供数据共享方案的对象，被称为【作用域对象】
 
@@ -1314,13 +1319,13 @@ TwoServlet {
 * HttpServlet：会话作用域对象
 * HttpServletRequest：请求作用域对象
 
-#### 3. 监听器接口实现类开发规范
+### 监听器接口实现类开发规范
 
 1. 根据监听的实际情况，选择对应监听器接口进行实现
 2. 充血监听器接口声明【监听事件处理方法】
 3. 在web.xml文件将监听器接口实现类注册到Http服务器
 
-#### 4. ServletContextListener接口：
+### ServletContextListener接口：
 
 1）作用：通过这个接口合法的检测全局作用域对象被初始化时刻及销毁时刻。
 
@@ -1329,7 +1334,7 @@ TwoServlet {
 * public void contextInitlized()：在全局作用对象被Http服务器初始化被调用
 * public vaid contextDestory()：在全局作用域对象被Http服务器销毁事件触发调用
 
-#### 5. ServletContextAttributeListener接口
+### ServletContextAttributeListener接口
 
 1）作用：通过这个接口合法的检测全局作用域对象共享数据变化时刻
 
@@ -1339,7 +1344,7 @@ TwoServlet {
 * public void contextReplaced()：在全局作用域对象更新共享数据
 * public vlid contextRemove()：在全局作用域对象删除共享数据
 
-#### 6. 全局作用域对象共享数据变化时刻
+### 全局作用域对象共享数据变化时刻
 ```java
 ServletContext application = request.getServletContext();
 application.setAttribute("key1", 100);// 新增共享数据
@@ -1347,14 +1352,14 @@ application.setAttribute("key1", 200);// 更新共享数据
 application.removeAttribute("key1")；// 删除共享数据
 ```
 
-### 监听器接口提高程序运行速度
+## 监听器接口提高程序运行速度
 ---
 
 todo
 
-### 过滤器接口
+## 过滤器接口
 ---
-#### 1. 介绍
+### 介绍
 
 1）来自于Servlet规范下接口，在Tomcat中存在于servlet-api.jar包。
 
@@ -1362,13 +1367,13 @@ todo
 
 3）Filter接口在Http服务器调用资源文件之前，对Http服务器进行拦截。
 
-#### 2. 具体作用
+### 具体作用
 
 1）拦截Http服务器，帮助Http服务器检测当前请求合法性。
 
 2）拦截Http服务器，对当前请求进行增强操作。
 
-#### 3. Filter接口实现类开发步骤：三步
+### Filter接口实现类开发步骤：三步
 
 1）创建一个Java类实现Filter接口。
 
@@ -1376,12 +1381,12 @@ todo
 
 3）web.xml将过滤器接口实现类注册到Http服务器。
 
-### 过滤器示例一：拦截一张图片
+## 过滤器示例一：拦截一张图片
 ---
 
-#### 1. 在web目录下新增一张图片资源文件（fj.jpg）。
+### 在web目录下新增一张图片资源文件（fj.jpg）。
 
-#### 2. 新建OneFilter
+### 新建OneFilter
 
 ```java
 package com.c1221.filter;
@@ -1399,9 +1404,9 @@ public class OneFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
-        // 1. 通过拦截请求对象得到请求包参数信息，从而得到来访用户的真实年龄
+        // 通过拦截请求对象得到请求包参数信息，从而得到来访用户的真实年龄
         String age = request.getParameter("age");
-        // 2. 根据年龄，帮助Http服务器判断本次请求合法性
+        // 根据年龄，帮助Http服务器判断本次请求合法性
         if (Integer.valueOf(age) < 70) {// 合法请求
             // 将拦截请求对象和响应对象交还给Tomcat，由Tomcat继续调用资源文件
             chain.doFilter(request, response);// 放行
@@ -1415,7 +1420,7 @@ public class OneFilter implements Filter {
 }
 ```
 
-#### 3. 修改web.xml
+### 修改web.xml
 ```xml
 <filter>
     <filter-name>OneFilter</filter-name>
@@ -1427,11 +1432,11 @@ public class OneFilter implements Filter {
 </filter-mapping>
 ```
 
-### 过滤器示例二：对request设置编码方式
+## 过滤器示例二：对request设置编码方式
 ---
-<img src="/pages/servlet/images/servlet_14.png" width=100%/>
+<img src="pages/servlet/images/servlet_14.png" width=100%/>
 
-#### 1. 新建index.html
+### 新建index.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1454,7 +1459,7 @@ public class OneFilter implements Filter {
 </html>
 ```
 
-#### 1. 新建OneServlet
+### 新建OneServlet
 ```java
 package com.c1221.controller;
 
@@ -1477,7 +1482,7 @@ public class OneServlet extends HttpServlet {
 }
 ```
 
-#### 2. 新建TwoServlet
+### 新建TwoServlet
 ```java
 package com.c1221.controller;
 
@@ -1500,7 +1505,7 @@ public class TwoServlet extends HttpServlet {
 }
 ```
 
-#### 3. 新建OneFilter
+### 新建OneFilter
 ```java
 package com.c1221.filter;
 
@@ -1535,10 +1540,10 @@ public class OneFilter implements Filter {
 </filter-mapping>
 ```
 
-### 过滤器拦截地址格式
+## 过滤器拦截地址格式
 ---
 
-#### 1. 命令格式
+### 命令格式
 ```xml
 <filter-mapping>
     <filter-name>OneFilter</filter-name>
@@ -1546,39 +1551,39 @@ public class OneFilter implements Filter {
 </filter-mapping>
 ```
 
-#### 2. 命令作用
+### 命令作用
 
 拦截地址通知Tomcat在调用何种资源文件之前需要调用OneFilter过滤进行拦截。
 
-#### 3. 拦截具体文件
+### 拦截具体文件
 要求Tomcat在调用某一个具体文件之前，来调用OneFilter拦截
 ```xml
 <url-pattern>/img/fj.jpg<url-pattern>
 ```
 
-#### 4. 拦截文件夹
+### 拦截文件夹
 要求Tomcat在调用某一个文件夹下所有的资源文件之前，来调用OneFilter拦截
 ```xml
 <url-pattern>/img/*</url-pattern>
 ```
 
-#### 5. 拦截某种类型
+### 拦截某种类型
 要求Tomcat在调用任意文件夹下某种类型文件之前，来调用OneFilter拦截
 ```xml
 <url-pattern>*.jpg</url-pattern>
 ```
 
-#### 6. 拦截所有
+### 拦截所有
 要求Tomcat在调用网站中任意文件时，来调用OneFilter拦截
 ```xml
 <url-pattern>/*</url-pattern>
 ```
 
-### 过滤器防止用户恶意登录行为
+## 过滤器防止用户恶意登录行为
 --- 
-<img src="/pages/servlet/images/servlet_15.png" width=100%/>
+<img src="pages/servlet/images/servlet_15.png" width=100%/>
 
-#### 1. 修改LoginServlet
+### 修改LoginServlet
 
 ```java
 package com.c1221.controller;
@@ -1600,14 +1605,14 @@ public class LoginServlet extends HttpServlet {
         String userName,password;
         UserDao dao = new UserDao();
         int result = 0;
-        // 1. 调用请求对象对请求体使用utf-8字符集进行重新编辑
+        // 调用请求对象对请求体使用utf-8字符集进行重新编辑
         request.setCharacterEncoding("utf-8");
-        // 2. 调用请求对象读取请求体参数信息
+        // 调用请求对象读取请求体参数信息
         userName = request.getParameter("userName");
         password = request.getParameter("password");
-        // 3. 调用DAO将查询验证信息推送到数据库服务器上
+        // 调用DAO将查询验证信息推送到数据库服务器上
         result = dao.login(userName, password);
-        // 4. 调用响应对象，根据验证码结果将不同资源文件地址写入到响应体，交给浏览器
+        // 调用响应对象，根据验证码结果将不同资源文件地址写入到响应体，交给浏览器
         if (result == 1) {
             // 在判定来访用户身份合法后，通过请求对象向Tomcat申请为当前用户申请一个HttpSession
             HttpSession session = request.getSession();
@@ -1620,7 +1625,7 @@ public class LoginServlet extends HttpServlet {
 }
 ```
 
-#### 2. 修改UserFindServlet
+### 修改UserFindServlet
 ```java
 package com.c1221.controller;
 
@@ -1678,14 +1683,14 @@ public class UserFindServlet extends HttpServlet {
     }
 }
 ```
-#### 3. 使用过滤器
+### 使用过滤器
 
 问题示意图：
-<img src="/pages/servlet/images/servlet_16.png" width=100%/>
+<img src="pages/servlet/images/servlet_16.png" width=100%/>
 使用过滤器：
-<img src="/pages/servlet/images/servlet_17.png" width=100%/>
+<img src="pages/servlet/images/servlet_17.png" width=100%/>
 
-##### 1）新建OneFilter
+#### 1）新建OneFilter
 ```java
 package com.c1221;
 
@@ -1706,14 +1711,14 @@ public class OneFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request2 = (HttpServletRequest)request;
         HttpServletResponse response2 = (HttpServletResponse)response;
-        // 1. 拦截后，通过请求对象向Tomcat索要当前用户的HttpSession
+        // 拦截后，通过请求对象向Tomcat索要当前用户的HttpSession
         HttpSession session = request2.getSession(false);
-        // 2. 判断来访用户身份合法性
+        // 判断来访用户身份合法性
         if (session == null) {
             request2.getRequestDispatcher("/login_error.html").forward(request, response);
             return;
         }
-        // 3. 放行
+        // 放行
         chain.doFilter(request, response);
     }
 }
@@ -1729,12 +1734,12 @@ public class OneFilter implements Filter {
     <url-pattern>/*</url-pattern>
 </filter-mapping>
 ```
-#### 4. 互联网通信流程图
-<img src="/pages/servlet/images/servlet_18.png" width=100%/>
-<img src="/pages/servlet/images/servlet_18a.png" width=100%/>
-<img src="/pages/servlet/images/servlet_18b.png" width=100%/>
+### 互联网通信流程图
+<img src="pages/servlet/images/servlet_18.png" width=100%/>
+<img src="pages/servlet/images/servlet_18a.png" width=100%/>
+<img src="pages/servlet/images/servlet_18b.png" width=100%/>
 
-#### 5. 解决拦截所有后，无法登录问题
+### 解决拦截所有后，无法登录问题
 修改OneServlet
 ```java
 package com.c1221;
@@ -1757,20 +1762,20 @@ public class OneFilter implements Filter {
         HttpServletRequest request2 = (HttpServletRequest)request;
         HttpServletResponse response2 = (HttpServletResponse)response;
         HttpSession session = null;
-        // 1. 调用请求对象读取请求包中请求行URI，了解用户访问的资源文件是谁
+        // 调用请求对象读取请求包中请求行URI，了解用户访问的资源文件是谁
         String uri = request2.getRequestURI();//【/网站名/资源文件名】/examsystem/login.html or /examsystem/login
-        // 2. 如果本次请求资源文件与登录相关【login.html or LoginServlet】此时应该无条件放行
+        // 如果本次请求资源文件与登录相关【login.html or LoginServlet】此时应该无条件放行
         if (uri.indexOf("login") != -1 || "/examsystem/".equals(uri)) {
             chain.doFilter(request, response);
             return;
         }
-        // 3. 如果本次请求访问的是其他资源文件，需要得到用户在服务器HttpSession
+        // 如果本次请求访问的是其他资源文件，需要得到用户在服务器HttpSession
         session = request2.getSession(false);
         if (session != null) {// 判断来访用户身份合法性
             chain.doFilter(request, response);// 放行
             return;
         }
-        // 4. 做拒绝请求
+        // 做拒绝请求
         request2.getRequestDispatcher("/login_error.html").forward(request, response);
     }
 }
