@@ -46,15 +46,11 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -5185,9 +5181,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="1webview&#x4E0E;ios&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;">1.WebView&#x4E0E;iOS&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;</h1>
-<h2 id="&#x4E00;&#x3001;wkwebview&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;">&#x4E00;&#x3001;WKWebView&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;</h2>
-<h3 id="11-wknavigationdelegate">1.1 WKNavigationDelegate</h3>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#1webview&#x4E0E;ios&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;"><b>1. </b>1.WebView&#x4E0E;iOS&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4E00;&#x3001;wkwebview&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;"><b>1.1. </b>&#x4E00;&#x3001;WKWebView&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;</a></li><ul><li><span class="title-icon "></span><a href="#11-wknavigationdelegate"><b>1.1.1. </b>1.1 WKNavigationDelegate</a></li><li><span class="title-icon "></span><a href="#12-wkuidelegate"><b>1.1.2. </b>1.2 WKUIDelegate</a></li><li><span class="title-icon "></span><a href="#13-wkscriptmessagehandler"><b>1.1.3. </b>1.3 WKScriptMessageHandler</a></li><li><span class="title-icon "></span><a href="#14-wkusercontentcontroller"><b>1.1.4. </b>1.4 WKUserContentController</a></li><li><span class="title-icon "></span><a href="#15-wkscriptmessage"><b>1.1.5. </b>1.5 WKScriptMessage</a></li></ul><li><span class="title-icon "></span><a href="#&#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;cqwebview"><b>1.2. </b>&#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;CQWebView</a></li><li><span class="title-icon "></span><a href="#21-&#x589E;&#x52A0;jsoc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;"><b>1.3. </b>2.1 &#x589E;&#x52A0;js/oc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#22-&#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;"><b>1.4. </b>2.2 &#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;</a></li><li><span class="title-icon "></span><a href="#23-&#x5B9E;&#x73B0;wkscriptmessagehandler"><b>1.5. </b>2.3 &#x5B9E;&#x73B0;WKScriptMessageHandler</a></li><li><span class="title-icon "></span><a href="#&#x4E09;&#x3001;js&#x8C03;&#x7528;swift"><b>1.6. </b>&#x4E09;&#x3001;JS&#x8C03;&#x7528;Swift</a></li><ul><li><span class="title-icon "></span><a href="#21-&#x5B8C;&#x6574;html"><b>1.6.1. </b>2.1 &#x5B8C;&#x6574;html</a></li><li><span class="title-icon "></span><a href="#32-&#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;"><b>1.6.2. </b>3.2 &#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;</a></li><li><span class="title-icon "></span><a href="#32-&#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;"><b>1.6.3. </b>3.2 &#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;</a></li></ul><li><span class="title-icon "></span><a href="#&#x56DB;&#x3001;swift&#x8C03;&#x7528;js"><b>1.7. </b>&#x56DB;&#x3001;Swift&#x8C03;&#x7528;JS</a></li><ul><li><span class="title-icon "></span><a href="#41-evaluatejavascript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;"><b>1.7.1. </b>4.1 evaluateJavaScript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;</a></li><li><span class="title-icon "></span><a href="#42-wkwebview&#x52A0;&#x8F7D;js"><b>1.7.2. </b>4.2 WKWebView&#x52A0;&#x8F7D;JS</a></li></ul><li><span class="title-icon "></span><a href="#&#x53C2;&#x8003;&#x6587;&#x7AE0;"><b>1.8. </b>&#x53C2;&#x8003;&#x6587;&#x7AE0;</a></li></ul></ul></div><a href="#1webview&#x4E0E;ios&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="1webview&#x4E0E;ios&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;"><a name="1webview&#x4E0E;ios&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;" class="anchor-navigation-ex-anchor" href="#1webview&#x4E0E;ios&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;"><i class="fa fa-link" aria-hidden="true"></i></a>1. 1.WebView&#x4E0E;iOS&#x539F;&#x751F;&#x7684;&#x4EA4;&#x4E92;</h1>
+<h2 id="&#x4E00;&#x3001;wkwebview&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;"><a name="&#x4E00;&#x3001;wkwebview&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#&#x4E00;&#x3001;wkwebview&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. &#x4E00;&#x3001;WKWebView&#x7684;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;</h2>
+<h3 id="11-wknavigationdelegate"><a name="11-wknavigationdelegate" class="anchor-navigation-ex-anchor" href="#11-wknavigationdelegate"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. 1.1 WKNavigationDelegate</h3>
 <p>&#x8BE5;&#x4EE3;&#x7406;&#x63D0;&#x4F9B;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x8FFD;&#x8E2A;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#xFF08;&#x9875;&#x9762;&#x5F00;&#x59CB;&#x52A0;&#x8F7D;&#x3001;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x3001;&#x52A0;&#x8F7D;&#x5931;&#x8D25;&#xFF09;&#x3001;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x6267;&#x884C;&#x8DF3;&#x8F6C;&#x3002;</p>
 <pre class="language-"><code class="lang-swift"><span class="token comment">// &#x9875;&#x9762;&#x5F00;&#x59CB;&#x52A0;&#x8F7D;&#x65F6;&#x8C03;&#x7528;</span>
 <span class="token keyword">optional</span> <span class="token keyword">func</span> <span class="token function">webView</span><span class="token punctuation">(</span><span class="token number">_</span> webView<span class="token punctuation">:</span> <span class="token builtin">WKWebView</span><span class="token punctuation">,</span> didStartProvisionalNavigation navigation<span class="token punctuation">:</span> <span class="token builtin">WKNavigation</span><span class="token operator">!</span><span class="token punctuation">)</span>
@@ -5206,26 +5202,26 @@
 <span class="token comment">// &#x5728;&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x4E4B;&#x524D;&#xFF0C;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x8DF3;&#x8F6C;</span>
 <span class="token keyword">optional</span> <span class="token keyword">func</span> <span class="token function">webView</span><span class="token punctuation">(</span><span class="token number">_</span> webView<span class="token punctuation">:</span> <span class="token builtin">WKWebView</span><span class="token punctuation">,</span> decidePolicyFor navigationAction<span class="token punctuation">:</span> <span class="token builtin">WKNavigationAction</span><span class="token punctuation">,</span> decisionHandler<span class="token punctuation">:</span> @escaping <span class="token punctuation">(</span><span class="token builtin">WKNavigationActionPolicy</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Void</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="12-wkuidelegate">1.2 WKUIDelegate</h3>
+<h3 id="12-wkuidelegate"><a name="12-wkuidelegate" class="anchor-navigation-ex-anchor" href="#12-wkuidelegate"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.2. 1.2 WKUIDelegate</h3>
 <pre class="language-"><code class="lang-swift"><span class="token keyword">optional</span> <span class="token keyword">func</span> <span class="token function">webView</span><span class="token punctuation">(</span><span class="token number">_</span> webView<span class="token punctuation">:</span> <span class="token builtin">WKWebView</span><span class="token punctuation">,</span> createWebViewWith configuration<span class="token punctuation">:</span> <span class="token builtin">WKWebViewConfiguration</span><span class="token punctuation">,</span> <span class="token keyword">for</span> navigationAction<span class="token punctuation">:</span> <span class="token builtin">WKNavigationAction</span><span class="token punctuation">,</span> windowFeatures<span class="token punctuation">:</span> <span class="token builtin">WKWindowFeatures</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">WKWebView</span><span class="token operator">?</span>
 </code></pre>
 <p>&#x4E0B;&#x9762;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;&#x5168;&#x90FD;&#x662F;&#x4E0E;&#x754C;&#x9762;&#x5F39;&#x51FA;&#x63D0;&#x793A;&#x6846;&#x76F8;&#x5173;&#x7684;&#xFF0C;&#x9488;&#x5BF9;&#x4E8E;web&#x754C;&#x9762;&#x7684;&#x4E09;&#x79CD;&#x63D0;&#x793A;&#x6846;&#xFF08;&#x8B66;&#x544A;&#x6846;&#x3001;&#x786E;&#x8BA4;&#x6846;&#x3001;&#x8F93;&#x5165;&#x6846;&#xFF09;&#x5206;&#x522B;&#x5BF9;&#x5E94;&#x4E09;&#x79CD;&#x4EE3;&#x7406;&#x65B9;&#x6CD5;&#x3002;&#x4E0B;&#x9762;&#x53EA;&#x5217;&#x4E3E;&#x4E86;&#x8B66;&#x544A;&#x6846;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
 <pre class="language-"><code class="lang-swift"><span class="token keyword">optional</span> <span class="token keyword">func</span> <span class="token function">webView</span><span class="token punctuation">(</span><span class="token number">_</span> webView<span class="token punctuation">:</span> <span class="token builtin">WKWebView</span><span class="token punctuation">,</span> runJavaScriptAlertPanelWithMessage message<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token punctuation">,</span> initiatedByFrame frame<span class="token punctuation">:</span> <span class="token builtin">WKFrameInfo</span><span class="token punctuation">,</span> completionHandler<span class="token punctuation">:</span> @escaping <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Void</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="13-wkscriptmessagehandler">1.3 WKScriptMessageHandler</h3>
+<h3 id="13-wkscriptmessagehandler"><a name="13-wkscriptmessagehandler" class="anchor-navigation-ex-anchor" href="#13-wkscriptmessagehandler"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.3. 1.3 WKScriptMessageHandler</h3>
 <p>WKScriptMessageHandler&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x9075;&#x5FAA;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x5B83;&#x80FD;&#x8BA9;&#x7F51;&#x9875;&#x901A;&#x8FC7;JS&#x628A;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x7ED9;OC&#x3002;&#x5176;&#x4E2D;&#x534F;&#x8BAE;&#x65B9;&#x6CD5;&#x3002;</p>
 <pre class="language-"><code class="lang-swift"><span class="token comment">// &#x4ECE;web&#x754C;&#x9762;&#x4E2D;&#x63A5;&#x6536;&#x5230;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x65F6;&#x8C03;&#x7528;</span>
 <span class="token keyword">func</span> <span class="token function">userContentController</span><span class="token punctuation">(</span><span class="token number">_</span> userContentController<span class="token punctuation">:</span> <span class="token builtin">WKUserContentController</span><span class="token punctuation">,</span> didReceive message<span class="token punctuation">:</span> <span class="token builtin">WKScriptMessage</span><span class="token punctuation">)</span>
 </code></pre>
 <p>&#x4ECE;&#x534F;&#x8BAE;&#x4E2D;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x4E86;&#x4E24;&#x4E2A;&#x7C7B;WKUserContentController&#x548C;WKScriptMessage&#x3002;WKUserContentController&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;WKScriptMessage&#x5219;&#x662F;&#x643A;&#x5E26;&#x7684;&#x6570;&#x636E;&#x3002;</p>
-<h3 id="14-wkusercontentcontroller">1.4 WKUserContentController</h3>
+<h3 id="14-wkusercontentcontroller"><a name="14-wkusercontentcontroller" class="anchor-navigation-ex-anchor" href="#14-wkusercontentcontroller"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.4. 1.4 WKUserContentController</h3>
 <p>WKUserContentController&#x6709;&#x4E24;&#x4E2A;&#x6838;&#x5FC3;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x662F;&#x5B83;&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#x3002;</p>
 <pre class="language-"><code class="lang-swift"><span class="token comment">// js&#x6CE8;&#x5165;&#xFF0C;&#x5373;&#x5411;&#x7F51;&#x9875;&#x4E2D;&#x6CE8;&#x5165;&#x6211;&#x4EEC;&#x7684;js&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x5F3A;&#x5927;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5F00;&#x53D1;&#x4E2D;&#x8981;&#x614E;&#x7528;&#x3002;</span>
 open <span class="token keyword">func</span> <span class="token function">addUserScript</span><span class="token punctuation">(</span><span class="token number">_</span> userScript<span class="token punctuation">:</span> <span class="token builtin">WKUserScript</span><span class="token punctuation">)</span>
 <span class="token comment">// &#x6DFB;&#x52A0;&#x4F9B;js&#x8C03;&#x7528;oc&#x7684;&#x6865;&#x6881;&#x3002;&#x8FD9;&#x91CC;&#x7684;name&#x5BF9;&#x5E94;WKScriptMessage&#x4E2D;&#x7684;name&#xFF0C;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x6211;&#x4EEC;&#x8BA4;&#x4E3A;&#x5B83;&#x5C31;&#x662F;&#x65B9;&#x6CD5;&#x540D;&#x3002;</span>
 open <span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token number">_</span> scriptMessageHandler<span class="token punctuation">:</span> <span class="token builtin">WKScriptMessageHandler</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="15-wkscriptmessage">1.5 WKScriptMessage</h3>
+<h3 id="15-wkscriptmessage"><a name="15-wkscriptmessage" class="anchor-navigation-ex-anchor" href="#15-wkscriptmessage"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.5. 1.5 WKScriptMessage</h3>
 <p>WKScriptMessage&#x5C31;&#x662F;js&#x901A;&#x77E5;oc&#x7684;&#x6570;&#x636E;&#x3002;&#x5176;&#x4E2D;&#x6709;&#x4E24;&#x4E2A;&#x6838;&#x5FC3;&#x5C5E;&#x6027;&#x7528;&#x7684;&#x5F88;&#x591A;&#x3002;</p>
 <pre class="language-"><code class="lang-swift">open <span class="token keyword">var</span> name<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
 </code></pre>
@@ -5234,7 +5230,7 @@ open <span class="token keyword">func</span> <span class="token function">add</s
 </code></pre>
 <p>&#x643A;&#x5E26;&#x7684;&#x6838;&#x5FC3;&#x6570;&#x636E;&#x3002;js&#x8C03;&#x7528;&#x65F6;&#x53EA;&#x9700;<code>window.webkit.messageHandlers.#name#.postMessage()</code></p>
 <p>&#x8FD9;&#x91CC;&#x7684;name&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x7684;name&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x611F;&#x89C9;&#x5F88;&#x723D;&#xFF0C;&#x5C31;&#x662F;&#x8FD9;&#x4E48;&#x7B80;&#x5355;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x3002;</p>
-<h2 id="&#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;cqwebview">&#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;CQWebView</h2>
+<h2 id="&#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;cqwebview"><a name="&#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;cqwebview" class="anchor-navigation-ex-anchor" href="#&#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;cqwebview"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. &#x4E8C;&#x3001;&#x81EA;&#x5B9A;&#x4E49;CQWebView</h2>
 <pre class="language-"><code class="lang-swift"><span class="token keyword">class</span> <span class="token class-name">CQWebView</span><span class="token punctuation">:</span> <span class="token builtin">UIView</span> <span class="token punctuation">{</span>
     <span class="token comment">// &#x589E;&#x52A0;webView&#x5C5E;&#x6027;</span>
     <span class="token keyword">private</span> <span class="token keyword">lazy</span> <span class="token keyword">var</span> webView<span class="token punctuation">:</span> <span class="token builtin">WKWebView</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -5250,7 +5246,7 @@ open <span class="token keyword">func</span> <span class="token function">add</s
     <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="21-&#x589E;&#x52A0;jsoc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;">2.1 &#x589E;&#x52A0;js/oc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;</h2>
+<h2 id="21-&#x589E;&#x52A0;jsoc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;"><a name="21-&#x589E;&#x52A0;jsoc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#21-&#x589E;&#x52A0;jsoc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. 2.1 &#x589E;&#x52A0;js/oc&#x4EA4;&#x4E92;&#x65B9;&#x6CD5;</h2>
 <pre class="language-"><code class="lang-swift"><span class="token keyword">class</span> <span class="token class-name">CQWebView</span><span class="token punctuation">:</span> <span class="token builtin">UIView</span> <span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
     <span class="token comment">// &#x589E;&#x52A0;js&#x6D88;&#x606F;&#x76D1;&#x542C;</span>
@@ -5267,7 +5263,7 @@ open <span class="token keyword">func</span> <span class="token function">add</s
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="22-&#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;">2.2 &#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;</h2>
+<h2 id="22-&#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;"><a name="22-&#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;" class="anchor-navigation-ex-anchor" href="#22-&#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. 2.2 &#x589E;&#x52A0;&#x4EE3;&#x7406;&#x5C5E;&#x6027;</h2>
 <pre class="language-"><code class="lang-swift"><span class="token comment">// WebView&#x4EE3;&#x7406;</span>
 <span class="token atrule">@objc</span> <span class="token keyword">protocol</span> <span class="token builtin">CQWebViewDelegate</span> <span class="token punctuation">{</span>
     <span class="token comment">// &#x63A5;&#x6536; js &#x53D1;&#x6765;&#x7684;&#x6D88;&#x606F;</span>
@@ -5278,7 +5274,7 @@ open <span class="token keyword">func</span> <span class="token function">add</s
     <span class="token keyword">weak</span> <span class="token keyword">var</span> delegate<span class="token punctuation">:</span> <span class="token builtin">CQWebViewDelegate</span><span class="token operator">?</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="23-&#x5B9E;&#x73B0;wkscriptmessagehandler">2.3 &#x5B9E;&#x73B0;WKScriptMessageHandler</h2>
+<h2 id="23-&#x5B9E;&#x73B0;wkscriptmessagehandler"><a name="23-&#x5B9E;&#x73B0;wkscriptmessagehandler" class="anchor-navigation-ex-anchor" href="#23-&#x5B9E;&#x73B0;wkscriptmessagehandler"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. 2.3 &#x5B9E;&#x73B0;WKScriptMessageHandler</h2>
 <pre class="language-"><code class="lang-swift"><span class="token comment">// js &#x548C; swift &#x7684;&#x4EA4;&#x4E92;</span>
 <span class="token keyword">extension</span> <span class="token builtin">CQWebView</span><span class="token punctuation">:</span> <span class="token builtin">WKScriptMessageHandler</span> <span class="token punctuation">{</span>
 
@@ -5289,8 +5285,8 @@ open <span class="token keyword">func</span> <span class="token function">add</s
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="&#x4E09;&#x3001;js&#x8C03;&#x7528;swift">&#x4E09;&#x3001;JS&#x8C03;&#x7528;Swift</h2>
-<h3 id="21-&#x5B8C;&#x6574;html">2.1 &#x5B8C;&#x6574;html</h3>
+<h2 id="&#x4E09;&#x3001;js&#x8C03;&#x7528;swift"><a name="&#x4E09;&#x3001;js&#x8C03;&#x7528;swift" class="anchor-navigation-ex-anchor" href="#&#x4E09;&#x3001;js&#x8C03;&#x7528;swift"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. &#x4E09;&#x3001;JS&#x8C03;&#x7528;Swift</h2>
+<h3 id="21-&#x5B8C;&#x6574;html"><a name="21-&#x5B8C;&#x6574;html" class="anchor-navigation-ex-anchor" href="#21-&#x5B8C;&#x6574;html"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.1. 2.1 &#x5B8C;&#x6574;html</h3>
 <pre class="language-"><code class="lang-html"><span class="token doctype">&lt;!doctype html&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
@@ -5318,7 +5314,7 @@ open <span class="token keyword">func</span> <span class="token function">add</s
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
 </code></pre>
-<h3 id="32-&#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;">3.2 &#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;</h3>
+<h3 id="32-&#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;"><a name="32-&#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;" class="anchor-navigation-ex-anchor" href="#32-&#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.2. 3.2 &#x589E;&#x52A0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x76D1;&#x542C;</h3>
 <p>&#x53EA;&#x9700;&#x8981;&#x8C03;&#x7528;<code>CQWebView</code>&#x7684;<code>adddScriptMessageHandler</code>&#x65B9;&#x6CD5;&#x3002;</p>
 <pre class="language-"><code class="lang-swift"><span class="token keyword">class</span> <span class="token class-name">ViewController</span><span class="token punctuation">:</span> <span class="token builtin">UIViewController</span> <span class="token punctuation">{</span>
 
@@ -5334,7 +5330,7 @@ open <span class="token keyword">func</span> <span class="token function">add</s
     <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="32-&#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;">3.2 &#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;</h3>
+<h3 id="32-&#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;"><a name="32-&#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;" class="anchor-navigation-ex-anchor" href="#32-&#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.3. 3.2 &#x5B9E;&#x73B0;&#x5BF9;js&#x6D88;&#x606F;&#x7684;&#x5904;&#x7406;</h3>
 <pre class="language-"><code class="lang-swift"><span class="token keyword">extension</span> <span class="token builtin">ViewController</span><span class="token punctuation">:</span> <span class="token builtin">CQWebViewDelegate</span> <span class="token punctuation">{</span>
 
     <span class="token keyword">func</span> <span class="token function">webView</span><span class="token punctuation">(</span><span class="token number">_</span> webView<span class="token punctuation">:</span> <span class="token builtin">CQWebView</span><span class="token punctuation">,</span> didReceiveMessage name<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token punctuation">,</span> body<span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -5349,8 +5345,8 @@ open <span class="token keyword">func</span> <span class="token function">add</s
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="&#x56DB;&#x3001;swift&#x8C03;&#x7528;js">&#x56DB;&#x3001;Swift&#x8C03;&#x7528;JS</h2>
-<h3 id="41-evaluatejavascript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;">4.1 evaluateJavaScript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;</h3>
+<h2 id="&#x56DB;&#x3001;swift&#x8C03;&#x7528;js"><a name="&#x56DB;&#x3001;swift&#x8C03;&#x7528;js" class="anchor-navigation-ex-anchor" href="#&#x56DB;&#x3001;swift&#x8C03;&#x7528;js"><i class="fa fa-link" aria-hidden="true"></i></a>1.7. &#x56DB;&#x3001;Swift&#x8C03;&#x7528;JS</h2>
+<h3 id="41-evaluatejavascript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;"><a name="41-evaluatejavascript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#41-evaluatejavascript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>1.7.1. 4.1 evaluateJavaScript&#x65B9;&#x6CD5;&#x4F7F;&#x7528;</h3>
 <p>&#x5728;html&#x7684;js&#x4E2D;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x4E86;<code>swiftCallJs</code>&#x65B9;&#x6CD5;&#x7B49;&#x5F85;&#x8C03;&#x7528;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8C03;&#x7528;<code>CQWebView</code>&#x7684;evaluateJavaScript&#x65B9;&#x6CD5;&#x5373;&#x53EF;&#x3002;</p>
 <pre class="language-"><code class="lang-swift"><span class="token comment">//swift &#x8C03; js&#x51FD;&#x6570;</span>
 webView<span class="token punctuation">.</span><span class="token function">evaluateJavaScript</span><span class="token punctuation">(</span><span class="token string">&quot;swiftCallJs(&apos;<span class="token interpolation"><span class="token delimiter variable">\(</span> dic<span class="token punctuation">[</span><span class="token string">&quot;msg&quot;</span><span class="token punctuation">]</span>  <span class="token keyword">as</span><span class="token operator">!</span> <span class="token builtin">String</span><span class="token delimiter variable">)</span></span>&apos;)&quot;</span><span class="token punctuation">,</span> completionHandler<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -5360,7 +5356,7 @@ webView<span class="token punctuation">.</span><span class="token function">eval
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="42-wkwebview&#x52A0;&#x8F7D;js">4.2 WKWebView&#x52A0;&#x8F7D;JS</h3>
+<h3 id="42-wkwebview&#x52A0;&#x8F7D;js"><a name="42-wkwebview&#x52A0;&#x8F7D;js" class="anchor-navigation-ex-anchor" href="#42-wkwebview&#x52A0;&#x8F7D;js"><i class="fa fa-link" aria-hidden="true"></i></a>1.7.2. 4.2 WKWebView&#x52A0;&#x8F7D;JS</h3>
 <pre class="language-"><code class="lang-swift"><span class="token builtin">NSString</span> <span class="token operator">*</span>js <span class="token operator">=</span> @<span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
 <span class="token comment">// &#x6839;&#x636E;JS&#x5B57;&#x7B26;&#x4E32;&#x521D;&#x59CB;&#x5316;WKUserScript&#x5BF9;&#x8C61;</span>
 <span class="token builtin">WKUserScript</span> <span class="token operator">*</span>script <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token builtin">WKUserScript</span> alloc<span class="token punctuation">]</span> initWithSource<span class="token punctuation">:</span>js injectionTime<span class="token punctuation">:</span><span class="token builtin">WKUserScriptInjectionTimeAtDocumentEnd</span> forMainFrameOnly<span class="token punctuation">:</span><span class="token constant">YES</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -5368,7 +5364,7 @@ webView<span class="token punctuation">.</span><span class="token function">eval
 <span class="token builtin">WKWebViewConfiguration</span> <span class="token operator">*</span>config <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token builtin">WKWebViewConfiguration</span> alloc<span class="token punctuation">]</span> <span class="token keyword">init</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">[</span>config<span class="token punctuation">.</span>userContentController addUserScript<span class="token punctuation">:</span>script<span class="token punctuation">]</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="&#x53C2;&#x8003;&#x6587;&#x7AE0;">&#x53C2;&#x8003;&#x6587;&#x7AE0;</h2>
+<h2 id="&#x53C2;&#x8003;&#x6587;&#x7AE0;"><a name="&#x53C2;&#x8003;&#x6587;&#x7AE0;" class="anchor-navigation-ex-anchor" href="#&#x53C2;&#x8003;&#x6587;&#x7AE0;"><i class="fa fa-link" aria-hidden="true"></i></a>1.8. &#x53C2;&#x8003;&#x6587;&#x7AE0;</h2>
 <ul>
 <li><a href="https://gitee.com/chenchangqing/cqweb-view" target="_blank">&#x6E90;&#x7801;</a></li>
 <li><a href="https://www.jianshu.com/p/bc5d33a0d043" target="_blank">Safari&#x8C03;&#x8BD5;iOS&#x4E2D;&#x7684;JS</a></li>
@@ -5423,7 +5419,7 @@ webView<span class="token punctuation">.</span><span class="token function">eval
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"WebView与iOS原生的交互","level":"1.26.2","depth":2,"next":{"title":"理解MVVM架构模式","level":"1.26.3","depth":2,"path":"pages/其他/理解MVVM架构模式.md","ref":"pages/其他/理解MVVM架构模式.md","articles":[]},"previous":{"title":"长城汽车Swift编程规约","level":"1.26.1","depth":2,"path":"pages/其他/长城汽车Swift编程规约.md","ref":"pages/其他/长城汽车Swift编程规约.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/其他/WebView与iOS原生的交互.md","mtime":"2023-08-06T07:15:23.516Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-08-06T17:12:42.387Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"WebView与iOS原生的交互","level":"1.26.2","depth":2,"next":{"title":"理解MVVM架构模式","level":"1.26.3","depth":2,"path":"pages/其他/理解MVVM架构模式.md","ref":"pages/其他/理解MVVM架构模式.md","articles":[]},"previous":{"title":"长城汽车Swift编程规约","level":"1.26.1","depth":2,"path":"pages/其他/长城汽车Swift编程规约.md","ref":"pages/其他/长城汽车Swift编程规约.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","klipse","popup","todo","hide-element","simple-mind-map","mermaid-gb3","anchor-navigation-ex","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/其他/WebView与iOS原生的交互.md","mtime":"2023-08-06T17:21:35.996Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-08-07T18:03:57.658Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -5470,15 +5466,7 @@ webView<span class="token punctuation">.</span><span class="token function">eval
         
     
         
-        <script src="../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
-        
-    
-        
         <script src="../../gitbook/gitbook-plugin-hide-element/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
         
     
         

@@ -46,15 +46,11 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -5185,9 +5181,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;">&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;"><b>1. </b>&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;</a></li><ul><li><span class="title-icon "></span><a href="#scrollcontroller"><b>1.1. </b>ScrollController</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x6EDA;&#x52A8;&#x76D1;&#x542C;"><b>1.1.1. </b>1. &#x6EDA;&#x52A8;&#x76D1;&#x542C;</a></li><li><span class="title-icon "></span><a href="#2-&#x5B9E;&#x4F8B;"><b>1.1.2. </b>2. &#x5B9E;&#x4F8B;</a></li><li><span class="title-icon "></span><a href="#3-&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;"><b>1.1.3. </b>3. &#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;</a></li><li><span class="title-icon "></span><a href="#4-scrollposition"><b>1.1.4. </b>4. ScrollPosition</a></li><li><span class="title-icon "></span><a href="#5-scrollcontroller&#x63A7;&#x5236;&#x539F;&#x7406;"><b>1.1.5. </b>5. ScrollController&#x63A7;&#x5236;&#x539F;&#x7406;</a></li></ul><li><span class="title-icon "></span><a href="#&#x6EDA;&#x52A8;&#x76D1;&#x542C;"><b>1.2. </b>&#x6EDA;&#x52A8;&#x76D1;&#x542C;</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x6EDA;&#x52A8;&#x901A;&#x77E5;"><b>1.2.1. </b>1. &#x6EDA;&#x52A8;&#x901A;&#x77E5;</a></li><li><span class="title-icon "></span><a href="#2-&#x5B9E;&#x4F8B;_1"><b>1.2.2. </b>2. &#x5B9E;&#x4F8B;</a></li></ul></ul></ul></div><a href="#&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;"><a name="&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;" class="anchor-navigation-ex-anchor" href="#&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;</h1>
 <p><a href="https://gitee.com/learnany/flutter/blob/master/lib/scroll_controller_route2.dart" target="_blank">&#x6E90;&#x7801;</a> <a href="https://book.flutterchina.club/chapter6/scroll_controller.html#_6-4-%E6%BB%9A%E5%8A%A8%E7%9B%91%E5%90%AC%E5%8F%8A%E6%8E%A7%E5%88%B6" target="_blank">&#x6EDA;&#x52A8;&#x76D1;&#x542C;&#x53CA;&#x63A7;&#x5236;</a></p>
-<h2 id="scrollcontroller">ScrollController</h2>
+<h2 id="scrollcontroller"><a name="scrollcontroller" class="anchor-navigation-ex-anchor" href="#scrollcontroller"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. ScrollController</h2>
 <hr>
 <p>ScrollController&#x6784;&#x9020;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre class="language-"><code class="lang-c"><span class="token function">ScrollController</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -5200,11 +5196,11 @@
 <li>offset&#xFF1A;&#x53EF;&#x6EDA;&#x52A8;&#x7EC4;&#x4EF6;&#x5F53;&#x524D;&#x7684;&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x3002;</li>
 <li>jumpTo(double offset)&#x3001;animateTo(double offset,...)&#xFF1A;&#x8FD9;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x8DF3;&#x8F6C;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x5B83;&#x4EEC;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#xFF0C;&#x540E;&#x8005;&#x5728;&#x8DF3;&#x8F6C;&#x65F6;&#x4F1A;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x52A8;&#x753B;&#xFF0C;&#x800C;&#x524D;&#x8005;&#x4E0D;&#x4F1A;&#x3002;</li>
 </ul>
-<h3 id="1-&#x6EDA;&#x52A8;&#x76D1;&#x542C;">1. &#x6EDA;&#x52A8;&#x76D1;&#x542C;</h3>
+<h3 id="1-&#x6EDA;&#x52A8;&#x76D1;&#x542C;"><a name="1-&#x6EDA;&#x52A8;&#x76D1;&#x542C;" class="anchor-navigation-ex-anchor" href="#1-&#x6EDA;&#x52A8;&#x76D1;&#x542C;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. 1. &#x6EDA;&#x52A8;&#x76D1;&#x542C;</h3>
 <p>ScrollController&#x95F4;&#x63A5;&#x7EE7;&#x627F;&#x81EA;Listenable&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6839;&#x636E;ScrollController&#x6765;&#x76D1;&#x542C;&#x6EDA;&#x52A8;&#x4E8B;&#x4EF6;&#xFF0C;&#x5982;&#xFF1A;</p>
 <pre class="language-"><code class="lang-c">controller<span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">&gt;</span><span class="token function">print</span><span class="token punctuation">(</span>controller<span class="token punctuation">.</span>offset<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="2-&#x5B9E;&#x4F8B;">2. &#x5B9E;&#x4F8B;</h3>
+<h3 id="2-&#x5B9E;&#x4F8B;"><a name="2-&#x5B9E;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#2-&#x5B9E;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.2. 2. &#x5B9E;&#x4F8B;</h3>
 <p>&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;ListView&#xFF0C;&#x5F53;&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6253;&#x5370;&#x51FA;&#x5F53;&#x524D;&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#xFF0C;&#x7136;&#x540E;&#x5224;&#x65AD;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x662F;&#x5426;&#x8D85;&#x8FC7;1000&#x50CF;&#x7D20;&#xFF0C;&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x5219;&#x5728;&#x5C4F;&#x5E55;&#x53F3;&#x4E0B;&#x89D2;&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x201C;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x201D;&#x7684;&#x6309;&#x94AE;&#xFF0C;&#x8BE5;&#x6309;&#x94AE;&#x70B9;&#x51FB;&#x540E;&#x53EF;&#x4EE5;&#x4F7F;ListView&#x6062;&#x590D;&#x5230;&#x521D;&#x59CB;&#x4F4D;&#x7F6E;&#xFF1B;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8D85;&#x8FC7;1000&#x50CF;&#x7D20;&#xFF0C;&#x5219;&#x9690;&#x85CF;&#x201C;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x201D;&#x6309;&#x94AE;&#x3002;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre class="language-"><code class="lang-c">class ScrollControllerTestRoute extends StatefulWidget <span class="token punctuation">{</span>
   @override
@@ -5271,19 +5267,19 @@ class ScrollControllerTestRouteState extends State<span class="token operator">&
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="3-&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;">3. &#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;</h3>
+<h3 id="3-&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;"><a name="3-&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;" class="anchor-navigation-ex-anchor" href="#3-&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.3. 3. &#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x6062;&#x590D;</h3>
 <p>PageStorage&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x9875;&#x9762;(&#x8DEF;&#x7531;)&#x76F8;&#x5173;&#x6570;&#x636E;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x5B83;&#x5E76;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x5B50;&#x6811;&#x7684;UI&#x5916;&#x89C2;&#xFF0C;&#x5176;&#x5B9E;&#xFF0C;PageStorage&#x662F;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x578B;&#x7EC4;&#x4EF6;&#xFF0C;&#x5B83;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x6876;&#xFF08;bucket&#xFF09;&#xFF0C;&#x5B50;&#x6811;&#x4E2D;&#x7684;Widget&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6307;&#x5B9A;&#x4E0D;&#x540C;&#x7684;PageStorageKey&#x6765;&#x5B58;&#x50A8;&#x5404;&#x81EA;&#x7684;&#x6570;&#x636E;&#x6216;&#x72B6;&#x6001;&#x3002;</p>
 <p><a href="https://blog.csdn.net/vitaviva/article/details/105313672" target="_blank">&#x4F7F;&#x7528;PageStorage&#x5728;&#x9875;&#x9762;&#x5207;&#x6362;&#x65F6;&#x4FDD;&#x5B58;&#x72B6;&#x6001;</a></p>
-<h3 id="4-scrollposition">4. ScrollPosition</h3>
+<h3 id="4-scrollposition"><a name="4-scrollposition" class="anchor-navigation-ex-anchor" href="#4-scrollposition"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.4. 4. ScrollPosition</h3>
 <p>ScrollPosition&#x662F;&#x7528;&#x6765;&#x4FDD;&#x5B58;&#x53EF;&#x6EDA;&#x52A8;&#x7EC4;&#x4EF6;&#x7684;&#x6EDA;&#x52A8;&#x4F4D;&#x7F6E;&#x7684;&#x3002;&#x4E00;&#x4E2A;ScrollController&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x88AB;&#x591A;&#x4E2A;&#x53EF;&#x6EDA;&#x52A8;&#x7EC4;&#x4EF6;&#x4F7F;&#x7528;&#xFF0C;ScrollController&#x4F1A;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;&#x53EF;&#x6EDA;&#x52A8;&#x7EC4;&#x4EF6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;ScrollPosition&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E9B;ScrollPosition&#x4FDD;&#x5B58;&#x5728;ScrollController&#x7684;positions&#x5C5E;&#x6027;&#x4E2D;&#xFF08;List<scrollposition>&#xFF09;&#x3002;ScrollPosition&#x662F;&#x771F;&#x6B63;&#x4FDD;&#x5B58;&#x6ED1;&#x52A8;&#x4F4D;&#x7F6E;&#x4FE1;&#x606F;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;offset&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x4FBF;&#x6377;&#x5C5E;&#x6027;&#xFF1A;</scrollposition></p>
 <pre class="language-"><code class="lang-c"><span class="token keyword">double</span> get offset <span class="token operator">=</span><span class="token operator">&gt;</span> position<span class="token punctuation">.</span>pixels<span class="token punctuation">;</span>
 </code></pre>
-<h3 id="5-scrollcontroller&#x63A7;&#x5236;&#x539F;&#x7406;">5. ScrollController&#x63A7;&#x5236;&#x539F;&#x7406;</h3>
-<h2 id="&#x6EDA;&#x52A8;&#x76D1;&#x542C;">&#x6EDA;&#x52A8;&#x76D1;&#x542C;</h2>
+<h3 id="5-scrollcontroller&#x63A7;&#x5236;&#x539F;&#x7406;"><a name="5-scrollcontroller&#x63A7;&#x5236;&#x539F;&#x7406;" class="anchor-navigation-ex-anchor" href="#5-scrollcontroller&#x63A7;&#x5236;&#x539F;&#x7406;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.5. 5. ScrollController&#x63A7;&#x5236;&#x539F;&#x7406;</h3>
+<h2 id="&#x6EDA;&#x52A8;&#x76D1;&#x542C;"><a name="&#x6EDA;&#x52A8;&#x76D1;&#x542C;" class="anchor-navigation-ex-anchor" href="#&#x6EDA;&#x52A8;&#x76D1;&#x542C;"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. &#x6EDA;&#x52A8;&#x76D1;&#x542C;</h2>
 <hr>
-<h3 id="1-&#x6EDA;&#x52A8;&#x901A;&#x77E5;">1. &#x6EDA;&#x52A8;&#x901A;&#x77E5;</h3>
+<h3 id="1-&#x6EDA;&#x52A8;&#x901A;&#x77E5;"><a name="1-&#x6EDA;&#x52A8;&#x901A;&#x77E5;" class="anchor-navigation-ex-anchor" href="#1-&#x6EDA;&#x52A8;&#x901A;&#x77E5;"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.1. 1. &#x6EDA;&#x52A8;&#x901A;&#x77E5;</h3>
 <p>Flutter Widget&#x6811;&#x4E2D;&#x5B50;Widget&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x53D1;&#x9001;&#x901A;&#x77E5;&#xFF08;Notification&#xFF09;&#x4E0E;&#x7236;(&#x5305;&#x62EC;&#x7956;&#x5148;)Widget&#x901A;&#x4FE1;&#x3002;</p>
-<h3 id="2-&#x5B9E;&#x4F8B;">2. &#x5B9E;&#x4F8B;</h3>
+<h3 id="2-&#x5B9E;&#x4F8B;_1"><a name="2-&#x5B9E;&#x4F8B;_1" class="anchor-navigation-ex-anchor" href="#2-&#x5B9E;&#x4F8B;_1"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2. 2. &#x5B9E;&#x4F8B;</h3>
 <pre class="language-"><code class="lang-c">import <span class="token string">&apos;package:flutter/material.dart&apos;</span><span class="token punctuation">;</span>
 
 class ScrollNotificationTestRoute extends StatefulWidget <span class="token punctuation">{</span>
@@ -5378,7 +5374,7 @@ class _ScrollNotificationTestRouteState
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"滚动监听及控制","level":"1.8.6.4","depth":3,"next":{"title":"AnimatedList","level":"1.8.6.5","depth":3,"path":"pages/fultter/AnimatedList.md","ref":"pages/fultter/AnimatedList.md","articles":[]},"previous":{"title":"ListView","level":"1.8.6.3","depth":3,"path":"pages/fultter/ListView.md","ref":"pages/fultter/ListView.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/fultter/滚动监听及控制.md","mtime":"2023-08-06T07:15:23.495Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-08-06T17:12:42.387Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"滚动监听及控制","level":"1.8.6.4","depth":3,"next":{"title":"AnimatedList","level":"1.8.6.5","depth":3,"path":"pages/fultter/AnimatedList.md","ref":"pages/fultter/AnimatedList.md","articles":[]},"previous":{"title":"ListView","level":"1.8.6.3","depth":3,"path":"pages/fultter/ListView.md","ref":"pages/fultter/ListView.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","klipse","popup","todo","hide-element","simple-mind-map","mermaid-gb3","anchor-navigation-ex","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/fultter/滚动监听及控制.md","mtime":"2023-08-06T17:21:35.974Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-08-07T18:03:57.658Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -5425,15 +5421,7 @@ class _ScrollNotificationTestRouteState
         
     
         
-        <script src="../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
-        
-    
-        
         <script src="../../gitbook/gitbook-plugin-hide-element/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
         
     
         

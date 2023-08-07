@@ -46,15 +46,11 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -5185,7 +5181,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="servlet&#x751F;&#x547D;&#x5468;&#x671F;">Servlet&#x751F;&#x547D;&#x5468;&#x671F;</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#servlet&#x751F;&#x547D;&#x5468;&#x671F;"><b>1. </b>Servlet&#x751F;&#x547D;&#x5468;&#x671F;</a></li><ul><ul><li><span class="title-icon "></span><a href="#httpservletresponse&#x63A5;&#x53E3;"><b>1.1.1. </b>HttpServletResponse&#x63A5;&#x53E3;</a></li><li><span class="title-icon "></span><a href="#httpservletrequest&#x63A5;&#x53E3;"><b>1.1.2. </b>HttpServletRequest&#x63A5;&#x53E3;</a></li><li><span class="title-icon "></span><a href="#&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;"><b>1.1.3. </b>&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;</a></li></ul></ul></ul></div><a href="#servlet&#x751F;&#x547D;&#x5468;&#x671F;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="servlet&#x751F;&#x547D;&#x5468;&#x671F;"><a name="servlet&#x751F;&#x547D;&#x5468;&#x671F;" class="anchor-navigation-ex-anchor" href="#servlet&#x751F;&#x547D;&#x5468;&#x671F;"><i class="fa fa-link" aria-hidden="true"></i></a>1. Servlet&#x751F;&#x547D;&#x5468;&#x671F;</h1>
 <ol>
 <li>&#x7F51;&#x7AD9;&#x4E2D;&#x6240;&#x6709;&#x7684;Servlet&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x80FD;&#x7531;Http&#x670D;&#x52A1;&#x5668;&#x8D1F;&#x8D23;&#x521B;&#x5EFA;&#x3002;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x4E0D;&#x80FD;&#x624B;&#x52A8;&#x521B;&#x5EFA;Servlet&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x3002;</li>
 <li>&#x5728;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;Http&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x5BF9;&#x4E8E;&#x5F53;&#x524D;Servlet&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7C7B;&#x7B2C;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;Servlet&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x3002;
@@ -5198,7 +5194,7 @@
 <li>&#x5728;Http&#x670D;&#x52A1;&#x5668;&#x8FD0;&#x884C;&#x671F;&#x95F4;&#xFF0C;&#x4E00;&#x4E2A;Servlet&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7C7B;&#x53EA;&#x80FD;&#x88AB;&#x521B;&#x5EFA;&#x51FA;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x3002;</li>
 <li>&#x5728;Http&#x670D;&#x52A1;&#x5668;&#x5173;&#x95ED;&#x65F6;&#x523B;&#xFF0C;&#x81EA;&#x52A8;&#x5C06;&#x7F51;&#x7AD9;&#x4E2D;&#x6240;&#x6709;&#x7684;Servlet&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x9500;&#x6BC1;&#x3002;</li>
 </ol>
-<h3 id="httpservletresponse&#x63A5;&#x53E3;">HttpServletResponse&#x63A5;&#x53E3;</h3>
+<h3 id="httpservletresponse&#x63A5;&#x53E3;"><a name="httpservletresponse&#x63A5;&#x53E3;" class="anchor-navigation-ex-anchor" href="#httpservletresponse&#x63A5;&#x53E3;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.1. HttpServletResponse&#x63A5;&#x53E3;</h3>
 <ol>
 <li>&#x4ECB;&#x7ECD;&#xFF1A;<ol>
 <li>HttpServletResponse&#x63A5;&#x53E3;&#x6765;&#x81EA;&#x4E8E;Servlet&#x89C4;&#x8303;&#x4E2D;&#xFF0C;&#x5728;Tomcat&#x4E2D;&#x5B58;&#x5728;servlet-api.jar</li>
@@ -5309,7 +5305,7 @@
 <p> sendRedirect&#x65B9;&#x6CD5;&#x8FDC;&#x7A0B;&#x63A7;&#x5236;&#x6D4F;&#x89C8;&#x5668;&#x8BF7;&#x6C42;&#x884C;&#x4E3A;&#x3010;&#x8BF7;&#x6C42;&#x5730;&#x5740;&#xFF0C;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF0C;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x3011;&#x3002;</p>
 </li>
 </ol>
-<h3 id="httpservletrequest&#x63A5;&#x53E3;">HttpServletRequest&#x63A5;&#x53E3;</h3>
+<h3 id="httpservletrequest&#x63A5;&#x53E3;"><a name="httpservletrequest&#x63A5;&#x53E3;" class="anchor-navigation-ex-anchor" href="#httpservletrequest&#x63A5;&#x53E3;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.2. HttpServletRequest&#x63A5;&#x53E3;</h3>
 <ol>
 <li>&#x4ECB;&#x7ECD;&#xFF1A;<ol>
 <li>HttpServletRequest&#x63A5;&#x53E3;&#x6765;&#x81EA;&#x4E8E;Servlet&#x89C4;&#x8303;&#x4E2D;&#xFF0C;&#x5728;Tomcat&#x4E2D;&#x5B58;&#x5728;servlet-api.jar</li>
@@ -5379,7 +5375,7 @@
 </code></pre>
 </li>
 </ol>
-<h3 id="&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;">&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;</h3>
+<h3 id="&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;"><a name="&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;" class="anchor-navigation-ex-anchor" href="#&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1.3. &#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x548C;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;</h3>
 <ol>
 <li><p>http&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x9001;&#x7684;&#x3010;http&#x8BF7;&#x6C42;&#x534F;&#x8BAE;&#x5305;&#x3011;&#x4E4B;&#x540E;&#xFF0C;&#x81EA;&#x52A8;&#x4E3A;&#x5F53;&#x524D;&#x7684;&#x3010;Http&#x8BF7;&#x6C42;&#x534F;&#x8BAE;&#x5305;&#x3011;&#x751F;&#x6210;1&#x4E2A;&#x3010;&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#x3011;&#x548C;1&#x4E00;&#x4E2A;&#x3010;&#x54CD;&#x5E94;&#x5BF9;&#x8C61;&#x3011;&#x3002;</p>
 </li>
@@ -5433,7 +5429,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Servlet生命周期","level":"1.2.2","depth":2,"next":{"title":"Servlet考试管理系统","level":"1.2.3","depth":2,"path":"pages/servlet/exammanagementsystem.md","ref":"pages/servlet/exammanagementsystem.md","articles":[]},"previous":{"title":"Servlet规范","level":"1.2.1","depth":2,"path":"pages/servlet/rule.md","ref":"pages/servlet/rule.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","page-toc-button","klipse","popup","todo","hide-element","back-to-top-button","simple-mind-map","mermaid-gb3","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"page-toc-button":{},"back-to-top-button":{},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/servlet/life.md","mtime":"2023-08-06T07:15:23.510Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-08-06T17:12:42.387Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Servlet生命周期","level":"1.2.2","depth":2,"next":{"title":"Servlet考试管理系统","level":"1.2.3","depth":2,"path":"pages/servlet/exammanagementsystem.md","ref":"pages/servlet/exammanagementsystem.md","articles":[]},"previous":{"title":"Servlet规范","level":"1.2.1","depth":2,"path":"pages/servlet/rule.md","ref":"pages/servlet/rule.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","klipse","popup","todo","hide-element","simple-mind-map","mermaid-gb3","anchor-navigation-ex","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"mermaid-gb3":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/servlet/life.md","mtime":"2023-08-06T17:21:35.990Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-08-07T18:03:57.658Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -5480,15 +5476,7 @@
         
     
         
-        <script src="../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
-        
-    
-        
         <script src="../../gitbook/gitbook-plugin-hide-element/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
         
     
         
