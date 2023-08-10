@@ -5,14 +5,17 @@
 
 ### 创建用户信息表Users
 
+解决表不能存中文：https://blog.csdn.net/liyingjie2001/article/details/124602734
+
 ```sql
+CREATE DATABASE c1221 CHARACTER SET utf8;
 CREATE TABLE Users(
     userId int primary key auto_increment, #用户编号
     userName varchar(50), #用户名称
     password varchar(50), #用户密码
     sex char(1), #用户性别 ‘男’ 或 ‘女’
     email varchar(50) ## 用户邮箱
-);
+) CHARACTER SET utf8;
 ```
 ### 在src下新建com.c1221.entity.Users实体类
 ```java
@@ -116,7 +119,7 @@ public class JdbcUtil {
 
 ## 用户信息注册流程图
 ---
-<img src="pages/servlet/images/servlet_02.png" width=100%/>
+<img src="images/servlet_02.png" width=100%/>
 
 ## 注册页面
 ---
@@ -287,7 +290,7 @@ public class UserAddServlet extends HttpServlet {
 ```
 ## 查询Servlet
 ---
-<img src="pages/servlet/images/servlet_03.png" width=100%/>
+<img src="images/servlet_03.png" width=100%/>
 
 ### 修改web.xml
 
@@ -520,7 +523,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 ```
 ## 登录验证
 ---
-<img src="pages/servlet/images/servlet_04.png" width=100%/>
+<img src="images/servlet_04.png" width=100%/>
 
 ### 新建login.html
 ```html
@@ -696,7 +699,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 2）1XX
 最有特征的是100：通知浏览器本次返回的资源文件并不是一个独立的资源文件，需要浏览器在接受响应包之后，继续向Http服务器所要依赖。
-<img src="pages/servlet/images/servlet_05.png" width=100%/>
+<img src="images/servlet_05.png" width=100%/>
 
 3）2XX  
 最有特征的是200：通知浏览器本次返回的资源文件是一个完整独立资源文件，浏览器在接收到之后不需要所要其他关联文件。  
@@ -716,7 +719,7 @@ response.sendRedirect("资源文件地址")写入到响应头中location，而�
 
 ## 做个Servlet之间的调用规则
 ---
-<img src="pages/servlet/images/servlet_06.png" width=100%/>
+<img src="images/servlet_06.png" width=100%/>
 
 ### 前提条件
 
@@ -735,7 +738,7 @@ response.sendRedirect("资源文件地址")写入到响应头中location，而�
 ## 重定向解决方案
 --- 
 
-<img src="pages/servlet/images/servlet_07.png" width=100%/>
+<img src="images/servlet_07.png" width=100%/>
 
 ### 工作原理
 
@@ -760,7 +763,7 @@ response.sendRedirect("请求地址")，将地址写入到响应包中响应头�
 ## 请求转发解决方案
 ---
 
-<img src="pages/servlet/images/servlet_08.png" width=100%/>
+<img src="images/servlet_08.png" width=100%/>
 
 ### 原理
 
@@ -805,7 +808,7 @@ report.forward(当前请求对象, 当前响应对象);
 
 ## ServletContext接口
 ---
-<img src="pages/servlet/images/servlet_09.png" width=100%/>
+<img src="images/servlet_09.png" width=100%/>
 
 ### 介绍
 
@@ -850,7 +853,7 @@ Object 数据 = application.getAttribute("key1");
 ## Cookie
 ---
 
-<img src="pages/servlet/images/servlet_10.png" width=100%/>
+<img src="images/servlet_10.png" width=100%/>
 
 ### 介绍
 
@@ -897,7 +900,7 @@ for(Cookie card: cookieArray) {
 
 ## 会员卡订单
 ---
-<img src="pages/servlet/images/servlet_11.png" width=100%/>
+<img src="images/servlet_11.png" width=100%/>
 
 ### 新建index.html
 ```html
@@ -1131,7 +1134,7 @@ OneServlet {
 
 ### Http服务器如何将用户于HttpSession关联起来
 cookie
-<img src="pages/servlet/images/servlet_13.png" width=100%/>
+<img src="images/servlet_13.png" width=100%/>
 
 ### getSession于getSession(false)
 
@@ -1160,7 +1163,7 @@ cookie
 
 ## Session购物车示例
 ---
-<img src="pages/servlet/images/servlet_12.png" width=100%/>
+<img src="images/servlet_12.png" width=100%/>
 
 ### 新建index.html
 ```html
@@ -1355,7 +1358,420 @@ application.removeAttribute("key1")；// 删除共享数据
 ## 监听器接口提高程序运行速度
 ---
 
-todo
+### 测试用户注册时间
+
+JDBC规范中，Connection创建与销毁最浪费时间，修改UserAddServlet，计算消耗时间：
+```java
+Date startDate = new Date();
+result = dao.add(user);
+Date endDate = new Date();
+System.out.println("添加消耗时间 = "+ (endDate.getTime() - startDate.getTime())+"毫秒");
+```
+
+### 新建JdbcUtil2
+```java
+package com.c1221.util;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.Map;
+
+public class JdbcUtil2 {
+
+    static final String URL = "jdbc:mysql://localhost:3306/c1221";
+    static final String USERNAME = "root";
+    static final String PASSWORD = "123456";
+    PreparedStatement ps = null;
+    Connection con = null;
+
+    // 静态代码块在类加载时执行，并且只执行一次
+    static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getCon(HttpServletRequest request) {
+        // 1. 通过请求对象，得到全局作用域对象
+        ServletContext application = request.getServletContext();
+        // 2. 从全局作用域得到map
+        Map map = (Map)application.getAttribute("key1");
+        // 3. 从map得到一个处于空闲状态Connection
+        Iterator it = map.keySet().iterator();
+        while (it.hasNext()) {
+            con = (Connection) it.next();
+            boolean flag = (boolean) map.get(con);
+            if (flag == true) {
+                break;
+            }
+        }
+        return con;
+    }
+
+    public PreparedStatement createStatement(String sql, HttpServletRequest request) {
+        try {
+            ps = getCon(request).prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ps;
+    }
+
+    public void close(HttpServletRequest request) {
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        ServletContext application = request.getServletContext();
+        Map map = (Map)application.getAttribute("key1");
+        map.put(con, true);
+    }
+
+    public Connection getCon() {
+        try {
+            con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return con;
+    }
+
+    public PreparedStatement createStatement(String sql) {
+        try {
+            ps = getCon().prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ps;
+    }
+
+    public void close() {
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (con != null) {
+            try {
+                con.close();
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+### 新建OneListener
+```java
+package com.c1221.listener;
+
+import com.c1221.util.JdbcUtil;
+import com.c1221.util.JdbcUtil2;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class OneListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
+
+    public OneListener() {
+    }
+
+    // 在Tomcat启动时，预先创建20个Connection，在userDao.add方法执行时
+    // 将实现建好connection交给add方法
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        /* This method is called when the servlet context is initialized(when the Web application is deployed). */
+        JdbcUtil2 util = new JdbcUtil2();
+        Map map = new HashMap();
+        for(int i=1;i<=20;i++) {
+            Connection con = util.getCon();
+            System.out.println("在Http服务器启动时，创建Connection "+con);
+            map.put(con, true);// true表示这个通道处于空闲状态，false通道正在被使用
+        }
+        // 为了在Http服务器运行期间，一致都可以使用20个Connection，将Connection保存
+        // 到全局作用域对象
+        ServletContext application = sce.getServletContext();
+        application.setAttribute("key1", map);
+    }
+
+    // 在Http服务器关闭时刻，将全局作用域对象20个Connection销毁
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        /* This method is called when the servlet Context is undeployed or Application Server shuts down. */
+        ServletContext application = sce.getServletContext();
+        Map map = (Map)application.getAttribute("key1");
+        Iterator it = map.keySet().iterator();
+        while (it.hasNext()) {
+            Connection con = (Connection)it.next();
+            if (con!=null) {
+                System.out.println("兄弟们，我"+con+" 先行一步，20年后老子还是条好汉");
+            }
+        }
+    }
+
+    @Override
+    public void sessionCreated(HttpSessionEvent se) {
+        /* Session is created. */
+    }
+
+    @Override
+    public void sessionDestroyed(HttpSessionEvent se) {
+        /* Session is destroyed. */
+    }
+
+    @Override
+    public void attributeAdded(HttpSessionBindingEvent sbe) {
+        /* This method is called when an attribute is added to a session. */
+    }
+
+    @Override
+    public void attributeRemoved(HttpSessionBindingEvent sbe) {
+        /* This method is called when an attribute is removed from a session. */
+    }
+
+    @Override
+    public void attributeReplaced(HttpSessionBindingEvent sbe) {
+        /* This method is called when an attribute is replaced in a session. */
+    }
+}
+```
+修改xml
+```xml
+<listener>
+    <listener-class>com.c1221.listener.OneListener</listener-class>
+</listener>
+```
+
+### 修改UserDao
+```java
+package com.c1221.com.c1221.dao;
+
+import com.c1221.entity.Users;
+import com.c1221.util.JdbcUtil;
+import com.c1221.util.JdbcUtil2;
+
+import javax.servlet.http.HttpServletRequest;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserDao {
+
+    JdbcUtil2 util = new JdbcUtil2();
+    public int add(Users users) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int result = 0;
+        try {
+            // 2、获取连接
+            conn = JdbcUtil.getConnection();
+            // 将自动提交机制修改为手动提交
+            conn.setAutoCommit(false);
+            // 3、获取数据库操作对象
+            String sql = "insert into users(userName,password,sex,email)" +
+                    " values(?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            // 4、执行SQL语句
+            ps.setString(1, users.getUserName());
+            ps.setString(2, users.getPassword());
+            ps.setString(3, users.getSex());
+            ps.setString(4, users.getEmail());
+            result = ps.executeUpdate();
+            conn.commit();
+        } catch(Exception e) {
+            // 回滚事务
+            if(conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(conn, ps, null);
+        }
+        return result;
+    }
+
+    public int add(Users users, HttpServletRequest request) {
+
+        String sql = "insert into users(userName,password,sex,email)" +
+                " values(?,?,?,?)";
+        PreparedStatement ps = util.createStatement(sql, request);
+        int result = 0;
+        try {
+            // 4、执行SQL语句
+            ps.setString(1, users.getUserName());
+            ps.setString(2, users.getPassword());
+            ps.setString(3, users.getSex());
+            ps.setString(4, users.getEmail());
+            result = ps.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            util.close(request);
+        }
+        return result;
+    }
+
+    // 查询用户信息
+    public List findAll() {
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        List<Users> userList = new ArrayList<Users>();
+        try {
+            // 2、获取连接
+            conn = JdbcUtil.getConnection();
+            // 3、获取数据库操作对象
+            String sql = "select * from users";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Integer userId = rs.getInt("userId");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String sex = rs.getString("sex");
+                String email = rs.getString("email");
+                Users users = new Users(userId, userName, password, sex, email);
+                userList.add(users);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(conn, ps, rs);
+        }
+        return userList;
+    }
+
+    // 根据用户编号删除用户信息
+    public int delete(String userId) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int result = 0;
+        try {
+            // 2、获取连接
+            conn = JdbcUtil.getConnection();
+            // 将自动提交机制修改为手动提交
+            conn.setAutoCommit(false);
+            // 3、获取数据库操作对象
+            String sql = "delete from users where userId=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, userId);
+            result = ps.executeUpdate();
+            conn.commit();
+        } catch(Exception e) {
+            // 回滚事务
+            if(conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(conn, ps, null);
+        }
+        return result;
+    }
+    // 登录验证
+    public int login(String userName, String password) {
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            // 2、获取连接
+            conn = JdbcUtil.getConnection();
+            // 3、获取数据库操作对象
+            String sql = "select count(*) from users where userName=? and password=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("count(*)");
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(conn, ps, rs);
+        }
+        return result;
+    }
+}
+```
+
+### 修改UserAddServlet
+```java
+package com.c1221.controller;
+
+import com.c1221.com.c1221.dao.UserDao;
+import com.c1221.entity.Users;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+
+public class UserAddServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userName,password,sex,email;
+        UserDao dao = new UserDao();
+        Users user = null;
+        int result = 0;
+        PrintWriter out = null;
+        // 1.【调用请求对象】读取【请求头】参数信息，得到用户的信息
+        userName = req.getParameter("userName");
+        password = req.getParameter("password");
+        sex = req.getParameter("sex");
+        email = req.getParameter("email");
+        // 2.【调用UserDao】将用户信息填充到INSERT命令借助JDBC规范发送到数据库服务器
+        user = new Users(null, userName, password, sex, email);
+        Date startDate = new Date();
+        result = dao.add(user, req);
+        Date endDate = new Date();
+        System.out.println("添加消耗时间 = "+ (endDate.getTime() - startDate.getTime())+"毫秒");
+        // 3.【调用响应对象】将【处理结果】以二进制形式写入到响应体
+        resp.setContentType("text/html;charset=utf-8");
+        out = resp.getWriter();
+        if (result == 1) {
+            out.print("<font style='color:red;font-size:40'>用户信息注册成功</font>");
+        } else {
+            out.print("<font style='color:red;font-size:40'>用户信息注册失败</font>");
+        }
+        out.close();
+        // Tomcat负责销毁【请求对象】和【响应对象】
+        // Tomcat负责将Http响应协议包推送到发起请求的浏览器上
+        // 浏览器根据响应头content-type指定编译器对响应体二进制内容编辑
+        // 浏览器将编辑后结果在窗口中展示给用户【结束】
+    }
+}
+```
 
 ## 过滤器接口
 ---
@@ -1434,7 +1850,7 @@ public class OneFilter implements Filter {
 
 ## 过滤器示例二：对request设置编码方式
 ---
-<img src="pages/servlet/images/servlet_14.png" width=100%/>
+<img src="images/servlet_14.png" width=100%/>
 
 ### 新建index.html
 ```html
@@ -1581,7 +1997,7 @@ public class OneFilter implements Filter {
 
 ## 过滤器防止用户恶意登录行为
 --- 
-<img src="pages/servlet/images/servlet_15.png" width=100%/>
+<img src="images/servlet_15.png" width=100%/>
 
 ### 修改LoginServlet
 
@@ -1686,9 +2102,9 @@ public class UserFindServlet extends HttpServlet {
 ### 使用过滤器
 
 问题示意图：
-<img src="pages/servlet/images/servlet_16.png" width=100%/>
+<img src="images/servlet_16.png" width=100%/>
 使用过滤器：
-<img src="pages/servlet/images/servlet_17.png" width=100%/>
+<img src="images/servlet_17.png" width=100%/>
 
 #### 1）新建OneFilter
 ```java
@@ -1735,9 +2151,9 @@ public class OneFilter implements Filter {
 </filter-mapping>
 ```
 ### 互联网通信流程图
-<img src="pages/servlet/images/servlet_18.png" width=100%/>
-<img src="pages/servlet/images/servlet_18a.png" width=100%/>
-<img src="pages/servlet/images/servlet_18b.png" width=100%/>
+<img src="images/servlet_18.png" width=100%/>
+<img src="images/servlet_18a.png" width=100%/>
+<img src="images/servlet_18b.png" width=100%/>
 
 ### 解决拦截所有后，无法登录问题
 修改OneServlet
@@ -1779,8 +2195,13 @@ public class OneFilter implements Filter {
         request2.getRequestDispatcher("/login_error.html").forward(request, response);
     }
 }
-
 ```
+
+## 参考
+---
+
+* [HTTP Status Code 304 状态码的详细讲解](https://blog.csdn.net/testcs_dn/article/details/84833920/)
+* [mac chrome 强制刷新浏览器缓存](https://blog.csdn.net/qq_28018283/article/details/71043137)
 
 <div style="margin: 0px;">
     备案号：
