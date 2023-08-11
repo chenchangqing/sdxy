@@ -28,7 +28,7 @@ public class Users {
     private String sex;
     private String email;
 
-    public User(Integer userId, String userName, String password, String sex, String email) {
+    public Users(Integer userId, String userName, String password, String sex, String email) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -36,9 +36,45 @@ public class Users {
         this.email = email;
     }
 
-    /// Getter
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-    /// Setter
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
 ```
 生成get、set、构造方法：右键类文件编辑区（Command+N）->Generate->Constructor、Getter、Setter
@@ -133,7 +169,7 @@ public class JdbcUtil {
 </head>
 <body>
     <center>
-        <form action="/examsystem/user/add" method="get">
+        <form action="/examsystem/user/add" method="post">
             <table>
                 <tr>
                     <td>用户姓名</td>
@@ -243,67 +279,39 @@ https://blog.51cto.com/laoshifu/4839810
 ### 在src下新建com.c1221.controller.UserAddServlet
 
 ```java
-package com.c1221.controller;
-
-import com.c1221.com.c1221.dao.UserDao;
-import com.c1221.entity.Users;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-public class UserAddServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName,password,sex,email;
-        UserDao dao = new UserDao();
-        Users user = null;
-        int result = 0;
-        PrintWriter out = null;
-        // 1.【调用请求对象】读取【请求头】参数信息，得到用户的信息
-        userName = req.getParameter("userName");
-        password = req.getParameter("password");
-        sex = req.getParameter("sex");
-        email = req.getParameter("email");
-        // 2.【调用UserDao】将用户信息填充到INSERT命令借助JDBC规范发送到数据库服务器
-        user = new Users(null, userName, password, sex, email);
-        result = dao.add(user);
-        // 3.【调用响应对象】将【处理结果】以二进制形式写入到响应体
-        resp.setContentType("text/html;charset=utf-8");
-        out = resp.getWriter();
-        if (result == 1) {
-            out.print("<font style='color:red;font-size:40'>用户信息注册成功</font>");
-        } else {
-            out.print("<font style='color:red;font-size:40'>用户信息注册失败</font>");
-        }
-        out.close();
-        // Tomcat负责销毁【请求对象】和【响应对象】
-        // Tomcat负责将Http响应协议包推送到发起请求的浏览器上
-        // 浏览器根据响应头content-type指定编译器对响应体二进制内容编辑
-        // 浏览器将编辑后结果在窗口中展示给用户【结束】
+@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    String userName,password,sex,email;
+    UserDao dao = new UserDao();
+    Users user = null;
+    int result = 0;
+    PrintWriter out = null;
+    // 1.【调用请求对象】读取【请求头】参数信息，得到用户的信息
+    userName = req.getParameter("userName");
+    password = req.getParameter("password");
+    sex = req.getParameter("sex");
+    email = req.getParameter("email");
+    // 2.【调用UserDao】将用户信息填充到INSERT命令借助JDBC规范发送到数据库服务器
+    user = new Users(null, userName, password, sex, email);
+    result = dao.add(user);
+    // 3.【调用响应对象】将【处理结果】以二进制形式写入到响应体
+    resp.setContentType("text/html;charset=utf-8");
+    out = resp.getWriter();
+    if (result == 1) {
+        out.print("<font style='color:red;font-size:40'>用户信息注册成功</font>");
+    } else {
+        out.print("<font style='color:red;font-size:40'>用户信息注册失败</font>");
     }
+    out.close();
+    // Tomcat负责销毁【请求对象】和【响应对象】
+    // Tomcat负责将Http响应协议包推送到发起请求的浏览器上
+    // 浏览器根据响应头content-type指定编译器对响应体二进制内容编辑
+    // 浏览器将编辑后结果在窗口中展示给用户【结束】
 }
-
 ```
 ## 查询Servlet
 ---
 <img src="images/servlet_03.png" width=100%/>
-
-### 修改web.xml
-
-```xml
-<servlet>
-    <servlet-name>UserFindServlet</servlet-name>
-    <servlet-class>com.c1221.controller.UserFindServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>UserFindServlet</servlet-name>
-    <url-pattern>/user/find</url-pattern>
-</servlet-mapping>
-```
 
 ### 新增UserFindServlet
 ```java
@@ -336,6 +344,18 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     }
     out.print("</table>");
 }
+```
+修改web.xml
+
+```xml
+<servlet>
+    <servlet-name>UserFindServlet</servlet-name>
+    <servlet-class>com.c1221.controller.UserFindServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>UserFindServlet</servlet-name>
+    <url-pattern>/user/find</url-pattern>
+</servlet-mapping>
 ```
 
 ### 修改UserDao
@@ -637,7 +657,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     }
 }
 ```
-### 修改web.xml
+修改web.xml
 ```xml
 <servlet>
     <servlet-name>LoginServlet</servlet-name>

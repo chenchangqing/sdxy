@@ -28,7 +28,7 @@ public class Users {
     private String sex;
     private String email;
 
-    public User(Integer userId, String userName, String password, String sex, String email) {
+    public Users(Integer userId, String userName, String password, String sex, String email) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -36,9 +36,45 @@ public class Users {
         this.email = email;
     }
 
-    /// Getter
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-    /// Setter
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
 ```
 生成get、set、构造方法：右键类文件编辑区（Command+N）->Generate->Constructor、Getter、Setter
@@ -119,7 +155,7 @@ public class JdbcUtil {
 
 ## 用户信息注册流程图
 ---
-<img src="images/servlet_02.png" width=100%/>
+<img src="pages/servlet/images/servlet_02.png" width=100%/>
 
 ## 注册页面
 ---
@@ -133,7 +169,7 @@ public class JdbcUtil {
 </head>
 <body>
     <center>
-        <form action="/examsystem/user/add" method="get">
+        <form action="/examsystem/user/add" method="post">
             <table>
                 <tr>
                     <td>用户姓名</td>
@@ -243,67 +279,39 @@ https://blog.51cto.com/laoshifu/4839810
 ### 在src下新建com.c1221.controller.UserAddServlet
 
 ```java
-package com.c1221.controller;
-
-import com.c1221.com.c1221.dao.UserDao;
-import com.c1221.entity.Users;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-public class UserAddServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName,password,sex,email;
-        UserDao dao = new UserDao();
-        Users user = null;
-        int result = 0;
-        PrintWriter out = null;
-        // 1.【调用请求对象】读取【请求头】参数信息，得到用户的信息
-        userName = req.getParameter("userName");
-        password = req.getParameter("password");
-        sex = req.getParameter("sex");
-        email = req.getParameter("email");
-        // 2.【调用UserDao】将用户信息填充到INSERT命令借助JDBC规范发送到数据库服务器
-        user = new Users(null, userName, password, sex, email);
-        result = dao.add(user);
-        // 3.【调用响应对象】将【处理结果】以二进制形式写入到响应体
-        resp.setContentType("text/html;charset=utf-8");
-        out = resp.getWriter();
-        if (result == 1) {
-            out.print("<font style='color:red;font-size:40'>用户信息注册成功</font>");
-        } else {
-            out.print("<font style='color:red;font-size:40'>用户信息注册失败</font>");
-        }
-        out.close();
-        // Tomcat负责销毁【请求对象】和【响应对象】
-        // Tomcat负责将Http响应协议包推送到发起请求的浏览器上
-        // 浏览器根据响应头content-type指定编译器对响应体二进制内容编辑
-        // 浏览器将编辑后结果在窗口中展示给用户【结束】
+@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    String userName,password,sex,email;
+    UserDao dao = new UserDao();
+    Users user = null;
+    int result = 0;
+    PrintWriter out = null;
+    // 1.【调用请求对象】读取【请求头】参数信息，得到用户的信息
+    userName = req.getParameter("userName");
+    password = req.getParameter("password");
+    sex = req.getParameter("sex");
+    email = req.getParameter("email");
+    // 2.【调用UserDao】将用户信息填充到INSERT命令借助JDBC规范发送到数据库服务器
+    user = new Users(null, userName, password, sex, email);
+    result = dao.add(user);
+    // 3.【调用响应对象】将【处理结果】以二进制形式写入到响应体
+    resp.setContentType("text/html;charset=utf-8");
+    out = resp.getWriter();
+    if (result == 1) {
+        out.print("<font style='color:red;font-size:40'>用户信息注册成功</font>");
+    } else {
+        out.print("<font style='color:red;font-size:40'>用户信息注册失败</font>");
     }
+    out.close();
+    // Tomcat负责销毁【请求对象】和【响应对象】
+    // Tomcat负责将Http响应协议包推送到发起请求的浏览器上
+    // 浏览器根据响应头content-type指定编译器对响应体二进制内容编辑
+    // 浏览器将编辑后结果在窗口中展示给用户【结束】
 }
-
 ```
 ## 查询Servlet
 ---
-<img src="images/servlet_03.png" width=100%/>
-
-### 修改web.xml
-
-```xml
-<servlet>
-    <servlet-name>UserFindServlet</servlet-name>
-    <servlet-class>com.c1221.controller.UserFindServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>UserFindServlet</servlet-name>
-    <url-pattern>/user/find</url-pattern>
-</servlet-mapping>
-```
+<img src="pages/servlet/images/servlet_03.png" width=100%/>
 
 ### 新增UserFindServlet
 ```java
@@ -336,6 +344,18 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     }
     out.print("</table>");
 }
+```
+修改web.xml
+
+```xml
+<servlet>
+    <servlet-name>UserFindServlet</servlet-name>
+    <servlet-class>com.c1221.controller.UserFindServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>UserFindServlet</servlet-name>
+    <url-pattern>/user/find</url-pattern>
+</servlet-mapping>
 ```
 
 ### 修改UserDao
@@ -523,7 +543,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 ```
 ## 登录验证
 ---
-<img src="images/servlet_04.png" width=100%/>
+<img src="pages/servlet/images/servlet_04.png" width=100%/>
 
 ### 新建login.html
 ```html
@@ -637,7 +657,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     }
 }
 ```
-### 修改web.xml
+修改web.xml
 ```xml
 <servlet>
     <servlet-name>LoginServlet</servlet-name>
@@ -699,7 +719,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 2）1XX
 最有特征的是100：通知浏览器本次返回的资源文件并不是一个独立的资源文件，需要浏览器在接受响应包之后，继续向Http服务器所要依赖。
-<img src="images/servlet_05.png" width=100%/>
+<img src="pages/servlet/images/servlet_05.png" width=100%/>
 
 3）2XX  
 最有特征的是200：通知浏览器本次返回的资源文件是一个完整独立资源文件，浏览器在接收到之后不需要所要其他关联文件。  
@@ -719,7 +739,7 @@ response.sendRedirect("资源文件地址")写入到响应头中location，而�
 
 ## 做个Servlet之间的调用规则
 ---
-<img src="images/servlet_06.png" width=100%/>
+<img src="pages/servlet/images/servlet_06.png" width=100%/>
 
 ### 前提条件
 
@@ -738,7 +758,7 @@ response.sendRedirect("资源文件地址")写入到响应头中location，而�
 ## 重定向解决方案
 --- 
 
-<img src="images/servlet_07.png" width=100%/>
+<img src="pages/servlet/images/servlet_07.png" width=100%/>
 
 ### 工作原理
 
@@ -763,7 +783,7 @@ response.sendRedirect("请求地址")，将地址写入到响应包中响应头�
 ## 请求转发解决方案
 ---
 
-<img src="images/servlet_08.png" width=100%/>
+<img src="pages/servlet/images/servlet_08.png" width=100%/>
 
 ### 原理
 
@@ -808,7 +828,7 @@ report.forward(当前请求对象, 当前响应对象);
 
 ## ServletContext接口
 ---
-<img src="images/servlet_09.png" width=100%/>
+<img src="pages/servlet/images/servlet_09.png" width=100%/>
 
 ### 介绍
 
@@ -853,7 +873,7 @@ Object 数据 = application.getAttribute("key1");
 ## Cookie
 ---
 
-<img src="images/servlet_10.png" width=100%/>
+<img src="pages/servlet/images/servlet_10.png" width=100%/>
 
 ### 介绍
 
@@ -900,7 +920,7 @@ for(Cookie card: cookieArray) {
 
 ## 会员卡订单
 ---
-<img src="images/servlet_11.png" width=100%/>
+<img src="pages/servlet/images/servlet_11.png" width=100%/>
 
 ### 新建index.html
 ```html
@@ -1134,7 +1154,7 @@ OneServlet {
 
 ### Http服务器如何将用户于HttpSession关联起来
 cookie
-<img src="images/servlet_13.png" width=100%/>
+<img src="pages/servlet/images/servlet_13.png" width=100%/>
 
 ### getSession于getSession(false)
 
@@ -1163,7 +1183,7 @@ cookie
 
 ## Session购物车示例
 ---
-<img src="images/servlet_12.png" width=100%/>
+<img src="pages/servlet/images/servlet_12.png" width=100%/>
 
 ### 新建index.html
 ```html
@@ -1850,7 +1870,7 @@ public class OneFilter implements Filter {
 
 ## 过滤器示例二：对request设置编码方式
 ---
-<img src="images/servlet_14.png" width=100%/>
+<img src="pages/servlet/images/servlet_14.png" width=100%/>
 
 ### 新建index.html
 ```html
@@ -1997,7 +2017,7 @@ public class OneFilter implements Filter {
 
 ## 过滤器防止用户恶意登录行为
 --- 
-<img src="images/servlet_15.png" width=100%/>
+<img src="pages/servlet/images/servlet_15.png" width=100%/>
 
 ### 修改LoginServlet
 
@@ -2102,9 +2122,9 @@ public class UserFindServlet extends HttpServlet {
 ### 使用过滤器
 
 问题示意图：
-<img src="images/servlet_16.png" width=100%/>
+<img src="pages/servlet/images/servlet_16.png" width=100%/>
 使用过滤器：
-<img src="images/servlet_17.png" width=100%/>
+<img src="pages/servlet/images/servlet_17.png" width=100%/>
 
 #### 1）新建OneFilter
 ```java
@@ -2151,9 +2171,9 @@ public class OneFilter implements Filter {
 </filter-mapping>
 ```
 ### 互联网通信流程图
-<img src="images/servlet_18.png" width=100%/>
-<img src="images/servlet_18a.png" width=100%/>
-<img src="images/servlet_18b.png" width=100%/>
+<img src="pages/servlet/images/servlet_18.png" width=100%/>
+<img src="pages/servlet/images/servlet_18a.png" width=100%/>
+<img src="pages/servlet/images/servlet_18b.png" width=100%/>
 
 ### 解决拦截所有后，无法登录问题
 修改OneServlet
