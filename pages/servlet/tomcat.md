@@ -30,7 +30,7 @@ mv apache-tomcat-10.0.2 ~/
 
 - bin：这个目录是Tomcat服务器的命令文件存放的目录，比如：启动Tomcat、关闭Tomcat。
 - config：这个目录是Tomcat服务器的配置文件存放目录。
-    - server.xml：可以配置端口号，默认Tomcat端口是8080。
+	- server.xml：可以配置端口号，默认Tomcat端口是8080。
 - lib：这个目录是Tomcat服务器核心程序目录，因为Tomcat服务器是Java语言编写的，这里的jar包里面都是class文件。
 - logs：Tomcat服务器的日志目录，Tomcat服务器启动等信息都会在这个目录下生成日志文件。
 - temp：Tomcat服务器的临时目录，存储临时文件。
@@ -93,10 +93,4 @@ startup.sh
 shutdown.sh
 ```
 
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
 
