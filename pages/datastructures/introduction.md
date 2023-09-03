@@ -96,11 +96,3 @@
 - 辅助变量所占用的空间；
 
 算法的空间复杂度指的是：算法中除输入数据占用的存储空间之外所需的附加存储空间的大小。
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
