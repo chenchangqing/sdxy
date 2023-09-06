@@ -1,5 +1,3 @@
- 
-
 # 第二章 线性表（数据结构导论）
 
 ## 线性表的基本概念
@@ -22,17 +20,17 @@
 ```c
 typedef struct 
 {
-    int num;
-    char name[8];
-    char sex[2];
-    int age;
-    int score;
+	int num;
+	char name[8];
+	char sex[2];
+	int age;
+	int score;
 } DataType;
 const int Maxsize = 100;
 typedef struct 
 {
-    DataType data[Maxsize];
-    int length;
+	DataType data[Maxsize];
+	int length;
 } SeqList;
 SeqList L;
 ```
@@ -43,12 +41,12 @@ SeqList L;
 ```c
 void InsertSeqlist(SeqList L, DataType x, int i)
 {
-    if (L.length==Maxsize) exit("表已满");
-    if (i<1||i>L.length+1) exit("位置错");
-    for (int j = L.length; j >= i; j--)
-        L.data[j] = L.data[j-1];
-    L.data[i-1] = x;
-    L.length++;
+	if (L.length==Maxsize) exit("表已满");
+	if (i<1||i>L.length+1) exit("位置错");
+	for (int j = L.length; j >= i; j--)
+		L.data[j] = L.data[j-1];
+	L.data[i-1] = x;
+	L.length++;
 }
 ```
 
@@ -58,10 +56,10 @@ void InsertSeqlist(SeqList L, DataType x, int i)
 ```c
 void DeleteSeqlist(SeqList L, int i)
 {
-    if (i<1||i>L.length) exit("非法位置");
-    for (int j = i; j < L.length; j++)
-        L.data[j-1] = L.data[i];
-    L.length--;
+	if (i<1||i>L.length) exit("非法位置");
+	for (int j = i; j < L.length; j++)
+		L.data[j-1] = L.data[i];
+	L.length--;
 }
 ```
 
@@ -71,11 +69,11 @@ i从0开始，作为扫描顺序表时的下标。如果表L中有一个结点�
 ```c
 int LocateSeqlist(SeqList L, DataType x)
 {
-    int i=0;
-    while((i<L.length) && (L.data[i]!=x))
-        i++;
-    if (i<L.length) return i+1
-    else return 0;
+	int i=0;
+	while((i<L.length) && (L.data[i]!=x))
+		i++;
+	if (i<L.length) return i+1
+	else return 0;
 }
 ```
 
@@ -124,8 +122,8 @@ data部分称为数据域，用于存储线性表的一个数据元素，next部
 ```c
 typedef struct node
 {
-    DataType data;
-    struct node *next;
+	DataType data;
+	struct node *next;
 } Node, *LinkList;
 LinkList head;
 ```
@@ -139,10 +137,10 @@ struct node表示链表的结点，结点包含两个域：数据域（data）�
 ```c
 LinkList InitateLinkList() 
 {
-    LinkList head;
-    head=malloc(sizeof(Node));
-    head->next=NULL;
-    return head;
+	LinkList head;
+	head=malloc(sizeof(Node));
+	head->next=NULL;
+	return head;
 }
 ```
 
@@ -154,14 +152,14 @@ LinkList InitateLinkList()
 ```c
 int LengthLinkList(LinkList head)
 {
-    Node *p=head;
-    int cnt=0;
-    while(p->next!=NULL)
-    {
-        p=p->next;
-        cnt++;
-    }
-    return cnt;
+	Node *p=head;
+	int cnt=0;
+	while(p->next!=NULL)
+	{
+		p=p->next;
+		cnt++;
+	}
+	return cnt;
 }
 ```
 
@@ -171,13 +169,13 @@ int LengthLinkList(LinkList head)
 ```c
 Node * GetLinkList(LinkList head, int i)
 {
-    Node *p;
-    p=head->next;
-    int c=1;
-    while((c<i) && (p!=NULL))
-        p=p->next;c++;
-    if (i==c) reutrn p; 
-    else reuturn NULL:
+	Node *p;
+	p=head->next;
+	int c=1;
+	while((c<i) && (p!=NULL))
+		p=p->next;c++;
+	if (i==c) reutrn p; 
+	else reuturn NULL:
 }
 ```
 
@@ -187,16 +185,16 @@ Node * GetLinkList(LinkList head, int i)
 ```c
 int LocateLinkList(LinkList head, DataType x)
 {
-    Node *p=head;
-    p=p->next;
-    int i=0;
-    while(p!=NULL && p->data!=x) 
-    {
-        i++;
-        p=p->next;
-    }
-    if (p!=NULL) return i+1;
-    else return 0;
+	Node *p=head;
+	p=p->next;
+	int i=0;
+	while(p!=NULL && p->data!=x) 
+	{
+		i++;
+		p=p->next;
+	}
+	if (p!=NULL) return i+1;
+	else return 0;
 }
 ```
 
@@ -208,17 +206,17 @@ int LocateLinkList(LinkList head, DataType x)
 ```c
 void InsertLinkList(LinkList head, DataType x, int i)
 {
-    Node *p, *q;
-    if (i==1) q=head;
-    else q=GetLinkList(head, i-1);
-    if (q==NULL) exit("找不到插入的位置");
-    else 
-    {
-        p=malloc(sizeof(Node));
-        p->data=x;
-        p->next=q->next;
-        q->next=p;
-    }
+	Node *p, *q;
+	if (i==1) q=head;
+	else q=GetLinkList(head, i-1);
+	if (q==NULL) exit("找不到插入的位置");
+	else 
+	{
+		p=malloc(sizeof(Node));
+		p->data=x;
+		p->next=q->next;
+		q->next=p;
+	}
 }
 ```
 
@@ -230,23 +228,22 @@ void InsertLinkList(LinkList head, DataType x, int i)
 ```c
 void DeleteLinkList(LinkList head, int i)
 {
-    Node *q;
-    if (i==1) q=head;
-    else q=GetLinkList(head, i-1);
-    if (q!=NULL && q->next!=NUll)
-    {
-        p=q->next;
-        q->next=p->next;
-        free(p);
-    }
-    else ext("找不到要删除的结点");
+	Node *q;
+	if (i==1) q=head;
+	else q=GetLinkList(head, i-1);
+	if (q!=NULL && q->next!=NUll)
+	{
+		p=q->next;
+		q->next=p->next;
+		free(p);
+	}
+	else ext("找不到要删除的结点");
 }
 ```
 
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
+## 参考
+---
 
+- [手把手教你数据结构c语言实现](https://www.kancloud.cn/digest/datastructbyc/143032)
+- [数据结构](http://c.biancheng.net/view/3338.html)
+- [C语言数据结构-顺序栈](https://blog.csdn.net/ahafg/article/details/49030093)

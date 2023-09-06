@@ -1,5 +1,8 @@
 # Summary
 
+* 数据结构导论
+    * [第一章 概论](pages/datastructures/introduction.md)
+    * [第二章 线性表](pages/datastructures/lineartable.md)
 * IDEA
     * [IDEA环境配置](pages/idea/env.md)
     * [IDEA创建项目](pages/idea/createp.md)
@@ -111,9 +114,6 @@
     * [二叉树的下一个节点](pages/面试系列/二叉树的下一个节点.md)
     * [用两个栈实现队列](pages/面试系列/用两个栈实现队列.md)
     * [面试问题整理](pages/面试系列/面试问题整理.md)
-* 数据结构导论
-    * [第一章 概论](pages/datastructures/introduction.md)
-    * [第二章 线性表](pages/数据结构导论/第二章_线性表.md)
 * 操作系统概论
     * [第一章 操作系统简介](pages/操作系统概论/第一章_操作系统简介.md)
     * 第二章 进程管理
