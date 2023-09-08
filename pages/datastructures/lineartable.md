@@ -241,6 +241,147 @@ void DeleteLinkList(LinkList head, int i)
 }
 ```
 
+## 其他运算在单链表上的实现
+---
+### 建表（尾插法一）
+
+三步：首先建立带头结点的空表；其次建立一个新结点，然后将新结点链接到头结点之后；重复建立新结点和将新结点链接到表尾这两个步骤，直到线性表中所有元素链接到单链表中。
+
+```c
+LinkList CreateLinkList1()
+{
+	LinkList head;
+	int x,i;
+	head=InitateLinkList();
+	i=1;
+	scanf("%d", &x);
+	while(x!=0) 
+	{
+		InsertLinkList(head,x,i);
+		i++;
+		scanf("%d", &x);
+	}
+	return head;
+}
+```
+
+时间复杂度：O（n^2)
+
+### 建表（尾插法二）
+
+上面的算法由于每次插入都从表头开始查找，比较浪费时间。因为每次都是把新的结点链接到表尾，我们可以用一个指针指向尾结点，这样就为下一个新结点指明了插入位置。
+```c
+LinkList CreateLinkList2()
+{
+	LinkList head;
+	Node *q,*t;
+	int x;
+	head=malloc(sizeof(Node));
+	q=head;
+	scanf("%d", &x);
+	while(x!=0)
+	{
+		t=malloc(sizeof(Node));
+		t->data=x;
+		q->next=t;
+		q=t;
+		scanf("%d",&x);
+	}
+}
+```
+
+时间复杂度：O（n)
+
+### 建表（头插法）
+
+该方法始终将新增加的结点插入到头结点之后，第一个数据结点之前，可称之为“前插”操作。
+```c
+LinkList CreateLinkList3() 
+{
+	LinkList head;
+	Node *p;
+	int x;
+	head=malloc(sizeof(Node));
+	head->next=NULL;
+	scandf("%d",&x);
+	while(x)
+	{
+		p=malloc(sizeof(Node));
+		p->data=x;
+		p->next=head->next;
+		head->next=p;
+		scandf("%d",&x);
+	}
+	return head;
+}
+```
+
+### 删除重复结点
+```c
+void PurgeLinkList(LinkList head) 
+{
+	Node *p,*q,*r;
+	q=head->next;
+	while(q!=NULL) 
+	{
+		p=q;
+		while(p->next!=NULL)
+			if(p->next->data==q->data)
+			{
+				r=p->next;
+				p->next=r->next;
+				free(r);
+			}
+			else p=p->next;
+		q=q->next;
+	}
+}
+```
+
+## 循环链表
+---
+
+在单链表中，如果让最后一个结点的指针域指向第一个结点可以构成循环链表。在循环链表中，从任意结点出发能够扫描整个链表。
+
+## 双向循环链表
+---
+
+在单链表的每个结点中再设置一个指向其直接前驱结点的指针域prior，这样每个结点有两个指针。prior与next类型相同，它指向直接前驱结点。头结点的prior指向最后一个结点，最后一个结点的next指向头结点，由这种结点构成的链表称为双向循环链表。
+```c
+struct dbnode
+{
+	DataType data;
+	struct dbnode *prior,*next;
+}
+```
+双向循环链表的对称性可以用下列等式表示：
+```c
+p=p->next=p->next->prior
+```
+
+### 删除
+1. p->prior->next=p->next;
+2. p->next->prior=p->prior;
+3. free(p);
+
+### 插入
+
+1. t->prior=p;
+2. t->next=p->next;
+3. p->next->prior=t;
+4. p->next=t;
+
+## 顺序实现与链式实现的比较
+---
+
+- 查找：顺序表是随机存取，时间复杂度为O（1）。单链表需要对表元素进行扫描，它时间复杂度为O（n）。
+- 定位：时间复杂度都是O（n）。
+- 插入、删除：在顺序表和链表中，都需要进行定位。在顺序表中，其基本操作是元素的比较和结点的移动，平均时间复杂度为O（n）。在单链表中，由于需要定位，基本操作是元素的比较，尽管不需要移动结点，其平均时间复杂度仍然为O（n）。
+- 单链表的每个结点包括数据域与指针域，指针域需要占用额外空间。
+- 顺序表要预先分配存储空间，如果预先分配得过大，将造成浪费，若分配得过小，又将发生上溢；单链表不需要预先分配空间，只需要内存空间没有耗尽，单链表中的结点个数就没有限制。
+
+
+
 ## 参考
 ---
 
