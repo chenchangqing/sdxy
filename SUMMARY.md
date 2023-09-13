@@ -3,6 +3,7 @@
 * 数据结构导论
     * [第一章 概论](pages/datastructures/introduction.md)
     * [第二章 线性表](pages/datastructures/lineartable.md)
+    * [第三章 栈、队列和数组](pages/datastructures/stacks-queues.md)
 * IDEA
     * [IDEA环境配置](pages/idea/env.md)
     * [IDEA创建项目](pages/idea/createp.md)

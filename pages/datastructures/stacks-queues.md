@@ -1,4 +1,3 @@
- 
 # 第三章 栈、队列和数组
 
 ## 栈
@@ -27,8 +26,8 @@
 const int maxsize=6;
 typedef struct seqstack
 {
-    DataType data[maxsize];
-    int top;
+	DataType data[maxsize];
+	int top;
 } SeqStk;
 ```
 maxsize为顺序栈的容量。  
@@ -39,8 +38,8 @@ top为标志栈顶位置的变量，常用整型表示，范围0～(maxsize-1)�
 ```c
 int InitStack(SeqStk *stk) 
 {
-    stk->top=0;
-    return 1;
+	stk->top=0;
+	return 1;
 }
 ```
 
@@ -48,8 +47,8 @@ int InitStack(SeqStk *stk)
 ```c
 int EmptyStack(SeqStk *stk)
 {
-    if (stk->top==0) return 1;
-    else return 0;
+	if (stk->top==0) return 1;
+	else return 0;
 }
 ```
 
@@ -57,16 +56,16 @@ int EmptyStack(SeqStk *stk)
 ```c
 int Push(SeqStk *stk, DataType x)
 {
-    if (stk->top==maxsize-1)
-    {
-        error("栈已满");return 0;
-    } 
-    else 
-    {
-        stk->top++;
-        stk->data[stk->top]=x;
-        return 1;
-    }
+	if (stk->top==maxsize-1)
+	{
+		error("栈已满");return 0;
+	} 
+	else 
+	{
+		stk->top++;
+		stk->data[stk->top]=x;
+		return 1;
+	}
 }
 ```
 
@@ -74,15 +73,15 @@ int Push(SeqStk *stk, DataType x)
 ```c
 int Pop(SeqStk *stk)
 {
-    if (EmptyStack(stk))
-    {
-        error("下溢");return 0;
-    } 
-    else 
-    {
-        stk->top--;
-        return 1;
-    }
+	if (EmptyStack(stk))
+	{
+		error("下溢");return 0;
+	} 
+	else 
+	{
+		stk->top--;
+		return 1;
+	}
 }
 ```
 
@@ -90,14 +89,14 @@ int Pop(SeqStk *stk)
 ```c
 DataType GetTop(SeqStk *stk)
 {
-    if (EmptyStack(stk))
-    {
-        return NULL;
-    }
-    else 
-    {
-        return stk->data[stk->top];
-    }
+	if (EmptyStack(stk))
+	{
+		return NULL;
+	}
+	else 
+	{
+		return stk->data[stk->top];
+	}
 }
 ```
 
@@ -109,8 +108,8 @@ DataType GetTop(SeqStk *stk)
 ```c
 typedef struct node 
 {
-    DataType data;
-    struct node *next;
+	DataType data;
+	struct node *next;
 }LkStk;
 ```
 
@@ -118,8 +117,8 @@ typedef struct node
 ```c
 void InitStack(LkStk *LS)
 {
-    LS = (LkStk *)malloc(sizeof(LkStk));
-    LS->next=NULL;
+	LS = (LkStk *)malloc(sizeof(LkStk));
+	LS->next=NULL;
 }
 ```
 生成一个结点，该结点的next域设置为NULL。
@@ -128,14 +127,14 @@ void InitStack(LkStk *LS)
 ```c
 int EmptyStack(LkStk *LS)
 {
-    if (LS->next==NULL)
-    {
-        return 1;
-    }
-    else 
-    {
-        return 0;
-    }
+	if (LS->next==NULL)
+	{
+		return 1;
+	}
+	else 
+	{
+		return 0;
+	}
 }
 ```
 
@@ -143,11 +142,11 @@ int EmptyStack(LkStk *LS)
 ```c
 void Push(LkStk *LS, DataType x)
 {
-    LkStk *temp;
-    temp=(LkStk *)malloc(sizeof(LkStk));
-    temp->data=x;
-    temp->next=LS->next;
-    LS->next=temp;
+	LkStk *temp;
+	temp=(LkStk *)malloc(sizeof(LkStk));
+	temp->data=x;
+	temp->next=LS->next;
+	LS->next=temp;
 }
 ```
 
@@ -155,18 +154,18 @@ void Push(LkStk *LS, DataType x)
 ```c
 int Pop(LkStk *LS) 
 {
-    LkStk *temp;
-    if (!EmptyStack(LS))
-    {
-        temp=LS->next;
-        LS->next=temp->next;
-        free(temp);
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+	LkStk *temp;
+	if (!EmptyStack(LS))
+	{
+		temp=LS->next;
+		LS->next=temp->next;
+		free(temp);
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 ``` 
 
@@ -188,8 +187,8 @@ int Pop(LkStk *LS)
 ```c
 long f(int n) 
 {
-    if(n==0)return 1;
-    else return n*f(n-1);
+	if(n==0)return 1;
+	else return n*f(n-1);
 }
 ```
 
@@ -219,8 +218,8 @@ long f(int n)
 const int maxsize=20;
 typedef struct sequeue
 {
-    DataType data[maxsize];
-    int front, rear;
+	DataType data[maxsize];
+	int front, rear;
 }SeqQue;
 SeqQue SQ;
 ```
@@ -232,8 +231,8 @@ SeqQue SQ;
 ```c
 typedef struct cycqueue
 {
-    DataType data[maxsize];
-    int front, rear;
+	DataType data[maxsize];
+	int front, rear;
 }CycQue;
 ```
 
@@ -241,8 +240,8 @@ typedef struct cycqueue
 ```c
 void InitQueue(CycQue CQ)
 {
-    CQ.front=0;
-    CQ.rear=0;
+	CQ.front=0;
+	CQ.rear=0;
 }
 ```
 
@@ -250,8 +249,8 @@ void InitQueue(CycQue CQ)
 ```c
 int EmptyQueue(CycQue CQ)
 {
-    if(CQ.rear==CQ.front) return 1;
-    else return 0;
+	if(CQ.rear==CQ.front) return 1;
+	else return 0;
 }
 ```
 
@@ -259,16 +258,16 @@ int EmptyQueue(CycQue CQ)
 ```c
 int EnQueue(CycQue CQ, DataType x)
 {
-    if ((CQ.rear+1)%maxsize==CQ.front)
-    {
-        error("队列满");return 0;
-    }
-    else 
-    {
-        CQ.rear=(CQ.rear+1)%maxsize;
-        CQ.data[CQ.rear]=x;
-        return 1;
-    }
+	if ((CQ.rear+1)%maxsize==CQ.front)
+	{
+		error("队列满");return 0;
+	}
+	else 
+	{
+		CQ.rear=(CQ.rear+1)%maxsize;
+		CQ.data[CQ.rear]=x;
+		return 1;
+	}
 }
 ```
 
@@ -276,15 +275,15 @@ int EnQueue(CycQue CQ, DataType x)
 ```c
 int OutQueue(CycQue CQ)
 {
-    if (EmptyQueue(CQ))
-    {
-        error("队列空");return 0;
-    }
-    else 
-    {
-        CQ.front=(CQ.front+1)%maxsize;
-        return 1;
-    }
+	if (EmptyQueue(CQ))
+	{
+		error("队列空");return 0;
+	}
+	else 
+	{
+		CQ.front=(CQ.front+1)%maxsize;
+		return 1;
+	}
 }
 ```
 
@@ -292,20 +291,12 @@ int OutQueue(CycQue CQ)
 ```c
 DataType GetHead(Cycle CQ)
 {
-    if (EmptyQueue(CQ)) 
-    {
-        return NULL;
-    } 
-    else {
-        return CQ.data[(CQ.front+1)%maxsize];
-    }
+	if (EmptyQueue(CQ))	
+	{
+		return NULL;
+	} 
+	else {
+		return CQ.data[(CQ.front+1)%maxsize];
+	}
 }
 ```
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
