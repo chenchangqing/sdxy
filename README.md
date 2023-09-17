@@ -302,6 +302,96 @@ DataType GetHead(Cycle CQ)
 }
 ```
 
+### 队列的链接实现
+
+队列的链接实现实际上是使用一个带头结点的单链表来表示队列，称为链队列。头指针指向链表的头结点，单链表的头结点的next域指向队列首结点，尾指针指向队列尾结点，即单链表的最后一个结点。
+
+链接队列用类C语言定义：
+```c
+typedef struct LinkQueueNode
+{
+    DataType data;
+    struct LinkQueueNode *next;
+}LkQueNode;
+typedef struct LinkQueueNode
+{
+    LkQueNode *front, * rear;
+}LkQue;
+LkQue LQ;
+```
+
+#### 队列的初始化
+```c
+void InitQueue(LkQue *LQ)
+{
+    LkQueNode *temp;
+    temp=(LkQueNode *)malloc(sizeof(LkQueNode));
+    LQ->front=temp;
+    LQ->rear=teamp;
+    (LQ->front)->next=NULL;
+}
+```
+
+#### 判队列空
+```c
+int EmptyQueue(LkQue LQ)
+{
+    if(LQ.rear==LQ.front) return 1; 
+    else return 0;
+}
+```
+
+#### 入队列
+```c
+void EnQueue(LkQue *LQ, DataType x)
+{
+    LkQueNode *temp;
+    temp=(LkQueNode *)malloc(sizeof(LkQueNode));
+    temp->data=x;
+    temp->next=NULL;
+    (LQ->rear)->next=temp;
+    LQ->rear=temp;
+}
+```
+
+#### 出队列
+```c
+OutQueue(LkQue *LQ) 
+{
+    LkQueNode *temp;
+    if(EmptyQueue(CQ))
+    {
+        error("队空");return 0;
+    }
+    else
+    {
+        temp=(LQ->front)->next;
+        (LQ->front)->next=temp->next;
+        if(temp->next==NULL)
+            LQ->rear=LQ->front;
+        free(temp);
+        return 1;
+    }
+}
+```
+
+#### 取队列首元素
+```c
+DataType GetHead(LkQue LQ)
+{
+    LkQueNode *temp;
+    if (EmptyQueue(CQ))
+    {
+        return NULLData;
+    }
+    else
+    {
+        temp=LQ.front->next;
+        return temp->data;
+    }
+}
+```
+
 <div style="margin: 0px;">
     备案号：
     <a href="https://beian.miit.gov.cn/" target="_blank">
