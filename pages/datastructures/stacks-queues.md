@@ -300,3 +300,195 @@ DataType GetHead(Cycle CQ)
 	}
 }
 ```
+
+### 队列的链接实现
+
+队列的链接实现实际上是使用一个带头结点的单链表来表示队列，称为链队列。头指针指向链表的头结点，单链表的头结点的next域指向队列首结点，尾指针指向队列尾结点，即单链表的最后一个结点。
+
+链接队列用类C语言定义：
+```c
+typedef struct LinkQueueNode
+{
+    DataType data;
+    struct LinkQueueNode *next;
+}LkQueNode;
+typedef struct LinkQueueNode
+{
+    LkQueNode *front, * rear;
+}LkQue;
+LkQue LQ;
+```
+
+#### 队列的初始化
+```c
+void InitQueue(LkQue *LQ)
+{
+    LkQueNode *temp;
+    temp=(LkQueNode *)malloc(sizeof(LkQueNode));
+    LQ->front=temp;
+    LQ->rear=teamp;
+    (LQ->front)->next=NULL;
+}
+```
+
+#### 判队列空
+```c
+int EmptyQueue(LkQue LQ)
+{
+    if(LQ.rear==LQ.front) return 1; 
+    else return 0;
+}
+```
+
+#### 入队列
+```c
+void EnQueue(LkQue *LQ, DataType x)
+{
+    LkQueNode *temp;
+    temp=(LkQueNode *)malloc(sizeof(LkQueNode));
+    temp->data=x;
+    temp->next=NULL;
+    (LQ->rear)->next=temp;
+    LQ->rear=temp;
+}
+```
+
+#### 出队列
+```c
+OutQueue(LkQue *LQ) 
+{
+    LkQueNode *temp;
+    if(EmptyQueue(CQ))
+    {
+        error("队空");return 0;
+    }
+    else
+    {
+        temp=(LQ->front)->next;
+        (LQ->front)->next=temp->next;
+        if(temp->next==NULL)
+            LQ->rear=LQ->front;
+        free(temp);
+        return 1;
+    }
+}
+```
+
+#### 取队列首元素
+```c
+DataType GetHead(LkQue LQ)
+{
+    LkQueNode *temp;
+    if (EmptyQueue(CQ))
+    {
+        return NULLData;
+    }
+    else
+    {
+        temp=LQ.front->next;
+        return temp->data;
+    }
+}
+```
+
+### 队列的应用
+
+银行办理业务：
+
+```c
+while(1)
+{
+	接收命令；
+	若为‘A’，取号，排队等待；
+	若为‘N’，队列中的第一个人，即持所报号的人，出队列接收服务；
+	若为‘Q’，队列中剩余人按按顺序依次接收服务，结束；
+}
+```
+
+用C语言算法描述：
+```c
+typedef struct LinkQueueNode
+{
+	int data;
+	struct LinkQueueNode *next;
+} LkQueNode;
+typedef struct LinkQueue
+{
+	LkQueNode *front, *rear;
+}
+void GetService()
+{
+	LkQue LQ;
+	int n;
+	char ch;
+	InitQueue(&LQ);
+	while(1)
+	{
+		printf("\n请输入命令：");
+		scanf("%c", &ch);
+		switch(ch)
+		{
+		case 'A': 
+			printf("客户取号\n");
+			scanf("%d", &n);
+			EnQueue(&LQ, n);
+			break;
+		case 'N':
+			if(!EmptyQueue(LQ))
+			{
+				n=Gettop(LQ);
+				OutQueue(&LQ);
+				printf("号为 %d 的客户接收服务", n);
+			}
+			else 
+			{
+				printf("无人等待服务\n");
+			}
+			break;
+		case 'Q':
+			printf("排队等候的人一次接受服务\n");
+			break;
+		}
+		if(ch=='Q') 
+		{
+			while(!EmptyQueue(LQ))
+			{
+				n=Gettop(LQ);
+				OutQueue(&LQ);
+				printf("号为 %d 的客户接受服务", n);
+			}
+			break;
+		}
+	}
+}
+```
+
+## 数组
+---
+
+### 数组的逻辑结构和基本运算
+
+数组可以看成线性表的一种推广。以为数组有称向量，它由一组具有相同类型的数据元素组成，并存储在一组连续的存储单元中。若一维数组中的数据元素又是一维数组结构，则称为二维数组；依此类推，若一维数组中的数据元素又是一个二维数组结构，则称为三维数组。
+
+二维数组是n个列向量组成的线性表；二维数组是m个行向量组成的线性表。
+
+数组通常只有两种基本运算
+
+- 读：给定一组下标，返回该位置的元素内容；
+- 写：给定一组下标，修改改位置的元素内容。
+
+### 数组的存储结构
+
+一维数组元素的内存单元地址是连续的，二维数组可有两种存储方法：
+
+- 一种是以列序为主序的存储；
+- 一种是以行序为主序的存储。
+
+## 矩阵
+---
+
+矩阵是很多科学计算问题研究的对象，矩阵可以用二维数组来表示。在数值分析中经常出现一些高阶矩阵，这些高阶矩阵中有许多值相同的元素或零元素，为了节省存储空间，对这类矩阵采用多个值相同的元素只分配一个存储空间，零元素不存储的策略，这一方法称为矩阵的压缩存储。
+
+* 对称矩阵
+* 三角矩阵
+* 稀疏矩阵
