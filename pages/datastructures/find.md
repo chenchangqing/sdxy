@@ -1,4 +1,3 @@
- 
 # 第六章 查找
 
 ## 基本概念
@@ -24,24 +23,24 @@
 const int Maxsize = 20;
 typedef struct
 {
-    KeyType key;
-    ...
+	KeyType key;
+	...
 }TableElem;
 typedef struct
 {
-    TableElem ele[Maxsize+1];
-    int n;
+	TableElem ele[Maxsize+1];
+	int n;
 }SqTable;
 ```
 查找算法如下：
 ```c
 int SearchSqTable(SqTable T, KeyType key)
 {
-    T.elem[0].key = key;
-    i = T.n;
-    while(T.elem[i].key! = key)
-        i--;
-    return i;
+	T.elem[0].key = key;
+	i = T.n;
+	while(T.elem[i].key! = key)
+		i--;
+	return i;
 }
 ```
 对于查找运算，其基本操作是“数据元素的键值与给定值的比较”，所以通常用“数据元素的键值与给定值的比较次数”作为衡量查找算法好坏的依据，称上述比较次数为查找长度。
@@ -54,16 +53,16 @@ int SearchSqTable(SqTable T, KeyType key)
 ```c
 int SearchBin(SqTable T, KeyType key)
 {
-    int low,high;
-    low=1;high=T.n;
-    while(low<=high)
-    {
-        mid=(low+high)/2;
-        if (key==T.elem[mid].key) return mid;
-        else if (key<T.elem[mid].key) high = mid-1;
-        else low = mid+1;
-    }
-    return 0;
+	int low,high;
+	low=1;high=T.n;
+	while(low<=high)
+	{
+		mid=(low+high)/2;
+		if (key==T.elem[mid].key) return mid;
+		else if (key<T.elem[mid].key) high = mid-1;
+		else low = mid+1;
+	}
+	return 0;
 }
 ```
 
@@ -88,8 +87,8 @@ int SearchBin(SqTable T, KeyType key)
 ```c
 typedef struct btnode
 {
-    KeyType key;
-    struct btnode *lchild, *rchild;
+	KeyType key;
+	struct btnode *lchild, *rchild;
 }BSTNode, *BinTree;
 BinTree bst;
 ```
@@ -98,12 +97,12 @@ BinTree bst;
 ```c
 Bintree SearchBST(BinTree bst, KeyType key)
 {
-    if (bst==NULL) return NULL;
-    else if (key==bst->key) return bst;
-    else if (key<bst->key)
-        return SearchBST(bst->lchild, key);
-    else 
-        return SearchBST(bst->rchild, key);
+	if (bst==NULL) return NULL;
+	else if (key==bst->key) return bst;
+	else if (key<bst->key)
+		return SearchBST(bst->lchild, key);
+	else 
+		return SearchBST(bst->rchild, key);
 }
 ```
 关键字比较的次数不超过二叉树的深度。
@@ -114,32 +113,32 @@ Bintree SearchBST(BinTree bst, KeyType key)
 ```c
 Bintree SearchBST(BinTree bst, KeyType key, BSTNode *f) 
 {
-    if (bst==NULL) return NULL;
-    else if (key==bst->key) return bst;
-    else if (key<bst->key) return SearchBST(bst->lchild, key, bst);
-    else return SearchBST(bst->rchild, key, bst);
+	if (bst==NULL) return NULL;
+	else if (key==bst->key) return bst;
+	else if (key<bst->key) return SearchBST(bst->lchild, key, bst);
+	else return SearchBST(bst->rchild, key, bst);
 }
 
 int InsertBST(BinTree bst, KeyType key)
 {
-    BSTNode *p, *t, *f;
-    f = NULL;
-    t = SearchBST(bst, key, f);
-    if (t==NULL) 
-    {
-        p = malloc(sizeof(btnode));
-        p->key = key;
-        p->lchild = NULL;
-        p->rchild = NULL;
-        if (f==NULL) bst = p;
-        else if (key<f->key) f->lchild = p;
-        else f->rchild = p;
-        return 1;
-    } 
-    else 
-    {
-        return 0;
-    }
+	BSTNode *p, *t, *f;
+	f = NULL;
+	t = SearchBST(bst, key, f);
+	if (t==NULL) 
+	{
+		p = malloc(sizeof(btnode));
+		p->key = key;
+		p->lchild = NULL;
+		p->rchild = NULL;
+		if (f==NULL) bst = p;
+		else if (key<f->key) f->lchild = p;
+		else f->rchild = p;
+		return 1;
+	} 
+	else 
+	{
+		return 0;
+	}
 }
 ```
 
@@ -195,9 +194,9 @@ int InsertBST(BinTree bst, KeyType key)
 const int n=20;
 typedef struct TagNode
 {
-    KeyType key;
-    struct TagNode *next;
-    ...
+	KeyType key;
+	struct TagNode *next;
+	...
 }*Pointer, Node;
 typedef Pointer LinkHash[n];
 ```
@@ -205,56 +204,56 @@ typedef Pointer LinkHash[n];
 ```c
 Pointer SearchLinkHash(KeyType key, LinkHash HP)
 {
-    i = H(key);
-    p = HP[i];
-    if (p==NULL) return NULL;
-    while((p!=NULL) && (p->key != key))
-        p=p->next;
-    return p;
+	i = H(key);
+	p = HP[i];
+	if (p==NULL) return NULL;
+	while((p!=NULL) && (p->key != key))
+		p=p->next;
+	return p;
 }
 ```
 散列表上的插入算法：
 ```c
 void InsertLinkHash(KeyType key, LinkHash HP)
 {
-    if((SearchLinkHash(key, HP)) == NULL)
-    {
-        i=H(key);
-        q=Pointer malloc(size(Node));
-        q->key = key;
-        q->next = HP[i];
-        HP[i]=q;
-    }
+	if((SearchLinkHash(key, HP)) == NULL)
+	{
+		i=H(key);
+		q=Pointer malloc(size(Node));
+		q->key = key;
+		q->next = HP[i];
+		HP[i]=q;
+	}
 }
 ```
 散列表删除算法：
 ```c
 void DeleteLinkHash(KeyType key, LinkHash HP)
 {
-    i=H(key);
-    if (HP[i]==NULL) return;
-    else 
-    {
-        p=HP[i];
-        if (p->key==key)
-        {
-            HP[i]=p->next;
-            free(p);
-            return;
-        } else {
-            while (p->next!=NULL)
-            {
-                q=p;
-                p=p->next;
-                if(p->key==key)
-                {
-                    q->next=p->next;
-                    free(p);
-                    return;
-                }
-            }
-        }
-    }
+	i=H(key);
+	if (HP[i]==NULL) return;
+	else 
+	{
+		p=HP[i];
+		if (p->key==key)
+		{
+			HP[i]=p->next;
+			free(p);
+			return;
+		} else {
+			while (p->next!=NULL)
+			{
+				q=p;
+				p=p->next;
+				if(p->key==key)
+				{
+					q->next=p->next;
+					free(p);
+					return;
+				}
+			}
+		}
+	}
 }
 ```
 
@@ -265,8 +264,8 @@ void DeleteLinkHash(KeyType key, LinkHash HP)
 const int MaxSize = 20;
 typedef struct
 {
-    KeyType key;
-    ...
+	KeyType key;
+	...
 }Element;
 typedef Element OpenHash[MaxSize];
 ```
@@ -274,20 +273,12 @@ typedef Element OpenHash[MaxSize];
 ```c
 int SearchOpenHash(KeyType key, OpenHash HL)
 {
-    /* 在散列表HL中查找键值为key的结点，成功时返回该位置；不成功时返回标志0，嘉定以线性探测法解决冲突 */
-    d=H(key);
-    i=d;
-    while((HL[i].key!=NULL) && (HL[i].key!=key))
-        i=(i+1)%m;
-    if(HL[i].key==key)return i;
-    else return 0;
+	/* 在散列表HL中查找键值为key的结点，成功时返回该位置；不成功时返回标志0，嘉定以线性探测法解决冲突 */
+	d=H(key);
+	i=d;
+	while((HL[i].key!=NULL) && (HL[i].key!=key))
+		i=(i+1)%m;
+	if(HL[i].key==key)return i;
+	else return 0;
 }
 ```
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
