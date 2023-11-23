@@ -1,4 +1,3 @@
- 
 # 第七章 排序
 
 ## 概述
@@ -16,8 +15,8 @@
 ```c
 typedef struct
 {
-    int key;
-    ItemType otheritem;
+	int key;
+	ItemType otheritem;
 }RecordType;
 typedef RecordType List[n+1];
 ```
@@ -37,18 +36,18 @@ typedef RecordType List[n+1];
 ```c
 void StraightInsertSort(List R, int n)  // 对顺序表R进行直接插入排序
 {
-    int i,j;
-    for(i=2;i<=n;i++)               // n为表长，从第二个记录起进行插入
-    {
-        R[0] = R[i];                    // 第i个记录复制为岗哨
-        j=i-1;
-        while(R[0].key<R[j].key)        // 与岗哨比较，直至键值不大于岗哨键值
-        {
-            R[j+1]=R[j];                // 将第j个记录赋值给第j+1个记录
-            j--;
-        }
-        R[j+1]=R[0];                    // 将第i个记录插入到序列中
-    }
+	int i,j;
+	for(i=2;i<=n;i++) 			  	// n为表长，从第二个记录起进行插入
+	{
+		R[0] = R[i];					// 第i个记录复制为岗哨
+		j=i-1;
+		while(R[0].key<R[j].key)		// 与岗哨比较，直至键值不大于岗哨键值
+		{
+			R[j+1]=R[j];				// 将第j个记录赋值给第j+1个记录
+			j--;
+		}
+		R[j+1]=R[0];					// 将第i个记录插入到序列中
+	}
 }
 ```
 直接插入的算法简单，易于理解，容易实现，时间复杂度为O（n^2），若待排序记录的数量很大时，一般不选用直接插入排序。从空间来看，它只需要一个记录的辅助空间，即空间复杂度O（1）。
@@ -67,22 +66,22 @@ void StraightInsertSort(List R, int n)  // 对顺序表R进行直接插入排序
 ```c
 void BubbleSort(List R, int n)
 {
-    int i,j,temp,endsort;
-    for(i=1;i<n-1;i++)
-    {
-        endsort=0;
-        for(j=1;j<n-i-1;j++)1   
-        {
-            if(R[j].key>R[j+1].key) // 如果逆序则交换记录
-            {
-                temp=R[j];
-                R[j]=R[j+1];
-                R[j+1]=temp;
-                endsort = 1;
-            }
-        }
-        if(endsort==0) break;
-    }
+	int i,j,temp,endsort;
+	for(i=1;i<n-1;i++)
+	{
+		endsort=0;
+		for(j=1;j<n-i-1;j++)1	
+		{
+			if(R[j].key>R[j+1].key)	// 如果逆序则交换记录
+			{
+				temp=R[j];
+				R[j]=R[j+1];
+				R[j+1]=temp;
+				endsort = 1;
+			}
+		}
+		if(endsort==0) break;
+	}
 }
 ```
 该算法的时间复杂度为O（n^2），冒泡排序是稳定的排序方法。
@@ -95,30 +94,30 @@ void BubbleSort(List R, int n)
 ```c
 int QuickPartition(List R, int low, int high) 
 {
-    // 对R[low]，R[low+1],...,R[high]子序列进行一趟快速排序
-    x=R[low];// 置初值
-    while(low<high)
-    {
-        while((low<high)&&(R[high].key>=x.key)) high--;
-        R[low]=R[high];// 自尾端进行比较，将比x键值小的记录移至低端
-        while((low<high)&&(R[low].key<=x.key)) low--;
-        R[high]=R[low];// 自首端进行比较，将比x键值大的记录移至高端
-    }
-    R[low]=x;// 一趟快速排序结束，将x移至其最中位置
-    return low;
+	// 对R[low]，R[low+1],...,R[high]子序列进行一趟快速排序
+	x=R[low];// 置初值
+	while(low<high)
+	{
+		while((low<high)&&(R[high].key>=x.key)) high--;
+		R[low]=R[high];// 自尾端进行比较，将比x键值小的记录移至低端
+		while((low<high)&&(R[low].key<=x.key)) low--;
+		R[high]=R[low];// 自首端进行比较，将比x键值大的记录移至高端
+	}
+	R[low]=x;// 一趟快速排序结束，将x移至其最中位置
+	return low;
 }
 ```
 完整的快速排序可写成如下递归算法：
 ```c
 void QuickSort(List R, int low, int high)
 {
-    // 对记录序列R[low],R[low+1],...,R[high]进行快速排序
-    if(low<high)
-    {
-        temp=QuickPartition(R,low,high);
-        QuickSort(R,low,temp-1);
-        QuickSort(R,temp+1,high);
-    }
+	// 对记录序列R[low],R[low+1],...,R[high]进行快速排序
+	if(low<high)
+	{
+		temp=QuickPartition(R,low,high);
+		QuickSort(R,low,temp-1);
+		QuickSort(R,temp+1,high);
+	}
 }
 ```
 ## 选择排序
@@ -133,16 +132,16 @@ void QuickSort(List R, int low, int high)
 ```c
 void SelectSort(List R, int n)
 {
-    int min,i,j;
-    for(i=1;i<=n-1;i++)// 每次循环，选择出一个最小键值
-    {
-        min=i;// 假设第i个记录键值最小
-        for(j=i+1;j<=n;j++)
-        {
-            if(R[j].key<R[min].key) min=j;// 记录下键值最小记录的下标
-        }
-        if(min!=i) swap(R[min], R[i]);// 将最小键值记录和交换第i个记录交换
-    }
+	int min,i,j;
+	for(i=1;i<=n-1;i++)// 每次循环，选择出一个最小键值
+	{
+		min=i;// 假设第i个记录键值最小
+		for(j=i+1;j<=n;j++)
+		{
+			if(R[j].key<R[min].key) min=j;// 记录下键值最小记录的下标
+		}
+		if(min!=i) swap(R[min], R[i]);// 将最小键值记录和交换第i个记录交换
+	}
 }
 ```
 
@@ -153,37 +152,37 @@ void SelectSort(List R, int n)
 ```swift
 void Sift(List R, int k, int m)
 {
-    /* 假设R[k],R[k+1],...,R[m]是以R[k]为根的完全二叉树，R[k]的左、右子树均满足堆的性质。本算法调整R[k]使整个序列R[k],R[k+1],...,R[m]满足堆的性质 */
-    int i,j,x;
-    List t;
-    i=k;j=2*i;
-    x=R[k].key;
-    t=R[k];
-    while(j<=m)
-    {
-        if((j<m)&&(R[j].key>R[j+1].key))
-        {
-            j++;// 若存在右子树，且右子树根的关键字小，则沿右分支筛选
-            if(x<R[j].key)break;// 筛选完毕
-            else { R[i]=R[j];i=j;j=2*i;}
-        }
-    }
-    R[i]=t;// 填入恰当位置
+	/* 假设R[k],R[k+1],...,R[m]是以R[k]为根的完全二叉树，R[k]的左、右子树均满足堆的性质。本算法调整R[k]使整个序列R[k],R[k+1],...,R[m]满足堆的性质 */
+	int i,j,x;
+	List t;
+	i=k;j=2*i;
+	x=R[k].key;
+	t=R[k];
+	while(j<=m)
+	{
+		if((j<m)&&(R[j].key>R[j+1].key))
+		{
+			j++;// 若存在右子树，且右子树根的关键字小，则沿右分支筛选
+			if(x<R[j].key)break;// 筛选完毕
+			else { R[i]=R[j];i=j;j=2*i;}
+		}
+	}
+	R[i]=t;// 填入恰当位置
 }
 ```
 堆排序算法描述如下：
 ```c
 void HeapSort(List R)
 {
-    // 对R[n]进行堆排序，排序完成后，R中记录按关键字自大至小有序排列
-    int i;
-    for(i=n/2;i>=1;i--) 
-        Shit(R,i,n);// 从第n/2个记录开始进行筛选建堆
-    for(i=n;i>=2;i--)
-    {
-        swap(R[1],R[i]);// 将堆顶记录和堆中最后一个记录互换
-        Sift(R,1,i-1);// 调整R[1]是R[1],...,R[i-1]变成堆
-    }
+	// 对R[n]进行堆排序，排序完成后，R中记录按关键字自大至小有序排列
+	int i;
+	for(i=n/2;i>=1;i--) 
+		Shit(R,i,n);// 从第n/2个记录开始进行筛选建堆
+	for(i=n;i>=2;i--)
+	{
+		swap(R[1],R[i]);// 将堆顶记录和堆中最后一个记录互换
+		Sift(R,1,i-1);// 调整R[1]是R[1],...,R[i-1]变成堆
+	}
 }
 ```
 
@@ -199,24 +198,24 @@ void HeapSort(List R)
 ```swift
 void Merge(List a, List R, int h, int m, int n)
 {
-    // 将ah,...,am和am+1,...,an两个有序序列合并成一个有序序列Rh,...,Rn
-    k=h;j=m+1;// k,j置成文件的起始位置
-    while((h<=m) && (j<n))// 将a中记录从小到大合并入R
-    {
-        if(a[h].key<=a[j].key)// a[h]键值小，送入R[k]并修改h值
-        {
-            R[k]=a[h];
-            h++;
-        }
-        else // a[j]键值小，送入R[k]并修改j值
-        {
-            R[k]=a[j];
-            j++;
-        }
-        k++;
-    }
-    while(h<m){R[k]=a[h];h++;k++;}// j>n，将ah,...,am剩余部分插入R的末尾
-    while(j<=n){R[k]=a[j];j++;k++;}// h>m，将am+1,...,an剩余部分插入R的末尾
+	// 将ah,...,am和am+1,...,an两个有序序列合并成一个有序序列Rh,...,Rn
+	k=h;j=m+1;// k,j置成文件的起始位置
+	while((h<=m) && (j<n))// 将a中记录从小到大合并入R
+	{
+		if(a[h].key<=a[j].key)// a[h]键值小，送入R[k]并修改h值
+		{
+			R[k]=a[h];
+			h++;
+		}
+		else // a[j]键值小，送入R[k]并修改j值
+		{
+			R[k]=a[j];
+			j++;
+		}
+		k++;
+	}
+	while(h<m){R[k]=a[h];h++;k++;}// j>n，将ah,...,am剩余部分插入R的末尾
+	while(j<=n){R[k]=a[j];j++;k++;}// h>m，将am+1,...,an剩余部分插入R的末尾
 }
 ```
 
@@ -228,38 +227,30 @@ void Merge(List a, List R, int h, int m, int n)
 ```c
 void MergePass(List a,List b,int n, int h)
 {
-    /* 在含有n个记录的序列a中，将长度各为h的相邻两个有序子序列合并成长度为2h的一个有序序列，并把结果存入b中 */
-    i=1;
-    while(i<=n-2*h+1)
-    {
-        merge(a,b,i,i+h-1,i+2*h-1);// 将序列ai,...,ai+h-1和序列ai+h,...,ai+2*h-1合并成序列bi,...,bi+2*h-1
-        i+=2*h;//下边i移动2*h
-    }
-    if(i+h-1<n)// h<剩余序列长度<2h
-        merge(a,b,i,i+h-1,n);// 将序列ai,...,ai+h-1和ai+h,...,an合并成bi,...,bn
-    else for(t=i;t<=n;t++)b[t]=a[t];// 将剩余序列长度<h,将ai,...,an复制到bi,...,bn
+	/* 在含有n个记录的序列a中，将长度各为h的相邻两个有序子序列合并成长度为2h的一个有序序列，并把结果存入b中 */
+	i=1;
+	while(i<=n-2*h+1)
+	{
+		merge(a,b,i,i+h-1,i+2*h-1);// 将序列ai,...,ai+h-1和序列ai+h,...,ai+2*h-1合并成序列bi,...,bi+2*h-1
+		i+=2*h;//下边i移动2*h
+	}
+	if(i+h-1<n)// h<剩余序列长度<2h
+		merge(a,b,i,i+h-1,n);// 将序列ai,...,ai+h-1和ai+h,...,an合并成bi,...,bn
+	else for(t=i;t<=n;t++)b[t]=a[t];// 将剩余序列长度<h,将ai,...,an复制到bi,...,bn
 }
 ```
 二路归并排序算法描述如下：
 ```c
 void MergeSort(List a,int n)
 {
-    // 将序列a1,a2,...,an按关键字的非递减次序进行排序，b也定义为list类型
-    m=1;// m为子序列长度，初始值为1
-    while(m<n)
-    {
-        MergePass(a,b,n,m);// 将序列a中有序子序列合并到b
-        m=2*m;// 子序列长度扩大1倍
-        MergePass(b,a,n,m);// 将序列b中有序子序列合并到a
-        m=2*没；// 子序列长度扩大1倍
-    }
+	// 将序列a1,a2,...,an按关键字的非递减次序进行排序，b也定义为list类型
+	m=1;// m为子序列长度，初始值为1
+	while(m<n)
+	{
+		MergePass(a,b,n,m);// 将序列a中有序子序列合并到b
+		m=2*m;// 子序列长度扩大1倍
+		MergePass(b,a,n,m);// 将序列b中有序子序列合并到a
+		m=2*没；// 子序列长度扩大1倍
+	}
 }
 ```
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-

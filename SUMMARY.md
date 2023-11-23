@@ -6,6 +6,7 @@
     * [第三章 栈、队列和数组](pages/datastructures/stacks-queues.md)
     * [第四章 树和二叉树](pages/datastructures/tree.md)
     * [第六章 查找](pages/datastructures/find.md)
+    * [第七章 排序](pages/datastructures/sort.md)
 * IDEA
     * [IDEA环境配置](pages/idea/env.md)
     * [IDEA创建项目](pages/idea/createp.md)
