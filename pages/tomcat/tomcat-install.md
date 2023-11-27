@@ -93,7 +93,6 @@ startup.sh
 shutdown.sh
 ```
 
-老杜语雀笔记：https://www.yuque.com/docs/share/866abad4-7106-45e7-afcd-245a733b073f?# 《Spring6》
-密码：mg9b
+## 视频地址
 
-
+https://www.bilibili.com/video/BV1Z3411C7NZ/?p=4

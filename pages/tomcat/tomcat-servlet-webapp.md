@@ -1,16 +1,15 @@
- 
 # 带有Servlet的web应用
 ```
 webapproot
-    |-----WEB-INF
-            |-----classes（存放字节码）
-            |-----lib（第三方jar包）
-            |-----web.xml（注册Servlet）
-    |-----html
-    |-----css
-    |-----javascript
-    |-----image
-    ...
+	|-----WEB-INF
+			|-----classes（存放字节码）
+			|-----lib（第三方jar包）
+			|-----web.xml（注册Servlet）
+	|-----html
+	|-----css
+	|-----javascript
+	|-----image
+	...
 ```
 
 ## 第一步
@@ -99,11 +98,3 @@ CLASSPATH=.;C:\dev\apache-tomcat-10.0.12\lib\servlet.api.jar
 ## 视频地址
 
 https://www.bilibili.com/video/BV1Z3411C7NZ/?p=8
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-

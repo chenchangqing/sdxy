@@ -23,11 +23,14 @@
         * [JDBC事务](pages/jdbc/transaction.md)
         * [JDBC工具类](pages/jdbc/tool.md)
         * [悲观锁和乐观锁](pages/jdbc/lock.md)
+    * Tomcat
+        * [Tomcat的安装](pages/tomcat/tomcat-install.md)
+        * [实现最基本的web应用](pages/tomcat/tomcat-first-webapp.md)
+        * [带有Servlet的web应用](pages/tomcat/tomcat-servlet-webapp.md)
     * Servlet
         * [Servlet规范](pages/servlet/rule.md)
         * [Servlet生命周期](pages/servlet/life.md)
         * [Servlet考试管理系统](pages/servlet/exammanagementsystem.md)
-        * [Tomcat的安装](pages/servlet/tomcat.md)
 * 数据结构导论
     * [第一章 概论](pages/datastructures/introduction.md)
     * [第二章 线性表](pages/datastructures/lineartable.md)
