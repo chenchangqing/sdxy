@@ -1,5 +1,33 @@
 # Summary
 
+* 服务器开发
+    * Java
+        * [域名的注册及备案](pages/java/域名的注册及备案.md)
+        * [Java开发工具](pages/java/Java开发工具.md)
+        * [Mac下配置JDK](pages/java/configenv.md)
+    * MYSQL
+        * [Mac下MYSQL的安装](pages/mysql/Mac下MYSQL的安装.md)
+    * IDEA
+        * [IDEA环境配置](pages/idea/env.md)
+        * [IDEA创建项目](pages/idea/createp.md)
+        * [IDEA快捷键](pages/idea/quickkey.md)
+        * [IDEA模版](pages/idea/template.md)
+        * [IDEA配置Tomcat](pages/idea/tomcat.md)
+        * [Maven的安装与配置](pages/idea/mavenconfig.md)
+    * JDBC
+        * [准备工作](pages/jdbc/prepare.md)
+        * [Mac下配置MySQL驱动](pages/jdbc/configmysql.md)
+        * [JDBC本质](pages/jdbc/nature.md)
+        * [JDBC编程](pages/jdbc/programming.md)
+        * [JDBC登录](pages/jdbc/login.md)
+        * [JDBC事务](pages/jdbc/transaction.md)
+        * [JDBC工具类](pages/jdbc/tool.md)
+        * [悲观锁和乐观锁](pages/jdbc/lock.md)
+    * Servlet
+        * [Servlet规范](pages/servlet/rule.md)
+        * [Servlet生命周期](pages/servlet/life.md)
+        * [Servlet考试管理系统](pages/servlet/exammanagementsystem.md)
+        * [Tomcat的安装](pages/servlet/tomcat.md)
 * 数据结构导论
     * [第一章 概论](pages/datastructures/introduction.md)
     * [第二章 线性表](pages/datastructures/lineartable.md)
@@ -7,37 +35,9 @@
     * [第四章 树和二叉树](pages/datastructures/tree.md)
     * [第六章 查找](pages/datastructures/find.md)
     * [第七章 排序](pages/datastructures/sort.md)
-* IDEA
-    * [IDEA环境配置](pages/idea/env.md)
-    * [IDEA创建项目](pages/idea/createp.md)
-    * [IDEA快捷键](pages/idea/quickkey.md)
-    * [IDEA模版](pages/idea/template.md)
-    * [IDEA配置Tomcat](pages/idea/tomcat.md)
-    * [Maven的安装与配置](pages/idea/mavenconfig.md)
-* JavaWeb
-    * [Servlet规范](pages/servlet/rule.md)
-    * [Servlet生命周期](pages/servlet/life.md)
-    * [Servlet考试管理系统](pages/servlet/exammanagementsystem.md)
-    * [Tomcat的安装](pages/servlet/tomcat.md)
 * 现代汉语
     * [第一章](pages/modernchinese/chapter1.md)
     * [第二章](pages/modernchinese/chapter2.md)
-* Java
-    * [Mac下配置JDK](pages/java/configenv.md)
-* MYSQL
-    * [Mac下MYSQL的安装](pages/mysql/Mac下MYSQL的安装.md)
-* JDBC
-    * [准备工作](pages/jdbc/prepare.md)
-    * [Mac下配置MySQL驱动](pages/jdbc/configmysql.md)
-    * [JDBC本质](pages/jdbc/nature.md)
-    * [JDBC编程](pages/jdbc/programming.md)
-    * [JDBC登录](pages/jdbc/login.md)
-    * [JDBC事务](pages/jdbc/transaction.md)
-    * [JDBC工具类](pages/jdbc/tool.md)
-    * [悲观锁和乐观锁](pages/jdbc/lock.md)
-* 重拾服务端
-    * [域名的注册及备案](pages/重拾服务端/域名的注册及备案.md)
-    * [Java开发工具](pages/重拾服务端/Java开发工具.md)
 * Flutter
     * 第一章 起步
         * [在MacOS上搭建Flutter开发环境](pages/fultter/在MacOS上搭建Flutter开发环境.md)
