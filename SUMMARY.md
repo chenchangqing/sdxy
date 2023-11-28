@@ -31,6 +31,14 @@
         * [Servlet规范](pages/servlet/rule.md)
         * [Servlet生命周期](pages/servlet/life.md)
         * [Servlet考试管理系统](pages/servlet/exammanagementsystem.md)
+        * [HttpServletRequest](pages/servlet/httpservletrequest.md)
+        * [HttpServletResponse](pages/servlet/httpservletresponse.md)
+        * [请求对象和响应对象生命周期](pages/servlet/httpservletrequestresponselife.md)
+        * [GenericServlet](pages/servlet/genericservlet.md)
+        * [ServletConfig](pages/servlet/servletconfig.md)
+        * [ServletContext](pages/servlet/servletcontext.md)
+    * HTTP
+        * [HTTP协议](pages/http/http.md)
 * 数据结构导论
     * [第一章 概论](pages/datastructures/introduction.md)
     * [第二章 线性表](pages/datastructures/lineartable.md)
