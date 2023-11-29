@@ -6,21 +6,20 @@ book.pdf
 
 #/pages/**/*
 #!/pages/java
-#!/pages/MYSQL
+#!/pages/mysql
 #!/pages/idea
 #!/pages/jdbc
 #!/pages/tomcat
 #!/pages/servlet
 #!/pages/http
-#!/pages/C++程序设计
-#!/pages/FFmpeg
+#!/pages/ffmpeg
 #!/pages/fultter
 #!/pages/Git
-#!/pages/iOS组件化
+#!/pages/ioscomponentization
 #!/pages/lflivekit
 #!/pages/lirtmp
-#!/pages/OpenGL系列
-#!/pages/RxSwift系列
+#!/pages/opengl
+#!/pages/rxswift
 #!/pages/WebView系列
 #!/pages/信息系统开发与管理
 #!/pages/其他
