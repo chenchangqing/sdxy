@@ -1,4 +1,3 @@
- 
 # 配置欢迎页
 
 ## 什么是web站点的欢迎页
@@ -17,7 +16,7 @@
 2）在web.xml文件中进行了以下的配置
 ```xml
 <welcome-file-list>
-    <welcome-file>login.html</welcome-file>
+	<welcome-file>login.html</welcome-file>
 </welcome-file-list>
 ```
 >注意：设置欢迎页面的时候，这个路径不需要以“/”开始，并且这个路径默认是从webapp的根下开始查找。  
@@ -27,8 +26,8 @@
 ## 设置多个欢迎页面
 ```xml
 <welcome-file-list>
-    <welcome-file>page1/page2/page.html</welcome-file>
-    <welcome-file>login.html</welcome-file>
+	<welcome-file>page1/page2/page.html</welcome-file>
+	<welcome-file>login.html</welcome-file>
 </welcome-file-list>
 ```
 >注意：越靠上的优先级越高，找不到的继续向下找。
@@ -39,9 +38,9 @@
 2）CATALINA_HOME/conf/web.xml。（全局配置）
 ```xml
 <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+	<welcome-file>index.html</welcome-file>
+	<welcome-file>index.htm</welcome-file>
+	<welcome-file>index.jsp</welcome-file>
 </welcome-file-list>
 ```
 >注意：局部优先原则（就近原则）。
@@ -55,11 +54,3 @@
 ## 视频地址
 
 https://www.bilibili.com/video/BV1Z3411C7NZ?p=20
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-

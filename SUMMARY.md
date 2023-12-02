@@ -37,6 +37,7 @@
     * [ServletConfig](pages/servlet/servletconfig.md)
     * [ServletContext](pages/servlet/servletcontext.md)
     * [HttpServlet](pages/servlet/httpservlet.md)
+    * [配置欢迎页](pages/servlet/welcome.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS

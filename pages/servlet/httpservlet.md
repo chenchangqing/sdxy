@@ -150,9 +150,9 @@ public abstract class HttpServlet extends GenericServlet {
 
 #### 通过以上源代码分析：
 
-1）假设前端发送的请求是get请求，后端程序员重写的方法是doPost；发生405这样的错误。  
-2）假设前端发送的请求是post请求，后端程序员重写的方法是doGet；发生405这样的错误。	
-3）只要HttpServlet类中的doGet方法或doPost方法执行了，必然405。	
+1）假设前端发送的请求是get请求，后端程序员重写的方法是doPost；发生405这样的错误。    
+2）假设前端发送的请求是post请求，后端程序员重写的方法是doGet；发生405这样的错误。  	
+3）只要HttpServlet类中的doGet方法或doPost方法执行了，必然405。  
 4）HelloServlet继承HttpServelt，重写HttpServlet类中的service()方法，享受不到405错误，享受不到HTTP协议专属的东西。
 
 >405表示前端的错误，发送的请求方式不对。和服务器不一致。不是服务器需要的请求方式。
