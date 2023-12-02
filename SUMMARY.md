@@ -36,6 +36,7 @@
     * [GenericServlet](pages/servlet/genericservlet.md)
     * [ServletConfig](pages/servlet/servletconfig.md)
     * [ServletContext](pages/servlet/servletcontext.md)
+    * [HttpServlet](pages/servlet/httpservlet.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS
@@ -151,7 +152,7 @@
     * [Flutter学习记录](pages/fultter/Flutter_learning_record.md)
 * librtmp
     * [librtmp源码之调试](pages/librtmp/librtmp_debug.md)
-    * [librtmp源码之相关结构体](pages/librtmp/librtmp_struct_.md)
+    * [librtmp源码之相关结构体](pages/librtmp/librtmp_struct.md)
     * [librtmp源码之RTMP_Connect](pages/librtmp/librtmp_RTMP_Connect.md)
     * [librtmp源码之HandShake](pages/librtmp/librtmp_HandShake.md)
     * [librtmp源码之SendConnectPacket](pages/librtmp/librtmp_SendConnectPacket.md)

@@ -1,4 +1,3 @@
- 
 # HttpServlet
 ---
 HttpServlet在`jakarta.servlet.http`包里，HttpServlet类是专门为HTTP协议准备的，比GenericServlet更加适合HTTP协议下的开发。
@@ -7,13 +6,13 @@ HttpServlet在`jakarta.servlet.http`包里，HttpServlet类是专门为HTTP协�
 jakarta.servlet.Servlet **核心接口（接口）**  
 jakarta.servlet.ServletConfig **Servlet配置信息接口（接口）**  
 jakarta.servlet.ServletContext **Servlet上下文接口（接口）**  
-jakarta.servlet.ServletRequest **Servlet请求接口（接口）**  
-jakarta.servlet.ServletResponse **Servlet响应接口（接口）** 
-jakarta.servlet.ServletException **Servlet异常（类）**   
+jakarta.servlet.ServletRequest **Servlet请求接口（接口）**	
+jakarta.servlet.ServletResponse **Servlet响应接口（接口）**	
+jakarta.servlet.ServletException **Servlet异常（类）**	
 jakarta.servlet.GenericServlet **标准通用的Servlet类（抽象类）**
 
-## http包下都有哪些类和接口？      
-jakarta.servlet.http.HttpServlet **HTTP协议专用的Servlet类，抽象类**      
+## http包下都有哪些类和接口？  	
+jakarta.servlet.http.HttpServlet **HTTP协议专用的Servlet类，抽象类**  	
 jakarta.servlet.http.HttpServletRequest **HTTP协议专用的请求对象**  
 jakarta.servlet.http.HttpServletResponse **HTTP协议专用的响应对象**  
 
@@ -48,7 +47,7 @@ HttpServletRequest，简称request对象，封装了请求协议的全部内容�
 HelloServlet：
 ```java
 public class HelloServlet extends HttpServlet {
-    // 用户第一次请求，创建HelloServlet对象的时候，会执行这个无参数的方法。
+	// 用户第一次请求，创建HelloServlet对象的时候，会执行这个无参数的方法。
     public HttpServlet() {
     }
 
@@ -57,26 +56,26 @@ public class HelloServlet extends HttpServlet {
 }
 
 public abstract class GenericServlet implements Servlet, ServletConfig, Serializable {
-    // 用户第一次请求的时候，HelloServlet对象第一次被创建之后，这个init方法会执行
-    public void init(ServletConfig config) throws ServletException {
+	// 用户第一次请求的时候，HelloServlet对象第一次被创建之后，这个init方法会执行
+	public void init(ServletConfig config) throws ServletException {
         this.config = config;
         this.init();
     }
     // 用户第一次请求的时候，带有参数的`init(ServletConfig config)`执行之后，会执行这个没有参数的init()
-    public void init() throws ServletException {
-    }
+	public void init() throws ServletException {
+	}
 }
 ```
 HttpServlet：
 ```java
 // HttpServlet模板类
 public abstract class HttpServlet extends GenericServlet {
-    // 用户发送第一次请求的时候，这个service会执行
-    // 用户发送第N次请求的时候，这个service方法还是会执行
-    // 用户只要发送一次请求，这个service方法就会执行一次
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+	// 用户发送第一次请求的时候，这个service会执行
+	// 用户发送第N次请求的时候，这个service方法还是会执行
+	// 用户只要发送一次请求，这个service方法就会执行一次
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
         if (req instanceof HttpServletRequest && res instanceof HttpServletResponse) {
-            // 将ServletRequest和ServletResponse向下转型为带有Http的HttpServlet和HttpServletResponse
+        	// 将ServletRequest和ServletResponse向下转型为带有Http的HttpServlet和HttpServletResponse
             HttpServletRequest request = (HttpServletRequest)req;
             HttpServletResponse response = (HttpServletResponse)res;
             // 调用重载的service方法
@@ -88,15 +87,15 @@ public abstract class HttpServlet extends GenericServlet {
     // 这个service方法的两个参数都是带有Http的
     // 这个service是一个模板方法。
     // 在该方法中定义核心算法骨架，具体的实现步骤延迟到子类中去完成。
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 获取请求方式
-        // 这个请求方式最终可能是：“”
-        // 注意：request.getMethod()方法获取的时候请求方式，可能是七种之一
-        // GET POST PUT DELETE HEAD OPTIONS TRACE
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 获取请求方式
+		// 这个请求方式最终可能是：“”
+		// 注意：request.getMethod()方法获取的时候请求方式，可能是七种之一
+		// GET POST PUT DELETE HEAD OPTIONS TRACE
         String method = req.getMethod();
         long lastModified;
         if (method.equals("GET")) {
-            // 如果请求方式是GET，这执行doGet
+        	// 如果请求方式是GET，这执行doGet
             lastModified = this.getLastModified(req);
             if (lastModified == -1L) {
                 this.doGet(req, resp);
@@ -114,7 +113,7 @@ public abstract class HttpServlet extends GenericServlet {
             this.maybeSetLastModified(resp, lastModified);
             this.doHead(req, resp);
         } else if (method.equals("POST")) {
-            // 如果请求方式是POST，这执行doPost
+        	// 如果请求方式是POST，这执行doPost
             this.doPost(req, resp);
         } else if (method.equals("PUT")) {
             this.doPut(req, resp);
@@ -134,14 +133,14 @@ public abstract class HttpServlet extends GenericServlet {
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 报405错误
+    	// 报405错误
         String protocol = req.getProtocol();
         String msg = lStrings.getString("http.method_get_not_supported");
         resp.sendError(this.getMethodNotSupportedCode(protocol), msg);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 报405错误
+    	// 报405错误
         String protocol = req.getProtocol();
         String msg = lStrings.getString("http.method_post_not_supported");
         resp.sendError(this.getMethodNotSupportedCode(protocol), msg);
@@ -152,8 +151,8 @@ public abstract class HttpServlet extends GenericServlet {
 #### 通过以上源代码分析：
 
 1）假设前端发送的请求是get请求，后端程序员重写的方法是doPost；发生405这样的错误。  
-2）假设前端发送的请求是post请求，后端程序员重写的方法是doGet；发生405这样的错误。 
-3）只要HttpServlet类中的doGet方法或doPost方法执行了，必然405。    
+2）假设前端发送的请求是post请求，后端程序员重写的方法是doGet；发生405这样的错误。	
+3）只要HttpServlet类中的doGet方法或doPost方法执行了，必然405。	
 4）HelloServlet继承HttpServelt，重写HttpServlet类中的service()方法，享受不到405错误，享受不到HTTP协议专属的东西。
 
 >405表示前端的错误，发送的请求方式不对。和服务器不一致。不是服务器需要的请求方式。
@@ -168,11 +167,3 @@ public abstract class HttpServlet extends GenericServlet {
 ## 视频地址
 
 https://www.bilibili.com/video/BV1Z3411C7NZ?p=20
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
