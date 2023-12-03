@@ -32,7 +32,6 @@
     * [Servlet考试管理系统](pages/servlet/exammanagementsystem.md)
     * [HttpServletRequest](pages/servlet/httpservletrequest.md)
     * [HttpServletResponse](pages/servlet/httpservletresponse.md)
-    * [请求对象和响应对象生命周期](pages/servlet/httpservletrequestresponselife.md)
     * [GenericServlet](pages/servlet/genericservlet.md)
     * [ServletConfig](pages/servlet/servletconfig.md)
     * [ServletContext](pages/servlet/servletcontext.md)
