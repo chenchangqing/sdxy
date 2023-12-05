@@ -1,182 +1,157 @@
  
-# HttpServletRequest
+# HttpServletResponse
 
-## 什么是HttpServletReqeust？
-1）HttpServletRequest是一个接口，全限定名称：jakarta.servlet.http.HttpServletRequest。  
-2）HttpServletRequest接口是Servlet规范中的一员，在Tomcat中存在servlet-api.jar。  
-3）HttpServletRequest接口实现类由Http服务器负责提供。  
-4）HttpServletReqeust接口负责在doGet/doPost方法运行时读区http请求协议包中信息。  
-5）开发人员习惯于将HttpServletRequest接口修饰的对象称为【请求对象】。 
+## 什么是HttpServletResponse？
 
-## HttpServletRequest父接口
-jakarta.servlet.ServletRequest：
+1）HttpServletResponse是一个接口，全限定名称：jakarta.servlet.http.HttpServletResponse。  
+2）HttpServletResponse接口Servlet规范中的一员，在Tomcat中存在servlet-api.jar。  
+3）HttpServletResponse接口实现类由Http服务器负责提供。  
+4）HttpServletResponse接口负责将doGet/doPost方法执行结果以二进制形式写入到【响应体】交给浏览器。  
+5）开发人员习惯于将HttpServletResponse接口修饰的对象称为【响应对象】。  
+6）设置响应头中【content-type】属性值，从而控制浏览器使用，对应编译器将响应体二进制数据编译为【文字、图片、视频、命令】。  
+7）设置响应头中【location】属性，将一个请求地址赋值给location，从而控制浏览器向执行服务器发送请求。  
+
+## 写入Hello world响应体
 ```java
-public interface HttpServletRequest extends ServletRequest {}
-```
-
-## HttpServletRequest实现类
-`org.apache.catalina.connector.RequestFacade`
-```java
-public class RequestFacade implements HttpServletRequest {}
-```
->Tomcat服务器实现了HttpServletRequest接口，也说明了了Tomcat服务器实现了Servlet规范。
-
-## HttpServletRequest对象中有什么信息？
-1）HttpServletRequest对象是Tomcat服务器负责创建的。封装了HTTP的请求协议。  
->实际上是用户发送请求的时候，遵循了HTTP协议，发送的是HTTP的请求协议，Tomcat服务器将HTTP协议中的信息以及数据全部解析出来，然后Tomcat服务器把这些信息封装到HttpServletRequest对象当中，传给了javaweb程序员。
-
-## request对象和response对象生命周期
-1）http服务器接收到浏览器发送的【http请求协议包】之后，自动为当前的【Http请求协议包】生成1个【请求对象】和1一个【响应对象】。  
-2）在http服务器调用doGet/doPost方法时，负责将【请求对象】和【响应对象】作为实参传递到方法，确保doGet/doPost正确执行。  
-3）在http服务器准备推送http响应协议包之前，负责将本次请求关联的【请求对象】和【响应对象】销毁。  
->【请求对象】和【响应对象】生命周期贯穿一次请求的处理过程中，【请求对象】和【响应对象】相当于用户在服务端的代言人。
-
-## 获取前端浏览器用户提交的数据
-```java
-String getParameter(String name)
-Map<String,String[]>getParameterMap()
-Enumeration<String>getParameterNames()
-String[] getParameterValues(String name)
-```
-以上4个方法和获取用户提交的数据有关系。
->注意：`getParameterValues`之所以使用`String[]`格式，是因为前端提交的数据格式可能是：name=张三&name=李四，解决同一个key对应了多个值的问题。
-
-## 获取请求信息
-
-javaweb程序员面向HttpServletRequest接口编程，调用方法就可以获取请求的信息了。
->请求信息包括：请求行、请求头、请求体。
-
-**1）获取请求行信息：**
-```java
-public class Servlet1 extends HttpServlet {
+public class OneServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
-        // 1. 通过请求对象，读取【请求行】中【url】信息
-        String url = request.getRequestURL().toString();
-        // 2. 通过请求对象，读取【请求行】中【method】信息
-        String method = request.getMethod();
-        // 3. 通过请求对象，读取【请求行】中uri信息
-        String uri = request.getRequestURI();// substring
-        System.out.println("URL "+url);
-        System.out.println("method "+method);
-        System.out.println("URI "+uri);
-    }
-}
-```
->URI：资源文件精准定位地址，在请求行并没有URL这个属性，实际上URL中截取一个字符串，这个字符串格式“/网站名/资源文件名”，URI用于让Http服务器对被访问的资源文件进行定位。
 
-**2）获取请求体信息：**
-```java
-public class Servlet2 extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
-        // 1. 通过请求对象，读取【请求行】中【所有请求参数名】信息
-        Enumeration paramNames = request.getParameterNames();// 将所有请求参数名称保存到一个枚举对象进行返回
-        while(paramNames.hasMoreElements()) {
-            String paramName = (String)paramNames.nextElement();
-            // 2. 通过请求对象读取指定的参数名称的值
-            String value = request.getParameter(paramName);
-            System.out.println("请求参数名 "+paramName+" 请求参数值"+value);
-        }
+        String result = "Hello，world";
+        // ----- 响应对象将结果写入到响应体 ---- start
+        // 1. 通过响应对象，向Tomcat索要输出流
+        PrintWriter out = response.getWriter();
+        // 2. 通过输出流，将执行结果以二进制形式写入到响应体
+        out.write(result);
+        // ----- 响应对象将结果写入到响应体 ---- end
     }
 }
 ```
 
-## 请求转发
-可以代替浏览器向Http服务器申请资源文件调用。
+## 写入50，浏览器显示的是2？
+```java
+public class TwoServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
 
-```java
-// 第一步：获取请求转发器对象
-RequestDispatcher dispatcher = request.getRequestDispatcher("/xxx");
-// 第二步：调用转发器的forward方法完成跳转/转发
-dispatcher.forward(request, response);
+        String result = 50;
+        // ----- 响应对象将结果写入到响应体 ---- start
+        // 1. 通过响应对象，向Tomcat索要输出流
+        PrintWriter out = response.getWriter();
+        // 2. 通过输出流，将执行结果以二进制形式写入到响应体
+        out.write(result);
+        // ----- 响应对象将结果写入到响应体 ---- end
+    }
+}
 ```
+**问题：**浏览器显示不是50，而是2？
+
+**原因：**out.writer方法将【字符】、【字符串】、【ASCII码】写入到响应体，【ASCII码】 a ---> 97, 2 ---> 50，这里的50对应2，所以显示2。
+
+**修改：**out.write(result) ---> out.print(result)，这样就会显示50。
+
+## 解析HTML
 ```java
-// 第一步和第二步代码可以联合在一起
+public class ThreeServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
+
+        String result = "Java<br/>Mysql<br/>HTML<br/>";
+        // ----- 响应对象将结果写入到响应体 ---- start
+        // 1. 通过响应对象，向Tomcat索要输出流
+        PrintWriter out = response.getWriter();
+        // 2. 通过输出流，将执行结果以二进制形式写入到响应体
+        out.print(result);
+        // ----- 响应对象将结果写入到响应体 ---- end
+    }
+}
+```
+**问题：**浏览器在接收到响应结果时，将<br/>作为文字内容在窗口展示出来，没有将<br/>当作HTML变迁命令来执行。
+
+**原因：**浏览器在接收到响应包之后，根据【响应头中content-type】属性的值，来采用对应【编译器】对【响应体中二进制内容】进行编译处理。在默认的情况下，content-type的属性值为“text”，content-type="text"，此时浏览器回采用【文本编译器】对响应体二进制数据进行解析。
+
+**修改：**一定要在得到输出流之前，通过响应对象对应响应头中content-type的属性进行一次重新赋值用于指定浏览器采用正确编译器。
+```java
+// 设置响应头content-type
+response.setContentType("text/html");
+```
+
+## 中文乱码
+```java
+public class ThreeServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
+        // 设置响应头content-type
+        response.setContentType("text/html");
+
+        String result = "Java<br/>Mysql<br/>HTML<br/>";
+        String result2 = "红烧排骨<br/>梅菜扣肉<br/>糖处里脊"
+        // ----- 响应对象将结果写入到响应体 ---- start
+        // 1. 通过响应对象，向Tomcat索要输出流
+        PrintWriter out = response.getWriter();
+        // 2. 通过输出流，将执行结果以二进制形式写入到响应体
+        out.print(result);
+        out.print(result2);
+        // ----- 响应对象将结果写入到响应体 ---- end
+    }
+}
+```
+**问题：**中文字符不可以正确显示？出现？？？
+
+**修改：**
+```java
+response.setContentType("text/html;charset=utf-8");
+```
+>charset=ISO-8859-1：偏东欧的字符集，应该修改为charset=utf-8。
+
+## 重定向
+```java
+public class FourServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
+        // 设置响应头content-type
+        response.setContentType("text/html;charset=utf-8;");
+
+        String result = "http://www.baidu.com";
+
+        // 通过响应对象，将地址赋值给响应头中location属性
+        response.sendRedirect(result);// [响应头 location="http://www.baidu.com"]
+    }
+}
+```
+**重定向：**浏览器在接收到响应包之后，如果发现响应头中存在location属性，自动通过地址栏向location指定网站发送请求。
+
+`sendRedirect`方法远程控制浏览器请求行为【请求地址，请求方式，请求参数】。
+
+## 转发和重定向区别
+
+#### 1）代码区别
+
+转发：
+```java
 request.getRequestDispatcher("/xxx").forward(request, response);
 ```
->转发的时候，转发的路径以“/”开始，不加项目名。
-    
-## 中文乱码
-
-**1）Post请求**
+重定向：
 ```java
-public class Servlet3 extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
-        // 通过请求对象，读取【请求体】参数信息
-        String value = request.getParameter("userName");
-        Sytem.out.println("从请求体得到参数值 "+value);
-    }
-}
+response.sendRedirect("/xxx/b");
 ```
-问题：以POST方式发送中文参数内容“劳瘁是个男人”，得到【乱码】“？？？？？”
+>注意：路径上要加xxx项目名。因为浏览器发送请求，请求路径上需要添加项目名。
 
-原因：浏览器以POST发送请求，请求参数保存在【请求体】，在Http请求协议包到达http服务器之后，第一件事就是进行解码，请求体二进制内容由当前请求（request）负责解码，request默认使用【ISO-8859-1】字符集，一个东欧语系字符集，此时如果请求体参数内容是中文，将无法解码只能得到乱码。
+#### 2）形式区别
+转发（一次请求）：在浏览器地址栏上发送的请求是：http://localhost:8080/xxx/a ，最终请求结束之后，浏览器地址上的地址还是这个，没变；
 
-解决：在Post请求方式下，在读取请求体内容时，应该通知请求对象使用utf-8字符集请求体内容进行一次重新解码。
-```java
-request.setCHaracterEncoding("utf-8");
-```
->Tomcat10不会乱码，Tomcat8、9都会乱码。
+重定向（两次请求）：在浏览器地址栏上发送的请求是：http://localhost:8080/xxx/a ，最终在浏览器地址栏上显示的地址是：http://localhost:8080/xxx/b 。
 
-**2）Get请求**
-```java
-public class Servlet3 extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOExcepiton {
-        // 通过请求对象，读取【请求头】参数信息
-        String userName = request.getParameter("userName");
-        System.out.println("从请求头得到参数值 "+userName);
-    }
-}
-```
-问题：以GET方式发送中文参数内容“老杨是个正经人”时，得到正常值，
+#### 3）本质区别
+转发：是由WEB服务器来控制的，A资源跳转到B资源，这个跳转动作是Tomcat服务器内部完成的；
 
-原因：浏览器以GET方式发送请求，请求参数保存在【请求头】，在Http请求协议包到达http服务器之后，第一件事就是进行解码请求头二进制内容由Tomcat9.0默认使用【utf-8】字符集，可以解析一切国家文字。 
+重定向：是浏览器完成的，具体跳转到哪个资源，是浏览器说了算。
 
-Get请求中文乱码怎么解决？修改`CATALINA_HOME/conf/server.xml`配置文件。
-```xml
-<Connector- URIEncoding="UTF-8" />
-```
-如何查看Tomcat默认使用什么字符集解析Get请求：`CATALINA_HOME/webapps/docs/config/http.html`找到URIEncoding说明。例如tomcat7:
->This specifies the character encoding used to decode the URI bytes, after %xx decoding the URL. If not specified, ISO-8859-1 will be used.
+## 转发和重定向应该如何选择？
 
-**3) Response中文乱码**  
-在Tomcat9及之前，响应中文也是有乱码的，如何解决：
-```java
-response.setContentType("text/html;charset=UTF-8")
-```
+如果在上一个Servlet当中向request域当中绑定了数据，希望从下一个Servlet当中把request域里面的数据取出来，使用转发机制；剩下所有的请求均使用重定向。
+>转发不会改变请求方法，比如doPost请求转发至doGet请求，会导致进入下个请求的doPost，出现405错误，这个时候需要考虑使用重定向。
 
-## 请求域对象
+## 视频
 
-1）请求域对象要比应用域对象范围小很多，生命周期短很多，请求域只在一次请求内有效。  
-2）一个请求对象request对应一个请求域对象，一次请求结束之后，这个请求域就销毁了。  
-3）请求域对象也有这三个方法：
-```java
-void setAttribute(String name, Object o)// 向请求域绑定数据
-void removeAttribute(String name)// 从域当中根据name获取数据
-Object getAttribute(String name)// 将域当中绑定的数据移出
-```
-4）请求域和应用域的选用原则
->尽量使用小的域对象，因为小的域对象占用的资源较小。
+start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=32  
 
-## 其他常用方法
-```java
-// 获取客户端的IP地址
-String remoteAddr = request.getRemoteAddr();
-// 获取应用的根路径
-String contextPath = request.getContextPath();
-// 获取请求方式
-String method = request.getMethod();
-// 获取请求的URI
-String requestURI = request.getRequestURI();
-// 获取servlet路径
-String servletPath = request.getServletPath();
-```
-
-## 视频地址
-
-start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=22  
-end:https://www.bilibili.com/video/BV1Z3411C7NZ?p=26
-
-2023.12.4 00:38
+2023.12.5 11:52
 
 <div style="margin: 0px;">
     备案号：

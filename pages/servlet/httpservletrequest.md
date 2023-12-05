@@ -4,7 +4,7 @@
 1）HttpServletRequest是一个接口，全限定名称：jakarta.servlet.http.HttpServletRequest。  
 2）HttpServletRequest接口是Servlet规范中的一员，在Tomcat中存在servlet-api.jar。  
 3）HttpServletRequest接口实现类由Http服务器负责提供。  
-4）HttpServletReqeust接口负责在doGet/doPost方法运行时读区http请求协议包中信息。  
+4）HttpServletReqeust接口负责在doGet/doPost方法运行时读取http请求协议包中信息。  
 5）开发人员习惯于将HttpServletRequest接口修饰的对象称为【请求对象】。 
 
 ## HttpServletRequest父接口
@@ -92,6 +92,10 @@ dispatcher.forward(request, response);
 // 第一步和第二步代码可以联合在一起
 request.getRequestDispatcher("/xxx").forward(request, response);
 ```
+- 转发的时候是一次请求，不管你转发了多少次，都是一次请求。
+- AServlet转发到BServlet，再转发到CServlet，再转发到DServlet，不管转发了多少次，都在同一request中。
+- 这是因为调用forward方法的时候，会将当前的request和response对象传递给下一个Servlet。
+
 >转发的时候，转发的路径以“/”开始，不加项目名。
 	
 ## 中文乱码
