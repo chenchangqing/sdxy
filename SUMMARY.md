@@ -38,6 +38,8 @@
     * [HttpServlet](pages/servlet/httpservlet.md)
     * [配置欢迎页](pages/servlet/welcome.md)
     * [注解](pages/servlet/annotation.md)
+* JSP
+    * [JSP原理](pages/jsp/principles.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS

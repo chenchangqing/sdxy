@@ -1,4 +1,3 @@
- 
 # JSP原理
 
 ## 我的第一个JSP程序
@@ -95,11 +94,3 @@ out.print();
 
 start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=36  
 start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=37
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
