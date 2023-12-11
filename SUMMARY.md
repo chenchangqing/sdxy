@@ -40,6 +40,8 @@
     * [注解](pages/servlet/annotation.md)
 * JSP
     * [JSP原理](pages/jsp/principles.md)
+    * [Servlet+JSP项目改造](pages/jsp/servletjsp.md)
+    * [Session](pages/jsp/session.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS
