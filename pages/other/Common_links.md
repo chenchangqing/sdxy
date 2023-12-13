@@ -166,6 +166,7 @@
 * [GitBook 本地使用排雷，及导出基本可用的 PDF 版本](https://www.jianshu.com/p/617a467bfe40)
 * [案例](https://www.chengweiyang.cn/gitbook/customize/book.json.html)
 * [jim](https://jiangminggithub.github.io/gitbook/)
+* [GITBOOK](https://kuang.netlify.app/blog/gitbook.html)
 
 ## 百度统计
 

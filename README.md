@@ -1,100 +1,58 @@
  
-# JSP原理
+# Session
+--- 
 
-## 我的第一个JSP程序
+## 什么是会话？
+用户打开浏览器，进行一系列操作，然后最终将浏览器关闭，这个整个过程叫做：一次会话。会话在服务器端也有一个对应的java对象，这个java对象叫做session。  
 
-1）在WEB-INF目录之外创建一个index.jsp文件，然后这个文件没有任何内容。  
-2）在上面的项目部署之后，启动服务器，打开浏览器访问以下路径 ，展示空白页面。  
->http://localhost:8080/jsp/index.jsp
+什么是一次请求：用户在浏览器上点击了一下，然后在页面停下来，可以粗略认为是一次请求。请求对应的服务器的java对象是request。  一次会话当中包含多次请求。
 
-3）实际上访问index.jsp，底层执行的是index_jsp.class这个java程序。  
-4）这个index.jsp会被tomcat翻译生成index_jsp.java文件，然后tomcat服务器又会将index_jsp.java编译生成index_jsp.class文件。
+在java的servlet规范当中，session对象类名：HttpSession(jarkata.servlet.http.HttpSession)。  
 
-控制台找到：  
->CATALINA_BASE: C:\Users\Administrator\AppData\Local\JetBrains\IntelliJIdea2021.3\tomcat\xxx
+session机制属于B/S结构的一部分。如果使用php语言开发WEB项目，同样也是有session这种机制的。session机制实际上是一种规范。然后不同的语言对这种会话机制都有实现。
 
-index_jsp.java路径：
->CATALINA_BASE\work/Catalina\localhost\jsp\org\apache\jsp\index_jsp.java  
+## Session的作用
 
-5）访问index.jsp，实际上执行的是index_jsp.class中的方法。
+保存会话状态：用户登录成功了，这是一种刚登陆成功的状态，你怎么把登录成功的状态一只保存起来？使用session对象可以保留会话状态。
 
-## JSP实际是一个Servlet
+## 为什么需要session对象来保存会话状态呢？
 
-1）index.jsp访问的时候，会自动翻译生成index_jsp.java，会自动翻译生成index_jsp.class，那么index_jsp这就是一个类。  
-2）index_jsp类继承HttpJspBase，而HttpJspBase类继承的是HttpServlet。所以index_jsp类就是一个Servlet类。  
-3）jsp的生命周期和Servlet的生命周期完全相同。完全就是一个东西，没有任何区别。  
-4）jsp和servlet一样，都是单例的。（假单例）
+因为HTTP协议是一种无状态协议。只要B和S断开了，那么关闭浏览器这个动作，服务器知道吗？不知道，服务器不知道浏览器关闭的。
+>什么是无状态：请求的时候，B和S是连接的，但是请求结束之后，连接就断了。为什么要这么做？HTTP协议为什么要设计成这样？因为这样的无状态协议，可以降低服务器的压力，请求的瞬间是连接的，请求结束后，连接断开，这样服务器压力小。
 
-## JSP文件第一次访问的时候是比较慢的，为什么？
+## 为什么不使用request对象保存会话状态？
 
-1）要把jsp文件翻译生成java文件。  
-2）java源文件要编译生成class字节码文件。  
-3）然后通过class去创建servlet对象。  
-4）然后调用servlet对象的init方法。  
-5）最后调用servlet对象的service方法。
+同问：为什么不是用ServletContext对象保存会话状态？
 
-第二次就比较快了，为什么？因为第二次直接调用单例servlet对象的esrvice方法即可。
+* request是一次请求一个对象。  
+* ServletContext对象是服务器启动的时候创建，服务器关闭的时候销毁，这个ServletContext对象只有一个。  
+* ServletContext对象的域太大。  
+* request请求域（HttpServletRequest)、session会话域（HttpSession）、application域（ServletContext)  
+* request小于session小于application。
 
-## JSP是什么？
-
-1）JSP是java程序。（JSP本质还是一个Servlet）  
-2）JSP是：JavaServer Pages的缩写。（基于java语言实现的服务器的页面）  
-3）Servlet是JavaEE的13个子规范之一，那么JSP也是13个子规范之一。  
-4）JSP是一套规范。所有的web容器/web服务器都是遵循这套规范的，都是按照这套规范进行的“翻译”。  
-5）每一个web容器/web服务器都会内置一个JSP翻译引擎。
-
-## 翻译JSP
-
-在JSP文件中直接编写文件，都会自动被翻译到哪里？
-
-1）翻译到servlet类的service方法的out.writer("翻译到这里")，直接翻译到双引号里，被java程序当做普通字符串打印输出到浏览器。  
-2）在JSP中编写的HTML CSS JS代码，这些代码对于JSP来说只是一个普通的字符串。但是JSP把这个普通的字符串一旦输出到浏览器，浏览器就会对HTML CSS JS进行解释执行，展示页面效果。
-
-## 中文乱码
-
-通过page指令来设置响应的内容类型，在内容类型的最后面添加：charset=UTF-8。
+## 思考一下
 ```java
-<%@page contentType="text/html;charset=UTF-8"%>
+HttpSession session = request.getSession()；
 ```
-表示响应的内容类型是text/html，采用字符集UTF-8。
+这行代码很神奇：张三访问的时候获取的session对象就是张三的；李四访问的时候获取的session对象就是李四的。
 
-## <%Java代码%>
+## session的实现原理
 
-1）在这个符号当中编写的被视为java程序，被翻译到Servlet类的service方法内部。  
->注意：在<%%>这个符号里面写java代码的时候，要时时刻刻地记住你正在“方法提”当中写代码，方法体中可以写什么，不可以写什么。
+* JSESSIONID=xxxx 这个是一Cookie的形式保存在浏览器的内存中的。浏览器只要关闭，这个cookie就没有了。  
+* session列表是一个Map，map的key是sessionid，map的value是session对象。  
+* 用户第一次请求，服务器生成session对象，同时生成ID，将ID发送给浏览器。  
+* 用户第二次请求，自动将浏览器内存中的ID发送给服务器，服务器根据ID查找session对象。  
+* 关闭浏览器，内存消失，cookie消失，sessionid消失，会话等同于结束。
 
-2）在service方法当中编写的代码是有顺序的，方法体当中的代码要遵循自上而下的顺序依次逐行执行。  
-3）service方法当中不能写静态代码块，不能写方法，不能定义成员变量。  
-4）在同一个JSP当中<%%>这个符号可以出现多个。
+## Cookie禁用了，session还能找到吗？
 
-## <%!Java代码%>
-在这个符号中编写的java程序自动翻译到service方法之外。  
->这个语法很少用，因为在service方法外面写静态变量和实例变量，都会存在线程安全问题，JSP就是servlet，servlet是单例的，多线程并发的环境下，这个静态变量和实例变量一旦有修改操作，必然会存在线程安全问题。
-
-## <%--注释--%>
-JSP的专业注释，不会被翻译到java源代码当中。
-><!-- -->这种注释属于HTML的注视，仍然会被翻译到java源代码当中。
-
-## JSP的输出语句
-```java
-<% String name="jack"; out.write("name="+name);%>
-```
->注意：以上代码中的out是JSP的九大内置对象之一。可以直接拿来用。当然，必须只能在service方法内部使用。  
-
->如果向浏览器傻姑娘输出的内容中没有“java代码”，例如输出的字符串是一个固定的字符串，可以直接在jsp中编写，不需要写到<%%>这里。
-
-## <%=Java代码%>
-
-在等号后面编写要输出的内容，翻译成以下java代码，翻译到service方法当中了。
-```java
-out.print();
-```
->当输出的内容中含有java的变量，输出的内容是一个动态的内容，不是一个死的字符串。如果输出是一个固定的字符串，直接在JSP文件中编写科技。
+* cookie禁用是什么意思？服务器正常发送cookie给浏览器，但是浏览器不要了，拒收了，并不是服务器不发了。  
+* 找不到了，每次请求都会获取到新的session对象。  
+* cookie禁用了，session机制还能实现吗？可以，需要使用URL重写机制。
 
 ## 视频
 
-start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=36  
-start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=37
+start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=44
 
 <div style="margin: 0px;">
     备案号：

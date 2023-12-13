@@ -4,13 +4,13 @@
 
 ## 修改html为jsp
 
-1）修改html为jsp，然后在jsp文件头步添加page指令（指定contentType防止中文乱码，将所有JSP直接拷贝至web目录下。  
-2）使用`<%=request.getContentPath()%>`替换超链接的根路径。  
+1. 修改html为jsp，然后在jsp文件头步添加page指令（指定contentType防止中文乱码，将所有JSP直接拷贝至web目录下。  
+2. 使用`<%=request.getContentPath()%>`替换超链接的根路径。  
 
 
 ## 修改Servlet
 
-1）将数据集合list存储到request域当中。
+1）将数据集合list存储到request域当中。  
 2）转发forward到jsp。
 
 ## 修改JSP

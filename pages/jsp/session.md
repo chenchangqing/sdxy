@@ -23,14 +23,32 @@ session机制属于B/S结构的一部分。如果使用php语言开发WEB项目�
 
 同问：为什么不是用ServletContext对象保存会话状态？
 
-1）request是一次请求一个对象。  
-2）ServletContext对象是服务器启动的时候创建，服务器关闭的时候销毁，这个ServletContext对象只有一个。  
-3）ServletContext对象的域太大。  
-4）request请求域（HttpServletRequest)、session会话域（HttpSession）、application域（ServletContext)  
-5）request小于session小于application。
+* request是一次请求一个对象。  
+* ServletContext对象是服务器启动的时候创建，服务器关闭的时候销毁，这个ServletContext对象只有一个。  
+* ServletContext对象的域太大。  
+* request请求域（HttpServletRequest)、session会话域（HttpSession）、application域（ServletContext)  
+* request小于session小于application。
 
 ## 思考一下
 ```java
 HttpSession session = request.getSession()；
 ```
 这行代码很神奇：张三访问的时候获取的session对象就是张三的；李四访问的时候获取的session对象就是李四的。
+
+## session的实现原理
+
+* JSESSIONID=xxxx 这个是一Cookie的形式保存在浏览器的内存中的。浏览器只要关闭，这个cookie就没有了。  
+* session列表是一个Map，map的key是sessionid，map的value是session对象。  
+* 用户第一次请求，服务器生成session对象，同时生成ID，将ID发送给浏览器。  
+* 用户第二次请求，自动将浏览器内存中的ID发送给服务器，服务器根据ID查找session对象。  
+* 关闭浏览器，内存消失，cookie消失，sessionid消失，会话等同于结束。
+
+## Cookie禁用了，session还能找到吗？
+
+* cookie禁用是什么意思？服务器正常发送cookie给浏览器，但是浏览器不要了，拒收了，并不是服务器不发了。  
+* 找不到了，每次请求都会获取到新的session对象。  
+* cookie禁用了，session机制还能实现吗？可以，需要使用URL重写机制。
+
+## 视频
+
+start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=44
