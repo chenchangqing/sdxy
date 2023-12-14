@@ -58,6 +58,11 @@ HttpSession session = request.getSession()；
 session.invalidate();
 ```
 
+## JSP禁用session
+```java
+<%@page session="false"%>
+```
+
 ## 视频
 
 * start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=44

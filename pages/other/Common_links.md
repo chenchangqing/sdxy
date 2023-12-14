@@ -187,6 +187,7 @@
 * [使用 Markdown 时，如何为文字加下划线？](https://www.zhihu.com/question/28375977)
 * [Markdown 简介](https://m.imooc.com/wiki/markdownlesson-markdownoverview)
 * [MarkDown中如何换行？](https://blog.csdn.net/u014163312/article/details/117934339)
+* [基础配置](https://www.mapull.com/gitbook/default/config/basic.html)
 
 ## 简历
 
