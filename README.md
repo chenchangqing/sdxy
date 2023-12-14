@@ -38,21 +38,31 @@ HttpSession session = request.getSession()；
 
 ## session的实现原理
 
-* JSESSIONID=xxxx 这个是一Cookie的形式保存在浏览器的内存中的。浏览器只要关闭，这个cookie就没有了。  
-* session列表是一个Map，map的key是sessionid，map的value是session对象。  
-* 用户第一次请求，服务器生成session对象，同时生成ID，将ID发送给浏览器。  
-* 用户第二次请求，自动将浏览器内存中的ID发送给服务器，服务器根据ID查找session对象。  
-* 关闭浏览器，内存消失，cookie消失，sessionid消失，会话等同于结束。
+1. JSESSIONID=xxxx 这个是一Cookie的形式保存在浏览器的内存中的。浏览器只要关闭，这个cookie就没有了。  
+2. session列表是一个Map，map的key是sessionid，map的value是session对象。  
+3. 用户第一次请求，服务器生成session对象，同时生成ID，将ID发送给浏览器。  
+4. 用户第二次请求，自动将浏览器内存中的ID发送给服务器，服务器根据ID查找session对象。  
+5. 关闭浏览器，内存消失，cookie消失，sessionid消失，会话等同于结束。
 
 ## Cookie禁用了，session还能找到吗？
 
 * cookie禁用是什么意思？服务器正常发送cookie给浏览器，但是浏览器不要了，拒收了，并不是服务器不发了。  
-* 找不到了，每次请求都会获取到新的session对象。  
+* 找不到了，每次请求都会获取到新的session对象。
 * cookie禁用了，session机制还能实现吗？可以，需要使用URL重写机制。
+    http://xxxx;jsessionid=DD5EC49931F2AC378DC68548C9E5?v=f050045a0c
+
+>URL重写机制会提高开发者的成本，开发人员在编写任何请求路径的时候，后面都要添加一个sessionid，给开发带来了很大的难度，很大的成本，所以大部分的网站都是这样设计：你要是禁用cookie，你就别用了。
+
+## 销毁session对象
+
+```java
+session.invalidate();
+```
 
 ## 视频
 
-start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=44
+* start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=44
+* end:https://www.bilibili.com/video/BV1Z3411C7NZ?p=45
 
 <div style="margin: 0px;">
     备案号：
