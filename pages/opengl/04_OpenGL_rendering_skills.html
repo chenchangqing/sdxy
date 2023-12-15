@@ -3753,15 +3753,15 @@ M3DVector3f vector2 <span class="token operator">=</span> <span class="token pun
 <h2 id="&#x56DB;&#x3001;&#x6848;&#x4F8B;"><a name="&#x56DB;&#x3001;&#x6848;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#&#x56DB;&#x3001;&#x6848;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. &#x56DB;&#x3001;&#x6848;&#x4F8B;</h2>
 <p><a href="https://gitee.com/chenchangqing/iOS-OpenGL-Tutorials/tree/master/04_OpenGL&#x6E32;&#x67D3;&#x6280;&#x5DE7;" target="_blank">&#x6E90;&#x7801;</a></p>
 <h3 id="41-&#x6297;&#x952F;&#x9F7F;&#x591A;&#x91CD;&#x91C7;&#x6837;"><a name="41-&#x6297;&#x952F;&#x9F7F;&#x591A;&#x91CD;&#x91C7;&#x6837;" class="anchor-navigation-ex-anchor" href="#41-&#x6297;&#x952F;&#x9F7F;&#x591A;&#x91CD;&#x91C7;&#x6837;"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.1. 4.1 &#x6297;&#x952F;&#x9F7F;+&#x591A;&#x91CD;&#x91C7;&#x6837;</h3>
-<pre class="language-"><code class="lang-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLFrustum.h&quot;</span></span>
+<pre class="language-"><code class="lang-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLFrustum.h&quot;</span></span>
 
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> __APPLE__</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">else</span></span>
-<span class="token macro property">#<span class="token directive keyword">define</span> FREEGLUT_STATIC</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__APPLE__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">FREEGLUT_STATIC</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
 
 GLShaderManager shaderManager<span class="token punctuation">;</span>
 GLFrustum viewFrustum<span class="token punctuation">;</span>
@@ -3772,12 +3772,12 @@ GLBatch mountainRangeBatch<span class="token punctuation">;</span>
 GLBatch moonBatch<span class="token punctuation">;</span>
 
 
-<span class="token macro property">#<span class="token directive keyword">define</span> SMALL_STARS     100</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> MEDIUM_STARS     40</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> LARGE_STARS      15</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SMALL_STARS</span>     <span class="token expression"><span class="token number">100</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MEDIUM_STARS</span>     <span class="token expression"><span class="token number">40</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LARGE_STARS</span>      <span class="token expression"><span class="token number">15</span></span></span>
 
-<span class="token macro property">#<span class="token directive keyword">define</span> SCREEN_X        800</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> SCREEN_Y        600</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SCREEN_X</span>        <span class="token expression"><span class="token number">800</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SCREEN_Y</span>        <span class="token expression"><span class="token number">600</span></span></span>
 
 
 <span class="token comment">// &#x9009;&#x62E9;&#x83DC;&#x5355;</span>
@@ -3994,16 +3994,16 @@ GLBatch moonBatch<span class="token punctuation">;</span>
 <span class="token comment">/*
  &#x6848;&#x4F8B;&#xFF1A;&#x5B9E;&#x73B0;&#x77E9;&#x9635;&#x7684;&#x79FB;&#x52A8;&#xFF0C;&#x5229;&#x7528;&#x77E9;&#x9635;&#x7684;&#x5E73;&#x79FB;&#x3001;&#x65CB;&#x8F6C;&#x3001;&#x7EFC;&#x5408;&#x53D8;&#x5316;&#x7B49;
  */</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLShaderManager.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;math3d.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLShaderManager.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;math3d.h&quot;</span></span>
 
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> __APPLE__</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">else</span></span>
-<span class="token macro property">#<span class="token directive keyword">define</span> FREEGLUT_STATIC</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__APPLE__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">FREEGLUT_STATIC</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
 
 GLBatch    squareBatch<span class="token punctuation">;</span>
 GLShaderManager    shaderManager<span class="token punctuation">;</span>
@@ -4053,13 +4053,13 @@ GLfloat yPos <span class="token operator">=</span> <span class="token number">0.
         xPos <span class="token operator">+=</span> stepSize<span class="token punctuation">;</span>
 
     <span class="token comment">// &#x78B0;&#x649E;&#x68C0;&#x6D4B;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>xPos <span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span> xPos <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">xPos</span> <span class="token generic class-name"><span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span> xPos <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">;</span>
 
-    <span class="token keyword">if</span><span class="token punctuation">(</span>xPos <span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span> xPos <span class="token operator">=</span> <span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>xPos <span class="token operator">&gt;</span></span></span> <span class="token punctuation">(</span><span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span> xPos <span class="token operator">=</span> <span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">;</span>
 
-    <span class="token keyword">if</span><span class="token punctuation">(</span>yPos <span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span>  yPos <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">yPos</span> <span class="token generic class-name"><span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span>  yPos <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1.0f</span> <span class="token operator">+</span> blockSize<span class="token punctuation">;</span>
 
-    <span class="token keyword">if</span><span class="token punctuation">(</span>yPos <span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span> yPos <span class="token operator">=</span> <span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>yPos <span class="token operator">&gt;</span></span></span> <span class="token punctuation">(</span><span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">)</span><span class="token punctuation">)</span> yPos <span class="token operator">=</span> <span class="token number">1.0f</span> <span class="token operator">-</span> blockSize<span class="token punctuation">;</span>
 
     <span class="token function">glutPostRedisplay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -4130,20 +4130,20 @@ GLfloat yPos <span class="token operator">=</span> <span class="token number">0.
 </code></pre>
 <h3 id="43-&#x6B63;&#x4EA4;&#x6295;&#x5F71;"><a name="43-&#x6B63;&#x4EA4;&#x6295;&#x5F71;" class="anchor-navigation-ex-anchor" href="#43-&#x6B63;&#x4EA4;&#x6295;&#x5F71;"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.3. 4.3 &#x6B63;&#x4EA4;&#x6295;&#x5F71;</h3>
 <pre class="language-"><code class="lang-cpp">
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span>    </span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLMatrixStack.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLFrame.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLFrustum.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLGeometryTransform.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLBatch.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span>    </span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLMatrixStack.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLFrame.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLFrustum.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLGeometryTransform.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLBatch.h&quot;</span></span>
 
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> __APPLE__</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">else</span></span>
-<span class="token macro property">#<span class="token directive keyword">define</span> FREEGLUT_STATIC</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__APPLE__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">FREEGLUT_STATIC</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
 
 
 GLFrame             viewFrame<span class="token punctuation">;</span>
@@ -4683,20 +4683,20 @@ GLShaderManager     shaderManager<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="44-&#x900F;&#x89C6;&#x6295;&#x5F71;"><a name="44-&#x900F;&#x89C6;&#x6295;&#x5F71;" class="anchor-navigation-ex-anchor" href="#44-&#x900F;&#x89C6;&#x6295;&#x5F71;"><i class="fa fa-link" aria-hidden="true"></i></a>1.6.4. 4.4 &#x900F;&#x89C6;&#x6295;&#x5F71;</h3>
-<pre class="language-"><code class="lang-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLMatrixStack.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLFrame.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLFrustum.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLGeometryTransform.h&quot;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;GLBatch.h&quot;</span></span>
+<pre class="language-"><code class="lang-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLTools.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLMatrixStack.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLFrame.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLFrustum.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLGeometryTransform.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;GLBatch.h&quot;</span></span>
 
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> __APPLE__</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">else</span></span>
-<span class="token macro property">#<span class="token directive keyword">define</span> FREEGLUT_STATIC</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__APPLE__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;glut/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">FREEGLUT_STATIC</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
 
 
 GLFrame             viewFrame<span class="token punctuation">;</span>
@@ -5277,7 +5277,7 @@ GLShaderManager     shaderManager<span class="token punctuation">;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4.OpenGL渲染技巧","level":"1.13.4","depth":2,"next":{"title":"5.OpenGL三角形批次类绘制案例","level":"1.13.5","depth":2,"path":"pages/opengl/05_OpenGL_triangle_batch_class_drawing_case.md","ref":"pages/opengl/05_OpenGL_triangle_batch_class_drawing_case.md","articles":[]},"previous":{"title":"3.OpenGL渲染问题的处理方法","level":"1.13.3","depth":2,"path":"pages/opengl/03_How_to_deal_with_OpenGL_rendering_problems.md","ref":"pages/opengl/03_How_to_deal_with_OpenGL_rendering_problems.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","klipse","popup","todo","hide-element","simple-mind-map","mermaid-gb3","anchor-navigation-ex","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"night","family":"serif","size":1},"mermaid-gb3":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/opengl/04_OpenGL_rendering_skills.md","mtime":"2023-12-14T17:11:54.019Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-12-14T18:33:53.204Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4.OpenGL渲染技巧","level":"1.13.4","depth":2,"next":{"title":"5.OpenGL三角形批次类绘制案例","level":"1.13.5","depth":2,"path":"pages/opengl/05_OpenGL_triangle_batch_class_drawing_case.md","ref":"pages/opengl/05_OpenGL_triangle_batch_class_drawing_case.md","articles":[]},"previous":{"title":"3.OpenGL渲染问题的处理方法","level":"1.13.3","depth":2,"path":"pages/opengl/03_How_to_deal_with_OpenGL_rendering_problems.md","ref":"pages/opengl/03_How_to_deal_with_OpenGL_rendering_problems.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","klipse","popup","todo","hide-element","simple-mind-map","mermaid-gb3","anchor-navigation-ex","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"night","family":"serif","size":1},"mermaid-gb3":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/opengl/04_OpenGL_rendering_skills.md","mtime":"2023-12-15T14:24:04.178Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-12-15T17:19:35.651Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

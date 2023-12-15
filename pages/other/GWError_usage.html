@@ -3670,22 +3670,22 @@
 </ol>
 <h2 id="gwerror"><a name="gwerror" class="anchor-navigation-ex-anchor" href="#gwerror"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. GWError</h2>
 <p><code>GWError</code>&#x662F;&#x5BF9;<code>GWClientError</code>&#x3001;<code>GWSeverError</code>&#x3001;<code>MoyaError</code>&#x7684;&#x5305;&#x88C5;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5F15;&#x53D1;&#x9519;&#x8BEF;&#x7684;&#x6765;&#x6E90;&#x662F;&#x88AB;&#x5305;&#x88C5;&#x7684;&#x4E09;&#x79CD;&#x81EA;&#x5B9A;&#x4E49;&#x9519;&#x8BEF;&#xFF1A;</p>
-<pre class="language-"><code class="lang-swift"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token builtin">GWError</span><span class="token punctuation">:</span> <span class="token builtin">Swift</span><span class="token punctuation">.</span><span class="token builtin">Error</span> <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">GWError</span><span class="token punctuation">:</span> <span class="token class-name">Swift</span><span class="token punctuation">.</span><span class="token class-name">Error</span> <span class="token punctuation">{</span>
     <span class="token comment">// Moya&#x9519;&#x8BEF;</span>
-    <span class="token keyword">case</span> <span class="token function">moya</span><span class="token punctuation">(</span><span class="token builtin">MoyaError</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> <span class="token function">moya</span><span class="token punctuation">(</span><span class="token class-name">MoyaError</span><span class="token punctuation">)</span>
     <span class="token comment">// &#x5BA2;&#x6237;&#x7AEF;&#x9519;&#x8BEF;</span>
-    <span class="token keyword">case</span> <span class="token function">client</span><span class="token punctuation">(</span><span class="token builtin">GWClientError</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> <span class="token function">client</span><span class="token punctuation">(</span><span class="token class-name">GWClientError</span><span class="token punctuation">)</span>
     <span class="token comment">// &#x670D;&#x52A1;&#x7AEF;&#x9519;&#x8BEF;</span>
-    <span class="token keyword">case</span> <span class="token function">server</span><span class="token punctuation">(</span><span class="token builtin">GWSeverError</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> <span class="token function">server</span><span class="token punctuation">(</span><span class="token class-name">GWSeverError</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p><code>GWError</code>&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E86;<code>LocalizedError</code>&#x3001;<code>CustomNSError</code>&#xFF1A;</p>
-<pre class="language-"><code class="lang-swift"><span class="token keyword">extension</span> <span class="token builtin">GWError</span><span class="token punctuation">:</span> <span class="token builtin">LocalizedError</span> <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">extension</span> <span class="token class-name">GWError</span><span class="token punctuation">:</span> <span class="token class-name">LocalizedError</span> <span class="token punctuation">{</span>
     <span class="token comment">// &#x9519;&#x8BEF;&#x63CF;&#x8FF0;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorDescription<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorDescription<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span> <span class="token punctuation">{</span>
         <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">{</span>
         <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">moya</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> error<span class="token punctuation">.</span>gwErrorDescription <span class="token operator">?</span><span class="token operator">?</span> <span class="token builtin">GWI18n</span><span class="token punctuation">.</span>R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>localizable<span class="token punctuation">.</span><span class="token function">base_net_erroe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> error<span class="token punctuation">.</span>gwErrorDescription <span class="token operator">??</span> <span class="token class-name">GWI18n</span><span class="token punctuation">.</span><span class="token class-name">R</span><span class="token punctuation">.</span>string<span class="token punctuation">.</span>localizable<span class="token punctuation">.</span><span class="token function">base_net_erroe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">client</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> error<span class="token punctuation">.</span>errorDescription
         <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">server</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -3694,11 +3694,11 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">extension</span> <span class="token builtin">GWError</span><span class="token punctuation">:</span> <span class="token builtin">CustomNSError</span> <span class="token punctuation">{</span> <span class="token comment">/// The domain of the error.</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">var</span> errorDomain<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token operator">=</span> <span class="token string">&quot;com.gwm.error&quot;</span>
+<span class="token keyword">extension</span> <span class="token class-name">GWError</span><span class="token punctuation">:</span> <span class="token class-name">CustomNSError</span> <span class="token punctuation">{</span> <span class="token comment">/// The domain of the error.</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">var</span> errorDomain<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;com.gwm.error&quot;</span></span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x7801;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorCode<span class="token punctuation">:</span> <span class="token builtin">Int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorCode<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">{</span>
         <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">{</span>
         <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">moya</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> error<span class="token punctuation">.</span>errorCode
@@ -3710,15 +3710,15 @@
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x4FE1;&#x606F;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorUserInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
-        <span class="token keyword">var</span> userInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
-        userInfo<span class="token punctuation">[</span><span class="token builtin">NSLocalizedDescriptionKey</span><span class="token punctuation">]</span> <span class="token operator">=</span> errorDescription
-        userInfo<span class="token punctuation">[</span><span class="token builtin">NSUnderlyingErrorKey</span><span class="token punctuation">]</span> <span class="token operator">=</span> underlyingError
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorUserInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">String</span><span class="token punctuation">:</span> <span class="token keyword">Any</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> userInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">String</span><span class="token punctuation">:</span> <span class="token keyword">Any</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+        userInfo<span class="token punctuation">[</span><span class="token class-name">NSLocalizedDescriptionKey</span><span class="token punctuation">]</span> <span class="token operator">=</span> errorDescription
+        userInfo<span class="token punctuation">[</span><span class="token class-name">NSUnderlyingErrorKey</span><span class="token punctuation">]</span> <span class="token operator">=</span> underlyingError
         <span class="token keyword">return</span> userInfo
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x5185;&#x90E8;&#x9519;&#x8BEF;</span>
-    <span class="token keyword">internal</span> <span class="token keyword">var</span> underlyingError<span class="token punctuation">:</span> <span class="token builtin">Swift</span><span class="token punctuation">.</span><span class="token builtin">Error</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> underlyingError<span class="token punctuation">:</span> <span class="token class-name">Swift</span><span class="token punctuation">.</span><span class="token class-name">Error</span><span class="token operator">?</span> <span class="token punctuation">{</span>
         <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">{</span>
         <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">moya</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">return</span> error
         <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">client</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">return</span> error
@@ -3729,7 +3729,7 @@
 </code></pre>
 <p>&#x4E3A;&#x4E86;&#x517C;&#x5BB9;&#x8001;&#x4EE3;&#x7801;&#xFF0C;&#x4FDD;&#x7559;&#x4E86;<code>statusCode</code>&#x3001;<code>message</code>&#x3001;<code>code</code>&#x4E09;&#x4E2A;&#x5C5E;&#x6027;&#xFF1A;</p>
 <pre class="language-"><code class="lang-swift"><span class="token comment">// &#x72B6;&#x6001;&#x7801;</span>
-<span class="token keyword">public</span> <span class="token keyword">var</span> statusCode<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span> <span class="token keyword">var</span> statusCode<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token operator">?</span> <span class="token punctuation">{</span>
     <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">{</span>
     <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">moya</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> error<span class="token punctuation">.</span>response<span class="token operator">?</span><span class="token punctuation">.</span>statusCode
@@ -3741,25 +3741,25 @@
 <span class="token punctuation">}</span>
 
 <span class="token comment">// &#x9519;&#x8BEF;&#x63D0;&#x793A;</span>
-<span class="token keyword">public</span> <span class="token keyword">var</span> message<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
-    errorDescription <span class="token operator">?</span><span class="token operator">?</span> <span class="token string">&quot;&quot;</span>
+<span class="token keyword">public</span> <span class="token keyword">var</span> message<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token punctuation">{</span>
+    errorDescription <span class="token operator">??</span> <span class="token string-literal"><span class="token string">&quot;&quot;</span></span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">// &#x9519;&#x8BEF;&#x7801;</span>
-<span class="token keyword">public</span> <span class="token keyword">var</span> code<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span> <span class="token keyword">var</span> code<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token punctuation">{</span>
     <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">{</span>
     <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">moya</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span>errorCode<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token class-name">String</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span>errorCode<span class="token punctuation">)</span>
     <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">client</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span>code<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token class-name">String</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span>code<span class="token punctuation">)</span>
     <span class="token keyword">case</span> <span class="token keyword">let</span> <span class="token punctuation">.</span><span class="token function">server</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span>code<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token class-name">String</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span>code<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="gwclienterror"><a name="gwclienterror" class="anchor-navigation-ex-anchor" href="#gwclienterror"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. GWClientError</h2>
 <p><code>GWClientError</code>&#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x9519;&#x8BEF;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;&#x6821;&#x9A8C;&#x903B;&#x8F91;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x4E00;&#x79CD;&#x5F02;&#x5E38;&#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x540C;&#x6837;&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E86;<code>LocalizedError</code>&#x3001;<code>CustomNSError</code>&#xFF0C;&#x76EE;&#x524D;&#x6709;&#x5982;&#x4E0B;&#x5B9A;&#x4E49;&#xFF1A;&#x3002;</p>
-<pre class="language-"><code class="lang-swift"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token builtin">GWClientError</span><span class="token punctuation">:</span> <span class="token builtin">Swift</span><span class="token punctuation">.</span><span class="token builtin">Error</span> <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">GWClientError</span><span class="token punctuation">:</span> <span class="token class-name">Swift</span><span class="token punctuation">.</span><span class="token class-name">Error</span> <span class="token punctuation">{</span>
     <span class="token comment">// &#x6CA1;&#x6709;&#x7F51;&#x7EDC;</span>
     <span class="token keyword">case</span> noNetwork
     <span class="token comment">// &#x7F51;&#x7EDC;&#x5F02;&#x5E38;</span>
@@ -3770,46 +3770,46 @@
     <span class="token keyword">case</span> postComment
 
     <span class="token comment">// &#x72B6;&#x6001;&#x7801;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> statusCode<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> statusCode<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token operator">?</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x63D0;&#x793A;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> message<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> message<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x7801;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> code<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> code<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">extension</span> <span class="token builtin">GWClientError</span><span class="token punctuation">:</span> <span class="token builtin">LocalizedError</span> <span class="token punctuation">{</span>
+<span class="token keyword">extension</span> <span class="token class-name">GWClientError</span><span class="token punctuation">:</span> <span class="token class-name">LocalizedError</span> <span class="token punctuation">{</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x63CF;&#x8FF0;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorDescription<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorDescription<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">extension</span> <span class="token builtin">GWClientError</span><span class="token punctuation">:</span> <span class="token builtin">CustomNSError</span> <span class="token punctuation">{</span><span class="token comment">/// The domain of the error.</span>
+<span class="token keyword">extension</span> <span class="token class-name">GWClientError</span><span class="token punctuation">:</span> <span class="token class-name">CustomNSError</span> <span class="token punctuation">{</span><span class="token comment">/// The domain of the error.</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">var</span> errorDomain<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token operator">=</span> <span class="token string">&quot;com.gwm.error.client&quot;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">var</span> errorDomain<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;com.gwm.error.client&quot;</span></span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x7801;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorCode<span class="token punctuation">:</span> <span class="token builtin">Int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorCode<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x4FE1;&#x606F;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorUserInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorUserInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">String</span><span class="token punctuation">:</span> <span class="token keyword">Any</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="gwsevererror"><a name="gwsevererror" class="anchor-navigation-ex-anchor" href="#gwsevererror"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. GWSeverError</h2>
 <p><code>GWSeverError</code>&#x662F;&#x670D;&#x52A1;&#x7AEF;&#x9519;&#x8BEF;&#xFF0C;&#x662F;&#x670D;&#x52A1;&#x7AEF;&#x5F02;&#x5E38;&#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x540C;&#x6837;&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E86;<code>LocalizedError</code>&#x3001;<code>CustomNSError</code>&#xFF0C;&#x76EE;&#x524D;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre class="language-"><code class="lang-swift"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token builtin">GWSeverError</span><span class="token punctuation">:</span> <span class="token builtin">Swift</span><span class="token punctuation">.</span><span class="token builtin">Error</span> <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">GWSeverError</span><span class="token punctuation">:</span> <span class="token class-name">Swift</span><span class="token punctuation">.</span><span class="token class-name">Error</span> <span class="token punctuation">{</span>
     <span class="token comment">// &#x8D44;&#x8BAF;&#x8BC4;&#x8BBA;&#x4E0D;&#x5B58;&#x5728;(&#x56DE;&#x590D;&#x8BC4;&#x8BBA;)</span>
     <span class="token keyword">case</span> newsCommentNotExist
     <span class="token comment">// &#x52A8;&#x6001;&#x8BC4;&#x8BBA;&#x4E0D;&#x5B58;&#x5728;(&#x56DE;&#x590D;&#x8BC4;&#x8BBA;)</span>
@@ -3819,48 +3819,48 @@
     <span class="token comment">// &#x52A8;&#x6001;&#x4E0D;&#x5B58;&#x5728;</span>
     <span class="token keyword">case</span> dynamicNotExist
     <span class="token comment">// &#x7ED3;&#x679C;&#x5F02;&#x5E38;</span>
-    <span class="token keyword">case</span> <span class="token function">resultException</span><span class="token punctuation">(</span>code<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token operator">?</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token operator">?</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> <span class="token function">resultException</span><span class="token punctuation">(</span>code<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token operator">?</span><span class="token punctuation">)</span>
 
     <span class="token comment">// &#x4E1A;&#x52A1;&#x5F02;&#x5E38;</span>
-    <span class="token keyword">static</span> <span class="token keyword">let</span> businessErrors<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">GWSeverError</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token keyword">static</span> <span class="token keyword">let</span> businessErrors<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">GWSeverError</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">]</span>
     <span class="token comment">// &#x6839;&#x636E;code&#x5339;&#x914D;&#x4E1A;&#x52A1;&#x5F02;&#x5E38;</span>
-    <span class="token keyword">static</span> <span class="token keyword">func</span> <span class="token function">getError</span><span class="token punctuation">(</span>code<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token operator">?</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">GWSeverError</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">func</span> <span class="token function-definition function">getError</span><span class="token punctuation">(</span>code<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">GWSeverError</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x72B6;&#x6001;&#x7801;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> statusCode<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> statusCode<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token operator">?</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x63D0;&#x793A;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> message<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> message<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x7801;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> code<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> code<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>&#x5B9E;&#x73B0;&#x4E86;<code>CustomNSError</code>&#x7684;<code>errorCode</code>,<code>errorCode</code>&#x5E94;&#x8BE5;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x9519;&#x8BEF;code&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#xFF1A;</p>
-<pre class="language-"><code class="lang-swift"><span class="token keyword">extension</span> <span class="token builtin">GWSeverError</span><span class="token punctuation">:</span> <span class="token builtin">LocalizedError</span> <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">extension</span> <span class="token class-name">GWSeverError</span><span class="token punctuation">:</span> <span class="token class-name">LocalizedError</span> <span class="token punctuation">{</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x63CF;&#x8FF0;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorDescription<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorDescription<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">extension</span> <span class="token builtin">GWSeverError</span><span class="token punctuation">:</span> <span class="token builtin">CustomNSError</span> <span class="token punctuation">{</span><span class="token comment">/// The domain of the error.</span>
+<span class="token keyword">extension</span> <span class="token class-name">GWSeverError</span><span class="token punctuation">:</span> <span class="token class-name">CustomNSError</span> <span class="token punctuation">{</span><span class="token comment">/// The domain of the error.</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">var</span> errorDomain<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token operator">=</span> <span class="token string">&quot;com.gwm.error.server&quot;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">var</span> errorDomain<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;com.gwm.error.server&quot;</span></span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x7801;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorCode<span class="token punctuation">:</span> <span class="token builtin">Int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorCode<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">{</span>
         <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">{</span>
         <span class="token comment">// &#x8D44;&#x8BAF;&#x8BC4;&#x8BBA;&#x4E0D;&#x5B58;&#x5728;(&#x56DE;&#x590D;&#x8BC4;&#x8BBA;)</span>
         <span class="token keyword">case</span> <span class="token punctuation">.</span>newsCommentNotExist<span class="token punctuation">:</span>
@@ -3874,13 +3874,13 @@
         <span class="token comment">// &#x52A8;&#x6001;&#x4E0D;&#x5B58;&#x5728;</span>
         <span class="token keyword">case</span> <span class="token punctuation">.</span>dynamicNotExist<span class="token punctuation">:</span>
             <span class="token keyword">return</span> <span class="token number">712200</span>
-        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">resultException</span><span class="token punctuation">(</span><span class="token keyword">let</span> code<span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token number">_</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token number">_</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">resultException</span><span class="token punctuation">(</span><span class="token keyword">let</span> code<span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token omit keyword">_</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token omit keyword">_</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> code
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">// &#x9519;&#x8BEF;&#x4FE1;&#x606F;</span>
-    <span class="token keyword">public</span> <span class="token keyword">var</span> errorUserInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">:</span> <span class="token builtin">Any</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> errorUserInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">String</span><span class="token punctuation">:</span> <span class="token keyword">Any</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -3888,15 +3888,15 @@
 <h2 id="&#x670D;&#x52A1;&#x7AEF;&#x901A;&#x7528;&#x9519;&#x8BEF;"><a name="&#x670D;&#x52A1;&#x7AEF;&#x901A;&#x7528;&#x9519;&#x8BEF;" class="anchor-navigation-ex-anchor" href="#&#x670D;&#x52A1;&#x7AEF;&#x901A;&#x7528;&#x9519;&#x8BEF;"><i class="fa fa-link" aria-hidden="true"></i></a>1.5. &#x670D;&#x52A1;&#x7AEF;&#x901A;&#x7528;&#x9519;&#x8BEF;</h2>
 <p>&#x5F53;&#x670D;&#x52A1;&#x7AEF;&#x8FD4;&#x56DE;&#x7684;&#x9519;&#x8BEF;&#x7801;&#x4E0D;&#x5339;&#x914D;&#x6211;&#x4EEC;&#x7EA6;&#x5B9A;&#x7684;errorCode&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x7EDF;&#x4E00;&#x4F7F;&#x7528;<code>resultException</code>&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x9519;&#x8BEF;&#xFF0C;<code>resultException</code>&#x6709;<code>code</code>&#x3001;<code>msg</code>&#x3001;<code>statusCode</code>&#x4E09;&#x4E2A;&#x5173;&#x8054;&#x5C5E;&#x6027;&#x3002;</p>
 <pre class="language-"><code class="lang-swift"><span class="token comment">// &#x4E1A;&#x52A1;&#x5F02;&#x5E38;</span>
-<span class="token keyword">static</span> <span class="token keyword">let</span> businessErrors<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">GWSeverError</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+<span class="token keyword">static</span> <span class="token keyword">let</span> businessErrors<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">GWSeverError</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
     <span class="token punctuation">.</span>newsCommentNotExist<span class="token punctuation">,</span>
     <span class="token punctuation">.</span>dynamicCommentNotExist<span class="token punctuation">,</span>
     <span class="token punctuation">.</span>dynamicNotExist<span class="token punctuation">,</span>
     <span class="token punctuation">.</span>dynamicCommentNotExistOnQuery
 <span class="token punctuation">]</span>
 <span class="token comment">// &#x6839;&#x636E;code&#x5339;&#x914D;&#x4E1A;&#x52A1;&#x5F02;&#x5E38;</span>
-<span class="token keyword">static</span> <span class="token keyword">func</span> <span class="token function">getError</span><span class="token punctuation">(</span>code<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token operator">?</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token builtin">Int</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">GWSeverError</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token keyword">let</span> customError <span class="token operator">=</span> businessErrors<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">{</span> $<span class="token number">0</span><span class="token punctuation">.</span>errorCode <span class="token operator">==</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">first</span> <span class="token punctuation">{</span>
+<span class="token keyword">static</span> <span class="token keyword">func</span> <span class="token function-definition function">getError</span><span class="token punctuation">(</span>code<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">GWSeverError</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> customError <span class="token operator">=</span> businessErrors<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>errorCode <span class="token operator">==</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>first <span class="token punctuation">{</span>
         <span class="token keyword">return</span> customError
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token punctuation">.</span><span class="token function">resultException</span><span class="token punctuation">(</span>code<span class="token punctuation">:</span> code<span class="token punctuation">,</span> msg<span class="token punctuation">:</span> msg<span class="token punctuation">,</span> statusCode<span class="token punctuation">:</span> statusCode<span class="token punctuation">)</span>
@@ -3904,22 +3904,22 @@
 </code></pre>
 <h2 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;"><a name="&#x5982;&#x4F55;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>1.6. &#x5982;&#x4F55;&#x4F7F;&#x7528;</h2>
 <p>&#x5BA2;&#x6237;&#x7AEF;&#x9519;&#x8BEF;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x4E0B;&#x9762;&#x662F;&#x6CA1;&#x6709;&#x7F51;&#x7EDC;&#x7684;&#x65F6;&#x5019;&#x8FD4;&#x56DE;&#x4E86;<code>noNetwork</code>&#x5F02;&#x5E38;&#xFF1A;</p>
-<pre class="language-"><code class="lang-swift"><span class="token keyword">if</span> <span class="token function">NetworkReachabilityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>isReachable <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token punctuation">{</span>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">if</span> <span class="token class-name">NetworkReachabilityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>isReachable <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token punctuation">{</span>
     failedCallBack<span class="token operator">?</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">client</span><span class="token punctuation">(</span><span class="token punctuation">.</span>noNetwork<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token constant">nil</span>
+    <span class="token keyword">return</span> <span class="token nil constant">nil</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>&#x670D;&#x52A1;&#x7AEF;&#x9519;&#x8BEF;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x4E0B;&#x9762;&#x662F;&#x5224;&#x65AD;&#x8BC4;&#x8BBA;&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;&#x4E86;<code>newsCommentNotExist</code>&#x5F02;&#x5E38;&#xFF1A;</p>
 <pre class="language-"><code class="lang-swift"><span class="token punctuation">}</span><span class="token punctuation">,</span> onError<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token keyword">in</span>
     <span class="token comment">// &#x5339;&#x914D;&#x81EA;&#x5B9A;&#x4E49;&#x9519;&#x8BEF;</span>
-    <span class="token keyword">if</span> <span class="token keyword">let</span> gwError <span class="token operator">=</span> error <span class="token keyword">as</span><span class="token operator">?</span> <span class="token builtin">GWError</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> gwError<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token builtin">GWSeverError</span><span class="token punctuation">.</span>newsCommentNotExist<span class="token punctuation">.</span>code <span class="token punctuation">{</span>
-            observer<span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span><span class="token builtin">GWError</span><span class="token punctuation">.</span><span class="token function">server</span><span class="token punctuation">(</span><span class="token punctuation">.</span>newsCommentNotExist<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> gwError <span class="token operator">=</span> error <span class="token keyword">as</span><span class="token operator">?</span> <span class="token class-name">GWError</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> gwError<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token class-name">GWSeverError</span><span class="token punctuation">.</span>newsCommentNotExist<span class="token punctuation">.</span>code <span class="token punctuation">{</span>
+            observer<span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span><span class="token class-name">GWError</span><span class="token punctuation">.</span><span class="token function">server</span><span class="token punctuation">(</span><span class="token punctuation">.</span>newsCommentNotExist<span class="token punctuation">)</span><span class="token punctuation">)</span>
             observer<span class="token punctuation">.</span><span class="token function">onCompleted</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token keyword">return</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-    observer<span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span><span class="token builtin">GWError</span><span class="token punctuation">.</span><span class="token function">client</span><span class="token punctuation">(</span><span class="token punctuation">.</span>postComment<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    observer<span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span><span class="token class-name">GWError</span><span class="token punctuation">.</span><span class="token function">client</span><span class="token punctuation">(</span><span class="token punctuation">.</span>postComment<span class="token punctuation">)</span><span class="token punctuation">)</span>
     observer<span class="token punctuation">.</span><span class="token function">onCompleted</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
@@ -3967,7 +3967,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"GWError的使用","level":"1.9.9.16","depth":3,"next":{"title":"Universal Links","level":"1.9.9.17","depth":3,"path":"pages/other/Universal_Links.md","ref":"pages/other/Universal_Links.md","articles":[]},"previous":{"title":"自定义错误","level":"1.9.9.15","depth":3,"path":"pages/other/custom_error.md","ref":"pages/other/custom_error.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","klipse","popup","todo","hide-element","simple-mind-map","mermaid-gb3","anchor-navigation-ex","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"night","family":"serif","size":1},"mermaid-gb3":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/other/GWError_usage.md","mtime":"2023-12-14T17:11:54.024Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-12-14T18:33:53.204Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"GWError的使用","level":"1.9.9.16","depth":3,"next":{"title":"Universal Links","level":"1.9.9.17","depth":3,"path":"pages/other/Universal_Links.md","ref":"pages/other/Universal_Links.md","articles":[]},"previous":{"title":"自定义错误","level":"1.9.9.15","depth":3,"path":"pages/other/custom_error.md","ref":"pages/other/custom_error.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","-lunr","-search","search-pro","-sharing","chapter-fold","flexible-alerts","prism","expandable-chapters-small","expandable-chapters","github","splitter","copy-code-button","klipse","popup","todo","hide-element","simple-mind-map","mermaid-gb3","anchor-navigation-ex","statistics"],"styles":{"pdf":"./styles/pdf.css","website":"./styles/website.css"},"pluginsConfig":{"chapter-fold":{},"prism":{"css":["prismjs/themes/prism.css"]},"statistics":{"bd_url":"https://hm.baidu.com/hm.js","cnzz_url":"https://s95.cnzz.com/z_stat.php","google_url":"https://www.googletagmanager.com/gtag/js","bd_token":"f2185c597b86bd4be32b1fc0d26bdee5"},"github":{"url":"https://github.com/chenchangqing"},"todo":{},"splitter":{},"search-pro":{},"popup":{},"hide-element":{"elements":[".summary .gitbook-link"]},"fontsettings":{"theme":"night","family":"serif","size":1},"mermaid-gb3":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Attention"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"simple-mind-map":{"autoFit":true,"linkShape":"diagonal","preset":"default","style":{},"type":"markdown"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"陈长青","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":0,"left":0,"top":0,"bottom":0},"fontSize":14,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"技术博客","language":"zh-hans","links":{},"gitbook":"*","description":"每天进步一点点","extension":null},"file":{"path":"pages/other/GWError_usage.md","mtime":"2023-12-15T14:24:04.184Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-12-15T17:19:35.651Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
