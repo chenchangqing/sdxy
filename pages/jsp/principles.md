@@ -1,6 +1,8 @@
 # JSP原理
 ---
 
+* 23.12.16 1:16更新
+
 ## 我的第一个JSP程序
 
 1）在WEB-INF目录之外创建一个index.jsp文件，然后这个文件没有任何内容。  
@@ -91,7 +93,68 @@ out.print();
 ```
 >当输出的内容中含有java的变量，输出的内容是一个动态的内容，不是一个死的字符串。如果输出是一个固定的字符串，直接在JSP文件中编写科技。
 
+## JSP指令
+
+指导JSP的翻译引擎如何工作。
+
+* include：包含，在JSP中完成静态包含。
+* taglib：引入标签库，例如：JSTL标签。
+* page：可以指定contetType等
+* 语法：<%@指令名 属性名=属性值%>
+
+## page指令
+
+* `<%@page session="true/false"%>`：true表示启用JSP的内置对象session，false，反之不启用session。
+* `<%@page contentType="text/json"%>`：contentType属性用来设置响应的内容类型。
+* `<%@page pageEncoding="UTF-8"%>`：设置字符集编码。
+
+>`<%@page contentType="text/json;charset=UTF-8"%>` 和 `<%@page contentType="text/json" pageEncoding="UTF-8"%>`功能一样。
+
+* `<%@page import="java.util.list"%>`：导入包。
+* `<%@page errorPage="/error.jsp"%>`：当java程序出现错误后，会跳转到error.jsp页面。
+
+>注意：当配置了errorPage时，需要在errorPage输出错误堆栈信息，要不然程序员无法获取错误信息日志。
+
+* `<%@page isErrorPage="true"%>`：表示启用JSP九大内置对象之一：exception，默认是false。配置错误error.jsp页面：
+
+```java
+<%@page contentType="text/html;chartset=UTF-8" %>
+<%-- 在错误页面启用JSP九大内置对象之：exception--%>
+<%--exception内置对象就是刚刚发生的异常对象。--%>
+<%@page isErrorPage="true"%>
+<html>
+<head>
+	<title>error</title>
+</head>
+<body>
+<h1>网络繁忙，稍后再试！！！</h1>
+<%--打印异常堆栈信息，输出到后台控制台，exception是九大内置对象之一。--%>
+<%
+	exception.printStackTrace();
+%>
+</body>
+</html>
+```
+
+## JSP的九大内置对象
+
+* pageContext：页面作用域。
+* request：请求作用域。
+* session：会话作用域。
+* application：应用作用域。
+
+> * pageContext<request<session<application
+* 以上四个作用域都用：setAttribute getAttribute removeAttribute class中的方法。
+* 以上作用域的使用原则：尽可能使用小的域。
+
+* exception：打印异常堆栈信息。
+* config：获取web.xml的配置信息。
+* page：其实就是this，当前的servlet对象。
+* out：负责输出。
+* response：负责响应。
+
 ## 视频
 
-start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=36  
-end:https://www.bilibili.com/video/BV1Z3411C7NZ?p=37
+* start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=36  
+* end:https://www.bilibili.com/video/BV1Z3411C7NZ?p=37
+* end:https://www.bilibili.com/video/BV1Z3411C7NZ?p=50

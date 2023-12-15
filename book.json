@@ -60,9 +60,9 @@
       ]
     },
     "fontsettings": {
-        "theme": "night",
-        "family": "serif",
-        "size": 1
+      "theme": "night",
+      "family": "serif",
+      "size": 1
     },
     "statistics": {
       "bd_token": "f2185c597b86bd4be32b1fc0d26bdee5"

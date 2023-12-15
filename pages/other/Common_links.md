@@ -167,6 +167,9 @@
 * [案例](https://www.chengweiyang.cn/gitbook/customize/book.json.html)
 * [jim](https://jiangminggithub.github.io/gitbook/)
 * [GITBOOK](https://kuang.netlify.app/blog/gitbook.html)
+* [npm的官方网站-gitbook-plugin](https://www.npmjs.com/search?q=gitbook-plugin)
+* [npm的官方网站-gitbook-theme](https://www.npmjs.com/search?q=gitbook-theme)
+* [GitBook插件官网](https://docs.gitbook.com/)
 
 ## 百度统计
 
