@@ -1,4 +1,3 @@
- 
 # EL表达式
 ---
 
@@ -24,15 +23,15 @@
 
 ```java
 <%
-    // 创建User对象
-    User user = new User();
-    user.setUsername("jackson");
-    user.setPassword("1234");
-    user.setAge(18);
+	// 创建User对象
+	User user = new User();
+	user.setUsername("jackson");
+	user.setPassword("1234");
+	user.setAge(18);
 
-    // 将User对象存储到某个域当中。一定要存，因为EL表达式只能从某个域范围中取数据。
-    // 数据是必须存储到四大域之一的。
-    request.setAttribute("userObj", user);
+	// 将User对象存储到某个域当中。一定要存，因为EL表达式只能从某个域范围中取数据。
+	// 数据是必须存储到四大域之一的。
+	request.setAttribute("userObj", user);
 %>
 ${userObj}
 
@@ -128,27 +127,27 @@ application.getInitParameter("pageNum")；
 ${"abc"=="abc"}：显示true。
 ```java
 <%
-    Object obj = new Object();
-    request.setAttribute("k1", obj);
-    request.setAttribute("k2", obj);
+	Object obj = new Object();
+	request.setAttribute("k1", obj);
+	request.setAttribute("k2", obj);
 %>
 ```
 ${k1 == k2}：显示true。
 ```java
 <%
-    String s1 = new String("abc");
-    String s2 = new String("abc");
-    request.setAttribute("s1", s1);
-    request.setAttribute("s2", s2);
+	String s1 = new String("abc");
+	String s2 = new String("abc");
+	request.setAttribute("s1", s1);
+	request.setAttribute("s2", s2);
 %>
 ```
 ${s1 == s2}：显示true，因为String重写了equals方法。
 ```java
 <%
-    Object obj1 = new Object();
-    Object obj2 = new Object();
-    request.setAttribute("obj1", obj1);
-    request.setAttribute("obj2", obj2);
+	Object obj1 = new Object();
+	Object obj2 = new Object();
+	request.setAttribute("obj1", obj1);
+	request.setAttribute("obj2", obj2);
 %>
 ```
 ${obj1 == obj2}：显示false。
@@ -180,11 +179,3 @@ ${empty param.username ? "对不起，用户名不能为空" : "欢迎访问"}
 
 * start：https://www.bilibili.com/video/BV1Z3411C7NZ?p=51
 * end://www.bilibili.com/video/BV1Z3411C7NZ?p=53
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-

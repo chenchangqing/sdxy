@@ -43,6 +43,7 @@
     * [Servlet+JSP项目改造](pages/jsp/servletjsp.md)
     * [Session](pages/jsp/session.md)
     * [Cookie](pages/jsp/cookie.md)
+    * [EL表达式](pages/jsp/el.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS
