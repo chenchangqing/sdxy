@@ -44,6 +44,7 @@
     * [Session](pages/jsp/session.md)
     * [Cookie](pages/jsp/cookie.md)
     * [EL表达式](pages/jsp/el.md)
+    * [JSTL标签库](pages/jsp/jstl.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS

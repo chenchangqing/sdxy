@@ -178,4 +178,4 @@ ${empty param.username ? "对不起，用户名不能为空" : "欢迎访问"}
 ## 视频
 
 * start：https://www.bilibili.com/video/BV1Z3411C7NZ?p=51
-* end://www.bilibili.com/video/BV1Z3411C7NZ?p=53
+* end：https://www.bilibili.com/video/BV1Z3411C7NZ?p=53
