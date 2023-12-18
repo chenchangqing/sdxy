@@ -2,6 +2,7 @@
 ---
 * 23.12.17 23:41开始
 * 23.12.18 0:50更新
+* 23.12.18 21:25更新
 
 ## 什么是监听器
 
@@ -105,6 +106,34 @@ User实现了HttpSessionBindingListener，会触发监听方法。
 
 * 不考虑登录：可以使用`HttpSessionAttributeListener`实现。
 * 考虑登录：需要使用`HttpSessionBindingListener`。
+
+```java
+public class User implements HttpSessionBindingListener {
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		// 获取ServletContext对象
+		ServletContext application = event.getSession().getServletContext();
+		// 获取在线人数
+		Object onlinecount = application.getAttribute("onlinecount");
+		if (onlinecount == null) {
+			application.setAttribute("onlinecount", 1);
+		} else {
+			int count = (Integer)onlinecount;
+			count++;
+			application.setAttribute("onlinecount", count);
+		}
+	}
+
+	@Override
+	public void valueUnBound(HttpSessionBindingEvent event) {
+		// 获取ServletContext对象
+		ServletContext application = event.getSession().getServletContext();
+		Integer onlinecount = (Integer)application.getAttribute("onlinecount");
+		onlinecount--;
+		application.setAttribute("onlinecount", count);
+	}
+}
+```
 
 ## HttpSessionActivationListener
 
