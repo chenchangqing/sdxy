@@ -143,5 +143,5 @@ document.location.href = "${pageContext.request.contextPath}/dept/delete?deptno=
 ```
 ## 视频
 
-* start://www.bilibili.com/video/BV1Z3411C7NZ?p=54
-* end://www.bilibili.com/video/BV1Z3411C7NZ?p=55
+* start：http://www.bilibili.com/video/BV1Z3411C7NZ?p=54
+* end：http://www.bilibili.com/video/BV1Z3411C7NZ?p=55
