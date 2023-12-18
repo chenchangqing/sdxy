@@ -1,6 +1,8 @@
 # Mac下配置MySQL驱动
+---
+* 23.12.19 1:08更新
 
-### 下载MySQL驱动jar
+## 下载MySQL驱动jar
 
 官网地址：https://dev.mysql.com/downloads/connector/j/
 
@@ -10,7 +12,7 @@
 ```
 以上是jar路径，也就是驱动所在位置。
 
-### 配置驱动
+## 配置驱动
 
 如果没有配置过JDK，先配置JDK，参考：http://www.1221.site/pages/java/configenv.html
 
@@ -27,4 +29,3 @@ source ~/.bash_profile
 ```
 
 >参考：https://blog.csdn.net/pan_junbiao/article/details/86626741
-
