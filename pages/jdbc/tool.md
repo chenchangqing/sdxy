@@ -1,6 +1,7 @@
 # JDBC工具类
 ---
 * 23.12.18 22:46更新
+* 23.12.19 23:32更新
 
 ## DBUtil
 
@@ -32,6 +33,9 @@ public class DBUtil {
 		}
 	}
 
+	// 这个对象实际上在服务器中只有一个
+	private static ThreadLocal<Connection> local = new ThreadLocal<>();
+
 	/**
 	 * 获取数据库连接对象
 	 * 
@@ -39,7 +43,12 @@ public class DBUtil {
 	 * @throws SQLException
 	 */
 	public static Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password);
+		Connection conn = local.get();
+		if (conn == null) {
+			conn = DriverManager.getConnection(url, user, password);
+			local.set(conn);
+		}
+		return conn;
 	}
 
 	/**
@@ -66,6 +75,8 @@ public class DBUtil {
 		if (conn != null) {
 			try {
 				conn.close()
+				// Tomcat服务器是支持县城池的，也就是说一个人用过了t1线程，t1线程还有可能被其他用户使用。
+				local.remove();
 			} catch(SQLException e) {
 				e.printStackTrace();
 			}
