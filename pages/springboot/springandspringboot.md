@@ -7,7 +7,7 @@
 
 https://spring.io/
 
-![](pages/springboot//images/springboot_springandspringboot_01.png)
+![](./images/springboot_springandspringboot_01.png)
 
 * Microservices（微服务）：一个项目功能模块很多，将每一个功能模块拆解成一个微小的服务，独立运行。
 * Reactive（响应式编程）：构建异步数据流，占用少量的线程，少量cpu及内存资源，构建高吞吐量的应用。
@@ -21,7 +21,7 @@ https://spring.io/
 
 https://spring.io/projects/spring-boot/
 
-![](pages/springboot//images/springboot_springandspringboot_02.png)
+![](./images/springboot_springandspringboot_02.png)
 
 * Spring Framework（Web开发）
 * Spring Data（数据访问）
@@ -39,7 +39,7 @@ https://spring.io/projects/spring-boot/
 
 * 响应式编程：https://spring.io/reactive/
 
-![](pages/springboot//images/springboot_springandspringboot_03.png)
+![](./images/springboot_springandspringboot_03.png)
 
 * 内部源码设计：基于Java8的一些新特性，如：接口默认实现，重新设计源码架构。
 
@@ -65,17 +65,17 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 ## SpringBoot优点
 
 * Create stand-alone Spring applications
-    * 创建独立Spring应用
+	* 创建独立Spring应用
 * Embed Tomcat, Jetty or Undertow directly (no need to deploy WAR files)
-    * 内嵌web服务器
+	* 内嵌web服务器
 * Provide opinionated 'starter' dependencies to simplify your build configuration
-    * 自动starter依赖，简化构建配置
+	* 自动starter依赖，简化构建配置
 * Automatically configure Spring and 3rd party libraries whenever possible
-    * 自动配置Spring以及第三方功能
+	* 自动配置Spring以及第三方功能
 * Provide production-ready features such as metrics, health checks, and externalized configuration
-    * 提供生产级别的监控、健康检查及外部化配置
+	* 提供生产级别的监控、健康检查及外部化配置
 * Absolutely no code generation and no requirement for XML configuration
-    * 无代码生成、无需编写XML
+	* 无代码生成、无需编写XML
 
 ## SpringBoot缺点
 
@@ -91,11 +91,3 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 
 * start：https://www.bilibili.com/video/BV19K4y1L7MT?p=1
 * end：https://www.bilibili.com/video/BV19K4y1L7MT?p=2
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-
