@@ -81,16 +81,16 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.h
 http://1221.site/pages/idea/createp.html#%E4%BD%BF%E7%94%A8maven%E5%88%9B%E5%BB%BAspringboot%E9%A1%B9%E7%9B%AE
 
 #### 1）点击`New Project`
-![](pages/springboot/images/springboot_started_01.png)
+![](./images/springboot_started_01.png)
 
 #### 2）项目设置
-![](pages/springboot/images/springboot_started_02.png)
+![](./images/springboot_started_02.png)
 
 #### 3）Create
-![](pages/springboot/images/springboot_started_03.png)
+![](./images/springboot_started_03.png)
 
 #### 4）pom.xml
-![](pages/springboot/images/springboot_started_04.png)
+![](./images/springboot_started_04.png)
 
 ### 默认会有一个Main入口
 
@@ -123,10 +123,10 @@ public class HelloController {
 
 在`Springboot01HelloworldApplication`运行main方法：
 
-![](pages/springboot/images/springboot_started_05.png)
+![](./images/springboot_started_05.png)
 
 #### 发现错误
-![](pages/springboot/images/springboot_started_06.png)
+![](./images/springboot_started_06.png)
 
 >springboot3.2.1不支持jdk1.8，需要更新到java17
 
@@ -158,7 +158,7 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.h
 
 ### 打包
 
-![](pages/springboot/images/springboot_started_07.png)
+![](./images/springboot_started_07.png)
 
 ### 找到jar
 
@@ -176,11 +176,3 @@ java -jar xxx-1.0-SNAPSHOT.jar
 
 * start：https://www.bilibili.com/video/BV19K4y1L7MT?p=5
 * start：https://www.bilibili.com/video/BV19K4y1L7MT?p=6
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
-

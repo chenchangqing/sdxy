@@ -147,7 +147,8 @@ SpringBoot + SpringCloud
 3. 点击`Reference Doc.`
 
 ![](./images/springboot_springandspringboot_06.png)
-* Documentation Overview（文档）：https://docs.spring.io/spring-boot/docs/current/reference/html/documentation.html#documentation
+* Documentation Overview（文档）
+	* https://docs.spring.io/spring-boot/docs/current/reference/html/documentation.html#documentation
 	* 可以下载PDF
 * Getting Started（入门）
 * Using Spring Boot（使用Spring Boot）
@@ -163,4 +164,4 @@ SpringBoot + SpringCloud
 ## 视频地址
 
 * start：https://www.bilibili.com/video/BV19K4y1L7MT?p=1
-* end：https://www.bilibili.com/video/BV19K4y1L7MT?p=2
+* end：https://www.bilibili.com/video/BV19K4y1L7MT?p=4
