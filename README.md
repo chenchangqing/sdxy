@@ -8,7 +8,7 @@
 
 https://spring.io/
 
-![](./images/springboot_springandspringboot_01.png)
+![](pages/springboot/images/springboot_springandspringboot_01.png)
 
 * Microservices（微服务）：一个项目功能模块很多，将每一个功能模块拆解成一个微小的服务，独立运行。
 * Reactive（响应式编程）：构建异步数据流，占用少量的线程，少量cpu及内存资源，构建高吞吐量的应用。
@@ -22,7 +22,7 @@ https://spring.io/
 
 https://spring.io/projects/spring-boot/
 
-![](./images/springboot_springandspringboot_02.png)
+![](pages/springboot/images/springboot_springandspringboot_02.png)
 
 * Spring Framework（Web开发）
 * Spring Data（数据访问）
@@ -40,7 +40,7 @@ https://spring.io/projects/spring-boot/
 
 * 响应式编程：https://spring.io/reactive/
 
-![](./images/springboot_springandspringboot_03.png)
+![](pages/springboot/images/springboot_springandspringboot_03.png)
 
 * 内部源码设计：基于Java8的一些新特性，如：接口默认实现，重新设计源码架构。
 
@@ -87,7 +87,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 
 https://martinfowler.com/microservices/
 
-![](./images/springboot_springandspringboot_04.png)
+![](pages/springboot/images/springboot_springandspringboot_04.png)
 
 * 微服务是一种架构风格
 * 一个应用拆分为一组小型服务
@@ -115,7 +115,7 @@ https://martinfowler.com/microservices/
 
 SpringBoot + SpringCloud
 
-![](./images/springboot_springandspringboot_05.png)
+![](pages/springboot/images/springboot_springandspringboot_05.png)
 
 ## 云原生
 
@@ -146,7 +146,7 @@ SpringBoot + SpringCloud
 2. 点击`LEARN`，`CURRENT`当前版本，`xxx-SNAPSHOT`快照版本，`RELEASE`已发布。
 3. 点击`Reference Doc.`
 
-![](./images/springboot_springandspringboot_06.png)
+![](pages/springboot/images/springboot_springandspringboot_06.png)
 * Documentation Overview（文档）：https://docs.spring.io/spring-boot/docs/current/reference/html/documentation.html#documentation
     * 可以下载PDF
 * Getting Started（入门）
