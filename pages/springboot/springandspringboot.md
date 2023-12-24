@@ -2,6 +2,7 @@
 ---
 * 23.12.23 20:55开始
 * 23.12.23 23:17更新
+* 23.12.24 22:50更新
 
 ## Spring的能力
 
@@ -81,6 +82,78 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 
 * 人称版本帝，迭代快，需要时刻关注变化
 * 封装太深，内部原理复杂，不容易精通
+
+## 微服务
+
+https://martinfowler.com/microservices/
+
+![](./images/springboot_springandspringboot_04.png)
+
+* 微服务是一种架构风格
+* 一个应用拆分为一组小型服务
+* 每个服务运行在自己的进程内，也就是可独立部署和升级
+* 服务之间使用轻量级HTTP交互
+* 服务围绕业务功能拆分
+* 可以由全自动部署机制独立部署
+* 去中心化，服务自治。服务可以使用不同的语言、不同的存储技术
+
+## 分布式
+
+### 分布式的困难
+* 远程调用：Http方式
+* 服务发现：找到服务可用的机器
+* 负载均衡
+* 服务容错：A服务调用B服务失败，如何处理。
+* 配置管理：建立配置中心，相同服务去配置中心更新。
+* 服务监控：对服务健康状况的监测。
+* 链路追踪：服务A调B服务，B服务调用C服务，C服务出现问题，如何排查。
+* 日志管理
+* 任务调度：服务A有个定时任务，所有机器怎么同步，并发还是串行。
+* ......
+
+### 分布式的解决
+
+SpringBoot + SpringCloud
+
+![](./images/springboot_springandspringboot_05.png)
+
+## 云原生
+
+原生应用如何上云。 Cloud Native
+
+### 上云的困难
+
+* 服务自愈：服务A的一台机器挂了，自动拉起一台新机器，部署服务A。
+* 弹性伸缩：流量高峰自动增加服务部署，流量低峰家少服务器部署。
+* 服务隔离：一台机器同时部署了服务A、B、C，A服务挂了，不影响其他服务。
+* 自动化部署
+* 灰度发布：更新服务只更新其中一台机器，其他机器的服务依然保持旧版本，经过时间验证，更新的服务没有问题，在全部更新。
+* 流量治理：机器A性能不好，让A负载低一些。
+* ......
+
+### 上云的解决
+
+* 初识云原生
+* 深入Docker-容器化技术
+* 掌握星际容器编排Kubernetes
+* DevOps-实战企业CI/CD，构建企业云平台
+* 拥抱新一代架构Service Mesh与Serverless
+* 云上架构与场景方案实战
+
+## 如何学习SpringBoot
+
+1. 进入官网：https://spring.io/projects/spring-boot/
+2. 点击`LEARN`，`CURRENT`当前版本，`xxx-SNAPSHOT`快照版本，`RELEASE`已发布。
+3. 点击`Reference Doc.`
+
+![](./images/springboot_springandspringboot_06.png)
+* Documentation Overview（文档）：https://docs.spring.io/spring-boot/docs/current/reference/html/documentation.html#documentation
+	* 可以下载PDF
+* Getting Started（入门）
+* Using Spring Boot（使用Spring Boot）
+* Core Features（核心特性）
+
+查看版本更新日志：https://github.com/spring-projects/spring-boot/wiki#release-notes
 
 ## 学习资料
 
