@@ -175,4 +175,4 @@ java -jar xxx-1.0-SNAPSHOT.jar
 ## 视频地址
 
 * start：https://www.bilibili.com/video/BV19K4y1L7MT?p=5
-* start：https://www.bilibili.com/video/BV19K4y1L7MT?p=6
+* end：https://www.bilibili.com/video/BV19K4y1L7MT?p=5
