@@ -58,7 +58,7 @@ static class Registrar implements ImportBeanDefinitionRegistrar, DeterminableImp
 * `@AutoConfigurationPackage`是标注在`xxxApplication`类上。
 * 计算包名：`new PackageImports(metadata)).getPackageNames()`
 
-<img src="pages/springboot/images/springboot_autoconfigprinciple_01.png" alt="img" width="50%">
+<img src="./images/springboot_autoconfigprinciple_01.png" alt="img" width="50%">
 * 所以`Registrar`将`xxxAplication`所在包下的所有组件注册了。
 
 ## @Import
@@ -67,39 +67,39 @@ static class Registrar implements ImportBeanDefinitionRegistrar, DeterminableImp
 
 ```java
 public class AutoConfigurationImportSelector {
-    ...
-    @Override
-    public String[] selectImports(AnnotationMetadata annotationMetadata) {
-        if (!isEnabled(annotationMetadata)) {
-            return NO_IMPORTS;
-        }
-        AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(annotationMetadata);
-        return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
-    }
-    ...
+	...
+	@Override
+	public String[] selectImports(AnnotationMetadata annotationMetadata) {
+		if (!isEnabled(annotationMetadata)) {
+			return NO_IMPORTS;
+		}
+		AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(annotationMetadata);
+		return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
+	}
+	...
 }
 ```
 * 调用关系
 
-<img src="pages/springboot/images/springboot_autoconfigprinciple_04.png" alt="img" width="100%">
+<img src="./images/springboot_autoconfigprinciple_04.png" alt="img" width="100%">
 
 * 利用`getAutoConfigurationEntry(annotationMetadata)`给容器中批量导入一些组件。
 
 ```java
 protected AutoConfigurationEntry getAutoConfigurationEntry(AnnotationMetadata annotationMetadata) {
-    if (!isEnabled(annotationMetadata)) {
-        return EMPTY_ENTRY;
-    }
-    AnnotationAttributes attributes = getAttributes(annotationMetadata);
-    // 寻找需要加载的候选配置类数组
-    List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);
-    configurations = removeDuplicates(configurations);
-    Set<String> exclusions = getExclusions(annotationMetadata, attributes);
-    checkExcludedClasses(configurations, exclusions);
-    configurations.removeAll(exclusions);
-    configurations = getConfigurationClassFilter().filter(configurations);
-    fireAutoConfigurationImportEvents(configurations, exclusions);
-    return new AutoConfigurationEntry(configurations, exclusions);
+	if (!isEnabled(annotationMetadata)) {
+		return EMPTY_ENTRY;
+	}
+	AnnotationAttributes attributes = getAttributes(annotationMetadata);
+	// 寻找需要加载的候选配置类数组
+	List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);
+	configurations = removeDuplicates(configurations);
+	Set<String> exclusions = getExclusions(annotationMetadata, attributes);
+	checkExcludedClasses(configurations, exclusions);
+	configurations.removeAll(exclusions);
+	configurations = getConfigurationClassFilter().filter(configurations);
+	fireAutoConfigurationImportEvents(configurations, exclusions);
+	return new AutoConfigurationEntry(configurations, exclusions);
 }
 ```
 * 调用`getCandidateConfigurations`，获取到所有需要导入到容器中的配置类。
@@ -109,20 +109,20 @@ List<String> configurations = getCandidateConfigurations(annotationMetadata, att
 ```
 * Debug调试，查看有127个候选配置组件：
 
-<img src="pages/springboot/images/springboot_autoconfigprinciple_02.png" alt="img" width="100%">
+<img src="./images/springboot_autoconfigprinciple_02.png" alt="img" width="100%">
 
 ## getCandidateConfigurations
 * `getCandidateConfigurations`调用了`ImportCandidates.load`：
 
 ```java
 protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes) {
-    List<String> configurations = ImportCandidates.load(AutoConfiguration.class, getBeanClassLoader())
-        .getCandidates();
-    Assert.notEmpty(configurations,
-            "No auto configuration classes found in "
-                    + "META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports. If you "
-                    + "are using a custom packaging, make sure that file is correct.");
-    return configurations;
+	List<String> configurations = ImportCandidates.load(AutoConfiguration.class, getBeanClassLoader())
+		.getCandidates();
+	Assert.notEmpty(configurations,
+			"No auto configuration classes found in "
+					+ "META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports. If you "
+					+ "are using a custom packaging, make sure that file is correct.");
+	return configurations;
 }
 ```
 * `ImportCandidates.load`从`META-INF/spring/%s.imports`位置来加载一个文件：
@@ -145,7 +145,7 @@ public static ImportCandidates load(Class<?> annotation, ClassLoader classLoader
 ```
 * 查看spring-boot-autoconfigure-3.2.1jar的META-INF:
 
-<img src="pages/springboot/images/springboot_autoconfigprinciple_03.png" alt="img" width="100%">
+<img src="./images/springboot_autoconfigprinciple_03.png" alt="img" width="100%">
 
 * spring.boot2.7起使用META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports文件来指定需要加载自动配置类
 
@@ -164,25 +164,25 @@ public static ImportCandidates load(Class<?> annotation, ClassLoader classLoader
 @ConditionalOnProperty(prefix = "spring.aop", name = "auto", havingValue = "true", matchIfMissing = true)
 public class AopAutoConfiguration {
 
-    // 我是一个配置类
-    @Configuration(proxyBeanMethods = false)
-    // 如果整个应用没有`Advice`类（org.aspectj.weaver.Advice），则不生效；
-    // 默认没有`Advice`类，所以默认不生效。
-    @ConditionalOnClass(Advice.class)
-    static class AspectJAutoProxyingConfiguration {
-        ...
-    }
+	// 我是一个配置类
+	@Configuration(proxyBeanMethods = false)
+	// 如果整个应用没有`Advice`类（org.aspectj.weaver.Advice），则不生效；
+	// 默认没有`Advice`类，所以默认不生效。
+	@ConditionalOnClass(Advice.class)
+	static class AspectJAutoProxyingConfiguration {
+		...
+	}
 
-    @Configuration(proxyBeanMethods = false)
-    // 如果没有“org.aspectj.weaver.Advice”类，则生效；
-    // 默认是没有的，所有默认生效。
-    @ConditionalOnMissingClass("org.aspectj.weaver.Advice")
-    // 默认开启aop功能
-    @ConditionalOnProperty(prefix = "spring.aop", name = "proxy-target-class", havingValue = "true",
-            matchIfMissing = true)
-    static class ClassProxyingConfiguration {
-        ...
-    }
+	@Configuration(proxyBeanMethods = false)
+	// 如果没有“org.aspectj.weaver.Advice”类，则生效；
+	// 默认是没有的，所有默认生效。
+	@ConditionalOnMissingClass("org.aspectj.weaver.Advice")
+	// 默认开启aop功能
+	@ConditionalOnProperty(prefix = "spring.aop", name = "proxy-target-class", havingValue = "true",
+			matchIfMissing = true)
+	static class ClassProxyingConfiguration {
+		...
+	}
 }
 ```
 
@@ -190,7 +190,7 @@ public class AopAutoConfiguration {
 
 ```java
 @AutoConfiguration(after = { CouchbaseDataAutoConfiguration.class, HazelcastAutoConfiguration.class,
-        HibernateJpaAutoConfiguration.class, RedisAutoConfiguration.class })
+		HibernateJpaAutoConfiguration.class, RedisAutoConfiguration.class })
 // 判断是否存在`CacheManager.class`类，不存在，则不生效；
 // 默认是有的，条件通过；
 @ConditionalOnClass(CacheManager.class)
@@ -200,7 +200,7 @@ public class AopAutoConfiguration {
 @EnableConfigurationProperties(CacheProperties.class)
 @Import({ CacheConfigurationImportSelector.class, CacheManagerEntityManagerFactoryDependsOnPostProcessor.class })
 public class CacheAutoConfiguration {
-    ...
+	...
 }
 ```
 
@@ -215,42 +215,42 @@ public class CacheAutoConfiguration {
 // 判断是否导入了`DispatcherServlet`类，因为注册了springmvc的starter，所以导入了。
 @ConditionalOnClass(DispatcherServlet.class)
 public class DispatcherServletAutoConfiguration {
-    ...
-    @Configuration(proxyBeanMethods = false)
-    @Conditional(DefaultDispatcherServletCondition.class)
-    // 判断是否导入`ServletRegistration`
-    @ConditionalOnClass(ServletRegistration.class)
-    // 开启配置绑定功能，配置文件中以“spring.mvc”开头的属性，
-    // 会被绑定至`WebMvcProperties`实例。
-    @EnableConfigurationProperties(WebMvcProperties.class)
-    protected static class DispatcherServletConfiguration {
+	...
+	@Configuration(proxyBeanMethods = false)
+	@Conditional(DefaultDispatcherServletCondition.class)
+	// 判断是否导入`ServletRegistration`
+	@ConditionalOnClass(ServletRegistration.class)
+	// 开启配置绑定功能，配置文件中以“spring.mvc”开头的属性，
+	// 会被绑定至`WebMvcProperties`实例。
+	@EnableConfigurationProperties(WebMvcProperties.class)
+	protected static class DispatcherServletConfiguration {
 
-        // 配置`DispatcherServlet`组件，指定名字。
-        @Bean(name = DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
-        public DispatcherServlet dispatcherServlet(WebMvcProperties webMvcProperties) {
-            ...
-            return dispatcherServlet;
-        }
+		// 配置`DispatcherServlet`组件，指定名字。
+		@Bean(name = DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
+		public DispatcherServlet dispatcherServlet(WebMvcProperties webMvcProperties) {
+			...
+			return dispatcherServlet;
+		}
 
-        @SuppressWarnings({ "deprecation", "removal" })
-        private void configureThrowExceptionIfNoHandlerFound(WebMvcProperties webMvcProperties,
-                DispatcherServlet dispatcherServlet) {
-            dispatcherServlet.setThrowExceptionIfNoHandlerFound(webMvcProperties.isThrowExceptionIfNoHandlerFound());
-        }
+		@SuppressWarnings({ "deprecation", "removal" })
+		private void configureThrowExceptionIfNoHandlerFound(WebMvcProperties webMvcProperties,
+				DispatcherServlet dispatcherServlet) {
+			dispatcherServlet.setThrowExceptionIfNoHandlerFound(webMvcProperties.isThrowExceptionIfNoHandlerFound());
+		}
 
-        // 配置文件上传解析器组件
-        @Bean
-        @ConditionalOnBean(MultipartResolver.class)
-        // 容器中没有名字为“multipartResolver”的组件
-        @ConditionalOnMissingBean(name = DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME)
-        public MultipartResolver multipartResolver(MultipartResolver resolver) {
-            // 给@Bean标注的方法传入了对象参数，这个参数的值就会从容器中找。
+		// 配置文件上传解析器组件
+		@Bean
+		@ConditionalOnBean(MultipartResolver.class)
+		// 容器中没有名字为“multipartResolver”的组件
+		@ConditionalOnMissingBean(name = DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME)
+		public MultipartResolver multipartResolver(MultipartResolver resolver) {
+			// 给@Bean标注的方法传入了对象参数，这个参数的值就会从容器中找。
             // SpringMVC multipartResolver。防止有些用户配置的文件上传解析器不符合规范
-            // Detect if the user has created a MultipartResolver but named it incorrectly
-            return resolver;
-        }
-    }
-    ...
+			// Detect if the user has created a MultipartResolver but named it incorrectly
+			return resolver;
+		}
+	}
+	...
 }
 ```
 
@@ -268,24 +268,24 @@ public class DispatcherServletAutoConfiguration {
 @ConditionalOnProperty(prefix = "server.servlet.encoding", value = "enabled", matchIfMissing = true)
 public class HttpEncodingAutoConfiguration {
 
-    private final Encoding properties;
+	private final Encoding properties;
 
-    public HttpEncodingAutoConfiguration(ServerProperties properties) {
-        this.properties = properties.getServlet().getEncoding();
-    }
+	public HttpEncodingAutoConfiguration(ServerProperties properties) {
+		this.properties = properties.getServlet().getEncoding();
+	}
 
-    @Bean
-    // 容器中如果没有配CharacterEncodingFilter，自动配置
-    // SpringBoot默认会在底层配好所有的组件。但是如果用户自己配置了以用户的优先
-    @ConditionalOnMissingBean
-    public CharacterEncodingFilter characterEncodingFilter() {
-        CharacterEncodingFilter filter = new OrderedCharacterEncodingFilter();
-        filter.setEncoding(this.properties.getCharset().name());
-        filter.setForceRequestEncoding(this.properties.shouldForce(Encoding.Type.REQUEST));
-        filter.setForceResponseEncoding(this.properties.shouldForce(Encoding.Type.RESPONSE));
-        return filter;
-    }
-    ...
+	@Bean
+	// 容器中如果没有配CharacterEncodingFilter，自动配置
+	// SpringBoot默认会在底层配好所有的组件。但是如果用户自己配置了以用户的优先
+	@ConditionalOnMissingBean
+	public CharacterEncodingFilter characterEncodingFilter() {
+		CharacterEncodingFilter filter = new OrderedCharacterEncodingFilter();
+		filter.setEncoding(this.properties.getCharset().name());
+		filter.setForceRequestEncoding(this.properties.shouldForce(Encoding.Type.REQUEST));
+		filter.setForceResponseEncoding(this.properties.shouldForce(Encoding.Type.RESPONSE));
+		return filter;
+	}
+	...
 }
 ```
 
@@ -306,11 +306,4 @@ public class HttpEncodingAutoConfiguration {
 
 * start：https://www.bilibili.com/video/BV19K4y1L7MT?p=13
 * end：https://www.bilibili.com/video/BV19K4y1L7MT?p=15
-
-<div style="margin: 0px;">
-    备案号：
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-        <!-- <img src="https://api.azpay.cn/808/1.png" style="height: 20px;"> -->沪ICP备2022002183号-1
-    </a >
-</div>
 
