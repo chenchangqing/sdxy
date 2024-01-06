@@ -1,7 +1,8 @@
 # 自动配置
 ---
 * 24.1.5 00:21 开始
-* 24.1.5 01:13 开始
+* 24.1.5 01:13 更新
+* 24.1.6 19:36 更新
 
 ## 自动版本仲裁机制
 
@@ -76,7 +77,68 @@
 
 >查看依赖树：右键点击`artifactId`，点击Diagrams->Show Dependences。
 
+## 自动配置
+
+在spring-boot-starter-web-3.2.1.pom，自动配置了`Tomcat`starter，`SpringMVC`starter。
+
+### Tomcat
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-tomcat</artifactId>
+  <version>3.2.1</version>
+  <scope>compile</scope>
+</dependency>
+```
+
+### SpringMVC
+
+```xml
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-web</artifactId>
+  <version>6.1.2</version>
+  <scope>compile</scope>
+</dependency>
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-webmvc</artifactId>
+  <version>6.1.2</version>
+  <scope>compile</scope>
+</dependency>
+```
+
+### 默认包扫描
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.structuring-your-code.using-the-default-package
+
+默认扫描：主程序所在包及其下面的所有子包里面的组件都会被默认扫描进来。
+
+修改包扫描路径：在`Application`类上增加注解：
+
+```java
+@SpringBootApplication(scanBasePackages="com.xxx")
+```
+或
+```java
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan("com.xxx")
+```
+
+### 各种配置
+* tomcat默认端口：server.port
+* 文件上传：spring.servlet.multipart.max-file-size
+* 配置都是绑定了java类，比入文件上传：MultipartProperties，并且这个java类在容器中存在对应对象。
+* 所有配置都可以通过`application.properties`修改。
+* 配置是按场景starter加载的。
+* SpringBoot所有自动配置都在spring-boot-autoconfigure`。
+
+> 点击`spring-boot-starter-web`，点击`spring-boot-starter`，找到`spring-boot-autoconfigure`
+
 
 ## 视频地址
 
 * start：https://www.bilibili.com/video/BV19K4y1L7MT/?p=6
+* end：https://www.bilibili.com/video/BV19K4y1L7MT/?p=7

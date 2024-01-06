@@ -54,6 +54,7 @@
     * [Spring与SpringBoot](pages/springboot/springandspringboot.md)
     * [SpringBoot入门](pages/springboot/gettingstarted.md)
     * [自动配置](pages/springboot/autoconfig.md)
+    * [注解](pages/springboot/annotation.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS
