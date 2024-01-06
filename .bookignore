@@ -4,7 +4,7 @@ gitbook.sh
 book.pdf
 *.pdf
 
-/pages/**/*
+#/pages/**/*
 #!/pages/java
 #!/pages/mysql
 #!/pages/idea
@@ -33,4 +33,4 @@ book.pdf
 #!/pages/datastructures
 #!/pages/jsp
 #!/pages/architecture
-!/pages/springboot
+#!/pages/springboot
