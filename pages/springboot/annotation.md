@@ -215,4 +215,4 @@ public class MyConfig {}
 ## 视频地址
 
 * start：https://www.bilibili.com/video/BV19K4y1L7MT/?p=8
-* start：https://www.bilibili.com/video/BV19K4y1L7MT/?p=12
+* end：https://www.bilibili.com/video/BV19K4y1L7MT/?p=12

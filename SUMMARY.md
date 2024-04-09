@@ -56,6 +56,7 @@
     * [自动配置](pages/springboot/autoconfig.md)
     * [注解](pages/springboot/annotation.md)
     * [自动配置原理](pages/springboot/autoconfigprinciple.md)
+    * [常用技巧](pages/springboot/commonlyusedtechniques.md)
 * HTTP
     * [HTTP协议](pages/http/http.md)
 * iOS
