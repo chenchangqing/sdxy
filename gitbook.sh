@@ -19,7 +19,7 @@ git checkout gh-pages
 git pull origin gh-pages
 shopt -s extglob
 # 保留忽略的文件
-rm -rf !(_book|.git|.gitignore|ignore|node_modules|book.pdf)
+rm -rf !(_book|.git|.gitignore|ignore|node_modules|book.pdf|ads.txt)
 cp -r _book/* .
 git add .
 git commit -m 'build gh-pages'
