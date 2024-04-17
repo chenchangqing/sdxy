@@ -69,9 +69,14 @@
       "bd_token": "f2185c597b86bd4be32b1fc0d26bdee5"
     },
     "google-adsense": {
+      "client": "ca-pub-6337567293513486",
       "ads": [
           {
-              "client": "ca-pub-6337567293513486"
+              "client": "ca-pub-6337567293513486",
+              "slot": "6078301498",
+              "format": "auto",
+              "location": ".page-inner section",
+              "style": "width: 100%;"
           }
       ]
     }
