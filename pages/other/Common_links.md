@@ -273,6 +273,7 @@
 
 * [尚德](http://yi.sunlands.com)
 * [自考](http://zk.zjzs.net/Index/index.aspx)
+* [浙江工业大学·自考](https://www.zjut.edu.cn/4497/list.htm)
 * [潭州课堂](https://www.shiguangkey.com)
 * [swift51](http://www.swift51.com/)
 * [csdn](https://www.csdn.net/)
@@ -508,5 +509,9 @@ fila
 
 ## JAVA
 
-* 老杜语雀笔记：https://www.yuque.com/docs/share/866abad4-7106-45e7-afcd-245a733b073f?# 《Spring6》
-密码：mg9b
+* 老杜语雀笔记：https://www.yuque.com/docs/share/866abad4-7106-45e7-afcd-245a733b073f?# 《Spring6》密码：mg9b
+
+## 接入广告
+
+* [Google AdSense](https://www.youtube.com/watch?v=kDQJF6Ngsi0)
+

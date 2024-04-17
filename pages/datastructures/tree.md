@@ -219,3 +219,19 @@ void posterder(BinTree bt)
 
 ## 判定树和哈夫曼树
 
+## 练习
+
+### 先序遍历ABCDEF，中序遍历CBAEDF，后序遍历结果为：
+
+CBEFDA
+
+	    a
+	b       d
+  c       e   f
+
+### 中序遍历BACDEFGH，后序遍历BCAEDGHF，建立该二叉树
+
+			F
+	E 				H
+A		D
+B C 				G
