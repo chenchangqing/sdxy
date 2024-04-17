@@ -1,7 +1,0 @@
-blockquote {
-  /**border-left: 2px dashed #333 !important;**/
-  background: linear-gradient(to bottom, #F1FAFA 100%,#F1FAFA 100%) !important;
-}
-/** 修改ol,ul缩进 **/
-.markdown-section ol{padding:0;margin:0;margin-bottom:.85em;padding-left:20px}
-.markdown-section ul{padding:0;margin:0;margin-bottom:.85em;padding-left:17px}
