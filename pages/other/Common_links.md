@@ -514,4 +514,5 @@ fila
 ## 接入广告
 
 * [Google AdSense](https://www.youtube.com/watch?v=kDQJF6Ngsi0)
+* [申请Google AdSense三次提示“网站已下线或无法访问”](https://www.zeplus.com/blog/2019/09/01/2116/)
 

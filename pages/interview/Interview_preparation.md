@@ -8,6 +8,11 @@ Thank you for giving me the opportunity to be interviewed for this position toda
 
 我大学的专业是计算机通信，10年来到上海从事Java后端方面的工作，做了几个OA功能的系统，主要使用的技术有JavaWeb相关的技术，像JAVA、SpringMVC、HTMl、JS等。从事Java大概3年多，我自学进入到了iOS行业，期间做过多媒体拍摄项目，RTC直播项目，对自研播放器有所了解。我掌握的技术章有OC、Swift，熟悉C、C++编程，掌握组件化编程，能够独立开发iOS项目。最近也学习了Flutter相关知识，通过阅读开源项目，对Flutter技术栈了解。
 
+
+我的名字叫陈长青，今年34岁，我的专业是计算机通信，拥有丰富的开发经验。我擅长于使用Swift语言，进行iOS移动开发，同时我还熟悉Java、C、C++等语言，并且我可以使用SwiftUI进行开发。我最近开发的项目使用了Swift语言，是在汇丰驻场进行开发，我很喜欢客户公司环境，我也非常热爱这份工作。
+
+My name is Changqing Chen, I am 34 years old, my major is computer communication, and I have rich development experience. I am good at using Swift language for iOS mobile application, and I am also familiar with languages ​​such as Objc, Java, C, C++, and I can use SwiftUI for development. My last project uses Swift language. I like the client company environment very much, and I love this job very much.
+
 ## 擅长技术
 
 熟练`OC`、`Swift`、`Java`、`RxSwift`、`MVVM`、`MVC`、`Cocoapods`、`GCD`、`Git Flow`。  
