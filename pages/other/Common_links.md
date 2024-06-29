@@ -516,3 +516,20 @@ fila
 * [Google AdSense](https://www.youtube.com/watch?v=kDQJF6Ngsi0)
 * [申请Google AdSense三次提示“网站已下线或无法访问”](https://www.zeplus.com/blog/2019/09/01/2116/)
 
+## SwiftUI 
+
+* [Button in SwiftUI](https://medium.com/@karepbq/button-in-swiftui-567172676cf6)
+* [SwiftUI text-alignment](https://stackoverflow.com/questions/56443535/swiftui-text-alignment)
+* [SwiftUI 给图片或View添加边框和圆角](https://blog.csdn.net/github_29300109/article/details/115536923)
+* [Icons & Image in SwiftUI](https://medium.com/@karepbq/icons-image-in-swiftui-efce83753d56)
+* [iOS SwiftUI 自己动手做个图片与照片选择器Picker](https://segmentfault.com/a/1190000021795134)
+* [扩展SwiftUI的Color支持十六进制](https://juejin.cn/post/6948250295549820942)
+* [如何在SwiftUI中给字体加粗](https://swiftflamel.com/2021/03/11/%E5%A6%82%E4%BD%95%E5%9C%A8swiftui%E4%B8%AD%E7%BB%99%E5%AD%97%E4%BD%93%E5%8A%A0%E7%B2%97/)
+* [SwiftUI. How to change the placeholder color of the TextField?](https://stackoverflow.com/questions/57688242/swiftui-how-to-change-the-placeholder-color-of-the-textfield)
+
+* [RandomColor.swift](https://gist.github.com/EnesKaraosman/efb9c2d989e51d20253976c8fb1aa734)
+* [SwiftUI极简教程13:NavigationView导航栏使用](https://juejin.cn/post/7085889482859216903)
+* [How to Use PhotosPicker in SwiftUI](https://www.appcoda.com/swiftui-photospicker/)
+* [Combine convert Just to AnyPublisher](https://stackoverflow.com/questions/60550577/combine-convert-just-to-anypublisher)
+* [MVVM with SwiftUI + Combine](https://medium.com/@catchvarun25/mvvm-with-swiftui-combine-51edb1a011ce)
+

@@ -260,6 +260,7 @@
     * [二叉树的下一个节点](pages/interview/Next_node_of_binary_tree.md)
     * [用两个栈实现队列](pages/interview/Implement_queue_with_two_stacks.md)
     * [面试问题整理](pages/interview/Interview_questions_compilation.md)
+    * [基本数据结构](pages/interview/data_structure.md)
 * 数据结构导论
     * [第一章 概论](pages/datastructures/introduction.md)
     * [第二章 线性表](pages/datastructures/lineartable.md)
