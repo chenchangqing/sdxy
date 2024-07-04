@@ -1,7 +1,9 @@
-<<<<<<< HEAD
+
 ## 桶排序
 
 24.7.4 update
+
+## 桶排序
 
 排序步骤：
 
@@ -79,6 +81,3 @@ public class BucketSort implements IArraySort {
 ```
 
 参考链接：https://www.runoob.com/w3cnote/bucket-sort.html
-=======
-## 桶排序
->>>>>>> 2f59504b9 (add pages/interview/bucket_sort.md.)
