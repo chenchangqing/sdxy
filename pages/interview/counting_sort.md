@@ -47,4 +47,7 @@ public class CountingSort implements IArraySort {
 }
 ```
 
-参考链接：https://www.runoob.com/w3cnote/counting-sort.html
+参考链接：
+
+* https://www.runoob.com/w3cnote/counting-sort.html
+* https://zhuanlan.zhihu.com/p/678011910
