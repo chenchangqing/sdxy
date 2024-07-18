@@ -13,6 +13,10 @@ Thank you for giving me the opportunity to be interviewed for this position toda
 
 My name is Changqing Chen, I am 34 years old, my major is computer communication, and I have rich development experience. I am good at using Swift language for iOS mobile application, and I am also familiar with languages ​​such as Objc, Java, C, C++, and I can use SwiftUI for development. My last project uses Swift language. I like the client company environment very much, and I love this job very much.
 
+我的名字叫陈长青，今年34岁，我的专业是计算机通信，拥有丰富的开发经验。我擅长于使用Swift语言，进行iOS移动开发，同时我还熟悉Java、C、C++等语言，并且我可以使用SwiftUI进行开发。我熟悉CICD，我会使用flutter，我了解iOS架构，我还熟悉敏捷开发，我还可以使用设计模式。
+
+My name is Changqing Chen, I am 34 years old, my major is computer communication, and I have rich development experience. I am good at using Swift language for iOS mobile application, and I am also familiar with languages such as Objc, Java, C, C++, and I can use SwiftUI for development. I am familiar with CICD, I can use flutter, I understand iOS architecture, and I am familiar with scrum development, and I can use  design patterns.
+
 ## 擅长技术
 
 熟练`OC`、`Swift`、`Java`、`RxSwift`、`MVVM`、`MVC`、`Cocoapods`、`GCD`、`Git Flow`。  
@@ -188,3 +192,10 @@ https://www.jianshu.com/p/8ea45370a20d
 ### Git分之管理
 
 ### 支付
+
+### flutter
+
+* [Flutter 的生命周期](https://juejin.cn/post/6844903874617147399)
+* [Flutter Redux：带例子的完整教程](https://juejin.cn/post/7067827402692526117)
+* [Flutter - iOS集成开发](https://rencheng.cc/2020/03/02/flutter/Flutter%E4%B8%8EiOS%E9%9B%86%E6%88%90/)
+* [flutter与native通信](https://blog.csdn.net/wang_yong_hui_1234/article/details/129852460)
