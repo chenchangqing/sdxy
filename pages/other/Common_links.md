@@ -46,6 +46,7 @@
 * [iOS UILabel 添加查看更多](https://www.jianshu.com/p/9cd4ffc345fd)
 * [UILabel中的NSAttributedString尾部截断](https://www.it1352.com/2139222.html)
 * [UITableView或UICollectionView的cell中嵌套UICollectionView后,第二层的CollectionViewCell点击无响应的问题](https://blog.csdn.net/wsyx768/article/details/102520671)
+* [Find all available images for Image(systemName:)](https://stackoverflow.com/questions/56514998/find-all-available-images-for-imagesystemname)
 
 ## ScrollView嵌套
 
@@ -545,13 +546,47 @@ fila
 * [扩展SwiftUI的Color支持十六进制](https://juejin.cn/post/6948250295549820942)
 * [如何在SwiftUI中给字体加粗](https://swiftflamel.com/2021/03/11/%E5%A6%82%E4%BD%95%E5%9C%A8swiftui%E4%B8%AD%E7%BB%99%E5%AD%97%E4%BD%93%E5%8A%A0%E7%B2%97/)
 * [SwiftUI. How to change the placeholder color of the TextField?](https://stackoverflow.com/questions/57688242/swiftui-how-to-change-the-placeholder-color-of-the-textfield)
-
 * [RandomColor.swift](https://gist.github.com/EnesKaraosman/efb9c2d989e51d20253976c8fb1aa734)
 * [SwiftUI极简教程13:NavigationView导航栏使用](https://juejin.cn/post/7085889482859216903)
 * [How to Use PhotosPicker in SwiftUI](https://www.appcoda.com/swiftui-photospicker/)
 * [Combine convert Just to AnyPublisher](https://stackoverflow.com/questions/60550577/combine-convert-just-to-anypublisher)
 * [MVVM with SwiftUI + Combine](https://medium.com/@catchvarun25/mvvm-with-swiftui-combine-51edb1a011ce)
+* [No Info.plist in newly created project](https://forums.developer.apple.com/forums/thread/727969)
+* [在 SwiftUI 中使用 UIKit 视图](https://fatbobman.com/zh/posts/uikitinswiftui/)
+* [Conditionally use view in SwiftUI](https://stackoverflow.com/questions/56517610/conditionally-use-view-in-swiftui)
 
+## SwiftUI 导航
+
+* [SwiftUI之NavigationView的基础使用与进阶实践](https://bbs.huaweicloud.com/blogs/352499)
+* [SwiftUI NavigationView and NavigationLink](https://medium.com/@TechSavvyScribe/swiftui-navigationview-and-navigationlink-6ded4ca57107)
+* [SwiftUI NavigationLink Dynamic Destination](https://forums.developer.apple.com/forums/thread/652980)
+
+## SwiftUI 控件
+
+* [SwiftUI之TabView的使用](https://juejin.cn/post/7109362535744176164)
+* [SwiftUI去掉List样式为GroupStyle顶部的空白](https://blog.csdn.net/humiaor/article/details/134831642)
+* [How to create grouped and inset grouped lists](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-grouped-and-inset-grouped-lists)
+* [Backgrounds and Overlays in SwiftUI](https://medium.com/@karepbq/backgrounds-and-overlays-in-swiftui-baeff500304e)
+* [掌握 SwiftUI 的 Safe Area](https://fatbobman.com/zh/posts/safearea/)
+* [swiftui 开发之旅：三大 Stack 构建布局](https://juejin.cn/post/7146899156953464863)
+* [SwiftUI基础篇List](https://juejin.cn/post/7265153693140713511)
+* [SwiftUI 基础篇之 ForEach](https://juejin.cn/post/6984753286058344456)
+* [How to create a segmented control and read values from it](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-segmented-control-and-read-values-from-it)
+* [DatePicker(时间)](https://www.55mx.com/post/120)
+* [SwiftUI Example](https://wangchujiang.com/swiftui-example/index.html)
+* [SwiftUI ForEach 搭配 array 時，如何取得成員的位置(index)](https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94%E9%9B%86/swiftui-foreach-%E6%90%AD%E9%85%8D-array-%E6%99%82-%E5%A6%82%E4%BD%95%E5%8F%96%E5%BE%97%E6%88%90%E5%93%A1%E7%9A%84%E4%BD%8D%E7%BD%AE-index-b2c64c3bbca3)
+
+## SwiftUI 布局
+
+* [SwiftUI 布局之标题左对齐图片居中对齐 （教程含源码）](https://blog.csdn.net/iCloudEnd/article/details/112852728)
+
+## SwiftUI 状态
+
+* [How do I share/bind @StateObject between SwiftUI views?](https://stackoverflow.com/questions/72505839/how-do-i-share-bind-stateobject-between-swiftui-views)
+* [SwiftUI) @State property @Binding @StateObject @ObservedObject @EnvironmentObject 學習筆記](https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E6%95%99%E5%AE%A4/swiftui-state-property-binding-stateobject-observedobject-environmentobject-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-b4366f87f4f4)
+* [@StateObject 和 @ObservedObject 的区别和使用](https://onevcat.com/2020/06/stateobject/)
+* [使用SwiftUI中的参数初始化@StateObject](https://cloud.tencent.com/developer/ask/sof/108099108)
+* [关于 SwiftUI State 的一些细节](https://onevcat.com/2021/01/swiftui-state/)
 
 ### H2Database
 
