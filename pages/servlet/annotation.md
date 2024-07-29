@@ -72,6 +72,10 @@ public class DeptServlet extends HttpServlet {
 }
 ```
 
+## @MultipartConfig
+
+* [Servlet文件上传||@MultipartConfig标注属性](https://blog.csdn.net/stven_king/article/details/22957001)
+
 ## 视频
 
 start:https://www.bilibili.com/video/BV1Z3411C7NZ?p=34  

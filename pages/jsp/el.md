@@ -91,6 +91,10 @@ page指令当中，有一个属性，可以忽略EL表达式：
 
 >isELIgnored="true"表示忽略JSP中整个页面的EL表达式，如果想忽略其中某个，可以使用反斜杠：\${username}。
 
+如果页面中`${pageContext.request.contextPath}`不生效，请显示增加`<%@ page isELIgnored="false" %>`。
+
+https://blog.csdn.net/qq_52108058/article/details/127145065
+
 ## 使用EL表达式获取应用的根
 
 ```java
@@ -179,3 +183,7 @@ ${empty param.username ? "对不起，用户名不能为空" : "欢迎访问"}
 
 * start：https://www.bilibili.com/video/BV1Z3411C7NZ?p=51
 * end：https://www.bilibili.com/video/BV1Z3411C7NZ?p=53
+
+## 问题
+
+* 

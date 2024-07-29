@@ -73,7 +73,7 @@ tomcat10之前使用：
 <%-- "varStatus="这个状态对象有count属性，可以直接使用 --%>
 <c:forEach items="${stuList}" var="s" varStatus="varStatus">
 	<%-- varStatus的count是从1开始，以1递增，主要是用于编号/序号 --%>
-	id:¥{varStatus.count},${s.id},name:${s.name}</br>
+	id:${varStatus.count},${s.id},name:${s.name}</br>
 </c:forEach>
 ```
 

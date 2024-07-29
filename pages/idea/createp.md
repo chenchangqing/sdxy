@@ -126,4 +126,6 @@
 
 [HttpMessageNotWritableException: No Converter for [class …] With Preset Content-Type](https://www.baeldung.com/spring-no-converter-with-preset)
 
+* [IDEA中用maven创建的Servlet项目](https://blog.csdn.net/huweiliyi/article/details/107637785)
+
 

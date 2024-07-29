@@ -509,7 +509,26 @@ fila
 
 ## JAVA
 
-* 老杜语雀笔记：https://www.yuque.com/docs/share/866abad4-7106-45e7-afcd-245a733b073f?# 《Spring6》密码：mg9b
+* 老杜语雀笔记：https://www.yuque.com/docs/share/866abad4-7106-45e7-afcd-245a733b073f?# 《Spring6》密码：mg9bJAVA
+* [java多文件上传](https://www.baidu.com/s?wd=java%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0&rsv_spt=1&rsv_iqid=0x8b31fcd8009cb1ec&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&rqlang=cn&tn=baiduhome_pg&rsv_dl=tb&rsv_enter=1&oq=java%25E4%25B8%258A%25E4%25BC%25A0%25E6%2596%2587%25E4%25BB%25B6%2520multipartfile&rsv_btype=t&inputT=17058&rsv_t=a45647W2YCMBFM%2BeShOR60JZG%2FGXlEwtEwhdUBddz5HfKf6UKkixwf2LwTESek8Agzku&rsv_sug3=49&rsv_sug1=36&rsv_sug7=100&rsv_pq=890d9ca00058187d&rsv_sug2=0&rsv_sug4=17897)
+* [java解析cvs](https://www.baidu.com/s?wd=java%E8%A7%A3%E6%9E%90cvs&rsv_spt=1&rsv_iqid=0xe44febf4007d175f&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&rqlang=cn&tn=baiduhome_pg&rsv_enter=1&rsv_dl=tb&oq=javaweb%2520%25E6%2589%2593%25E5%258C%2585&rsv_btype=t&inputT=12244&rsv_t=3d0cXBKhLKd5auVKQqH3LvshN4neoFtSAHSQigFetLr9VHH9DVtn%2BDHOSxm1Rb9GBxIX&rsv_sug3=35&rsv_sug1=36&rsv_sug7=100&rsv_pq=e6e8e61100210034&rsv_sug2=0&rsv_sug4=13006)
+* [Java List排序的几种方式整理](https://juejin.cn/post/6986191577659998216)
+* [JUnit4中@Before、@After、@Test等注解的作用](JUnit4中@Before、@After、@Test等注解的作用)
+* [JUnit知识点三则](https://breeze924.github.io/2018/08/26/JUnit%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%89%E5%88%99/)
+* [Mockito 应用指南](https://hezhiqiang8909.gitbook.io/java/docs/javalib/mockito)
+* [Servlet 生命周期](https://www.runoob.com/servlet/servlet-life-cycle.html)
+* [单元测试 - JUnit4 详解](https://pdai.tech/md/develop/ut/dev-ut-x-junit.html)
+* [Java List排序的几种方式整理](https://juejin.cn/post/6986191577659998216)
+* [Java 日期加一天或是日期往后减一天](https://blog.csdn.net/gengzeqing/article/details/108225440)
+* [java中比较两个日期的大小](https://blog.csdn.net/u013991521/article/details/60471545)
+* [Java 实例 - 字符串分割](https://www.runoob.com/java/string-split.html)
+ [The method getSubmittedFileName() is undefined](https://stackoverflow.com/questions/41038886/the-method-getsubmittedfilename-is-undefined-for-the-type-part)
+
+## JAVA打包
+
+* [geowa4/install.sh](https://gist.github.com/geowa4/1428257)
+* [Linux下 tomcat war自动部署脚本](https://blog.csdn.net/m0_37827628/article/details/107206734)
+* [自动部署war包脚本](https://www.cnblogs.com/dongma/p/9850325.html)
 
 ## 接入广告
 
@@ -533,3 +552,14 @@ fila
 * [Combine convert Just to AnyPublisher](https://stackoverflow.com/questions/60550577/combine-convert-just-to-anypublisher)
 * [MVVM with SwiftUI + Combine](https://medium.com/@catchvarun25/mvvm-with-swiftui-combine-51edb1a011ce)
 
+
+### H2Database
+
+* https://github.com/h2database/h2database
+* [Java Connect to H2 Database Examples](https://www.codejava.net/java-se/jdbc/connect-to-h2-database-examples#Console)
+* [java ClassNotFoundException for org.h2.Driver [duplicate]](https://stackoverflow.com/questions/4008011/java-classnotfoundexception-for-org-h2-driver)
+* [H2数据库的导入、导出(CSV)](https://www.cnblogs.com/interdrp/p/13379494.html)
+* [数据类型](https://www.h2database.com/html/datatypes.html#integer_type)
+* [tutorial](https://h2database.com/html/tutorial.html)
+* [H2: how to tell if table exists?](https://stackoverflow.com/questions/19518265/h2-how-to-tell-if-table-exists)
+* [H2 DataBase入门+整合hibernate+整合mybatis+整合](https://www.cnblogs.com/lingkang/p/16698403.html)
