@@ -644,3 +644,7 @@ fila
 * [tutorial](https://h2database.com/html/tutorial.html)
 * [H2: how to tell if table exists?](https://stackoverflow.com/questions/19518265/h2-how-to-tell-if-table-exists)
 * [H2 DataBase入门+整合hibernate+整合mybatis+整合](https://www.cnblogs.com/lingkang/p/16698403.html)
+
+## 系统安装
+
+* [5分钟教大家给旧款Mac升级Monterey](https://www.bilibili.com/video/BV1vL4y1E7fm/?vd_source=4a6062e553ec2339ad82be085de19964)
