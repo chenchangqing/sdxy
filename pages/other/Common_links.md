@@ -560,6 +560,11 @@ fila
 * [SwiftUI之NavigationView的基础使用与进阶实践](https://bbs.huaweicloud.com/blogs/352499)
 * [SwiftUI NavigationView and NavigationLink](https://medium.com/@TechSavvyScribe/swiftui-navigationview-and-navigationlink-6ded4ca57107)
 * [SwiftUI NavigationLink Dynamic Destination](https://forums.developer.apple.com/forums/thread/652980)
+* [SwiftUI NavigationLink lazy loading](https://ejameslin.github.io/SwiftUI-NavigationLink-lazy-loading/)
+* [【SwiftUI】解决 NavigationLink 立即加载 destination View 的问题（实现懒加载）](https://blog.csdn.net/fongim/article/details/105040296)
+* [关于SwiftUI手动返回NavigationLink的方法](https://blog.csdn.net/madaxin/article/details/118712119)
+* [SwiftUI Spacer() onTapGesture 无法触发](https://blog.csdn.net/u013633921/article/details/133688076)
+* [swiftUI 子视图修改父视图的属性](https://blog.csdn.net/lingjunjie/article/details/136659226)
 
 ## SwiftUI 控件
 
@@ -575,10 +580,15 @@ fila
 * [DatePicker(时间)](https://www.55mx.com/post/120)
 * [SwiftUI Example](https://wangchujiang.com/swiftui-example/index.html)
 * [SwiftUI ForEach 搭配 array 時，如何取得成員的位置(index)](https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94%E9%9B%86/swiftui-foreach-%E6%90%AD%E9%85%8D-array-%E6%99%82-%E5%A6%82%E4%BD%95%E5%8F%96%E5%BE%97%E6%88%90%E5%93%A1%E7%9A%84%E4%BD%8D%E7%BD%AE-index-b2c64c3bbca3)
+* [GeometryReader in SwiftUI](https://juejin.cn/post/6976889785537265671)
+* [SwiftUI修饰器】.disabled在实际开发的使用场景](https://www.55mx.com/post/176)
+* [SwiftUI 基础之圆形文字按钮ZStack Button Circle(2020)](https://juejin.cn/post/6844904053948973069)
 
 ## SwiftUI 布局
 
 * [SwiftUI 布局之标题左对齐图片居中对齐 （教程含源码）](https://blog.csdn.net/iCloudEnd/article/details/112852728)
+* [如何圆角化一个视图？](https://wangchujiang.com/swiftui-example/transforming-views/demo12/index.html)
+* [How to add a border in SwiftUI with clipShape?](https://stackoverflow.com/questions/77755756/how-to-add-a-border-in-swiftui-with-clipshape)
 
 ## SwiftUI 状态
 
@@ -587,6 +597,42 @@ fila
 * [@StateObject 和 @ObservedObject 的区别和使用](https://onevcat.com/2020/06/stateobject/)
 * [使用SwiftUI中的参数初始化@StateObject](https://cloud.tencent.com/developer/ask/sof/108099108)
 * [关于 SwiftUI State 的一些细节](https://onevcat.com/2021/01/swiftui-state/)
+
+## SwiftUI 网络
+
+* [swiftUI笔记之async&await实践MVVM网络请求](https://junyao.tech/posts/4f51f68e.html)
+* [Swift：class对象的copy｜周末学习](https://juejin.cn/post/6970168029204185095)
+
+## SwiftUI 通知
+
+* [活久见的重构 - iOS 10 UserNotifications 框架解析](https://onevcat.com/2016/08/notification/)
+* [SwiftUI本地推送通知教程：UserNotifications在Swift中的实现方式](https://blog.zhheo.com/p/b5f97112.html)
+* [iOS 闹钟的实现](https://www.psvmc.cn/article/2016-03-01-ios-alarm.html)
+
+## SwiftUI 协程
+
+* [SwiftUI中Task await async组合使用调用异步函数](https://blog.csdn.net/boildoctor/article/details/130199437)
+* [Swift 中的并发之 async/await —— WWDC 2021](https://blog.ficowshen.com/page/post/73)
+* [How to add an AppDelegate to a SwiftUI app](https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-an-appdelegate-to-a-swiftui-app)
+
+## SwiftUI 轮播
+
+* [SwiftUI 自定义实现旋转木马轮播效果](https://juejin.cn/post/6898258968775245837)
+* [ytb轮播](https://www.youtube.com/watch?v=t8DktcOfK3Y)
+* [SwiftUI 轮博图 轮播图 原理](https://blog.51cto.com/u_16213588/8616107)
+* [SwiftUI中TabView（PageTabViewStyle的用法及无限滚动组件infinity carousel）](https://blog.csdn.net/guoyongming925/article/details/139243368)
+* [SwiftUI轮播图组件 ｜ iOS开发](https://www.bilibili.com/video/BV1S24y1i7kY/?vd_source=4a6062e553ec2339ad82be085de19964)
+
+## SwiftUI 计时器
+
+* [Change width of Picker view in SwiftUI](https://medium.com/evangelist-apps/change-width-of-picker-view-in-swiftui-86aae39f9472)
+* [SwiftUI100天：使用SwiftUI搭建一个计时器App](https://juejin.cn/post/7125230357234286599)
+* [SwiftUI的Picker](https://blog.csdn.net/lingjunjie/article/details/136739051)
+* [ow to Use SwiftUI Picker](https://codewithchris.com/swiftui-picker-2023/)
+* [Swift：在当前日期基础上加/减日、周、月、年的教程及实例](https://juejin.cn/post/7132311216973676552)
+* [根据秒数转为时分秒显示 Swift](https://blog.csdn.net/weixin_42012181/article/details/88814904)
+* [SwiftUI: How to cancel timer in SwiftUI view?](https://stackoverflow.com/questions/58154701/swiftui-how-to-cancel-timer-in-swiftui-view)
+* [Timer publisher init timer after button click](https://stackoverflow.com/questions/73132771/timer-publisher-init-timer-after-button-click)
 
 ### H2Database
 
