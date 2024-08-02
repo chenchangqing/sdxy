@@ -648,3 +648,7 @@ fila
 ## 系统安装
 
 * [5分钟教大家给旧款Mac升级Monterey](https://www.bilibili.com/video/BV1vL4y1E7fm/?vd_source=4a6062e553ec2339ad82be085de19964)
+
+## 居住证
+
+* [上海落户社保缴费基数一览表](https://sh.bendibao.com/zffw/2023630/274248.shtm)
