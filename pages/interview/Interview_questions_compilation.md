@@ -196,33 +196,200 @@ static inline void pop(void *token) {
 * [理解 iOS 的内存管理](https://blog.devtang.com/2016/07/30/ios-memory-management/)
 * [CocoaPods 都做了什么？](https://draveness.me/cocoapods/)
 
+## category实现方式
+
+* `category`的作用：a）分散功能，b）声明私有方法；
+* `category`与`extension`:
+    * `category`是运行期决议的，不可以添加属性。
+    * `extension`是编译期决议的，可以添加属性，一般为了私有化。
+* `category`和原来类中存在相同方法，`category`的方法更加靠前，运行期优先被查找和调用。
+* `category`可以使用`runtime`关联对象来实现添加实例变量。
+
+**参考**：
+
+* [深入理解Objective-C：Category](https://tech.meituan.com/2015/03/03/diveintocategory.html)
+* [iOS Category 源码解析](https://tbfungeek.github.io/2020/01/06/iOS-Category-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/)
+* [iOS：Category为什么不能直接添加成员变量却能添加方法](https://juejin.cn/post/6844904114619416583)
+* [ios动态添加属性的几种方法](https://blog.csdn.net/shengyumojian/article/details/44919695)
+* [iOS-分类Category详解和关联对象](https://www.cnblogs.com/junhuawang/p/14041163.html)
+* [ios Category](https://cloud.tencent.com/developer/article/1336981)
+* [Monkey-Patching iOS with Objective-C Categories Part II: Adding Instance Properties](https://blog.carbonfive.com/monkey-patching-ios-with-objective-c-categories-part-ii-adding-instance-properties/)
+
 ## 方法交换
+
+1. `Swizzling`需要在`+(void)load`中添加。
+2. `Swizzling`应该总是在`dispatch_once`中执行。
+3. `Swizzling`在`+load`中执行时，不要调用`[super load]`。如果多次调用了`[super load]`，可能会出现“Swizzle无效”的假象。
+
+**场景**：
+
+1. 统计VC加载次数。
+2. 防止UI控件短时间多次激活事件。
+3. 防奔溃处理：数组越界问题。
+4. 适配iOS13的模态的的样式问题。
+
+**参考**：
+
+* [iOS开发·runtime原理与实践: 方法交换篇(Method Swizzling)(iOS“黑魔法”，埋点统计，禁止UI控件连续点击，防奔溃处理)](https://juejin.cn/post/6844903601681203214)
+* [iOS 小技能：Method Swizzling （交换方法的IMP）](https://cloud.tencent.com/developer/article/2078908)
 
 ## weak实现
 
+`weak`是`Runtime`维护了一个`hash`(哈希)表，用于存储指向某个对象的所有`weak`指针。weak表其实是一个`hash`（哈希）表，Key是所指对象的地址，Value是weak指针的地址（这个地址的值是所指对象指针的地址）数组。
+
+**参考**：
+
+* [iOS底层原理：weak的实现原理](https://juejin.cn/post/6844904101839372295)
+* [老生常谈的iOS- weak原理，你真的懂得还是为了应付面试](https://www.cnblogs.com/mysweetAngleBaby/p/16341648.html)
+* [D4-007-weak对象存储原理和销毁为什么会置nil（上）](https://www.bilibili.com/video/BV1PZ4y1H7Gs/?spm_id_from=333.999.0.0&vd_source=0e0265662467c6caea699dd58aec6891)
+* [D4-008-weak对象存储原理和销毁为什么会置nil（下）](https://www.bilibili.com/video/BV1hT4y1g7pA/?spm_id_from=333.337.search-card.all.click&vd_source=0e0265662467c6caea699dd58aec6891)
+
 ## 监控卡顿
+
+**卡顿原因**：
+
+* 复杂UI、图文混排的绘制量过大；
+* 在主线程上做网络同步请求；
+* 在主线程做大量的`IO`操作；
+* 运算量过大，`CPU`持续高占用；
+* 死锁和主子线程抢锁。
+
+**监控卡顿**：
+
+1. 创建一个`CFRunLoopObserverContext`观察者；
+2. 监听`kCFRunLoopBeforeSources`到`kCFRunLoopBeforeWaiting`再到`kCFRunLoopAfterWaiting`的状态。
+3. 开启子线程，利用信号量计算这几个状态切换的时间，间隔时间如果超过50ms，卡顿计数+1。
+4. 如果卡顿计数超过大于等于5次，触发卡顿上报线程调用栈。
+
+**参考**：
+
+* [iOS 之如何利用 RunLoop 原理去监控卡顿?](https://cloud.tencent.com/developer/article/1824227)
 
 ## block实现
 
+`block`是个结构图，拥有`isa`指针。
+
+**捕获机制**：
+
+* 全局变量，捕获指针，修改可以生效。
+* 局部变量，捕获值，修改不生效。
+
+**`block`类型**：
+
+* 全局`block`
+* 栈`block`
+* 堆`block`
+
+**`__block`**：
+
+依然是个结构体，拥有`isa`指针，局部变量被包装成了一个对象，里面有个成员变量，指向了局部变量，所以`block`修改这个变量是有效果的。
+
+**参考**：
+
+* [OC中block的底层实现原理](https://juejin.cn/post/6844904040954871815)
+
 ## 五大区
+
+* 栈区：运行期分配，例如：局部变量、函数参数等。
+* 堆区：运行期分配，例如：alloc、new的对象。
+* 全局区：编译期分配，例如：static修饰变量。
+* 常量区：编译期分配，例如：string的引用，但是string的指针是堆区
+* 代码区：编译期分配，存放程序的代码。
+
+**参考**：
+
+* [iOS-底层原理 24：内存五大区](https://juejin.cn/post/6949587150090272804)
 
 ## 性能优化（启动等）
 
-## 远程通知
+* 启动优化
+* 卡顿优化
+* 耗电优化
+* 包体积优化
 
-## 异步上传实现
+## TCP三次握手，四次挥手
+
+**三次握手**：
+
+1. 客户端发送`[SYN] Seq=x`；
+2. 服务端发送`[SYN, ACK] Seq=y Ack=x+1`；
+3. 客户端发送`[ACK] Seq=y+1`;
+
+**四次挥手**：
+
+1. 客户端发送`[FIN] Seq=x`；
+2. 服务端发送`[FIN, ACK] Ack=x+1`；
+3. 服务端发送`[FIN] Seq=y`;
+4. 客户端发送`[ACK] Ack=y+1`;
+5. 等待`2MSL`，服务端无响应，说明服务端已关闭，这时，客户端也关闭。
+
+**参考**：
+
+* [一文彻底搞懂 TCP三次握手、四次挥手过程及原理](https://juejin.cn/post/6844904070000410631)
+* [使用WireShark查看TCP的三次握手](https://blog.csdn.net/sanqima/article/details/108025304)
+
+## 通知
+
+**本地通知**：
+
+1. 请求权限；
+2. 创建通知内容；
+3. 创建通知触发
+4. 创建请求；
+5. 将请求添加到通知中心。
+
+**远程通知**：
+
+1. 请求权限；
+2. 上传token至业务服务器；
+3. 业务服务器使用`token`向苹果`APNS`服务器提交请求；
+
+* [活久见的重构 - iOS 10 UserNotifications 框架解析](https://onevcat.com/2016/08/notification/)
+
+## 对象在什么时候释放？
+
+* `Runloop`状态为休眠或退出。
+* `weak`引用的对象在`dealloc`中释放。
+* 离开自动释放池作用域。
+
+## ipa文件结构
+
+* Frameworks：App引入的动态库；
+* Assets.car；
+* 可执行文件：MachO文件；
+* 资源文件：xx.bundle；
+* 签名文件：_CodeSignature
+
+**参考**：
+
+* [iOS 包体积优化2 - 如何分析ipa包？](https://juejin.cn/post/7185080113304698941)
+
+## 动态库和静态库
+
+静态库：链接时完整地拷贝至可执行文件中，被多次使用就有多份冗余拷贝。利用静态函数库编译成的文件比较大，因为整个 函数库的所有数据都会被整合进目标代码中，他的优点就显而易见了，即编译后的执行程序不需要外部的函数库支持，因为所有使用的函数都已经被编译进去了。当然这也会成为他的缺点，因为如果静态函数库改变了，那么你的程序必须重新编译。
+
+动态库：链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存。由于函数库没有被整合进你的程序，而是程序运行时动态的申请并调用，所以程序的运行环境中必须提供相应的库。动态函数库的改变并不影响你的程序，所以动态函数库的升级比较方便。
+
+**参考**：
+
+* [iOS静态库与动态库的使用](https://github.com/qingfengiOS/Summary/blob/master/iOS%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8.md)
 
 ## 事件传递
 
-## iOS打包后的文件结构
+1. 点击一个UIView或产生一个触摸事件A，这个触摸事件A会被添加到由UIApplication管理的事件队列中（即，首先接收到事件的是UIApplication）。
+2. UIApplication会从事件对列中取出最前面的事件（此处假设为触摸事件A），把事件A传递给应用程序的主窗口（keyWindow）。
+3. 窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件。
+
+**参考**：
+
+* [史上最详细的iOS之事件的传递和响应机制-原理篇](https://www.jianshu.com/p/2e074db792ba)
 
 ## 面向对象编程特征有哪些？
+
 - “抽象”，把现实世界中的某一类东西，提取出来，用程序代码表示；
 - “封装”，把过程和数据包围起来，对数据的访问只能通过已定义的界面；
 - “继承”，一种联结类的层次模型；
 - “多态”，允许不同类的对象对同一消息做出响应。
-
-## OC和Swift如何互相调用？
 
 ## struct和class的区别？
 
@@ -250,7 +417,7 @@ https://juejin.cn/post/6844903951519727629
 
 概念：一个接受闭包作为参数的函数， 闭包是在这个函数结束前内被调用。
 
-### 常见设计模式有哪些？
+## 常见设计模式有哪些？
 
 https://www.cnblogs.com/newsouls/archive/2011/07/28/DesignTemplage.html
 
@@ -271,18 +438,42 @@ https://cloud.tencent.com/developer/article/1521135
 - GCD 实现多线程
 - NSOperation
 
-## 对象在什么时候释放？
-
 https://youle.zhipin.com/questions/4c09e5e18447d9dbtnV809W7FlQ~.html
 
 引用计数小于1的时候释放的。在ARC环境下我们不能直接去操作引用计数的值，但是我们可以跟踪是否有strong指针指向、如果没有strong指针指向、则立即销毁。 这里有一个地方值得关注的事自动缓存池，他会延迟销毁时机，但是实际上也是延迟执行re lease而已。
 
+## 异步上传实现
+
+* 分块上传；
+* `Socket`监听；
+
+**参考**：
+
+* [Java实现带进度条的文件上传：原理、方法与代码实例](https://blog.51cto.com/u_14540126/10078939)
+
+## https是什么？
+
+1. 客户端向服务器发送 HTTPS 请求。
+2. 服务器将公钥证书发送给客户端。
+3. 客户端验证服务器的证书。
+4. 如果验证通过，客户端生成一个用于会话的对称密钥。
+5. 客户端使用服务器的公钥对对称密钥进行加密，并将加密后的密钥发送给服务器。
+6. 服务器使用私钥对客户端发送的加密密钥进行解密，得到对称密钥。
+7. 服务器和客户端使用对称密钥进行加密和解密数据传输。
+
+**参考**：
+
+* [HTTPS 的加密过程及其工作原理](https://xie.infoq.cn/article/007a9bd16f44303fbd8b40689)
+
+## 对称加密和非对称加密的区别？
+
+## OC和Swift如何互相调用？
+
 ## 是否编写过单元测试？
 
 ## 如何管理依赖库？
-## 组件化开发方式有哪些？
 
-## https是什么？
+## 组件化开发方式有哪些？
 
 ## 请求相关证书
 
@@ -290,8 +481,4 @@ https://youle.zhipin.com/questions/4c09e5e18447d9dbtnV809W7FlQ~.html
 
 ## 如何存放敏感信息？
 
-## 对称加密和非对称加密的区别？
-
 ## 如何使用Git？
-
-## 上传进度如何实现？
