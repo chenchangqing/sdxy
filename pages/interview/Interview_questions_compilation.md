@@ -1,5 +1,7 @@
 # 面试问题整理
 
+24.8.5 更新
+
 ## 消息转发
 
 **消息发送的本质**：
@@ -194,7 +196,6 @@ static inline void pop(void *token) {
 * [Run Loop 记录与源码注释](https://github.com/Desgard/iOS-Source-Probe/blob/master/Objective-C/Foundation/Run%20Loop%20%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A.md)
 * [从RunLoop来看iOS内核中消息的发送: mach_msg](从RunLoop来看iOS内核中消息的发送: mach_msg)
 * [理解 iOS 的内存管理](https://blog.devtang.com/2016/07/30/ios-memory-management/)
-* [CocoaPods 都做了什么？](https://draveness.me/cocoapods/)
 
 ## category实现方式
 
@@ -467,18 +468,99 @@ https://youle.zhipin.com/questions/4c09e5e18447d9dbtnV809W7FlQ~.html
 
 ## 对称加密和非对称加密的区别？
 
-## OC和Swift如何互相调用？
+* 对称加密：加密解密都是用相同规则。
+* 非对称加密：公钥加密的信息只有私钥解得开，那么只要私钥不泄漏，通信就是安全的。
 
-## 是否编写过单元测试？
+**苹果证书校验**：
 
-## 如何管理依赖库？
+1. Mac生成c公钥、c私钥；
+2. 苹果服务器使用s私钥对c公钥加密，生成证书文件给Mac。
+3. Mac使用c私钥加密可执行文件（带证书），通过可执行文件在手机安装。
+4. 手机内置苹果服务器s公钥，解密证书，等到c公钥。
+5. 手机通过c公钥匙验证可执行文件，通过，则可以安装。
+
+**参考**：
+
+* [RSA算法介绍](https://www.jianshu.com/p/77ed9d7d4745)
+* [RSA2048和RSA1024](https://wenku.csdn.net/answer/u7ov6fjpzx)
+
+## https证书校验
+
+1. 创建NSURLSession对象。
+2. 创建NSURLSessionDataTask对象。
+3. 设置NSURLSessionDelegate代理。
+4. 实现NSURLSessionDelegate代理方法
+
+```c
+- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
+
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+
+        // 验证证书
+
+        SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
+
+        SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
+
+        NSData *remoteCertificateData = CFBridgingRelease(CFDataCreateCopy(NULL, SecCertificateCopyData(certificate)));
+
+        NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];
+
+        NSData *localCertData = [NSData dataWithContentsOfFile:cerPath];
+
+        if ([remoteCertificateData isEqualToData:localCertData]) {
+
+            // 验证通过
+
+            NSURLCredential *credential = [NSURLCredential credentialForTrust:serverTrust];
+
+            completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+
+        } else {
+
+            // 验证失败
+
+            completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
+
+        }
+
+    } else {
+
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+
+    }
+
+}
+```
+
+**参考**：
+
+* [ios https 证书校验](https://platform.yimenapp.com/info@-ios-https--zheng-shu-jiao-yan-16928.html)
+* [HTTPS 的加密过程及其工作原理](https://xie.infoq.cn/article/007a9bd16f44303fbd8b40689)
+
+## RESTful
+
+* [RESTful 架构详解](https://www.runoob.com/w3cnote/restful-architecture.html)
+
+## NoSql
+
+* [java开发中字典表的作用 java 定义字典](https://blog.51cto.com/u_87851/6304770?abTest=51cto)
+* [NoSql技术栈详解](https://www.bilibili.com/video/BV1Z5411E7eU/?buvid=XXF3EE3F568A2545A3334A8C2ADE5F7215574&from_spmid=search.search-result.0.0&is_story_h5=false&mid=sS4f2vP8WeYw%2BfLf495VIA%3D%3D&p=2&plat_id=116&share_from=ugc&share_medium=android&share_plat=android&share_session_id=a49190f6-3664-4985-8c4f-572e470ca110&share_source=WEIXIN&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1722842082&unique_k=JXslcKk&up_id=415938397)
+
+## JAVA面试题大全(200+道题目)
+
+* https://blog.csdn.net/qq_38078190/article/details/105773646
+
+## CocoaPods
+
+* [CocoaPods 都做了什么？](https://draveness.me/cocoapods/)
 
 ## 组件化开发方式有哪些？
-
-## 请求相关证书
 
 ## 轮播图实现原理
 
 ## 如何存放敏感信息？
 
 ## 如何使用Git？
+
+## OC和Swift如何互相调用？
