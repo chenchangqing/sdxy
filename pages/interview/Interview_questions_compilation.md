@@ -1,6 +1,7 @@
 # 面试问题整理
 
 24.8.5 更新
+24.8.6 更新
 
 ## 消息转发
 
@@ -538,19 +539,6 @@ https://youle.zhipin.com/questions/4c09e5e18447d9dbtnV809W7FlQ~.html
 * [ios https 证书校验](https://platform.yimenapp.com/info@-ios-https--zheng-shu-jiao-yan-16928.html)
 * [HTTPS 的加密过程及其工作原理](https://xie.infoq.cn/article/007a9bd16f44303fbd8b40689)
 
-## RESTful
-
-* [RESTful 架构详解](https://www.runoob.com/w3cnote/restful-architecture.html)
-
-## NoSql
-
-* [java开发中字典表的作用 java 定义字典](https://blog.51cto.com/u_87851/6304770?abTest=51cto)
-* [NoSql技术栈详解](https://www.bilibili.com/video/BV1Z5411E7eU/?buvid=XXF3EE3F568A2545A3334A8C2ADE5F7215574&from_spmid=search.search-result.0.0&is_story_h5=false&mid=sS4f2vP8WeYw%2BfLf495VIA%3D%3D&p=2&plat_id=116&share_from=ugc&share_medium=android&share_plat=android&share_session_id=a49190f6-3664-4985-8c4f-572e470ca110&share_source=WEIXIN&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1722842082&unique_k=JXslcKk&up_id=415938397)
-
-## JAVA面试题大全(200+道题目)
-
-* https://blog.csdn.net/qq_38078190/article/details/105773646
-
 ## CocoaPods
 
 * [CocoaPods 都做了什么？](https://draveness.me/cocoapods/)
@@ -564,3 +552,127 @@ https://youle.zhipin.com/questions/4c09e5e18447d9dbtnV809W7FlQ~.html
 ## 如何使用Git？
 
 ## OC和Swift如何互相调用？
+
+## RESTful
+
+* [RESTful 架构详解](https://www.runoob.com/w3cnote/restful-architecture.html)
+
+## NoSql
+
+* [java开发中字典表的作用 java 定义字典](https://blog.51cto.com/u_87851/6304770?abTest=51cto)
+* [NoSql技术栈详解](https://www.bilibili.com/video/BV1Z5411E7eU/?buvid=XXF3EE3F568A2545A3334A8C2ADE5F7215574&from_spmid=search.search-result.0.0&is_story_h5=false&mid=sS4f2vP8WeYw%2BfLf495VIA%3D%3D&p=2&plat_id=116&share_from=ugc&share_medium=android&share_plat=android&share_session_id=a49190f6-3664-4985-8c4f-572e470ca110&share_source=WEIXIN&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1722842082&unique_k=JXslcKk&up_id=415938397)
+
+## JAVA面试题大全(200+道题目)
+
+* https://blog.csdn.net/qq_38078190/article/details/105773646
+
+
+## Java容器有哪些？
+
+* Collection
+    * List
+        * ArrayList
+        * LinkedList
+        * Vector
+    * Set
+        * HashSet
+            * LinkedHashSet
+        * TreeSet
+* Map
+    * HashMap
+        * LinkedHashMap
+    * HashTable
+    * TreeMap
+
+## List、Set、Map 之间的区别是什么？
+
+* List：有序集合、元素可重复。
+* Set：元素不可重复，HashSet无序，LinkedHashSet按照插入排序，SortedSet可排序。
+* Map：键值对集合，存储键、值之间的映射。key无序，唯一，value可重复。
+
+* [HashMap和HashTable到底哪不同？](https://www.cnblogs.com/xinzhao/p/5644175.html)
+
+## HashMap 和 Hashtable 有什么区别？
+
+* HashMap不是线程安全的，HashTable是线程安全的
+* HashMap允许Null Key和Null Value，HashTable不允许
+
+* [【算法】散列表（哈希表）](https://www.youtube.com/watch?v=CnRR_UENZ2s)
+* [HashMap和HashTable到底哪不同？](https://www.cnblogs.com/xinzhao/p/5644175.html)
+
+## ArrayList 和 LinkedList 的区别是什么？
+
+* ArrayList的数据结构是动态数组；LinkedList的数据结构是双向链表。
+* ArrayList比LinkedList在随机访问的时候效率要高，因为LinkedList是线性的数据结构，需要依次往后查找。
+* 在非首尾的增删操作，LinkedList要比ArrayList的效率要高，因为ArrayList在操作增删时要影响其他元素的下标。
+
+总结：需要频繁读取集合中的元素时，推荐使用ArrayList；插入和删除操作较多时，推荐使用LinkedList。
+
+## ArrayList 和 Vector 的区别是什么？
+
+* 相同点：都实现了List接口，都是有序集合；
+* 区别：Vector是线程安全的，ArrayList不是线程安全的；
+* 当Vector或ArrayList中的元素超过它的初始大小时，Vector会将容量翻倍，而ArrayList只会将容量扩大50%。
+
+## Array 和 ArrayList 有何区别？
+
+* Array类型的变量在声明时必须实例化；ArrayList可以只是先声明；
+* Array大小是固定的，而ArrayList的大小是动态变化的；
+* Array可以包含基本类型和对象类型，ArrayList只能包含对象类型；
+
+## 说一下 spring 的事务隔离？
+
+* 脏读：当前事务读取了其他事物没有提交成功的数据。
+    * 使用“读提交”
+* 不可重复度：当前事务读了同一条记录，数据不一样，因为其他事务在两次读取期间修改了这条记录。
+    * 使用行级锁
+* 幻读：当前事务两次统计表行数不一样，因为其他事务新增或者删除表记录。
+    * 使用表级锁
+* 事务隔离级别：
+    * 读未提交
+    * 读提交
+    * 重复度
+    * 序列化
+
+* [快速理解脏读、不可重复读、幻读和MVCC](https://cloud.tencent.com/developer/article/1450773)
+
+## 说一下 spring mvc 运行流程?
+
+1. 请求被`DispatcherServlet`处理
+2. `DispatcherServlet`通过`HandlerMapping`找到`Controlller`
+3. `DispatcherServlet`调用`HandlerAdapter`执行`Controller`方法
+4. 返回`ModelAndView`对象
+5. `ViewResolver`渲染
+
+## 数据库的三范式是什么？
+
+* 无重复的列
+* 列属性完全依赖主键
+* 列属性不能简介与主键关联
+
+* [一范式、二范式、三范式区别](https://blog.csdn.net/dancheren/article/details/77891426)
+
+## 说一下 jvm 的主要组成部分？及其作用？
+
+* 类加载器（ClassLoader）
+* 运行时数据区（Runtime Data Area）
+* 执行引擎（Execution Engine）
+* 本地库接口（Native Interface）
+
+组件的作用： 首先通过类加载器（ClassLoader）会把 Java 代码转换成字节码，运行时数据区（Runtime Data Area）再把字节码加载到内存中，而字节码文件只是 JVM 的一套指令集规范，并不能直接交给底层操作系统去执行，因此需要特定的命令解析器执行引擎（Execution Engine），将字节码翻译成底层系统指令，再交由 CPU 去执行，而这个过程中需要调用其他语言的本地库接口（Native Interface）来实现整个程序的功能。
+
+## 说一下 jvm 运行时数据区域？
+
+* 程序计数器
+* 虚拟机栈
+* 本地方法栈
+* 堆（创建的对象）
+* 方法区（类的属性、成员变量、构造函数等）
+
+## 说一下类加载的执行过程？
+
+* 加载：根据查找路径找到相应的 class 文件然后导入
+* 检查：检查加载的 class 文件的正确性
+* 准备：给类中的静态变量分配内存空间
+* 解析：虚拟机将常量池中的符号引用替换成直接引用的过程。符号引用就理解为一个标识，而在直接引用直接指向内存中的地址；
+* 初始化：对静态变量和静态代码块执行初始化工作。

@@ -652,3 +652,7 @@ fila
 ## 居住证
 
 * [上海落户社保缴费基数一览表](https://sh.bendibao.com/zffw/2023630/274248.shtm)
+
+## 积分
+
+* [登录](http://jzzjf.rsj.sh.gov.cn/jzzjf)
