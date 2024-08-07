@@ -246,6 +246,8 @@ https://www.jianshu.com/p/8ea45370a20d
 
 10年以上开发经验，掌握iOS移动开发、JavaWeb开发；掌握Swift、OC、Java等多种高级语言；掌握SwiftUI开发；掌握MVC、MVVM、MVP架构模式；掌握HTML+JS；掌握Git；掌握iOS上架审核；掌握单元测试；掌握数据库编程；熟悉Runtime、Runloop、多线程及内存管理；熟悉多种组件化开发、设计模式；了解CICD（Fastlane、Jenkins）；了解Flutter、鸿蒙。
 
+More than 10 years of development experience, mastering iOS mobile development, JavaWeb development; mastering Swift, OC, Java and other high-level languages; mastering SwiftUI development; mastering MVC, MVVM, MVP architecture patterns; mastering HTML+JS; mastering Git; mastering iOS listing review; mastering unit testing; mastering database programming; familiar with Runtime, Runloop, multi-threading and memory management; familiar with various component-based development and design patterns; understanding CICD (Fastlane, Jenkins); understanding Flutter and Hongmeng.
+
 ### Experience
 
 工作前3年从事Java，最近10年从事iOS。
@@ -267,3 +269,23 @@ https://www.jianshu.com/p/8ea45370a20d
 使用过Bootstrap、JQuery、Extjs等Js框架；
 
 使用过Oracle、Mysql等数据库。  
+
+I worked on Java for the first 3 years and iOS for the last 10 years.
+
+I have used Swift and SwiftUI to work on banking projects and can write unit tests proficiently;
+
+I have used CTMedia and Cocoapods to componentize live broadcast projects;
+
+I have used shell scripts + Jenkins for packaging;
+
+I have used FFmpeg and OpenGL to make players;
+
+I have used Flutter to achieve dual-end development;
+
+I have used SSH to develop OA systems;
+
+I have used SpringMVC to make websites;
+
+I have used Js frameworks such as Bootstrap, JQuery, and Extjs;
+
+I have used databases such as Oracle and Mysql.
