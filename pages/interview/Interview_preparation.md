@@ -6,7 +6,7 @@
 
 Thank you for giving me the opportunity to be interviewed for this position today. I'm Green. My major is computer communication. I have 9 years of experience in iOS development, 3 years of experience in Java development, and served as the leader of the iOS team. I have experience in team management, component development, independent development, document writing, and good code habits.
 
-我大学的专业是计算机通信，10年来到上海从事Java后端方面的工作，做了几个OA功能的系统，主要使用的技术有JavaWeb相关的技术，像JAVA、SpringMVC、HTMl、JS等。从事Java大概3年多，我自学进入到了iOS行业，期间做过多媒体拍摄项目，RTC直播项目，对自研播放器有所了解。我掌握的技术章有OC、Swift，熟悉C、C++编程，掌握组件化编程，能够独立开发iOS项目。最近也学习了Flutter相关知识，通过阅读开源项目，对Flutter技术栈了解。
+我大学的专业是计算机通信，10年来到上海从事Java后端方面的工作，做过OA功能的系统，主要使用的技术有JavaWeb相关的技术，像JAVA、SpringMVC、HTML、JS等。从事Java大概3年多，我自学进入到了iOS行业，期间做过多媒体拍摄项目，RTC直播项目，对自研播放器有所了解。我掌握的技术章有OC、Swift，熟悉C、C++编程，掌握组件化编程，能够独立开发iOS项目。最近也学习了Flutter相关知识，通过阅读开源项目，对Flutter技术栈了解。
 
 
 我的名字叫陈长青，今年34岁，我的专业是计算机通信，拥有丰富的开发经验。我擅长于使用Swift语言，进行iOS移动开发，同时我还熟悉Java、C、C++等语言，并且我可以使用SwiftUI进行开发。我最近开发的项目使用了Swift语言，是在汇丰驻场进行开发，我很喜欢客户公司环境，我也非常热爱这份工作。
@@ -16,6 +16,46 @@ My name is Changqing Chen, I am 34 years old, my major is computer communication
 我的名字叫陈长青，今年34岁，我的专业是计算机通信，拥有丰富的开发经验。我擅长于使用Swift语言，进行iOS移动开发，同时我还熟悉Java、C、C++等语言，并且我可以使用SwiftUI进行开发。我熟悉CICD，我会使用flutter，我了解iOS架构，我还熟悉敏捷开发，我还可以使用设计模式。
 
 My name is Changqing Chen, I am 34 years old, my major is computer communication, and I have rich development experience. I am good at using Swift language for iOS mobile application, and I am also familiar with languages such as Objc, Java, C, C++, and I can use SwiftUI for development. I am familiar with CICD, I can use flutter, I understand iOS architecture, and I am familiar with scrum development, and I can use  design patterns.
+
+---
+
+个人资料：一句话，占比5％左右 
+
+学习技能：半分钟~一分钟，占比20％左右 
+
+项目和经历：一分钟左右，占比45％左右 
+
+工作体会：半分钟，占比15％左右
+
+一句话左右：职业规划，占比10％左右 
+
+一句话：兴趣占比，占比5％左右 
+
+## 自我介绍v2
+
+大家好，我的名字叫陈长青，今年35，我大学专业是计算机通信。
+
+我擅长iOS移动开发，拥有JavaWeb开发经验，熟练使用Git等代码管理工具，熟悉Flutter、鸿蒙开发。
+
+我Java经验3年，使用过SSH开发过OA系统，使用过SpringMVC做过网站，使用过Bootstrap、JQuery、Extjs等Js框架，使用过Oracle、Mysql等数据库。
+
+之后我从事iOS，使用Swift、OC参与多个项目的开发，熟练掌握组件化、项目架构、设计模式等，期间还做过播放器、直播项目，对FFmpeg、OpenGL编程有所了解。
+
+经过多年的开发，我发现编程语言是最容易的，理解编程思想和设计原理是才是重要的。
+
+最后，我对python编程感兴趣，对代码追求完美，相信可以为公司带来价值。
+
+Hello everyone, my name is Chen Changqing, I am 35 years old this year, and my university major is computer communication.
+
+I am good at iOS mobile development, have Java Web development experience, proficient in using Git and other code management tools, and familiar with Flutter and Harmony development.
+
+I have 3 years of Java experience, used SSH to develop OA systems, used SpringMVC to make websites, used Bootstrap, JQuery, Extjs and other Js frameworks, and used Oracle, Mysql and other databases.
+
+After that, I worked on iOS, used Swift and OC to participate in the development of multiple projects, and mastered componentization, project architecture, design patterns, etc. During this period, I also worked on player and live broadcast projects, and had some understanding of FFmpeg and OpenGL programming.
+
+After years of development, I found that programming language is the easiest, and understanding programming ideas and design principles is the most important.
+
+Finally, I am interested in python programming, pursue perfection in code, and believe that I can bring value to the company.
 
 ## 擅长技术
 
@@ -42,6 +82,8 @@ My name is Changqing Chen, I am 34 years old, my major is computer communication
 一个功能需求下来，在开发人员开发着前，您最希望它做好哪些开发准备？
 
 项目中难免存在一些不得不进行重构优化的代码，您是如何看待这个问题的？
+
+其实我好奇，工作内容，比如给我一个真实的需求是怎么样的？
 
 ## 面试问题
 
@@ -199,3 +241,29 @@ https://www.jianshu.com/p/8ea45370a20d
 * [Flutter Redux：带例子的完整教程](https://juejin.cn/post/7067827402692526117)
 * [Flutter - iOS集成开发](https://rencheng.cc/2020/03/02/flutter/Flutter%E4%B8%8EiOS%E9%9B%86%E6%88%90/)
 * [flutter与native通信](https://blog.csdn.net/wang_yong_hui_1234/article/details/129852460)
+
+### Profile
+
+10年以上开发经验，掌握iOS移动开发、JavaWeb开发；掌握Swift、OC、Java等多种高级语言；掌握SwiftUI开发；掌握MVC、MVVM、MVP架构模式；掌握HTML+JS；掌握Git；掌握iOS上架审核；掌握单元测试；掌握数据库编程；熟悉Runtime、Runloop、多线程及内存管理；熟悉多种组件化开发、设计模式；了解CICD（Fastlane、Jenkins）；了解Flutter、鸿蒙。
+
+### Experience
+
+工作前3年从事Java，最近10年从事iOS。
+
+使用Swift、SwiftUI做过银行项目，可以熟练编写单元测试；
+
+使用CTMedia、Cocoapods对直播项目组件化；
+
+使用shell脚本+Jenkins打包；
+
+使用FFmpeg、OpenGL做过播放器；
+
+使用过Flutter实现双端开发；
+
+使用过SSH开发过OA系统；
+
+使用过SpringMVC做过网站；
+
+使用过Bootstrap、JQuery、Extjs等Js框架；
+
+使用过Oracle、Mysql等数据库。  
