@@ -170,7 +170,7 @@
         * [CustomSliver](pages/flutter/CustomSliver.md)
         * [NestedScrollView](pages/flutter/NestedScrollView.md)
     * 实战
-        * [GoMoon](pages/fullter/go_moon.md)
+        * [GoMoon](pages/flutter/go_moon.md)
     * [Flutter学习记录](pages/flutter/Flutter_learning_record.md)
 * harmony
     * [DevEco Studio](pages/harmony/dev_eco_studio.md)
