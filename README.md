@@ -30,14 +30,14 @@ Your application code is in go_moon/lib/main.dart.
 ### 打开项目
 
 使用Android Studio打开项目，然后运行：
-<img src="flutter/images/flutter_go_moon_01.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_01.png" width=100%/>
 
 ## 新增首页
 
 ### 新增图片
 
 新建`assets/images`文件夹，导入下图：
-<img src="flutter/images/flutter_go_moon_02.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_02.png" width=100%/>
 
 在`.yaml`配置`assets`，注意空格
 ```
@@ -46,7 +46,7 @@ assets:
  - assets/images/
 ```
 拷贝图片路径：
-<img src="flutter/images/flutter_go_moon_03.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_03.png" width=100%/>
 
 ### 创建`pages/home_page.dart`
 
@@ -108,8 +108,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 ### 抽取背景组件方法
-<img src="flutter/images/flutter_go_moon_04.png" width=100%/>
-<img src="flutter/images/flutter_go_moon_05.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_04.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_05.png" width=100%/>
 ```c
 @override
 Widget build(BuildContext context) {
@@ -144,13 +144,13 @@ Widget _pageTitle() {
 
 ### 格式化代码
 
-<img src="flutter/images/flutter_go_moon_06.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_06.png" width=100%/>
 修改flutter设置：
-<img src="flutter/images/flutter_go_moon_07.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_07.png" width=100%/>
 
 ### 增加Container
 
-<img src="flutter/images/flutter_go_moon_08.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_08.png" width=100%/>
 ```c
 class HomePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidth;
@@ -175,12 +175,12 @@ class HomePage extends StatelessWidget {
 }
 ```
 修改main.dart
-<img src="flutter/images/flutter_go_moon_09.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_09.png" width=100%/>
 >快捷添加父组件：`option+enter`
 
 ### 增加左右边距
 
-<img src="flutter/images/flutter_go_moon_10.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_10.png" width=100%/>
 
 ```c
 padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
@@ -214,7 +214,7 @@ padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
 
 ### 增加Column
 
-<img src="flutter/images/flutter_go_moon_11.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_11.png" width=100%/>
 
 ```c
 Column(
@@ -227,7 +227,7 @@ Column(
 
 ### 优化方法
 
-<img src="flutter/images/flutter_go_moon_12.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_12.png" width=100%/>
 ```c
   ...
   Widget _destionationDropDownWidget() {
@@ -301,13 +301,13 @@ class CustomDropDownButtonClass extends StatelessWidget {
 }
 ```
 修改`home_page.dart`：
-<img src="flutter/images/flutter_go_moon_13.png" width=100%/>
-<img src="flutter/images/flutter_go_moon_14.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_13.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_14.png" width=100%/>
 
 ### 下拉组件布局
 
-<img src="flutter/images/flutter_go_moon_15.png" width=100%/>
-<img src="flutter/images/flutter_go_moon_16.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_15.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_16.png" width=100%/>
 ```c
   Widget _travellersInfomationWidget() {
     return Row(
@@ -340,11 +340,11 @@ class CustomDropDownButtonClass extends StatelessWidget {
     );
   }
 ```
-<img src="flutter/images/flutter_go_moon_18.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_18.png" width=100%/>
 
 ## 新增按钮
 
-<img src="flutter/images/flutter_go_moon_18.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_18.png" width=100%/>
 ```c
   Widget _rideButton() {
     return Container(
@@ -365,9 +365,9 @@ class CustomDropDownButtonClass extends StatelessWidget {
 
 ## 增加背景
 
-<img src="flutter/images/flutter_go_moon_19.png" width=100%/>
+<img src="pages/flutter/images/flutter_go_moon_19.png" width=100%/>
 最终UI：
-<img src="flutter/images/flutter_go_moon_20.png" width=30%/>
+<img src="pages/flutter/images/flutter_go_moon_20.png" width=30%/>
 
 ## 项目地址
 
