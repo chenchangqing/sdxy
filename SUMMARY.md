@@ -125,6 +125,7 @@
     * 实战
         * [GoMoon](pages/flutter/go_moon.md)
         * [Taskly](pages/flutter/taskly.md)
+        * [Animdo](pages/flutter/animdo.md)
     * [Flutter学习记录](pages/flutter/Flutter_learning_record.md)
 * harmony
     * [DevEco Studio](pages/harmony/dev_eco_studio.md)
