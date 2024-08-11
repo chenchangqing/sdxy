@@ -126,6 +126,7 @@
     * [Taskly](pages/flutter/taskly.md)
     * [Animdo](pages/flutter/animdo.md)
     * [Coincap](pages/flutter/coincap.md)
+    * [Friviaa](pages/flutter/friviaa.md)
     * [学习记录](pages/flutter/Flutter_learning_record.md)
 * harmony
     * [DevEco Studio](pages/harmony/dev_eco_studio.md)
