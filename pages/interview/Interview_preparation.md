@@ -45,6 +45,34 @@ My name is Changqing Chen, I am 34 years old, my major is computer communication
 
 最后，我对python编程感兴趣，对代码追求完美，相信可以为公司带来价值。
 
+## 项目经验总结
+
+### 后端经验
+
+* JavaWeb方面的最后一个项目是《平安健康险预授权系统》，功能就是在理赔之前对客户信息的审核。
+* 当时使用了Oracle数据库，Spring、SpringMVC等技术。
+* 实现的功能有客户信息的展示、客户信息的核实、展示合适结果，还就是系统权限控制等。
+
+### Cooplo
+
+* iOS方面独立开发过一个全景拍照的项目，原理在iPhone上前后各安装两个180度的鱼眼镜头，通过拍摄前后两张180度的广角照片，通过算法进行拼接成全景图。
+* 使用了Swift+c+c++的混合编程，当时还做了播放器，专门对全景图渲染。
+* 这个项目的难点在于对不同iPhone的适配，还有就是对照片的聚焦，因为两张照片的亮度影响算法的计算还有全景图的效果，还有就是对于opengles编程的使用。
+
+### 汇丰银行
+
+* 汇丰银行是一个全球性质的项目，我们当时针对中国区App做了UI方面的迭代，主要以展示为主。
+* 做银行项目很多值得学习的地方：
+	* 代码风格比较统一，基本每个UI会对应一个ViewModel和Style这样的结构体
+	* 代码价格使用的是VIP的方式，这种架构适用于大型项目，面向接口，方便单元测试
+	* 新增的单独模块，会有一份新的代码仓库，UI实现不局限UIKit，也可以使用SwiftUI
+	* 对于盲人模式，代码覆盖率要求都非常高
+	* CICD的流程很完善，包含像代码打包上传，脚本做代码扫描，单元测试的运行、代码加固等方面
+
+### 期望
+
+希望能发挥自己的特长，做出出色的产品，从而减少不要的重复工作，提高同事的工作效率，为公司带来价值，同时自己获得成长。
+
 Hello everyone, my name is Chen Changqing, I am 35 years old this year, and my university major is computer communication.
 
 I am good at iOS mobile development, have Java Web development experience, proficient in using Git and other code management tools, and familiar with Flutter and Harmony development.
@@ -68,6 +96,28 @@ Finally, I am interested in python programming, pursue perfection in code, and b
 ## 如何学习
 
 在工作中，如果遇到自己不会的问题，通过Google、百度相关资料，然后总结记录。学习一门新技术，我会通过查看其官方教程或找学习视频，同时买一本书籍阅读，然后实践，再根据自己的理解总结写文章记录。
+
+## 苹果项目经理电话准备
+
+硬件 照片 学 底层 目标
+
+* 自我介绍，亮点
+* 工作稳定性
+* 工作经验 
+* 硬件知识
+* 学习能力及计划
+* 英文练习
+
+我的大学专业是计算机通信，今年35岁。
+
+10年到14年从事JavaWeb方面开发，之后从事iOS编程直到现在。
+
+我可以使用JavaWeb开发一套安全美观的管理系统，同时也可以开发iOS应用，如果涉及到多端开发，我还可以使用Flutter进行开发应用。
+
+对于我们这个岗位，涉及到硬件，我也是很感兴趣，还有就是对于图像分析，之前我也做过全景拍照的项目，这方面的经验相信可以很好的支持我开展工作。
+
+我对自己的要求，是每天可以进步一点点，不管是工作还是自我学习方面，希望随着时间的推移，能为公司带来更大的价值。
+
 
 ## 职业规划
 

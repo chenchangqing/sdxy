@@ -128,6 +128,8 @@ $ sudo ln -s ~/Applications/calibre.app/Contents/MacOS/ebook-convert /usr/bin
 
 [临时解决GitHub的raw.githubusercontent.com无法连接问题](https://www.cnblogs.com/qiu-hua/p/12815425.html)
 
+[Cocoapods的版本升级和降级](https://kukumalucn.github.io/blog/2018/09/20/Cocoapods%E7%9A%84%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7%E5%92%8C%E9%99%8D%E7%BA%A7/)
+
 #### 八、安装PS
 
 [Adobe Photoshop 2021 For Mac v22.3 PS中文破解版](https://macoshome.com/app/graphicesdesign/5692.html#Down)

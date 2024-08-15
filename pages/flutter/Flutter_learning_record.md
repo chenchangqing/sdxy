@@ -25,6 +25,7 @@
 * [Flutter-状态管理](http://www.noobyard.com/article/p-xhhycaft-bs.html)
 * [Flutter学习笔记：Flutter状态管理（使用Provider进行状态管理）](https://zhuanlan.zhihu.com/p/392551608)
 * [Flutter中文网](https://doc.flutterchina.club/cookbook/design/themes/)
+* [macOS 上安装和配置 Flutter 开发环境](https://www.cnblogs.com/reyzhang/p/17069985.html)
 
 ## rxDart
 
