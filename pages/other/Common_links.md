@@ -278,6 +278,7 @@
 * [潭州课堂](https://www.shiguangkey.com)
 * [swift51](http://www.swift51.com/)
 * [csdn](https://www.csdn.net/)
+* [Udemy](https://allegisgroup.udemy.com/)
 
 ## 苹果官方文档
 
