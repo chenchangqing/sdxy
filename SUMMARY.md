@@ -5,6 +5,7 @@
     * [基础类型](pages/python/basic_types.md)
     * [操作符](pages/python/operator.md)
     * [控制语句](pages/python/control.md)
+    * [Functions and Methods](pages/python/functions_methods.md)
 * Java
     * [域名的注册及备案](pages/java/Domain_name_registration_and_filing.md)
     * [Java开发工具](pages/java/Java_Development_Tools.md)
