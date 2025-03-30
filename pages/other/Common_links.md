@@ -278,7 +278,7 @@
 * [潭州课堂](https://www.shiguangkey.com)
 * [swift51](http://www.swift51.com/)
 * [csdn](https://www.csdn.net/)
-* [Udemy](https://allegisgroup.udemy.com/)
+* [Udemy](https://teksystemsapac.udemy.com/)
 
 ## 苹果官方文档
 
@@ -424,6 +424,7 @@ sudo pip install openpyxl
 ## 电影
 
 * [你的名字](https://www.66s.cc/donghuapian/2841.html)
+* [新版6V](https://www.xb6v.com/)
 
 ## 后端
 
