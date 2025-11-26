@@ -24,10 +24,6 @@
 
 		[5, 6, 7, 8, 9]	[1, 2, 3, 4]
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4883938a1 (update pages/interview/merge_sort.md.)
 		[1, 2, 3, 4, 5, 6, 7, 8, 9]	
 
 代码实现：
@@ -85,8 +81,3 @@ public class MergeSort {
 ```
 
 参考链接：https://www.cnblogs.com/chengxiao/p/6194356.html
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4883938a1 (update pages/interview/merge_sort.md.)
