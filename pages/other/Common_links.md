@@ -273,7 +273,7 @@
 ## 学习
 
 * [尚德](http://yi.sunlands.com)
-* [自考](http://zk.zjzs.net/Index/index.aspx)
+* [自考](https://zk.zjzs.net)
 * [浙江工业大学·自考](https://www.zjut.edu.cn/4497/list.htm)
 * [潭州课堂](https://www.shiguangkey.com)
 * [swift51](http://www.swift51.com/)
