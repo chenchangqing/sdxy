@@ -27,8 +27,8 @@
 #
 # 【四、远程仓库与自定义域名说明】
 #   - origin (Gitee) : https://gitee.com/chenchangqing/sdxy.git
-#   - github (GitHub): https://github.com/chenchangqing/sdxy.git
-#     （新环境添加命令：git remote add github https://github.com/chenchangqing/sdxy.git）
+#   - github (GitHub): git@github.com:chenchangqing/sdxy.git (使用 SSH 免密推送)
+#     （新环境添加命令：git remote add github git@github.com:chenchangqing/sdxy.git）
 #   - 自定义域名：www.1221.site（DNS A 记录指向 GitHub Pages IP 185.199.109.153，
 #     脚本会自动在 gh-pages 分支生成并保留 CNAME 文件）
 #
@@ -51,7 +51,7 @@ fi
 if [ "$1" = "--push" ]; then
     echo "🚀 正在补推本地 develop / master / gh-pages 分支到远程..."
     git push -u origin develop master gh-pages -f && echo "✅ Gitee (origin) 推送成功" || echo "⚠️ Gitee (origin) 推送失败"
-    git -c http.connectTimeout=10 -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=15 push -u github develop master gh-pages -f && echo "✅ GitHub (github) 推送成功" || echo "⚠️ GitHub (github) 推送失败，请检查网络或代理后重试: ./gitbook.sh --push"
+    GIT_SSH_COMMAND="ssh -o ConnectTimeout=10" git push github develop master gh-pages -f && echo "✅ GitHub (github) 推送成功" || echo "⚠️ GitHub (github) 推送失败，请检查网络或代理后重试: ./gitbook.sh --push"
     exit 0
 fi
 
@@ -130,7 +130,7 @@ else
 fi
 
 echo "📤 正在推送至 GitHub (github)..."
-if git -c http.connectTimeout=10 -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=15 push -u github develop master gh-pages -f; then
+if GIT_SSH_COMMAND="ssh -o ConnectTimeout=10" git push github develop master gh-pages -f; then
     GITHUB_OK=1
     echo "✅ GitHub Pages (www.1221.site) 推送成功！"
 else
