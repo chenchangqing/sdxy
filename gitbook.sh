@@ -29,7 +29,7 @@
 #   - origin (Gitee) : https://gitee.com/chenchangqing/sdxy.git
 #   - github (GitHub): git@github.com:chenchangqing/sdxy.git (使用 SSH 免密推送)
 #     （新环境添加命令：git remote add github git@github.com:chenchangqing/sdxy.git）
-#   - 自定义域名：www.1221.site（DNS A 记录指向 GitHub Pages IP 185.199.109.153，
+#   - 自定义域名：1221.site（DNS A 记录指向 GitHub Pages IP 185.199.109.153，
 #     脚本会自动在 gh-pages 分支生成并保留 CNAME 文件）
 #
 # 【五、常见问题排查】
@@ -106,7 +106,7 @@ shopt -s extglob
 # 保留忽略的文件及自定义域名配置 CNAME
 rm -rf !(_book|.git|.gitignore|ignore|node_modules|book.pdf|ads.txt|CNAME)
 cp -r _book/* .
-echo "www.1221.site" > CNAME
+printf "1221.site" > CNAME
 git add .
 if ! git diff --cached --quiet; then
     git commit -m "build gh-pages: $COMMIT_MSG"
