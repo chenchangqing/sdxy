@@ -195,6 +195,8 @@
 * Security
     * [1.常用工具](pages/security/01_Commonly_used_tools.md)
     * [2.MonkeyDev](pages/security/02_MonkeyDev.md)
+* Jeecgboot
+    * [开发环境搭建](pages/jeecgboot/development_environment_construction.md)
 * 常用
     * [装机必备](pages/other/Essential_for_installation.md)
     * [常用链接](pages/other/Common_links.md)
