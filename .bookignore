@@ -36,4 +36,5 @@ book.pdf
 #!/pages/harmony
 #!/pages/python
 #!/pages/network
-#!pages/jeecgboot
+#!/pages/jeecgboot
+#!/pages/langchain

@@ -1,5 +1,8 @@
 # Summary
 
+* AI
+    * LangChain
+        * [Course's Resources](pages/langchain/course_resources.md)
 * Python
     * [Mac下配置Python](pages/python/config_python.md)
     * [基础类型](pages/python/basic_types.md)
