@@ -8,6 +8,7 @@
 * [Google AI Studio API Key](https://aistudio.google.com/apikey)
 * [Black Docs](https://black.readthedocs.io/en/stable/)
 * [Github Commit Code](https://github.com/emarco177/langchain-course/commit/3ec917104d438a5903db58c96abe18ab2103c6c8)
+* [Course](https://teksystemsapac.udemy.com/course/langchain/learn/lecture/52009171#overview)
 
 ## 初始化python项目
 
