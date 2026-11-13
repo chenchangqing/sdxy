@@ -3,6 +3,7 @@
 * AI
     * LangChain
         * [Course's Resources](pages/langchain/course_resources.md)
+        * [Your First LangChain](pages/langchain/your_first_langchain.md)
 * Python
     * [Mac下配置Python](pages/python/config_python.md)
     * [基础类型](pages/python/basic_types.md)
