@@ -6,6 +6,7 @@
         * [Your First LangChain](pages/langchain/your_first_langchain.md)
         * [Prompt Templates](pages/langchain/prompt_templates.md)
         * [Use Ollama](pages/langchain/use_ollama.md)
+        * [Intergrating LangSmith](pages/langchain/intergrating_langsmith.md)
 * Python
     * [Mac下配置Python](pages/python/config_python.md)
     * [基础类型](pages/python/basic_types.md)
