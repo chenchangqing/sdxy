@@ -8,6 +8,7 @@
 * [API.Playground](https://app.tavily.com/playground)
 * [Agents](https://docs.langchain.com/oss/python/langchain/agents)
 * [Tools](https://docs.langchain.com/oss/python/langchain/tools)
+* [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output)
 
 
 ## What are AI Agents?
