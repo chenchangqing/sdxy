@@ -11,6 +11,7 @@
         * [Agent Loop With LangChain](pages/langchain/agent_loop_with_langchain.md)
         * [Agent Loop With Ollama](pages/langchain/agent_loop_with_ollama.md)
         * [Agent Loop With Prompt](pages/langchain/agent_loop_with_prompt.md)
+        * [Rag](pages/langchain/rag.md)
 * Python
     * [Mac下配置Python](pages/python/config_python.md)
     * [基础类型](pages/python/basic_types.md)
