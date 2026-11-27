@@ -62,6 +62,9 @@
       "theme": "sepia",
       "family": "sans",
       "size": 1
+    },
+    "statistics": {
+      "bd_token": "f2185c597b86bd4be32b1fc0d26bdee5"
     }
   },
   "styles": {
